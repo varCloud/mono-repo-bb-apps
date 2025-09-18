@@ -1,0 +1,101 @@
+# See https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+
+# compiled output
+dist
+tmp
+out-tsc
+bazel-out
+
+# dependencies
+node_modules
+.pnpm-store/
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Nx
+.nx/cache
+.nx/workspace-data
+.cursor/rules/nx-rules.mdc
+.github/instructions/nx.instructions.md
+
+# Angular
+.angular
+/.angular/cache
+
+# Capacitor - Android
+/apps/*/android/app/build/
+/apps/*/android/app/src/main/assets/public/
+/apps/*/android/capacitor-cordova-android-plugins/
+/apps/*/android/.gradle/
+/apps/*/android/build/
+/apps/*/android/app/release/
+/apps/*/android/local.properties
+/apps/*/android/gradlew.bat
+
+# Capacitor - iOS
+/apps/*/ios/App/public/
+/apps/*/ios/App/Pods/
+/apps/*/ios/App/build/
+/apps/*/ios/DerivedData/
+/apps/*/ios/App.xcarchive/
+/apps/*/ios/App.xcworkspace/xcuserdata/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+*.env.development.local
+*.env.test.local
+*.env.production.local
+
+# Build files
+*.apk
+*.aab
+*.ipa
+*.app.dSYM.zip
+
+# Log files
+*.log
+logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Testing
+/coverage
+/.nyc_output
+
+# Build caches
+.gradle/
+.gradle-cache/
+.npm/
+.eslintcache
