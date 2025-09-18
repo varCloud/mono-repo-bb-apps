@@ -1,0 +1,27 @@
+.login-content {
+  .create-account {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--ion-color-secondary);
+    text-decoration: underline;
+    gap: 4px;
+  }
+
+  .question {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0.2px;
+  }
+
+  .link {
+    text-decoration: underline;
+  }
+}
+
+.bb-prueba-loca {
+  color: var(--ion-color-danger);
+}

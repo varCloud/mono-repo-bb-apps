@@ -1,0 +1,75 @@
+<ion-content *blockUI="'profile-page'">
+  <app-layout-content
+    customClass="profile-page"
+    [title]="'profile.title' | translate"
+  >
+    <ion-grid content-body class="ion-no-padding">
+      <ion-row>
+        <ion-col size="12" class="ion-text-center">
+          <div class="container-avatar">
+            <app-avatar-profile
+              size="small"
+              [imageUrl]="this.sesionService.user$()?.profilePictureUrl"
+              (changeImage)="onMenuItemClick('changePhoto')"
+            >
+            </app-avatar-profile>
+            <div class="container-info">
+              <span class="title">Nick Name</span>
+              <span class="subtitle">alegomezgmail.com</span>
+            </div>
+            <div class="container-messges">
+              <ion-button
+                [size]="'small'"
+                fill="outline"
+                (click)="onMenuItemClick('messages')"
+              >
+                <ion-icon
+                  slot="start"
+                  [name]="'chatbox-ellipses-outline'"
+                ></ion-icon>
+                Mensajes
+              </ion-button>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div class="container-link">
+            <div class="container-link-info">
+              <span class="title">Mi enlace</span>
+              <span class="subtitle"
+                >Boodybooster.com/Mariel-numero-de-usuario</span
+              >
+            </div>
+
+            <div class="container-link-button">
+              <ion-button
+                [size]="'small'"
+                fill="clear"
+                (click)="onMenuItemClick('messages')"
+              >
+                <ion-icon slot="start" [name]="'copy-outline'"></ion-icon>
+              </ion-button>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="menu-items">
+        <ion-col size="12">
+          <app-item-list
+            *ngFor="let item of menuItems"
+            [text]="item.text"
+            [icon]="item.icon"
+            [iconEnd]="item.iconEnd"
+            [showArrow]="item.showArrow ?? false"
+            [labelClass]="item.labelClass"
+            (itemClick)="onMenuItemClick(item.action)"
+          >
+          </app-item-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </app-layout-content>
+</ion-content>

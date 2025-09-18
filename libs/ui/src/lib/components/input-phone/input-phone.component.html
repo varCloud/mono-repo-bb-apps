@@ -1,0 +1,27 @@
+<div style="position: relative">
+  <span>{{ label() | translate }}</span>
+  <ion-item
+    lines="none"
+    class="input-phone-item"
+    [ngClass]="{
+      'ng-valid': control.valid && (control.touched || control.dirty),
+      'ng-invalid': control.invalid && (control.touched || control.dirty),
+    }"
+  >
+    <app-country-code-select
+      slot="start"
+      (countrySelect)="onCountrySelect($event)"
+      [selectedCountryCode]="countryCode()?.isoCode || 'MX'"
+    ></app-country-code-select>
+    <input
+      class="bb-input input-phone"
+      type="tel"
+      [prefix]="countryCode()?.dialCode + ' '"
+      [placeholder]="label() | translate"
+      [validation]="false"
+      [formControl]="control"
+      [mask]="countryCode()?.mask || '(000) 000-0000'"
+    />
+  </ion-item>
+  <app-error-message [control]="control"></app-error-message>
+</div>

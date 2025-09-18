@@ -1,0 +1,58 @@
+<ion-grid class="otp-container">
+  <ion-row class="ion-justify-content-center ion-align-items-center">
+    <ion-col size="12" class="ion-text-center otp-container-title">
+      <ion-text>
+        <h1 class="title">{{ "otp.title" | translate }}</h1>
+      </ion-text>
+      <ion-text class="subtitle">
+        {{ "otp.subtitle" | translate: { email: email() | maskEmail } }}
+      </ion-text>
+    </ion-col>
+
+    <ion-col size="auto" class="ion-text-center">
+      <form [formGroup]="otpForm">
+        <ion-input-otp
+          shape="soft"
+          formControlName="otp"
+          class="input-otp"
+          size="large"
+          placeholder="-"
+        >
+          @if (isValidOtp()) {
+            <ion-text class="success">{{ "otp.valid" | translate }}</ion-text>
+          } @else {
+            <ion-grid fixed>
+              <ion-row>
+                @if (remainingSeconds() !== 0) {
+                  <ion-col size="12" class="time">{{ displayTime() }}</ion-col>
+                }
+              </ion-row>
+              <ion-row>
+                <ion-col size="12" class="not-recived">
+                  {{ "otp.not-received" | translate }}
+                  <ion-button
+                    fill="clear"
+                    size="small"
+                    color="primary"
+                    [disabled]="remainingSeconds() !== 0"
+                    (click)="resendOtp()"
+                    >{{ "otp.resend" | translate }}</ion-button
+                  >
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          }
+        </ion-input-otp>
+      </form>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-justify-content-center footer-button">
+    @if (showButtonSend()) {
+      <ion-col size="12">
+        <ion-button expand="block" color="tertiary" shape="round">{{
+          "send" | translate
+        }}</ion-button>
+      </ion-col>
+    }
+  </ion-row>
+</ion-grid>

@@ -1,0 +1,118 @@
+import { Component, OnInit } from '@angular/core';
+import { loadStripe } from '@stripe/stripe-js';
+import { Browser } from '@capacitor/browser';
+
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonToggle,
+  IonButtons,
+  IonItem,
+  IonLabel,
+  IonButton,
+  IonRow,
+  IonGrid,
+  IonCol,
+  IonAlert,
+  IonInput,
+  IonInputPasswordToggle,
+  IonRouterLink,
+} from '@ionic/angular/standalone';
+import { TranslateModule } from '@ngx-translate/core';
+import { TranslationService } from '@monorepo-bb-app/core';
+import { ThemeService } from '@monorepo-bb-app/core';
+import { SocialLogin } from '@capgo/capacitor-social-login';
+import { CommonModule, JsonPipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { AddPaymentMethodComponent } from '@monorepo-bb-app/ui';
+import { HeaderComponent } from '@monorepo-bb-app/ui';
+import { ImageButtonComponent } from '@monorepo-bb-app/ui';
+import { OnbordingComponent } from '@monorepo-bb-app/ui';
+import { RouterLink } from '@angular/router';
+@Component({
+  selector: 'app-home',
+  templateUrl: 'home.page.html',
+  styleUrls: ['home.page.scss'],
+  imports: [
+    IonRouterLink,
+    IonButton,
+    IonLabel,
+    IonItem,
+    IonButtons,
+    IonToggle,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    TranslateModule,
+    IonToggle,
+    JsonPipe,
+    IonAlert,
+    AddPaymentMethodComponent,
+    IonGrid,
+    IonRow,
+    IonCol,
+    IonInput,
+    IonInputPasswordToggle,
+    HeaderComponent,
+    ImageButtonComponent,
+    OnbordingComponent,
+    RouterLink,
+  ],
+})
+export class HomePage implements OnInit {
+  token: any;
+  private stripe: any;
+  card: any;
+  elements: any;
+  isAlertOpen = false;
+
+  showPaymentMethod = false;
+  constructor(
+    private _translateService: TranslationService,
+    private _themeService: ThemeService,
+    private http: HttpClient,
+  ) {}
+
+  async ngOnInit() {
+    console.log('init');
+  }
+
+  changeLanguage(value: string) {
+    this._translateService.changeLanguage(value);
+  }
+
+  toggleTheme(event: any) {
+    if (event.detail.checked) {
+      this._themeService.setTheme('dark');
+    } else {
+      this._themeService.setTheme('light');
+    }
+  }
+
+  isDarkTheme() {
+    return this._themeService.isDarkMode;
+  }
+
+  async googleLogin() {
+    const res = await SocialLogin.login({
+      provider: 'google',
+      options: {},
+    });
+    this.token = res as any;
+    // handle the response
+    console.log(JSON.stringify(res));
+  }
+
+  async addCard() {
+    this.showPaymentMethod = true;
+  }
+
+  succesAddPayment($event: { data: any }) {
+    this.showPaymentMethod = false;
+    console.log($event.data);
+  }
+}

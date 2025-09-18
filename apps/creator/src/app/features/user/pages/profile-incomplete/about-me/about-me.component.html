@@ -1,0 +1,49 @@
+<ion-content class="profile-incomplete-aboutme-content">
+  <app-layout-content
+    customClass="create-account-page"
+    [useGoBack]="true"
+    [title]="'go-back' | translate"
+  >
+    <ion-grid content-header>
+      <ion-row>
+        <ion-col
+          ><app-header
+            [text]="'about-me.title' | translate"
+            [subtext]="'about-me.subtitle' | translate"
+          ></app-header
+        ></ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid content-body>
+      <form>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12">
+              <ion-textarea
+                mode="md"
+                label="{{ 'description' | translate }}"
+                labelPlacement="floating"
+                fill="outline"
+                placeholder="{{ 'about-me.placeholder' | translate }}"
+                rows="10"
+                [formControl]="bio"
+              ></ion-textarea>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </ion-grid>
+    <div content-footer class="ion-text-center">
+      <ion-button
+        color="tertiary"
+        class="bb-input"
+        expand="block"
+        shape="round"
+        (click)="goToNextStep()"
+        [disabled]="bio.invalid || isLoading()"
+      >
+        {{ "next" | translate }}
+      </ion-button>
+    </div>
+  </app-layout-content>
+</ion-content>

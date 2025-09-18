@@ -1,0 +1,17 @@
+<ion-list>
+  <ion-item
+    *ngFor="let conversation of conversations"
+    lines="none"
+    class="conversation-item"
+    (click)="onSelectConversation(conversation)"
+  >
+    <ion-avatar slot="start">
+      <img [src]="conversation.avatar" alt="user avatar" />
+    </ion-avatar>
+    <ion-label>
+      <h2>{{ conversation.name }}</h2>
+      <p>{{ conversation.email || conversation.message }}</p>
+    </ion-label>
+    <ion-note slot="end" color="medium">{{ conversation.date }}</ion-note>
+  </ion-item>
+</ion-list>

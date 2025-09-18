@@ -1,0 +1,129 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Blank </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-toggle
+          color="primary"
+          (ionChange)="toggleTheme($event)"
+          [checked]="isDarkTheme()"
+        >
+          Dark / Ligth
+        </ion-toggle>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <strong>{{ "username" | translate }} </strong>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button [color]="'tertiary'" (click)="changeLanguage('es')"
+          >ES</ion-button
+        >
+      </ion-col>
+      <ion-col>
+        <ion-button (click)="changeLanguage('en')">En</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button color="secondary" (click)="changeLanguage('en')"
+          >secondary</ion-button
+        >
+      </ion-col>
+      <ion-col>
+        <ion-button [routerLink]="['/cat-components']">Components</ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-button (click)="addCard()">Agregar tarjeta</ion-button>
+        <app-onbording [userId]="48"></app-onbording>
+
+        @if (showPaymentMethod) {
+          <app-add-payment-method
+            customerId="cus_SVkfBmXuRCyS8H"
+            (succesAddPayment)="succesAddPayment($event)"
+          ></app-add-payment-method>
+        }
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <app-header></app-header>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-input
+          class="bb-input"
+          [label]="'mail' | translate"
+          label-placement="floating"
+          fill="outline"
+          [maxlength]="20"
+          [placeholder]="'mail-placeholder' | translate"
+        ></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-input
+          class="bb-input"
+          [label]="'password' | translate"
+          label-placement="floating"
+          fill="outline"
+          [maxlength]="20"
+          [placeholder]="'password' | translate"
+          type="password"
+        >
+          <ion-input-password-toggle
+            slot="end"
+            [color]="'secondary'"
+          ></ion-input-password-toggle>
+        </ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button
+          shape="round"
+          expand="block"
+          color="tertiary"
+          (click)="(null)"
+          >Iniciar Sesión</ion-button
+        >
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="3">
+        <div>
+          <app-image-button
+            (click)="googleLogin()"
+            [image]="'assets/images/icon-google.svg'"
+          ></app-image-button>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <ion-button fill="clear" (click)="(null)"
+          ><span class="question link">Recupera tu contraseña</span></ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid class="footer">
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <ion-button fill="clear"
+          ><span class="question">¿No tienes una cuenta?</span> &nbsp;
+          <span class="create-account">Regístrate</span></ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

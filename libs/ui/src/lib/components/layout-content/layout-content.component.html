@@ -1,0 +1,18 @@
+<div class="layout-content ion-safe-area" [ngClass]="customClass()">
+  <div>
+    <div class="goBack" *ngIf="useGoBack()">
+      <ion-back-button
+        icon="arrow-back-outline"
+        defaultHref="/home"
+        class="ion-no-padding bb-goback"
+        uppercase="false"
+        [text]="title()"
+      ></ion-back-button>
+    </div>
+    <ng-content select="[content-header]"></ng-content>
+    <ng-content select="[content-body]"></ng-content>
+  </div>
+  <div class="layout-content-footer">
+    <ng-content select="[content-footer]"></ng-content>
+  </div>
+</div>

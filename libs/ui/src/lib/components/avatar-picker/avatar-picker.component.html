@@ -1,0 +1,31 @@
+@if (useOnlyDashedElement) {
+  <app-dashed-area
+    (clickEvent)="selectImage()"
+    [imageSrc]="currentImage"
+  ></app-dashed-area>
+} @else {
+  <div class="avatar-picker" [class]="'avatar-picker--' + size">
+    <div class="avatar-container" (click)="selectImage()">
+      <ion-avatar
+        [style.width]="avatarSize"
+        [style.height]="avatarSize"
+        [class.disabled]="disabled"
+      >
+        <img [src]="displayImage" alt="Avatar" />
+      </ion-avatar>
+
+      <div class="camera-overlay" *ngIf="!disabled">
+        <ion-icon name="camera"></ion-icon>
+      </div>
+
+      <div class="edit-badge" *ngIf="!disabled">
+        <ion-icon name="pencil"></ion-icon>
+      </div>
+    </div>
+    <div class="avatar-text" *ngIf="!disabled">
+      <ion-text color="medium">
+        <p>Toca para cambiar foto</p>
+      </ion-text>
+    </div>
+  </div>
+}

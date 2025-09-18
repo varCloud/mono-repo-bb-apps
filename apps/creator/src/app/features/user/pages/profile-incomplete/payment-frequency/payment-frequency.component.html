@@ -1,0 +1,40 @@
+<ion-content
+  class="payment-frequency-content"
+  *blockUI="'payment-frequency-page'"
+>
+  <app-layout-content
+    customClass="payment-frequency-page"
+    [useGoBack]="true"
+    [title]="'go-back' | translate"
+  >
+    <ion-grid content-header>
+      <ion-row>
+        <ion-col
+          ><app-header
+            [text]="'payment-frequency.title' | translate | uppercase"
+            customClass="payment-frequency-header"
+          ></app-header
+        ></ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid content-body>
+      @if (!isLoading()) {
+        <app-payment-frequency-settings
+          (PaymentFrecuencySelected)="onPaymentFrequencySelected($event)"
+          [defaultValues]="defaultPaymentFrequency"
+        ></app-payment-frequency-settings>
+      }
+    </ion-grid>
+    <div content-footer class="ion-text-center">
+      <ion-button
+        color="tertiary"
+        class="bb-input"
+        expand="block"
+        shape="round"
+        (click)="onNextButtonClick()"
+      >
+        {{ "next" | translate }}
+      </ion-button>
+    </div>
+  </app-layout-content>
+</ion-content>

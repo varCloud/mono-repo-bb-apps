@@ -1,0 +1,149 @@
+.exercise-form {
+  border-radius: 12px;
+  background: #fff;
+  box-shadow:
+    0 1px 2px 0 rgba(0, 0, 0, 0.3),
+    0 1px 3px 1px rgba(0, 0, 0, 0.15);
+  margin: 1rem 0;
+  overflow: hidden;
+
+  ion-accordion-group {
+    background: transparent;
+  }
+
+  .upload-error {
+    border: 2px solid var(--ion-color-danger);
+    border-radius: 12px !important;
+
+    ion-item[slot="header"] {
+      background: var(--ion-color-danger) !important;
+      color: var(--ion-color-danger);
+    }
+  }
+
+  .accordion-content {
+    padding: 10px;
+  }
+
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .form-field {
+    width: 100%;
+
+    ion-input,
+    ion-textarea {
+      width: 100%;
+      --padding-start: 1rem;
+      --padding-end: 1rem;
+      --border-radius: 8px;
+      --background: white;
+      --border-width: 1px;
+      --border-style: solid;
+      --border-color: #ddd;
+    }
+
+    ion-textarea {
+      --padding-top: 0.5rem;
+    }
+  }
+
+  .video-upload {
+    margin-top: 1rem;
+
+    .upload-label {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 0.5rem;
+    }
+
+    [id^="uppy-dashboard"] {
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+      background: #fff;
+
+      &:hover {
+        border-color: var(--ion-color-primary);
+      }
+    }
+  }
+
+  .error-message {
+    color: var(--ion-color-danger);
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+    padding-left: 1rem;
+  }
+}
+
+:host ::ng-deep {
+  .uppy-Dashboard-inner {
+    border: none !important;
+    background: none !important;
+    box-shadow: none !important;
+  }
+
+  .uppy-Dashboard-AddFiles {
+    border-radius: 24px;
+    margin: 0;
+    border: 3px dashed var(--ion-color-primary);
+    position: relative;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    // &::before {
+    //   content: '';
+    //   background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'%3E%3Cpath d='M320 367.79h76c55 0 100-29.21 100-83.6s-53-81.47-96-83.6c-8.89-85.06-71-136.8-144-136.8-69 0-113.44 45.79-128 91.2-60 5.7-112 43.88-112 106.4s54 106.4 120 106.4h56' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'/%3E%3Cpath fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='32' d='M320 255.79l-64-64-64 64M256 448.21V207.79'/%3E%3C/svg%3E");
+    //   width: 44px;
+    //   height: 44px;
+    //   display: block;
+    //   margin-bottom: 12px;
+    //   opacity: 0.6;
+    // }
+
+    .uppy-Dashboard-AddFiles-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .uppy-Dashboard-browse {
+      color: var(--ion-color-primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    // Ocultar el ícono predeterminado de Uppy
+    .uppy-Dashboard-AddFiles-icon {
+      display: none;
+    }
+  }
+  .uppy-StatusBar-actionBtn {
+    &--upload {
+      display: none;
+    }
+  }
+  .uppy-Dashboard-files {
+    flex: none;
+  }
+
+  ion-accordion {
+    background: white;
+  }
+
+  ion-accordion-group {
+    ion-item::part(native) {
+      --padding-start: 1rem;
+      --inner-padding-end: 1rem;
+      --background: white;
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@monorepo-bb-app/core": ["libs/core/index.ts"],
+      "@monorepo-bb-app/shared": ["libs/shared/index.ts"],
+      "@monorepo-bb-app/ui": ["libs/ui/src/index.ts"],
+      "@monorepo-bb-app/styles/*": ["libs/shared/scss/*"]
+    },
+    "useDefineForClassFields": false
+  },
+  "exclude": ["node_modules", "tmp"]
+}

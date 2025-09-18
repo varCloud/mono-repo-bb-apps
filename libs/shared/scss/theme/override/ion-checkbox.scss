@@ -1,0 +1,9 @@
+ion-checkbox.bb-checkbox {
+  --checkbox-background-checked: var(--ion-color-secondary);
+  --checkmark-color: #fff;
+}
+ion-checkbox.bb-checkbox::part(container) {
+  border-radius: 6px;
+  border: 2px solid var(--ion-color-secondary);
+  --color: #fff;
+}

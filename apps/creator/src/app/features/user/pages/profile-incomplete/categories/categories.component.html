@@ -1,0 +1,34 @@
+<ion-content class="profile-incomplete-categories-content">
+  <app-layout-content customClass="profile-incomplete-categories-page">
+    <ion-grid content-header>
+      <ion-row>
+        <ion-col
+          ><app-header
+            [text]="'categories.title' | translate"
+            [subtext]="'categories.content-creation-categories' | translate"
+          ></app-header
+        ></ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid content-body>
+      @if (!isLoading()) {
+        <app-categories-select
+          (selectedCategories)="onSelectedCategories($event)"
+          [defaultSelected]="categoriesSelected()"
+        ></app-categories-select>
+      }
+    </ion-grid>
+    <div content-footer class="ion-text-center">
+      <ion-button
+        color="tertiary"
+        class="bb-input"
+        expand="block"
+        shape="round"
+        [disabled]="getSelectedCategories() < 1 || isLoading()"
+        (click)="nextStep()"
+      >
+        {{ "next" | translate }}
+      </ion-button>
+    </div>
+  </app-layout-content>
+</ion-content>

@@ -1,0 +1,25 @@
+<ion-item
+  [button]="!disabled"
+  [disabled]="disabled"
+  (click)="onClick()"
+  [lines]="'none'"
+  [detail]="showArrow"
+  class="item-list"
+>
+  <ion-icon *ngIf="icon" [name]="icon" slot="start"></ion-icon>
+  <ion-label [class]="labelClass">{{ text }}</ion-label>
+  <ion-spinner *ngIf="loading" slot="end" name="circular"></ion-spinner>
+  <ion-text
+    *ngIf="actionText && !loading"
+    slot="end"
+    color="primary"
+    class="action-text"
+    >{{ actionText }}</ion-text
+  >
+  <ion-icon
+    *ngIf="iconEnd"
+    [name]="iconEnd"
+    slot="end"
+    [color]="'secondary'"
+  ></ion-icon>
+</ion-item>

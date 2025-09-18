@@ -1,0 +1,7 @@
+<ion-text class="currency-text-container {{ customClass() }}">
+  @if (!isUsDollars()) {
+    <small>$</small>
+  }
+  {{ amount() | number: "2.2-2" }}
+  <small>{{ suffix() }}</small>
+</ion-text>

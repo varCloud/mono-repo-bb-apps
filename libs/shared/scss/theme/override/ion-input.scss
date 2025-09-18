@@ -1,0 +1,16 @@
+ion-input.bb-input {
+  --border-color: var(--ion-color-bb-input-border-color);
+  --color: var(--ion-color-bb-input-color);
+  --highlight-color-focused: var(--ion-color-bb-input-highlight-color);
+  &.has-focus {
+    .label-text-wrapper,
+    .label-text {
+      color: var(--ion-color-bb-input-highlight-color);
+    }
+  }
+}
+
+ion-input.bb-input .label-text-wrapper,
+ion-input.bb-input .label-text {
+  color: var(--ion-color-bb-label);
+}

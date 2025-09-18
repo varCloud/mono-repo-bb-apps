@@ -1,0 +1,26 @@
+<div class="cover-upload-container">
+  <input
+    type="file"
+    id="cover-image"
+    accept="image/*"
+    (change)="onFileChange($event)"
+    style="display: none"
+  />
+  <label for="cover-image" class="cover-upload-area">
+    <div *ngIf="!previewUrl" class="upload-placeholder">
+      <ion-icon name="cloud-upload-outline"></ion-icon>
+      <span color="secondary">Carga la imagen de tu portada</span>
+    </div>
+    <div *ngIf="previewUrl" class="preview-container">
+      <img [src]="previewUrl" alt="Preview" class="image-preview" />
+    </div>
+  </label>
+</div>
+<ion-modal
+  #modal
+  trigger="open-modal"
+  [initialBreakpoint]="0.25"
+  [breakpoints]="[0, 0.25, 0.5, 0.75]"
+>
+  <ng-template> </ng-template>
+</ion-modal>

@@ -1,0 +1,11 @@
+<form [formGroup]="formPaymentMethod" (ngSubmit)="addPaymentMethod()">
+  <div #paymentMethod></div>
+  @if (isLoading()) {
+    <ion-spinner name="circular"></ion-spinner>
+  } @else {
+    <ion-button type="submit">{{
+      "add-payment-method" | translate
+    }}</ion-button>
+    <ion-button (click)="clearFields()">{{ "clear" | translate }}</ion-button>
+  }
+</form>

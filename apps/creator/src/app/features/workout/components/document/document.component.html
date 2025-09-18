@@ -1,0 +1,96 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/workout/create"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Documento</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <form [formGroup]="documentForm" (ngSubmit)="uploadDocuments()">
+        <ion-item>
+          <ion-label position="floating">Título</ion-label>
+          <ion-input formControlName="title" type="text"></ion-input>
+          <div
+            *ngIf="
+              documentForm.get('title')?.invalid &&
+              documentForm.get('title')?.touched
+            "
+            class="error-message"
+          >
+            El título es requerido
+          </div>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Descripción</ion-label>
+          <ion-textarea formControlName="description" rows="4"></ion-textarea>
+          <div
+            *ngIf="
+              documentForm.get('description')?.invalid &&
+              documentForm.get('description')?.touched
+            "
+            class="error-message"
+          >
+            La descripción es requerida
+          </div>
+        </ion-item>
+
+        <ion-item lines="none">
+          <div class="file-upload-container">
+            <input
+              type="file"
+              multiple
+              accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt"
+              (change)="onFileSelected($event)"
+              id="documentFiles"
+            />
+            <label for="documentFiles" class="file-upload-button">
+              <ion-icon name="document-attach-outline"></ion-icon>
+              Seleccionar documentos
+            </label>
+            <div
+              *ngIf="
+                documentForm.get('files')?.invalid &&
+                documentForm.get('files')?.touched
+              "
+              class="error-message"
+            >
+              Debe seleccionar al menos un documento
+            </div>
+          </div>
+        </ion-item>
+
+        <div class="selected-files" *ngIf="selectedFiles.length > 0">
+          <h4>Documentos seleccionados:</h4>
+          <div class="file-chips">
+            <ion-chip *ngFor="let file of selectedFiles; let i = index">
+              <ion-label>{{ file.name }}</ion-label>
+              <ion-icon
+                name="close-circle-outline"
+                (click)="removeFile(i)"
+              ></ion-icon>
+            </ion-chip>
+          </div>
+        </div>
+
+        <div *ngIf="isUploading" class="upload-progress">
+          <ion-progress-bar [value]="uploadProgress"></ion-progress-bar>
+          <p>Subiendo documentos... {{ (uploadProgress * 100).toFixed(0) }}%</p>
+        </div>
+
+        <div class="button-container">
+          <ion-button type="button" fill="outline" (click)="cancel()"
+            >Cancelar</ion-button
+          >
+          <ion-button type="submit" [disabled]="isUploading"
+            >Subir documentos</ion-button
+          >
+        </div>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

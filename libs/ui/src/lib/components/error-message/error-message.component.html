@@ -1,0 +1,9 @@
+@if ((control().dirty || control().touched) && errorMessages) {
+  <div class="error-wrapper" [class]="class()">
+    @for (item of errorMessages; track $index) {
+      <p class="error-text">
+        {{ item | translate }}
+      </p>
+    }
+  </div>
+}

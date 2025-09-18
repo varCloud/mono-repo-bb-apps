@@ -1,0 +1,109 @@
+:host {
+  .menu-items {
+    margin-top: 24px;
+
+    app-item-list {
+      margin-bottom: 15px !important;
+
+      &:last-child {
+        margin-bottom: 0px;
+        margin-top: 70px;
+      }
+    }
+  }
+
+  .container-avatar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .container-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .title {
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 20px;
+      /* 125% */
+      letter-spacing: 0.2px;
+    }
+
+    .subtitle {
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 22px;
+      /* 157.143% */
+      letter-spacing: 0.2px;
+    }
+  }
+
+  .container-messges {
+    ion-button {
+      height: 32px;
+      color: black !important;
+      font-size: 12px;
+      --background: #fff;
+      --border-color: #fff;
+    }
+  }
+
+  .container-link {
+    height: 98px;
+    width: 100%;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #0ab4fa 0%, #1a46fe 100%);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    margin-top: 28px;
+    .container-link-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      width: 100%;
+      .title {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 20px;
+        letter-spacing: 0.2px;
+        color: #ffffff;
+      }
+
+      .subtitle {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 22px;
+        letter-spacing: 0.2px;
+        color: #ffffff;
+      }
+    }
+
+    .container-link-button {
+      position: absolute;
+      top: 5px;
+      right: 0;
+
+      ion-button {
+        height: 32px;
+        color: #fff !important;
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+.text-danger {
+  --color: red !important;
+}

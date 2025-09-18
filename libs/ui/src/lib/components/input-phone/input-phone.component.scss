@@ -1,0 +1,43 @@
+.input-phone {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  color: var(--ion-color-bb-input-color);
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: 0;
+}
+
+ion-item {
+  --background: transparent;
+  --border-color: #b3b3b3;
+  --border-style: solid;
+  --border-width: 1px;
+  --border-radius: 5px;
+
+  &.ng-invalid {
+    --border-color: #f44336;
+  }
+}
+
+span {
+  position: absolute;
+  padding: 0 2px;
+  webkit-transform: translateY(-45%) scale(0.75);
+  transform: translateY(-45%) scale(0.75);
+  margin-left: 0px;
+  margin-right: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  background-color: var(--background);
+  color: #b3b3b3;
+  z-index: 2;
+  max-width: calc(
+    (100% - var(--padding-start) - var(--padding-end) - 8px) / 0.75
+  );
+}

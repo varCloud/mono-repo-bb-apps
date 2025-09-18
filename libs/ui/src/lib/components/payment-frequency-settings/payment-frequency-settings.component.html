@@ -1,0 +1,105 @@
+@if (!isLoading()) {
+  <ion-grid class="payment-frequency-setting-content">
+    <ion-row>
+      <ion-col size="12">
+        <ion-text class="max-categories-text ion-text-center">
+          <p>{{ "your-client-payment" | translate }}</p>
+        </ion-text>
+      </ion-col>
+      <ion-col size="12">
+        <ion-radio-group
+          [ngModel]="selectedPaymentFrequencyId()"
+          (ngModelChange)="selectedPaymentFrequencyId.set($event)"
+        >
+          @for (payment of paymentFrecuency(); track payment.cycleId) {
+            <ion-item
+              lines="none"
+              (click)="selectPaymentFrequency(payment)"
+              [ngClass]="{
+                selected: payment.cycleId === selectedPaymentFrequencyId(),
+              }"
+            >
+              <ion-radio
+                class="bb-radio"
+                slot="start"
+                [value]="payment.cycleId"
+              ></ion-radio>
+              <ion-label>
+                <ion-text>{{ payment.description }}</ion-text
+                ><br />
+                @if (payment.isRecommended) {
+                  <ion-note color="secondary" class="recommended-label">
+                    {{ "recommended" | translate }}
+                  </ion-note>
+                }
+              </ion-label>
+              <ion-text slot="end" class="payment-amount">
+                <app-currency [amount]="payment.amount"></app-currency>
+              </ion-text>
+            </ion-item>
+          }
+        </ion-radio-group>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12" class="bold">
+        <ion-range
+          [min]="selectedPaymentFrequency()?.amountMin"
+          [max]="selectedPaymentFrequency()?.amountMax"
+          [value]="selectedPaymentFrequency()?.amount"
+          [pin]="true"
+          (ionChange)="onIonChange($event)"
+          mode="md"
+        >
+          <div slot="start" class="ion-text-center">
+            {{ "min" | translate | uppercase }}<br />
+            <app-currency
+              [amount]="selectedPaymentFrequency()?.amountMin ?? 0"
+            ></app-currency>
+          </div>
+          <div slot="end" class="ion-text-center">
+            {{ "max" | translate | uppercase }}<br />
+            <ion-text class="ion-text-end">
+              <app-currency
+                [amount]="selectedPaymentFrequency()?.amountMax ?? 0"
+              ></app-currency>
+            </ion-text>
+          </div>
+        </ion-range>
+      </ion-col>
+      <ion-col size="6" offset="3">
+        <ion-input
+          fill="outline"
+          placeholder="00.00"
+          mode="md"
+          [formControl]="currencyControl"
+        >
+          <span slot="end">{{ currency() }}</span>
+        </ion-input>
+        <app-error-message
+          [control]="currencyControl"
+          [customMessages]="{
+            max:
+              'formErrors.max'
+              | translate: { max: selectedPaymentFrequency()?.amountMax },
+            min:
+              'formErrors.min'
+              | translate: { min: selectedPaymentFrequency()?.amountMin },
+          }"
+        ></app-error-message>
+      </ion-col>
+      <ion-col size="12" class="ion-margin-top">
+        <ion-item class="text-card-calculate-payment">
+          <ion-label> Total a ganar después de comisiones </ion-label>
+
+          <ion-text slot="end" class="payment-amount" color="primary">
+            <app-currency [amount]="calculatePayment()"></app-currency>
+          </ion-text>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+} @else {
+  <app-list-skeleton [itemRepeat]="3"></app-list-skeleton>
+}

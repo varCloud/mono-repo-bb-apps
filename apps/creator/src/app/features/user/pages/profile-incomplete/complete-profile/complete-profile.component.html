@@ -1,0 +1,175 @@
+<ion-content class="complete-profile-content">
+  <app-layout-content
+    customClass="complete-profile-page"
+    [useGoBack]="true"
+    [title]="'go-back' | translate"
+  >
+    <ion-grid content-header>
+      <ion-row>
+        <ion-col
+          ><app-header
+            [text]="
+              'create-account-profile.complete-profile' | translate | uppercase
+            "
+            [subtext]="'create-account-profile.subtitle' | translate"
+          ></app-header
+        ></ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid content-body>
+      <form [formGroup]="form">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12">
+              <app-avatar-picker
+                [size]="'medium'"
+                [disabled]="false"
+                (imageChanged)="onImageSelected($event)"
+              >
+              </app-avatar-picker>
+            </ion-col>
+            <ion-col size="12">
+              <ion-input
+                formControlName="firstName"
+                class="bb-input"
+                [label]="'create-account-profile.firstnames' | translate"
+                label-placement="floating"
+                fill="outline"
+                [placeholder]="
+                  'create-account-profile.into-firstnames' | translate
+                "
+                type="text"
+                mode="md"
+              ></ion-input>
+              <app-error-message
+                [control]="$any(form.get('firstName'))"
+              ></app-error-message>
+            </ion-col>
+            <ion-col size="12">
+              <ion-input
+                formControlName="lastName"
+                class="bb-input"
+                [label]="'create-account-profile.lastnames' | translate"
+                label-placement="floating"
+                fill="outline"
+                [placeholder]="
+                  'create-account-profile.into-lastnames' | translate
+                "
+                type="text"
+                mode="md"
+              ></ion-input>
+              <app-error-message
+                [control]="$any(form.get('lastName'))"
+              ></app-error-message>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-input
+                formControlName="nickName"
+                class="bb-input"
+                [label]="'Nickname' | translate"
+                label-placement="floating"
+                fill="outline"
+                [placeholder]="
+                  'create-account-profile.into-nick-name' | translate
+                "
+                type="text"
+                mode="md"
+              ></ion-input>
+              <app-error-message
+                [control]="$any(form.get('nickName'))"
+              ></app-error-message>
+            </ion-col>
+            <ion-col size="12">
+              <ion-item lines="none">
+                <ion-label class="label">
+                  {{ "create-account-profile.birthdate" | translate }}
+                </ion-label>
+                <ion-datetime-button
+                  datetime="datetime"
+                  mode="md"
+                  slot="end"
+                ></ion-datetime-button>
+              </ion-item>
+
+              <ion-modal [keepContentsMounted]="true">
+                <ng-template>
+                  <ion-datetime
+                    id="datetime"
+                    mode="md"
+                    presentation="date"
+                    [showDefaultButtons]="true"
+                    [doneText]="'accept' | translate"
+                    [cancelText]="'cancel' | translate"
+                    formControlName="birthdate"
+                    [max]="getMaxDate()"
+                  ></ion-datetime>
+                </ng-template>
+              </ion-modal>
+              <app-error-message
+                [control]="$any(form.get('birthdate'))"
+              ></app-error-message>
+            </ion-col>
+            <ion-col size="12">
+              <ion-item lines="none">
+                <ion-label class="label">
+                  {{ "create-account-profile.gender" | translate }}
+                </ion-label>
+                <ion-select
+                  formControlName="genderId"
+                  [placeholder]="'create-account-profile.gender' | translate"
+                  slot="end"
+                >
+                  @for (item of genderOpt; track $index) {
+                    <ion-select-option [value]="item.value">{{
+                      item.label | translate
+                    }}</ion-select-option>
+                  }
+                </ion-select>
+              </ion-item>
+
+              <app-error-message
+                [control]="$any(form.get('birthdate'))"
+              ></app-error-message>
+            </ion-col>
+            <ion-col size="12">
+              <app-input-phone
+                [control]="$any(form.get('phone'))"
+                [isoCode]="isoCode()"
+                (maskSelected)="onMaskSelected($event)"
+              ></app-input-phone>
+            </ion-col>
+            <ion-col size="12">
+              <ion-item lines="none" button="" (click)="openColorPicker()">
+                <ion-label class="label">{{
+                  "create-account-profile.profile-color" | translate
+                }}</ion-label>
+                <input
+                  formControlName="profileColor"
+                  type="color"
+                  class="custom-color-input"
+                  #colorPicker
+                />
+              </ion-item>
+              <app-error-message
+                [control]="$any(form.get('profileColor'))"
+              ></app-error-message>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </ion-grid>
+    <div content-footer class="ion-text-center">
+      <ion-button
+        color="tertiary"
+        class="bb-input"
+        expand="block"
+        shape="round"
+        [disabled]="form.invalid"
+        (click)="onSave()"
+      >
+        {{ "create-account-profile.title" | translate }}
+      </ion-button>
+    </div>
+  </app-layout-content>
+</ion-content>

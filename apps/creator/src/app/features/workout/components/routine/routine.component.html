@@ -1,0 +1,257 @@
+<ion-header>
+  <div class="container-header">
+    <ion-back-button
+      [mode]="'ios'"
+      defaultHref="/workout/create"
+    ></ion-back-button>
+    <span class="header-title">{{ "workout.routine.title" | translate }}</span>
+  </div>
+</ion-header>
+
+<ion-content class="ion-padding" class="excercises-container-uppy">
+  <form [formGroup]="routineForm" (ngSubmit)="saveRoutine()">
+    <!-- Sección de Portada -->
+    <div class="section">
+      <h2>{{ "workout.routine.cover" | translate }}</h2>
+
+      <ion-item>
+        <ion-col size="12">
+          <ion-input
+            formControlName="title"
+            class="bb-input"
+            [label]="'workout.routine.cover-title' | translate"
+            label-placement="floating"
+            fill="outline"
+            [maxlength]="100"
+            mode="md"
+            [placeholder]="
+              'workout.routine.cover-title-placeholder' | translate
+            "
+          ></ion-input>
+          <div
+            *ngIf="
+              routineForm.get('title')?.invalid &&
+              routineForm.get('title')?.touched
+            "
+            class="error-message"
+          >
+            {{ "workout.routine.cover-title-required" | translate }}
+          </div>
+        </ion-col>
+      </ion-item>
+
+      <ion-item>
+        <ion-col size="12">
+          <ion-input
+            formControlName="description"
+            class="bb-input"
+            [label]="'workout.routine.cover-description' | translate"
+            label-placement="floating"
+            fill="outline"
+            [maxlength]="100"
+            mode="md"
+            [placeholder]="
+              'workout.routine.cover-description-placeholder' | translate
+            "
+          ></ion-input>
+          <div
+            *ngIf="
+              routineForm.get('description')?.invalid &&
+              routineForm.get('description')?.touched
+            "
+            class="error-message"
+          >
+            {{ "workout.routine.cover-description-required" | translate }}
+          </div>
+        </ion-col>
+      </ion-item>
+      <app-avatar-picker
+        [useOnlyDashedElement]="true"
+        (imageChanged)="onCoverImageSelected($event)"
+      ></app-avatar-picker>
+    </div>
+
+    <!-- Sección Target -->
+    <div class="section">
+      <h2>{{ "workout.routine.target" | translate }}</h2>
+      <ion-list>
+        <ion-item>
+          <ion-select
+            mode="md"
+            [multiple]="true"
+            aria-label="fruit"
+            [label]="'workout.routine.target' | translate"
+            fill="outline"
+            justify="space-between"
+            [placeholder]="'workout.routine.target-placeholder' | translate"
+            formControlName="target"
+          >
+            <ion-select-option
+              *ngFor="let option of targetOptions"
+              [value]="option.tagId"
+              >{{ option.name }}</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <!-- Sección Ubicación -->
+    <div class="section">
+      <h2>{{ "workout.routine.location" | translate }}</h2>
+      <ion-list>
+        <ion-item>
+          <ion-select
+            mode="md"
+            [multiple]="true"
+            aria-label="fruit"
+            [label]="'workout.routine.location' | translate"
+            fill="outline"
+            justify="space-between"
+            [placeholder]="'workout.routine.location-placeholder' | translate"
+            formControlName="location"
+          >
+            <ion-select-option
+              *ngFor="let option of locationOptions"
+              [value]="option.locationTypeId"
+              >{{ option.description }}</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <!-- Sección Dificultad -->
+    <div class="section">
+      <h2>{{ "workout.routine.difficulty" | translate }}</h2>
+      <ion-list>
+        <ion-item>
+          <ion-select
+            mode="md"
+            [multiple]="true"
+            aria-label="fruit"
+            [label]="'workout.routine.difficulty' | translate"
+            fill="outline"
+            justify="space-between"
+            [placeholder]="'workout.routine.difficulty-placeholder' | translate"
+            formControlName="difficulty"
+          >
+            <ion-select-option
+              *ngFor="let option of difficultyOptions"
+              [value]="option.levelId"
+              >{{ option.description }}</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <!-- Sección Categoría -->
+    <div class="section">
+      <h2>{{ "workout.routine.category" | translate }}</h2>
+      <ion-list>
+        <ion-item>
+          <ion-select
+            mode="md"
+            [multiple]="true"
+            aria-label="fruit"
+            [label]="'workout.routine.category' | translate"
+            fill="outline"
+            justify="space-between"
+            [placeholder]="'workout.routine.category-placeholder' | translate"
+            formControlName="category"
+          >
+            <ion-select-option
+              *ngFor="let option of difficultyOptions"
+              [value]="option.levelId"
+              >{{ option.description }}</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <!-- Sección Equipo -->
+    <div class="section">
+      <h2>{{ "workout.routine.equipment" | translate }}</h2>
+      <ion-list>
+        <ion-item>
+          <ion-select
+            mode="md"
+            [multiple]="true"
+            aria-label="fruit"
+            [label]="'workout.routine.equipment' | translate"
+            fill="outline"
+            justify="space-between"
+            [placeholder]="'workout.routine.equipment-placeholder' | translate"
+            formControlName="equipment"
+          >
+            <ion-select-option [value]="1">Apples</ion-select-option>
+            <ion-select-option [value]="2">Oranges</ion-select-option>
+            <ion-select-option [value]="3">Bananas</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <!-- Sección Ejercicios -->
+    <div class="section">
+      <h2>{{ "workout.routine.exercises-title" | translate }}</h2>
+
+      <!-- Lista de ejercicios y formularios -->
+      <div class="exercises-list">
+        <div
+          *ngFor="let exercise of exercises.controls; let i = index"
+          class="exercise-item"
+        >
+          <!-- Formulario para añadir ejercicio -->
+          @if (_sesionService.user$()) {
+            <app-add-exercise
+              [exerciseNumber]="i + 1"
+              [exerciseForm]="$any(exercise)"
+              (exerciseAdded)="onExerciseAdded($event)"
+              [ejecutar]="ejecutarFILE()"
+              [objectId]="objectId"
+              (uploadErrorEvent)="onExerciseUploadError()"
+              (uploadSuccessEvent)="successUpload()"
+            ></app-add-exercise>
+          }
+        </div>
+      </div>
+
+      <!-- Botón para agregar ejercicio -->
+      <app-dashed-area
+        (clickEvent)="toggleAddExercise()"
+        icon="add-circle-outline"
+        [label]="'workout.routine.add-exercise' | translate"
+        [disabled]="areValidExercises"
+      ></app-dashed-area>
+    </div>
+
+    <!-- Botón para crear entrenamiento -->
+    <ion-button
+      expand="block"
+      type="submit"
+      color="tertiary"
+      class="bb-input"
+      expand="block"
+      shape="round"
+      [disabled]="routineForm.invalid"
+    >
+      @if (retryUpload()) {
+        {{ "Reintentar " | translate }}
+      } @else {
+        {{ "workout.routine.create-routine" | translate }}
+      }
+    </ion-button>
+
+    <!-- Indicador de progreso de subida -->
+    <div *ngIf="isUploading" class="upload-progress">
+      <ion-progress-bar [value]="uploadProgress"></ion-progress-bar>
+      <p>
+        {{ "workout.routine.saving" | translate }}
+        {{ (uploadProgress * 100).toFixed(0) }}%
+      </p>
+    </div>
+  </form>
+</ion-content>

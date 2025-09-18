@@ -1,0 +1,13 @@
+<button
+  type="button"
+  class="cover-dashed-area"
+  (click)="onClick()"
+  [disabled]="disabled()"
+>
+  @if (imageSrc()) {
+    <img [src]="imageSrc()" alt="" />
+  } @else {
+    <ion-icon [name]="icon()"></ion-icon>
+    <span color="secondary">{{ label() }}</span>
+  }
+</button>

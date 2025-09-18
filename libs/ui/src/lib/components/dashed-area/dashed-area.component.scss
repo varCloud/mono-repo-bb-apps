@@ -1,0 +1,42 @@
+.cover-dashed-area {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  max-height: 120px;
+  width: 100%;
+  cursor: pointer;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  padding: 16px;
+
+  &:hover {
+    border-color: var(--ion-color-primary);
+    background-color: rgba(var(--ion-color-primary-rgb), 0.1);
+  }
+
+  ion-icon {
+    font-size: 32px;
+    color: var(--ion-color-primary);
+  }
+
+  span {
+    color: var(--ion-color-secondary);
+    font-size: 14px;
+    text-align: center;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px; /* 125% */
+    letter-spacing: 0.2px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+}

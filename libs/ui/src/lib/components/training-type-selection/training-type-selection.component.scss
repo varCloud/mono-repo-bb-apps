@@ -1,0 +1,78 @@
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: var(--ion-color-dark);
+}
+
+p {
+  color: var(--ion-color-medium);
+  margin-bottom: 24px;
+}
+
+.training-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 8px #0000001a;
+  height: 94px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.content-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--ion-color-tertiary);
+  border-radius: 12px;
+  width: 30%;
+  height: 94px;
+  margin: 0 auto;
+}
+
+.contaniner-info {
+  display: flex;
+  justify-content: flex-start;
+  width: 70%;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+ion-img {
+  width: 50px;
+  height: 50px;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 4px;
+  color: var(--ion-color-dark);
+}
+
+ion-text {
+  font-size: 14px;
+  color: var(--ion-color-medium);
+  font-style: normal;
+  font-weight: 300;
+  line-height: 20px;
+}
+
+ion-card {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

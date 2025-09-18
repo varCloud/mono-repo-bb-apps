@@ -1,0 +1,19 @@
+<ion-grid class="ion-grid-no-padding">
+  <ion-row>
+    <ion-col size="12" *ngFor="let type of trainingTypes">
+      <ion-card class="training-card" (click)="selectTrainingType(type.id)">
+        <div class="content-card">
+          <div class="icon-container">
+            <ion-img [src]="type.icon" alt="{{ type.title }}"></ion-img>
+          </div>
+          <div class="contaniner-info">
+            <ion-label>
+              <h3>{{ type.title }}</h3>
+              <ion-text>{{ type.description }}</ion-text>
+            </ion-label>
+          </div>
+        </div>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>

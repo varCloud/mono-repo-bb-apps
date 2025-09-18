@@ -1,0 +1,177 @@
+{
+  "about-me": {
+    "placeholder": "Write something about yourself",
+    "save-error": "Error saving description.",
+    "save-success": "Description saved successfully.",
+    "subtitle": "Write a brief description about yourself so your clients can get to know you better.",
+    "title": "About Me"
+  },
+  "accept": "Accept",
+  "add-payment-method": "Add Payment Method",
+  "cancel": "Cancel",
+  "categories": {
+    "content-creation-categories": "Categories you master for content creation:",
+    "max-categories-selected": "You can select up to {{limit}} categories",
+    "save-error": "Error saving categories",
+    "save-success": "Categories saved successfully",
+    "title": "Categories"
+  },
+  "clear": "Clear",
+  "continue": "Continue",
+  "create-account": "Create Account",
+  "create-account-profile": {
+    "birthdate": "Date of birth",
+    "cellphone-number": "Cell phone number",
+    "complete-profile": "Complete your profile",
+    "firstnames": "First name(s)",
+    "full-name": "Full name",
+    "gender": "Gender",
+    "into-firstnames": "Enter your first name(s)",
+    "into-full-name": "Enter your full name",
+    "into-lastnames": "Enter your last name(s)",
+    "into-nick-name": "Enter your nickname",
+    "into-phone": "Enter your phone number",
+    "into-profile-color": "Profile color",
+    "lastnames": "Last name(s)",
+    "profile-color": "Profile color",
+    "save-error": "Error creating account",
+    "save-success": "Account created successfully",
+    "subtitle": "Fill out the following fields to create your account",
+    "title": "Create Account"
+  },
+  "description": "Description",
+  "error": {
+    "default": "An unexpected error occurred",
+    "email-required": "Email is required",
+    "error-processing": "Error processing request. Please try again later.",
+    "max-categories-selected": "You can select up to {{limit}} categories",
+    "network": "Network error. Please check your internet connection.",
+    "not-found": "Resource not found.",
+    "password-required": "Password is required",
+    "unauthorized": "Unauthorized. Please log in again."
+  },
+  "forgot-password": {
+    "email-placeholder": "Enter your email address",
+    "send-link": "Send recovery link",
+    "subtitle": "Enter the email address where we will send the verification code",
+    "title": "Forgot my password"
+  },
+  "formErrors": {
+    "duplicate": "The value already exists",
+    "email": "The email is not valid",
+    "max": "The value must be less than or equal to {{max}}",
+    "maxlength": "The field cannot have more than {{maxlength}} characters",
+    "min": "The value must be greater than or equal to {{min}}",
+    "minlength": "The field must have at least {{minlength}} characters",
+    "pattern": "The field format is not valid",
+    "required": "This field is required",
+    "unique": "The value must be unique",
+    "zero": "The value cannot be zero"
+  },
+  "genders": {
+    "female": "Female",
+    "male": "Male",
+    "other": "Other"
+  },
+  "go-back": "Go back",
+  "login": {
+    "errors": {
+      "email-required": "Email is required",
+      "invalid-credentials": "Invalid email and/or password",
+      "password-required": "Password is required"
+    },
+    "forgot-password": "Forgot my password",
+    "login": "Log in",
+    "login-with": "Log in with",
+    "no-account": "Don't have an account?",
+    "recover-password": "Recover your password",
+    "register": "Sign up",
+    "welcome-user": "WELCOME!"
+  },
+  "mail": "Mail",
+  "max": "Maximum",
+  "min": "Minimum",
+  "next": "Next",
+  "onboarding-text": "Join the largest community of coaches around the world",
+  "otp": {
+    "not-received": "Haven't received it yet?",
+    "resend": "Resend code",
+    "subtitle": "A code has been sent to your email {{email}}",
+    "title": "Enter the confirmation code"
+  },
+  "password": "Password",
+  "payment-frequency": {
+    "save-error": "Error saving payment frequency.",
+    "save-success": "Payment frequency saved successfully.",
+    "title": "Choose the cost of your training"
+  },
+  "payment-method-added": "Payment method added",
+  "payment-method-added-success": "Payment method added successfully",
+  "recommended": "Recommended",
+  "reset-password": {
+    "confirm-password": "Confirm password",
+    "confirm-password-required": "Password confirmation is required",
+    "new-password": "New password",
+    "password-min-length": "Password must be at least 6 characters",
+    "password-pattern": "Password must contain at least one uppercase letter, one lowercase letter, and one number",
+    "password-required": "Password is required",
+    "password-reset-success": "Password successfully reset. Please log in with your new password.",
+    "passwords-do-not-match": "Passwords do not match",
+    "passwords-mismatch": "Passwords do not match",
+    "reset-password": "Create new password",
+    "subtitle": "Enter your new password",
+    "title": "Reset password"
+  },
+  "search": "Search",
+  "send": "Send",
+  "skip": "Skip",
+  "steps-onboarding": {
+    "step-1-description": "Start your community with your own personalized app.",
+    "step-1-title": "Training",
+    "step-2-description": "Create your own routines, share your classes, and start generating income.",
+    "step-2-title": "Client Management",
+    "step-3-description": "Monitor your clients' training, goals, and objectives.",
+    "step-3-title": "Progress"
+  },
+  "user-create-account": {
+    "have-account": "Do you have an account?",
+    "title": "Create account as creator"
+  },
+  "username": "User Name",
+  "validate-otp": {
+    "description": "Enter the 6-digit code we sent to your email to reset your password",
+    "resend": "Resend code",
+    "subtitle": "Verify your identity",
+    "title": "Enter verification code",
+    "verify": "Verify Code"
+  },
+  "workout": {
+    "routine": {
+      "add-exercise": "Add exercise",
+      "category": "Category",
+      "category-placeholder": "Select",
+      "cover": "Cover",
+      "cover-description": "Routine description",
+      "cover-description-placeholder": "Enter the routine description",
+      "cover-description-required": "Description is required",
+      "cover-title": "Routine title",
+      "cover-title-placeholder": "Enter the routine title",
+      "cover-title-required": "Title is required",
+      "create-routine": "Create Training",
+      "difficulty": "Difficulty",
+      "difficulty-placeholder": "Select",
+      "equipment": "Equipment",
+      "equipment-placeholder": "Select",
+      "exercise": "Exercise",
+      "exercises-title": "Upload the exercises for your routine",
+      "location": "Location",
+      "location-placeholder": "Select",
+      "remove-exercise": "Remove exercise",
+      "saving": "Saving routine...",
+      "target": "Target",
+      "target-placeholder": "Select",
+      "title": "Routines"
+    }
+  },
+  "your-client-payment": "Your client will pay"
+}

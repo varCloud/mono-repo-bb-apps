@@ -1,0 +1,13 @@
+.payment-frequency-content {
+  .payment-frequency-page {
+    .payment-frequency-header {
+      background-color: rgb(72, 58, 40) !important;
+    }
+  }
+
+  ::ng-deep .payment-frequency-header .header-text {
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 28px;
+  }
+}

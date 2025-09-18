@@ -1,0 +1,14 @@
+<!-- Upload file component -->
+<div class="upload-container">
+  <input
+    type="file"
+    [id]="fileId"
+    [accept]="accept"
+    (change)="onFileChange($event)"
+    style="display: none"
+  />
+  <label [for]="fileId" class="upload-button">
+    <ion-icon [name]="icon"></ion-icon>
+    <span>{{ getFileName() }}</span>
+  </label>
+</div>

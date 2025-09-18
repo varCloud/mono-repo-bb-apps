@@ -1,0 +1,179 @@
+{
+  "about-me": {
+    "placeholder": "Escribe algo sobre ti",
+    "save-error": "Error al guardar la descripción.",
+    "save-success": "Descripción guardada exitosamente.",
+    "subtitle": "Escribe una breve descripción de ti para que tus clientes te conozcan mejor.",
+    "title": "Acerca de mí"
+  },
+  "accept": "Aceptar",
+  "add-payment-method": "Agregar método de pago",
+  "cancel": "Cancelar",
+  "categories": {
+    "content-creation-categories": "Categorías que domina para crear contenido:",
+    "max-categories-selected": "Puedes seleccionar máximo {{limit}} categorías",
+    "save-error": "Error al guardar categorías",
+    "save-success": "Categorías guardadas exitosamente",
+    "title": "Categorías"
+  },
+  "clear": "Limpiar",
+  "continue": "Continuar",
+  "create-account": "Crear cuenta",
+  "create-account-profile": {
+    "birthdate": "Fecha de nacimiento",
+    "cellphone-number": "Número de celular",
+    "complete-profile": "Completa tu perfil",
+    "firstnames": "Nombre(s)",
+    "full-name": "Nombre completo",
+    "gender": "Género",
+    "into-firstnames": "Ingrese sus nombre(s)",
+    "into-full-name": "Ingrese su nombre completo",
+    "into-lastnames": "Ingrese sus apellidos",
+    "into-nick-name": "Ingrese su nickname",
+    "into-phone": "Ingrese su número de teléfono",
+    "into-profile-color": "Color de perfil",
+    "lastnames": "Apellidos",
+    "profile-color": "Color de perfil",
+    "save-error": "Error al crear la cuenta",
+    "save-success": "Cuenta creada exitosamente",
+    "subtitle": "Completa los siguientes campos para crear tu cuenta",
+    "title": "Crear cuenta"
+  },
+  "description": "Descripción",
+  "error": {
+    "default": "Ha ocurrido un error inesperado",
+    "email-required": "El correo electrónico es obligatorio",
+    "error-processing": "Error al procesar la solicitud. Por favor, inténtalo de nuevo más tarde.",
+    "max-categories-selected": "Puedes seleccionar hasta {{limit}} categorías",
+    "network": "Error de red. Por favor, verifica tu conexión a Internet.",
+    "not-found": "No se encontró el recurso solicitado.",
+    "password-required": "La contraseña es obligatoria",
+    "unauthorized": "No autorizado. Por favor, inicia sesión nuevamente."
+  },
+  "forgot-password": {
+    "email-placeholder": "Escribe tu correo electrónico",
+    "send-link": "Enviar enlace de recuperación",
+    "subtitle": "Ingresa el correo electrónico al que enviaremos el código de verificación",
+    "title": "Olvidé mi contraseña"
+  },
+  "formErrors": {
+    "duplicate": "El valor ya existe",
+    "email": "El correo electrónico no es válido",
+    "max": "El valor debe ser menor o igual a {{max}}",
+    "maxlength": "El campo no puede tener más de {{maxlength}} caracteres",
+    "min": "El valor debe ser mayor o igual a {{min}}",
+    "minlength": "El campo debe tener al menos {{minlength}} caracteres",
+    "pattern": "El formato del campo no es válido",
+    "required": "Este campo es obligatorio",
+    "unique": "El valor debe ser único",
+    "zero": "El valor no puede ser cero"
+  },
+  "genders": {
+    "female": "Femenino",
+    "male": "Masculino",
+    "other": "Otro"
+  },
+  "go-back": "Regresar",
+  "login": {
+    "errors": {
+      "email-required": "El correo electrónico es obligatorio",
+      "invalid-credentials": "Correo electrónico y/o contraseña incorrectos",
+      "password-required": "La contraseña es obligatoria"
+    },
+    "forgot-password": "Olvidé mi contraseña",
+    "login": "Iniciar sesión",
+    "login-with": "Iniciar sesión con",
+    "no-account": "¿No tienes una cuenta?",
+    "recover-password": "Recupera tu contraseña",
+    "register": "Regístrate",
+    "welcome-user": "¡TE DAMOS LA BIENVENIDA!"
+  },
+  "mail": "Correo electrónico",
+  "mail-placeholder": "Escribe un correo electrónico",
+  "max": "Máximo",
+  "min": "Mínimo",
+  "next": "Siguiente",
+  "onboarding-text": "Forma parte de la comunidad más grande de coaches alrededor del mundo",
+  "otp": {
+    "not-received": "¿Aún no lo has recibido?",
+    "resend": "Reenviar código",
+    "subtitle": "Se ha enviado un código a tu correo {{email}}",
+    "title": "Ingresa el código de confirmación"
+  },
+  "password": "Contraseña",
+  "payment-frequency": {
+    "save-error": "Error al guardar la frecuencia de pago",
+    "save-success": "Frecuencia de pago guardada exitosamente",
+    "title": "Elige el costo de tus entrenamientos"
+  },
+  "payment-method-added": "Método de pago agregado",
+  "payment-method-added-success": "Método de pago agregado exitosamente",
+  "recommended": "Recomendado",
+  "reset-password": {
+    "confirm-password": "Confirmar contraseña",
+    "confirm-password-required": "La confirmación de la contraseña es obligatoria",
+    "new-password": "Nueva contraseña",
+    "password-min-length": "La contraseña debe tener al menos 6 caracteres",
+    "password-pattern": "La contraseña debe contener al menos una mayúscula, una minúscula y un número",
+    "password-required": "La contraseña es obligatoria",
+    "password-reset-failed": "Error al restablecer la contraseña",
+    "password-reset-success": "Contraseña restablecida exitosamente. Por favor, inicia sesión con tu nueva contraseña.",
+    "passwords-do-not-match": "Las contraseñas no coinciden",
+    "passwords-mismatch": "Las contraseñas no coinciden",
+    "reset-password": "Crear nueva contraseña",
+    "subtitle": "Ingresa tu nueva contraseña",
+    "title": "Restablecer contraseña"
+  },
+  "search": "Buscar",
+  "send": "Enviar",
+  "skip": "Omitir",
+  "steps-onboarding": {
+    "step-1-description": "Inicia tu comunidad con tu propia aplicación personalizada.",
+    "step-1-title": "Entrenamiento",
+    "step-2-description": "Crea tus propias rutinas, comparte tus clases y comienza a generar ingresos.",
+    "step-2-title": "Gestión de clientes",
+    "step-3-description": "Monitorea el entrenamiento de tus clientes, objetivos y metas.",
+    "step-3-title": "Progreso"
+  },
+  "user-create-account": {
+    "have-account": "¿Tienes una cuenta?",
+    "title": "Crear cuenta como creador"
+  },
+  "username": "Nombre de usuario",
+  "validate-otp": {
+    "description": "Ingresa el código de 6 dígitos que enviamos a tu correo para restablecer tu contraseña",
+    "resend": "Reenviar código",
+    "subtitle": "Verifica tu identidad",
+    "title": "Ingresa el código de verificación",
+    "verify": "Verificar código"
+  },
+  "workout": {
+    "routine": {
+      "add-exercise": "Agregar ejercicio",
+      "category": "Categoría",
+      "category-placeholder": "Selecciona",
+      "cover": "Portada",
+      "cover-description": "Descripción de la rutina",
+      "cover-description-placeholder": "Escribe la descripción de la rutina",
+      "cover-description-required": "La descripción es requerida",
+      "cover-title": "Título de la rutina",
+      "cover-title-placeholder": "Escribe el título de la rutina",
+      "cover-title-required": "El título es requerido",
+      "create-routine": "Crear Entrenamiento",
+      "difficulty": "Dificultad",
+      "difficulty-placeholder": "Selecciona",
+      "equipment": "Equipo",
+      "equipment-placeholder": "Selecciona",
+      "exercise": "Ejercicio",
+      "exercises-title": "Carga los ejercicios de tu rutina",
+      "location": "Ubicación",
+      "location-placeholder": "Selecciona",
+      "remove-exercise": "Eliminar ejercicio",
+      "saving": "Guardando rutina...",
+      "target": "Target",
+      "target-placeholder": "Selecciona",
+      "title": "Rutinas"
+    }
+  },
+  "your-client-payment": "Tu cliente pagará"
+}

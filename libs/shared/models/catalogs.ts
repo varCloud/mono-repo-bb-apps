@@ -1,0 +1,17 @@
+export enum CatalogType {
+  ALL = 'all',
+  ACCOUNT_STATUS = 'account-status',
+  BILLING_CYCLES = 'billing-cycles',
+  CATEGORIES = 'categories',
+  WORKER_STATUS = 'worker-status',
+  CONTENT_TYPES = 'content-types',
+  DIFFICULTY_LEVELS = 'difficulty-levels',
+  GENDERS = 'genders',
+  LOCATION_TYPES = 'location-types',
+  SUBSCRIPTION_STATUS = 'subscription-status',
+  TAGS = 'tags',
+  TICKET_STATUS = 'ticket-status',
+  TRANSACTION_STATUS = 'transaction-status',
+  USER_TYPES = 'user-types',
+  WORKOUT_GOALS = 'workout-goals',
+}

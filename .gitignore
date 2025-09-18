@@ -99,3 +99,7 @@ yarn-error.log*
 .gradle-cache/
 .npm/
 .eslintcache
+apps/athlete/android/*
+apps/athlete/ios/*
+apps/creator/android/*
+apps/creator/android.bak/*

@@ -1,0 +1,30 @@
+<ion-button fill="clear" (click)="presentPopover($event)" size="small">
+  <img
+    [src]="getCountry()?.urlFlag"
+    style="width: 24px; height: auto"
+    slot="start"
+  />
+  <ion-icon name="chevron-down" slot="end"></ion-icon>
+</ion-button>
+<ion-popover #popover [isOpen]="isOpen" (didDismiss)="isOpen = false">
+  <ng-template>
+    <ion-list>
+      @for (item of countryCodes; track $index) {
+        <ion-item
+          [button]="true"
+          (click)="selectCountry(item.isoCode)"
+          [detail]="false"
+        >
+          <img
+            [src]="item.urlFlag"
+            style="width: 24px; height: auto; margin-right: 8px"
+            slot="start"
+          />
+          <ion-label class="ion-text-nowrap"
+            >{{ item.dialCode }} ({{ item.name }})</ion-label
+          >
+        </ion-item>
+      }
+    </ion-list>
+  </ng-template>
+</ion-popover>

@@ -1,0 +1,76 @@
+.complete-profile-content {
+  ion-item {
+    --border-width: 1px;
+    --border-color: #b3b3b3;
+    --border-radius: 5px;
+    --background: transparent;
+    --min-height: 56px;
+
+    .label {
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 22px;
+      letter-spacing: 0.2px;
+    }
+  }
+
+  .color-picker-wrapper {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .color-display {
+    width: 40px;
+    height: 30px;
+    border-radius: 6px;
+    border: 2px solid var(--ion-color-light-shade);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  .hidden-color-input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  // Alternativa: Si quieres personalizar el input nativo directamente
+  .custom-color-input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 40px;
+    height: 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    outline: none;
+    background: none;
+
+    &::-webkit-color-swatch-wrapper {
+      padding: 0;
+      border: none;
+      border-radius: 6px;
+    }
+
+    &::-webkit-color-swatch {
+      border: 2px solid var(--ion-color-light-shade);
+      border-radius: 6px;
+    }
+
+    &::-moz-color-swatch {
+      border: 2px solid var(--ion-color-light-shade);
+      border-radius: 6px;
+    }
+  }
+}

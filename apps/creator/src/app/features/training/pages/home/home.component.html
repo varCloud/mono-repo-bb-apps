@@ -1,0 +1,217 @@
+<ion-header class="app-header ion-safe-area">
+  <div class="header-content ion-safe-area">
+    <div class="logo-section">
+      <img
+        src="./assets/images/logo-con-letras.svg"
+        alt="BodyBooster"
+        class="app-logo"
+      />
+    </div>
+    <div class="header-actions">
+      <ion-button fill="clear" size="small" class="header-icon-btn">
+        <ion-icon name="search" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" size="small" class="header-icon-btn">
+        <ion-icon name="notifications" slot="icon-only"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+</ion-header>
+
+<ion-content class="workout-home-content ion-safe-area">
+  <!-- Header con botón de nuevo entrenamiento -->
+  <div class="header-section">
+    <ion-button
+      expand="block"
+      fill="solid"
+      class="new-workout-btn"
+      color="tertiary"
+      (click)="onNewWorkoutClick()"
+    >
+      <ion-icon name="barbell" slot="start"></ion-icon>
+      Nuevo entrenamiento
+    </ion-button>
+  </div>
+
+  <!-- Biblioteca de ejercicios -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Biblioteca de ejercicios</h2>
+      <ion-button
+        fill="clear"
+        size="small"
+        class="see-all-btn"
+        color="secondary"
+      >
+        Ver todo
+      </ion-button>
+    </div>
+
+    <div class="exercise-card featured-card">
+      <img
+        src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop"
+        alt="HIIT Workout"
+      />
+      <div class="card-overlay">
+        <div class="card-content">
+          <h3>Hiit Workout 1</h3>
+          <div class="card-stats">
+            <div class="stat">
+              <ion-icon name="heart"></ion-icon>
+              <span>8.300 seguidores</span>
+            </div>
+            <span class="separator">•</span>
+            <span class="difficulty-text">Intermedio</span>
+          </div>
+        </div>
+        <div class="functional-badge">Funcional</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Perder peso -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Perder peso</h2>
+      <ion-button
+        fill="clear"
+        size="small"
+        class="see-all-btn"
+        color="secondary"
+      >
+        Ver todo
+      </ion-button>
+    </div>
+
+    <div class="cards-grid-weight-loss">
+      <div class="weight-loss-card">
+        <div class="card-image">
+          <img
+            src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=300&h=200&fit=crop"
+            alt="Barre 4 semanas"
+          />
+          <div class="card-overlay">
+            <div class="card-title-overlay">
+              <h2 class="large-title">BARRE</h2>
+            </div>
+            <div class="card-bottom-info">
+              <div class="stat">
+                <ion-icon name="heart"></ion-icon>
+                <span>8.300 seguidores</span>
+              </div>
+              <div class="category-badge barre">Barre</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-info">
+          <h4>Barre 4 semanas</h4>
+          <p class="difficulty-text">Intermedio</p>
+        </div>
+      </div>
+
+      <div class="weight-loss-card">
+        <div class="card-image">
+          <img
+            src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=300&h=200&fit=crop"
+            alt="Packs Smart Fit"
+          />
+          <div class="card-overlay">
+            <div class="card-title-overlay">
+              <div class="smart-fit-text">
+                <p>Mejora tu rendimiento con de los</p>
+              </div>
+            </div>
+            <div class="card-bottom-info">
+              <div class="stat">
+                <ion-icon name="heart"></ion-icon>
+                <span>672 seguidores</span>
+              </div>
+              <div class="category-badge fitness">Fitness</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-info">
+          <h4>Packs Smart Fit</h4>
+          <p class="difficulty-text">Avanzado</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ganar músculo -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Ganar músculo</h2>
+      <ion-button
+        fill="clear"
+        size="small"
+        class="see-all-btn"
+        color="secondary"
+      >
+        Ver todo
+      </ion-button>
+    </div>
+
+    <div class="cards-grid-muscle-gain">
+      <div class="muscle-gain-card">
+        <div class="card-image">
+          <img
+            src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=300&h=200&fit=crop"
+            alt="Tabata"
+          />
+          <div class="card-overlay">
+            <div class="card-title-overlay">
+              <div class="tabata-text">
+                <p>BIENVENIDOS</p>
+                <h2 class="large-title">HIIT</h2>
+                <h3>TABATA SOUNDS</h3>
+              </div>
+            </div>
+            <div class="card-bottom-info">
+              <div class="stat">
+                <ion-icon name="heart"></ion-icon>
+                <span>17.926 seguidores</span>
+              </div>
+              <div class="category-badge tabata">Tabata</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-info">
+          <h4>Tabata</h4>
+          <p class="difficulty-text">Principiante</p>
+        </div>
+      </div>
+
+      <div class="muscle-gain-card">
+        <div class="card-image">
+          <img
+            src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=300&h=200&fit=crop"
+            alt="GAP"
+          />
+          <div class="card-overlay">
+            <div class="card-title-overlay">
+              <div class="gap-text">
+                <h2 class="large-title">GAP</h2>
+                <p>GLÚTEOS, ABDOMEN Y PIERNAS</p>
+              </div>
+            </div>
+            <div class="card-bottom-info">
+              <div class="stat">
+                <ion-icon name="heart"></ion-icon>
+                <span>980 seguidores</span>
+              </div>
+              <div class="category-badge gap">GAP</div>
+            </div>
+            <div class="bookmark-icon">
+              <ion-icon name="bookmark"></ion-icon>
+            </div>
+          </div>
+        </div>
+        <div class="card-info">
+          <h4>GAP</h4>
+          <p class="difficulty-text">Avanzado</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

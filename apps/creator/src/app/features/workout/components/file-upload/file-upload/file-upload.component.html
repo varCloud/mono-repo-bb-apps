@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Subir Archivos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="background: #ffff">
+  <ion-grid>
+    <ion-button expand="block" (click)="selectFile()">
+      <ion-icon name="cloud-upload" slot="start"></ion-icon>
+      Seleccionar Archivo 1
+    </ion-button>
+
+    <div *ngIf="isUploading" class="upload-progress">
+      <ion-progress-bar [value]="uploadProgress / 100"></ion-progress-bar>
+      <p>{{ uploadProgress }}% completado</p>
+    </div>
+
+    <ion-list *ngIf="!isUploading">
+      <ion-item>
+        <ion-label class="ion-text-wrap">
+          <h2>Carga directa a Amazon S3</h2>
+          <p>
+            Selecciona archivos para subir directamente a la nube sin pasar por
+            el servidor.
+          </p>
+          <p>
+            <strong>Formatos permitidos:</strong> Imágenes (JPG, PNG, GIF),
+            videos (MP4, MOV), documentos (PDF)
+          </p>
+          <p><strong>Tamaño máximo:</strong> 10GB por archivo</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-grid>
+</ion-content>

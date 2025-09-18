@@ -1,0 +1,57 @@
+<div class="exercise-form">
+  <ion-accordion-group>
+    <ion-accordion
+      [value]="'exercise' + exerciseNumber"
+      [ngClass]="{ 'upload-error': isUploadError() }"
+    >
+      <ion-item slot="header" [color]="isUploadError() ? 'danger' : null">
+        <ion-label>Ejercicio {{ exerciseNumber }}</ion-label>
+      </ion-item>
+
+      <div slot="content" class="accordion-content">
+        <form [formGroup]="exerciseForm()" class="form-container">
+          <!-- Nombre del ejercicio -->
+          <div class="form-field">
+            <ion-input
+              formControlName="name"
+              class="bb-input"
+              placeholder="Nombre"
+              fill="outline"
+              mode="md"
+            ></ion-input>
+            <app-error-message
+              [control]="exerciseForm().get('name')!"
+            ></app-error-message>
+          </div>
+
+          <!-- Descripción del ejercicio -->
+          <div class="form-field">
+            <ion-textarea
+              formControlName="description"
+              class="bb-input"
+              placeholder="Descripción"
+              fill="outline"
+              rows="3"
+              mode="md"
+            ></ion-textarea>
+            <app-error-message
+              [control]="exerciseForm().get('description')!"
+            ></app-error-message>
+          </div>
+          @if (!hideCoverUpload()) {
+            <app-dashed-area (clickEvent)="abrirExplorer()"></app-dashed-area>
+          }
+
+          <!-- Uppy Dashboard para subida de video -->
+
+          <div
+            class="video-upload"
+            [style.display]="hideCoverUpload() ? 'block' : 'none'"
+          >
+            <div id="uppy-dashboard{{ exerciseNumber }}"></div>
+          </div>
+        </form>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+</div>

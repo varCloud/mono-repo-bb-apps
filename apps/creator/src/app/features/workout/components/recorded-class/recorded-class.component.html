@@ -1,0 +1,95 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/workout/create"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Clase grabada</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <form [formGroup]="classForm" (ngSubmit)="uploadVideo()">
+        <ion-item>
+          <ion-label position="floating">Título</ion-label>
+          <ion-input formControlName="title" type="text"></ion-input>
+          <div
+            *ngIf="
+              classForm.get('title')?.invalid && classForm.get('title')?.touched
+            "
+            class="error-message"
+          >
+            El título es requerido
+          </div>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Descripción</ion-label>
+          <ion-textarea formControlName="description" rows="4"></ion-textarea>
+          <div
+            *ngIf="
+              classForm.get('description')?.invalid &&
+              classForm.get('description')?.touched
+            "
+            class="error-message"
+          >
+            La descripción es requerida
+          </div>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Duración (minutos)</ion-label>
+          <ion-input formControlName="duration" type="number"></ion-input>
+          <div
+            *ngIf="
+              classForm.get('duration')?.invalid &&
+              classForm.get('duration')?.touched
+            "
+            class="error-message"
+          >
+            La duración debe ser un número válido
+          </div>
+        </ion-item>
+
+        <ion-item lines="none">
+          <div class="file-upload-container">
+            <input
+              type="file"
+              accept="video/*"
+              (change)="onFileSelected($event)"
+              id="videoFile"
+            />
+            <label for="videoFile" class="file-upload-button">
+              <ion-icon name="cloud-upload"></ion-icon>
+              {{ selectedFile ? selectedFile.name : "Seleccionar video" }}
+            </label>
+            <div
+              *ngIf="
+                classForm.get('videoFile')?.invalid &&
+                classForm.get('videoFile')?.touched
+              "
+              class="error-message"
+            >
+              El video es requerido
+            </div>
+          </div>
+        </ion-item>
+
+        <div *ngIf="isUploading" class="upload-progress">
+          <ion-progress-bar [value]="uploadProgress"></ion-progress-bar>
+          <p>Subiendo video... {{ (uploadProgress * 100).toFixed(0) }}%</p>
+        </div>
+
+        <div class="button-container">
+          <ion-button type="button" fill="outline" (click)="cancel()"
+            >Cancelar</ion-button
+          >
+          <ion-button type="submit" [disabled]="isUploading"
+            >Subir video</ion-button
+          >
+        </div>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

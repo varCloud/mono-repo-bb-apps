@@ -1,0 +1,15 @@
+<div class="avatar-profile" [class]="size">
+  <ion-avatar>
+    <img [src]="imageUrl || defaultImage" [alt]="'Profile Photo'" />
+  </ion-avatar>
+
+  <ion-button
+    *ngIf="showEditButton"
+    fill="clear"
+    class="edit-button"
+    [disabled]="disabled"
+    (click)="onEditClick()"
+  >
+    <ion-icon name="camera-outline" slot="icon-only"></ion-icon>
+  </ion-button>
+</div>
