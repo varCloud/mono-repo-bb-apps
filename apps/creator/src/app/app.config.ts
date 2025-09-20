@@ -1,8 +1,6 @@
 import {
   ApplicationConfig,
   importProvidersFrom,
-  provideBrowserGlobalErrorListeners,
-  provideZoneChangeDetection,
 } from '@angular/core';
 import { PreloadAllModules, provideRouter, RouteReuseStrategy, withPreloading } from '@angular/router';
 import { appRoutes } from './app.routes';
@@ -12,7 +10,6 @@ import { HttpClient, provideHttpClient, withFetch, withInterceptors } from '@ang
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { IonicStorageModule } from '@ionic/storage-angular';
-import { BlockUIModule } from 'ng-block-ui';
 import { register } from 'swiper/element/bundle';
 import { httpInterceptor } from '@monorepo-bb-app/core';
 
@@ -41,6 +38,5 @@ export const appConfig: ApplicationConfig = {
       })
     ),
     importProvidersFrom(IonicStorageModule.forRoot()),
-    importProvidersFrom(BlockUIModule.forRoot()),
   ],
 };

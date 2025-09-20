@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { loadStripe } from '@stripe/stripe-js';
-import { Browser } from '@capacitor/browser';
 
 import {
   IonHeader,
@@ -8,14 +6,10 @@ import {
   IonTitle,
   IonContent,
   IonToggle,
-  IonButtons,
-  IonItem,
-  IonLabel,
   IonButton,
   IonRow,
   IonGrid,
   IonCol,
-  IonAlert,
   IonInput,
   IonInputPasswordToggle,
   IonRouterLink,
@@ -24,9 +18,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TranslationService } from '@monorepo-bb-app/core';
 import { ThemeService } from '@monorepo-bb-app/core';
 import { SocialLogin } from '@capgo/capacitor-social-login';
-import { CommonModule, JsonPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { BrowserModule } from '@angular/platform-browser';
 import { AddPaymentMethodComponent } from '@monorepo-bb-app/ui';
 import { HeaderComponent } from '@monorepo-bb-app/ui';
 import { ImageButtonComponent } from '@monorepo-bb-app/ui';
@@ -39,9 +31,6 @@ import { RouterLink } from '@angular/router';
   imports: [
     IonRouterLink,
     IonButton,
-    IonLabel,
-    IonItem,
-    IonButtons,
     IonToggle,
     IonHeader,
     IonToolbar,
@@ -49,8 +38,6 @@ import { RouterLink } from '@angular/router';
     IonContent,
     TranslateModule,
     IonToggle,
-    JsonPipe,
-    IonAlert,
     AddPaymentMethodComponent,
     IonGrid,
     IonRow,
@@ -74,7 +61,7 @@ export class HomePage implements OnInit {
   constructor(
     private _translateService: TranslationService,
     private _themeService: ThemeService,
-    private http: HttpClient,
+    private http: HttpClient
   ) {}
 
   async ngOnInit() {

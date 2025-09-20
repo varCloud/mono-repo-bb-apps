@@ -10,7 +10,6 @@ import {
 } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { BlockUIModule } from 'ng-block-ui';
 import { CONSTANTS } from '@monorepo-bb-app/shared';
 import { PATTERNS } from '@monorepo-bb-app/shared';
 import { ForgotPasswordService, LoaderService } from '@monorepo-bb-app/core';
@@ -25,7 +24,6 @@ import { ForgotPasswordService, LoaderService } from '@monorepo-bb-app/core';
     FormsModule,
     IonicModule,
     TranslateModule,
-    BlockUIModule,
   ],
 })
 export class ResetPasswordFormComponent implements OnInit {

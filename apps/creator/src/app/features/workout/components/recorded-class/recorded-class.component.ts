@@ -26,7 +26,6 @@ import {
   ToastController,
 } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
-import { BlockUIModule } from 'ng-block-ui';
 
 @Component({
   selector: 'app-recorded-class',
@@ -37,7 +36,6 @@ import { BlockUIModule } from 'ng-block-ui';
     CommonModule,
     ReactiveFormsModule,
     TranslateModule,
-    BlockUIModule,
     IonHeader,
     IonToolbar,
     IonTitle,

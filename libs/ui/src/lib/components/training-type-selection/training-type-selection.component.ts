@@ -32,7 +32,6 @@ export interface TrainingType {
     IonImg,
     IonText,
     IonLabel,
-    IonButton,
     IonGrid,
     IonRow,
     IonCol,

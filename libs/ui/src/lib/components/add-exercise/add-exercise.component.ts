@@ -29,7 +29,6 @@ import Dashboard from '@uppy/dashboard';
 import AwsS3Multipart from '@uppy/aws-s3-multipart';
 import Spanish from '@uppy/locales/lib/es_ES';
 import { ErrorMessageComponent } from '@monorepo-bb-app/ui';
-import { UppyFile } from '@uppy/utils';
 import { SesionService } from '@monorepo-bb-app/core';
 import { DashedAreaComponent } from '@monorepo-bb-app/ui';
 
@@ -47,7 +46,6 @@ import { DashedAreaComponent } from '@monorepo-bb-app/ui';
     IonAccordion,
     IonItem,
     IonLabel,
-    IonButton,
     DashedAreaComponent,
     ErrorMessageComponent,
   ],
@@ -119,7 +117,7 @@ export class AddExerciseComponent implements AfterViewInit, OnDestroy {
 
   public abrirExplorer() {
     const dashboardEl = document.querySelector(
-      `#uppy-dashboard${this.exerciseNumber}`,
+      `#uppy-dashboard${this.exerciseNumber}`
     );
     const fileInput = dashboardEl?.querySelector('.uppy-Dashboard-input');
     if (fileInput instanceof HTMLInputElement) {

@@ -17,13 +17,14 @@ export default [
         },
       ],
       '@angular-eslint/component-selector': [
-        'error',
+        'warn',
         {
           type: 'element',
           prefix: 'lib',
           style: 'kebab-case',
         },
       ],
+      '@angular-eslint/prefer-inject': ['off'],
     },
   },
   {

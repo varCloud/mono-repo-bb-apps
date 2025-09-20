@@ -3,7 +3,6 @@ import { Platform } from '@ionic/angular';
 import {
   ActionSheetController,
   LoadingController,
-  IonicModule,
 } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Filesystem } from '@capacitor/filesystem';
@@ -14,17 +13,10 @@ import { FileAccessPermissionService } from '@monorepo-bb-app/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { BlockUIModule } from 'ng-block-ui';
-import { LayoutContentComponent } from '@monorepo-bb-app/ui';
 import {
   IonContent,
   IonGrid,
-  IonRow,
-  IonCol,
-  IonInput,
   IonButton,
-  IonText,
-  IonImg,
   IonList,
   IonHeader,
   IonToolbar,
@@ -41,12 +33,7 @@ import {
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.scss'],
   imports: [
-    IonImg,
-    IonText,
     IonButton,
-    IonInput,
-    IonCol,
-    IonRow,
     IonGrid,
     IonHeader,
     IonItem,
@@ -54,9 +41,7 @@ import {
     IonList,
     IonContent,
     TranslateModule,
-    LayoutContentComponent,
     IonProgressBar,
-    BlockUIModule,
     ReactiveFormsModule,
     IonButton,
     IonTitle,

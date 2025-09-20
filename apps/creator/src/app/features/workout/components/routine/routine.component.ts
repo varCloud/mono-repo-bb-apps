@@ -6,41 +6,22 @@ import {
   FormGroup,
   FormArray,
   Validators,
-  NgSelectOption,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
   IonHeader,
-  IonToolbar,
-  IonTitle,
   IonContent,
   IonBackButton,
-  IonButtons,
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardTitle,
   IonItem,
-  IonLabel,
   IonInput,
-  IonTextarea,
   IonButton,
-  IonIcon,
   IonProgressBar,
   IonList,
-  IonItemSliding,
-  IonItemOption,
-  IonItemOptions,
-  IonFab,
-  IonFabButton,
-  ToastController,
-  IonChip,
   IonSelect,
   IonSelectOption,
   IonCol,
 } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
-import { BlockUIModule } from 'ng-block-ui';
 import {
   addCircleOutline,
   trashOutline,
@@ -48,7 +29,7 @@ import {
   addOutline,
 } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
-import { UploadFileComponent, CoverUploadComponent, AddExerciseComponent } from '@monorepo-bb-app/ui';
+import { AddExerciseComponent } from '@monorepo-bb-app/ui';
 import { Exercise, CatalogsService, CatalogType, Tag, LocationType, DifficultyLevel, Categorie, StatusUpload, convertToPayload, CompleteResultUpload } from '@monorepo-bb-app/shared';
 import ObjectID from 'bson-objectid';
 import { DashedAreaComponent, AvatarPickerComponent } from '@monorepo-bb-app/ui';
@@ -74,35 +55,16 @@ interface ExerciseStep {
     CommonModule,
     ReactiveFormsModule,
     TranslateModule,
-    BlockUIModule,
     IonHeader,
-    IonToolbar,
-    IonTitle,
     IonContent,
     IonBackButton,
-    IonButtons,
-    IonCard,
-    IonCardContent,
-    IonCardHeader,
-    IonCardTitle,
     IonItem,
-    IonLabel,
     IonInput,
-    IonTextarea,
     IonButton,
-    IonIcon,
     IonProgressBar,
     IonList,
-    IonItemSliding,
-    IonItemOption,
-    IonItemOptions,
-    IonFab,
-    IonFabButton,
-    IonChip,
     IonSelect,
     IonSelectOption,
-    UploadFileComponent,
-    CoverUploadComponent,
     AddExerciseComponent,
     IonCol,
     DashedAreaComponent,

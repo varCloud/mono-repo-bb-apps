@@ -2,25 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
   IonButton,
-  IonBackButton,
   IonInput,
   IonRow,
   IonCol,
   IonGrid,
-  IonContent,
   IonInputPasswordToggle,
   IonText,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
-  IonButtons,
 } from '@ionic/angular/standalone';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { HeaderComponent, LayoutContentComponent } from '@monorepo-bb-app/ui';
 
 import { LoginService } from '../../services/login.service';
 import { LoginCredentials, UserResponse, ToastService } from '@monorepo-bb-app/shared';
-import { BlockUIModule } from 'ng-block-ui';
 import { Router, RouterLink } from '@angular/router';
 import { LoaderUIService } from '@monorepo-bb-app/core';
 
@@ -35,14 +28,12 @@ import { LoaderUIService } from '@monorepo-bb-app/core';
     IonRow,
     IonInput,
     IonButton,
-    IonContent,
     LayoutContentComponent,
     HeaderComponent,
     TranslateModule,
     IonInputPasswordToggle,
     ReactiveFormsModule,
     IonText,
-    BlockUIModule,
     RouterLink,
     TranslateModule
   ],

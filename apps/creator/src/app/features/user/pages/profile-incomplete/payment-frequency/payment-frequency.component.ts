@@ -1,5 +1,5 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import {
   IonContent,
   IonGrid,
@@ -8,7 +8,6 @@ import {
   IonButton,
 } from '@ionic/angular/standalone';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { BlockUI, BlockUIModule, NgBlockUI } from 'ng-block-ui';
 import { HeaderComponent, LayoutContentComponent, PaymentFrequencySettingsComponent } from '@monorepo-bb-app/ui';
 import { PaymentFrecuency, PaymentFrecuencyModel, PaymentFrecuencyRequest } from '@monorepo-bb-app/shared';
 import { UserService } from '../../../services/user.service';
@@ -30,13 +29,11 @@ import { ProfileIncompleteService } from '../../../services/profile-incomplete.s
     LayoutContentComponent,
     HeaderComponent,
     TranslateModule,
-    BlockUIModule,
     PaymentFrequencySettingsComponent,
     CommonModule,
   ],
 })
 export class PaymentFrequencyComponent implements OnInit {
-  @BlockUI('payment-frequency-page') paymentFrequencyBlockUI!: NgBlockUI;
   public paymentFrecuency: PaymentFrecuency[] = [];
   public defaultPaymentFrequency: PaymentFrecuency[] = [];
   public isLoading = signal(true);

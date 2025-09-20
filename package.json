@@ -49,7 +49,6 @@
     "@uppy/locales": "^5.0.0",
     "@uppy/utils": "^3.6.2",
     "bson-objectid": "^2.0.4",
-    "ng-block-ui": "^4.0.1",
     "ngx-mask": "^20.0.3",
     "rxjs": "~7.8.0",
     "swiper": "^11.2.10",

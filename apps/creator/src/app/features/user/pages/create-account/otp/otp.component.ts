@@ -4,11 +4,14 @@ import {
   IonCol,
   IonRow,
   IonGrid,
-  IonInput,
   IonButton,
 } from '@ionic/angular/standalone';
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
-import { HeaderComponent, LayoutContentComponent, OtpComponent } from '@monorepo-bb-app/ui';
+import {
+  HeaderComponent,
+  LayoutContentComponent,
+  OtpComponent,
+} from '@monorepo-bb-app/ui';
 import { CreateAccountService } from '../../../services/create-account.service';
 import { Router } from '@angular/router';
 import { API_URLS } from '@monorepo-bb-app/shared';
@@ -22,7 +25,6 @@ import { LoaderUIService } from '@monorepo-bb-app/core';
   styleUrls: ['./otp.component.scss'],
   imports: [
     IonButton,
-    IonInput,
     IonGrid,
     IonRow,
     IonCol,
@@ -44,7 +46,7 @@ export class OtpCreateAccountComponent implements OnInit {
     private _loginService: LoginService,
     private _toastService: ToastService,
     private _translate: TranslatePipe,
-    private _loader: LoaderUIService,
+    private _loader: LoaderUIService
   ) {
     if (!this._createAccountService.getUser()?.email) {
       this._router.navigate(['/create-account']);
@@ -90,7 +92,7 @@ export class OtpCreateAccountComponent implements OnInit {
       error: (error) => {
         this._loader.hideLoader();
         this._toastService.error(
-          error.error.message || this._translate.transform('error-processing'),
+          error.error.message || this._translate.transform('error-processing')
         );
         this._router.navigate(['/login']);
       },
