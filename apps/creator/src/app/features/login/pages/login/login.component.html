@@ -36,10 +36,10 @@
               mode="md"
             >
               @if (loginForm.get("password")?.value) {
-                <ion-input-password-toggle
-                  slot="end"
-                  [color]="'secondary'"
-                ></ion-input-password-toggle>
+              <ion-input-password-toggle
+                slot="end"
+                [color]="'secondary'"
+              ></ion-input-password-toggle>
               }
             </ion-input>
           </ion-col>
@@ -52,7 +52,7 @@
               expand="block"
               color="tertiary"
               type="submit"
-              >{{ "login.login" | translate }}</ion-button
+              >{{ 'login.login' | translate }}</ion-button
             >
           </ion-col>
         </ion-row>
@@ -61,7 +61,7 @@
           <ion-col size="12" class="ion-text-center">
             <ion-button fill="clear" (click)="onRecoverPassword()"
               ><span class="question link">{{
-                "login.recover-password" | translate
+                'login.recover-password' | translate
               }}</span></ion-button
             >
           </ion-col>
@@ -71,10 +71,10 @@
   </ion-grid>
   <div content-footer class="ion-text-center">
     <ion-button fill="clear" [routerLink]="['/create-account']">
-      <ion-text class="question">{{ "login.no-account" | translate }}</ion-text>
+      <ion-text class="question">{{ 'login.no-account' | translate }}</ion-text>
       &nbsp;
       <ion-text color="secondary" class="link">{{
-        "login.register" | translate
+        'login.register' | translate
       }}</ion-text>
     </ion-button>
   </div>

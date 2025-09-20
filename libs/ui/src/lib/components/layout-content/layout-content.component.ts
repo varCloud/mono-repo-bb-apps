@@ -22,7 +22,7 @@ export class LayoutContentComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (Capacitor.isNativePlatform()) {
+    if (Capacitor.isNativePlatform() && Capacitor.getPlatform() === 'android') {
       StatusBar.setOverlaysWebView({ overlay: false });
     }
   }
