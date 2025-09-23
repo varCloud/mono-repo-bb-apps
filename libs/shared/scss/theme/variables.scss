@@ -72,7 +72,7 @@
   --ion-color-bb-text-title-tint: #474747;
 
   --ion-color-bb-background-content: #f6f7f9;
-
+  --ion-background-color: #f6f7f9;
   --ion-color-bb-input-border-color: #f6f7f9;
   --ion-color-bb-input-color: #4f4f4f;
   --ion-color-bb-input-highlight-color: #487be2;
@@ -101,7 +101,7 @@
 
 .item.sc-ion-label-ios-h,
 .item .sc-ion-label-ios-h {
-  font-family: "SF Pro" !important;
+  font-family: 'SF Pro' !important;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -109,5 +109,6 @@
     --ion-color-base: #f4f5f8;
     --ion-background-color: #ffffff;
     --ion-text-color: #000000;
+    --ion-background-color: #f6f7f9;
   }
 }

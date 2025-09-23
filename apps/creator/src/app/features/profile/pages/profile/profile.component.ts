@@ -1,13 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutContentComponent , ItemListComponent , AvatarProfileComponent} from '@monorepo-bb-app/ui';
-import { BlockUI, BlockUIModule } from 'ng-block-ui';
 import {
   PROFILE_MENU_ITEMS,
-  ProfileMenuItem,
 } from '../../constants/profile-menu.constants';
 import { addIcons } from 'ionicons';
 import {
@@ -32,7 +30,6 @@ import { LoaderUIService, LocalStorageService, SesionService } from '@monorepo-b
     FormsModule,
     ReactiveFormsModule,
     LayoutContentComponent,
-    BlockUIModule,
     ItemListComponent,
     AvatarProfileComponent,
   ],

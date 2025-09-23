@@ -1,14 +1,12 @@
 import {
   Component,
   computed,
-  effect,
   input,
   OnInit,
   output,
   signal,
 } from '@angular/core';
 import { CatalogsService, CatalogType , ToastService,  } from '@monorepo-bb-app/shared';
-import { BlockUIModule } from 'ng-block-ui';
 import { ListSkeletonComponent } from '../skeleton/list-skeleton/list-skeleton.component';
 
 
@@ -60,7 +58,6 @@ import { PaymentFrecuency, PaymentFrecuencyModel } from '@monorepo-bb-app/shared
     IonGrid,
     IonRow,
     IonText,
-    BlockUIModule,
     ListSkeletonComponent,
     IonRadio,
     FormsModule,

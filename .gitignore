@@ -101,5 +101,6 @@ yarn-error.log*
 .eslintcache
 apps/athlete/android/*
 apps/athlete/ios/*
+apps/creator/ios/*
 apps/creator/android/*
 apps/creator/android.bak/*
