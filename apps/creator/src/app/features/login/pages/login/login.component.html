@@ -1,81 +1,85 @@
-<app-layout-content customClass="login-page">
-  <ion-grid content-header>
-    <ion-row>
-      <ion-col
-        ><app-header [text]="'login.welcome-user' | translate"></app-header
-      ></ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-grid content-body>
-    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-      <ion-grid>
-        <ion-row>
-          <ion-col size="12">
-            <ion-input
-              formControlName="email"
-              class="bb-input"
-              [label]="'mail' | translate"
-              label-placement="floating"
-              fill="outline"
-              [placeholder]="'mail-placeholder' | translate"
-              mode="md"
-            ></ion-input>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="12">
-            <ion-input
-              formControlName="password"
-              class="bb-input"
-              [label]="'password' | translate"
-              label-placement="floating"
-              fill="outline"
-              [maxlength]="20"
-              [placeholder]="'password' | translate"
-              type="password"
-              mode="md"
-            >
-              @if (loginForm.get("password")?.value) {
-              <ion-input-password-toggle
-                slot="end"
-                [color]="'secondary'"
-              ></ion-input-password-toggle>
-              }
-            </ion-input>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="12">
-            <ion-button
-              [disabled]="loginForm.invalid"
-              shape="round"
-              expand="block"
-              color="tertiary"
-              type="submit"
-              >{{ 'login.login' | translate }}</ion-button
-            >
-          </ion-col>
-        </ion-row>
+<ion-content>
+  <app-layout-content customClass="login-page">
+    <ion-grid content-header>
+      <ion-row>
+        <ion-col
+          ><app-header [text]="'login.welcome-user' | translate"></app-header
+        ></ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid content-body>
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12">
+              <ion-input
+                formControlName="email"
+                class="bb-input"
+                [label]="'mail' | translate"
+                label-placement="floating"
+                fill="outline"
+                [placeholder]="'mail-placeholder' | translate"
+                mode="md"
+              ></ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <ion-input
+                formControlName="password"
+                class="bb-input"
+                [label]="'password' | translate"
+                label-placement="floating"
+                fill="outline"
+                [maxlength]="20"
+                [placeholder]="'password' | translate"
+                type="password"
+                mode="md"
+              >
+                @if (loginForm.get("password")?.value) {
+                <ion-input-password-toggle
+                  slot="end"
+                  [color]="'secondary'"
+                ></ion-input-password-toggle>
+                }
+              </ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <ion-button
+                [disabled]="loginForm.invalid"
+                shape="round"
+                expand="block"
+                color="tertiary"
+                type="submit"
+                >{{ 'login.login' | translate }}</ion-button
+              >
+            </ion-col>
+          </ion-row>
 
-        <ion-row>
-          <ion-col size="12" class="ion-text-center">
-            <ion-button fill="clear" (click)="onRecoverPassword()"
-              ><span class="question link">{{
-                'login.recover-password' | translate
-              }}</span></ion-button
-            >
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </form>
-  </ion-grid>
-  <div content-footer class="ion-text-center">
-    <ion-button fill="clear" [routerLink]="['/create-account']">
-      <ion-text class="question">{{ 'login.no-account' | translate }}</ion-text>
-      &nbsp;
-      <ion-text color="secondary" class="link">{{
-        'login.register' | translate
-      }}</ion-text>
-    </ion-button>
-  </div>
-</app-layout-content>
+          <ion-row>
+            <ion-col size="12" class="ion-text-center">
+              <ion-button fill="clear" (click)="onRecoverPassword()"
+                ><span class="question link">{{
+                  'login.recover-password' | translate
+                }}</span></ion-button
+              >
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </ion-grid>
+    <div content-footer class="ion-text-center">
+      <ion-button fill="clear" [routerLink]="['/create-account']">
+        <ion-text class="question">{{
+          'login.no-account' | translate
+        }}</ion-text>
+        &nbsp;
+        <ion-text color="secondary" class="link">{{
+          'login.register' | translate
+        }}</ion-text>
+      </ion-button>
+    </div>
+  </app-layout-content>
+</ion-content>
