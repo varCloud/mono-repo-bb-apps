@@ -10,7 +10,7 @@
     "cap:athlete:sync": "cd apps/athlete && npx cap sync",
     "cap:athlete:open": "cd apps/athlete && npx cap open android",
     "dev:athlete:serve": "nx serve athlete --configuration=development --host=192.168.1.27 --port=3000",
-    "dev:creator:serve": "nx serve creator --configuration=development --host=192.168.100.20 --port=3000",
+    "dev:creator:serve": "nx serve creator --configuration=development --host=192.168.100.15 --port=3000",
     "creator:android": "npx cap build android",
     "creator:sync": "cd apps/creator && nx build creator && npx cap sync && npx cap build android",
     "dev:athlete:celular": "cd apps/athlete && npx cap sync && npx cap run android -l --host=192.168.1.27",
