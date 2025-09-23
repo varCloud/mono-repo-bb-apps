@@ -5,17 +5,8 @@ import {
   OnInit,
   viewChild,
 } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
-import {
-  IonContent,
-  IonButton,
-  IonText,
-  IonCardContent,
-  IonCardHeader,
-  IonCardTitle,
-  IonCard,
-} from '@ionic/angular/standalone';
-import { SwiperContainer } from 'swiper/element';
+import { Router } from '@angular/router';
+import { IonContent } from '@ionic/angular/standalone';
 import { CardOnboardingComponent } from '../card-onboarding/card-onboarding.component';
 import { StepsOnboardingComponent } from '@monorepo-bb-app/ui';
 
@@ -25,15 +16,7 @@ import { StepsOnboardingComponent } from '@monorepo-bb-app/ui';
   styleUrls: ['./steps-onboarding.component.scss'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
-    IonCard,
-    IonCardTitle,
-    IonCardHeader,
-    IonCardContent,
-    IonText,
-    IonButton,
     IonContent,
-    RouterLink,
-    CardOnboardingComponent,
     StepsOnboardingComponent
   ],
 })

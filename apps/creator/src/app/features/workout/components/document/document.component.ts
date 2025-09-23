@@ -27,7 +27,6 @@ import {
   ToastController,
 } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
-import { BlockUIModule } from 'ng-block-ui';
 import { documentAttachOutline, closeCircleOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 
@@ -40,7 +39,6 @@ import { addIcons } from 'ionicons';
     CommonModule,
     ReactiveFormsModule,
     TranslateModule,
-    BlockUIModule,
     IonHeader,
     IonToolbar,
     IonTitle,

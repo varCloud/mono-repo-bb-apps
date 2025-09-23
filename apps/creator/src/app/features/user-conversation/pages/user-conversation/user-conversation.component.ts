@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { BlockUI, BlockUIModule } from 'ng-block-ui';
 import { HeaderSearchComponent, LayoutContentComponent
 
  } from '@monorepo-bb-app/ui';
@@ -24,13 +23,11 @@ import { Router } from '@angular/router';
     FormsModule,
     ReactiveFormsModule,
     LayoutContentComponent,
-    BlockUIModule,
     HeaderSearchComponent,
     ConversationListComponent,
   ],
 })
 export class UserConversationComponent implements OnInit, OnDestroy {
-  @BlockUI('conversation-page') blockUI!: any;
 
   conversations: any[] = []; // Aquí definiremos el tipo correcto más adelante
 

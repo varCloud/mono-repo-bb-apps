@@ -2,25 +2,26 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
   IonButton,
-  IonBackButton,
   IonInput,
   IonRow,
   IonCol,
   IonGrid,
-  IonContent,
   IonInputPasswordToggle,
   IonText,
-  IonHeader,
+  IonContent,
   IonTitle,
   IonToolbar,
-  IonButtons,
+  IonHeader,
 } from '@ionic/angular/standalone';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { HeaderComponent, LayoutContentComponent } from '@monorepo-bb-app/ui';
 
 import { LoginService } from '../../services/login.service';
-import { LoginCredentials, UserResponse, ToastService } from '@monorepo-bb-app/shared';
-import { BlockUIModule } from 'ng-block-ui';
+import {
+  LoginCredentials,
+  UserResponse,
+  ToastService,
+} from '@monorepo-bb-app/shared';
 import { Router, RouterLink } from '@angular/router';
 import { LoaderUIService } from '@monorepo-bb-app/core';
 
@@ -30,36 +31,41 @@ import { LoaderUIService } from '@monorepo-bb-app/core';
   styleUrls: ['./login.component.scss'],
   standalone: true,
   imports: [
+    IonHeader,
+    IonToolbar,
+    IonTitle,
     IonGrid,
     IonCol,
     IonRow,
     IonInput,
     IonButton,
-    IonContent,
     LayoutContentComponent,
     HeaderComponent,
     TranslateModule,
     IonInputPasswordToggle,
     ReactiveFormsModule,
     IonText,
-    BlockUIModule,
     RouterLink,
-    TranslateModule
+    TranslateModule,
+    IonContent,
   ],
 })
 export class LoginComponent implements OnInit {
   loginForm: ReturnType<FormBuilder['group']>;
-  
+
   constructor(
     private _formBuilder: FormBuilder,
     private _loginService: LoginService,
     private _toastService: ToastService,
     private _translate: TranslateService,
     private _router: Router,
-    private _loader: LoaderUIService,
+    private _loader: LoaderUIService
   ) {
     this.loginForm = this._formBuilder.group({
-      email: ['sapitopicador@gmail.com', [Validators.required, Validators.email]],
+      email: [
+        'sapitopicador@gmail.com',
+        [Validators.required, Validators.email],
+      ],
       password: ['Victor90', [Validators.required, Validators.minLength(6)]],
     });
   }

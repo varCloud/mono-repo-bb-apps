@@ -60,6 +60,7 @@ const otpRequiredLength = (length: number) => {
     ReactiveFormsModule,
     FormsModule,
     MaskEmailPipe,
+    IonInputOtp,
   ],
   providers: [JsonPipe],
 })
@@ -68,8 +69,9 @@ export class OtpComponent implements OnInit, OnDestroy {
   public apiUrl = input.required<string>();
   public showButtonSend = input<boolean>(true);
   public otpSuccess = output<boolean>();
-
-  public otpForm: ReturnType<FormBuilder['group']>;
+  public otpForm = this._fb.group({
+    otp: ['', [Validators.required, otpRequiredLength(4)]],
+  });
 
   public remainingSeconds = signal(TIME.OTP.TIME_IN_SECONDS);
   public isValidOtp = signal<boolean>(false);
@@ -88,11 +90,8 @@ export class OtpComponent implements OnInit, OnDestroy {
     private _fb: FormBuilder,
     private _otpService: OtpService,
     private _toastService: ToastService,
-    private _globalBlockUIService: LoaderUIService,
+    private _globalBlockUIService: LoaderUIService
   ) {
-    this.otpForm = this._fb.group({
-      otp: ['', [Validators.required, otpRequiredLength(4)]],
-    });
     effect(() => {
       if (this.remainingSeconds() <= 0) {
         this.stopTimer();
@@ -127,7 +126,7 @@ export class OtpComponent implements OnInit, OnDestroy {
     this.intervalId.set(
       setInterval(() => {
         this.remainingSeconds.update((s) => s - 1);
-      }, 1000),
+      }, 1000)
     );
   }
 
