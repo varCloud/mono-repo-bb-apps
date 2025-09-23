@@ -5,6 +5,7 @@ import {
   OnInit,
   viewChild,
   Input,
+  input,
 } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import {
@@ -40,7 +41,7 @@ import { CommonModule } from '@angular/common';
 })
 export class StepsOnboardingComponent implements OnInit {
   swiperRef = viewChild<ElementRef>('swiperRef');
-
+  customClass = input<string>('');
   @Input() onboardingSteps: Array<{
     title: string;
     image: string;

@@ -1,4 +1,6 @@
 <ion-app>
-  <h1>Atleta</h1>
   <ion-router-outlet></ion-router-outlet>
 </ion-app>
+@if (isLoading()) {
+  <app-loader></app-loader>
+}

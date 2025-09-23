@@ -175,5 +175,12 @@
       "title": "Rutinas"
     }
   },
-  "your-client-payment": "Tu cliente pagará"
+  "your-client-payment": "Tu cliente pagará",
+
+  "athlete":{
+    "steps-onboarding.step-1-title": "Encuentra a tus entrenadores favoritos en una sola plataforma",
+    "steps-onboarding.step-2-title": "Descubre más de 1000 rutinas online y clases que se adaptan a tus necesidades",
+    "steps-onboarding.step-3-title": "Suscríbete a tu entrenador favorito y comienza tu vida saludable"
+
+  }
 }
