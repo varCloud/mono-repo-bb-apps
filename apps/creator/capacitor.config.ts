@@ -6,18 +6,15 @@ const config: CapacitorConfig = {
   webDir: '../../dist/apps/creator/browser',
   plugins: {
     SplashScreen: {
-      launchShowDuration: 0
+      launchShowDuration: 0,
     },
     PushNotifications: {
-      presentationOptions: ["badge", "sound", "alert"]
-    }
+      presentationOptions: ['badge', 'sound', 'alert'],
+    },
   },
   android: {
-    allowMixedContent: true
+    allowMixedContent: true,
   },
-  ios: {
-    contentInset: 'automatic'
-  }
 };
 
 export default config;

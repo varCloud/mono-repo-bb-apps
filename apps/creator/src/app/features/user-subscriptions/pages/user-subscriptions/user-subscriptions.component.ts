@@ -3,8 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { BlockUI, BlockUIModule } from 'ng-block-ui';
-import { LayoutContentComponent, HeaderComponent, HeaderSearchComponent } from '@monorepo-bb-app/ui';
+import { LayoutContentComponent, HeaderSearchComponent } from '@monorepo-bb-app/ui';
 import { ellipsisVertical, sendSharp } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 
@@ -27,12 +26,10 @@ interface Subscription {
     FormsModule,
     ReactiveFormsModule,
     LayoutContentComponent,
-    BlockUIModule,
     HeaderSearchComponent,
   ],
 })
 export class UserSubscriptionsComponent implements OnInit, OnDestroy {
-  @BlockUI('subscriptions-page') blockUI!: any;
 
   subscriptions: Subscription[] = [];
 

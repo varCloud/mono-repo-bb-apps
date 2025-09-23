@@ -11,7 +11,7 @@ import {
   selector: 'app-list-skeleton',
   templateUrl: './list-skeleton.component.html',
   styleUrls: ['./list-skeleton.component.scss'],
-  imports: [IonLabel, IonList, IonItem, IonSkeletonText, IonListHeader],
+  imports: [IonLabel, IonItem, IonSkeletonText],
 })
 export class ListSkeletonComponent implements OnInit {
   itemRepeat = input<number>(1);

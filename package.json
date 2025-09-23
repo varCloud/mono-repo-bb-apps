@@ -10,10 +10,13 @@
     "cap:athlete:sync": "cd apps/athlete && npx cap sync",
     "cap:athlete:open": "cd apps/athlete && npx cap open android",
     "dev:athlete:serve": "nx serve athlete --configuration=development --host=192.168.1.27 --port=3000",
-    "dev:creator:serve": "nx serve athlete --configuration=development --host=192.168.1.27 --port=3000",
+    "dev:creator:serve": "nx serve creator --configuration=development --host=192.168.100.15 --port=3000",
     "creator:android": "npx cap build android",
     "creator:sync": "cd apps/creator && nx build creator && npx cap sync && npx cap build android",
-    "dev:athlete:celular": "cd apps/athlete && npx cap sync && npx cap run android -l --host=192.168.1.27"
+    "dev:athlete:celular": "cd apps/athlete && npx cap sync && npx cap run android -l --host=192.168.1.27",
+    "ios:emulator-creator": "cd apps/creator && npx cap sync && nx build creator && npx cap run ios --live-reload",
+    "sync-files-creator:ios": "cd apps/creator && npx cap sync ios && cd ../../ && node scripts/sync-ios-files-creator.js",
+    "sync-files-creator:android": "cd apps/creator && npx cap sync android && cd ../../ && node scripts/sync-android-files-creator.js"
   },
   "private": true,
   "dependencies": {
@@ -49,7 +52,6 @@
     "@uppy/locales": "^5.0.0",
     "@uppy/utils": "^3.6.2",
     "bson-objectid": "^2.0.4",
-    "ng-block-ui": "^4.0.1",
     "ngx-mask": "^20.0.3",
     "rxjs": "~7.8.0",
     "swiper": "^11.2.10",

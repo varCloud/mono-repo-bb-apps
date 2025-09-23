@@ -14,8 +14,7 @@ import { ToastService } from '@monorepo-bb-app/shared';
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { CatalogsService } from '@monorepo-bb-app/shared';
-import { BlockUI, BlockUIModule, NgBlockUI } from 'ng-block-ui';
-import { ListSkeletonComponent } from '@monorepo-bb-app/ui';
+import { LoaderUIService } from '@monorepo-bb-app/core';
 
 @Component({
   selector: 'app-categories-select',
@@ -30,14 +29,10 @@ import { ListSkeletonComponent } from '@monorepo-bb-app/ui';
     FormsModule,
     IonText,
     TranslateModule,
-    BlockUIModule,
-    ListSkeletonComponent,
   ],
   providers: [TranslatePipe],
 })
 export class CategoriesSelectComponent implements OnInit {
-  @BlockUI('categories-select-component') categoriesBlockUI!: NgBlockUI;
-  public listSkeletonTemplate = ListSkeletonComponent;
   categories = signal<Categorie[]>([]);
   limitSelected = input<number>(5);
   defaultSelected = input<number[]>([]);
@@ -48,10 +43,11 @@ export class CategoriesSelectComponent implements OnInit {
     private _router: Router,
     private _toastService: ToastService,
     private _translate: TranslatePipe,
+    private _loaderService: LoaderUIService,
   ) {}
 
   ngOnInit() {
-    this.categoriesBlockUI.start(ListSkeletonComponent);
+    this._loaderService.showLoader();
     this._catalogsService.getCatalog(CatalogType.CATEGORIES).subscribe({
       next: (data: any) => {
         this.categories.set(
@@ -68,13 +64,13 @@ export class CategoriesSelectComponent implements OnInit {
             this.categories().filter((cat) => cat.selected),
           );
         }
-        this.categoriesBlockUI.stop();
+        this._loaderService.hideLoader();
       },
       error: () => {
         this._toastService.error(
           this._translate.transform('error.error-processing'),
         );
-        this.categoriesBlockUI.stop();
+        this._loaderService.hideLoader();
       },
     });
   }

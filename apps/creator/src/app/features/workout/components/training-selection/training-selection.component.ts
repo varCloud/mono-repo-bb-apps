@@ -2,12 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {
-  IonHeader,
-  IonToolbar,
-  IonTitle,
   IonContent,
-  IonBackButton,
-  IonButtons,
   IonGrid,
   IonRow,
   IonCol,
@@ -15,8 +10,7 @@ import {
 
 import { LayoutContentComponent, TrainingTypeSelectionComponent } from '@monorepo-bb-app/ui';
 import { TranslateModule } from '@ngx-translate/core';
-import { Block } from '@angular/compiler';
-import { BlockUIModule } from 'ng-block-ui';
+
 
 @Component({
   selector: 'app-training-selection',
@@ -25,19 +19,13 @@ import { BlockUIModule } from 'ng-block-ui';
   standalone: true,
   imports: [
     CommonModule,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
     IonContent,
-    IonBackButton,
-    IonButtons,
     IonGrid,
     IonRow,
     IonCol,
     TrainingTypeSelectionComponent,
     LayoutContentComponent,
     TranslateModule,
-    BlockUIModule,
   ],
 })
 export class TrainingSelectionComponent implements OnInit {

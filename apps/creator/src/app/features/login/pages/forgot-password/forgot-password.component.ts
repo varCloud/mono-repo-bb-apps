@@ -16,7 +16,6 @@ import {
   IonImg,
 } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
-import { BlockUI, BlockUIModule, NgBlockUI } from 'ng-block-ui';
 import { LayoutContentComponent } from '@monorepo-bb-app/ui';
 import { Router } from '@angular/router';
 import { LoaderUIService } from '@monorepo-bb-app/core';
@@ -36,7 +35,6 @@ import { LoaderUIService } from '@monorepo-bb-app/core';
     IonContent,
     TranslateModule,
     LayoutContentComponent,
-    BlockUIModule,
     ReactiveFormsModule,
   ],
 })

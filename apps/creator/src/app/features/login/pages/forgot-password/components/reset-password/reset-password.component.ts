@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ResetPasswordFormComponent, LayoutContentComponent } from '@monorepo-bb-app/ui';
-import { IonGrid, IonContent, IonicModule } from '@ionic/angular';
+import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { BlockUIModule } from 'ng-block-ui';
 import { Router } from '@angular/router';
 import { ToastService } from '@monorepo-bb-app/shared';
 
@@ -18,7 +17,6 @@ import { ToastService } from '@monorepo-bb-app/shared';
     FormsModule,
     IonicModule,
     TranslateModule,
-    BlockUIModule,
     LayoutContentComponent,
   ],
 })
