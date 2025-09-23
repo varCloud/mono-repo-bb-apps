@@ -18,7 +18,7 @@ export const onboardingRoutes: Routes = [
         loadComponent: () =>
           import(
             './components/steps-onbording/steps-onboarding.component'
-          ).then((m) => m.StepsOnboardingComponent),
+          ).then((m) => m.StepsOnboardingPage),
       },
       {
         path: '**',

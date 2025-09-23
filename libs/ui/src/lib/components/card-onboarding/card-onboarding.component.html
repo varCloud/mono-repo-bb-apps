@@ -1,0 +1,22 @@
+<ion-card class="ion-text-center ion-no-padding ion-no-margin SF" [mode]="'ios'">
+  <div>
+    <img alt="onboarding" [src]="image()" />
+    <ion-card-header class="ion-margin-top">
+      <ion-card-title class="ion-text-center" [mode]="'ios'">{{
+        title() | translate
+      }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content class="ion-padding">
+      {{ description() | translate }}
+    </ion-card-content>
+  </div>
+
+  <div class="ion-padding buttons-content">
+    <ion-button color="tertiary" shape="round" (click)="onContinue()">{{
+      buttonText() | translate
+    }}</ion-button>
+    <ion-button fill="clear" color="secondary" (click)="onSkip()">{{
+      "skip" | translate
+    }}</ion-button>
+  </div>
+</ion-card>
