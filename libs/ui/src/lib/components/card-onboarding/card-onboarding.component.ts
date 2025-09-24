@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import { Component, input, OnInit, output } from '@angular/core';
 import {
   IonCard,
@@ -19,14 +20,16 @@ import { TranslateModule } from '@ngx-translate/core';
     IonCardTitle,
     IonButton,
     TranslateModule,
-  ],
+    NgClass
+    
+],
 })
 export class CardOnboardingComponent implements OnInit {
   title = input.required<string>();
   description = input<string>('');
   image = input.required<string>();
   buttonText = input<string>('next');
-
+  customClass = input<string>('');
   continueAction = output();
   skipAction = output();
   constructor() {}

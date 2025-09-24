@@ -1,8 +1,8 @@
-<ion-card class="ion-text-center ion-no-padding ion-no-margin">
+<ion-card class="ion-text-center ion-no-padding ion-no-margin SF" [mode]="'ios'" [ngClass]="[customClass()]">
   <div>
     <img alt="onboarding" [src]="image()" />
     <ion-card-header class="ion-margin-top">
-      <ion-card-title class="ion-text-center">{{
+      <ion-card-title class="ion-text-center" [mode]="'ios'">{{
         title() | translate
       }}</ion-card-title>
     </ion-card-header>

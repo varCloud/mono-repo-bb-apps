@@ -1,0 +1,26 @@
+<ion-content [fullscreen]="true" class="ion-no-padding">
+  <div class="onboarding-content">
+    <div class="onbording-text ion-padding">
+      <img width="129" src="/assets/images/logo/logo.svg" />
+      <h1 class="title">
+        <ion-text color="secondary">Bienvenido</ion-text> a <br />
+
+        <ion-text class="text-bodybooster">
+          Body <ion-text color="tertiary">Booster</ion-text>
+        </ion-text>
+      </h1>
+      <ion-text class="description">{{
+        "onboarding-text" | translate
+      }}</ion-text>
+      <ion-button
+        expand="block"
+        color="tertiary"
+        class="next-button ion-padding"
+        shape="round"
+        [routerLink]="['/onbording/steps']"
+      >
+        {{ "next" | translate }}</ion-button
+      >
+    </div>
+  </div>
+</ion-content>

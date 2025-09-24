@@ -1,0 +1,20 @@
+  <swiper-container
+    #swiperRef
+    [pagination]="{
+      clickable: true,
+    }"
+    class="swiper-container"
+  >
+    <ng-container *ngFor="let step of onboardingSteps; let i = index">
+      <swiper-slide>
+        <app-card-onboarding
+          [customClass]="customClass()"
+          [title]="step.title"
+          [image]="step.image"
+          [description]="step.description"
+          (continueAction)="i < onboardingSteps.length - 1 ? nextSlide() : goToLogin()"
+          (skipAction)="goToLogin()"
+        ></app-card-onboarding>
+      </swiper-slide>
+    </ng-container>
+  </swiper-container>
