@@ -16,5 +16,6 @@ export const convertToPayload = (data: any) => {
       name: exercise.name,
       description: exercise.description,
     })),
+    idempotencyKey: data.idempotencyKey,
   };
 };

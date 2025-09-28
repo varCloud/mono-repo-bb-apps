@@ -14,4 +14,5 @@ export enum CatalogType {
   TRANSACTION_STATUS = 'transaction-status',
   USER_TYPES = 'user-types',
   WORKOUT_GOALS = 'workout-goals',
+  TOOLS = 'tools',
 }

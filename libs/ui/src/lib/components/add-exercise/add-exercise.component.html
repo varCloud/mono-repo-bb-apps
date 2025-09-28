@@ -1,11 +1,23 @@
 <div class="exercise-form">
   <ion-accordion-group>
     <ion-accordion
+      toggleIconSlot="start"
       [value]="'exercise' + exerciseNumber"
       [ngClass]="{ 'upload-error': isUploadError() }"
     >
       <ion-item slot="header" [color]="isUploadError() ? 'danger' : null">
-        <ion-label>Ejercicio {{ exerciseNumber }}</ion-label>
+        <ion-label>
+          {{ isDocument ? 'Documento' : 'Ejercicio' }}
+          {{ exerciseNumber }}</ion-label
+        >
+        @if( showIconDelete ){
+        <ion-icon
+          name="trash-outline"
+          slot="end"
+          color="danger"
+          (click)="removeExercise($event)"
+        ></ion-icon>
+        }
       </ion-item>
 
       <div slot="content" class="accordion-content">
@@ -25,6 +37,7 @@
           </div>
 
           <!-- Descripción del ejercicio -->
+          @if(showDescription){
           <div class="form-field">
             <ion-textarea
               formControlName="description"
@@ -38,8 +51,10 @@
               [control]="exerciseForm().get('description')!"
             ></app-error-message>
           </div>
+          }
+          <!--  -->
           @if (!hideCoverUpload()) {
-            <app-dashed-area (clickEvent)="abrirExplorer()"></app-dashed-area>
+          <app-dashed-area (clickEvent)="abrirExplorer()"></app-dashed-area>
           }
 
           <!-- Uppy Dashboard para subida de video -->

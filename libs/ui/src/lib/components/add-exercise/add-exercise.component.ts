@@ -1,36 +1,40 @@
 import {
   Component,
-  Output,
-  EventEmitter,
   Input,
   OnDestroy,
   AfterViewInit,
   input,
-  effect,
   signal,
   output,
-  model,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {
-  IonButton,
   IonInput,
   IonTextarea,
   IonAccordionGroup,
   IonAccordion,
   IonItem,
   IonLabel,
+  IonIcon,
 } from '@ionic/angular/standalone';
-import { environment, Exercise } from '@monorepo-bb-app/shared';
+import {
+  environment,
+  ExerciseFormControls,
+  StatusUpload,
+} from '@monorepo-bb-app/shared';
 import Uppy from '@uppy/core';
 import Dashboard from '@uppy/dashboard';
 
 import AwsS3Multipart from '@uppy/aws-s3-multipart';
 import Spanish from '@uppy/locales/lib/es_ES';
-import { ErrorMessageComponent } from '@monorepo-bb-app/ui';
+import {
+  ErrorMessageComponent,
+  DashedAreaComponent,
+} from '@monorepo-bb-app/ui';
 import { SesionService } from '@monorepo-bb-app/core';
-import { DashedAreaComponent } from '@monorepo-bb-app/ui';
+import { addIcons } from 'ionicons';
+import { trashOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-add-exercise',
@@ -38,6 +42,7 @@ import { DashedAreaComponent } from '@monorepo-bb-app/ui';
   styleUrls: ['./add-exercise.component.scss'],
   standalone: true,
   imports: [
+    IonIcon,
     CommonModule,
     ReactiveFormsModule,
     IonInput,
@@ -51,9 +56,13 @@ import { DashedAreaComponent } from '@monorepo-bb-app/ui';
   ],
 })
 export class AddExerciseComponent implements AfterViewInit, OnDestroy {
-  @Input() exerciseNumber: number = 1;
-  @Output() exerciseAdded = new EventEmitter<Exercise>();
-  exerciseForm = input.required<FormGroup>();
+  @Input() exerciseNumber = 1;
+  @Input() isDocument = true;
+  @Input() showDescription = true;
+  @Input() showIconDelete = false;
+
+  deleteEvent = output<number>();
+  exerciseForm = input.required<FormGroup<ExerciseFormControls>>();
   hideCoverUpload = signal(false);
   ejecutar = input.required<boolean>();
   objectId = input.required<string>();
@@ -65,7 +74,9 @@ export class AddExerciseComponent implements AfterViewInit, OnDestroy {
 
   private readonly BASE_URL = `${environment.API_URL}/upload`;
 
-  constructor(private sesionService: SesionService) {}
+  constructor(private sesionService: SesionService) {
+    addIcons({ trashOutline });
+  }
 
   ngAfterViewInit() {
     this.initializeUppy();
@@ -78,6 +89,11 @@ export class AddExerciseComponent implements AfterViewInit, OnDestroy {
     }
   }
 
+  removeExercise($event?: Event) {
+    $event?.stopPropagation();
+    this.deleteEvent.emit(this.exerciseForm().get('id')?.value || 0);
+  }
+
   private initializeUppy() {
     Spanish.strings.browseFiles = 'Seleccionar archivos';
     Spanish.strings.dropPasteFiles = ' %{browseFiles} ';
@@ -87,7 +103,7 @@ export class AddExerciseComponent implements AfterViewInit, OnDestroy {
         maxFileSize: environment.MAX_SIZE_FILE_AWS_S3,
         maxNumberOfFiles: 1,
         minNumberOfFiles: 1,
-        allowedFileTypes: ['video/*'],
+        allowedFileTypes: [this.isDocument ? 'application/pdf' : 'video/*'],
       },
       autoProceed: false,
       meta: { idempotency: this.objectId() },
@@ -108,13 +124,6 @@ export class AddExerciseComponent implements AfterViewInit, OnDestroy {
     this.eventListener();
   }
 
-  private markFormGroupTouched(formGroup: FormGroup) {
-    Object.keys(formGroup.controls).forEach((key) => {
-      const control = formGroup.get(key);
-      control?.markAsTouched();
-    });
-  }
-
   public abrirExplorer() {
     const dashboardEl = document.querySelector(
       `#uppy-dashboard${this.exerciseNumber}`
@@ -129,12 +138,12 @@ export class AddExerciseComponent implements AfterViewInit, OnDestroy {
     this.uppy.on('upload-success', (file, response) => {
       const videoUrl = response?.uploadURL || '';
       this.exerciseForm().patchValue({
-        videoFile: file,
-        videoUrl: videoUrl,
+        file: file,
+        url: videoUrl,
       });
       this.exerciseForm().patchValue({
         uppyFileId: null,
-        uploadStatus: 'success',
+        uploadStatus: StatusUpload.SUCCESS,
       });
       this.uploadSuccessEvent.emit();
       this.isUploadError.set(false);
@@ -144,13 +153,16 @@ export class AddExerciseComponent implements AfterViewInit, OnDestroy {
       this.isUploadError.set(true);
       this.exerciseForm().patchValue({
         uppyFileId: file?.id,
-        uploadStatus: 'error',
+        uploadStatus: StatusUpload.ERROR,
       });
       this.uploadErrorEvent.emit(file?.id);
     });
 
     this.uppy.on('file-added', (file) => {
       this.hideCoverUpload.set(true);
+      this.exerciseForm().patchValue({
+        uppyFileId: file?.id,
+      });
     });
 
     this.uppy.on('cancel-all', () => {

@@ -166,14 +166,20 @@
       "equipment-placeholder": "Selecciona",
       "exercise": "Ejercicio",
       "exercises-title": "Carga los ejercicios de tu rutina",
+      "exercises-video-title": "Carga el video de tu entrenamiento",
+      "exercises-doc-title": "Carga el documento",
       "location": "Ubicación",
       "location-placeholder": "Selecciona",
       "remove-exercise": "Eliminar ejercicio",
       "saving": "Guardando rutina...",
       "target": "Target",
       "target-placeholder": "Selecciona",
-      "title": "Rutinas"
+      "title": "Rutinas",
+      "link-video": "Link del video"
     }
   },
-  "your-client-payment": "Tu cliente pagará"
+  "your-client-payment": "Tu cliente pagará",
+  "title": "Título",
+  "example": "Ejemplo",
+  "video": "Video"
 }

@@ -1,0 +1,38 @@
+<ion-card>
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <h2 class="title">{{ 'video' | translate }}</h2>
+        </ion-col>
+        <ion-col size="12">
+          <ion-input
+            [formControl]="titleControl()"
+            class="bb-input"
+            [label]="'title' | translate"
+            label-placement="floating"
+            fill="outline"
+            [placeholder]="'title' | translate"
+            mode="md"
+          ></ion-input>
+          <app-error-message [control]="titleControl()"></app-error-message>
+        </ion-col>
+        <ion-col size="12">
+          <ion-input
+            [formControl]="urlControl()"
+            class="bb-input"
+            [label]="'workout.routine.link-video' | translate"
+            label-placement="floating"
+            fill="outline"
+            [placeholder]="'workout.routine.link-video' | translate"
+            mode="md"
+            [helperText]="
+              ('example' | translate) + ': https://youtu.be/1QXmZRk'
+            "
+          ></ion-input>
+          <app-error-message [control]="urlControl()"></app-error-message>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>

@@ -33,4 +33,4 @@ export * from './models/exercise';
 export * from './constants/message-status';
 export * from './constants/key-localstorage';
 export * from './environment/environment';
-
+export * from './services/workout/workout.service';
