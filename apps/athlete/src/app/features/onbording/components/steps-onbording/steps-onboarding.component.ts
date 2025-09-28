@@ -8,6 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { IonContent } from '@ionic/angular/standalone';
 import { StepsOnboardingComponent } from '@monorepo-bb-app/ui';
+import { ONBOARDING_STEPS } from './constants/steps';
 
 @Component({
   selector: 'app-steps-onboarding-page',
@@ -21,6 +22,7 @@ import { StepsOnboardingComponent } from '@monorepo-bb-app/ui';
 })
 export class StepsOnboardingPage implements OnInit {
   swiperRef = viewChild<ElementRef>('swiperRef');
+  readonly onboardingSteps = ONBOARDING_STEPS;
   constructor(private router: Router) {}
 
   ngOnInit() {}

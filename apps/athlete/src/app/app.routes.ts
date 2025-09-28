@@ -1,8 +1,11 @@
 import { Route } from '@angular/router';
+import { onboardingRoutes } from './features/onbording/routes';
 
-export const routes: Route[] = [
+export const AppRoutes: Route[] = [
+  ...onboardingRoutes,
   {
     path: '',
-    loadChildren: () => import('./app.routes').then(m => m.routes)
-  }
+    redirectTo: 'onbording',
+    pathMatch: 'full',
+  },
 ];

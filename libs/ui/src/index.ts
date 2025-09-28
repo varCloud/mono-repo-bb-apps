@@ -30,3 +30,6 @@ export * from './lib/components/stripe/onbording/onbording.component';
 export * from './lib/components/training-type-selection/training-type-selection.component';
 export * from './lib/components/upload-file/upload-file.component';
 export * from './lib/const/training-types.constants';
+
+export * from './lib/components/card-onboarding/card-onboarding.component';
+export * from './lib/components/steps-onbording/steps-onboarding.component';
