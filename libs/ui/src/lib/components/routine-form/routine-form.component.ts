@@ -43,7 +43,7 @@ import {
 } from '@monorepo-bb-app/shared';
 import { UppyFile } from '@uppy/utils';
 import { finalize } from 'rxjs';
-import { TrainingTypeEnum } from '../../const/training-types.constants';
+
 import ObjectID from 'bson-objectid';
 import { addIcons } from 'ionicons';
 import {
@@ -59,6 +59,7 @@ import { CatalogSelectComponent } from '../catalog-select/catalog-select.compone
 import { AddExerciseComponent } from '../add-exercise/add-exercise.component';
 import { AddRecordedClassComponent } from '../add-recorded-class/add-recorded-class.component';
 import { DashedAreaComponent } from '../dashed-area/dashed-area.component';
+import { TrainingTypeEnum } from '../../../../../shared/constants/types-routines';
 
 @Component({
   selector: 'lib-routine-form',
@@ -220,6 +221,12 @@ export class RoutineFormComponent implements OnInit {
       this.routineForm.markAllAsTouched();
       return;
     }
+
+    if (this.typeRoutine() === TrainingTypeEnum.RECORDED_CLASSES) {
+      this.saveExerciseData();
+      return;
+    }
+
     if (this.retryOnlyForm()) {
       this.saveExerciseData();
       this.retryOnlyForm.set(false);
@@ -256,7 +263,7 @@ export class RoutineFormComponent implements OnInit {
     const updatedExercises = this.routineForm.get('exercises')?.value ?? [];
 
     const allUploaded = updatedExercises.every(
-      (ex: any) => ex.videoUrl && ex.videoUrl.length > 0
+      (ex: any) => ex.url && ex.url.length > 0
     );
     if (!allUploaded) {
       return;
@@ -314,6 +321,7 @@ export class RoutineFormComponent implements OnInit {
       creatorId: this._sesionService.user$()?.userId,
       workoutUrl: imageUrl,
       idempotencyKey: this.objectId,
+      workoutTypeId: this.typeRoutine(),
     });
 
     this._workoutService

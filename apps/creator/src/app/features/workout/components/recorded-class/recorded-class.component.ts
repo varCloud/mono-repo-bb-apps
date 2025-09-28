@@ -14,8 +14,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import {
   LayoutContentComponent,
   RoutineFormComponent,
-  TrainingTypeEnum,
 } from '@monorepo-bb-app/ui';
+import { TrainingTypeEnum } from '@monorepo-bb-app/shared';
 
 @Component({
   selector: 'app-recorded-class',

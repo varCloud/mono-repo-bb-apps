@@ -103,8 +103,7 @@
   <div class="section">
     <h2>
       {{
-        titleSectionByType[typeRoutine()] || titleSectionByType.routines
-          | translate
+        titleSectionByType[typeRoutine()] || titleSectionByType[1] | translate
       }}
     </h2>
 

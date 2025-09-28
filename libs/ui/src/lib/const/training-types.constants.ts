@@ -22,9 +22,3 @@ export const TRAINING_TYPES: TrainingType[] = [
     icon: 'assets/icons/workouts/documento.svg',
   },
 ];
-
-export enum TrainingTypeEnum {
-  RECORDED_CLASSES = 'recorded-classes',
-  ROUTINES = 'routines',
-  DOCUMENT = 'document',
-}

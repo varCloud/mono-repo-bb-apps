@@ -7,7 +7,8 @@ import {
   IonBackButton,
 } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
-import { RoutineFormComponent, TrainingTypeEnum } from '@monorepo-bb-app/ui';
+import { RoutineFormComponent } from '@monorepo-bb-app/ui';
+import { TrainingTypeEnum } from '@monorepo-bb-app/shared';
 
 @Component({
   selector: 'app-routine',
