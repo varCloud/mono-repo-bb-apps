@@ -145,7 +145,6 @@ export class AddExerciseComponent implements AfterViewInit, OnDestroy {
         url: videoUrl,
       });
       this.exerciseForm().patchValue({
-        uppyFileId: null,
         uploadStatus: StatusUpload.SUCCESS,
       });
       this.uploadSuccessEvent.emit();
