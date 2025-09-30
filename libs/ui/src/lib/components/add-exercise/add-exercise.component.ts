@@ -6,6 +6,8 @@ import {
   input,
   signal,
   output,
+  ElementRef,
+  ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -61,7 +63,11 @@ export class AddExerciseComponent implements AfterViewInit, OnDestroy {
   @Input() showDescription = true;
   @Input() showIconDelete = false;
 
-  deleteEvent = output<number>();
+  @ViewChild('uppyDashboard', { static: false }) uppyDashboard:
+    | ElementRef
+    | undefined;
+
+  deleteEvent = output<Uppy>();
   exerciseForm = input.required<FormGroup<ExerciseFormControls>>();
   hideCoverUpload = signal(false);
   ejecutar = input.required<boolean>();
@@ -83,21 +89,18 @@ export class AddExerciseComponent implements AfterViewInit, OnDestroy {
     this.subscribeActions();
   }
 
-  ngOnDestroy() {
-    if (this.uppy && typeof this.uppy.close === 'function') {
-      this.uppy.close();
-    }
-  }
+  ngOnDestroy() {}
 
   removeExercise($event?: Event) {
     $event?.stopPropagation();
-    this.deleteEvent.emit(this.exerciseForm().get('id')?.value || 0);
+    this.deleteEvent.emit(this.uppy);
   }
 
   private initializeUppy() {
     Spanish.strings.browseFiles = 'Seleccionar archivos';
     Spanish.strings.dropPasteFiles = ' %{browseFiles} ';
     this.uppy = new Uppy({
+      id: `uppy-${this.exerciseNumber}`,
       locale: { ...Spanish },
       restrictions: {
         maxFileSize: environment.MAX_SIZE_FILE_AWS_S3,
@@ -110,7 +113,7 @@ export class AddExerciseComponent implements AfterViewInit, OnDestroy {
     })
       .use(Dashboard, {
         inline: true,
-        target: `#uppy-dashboard${this.exerciseNumber}`,
+        target: this.uppyDashboard?.nativeElement,
         showProgressDetails: true,
         proudlyDisplayPoweredByUppy: false,
         height: 270,
@@ -167,6 +170,15 @@ export class AddExerciseComponent implements AfterViewInit, OnDestroy {
 
     this.uppy.on('cancel-all', () => {
       this.hideCoverUpload.set(false);
+      this.exerciseForm().patchValue({
+        uppyFileId: null,
+      });
+    });
+    this.uppy.on('file-removed', () => {
+      this.hideCoverUpload.set(false);
+      this.exerciseForm().patchValue({
+        uppyFileId: null,
+      });
     });
   }
 

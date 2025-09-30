@@ -114,13 +114,13 @@
         <!-- Formulario para añadir ejercicio -->
         @if (_sesionService.user$()) {
         <app-add-exercise
-          [exerciseNumber]="i + 1"
+          [exerciseNumber]="exercise.get('id')!.value"
           [exerciseForm]="$any(exercise)"
           [ejecutar]="ejecutarFILE()"
           [objectId]="objectId"
           (uploadErrorEvent)="onExerciseUploadError()"
           (uploadSuccessEvent)="successUpload()"
-          (deleteEvent)="removeExercise($event)"
+          (deleteEvent)="removeExercise($event, i)"
           [isDocument]="typeRoutine() === TRAINING_TYPES.DOCUMENT"
           [showDescription]="typeRoutine() !== TRAINING_TYPES.DOCUMENT"
           [showIconDelete]="exercises.length > 1"

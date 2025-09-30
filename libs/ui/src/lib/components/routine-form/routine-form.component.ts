@@ -40,6 +40,7 @@ import {
   StatusUpload,
   convertToPayload,
   WorkoutService,
+  destroyUppy,
 } from '@monorepo-bb-app/shared';
 import { UppyFile } from '@uppy/utils';
 import { finalize } from 'rxjs';
@@ -60,6 +61,7 @@ import { AddExerciseComponent } from '../add-exercise/add-exercise.component';
 import { AddRecordedClassComponent } from '../add-recorded-class/add-recorded-class.component';
 import { DashedAreaComponent } from '../dashed-area/dashed-area.component';
 import { TrainingTypeEnum } from '../../../../../shared/constants/types-routines';
+import Uppy from '@uppy/core';
 
 @Component({
   selector: 'lib-routine-form',
@@ -85,7 +87,7 @@ export class RoutineFormComponent implements OnInit {
 
   uploadProgress = 0;
   isUploading = false;
-  nextExerciseId = 1;
+  nextExerciseId = 0;
 
   targetOptions: Tag[] = [];
   locationOptions: LocationType[] = [];
@@ -182,7 +184,9 @@ export class RoutineFormComponent implements OnInit {
       }),
       file: new FormControl<UppyFile | null>(null),
       url: new FormControl('', { nonNullable: true }),
-      uppyFileId: new FormControl<string | null>(null),
+      uppyFileId: new FormControl<string | null>(null, {
+        validators: [Validators.required],
+      }),
       retryUpload: new FormControl<boolean>(false, { nonNullable: true }),
       upload: new FormControl(false, { nonNullable: true }),
       uploadStatus: new FormControl<StatusUpload>(StatusUpload.PENDING, {
@@ -196,15 +200,9 @@ export class RoutineFormComponent implements OnInit {
     this.exercises.push(emptyExercise);
   }
 
-  removeExercise(id: number) {
-    const exerciseForm = this.routineForm.get('exercises') as FormArray;
-    const exercisesFilter = exerciseForm.controls.filter((exercise) => {
-      return exercise.get('id')?.value !== id;
-    });
-    this.routineForm.setControl(
-      'exercises',
-      this.formBuilder.array<ExerciseFormControls>(exercisesFilter as any)
-    );
+  removeExercise(uppy: Uppy, id: number) {
+    this.exercises.removeAt(id);
+    destroyUppy(uppy);
   }
 
   getFileName(index: number): string {
@@ -253,7 +251,6 @@ export class RoutineFormComponent implements OnInit {
     if (exercises?.value.length > 0 && !hasVideo) {
       return false;
     }
-    console.log(exercises.valid);
     return exercises?.valid ?? false;
   }
 
