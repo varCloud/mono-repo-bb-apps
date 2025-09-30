@@ -164,14 +164,20 @@
       "equipment-placeholder": "Select",
       "exercise": "Exercise",
       "exercises-title": "Upload the exercises for your routine",
+      "exercises-video-title": "Upload the video for your workout",
+      "exercises-doc-title": "Upload the document",
       "location": "Location",
       "location-placeholder": "Select",
       "remove-exercise": "Remove exercise",
       "saving": "Saving routine...",
       "target": "Target",
       "target-placeholder": "Select",
-      "title": "Routines"
+      "title": "Routines",
+      "link-video": "Link to video"
     }
   },
-  "your-client-payment": "Your client will pay"
+  "your-client-payment": "Your client will pay",
+  "title": "Title",
+  "example": "Example",
+  "video": "Video"
 }

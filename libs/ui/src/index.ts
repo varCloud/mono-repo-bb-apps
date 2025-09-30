@@ -1,4 +1,3 @@
-
 export * from './lib/components/add-exercise/add-exercise.component';
 export * from './lib/components/avatar-picker/avatar-picker.component';
 export * from './lib/components/avatar-profile/avatar-profile.component';
@@ -19,6 +18,9 @@ export * from './lib/components/loader/loader.component';
 export * from './lib/components/otp/otp.component';
 export * from './lib/components/dashed-area/dashed-area.component';
 export * from './lib/components/skeleton/list-skeleton/list-skeleton.component';
+export * from './lib/components/catalog-select/catalog-select.component';
+export * from './lib/components/add-recorded-class/add-recorded-class.component';
+export * from './lib/components/routine-form/routine-form.component';
 
 export * from './lib/components/payment-frequency-settings/payment-frequency-settings.component';
 export * from './lib/components/reset-password-form/reset-password-form/reset-password-form.component';
@@ -27,7 +29,7 @@ export * from './lib/components/stripe/add-payment-method/add-payment-method.com
 export * from './lib/components/stripe/onbording/onbording.component';
 export * from './lib/components/training-type-selection/training-type-selection.component';
 export * from './lib/components/upload-file/upload-file.component';
+export * from './lib/const/training-types.constants';
 
 export * from './lib/components/card-onboarding/card-onboarding.component';
 export * from './lib/components/steps-onbording/steps-onboarding.component';
-
