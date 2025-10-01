@@ -9,4 +9,5 @@ export interface customMessage {
   min?: string;
   max?: string;
   zero?: string;
+  invalidUrl?: string;
 }

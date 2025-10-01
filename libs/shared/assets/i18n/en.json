@@ -66,7 +66,8 @@
     "pattern": "The field format is not valid",
     "required": "This field is required",
     "unique": "The value must be unique",
-    "zero": "The value cannot be zero"
+    "zero": "The value cannot be zero",
+    "invalidUrl": "The value must be a valid URL"
   },
   "genders": {
     "female": "Female",
@@ -173,7 +174,11 @@
       "target": "Target",
       "target-placeholder": "Select",
       "title": "Routines",
-      "link-video": "Link to video"
+      "link-video": "Link to video",
+      "created-success": "Routine created successfully",
+      "updated-success": "Routine updated successfully",
+      "error": "Error saving routine",
+      "upload-error": "Error uploading file {{fileName}}"
     }
   },
   "your-client-payment": "Your client will pay",

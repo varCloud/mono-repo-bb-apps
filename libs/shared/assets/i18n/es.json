@@ -66,7 +66,8 @@
     "pattern": "El formato del campo no es válido",
     "required": "Este campo es obligatorio",
     "unique": "El valor debe ser único",
-    "zero": "El valor no puede ser cero"
+    "zero": "El valor no puede ser cero",
+    "invalidUrl": "El valor debe ser una URL válida"
   },
   "genders": {
     "female": "Femenino",
@@ -175,7 +176,11 @@
       "target": "Target",
       "target-placeholder": "Selecciona",
       "title": "Rutinas",
-      "link-video": "Link del video"
+      "link-video": "Link del video",
+      "created-success": "Rutina creada exitosamente",
+      "updated-success": "Rutina actualizada exitosamente",
+      "error": "Error al guardar la rutina",
+      "upload-error": "Error al subir el archivo {{fileName}}"
     }
   },
   "your-client-payment": "Tu cliente pagará",

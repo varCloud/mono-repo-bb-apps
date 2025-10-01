@@ -18,10 +18,11 @@ export class ErrorsMessagesService {
     min: 'formErrors.min',
     max: 'formErrors.max',
     zero: 'formErrors.zero',
+    invalidUrl: 'formErrors.invalidUrl',
   };
   getErrorMessage(
     control: AbstractControl | null,
-    customMessages?: customMessage | null,
+    customMessages?: customMessage | null
   ): string {
     if (!control || !control.errors) return '';
     const errors: ValidationErrors = control.errors;
