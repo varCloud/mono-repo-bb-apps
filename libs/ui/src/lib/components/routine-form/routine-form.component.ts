@@ -1,13 +1,5 @@
+import { Component, input, signal, type OnInit } from '@angular/core';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  input,
-  signal,
-  type OnInit,
-} from '@angular/core';
-import {
-  FormGroup,
   FormBuilder,
   Validators,
   FormArray,
@@ -18,7 +10,6 @@ import { Router } from '@angular/router';
 import { Photo } from '@capacitor/camera';
 import { Capacitor } from '@capacitor/core';
 import {
-  IonItem,
   IonCol,
   IonInput,
   IonButton,
@@ -41,6 +32,7 @@ import {
   convertToPayload,
   WorkoutService,
   destroyUppy,
+  urlValidator,
 } from '@monorepo-bb-app/shared';
 import { UppyFile } from '@uppy/utils';
 import { finalize } from 'rxjs';
@@ -53,7 +45,7 @@ import {
   createOutline,
   trashOutline,
 } from 'ionicons/icons';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
 import { AvatarPickerComponent } from '../avatar-picker/avatar-picker.component';
 import { CatalogSelectComponent } from '../catalog-select/catalog-select.component';
@@ -111,7 +103,7 @@ export class RoutineFormComponent implements OnInit {
   routineForm = this.formBuilder.group({
     title: ['', [Validators.required]],
     description: ['', [Validators.required]],
-    coverImage: [],
+    coverImage: [null, Validators.required],
     target: [''],
     location: [''],
     difficulty: [''],
@@ -129,7 +121,8 @@ export class RoutineFormComponent implements OnInit {
     public _sesionService: SesionService,
     private _uploadService: UploadService,
     private _workoutService: WorkoutService,
-    private toastService: ToastService
+    private _toastService: ToastService,
+    private _translate: TranslateService
   ) {
     addIcons({ addCircleOutline, trashOutline, createOutline, addOutline });
   }
@@ -162,7 +155,9 @@ export class RoutineFormComponent implements OnInit {
 
     if (this.typeRoutine() === TrainingTypeEnum.RECORDED_CLASSES) {
       this.routineForm.get('titleVideo')?.setValidators([Validators.required]);
-      this.routineForm.get('urlVideo')?.setValidators([Validators.required]);
+      this.routineForm
+        .get('urlVideo')
+        ?.setValidators([Validators.required, urlValidator]);
     }
   }
 
@@ -300,6 +295,7 @@ export class RoutineFormComponent implements OnInit {
   }
 
   private async saveExerciseData() {
+    this._loader.showLoader();
     let imageUrl =
       'https://bb-app-bucket-images.s3.amazonaws.com/uploads%2F75%2Fundefined%2Fphoto-23_1757813844787_vojwj8y5qml.jpg';
     if (Capacitor.isNativePlatform()) {
@@ -326,14 +322,22 @@ export class RoutineFormComponent implements OnInit {
       .pipe(finalize(() => this._loader.hideLoader()))
       .subscribe({
         next: (res) => {
-          console.log('Workout routine saved successfully');
-          // this.router.navigate(['/workout']);
+          this.router.navigate(['/home/training']);
+          this._toastService.success(
+            this._translate.instant('workout.routine.created-success'),
+            {
+              duration: 3000,
+            }
+          );
         },
         error: (err) => {
           this.retryOnlyForm.set(true);
-          this.toastService.error('Error saving workout routine', {
-            duration: 2000,
-          });
+          this._toastService.error(
+            this._translate.instant('workout.routine.error'),
+            {
+              duration: 2000,
+            }
+          );
         },
       });
   }

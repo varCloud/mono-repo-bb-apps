@@ -24,6 +24,7 @@ import {
   environment,
   ExerciseFormControls,
   StatusUpload,
+  ToastService,
 } from '@monorepo-bb-app/shared';
 import Uppy from '@uppy/core';
 import Dashboard from '@uppy/dashboard';
@@ -37,6 +38,7 @@ import {
 import { SesionService } from '@monorepo-bb-app/core';
 import { addIcons } from 'ionicons';
 import { trashOutline } from 'ionicons/icons';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-exercise',
@@ -80,7 +82,11 @@ export class AddExerciseComponent implements AfterViewInit, OnDestroy {
 
   private readonly BASE_URL = `${environment.API_URL}/upload`;
 
-  constructor(private sesionService: SesionService) {
+  constructor(
+    private sesionService: SesionService,
+    private _toastService: ToastService,
+    private _translate: TranslateService
+  ) {
     addIcons({ trashOutline });
   }
 
@@ -158,6 +164,12 @@ export class AddExerciseComponent implements AfterViewInit, OnDestroy {
         uploadStatus: StatusUpload.ERROR,
       });
       this.uploadErrorEvent.emit(file?.id);
+      const msg = this._translate.instant('workout.routine.upload-error', {
+        fileName: file?.name,
+      });
+      this._toastService.error(msg, {
+        duration: 2000,
+      });
     });
 
     this.uppy.on('file-added', (file) => {
