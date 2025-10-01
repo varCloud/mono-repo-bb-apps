@@ -8,7 +8,6 @@
     [placeholder]="placeholder() | translate"
     [formControl]="control()"
     class="catalog-ng-select"
-    appendTo="body"
   >
     <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
       @for (item of items | slice: 0 : 6; track item) {
