@@ -1,0 +1,50 @@
+<form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-img
+          src="/assets/images/forgot-password/forgot-pass.svg"
+          alt=""
+        ></ion-img>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col
+        size="12"
+        class="ion-text-center ion-margin-top ion-offset-1"
+      >
+        <ion-text [color]="'bb-text-title'" class="font-size-20 title">{{
+          "forgot-password.subtitle" | translate
+        }}</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" class="ion-margin-top">
+        <ion-input
+          formControlName="email"
+          class="bb-input"
+          [label]="'mail' | translate"
+          label-placement="floating"
+          fill="outline"
+          [maxlength]="100"
+          [placeholder]="'mail-placeholder' | translate"
+          mode="md"
+        ></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button
+          color="tertiary"
+          class="bb-input"
+          expand="block"
+          shape="round"
+          type="submit"
+          [disabled]="emailForm.invalid"
+        >
+          {{ "continue" | translate }}
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</form>
