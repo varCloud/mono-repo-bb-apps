@@ -27,6 +27,11 @@ export class ForgotPasswordComponent implements OnInit {
     private _loaderService: LoaderUIService,
   ) {}
 
+  onGoBack() {
+    console.log('Go back clicked');
+    this.router.navigate(['/login']);
+  }
+
   ngOnInit() {}
 
   public onEmailSubmit(email: string) {
