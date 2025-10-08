@@ -6,9 +6,6 @@ import {
   IonGrid,
   IonText,
   IonContent,
-  IonTitle,
-  IonToolbar,
-  IonHeader,
 } from '@ionic/angular/standalone';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { HeaderComponent, LayoutContentComponent, LoginFormComponent } from '@monorepo-bb-app/ui';
@@ -43,6 +40,7 @@ import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
   ],
 })
 export class LoginComponent implements OnInit {
+  public userType =  ENUM_TYPE_USER.ATHLETE;
   constructor(
     private _loginService: LoginService,
     private _toastService: ToastService,
@@ -50,7 +48,7 @@ export class LoginComponent implements OnInit {
     private _router: Router,
     private _loader: LoaderUIService
   ) {}
-  public userType = ENUM_TYPE_USER.CREATOR;
+
   ngOnInit() {}
 
   public async onLogin(credentials: LoginCredentials) {
