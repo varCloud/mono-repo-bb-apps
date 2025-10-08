@@ -17,8 +17,6 @@
 
     <ion-grid content-body>
       <form [formGroup]="form">
-        
-        <!-- Selección de Objetivos -->
         <ion-row>
           <ion-col size="12">
             <div class="section-title">
@@ -29,7 +27,7 @@
             <app-checkbox-list-selector
               [options]="goalsOptions()"
               [selectedValues]="form.get('goals')?.value || []"
-              [maxSelections]="3"
+              [maxSelections]="maxGoalsSelection"
               (selectedValuesChange)="onGoalsChange($event)"
             ></app-checkbox-list-selector>
             
@@ -38,8 +36,6 @@
             ></app-error-message>
           </ion-col>
         </ion-row>
-
-        <!-- Información adicional -->
         <ion-row>
           <ion-col size="12">
             <div class="info-card">
@@ -57,7 +53,7 @@
         class="bb-input"
         expand="block"
         shape="round"
-        [disabled]="form.invalid || isLoading()"
+        [disabled]="form.invalid"
         (click)="onContinue()"
       >
         {{ "common.continue" | translate }}

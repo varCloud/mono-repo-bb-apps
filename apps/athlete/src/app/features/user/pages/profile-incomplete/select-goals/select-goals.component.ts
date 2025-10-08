@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, effect, OnInit, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
@@ -10,15 +10,17 @@ import {
   IonGrid,
 } from '@ionic/angular/standalone';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { 
-  ErrorMessageComponent, 
-  HeaderComponent, 
+import {
+  ErrorMessageComponent,
+  HeaderComponent,
   LayoutContentComponent,
   CheckboxListSelectorComponent,
-  SelectOption 
+  SelectOption
 } from '@monorepo-bb-app/ui';
-import { ToastService } from '@monorepo-bb-app/shared';
-import { LoaderUIService } from '@monorepo-bb-app/core';
+import { CatalogsService, CatalogType, SaveGoalsRequest, ToastService } from '@monorepo-bb-app/shared';
+import { LoaderUIService, SesionService } from '@monorepo-bb-app/core';
+import { UserService } from '../../../services/user.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-select-goals',
@@ -41,52 +43,18 @@ import { LoaderUIService } from '@monorepo-bb-app/core';
   ],
 })
 export class SelectGoalsComponent implements OnInit {
-  
-  isLoading = signal(false);
-  
-  form = this._fb.group({
-    goals: this._fb.control<any[]>([], [Validators.required, Validators.minLength(1)]),
-  });
 
-  // Opciones de objetivos usando nuestro componente genérico
-  goalsOptions = signal<SelectOption[]>([
-    {
-      value: 'weight_loss',
-      label: 'onboarding.goals.weight-loss',
-      description: 'onboarding.goals.weight-loss-desc',
-      icon: 'trending-down'
-    },
-    {
-      value: 'muscle_gain',
-      label: 'onboarding.goals.muscle-gain',
-      description: 'onboarding.goals.muscle-gain-desc',
-      icon: 'fitness'
-    },
-    {
-      value: 'endurance',
-      label: 'onboarding.goals.endurance',
-      description: 'onboarding.goals.endurance-desc',
-      icon: 'bicycle'
-    },
-    {
-      value: 'strength',
-      label: 'onboarding.goals.strength',
-      description: 'onboarding.goals.strength-desc',
-      icon: 'barbell'
-    },
-    {
-      value: 'flexibility',
-      label: 'onboarding.goals.flexibility',
-      description: 'onboarding.goals.flexibility-desc',
-      icon: 'body'
-    },
-    {
-      value: 'general_fitness',
-      label: 'onboarding.goals.general-fitness',
-      description: 'onboarding.goals.general-fitness-desc',
-      icon: 'heart'
-    }
-  ]);
+
+  public form = this._fb.group({
+    goals: this._fb.control<any[]>([], [Validators.required, Validators.minLength(3)]),
+  });
+  public goalsOptions = signal<SelectOption[]>([]);
+  public maxGoalsSelection = 3;
+
+  get goals() {
+    return this.form.get('goals');
+  }
+
 
   constructor(
     private _fb: FormBuilder,
@@ -94,12 +62,37 @@ export class SelectGoalsComponent implements OnInit {
     private _toast: ToastService,
     private _translate: TranslateService,
     private _loader: LoaderUIService,
-  ) {}
+    private _catalogsService: CatalogsService,
+    private _userService: UserService,
+    private _sessionService: SesionService,
+  ) {
 
-  ngOnInit() {}
+    effect(() => {
+      this._sessionService.user$()
+    })
+  }
+
+  ngOnInit() {
+    this.getGoalsOptions();
+  }
 
   onGoalsChange(selectedGoals: any[]): void {
     this.form.patchValue({ goals: selectedGoals });
+  }
+
+  public getGoalsOptions() {
+    this._loader.showLoader();
+    this._catalogsService.getCatalog(CatalogType.USER_GOALS).subscribe({
+      next: (data: any) => {
+        this.goalsOptions.set(data.map((goal: any) => ({
+          value: goal.goalId,
+          label: goal.description,
+        })));
+      },
+      complete: () => {
+        this._loader.hideLoader();
+      }
+    });
   }
 
   async onContinue() {
@@ -108,27 +101,24 @@ export class SelectGoalsComponent implements OnInit {
       return;
     }
 
-    this.isLoading.set(true);
-
     try {
-      // Aquí puedes guardar los datos en un servicio temporal
-      // await this.onboardingService.saveGoals(this.form.value);
-      
-      this._toast.success(
-        this._translate.instant('onboarding.select-goals.save-success'),
-        { duration: 1000 }
-      );
-      
-      // Navegar a la siguiente pantalla
-      this._router.navigate(['/profile-incomplete/select-level']);
-      
+      this._loader.showLoader();
+      const payload: SaveGoalsRequest = {
+        userId: this._sessionService.user$()?.userId,
+        goalIds: this.form.value.goals,
+      }
+      this._userService.saveGoals(payload).pipe(take(1)).subscribe((response) => {
+        this._loader.hideLoader();
+        this._toast.success(this._translate.instant('onboarding.select-goals.save-success'));
+        this._router.navigate(['/profile-incomplete/select-level']);
+
+      });
+
     } catch (error) {
-      this._toast.error(
-        this._translate.instant('onboarding.select-goals.save-error'),
-        { duration: 1000 }
+      console.error('Error saving goals:', error);
+      this._loader.hideLoader();
+      this._toast.error(this._translate.instant('onboarding.select-goals.save-error'),{ duration: 1000 }
       );
-    } finally {
-      this.isLoading.set(false);
     }
   }
 }

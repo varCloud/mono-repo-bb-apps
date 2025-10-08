@@ -60,20 +60,6 @@
       "save-success": "Perfil completado exitosamente",
       "save-error": "Error al completar perfil"
     },
-    "goals": {
-      "weight-loss": "Pérdida de peso",
-      "weight-loss-desc": "Reducir grasa corporal y mantener un peso saludable",
-      "muscle-gain": "Ganancia muscular",
-      "muscle-gain-desc": "Aumentar masa muscular y fuerza",
-      "endurance": "Resistencia",
-      "endurance-desc": "Mejorar capacidad cardiovascular y resistencia",
-      "strength": "Fuerza",
-      "strength-desc": "Aumentar fuerza general y potencia",
-      "flexibility": "Flexibilidad",
-      "flexibility-desc": "Mejorar movilidad y flexibilidad corporal",
-      "general-fitness": "Fitness general",
-      "general-fitness-desc": "Mantener una buena condición física general"
-    },
     "activity-level": {
       "beginner": "Principiante",
       "beginner-desc": "Poco o nada de ejercicio, sedentario",

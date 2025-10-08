@@ -60,20 +60,7 @@
       "save-success": "Profile completed successfully",
       "save-error": "Error completing profile"
     },
-    "goals": {
-      "weight-loss": "Weight Loss",
-      "weight-loss-desc": "Reduce body fat and maintain a healthy weight",
-      "muscle-gain": "Muscle Gain",
-      "muscle-gain-desc": "Increase muscle mass and strength",
-      "endurance": "Endurance",
-      "endurance-desc": "Improve cardiovascular capacity and endurance",
-      "strength": "Strength",
-      "strength-desc": "Increase overall strength and power",
-      "flexibility": "Flexibility",
-      "flexibility-desc": "Improve mobility and body flexibility",
-      "general-fitness": "General Fitness",
-      "general-fitness-desc": "Maintain good overall physical condition"
-    },
+
     "activity-level": {
       "beginner": "Beginner",
       "beginner-desc": "Little to no exercise, sedentary",

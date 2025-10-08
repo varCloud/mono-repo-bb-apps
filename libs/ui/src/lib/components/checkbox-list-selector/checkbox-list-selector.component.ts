@@ -38,13 +38,27 @@ export class CheckboxListSelectorComponent {
     return this.selectedValues().includes(value);
   }
 
+  isDisabled(value: any): boolean {
+    if (this.disabled()) return true;
+    
+    const maxLimit = this.maxSelections();
+    if (!maxLimit) return false;
+    
+    // Si ya está seleccionado, no está deshabilitado
+    if (this.isSelected(value)) return false;
+    
+    // Si alcanzamos el límite máximo, deshabilitar los no seleccionados
+    return this.selectedValues().length >= maxLimit;
+  }
+
   onOptionChange(value: any, event: any) {
     const currentValues = [...this.selectedValues()];
-    
+
     if (event.detail.checked) {
-      // Check max selections limit
       const maxLimit = this.maxSelections();
       if (maxLimit && currentValues.length >= maxLimit) {
+        // Prevenir que se marque visualmente revirtiendo el estado
+        event.target.checked = false;
         return;
       }
       currentValues.push(value);
@@ -54,7 +68,7 @@ export class CheckboxListSelectorComponent {
         currentValues.splice(index, 1);
       }
     }
-    
+
     this.selectedValuesChange.emit(currentValues);
   }
 }
