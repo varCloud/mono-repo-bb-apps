@@ -6,7 +6,7 @@
       position: relative;
       width: 100%;
       overflow: hidden;
-
+      max-height: 188px !important;
       .category {
         position: absolute;
         bottom: 10px;
@@ -67,9 +67,9 @@
     }
   }
 
-  @media (max-width: 768px) {
-    .card-list-container {
-      height: 244px;
-    }
-  }
+  // @media (max-width: 768px) {
+  //   .card-list-container {
+  //     height: 244px;
+  //   }
+  // }
 }

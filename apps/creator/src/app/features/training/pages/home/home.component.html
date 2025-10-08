@@ -71,7 +71,7 @@
   <ion-grid class="workout-grid">
     <ion-row gap="5px">
       @for (workout of workouts(); track workout.workoutId) {
-      <ion-col size="6">
+      <ion-col size="6" size-md="3" size-lg="3">
         <lib-card-list [workout]="workout"></lib-card-list>
       </ion-col>
       }
