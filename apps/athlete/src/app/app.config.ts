@@ -44,6 +44,6 @@ export const appConfig: ApplicationConfig = {
         },
       })
     ),
-    importProvidersFrom(IonicStorageModule.forRoot()),
+    importProvidersFrom(IonicStorageModule.forRoot({name: 'db-athlete'})),
   ],
 };

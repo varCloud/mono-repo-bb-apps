@@ -8,7 +8,6 @@ import { LayoutContentComponent , OtpComponent} from '@monorepo-bb-app/ui';
 import { Router } from '@angular/router';
 import { API_URLS } from '@monorepo-bb-app/shared';
 
-
 @Component({
   selector: 'app-validate-otp-reset-password',
   templateUrl: './validate-otp-reset-password.component.html',
