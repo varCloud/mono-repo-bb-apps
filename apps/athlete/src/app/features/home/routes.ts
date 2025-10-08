@@ -9,17 +9,17 @@ export const homeRoutes: Routes = [
     canActivate: [authGuard],
     loadComponent: () =>
       import('./pages/home/home.component').then((m) => m.HomeComponent),
-    children: [
-      {
-        path: '',
-        redirectTo: '/home/training',
-        pathMatch: 'full',
-      },
-      {
-        path: '**',
-        redirectTo: '/home/training',
-        pathMatch: 'full',
-      },
-    ],
+    // children: [
+    //   {
+    //     path: '',
+    //     redirectTo: '/home/training',
+    //     pathMatch: 'full',
+    //   },
+    //   {
+    //     path: '**',
+    //     redirectTo: '/home/training',
+    //     pathMatch: 'full',
+    //   },
+    // ],
   },
 ];

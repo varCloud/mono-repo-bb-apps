@@ -23,7 +23,7 @@ import { AppRoutes } from './app.routes';
 
 register();
 export function createTranslateLoader(httpClient: HttpClient) {
-  return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json');
+  return new TranslateHttpLoader(httpClient, './assets/i18n/athlete/', '.json');
 }
 
 

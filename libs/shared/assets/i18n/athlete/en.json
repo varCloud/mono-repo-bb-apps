@@ -1,0 +1,112 @@
+{
+  "common": {
+    "back": "Back",
+    "continue": "Continue",
+    "accept": "Accept",
+    "cancel": "Cancel",
+    "save": "Save",
+    "finish": "Finish",
+    "next": "Next",
+    "previous": "Previous",
+    "skip": "Skip"
+  },
+  "onboarding": {
+    "tell-about-us": {
+      "title": "Tell us about yourself",
+      "subtitle": "To provide a better experience and results we need to know your data.",
+      "gender-title": "Gender",
+      "birthdate-title": "How old are you?",
+      "birthdate-label": "Select your birth date",
+      "age-label": "Age",
+      "age-placeholder": "Your age",
+      "weight-title": "What is your weight?",
+      "weight-label": "Weight",
+      "weight-placeholder": "Enter your weight",
+      "height-title": "How tall are you?",
+      "height-label": "Height",
+      "height-placeholder": "Enter your height",
+      "save-success": "Information saved successfully",
+      "save-error": "Error saving information"
+    },
+    "select-goals": {
+      "title": "Select your goals",
+      "subtitle": "What are your goals?",
+      "goals-title": "What goals do you want to achieve?",
+      "goals-subtitle": "You can select up to 3 goals",
+      "info-text": "Select the goals that best describe what you want to achieve",
+      "save-success": "Goals saved successfully",
+      "save-error": "Error saving goals"
+    },
+    "select-level": {
+      "title": "Select your level",
+      "subtitle": "Physical activity level",
+      "level-title": "What is your current activity level?",
+      "level-subtitle": "This will help us personalize your experience",
+      "info-text": "Select the level that best describes your current physical activity",
+      "save-success": "Level saved successfully",
+      "save-error": "Error saving level"
+    },
+    "profile-setup": {
+      "title": "Complete your profile",
+      "subtitle": "Final details to finish",
+      "first-name": "First Name",
+      "first-name-placeholder": "Your first name",
+      "last-name": "Last Name",
+      "last-name-placeholder": "Your last name",
+      "nickname": "Nickname",
+      "nickname-placeholder": "Your nickname",
+      "profile-color": "Profile color",
+      "finish-button": "Finish registration",
+      "save-success": "Profile completed successfully",
+      "save-error": "Error completing profile"
+    },
+    "goals": {
+      "weight-loss": "Weight Loss",
+      "weight-loss-desc": "Reduce body fat and maintain a healthy weight",
+      "muscle-gain": "Muscle Gain",
+      "muscle-gain-desc": "Increase muscle mass and strength",
+      "endurance": "Endurance",
+      "endurance-desc": "Improve cardiovascular capacity and endurance",
+      "strength": "Strength",
+      "strength-desc": "Increase overall strength and power",
+      "flexibility": "Flexibility",
+      "flexibility-desc": "Improve mobility and body flexibility",
+      "general-fitness": "General Fitness",
+      "general-fitness-desc": "Maintain good overall physical condition"
+    },
+    "activity-level": {
+      "beginner": "Beginner",
+      "beginner-desc": "Little to no exercise, sedentary",
+      "intermediate": "Intermediate",
+      "intermediate-desc": "Moderate exercise 2-3 times per week",
+      "advanced": "Advanced",
+      "advanced-desc": "Intense exercise 4-6 times per week"
+    }
+  },
+  "genders": {
+    "male": "Male",
+    "female": "Female",
+    "other": "Prefer not to say"
+  },
+  "gender": {
+    "male": "Male",
+    "female": "Female",
+    "other": "Prefer not to say"
+  },
+  "error": {
+    "required": "This field is required",
+    "min-age": "You must be at least 13 years old",
+    "max-age": "Maximum allowed age: 100 years",
+    "min-selections": "You must select at least one option",
+    "max-selections": "Maximum {{count}} selections allowed",
+    "invalid-email": "Invalid email format",
+    "invalid-phone": "Invalid phone number"
+  },
+  "validation": {
+    "email-required": "Email is required",
+    "password-required": "Password is required",
+    "password-min-length": "Password must be at least 8 characters",
+    "confirm-password": "Confirm password",
+    "passwords-match": "Passwords do not match"
+  }
+}

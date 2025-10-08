@@ -1,0 +1,112 @@
+{
+  "common": {
+    "back": "Regresar",
+    "continue": "Continuar",
+    "accept": "Aceptar",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "finish": "Finalizar",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "skip": "Saltar"
+  },
+  "onboarding": {
+    "tell-about-us": {
+      "title": "Cuéntanos sobre ti",
+      "subtitle": "Para brindar una mejor experiencia y resultados necesitamos saber tus datos.",
+      "gender-title": "Género",
+      "birthdate-title": "¿Cuántos años tienes?",
+      "birthdate-label": "Selecciona tu fecha de nacimiento",
+      "age-label": "Edad",
+      "age-placeholder": "Tu edad",
+      "weight-title": "¿Cuál es tu peso?",
+      "weight-label": "Peso",
+      "weight-placeholder": "Ingrese su peso",
+      "height-title": "¿Cuánto mides?",
+      "height-label": "Estatura",
+      "height-placeholder": "Ingrese su estatura",
+      "save-success": "Información guardada exitosamente",
+      "save-error": "Error al guardar la información"
+    },
+    "select-goals": {
+      "title": "Selecciona tus objetivos",
+      "subtitle": "¿Cuáles son tus objetivos?",
+      "goals-title": "¿Qué objetivos quieres alcanzar?",
+      "goals-subtitle": "Puedes seleccionar máximo 3 objetivos",
+      "info-text": "Selecciona los objetivos que mejor describan lo que quieres lograr",
+      "save-success": "Objetivos guardados exitosamente",
+      "save-error": "Error al guardar objetivos"
+    },
+    "select-level": {
+      "title": "Selecciona tu nivel",
+      "subtitle": "Nivel de actividad física",
+      "level-title": "¿Cuál es tu nivel de actividad actual?",
+      "level-subtitle": "Esto nos ayudará a personalizar tu experiencia",
+      "info-text": "Selecciona el nivel que mejor describa tu actividad física actual",
+      "save-success": "Nivel guardado exitosamente",
+      "save-error": "Error al guardar nivel"
+    },
+    "profile-setup": {
+      "title": "Completa tu perfil",
+      "subtitle": "Últimos detalles para finalizar",
+      "first-name": "Nombre",
+      "first-name-placeholder": "Tu nombre",
+      "last-name": "Apellido",
+      "last-name-placeholder": "Tu apellido",
+      "nickname": "Nickname",
+      "nickname-placeholder": "Tu nickname",
+      "profile-color": "Color de perfil",
+      "finish-button": "Finalizar registro",
+      "save-success": "Perfil completado exitosamente",
+      "save-error": "Error al completar perfil"
+    },
+    "goals": {
+      "weight-loss": "Pérdida de peso",
+      "weight-loss-desc": "Reducir grasa corporal y mantener un peso saludable",
+      "muscle-gain": "Ganancia muscular",
+      "muscle-gain-desc": "Aumentar masa muscular y fuerza",
+      "endurance": "Resistencia",
+      "endurance-desc": "Mejorar capacidad cardiovascular y resistencia",
+      "strength": "Fuerza",
+      "strength-desc": "Aumentar fuerza general y potencia",
+      "flexibility": "Flexibilidad",
+      "flexibility-desc": "Mejorar movilidad y flexibilidad corporal",
+      "general-fitness": "Fitness general",
+      "general-fitness-desc": "Mantener una buena condición física general"
+    },
+    "activity-level": {
+      "beginner": "Principiante",
+      "beginner-desc": "Poco o nada de ejercicio, sedentario",
+      "intermediate": "Intermedio",
+      "intermediate-desc": "Ejercicio moderado 2-3 veces por semana",
+      "advanced": "Avanzado",
+      "advanced-desc": "Ejercicio intenso 4-6 veces por semana"
+    }
+  },
+  "genders": {
+    "male": "Masculino",
+    "female": "Femenino",
+    "other": "Prefiero no decir"
+  },
+  "gender": {
+    "male": "Hombre",
+    "female": "Mujer",
+    "other": "Prefiero no decir"
+  },
+  "error": {
+    "required": "Este campo es obligatorio",
+    "min-age": "Debes tener al menos 13 años",
+    "max-age": "Edad máxima permitida: 100 años",
+    "min-selections": "Debes seleccionar al menos una opción",
+    "max-selections": "Máximo {{count}} selecciones permitidas",
+    "invalid-email": "Formato de email inválido",
+    "invalid-phone": "Número de teléfono inválido"
+  },
+  "validation": {
+    "email-required": "El correo electrónico es obligatorio",
+    "password-required": "La contraseña es obligatoria",
+    "password-min-length": "La contraseña debe tener al menos 8 caracteres",
+    "confirm-password": "Confirmar contraseña",
+    "passwords-match": "Las contraseñas no coinciden"
+  }
+}

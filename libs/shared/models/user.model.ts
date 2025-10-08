@@ -21,6 +21,10 @@ export interface User {
   isoCode?: string;
   gender?: string;
   birthdate?: string;
+  age?: string;
+  weight?: string;
+  height?: string;
+  
 }
 
 export interface Category {

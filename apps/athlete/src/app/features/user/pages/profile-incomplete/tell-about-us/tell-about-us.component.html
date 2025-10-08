@@ -1,0 +1,117 @@
+<ion-content class="tell-about-us-content">
+  <app-layout-content customClass="tell-about-us-page" [useGoBack]="true" [title]="'common.back' | translate">
+    <ion-grid content-header>
+      <ion-row>
+        <ion-col>
+          <app-header [text]="'onboarding.tell-about-us.title' | translate | uppercase"
+            [subtext]="'onboarding.tell-about-us.subtitle' | translate"></app-header>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid content-body>
+      <form [formGroup]="form">
+
+        <!-- Selección de Género -->
+        <ion-row>
+          <ion-col size="12">
+            <div class="section-title">
+              <h3>{{ 'onboarding.tell-about-us.gender-title' | translate }}</h3>
+            </div>
+
+            <div class="gender-selector">
+              <app-radio-card-selector 
+                class="gender-selector"
+                [options]="genderOptions()" 
+                [value]="form.get('gender')?.value"
+                (valueChange)="onGenderChange($event)"
+                cardClass="gender-card">
+              </app-radio-card-selector>
+            </div>
+
+            <app-error-message [control]="$any(form.get('gender'))"></app-error-message>
+          </ion-col>
+        </ion-row>
+
+        <!-- Fecha de Nacimiento -->
+        <ion-row>
+          <ion-col size="12">
+            <div class="section-title">
+              <h3>{{ 'onboarding.tell-about-us.birthdate-title' | translate }}</h3>
+            </div>
+
+            <ion-item lines="none" class="birthdate-item">
+              <ion-label class="label">
+                {{ "onboarding.tell-about-us.birthdate-label" | translate }}
+              </ion-label>
+              <ion-datetime-button datetime="datetime" mode="md" slot="end"></ion-datetime-button>
+            </ion-item>
+
+            <ion-modal [keepContentsMounted]="true">
+              <ng-template>
+                <ion-datetime id="datetime" 
+                  mode="ios" presentation="date" [showDefaultButtons]="true"
+                  [doneText]="'common.accept' | translate"
+                  [cancelText]="'common.cancel' | translate"
+                  formControlName="birthdate" [max]="getMaxDate()"
+                  (ionChange)="onBirthdateChange()"></ion-datetime>
+              </ng-template>
+            </ion-modal>
+
+            <app-error-message [control]="$any(form.get('birthdate'))"></app-error-message>
+          </ion-col>
+        </ion-row>
+
+        <!-- Edad (calculada automáticamente) -->
+        <ion-row>
+          <ion-col size="12">
+            <ion-input formControlName="age" class="bb-input" [label]="'onboarding.tell-about-us.age-label' | translate" label-placement="floating"
+              fill="outline" [placeholder]="'onboarding.tell-about-us.age-placeholder' | translate" type="number" mode="md" readonly></ion-input>
+
+            <app-error-message [control]="$any(form.get('age'))"></app-error-message>
+          </ion-col>
+        </ion-row>
+
+        <!-- Ingrese su peso -->
+        <ion-row>
+          <ion-col size="12">
+            <div class="section-title">
+              <h3>{{ 'onboarding.tell-about-us.weight-title' | translate }}</h3>
+            </div>
+          </ion-col>
+          <ion-col size="12">
+            <ion-input formControlName="weight" class="bb-input" [label]="'onboarding.tell-about-us.weight-label' | translate" label-placement="floating"
+              fill="outline" [placeholder]="'onboarding.tell-about-us.weight-placeholder' | translate" type="number" mode="md" >
+              <span [slot]="'end'">kg</span>
+            </ion-input>
+            <app-error-message [control]="$any(form.get('weight'))"></app-error-message>
+          </ion-col>
+        </ion-row>
+
+                <!-- Ingrese su peso -->
+        <ion-row>
+          <ion-col size="12">
+            <div class="section-title">
+              <h3>{{ 'onboarding.tell-about-us.height-title' | translate }}</h3>
+            </div>
+          </ion-col>
+          <ion-col size="12">
+            <ion-input formControlName="height" class="bb-input" [label]="'onboarding.tell-about-us.height-label' | translate" label-placement="floating"
+              fill="outline" [placeholder]="'onboarding.tell-about-us.height-placeholder' | translate" type="number" mode="md" >
+              <span [slot]="'end'">cm</span>
+            </ion-input>
+            <app-error-message [control]="$any(form.get('height'))"></app-error-message>
+          </ion-col>
+        </ion-row>
+
+      </form>
+    </ion-grid>
+
+    <div content-footer class="ion-text-center">
+      <ion-button color="tertiary" class="bb-input" expand="block" shape="round"
+        [disabled]="false" (click)="onContinue()">
+        {{ "common.continue" | translate }}
+      </ion-button>
+    </div>
+  </app-layout-content>
+</ion-content>

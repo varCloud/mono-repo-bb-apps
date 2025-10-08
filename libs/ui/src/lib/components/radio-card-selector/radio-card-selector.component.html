@@ -1,0 +1,26 @@
+<div class="radio-card-container">
+  <div 
+    *ngFor="let option of options()" 
+    class="radio-card"
+    [class.selected]="value() === option.value"
+    [class.disabled]="disabled() || option.disabled"
+    [attr.data-gender]="option.value"
+    (click)="selectOption(option.value)">
+    
+    <div class="card-content">
+      <!-- Usar imagen si está disponible, sino usar icono -->
+      <img *ngIf="option.image" [src]="option.image" [alt]="option.label" class="card-image" />
+      <ion-icon *ngIf="option.icon && !option.image" [name]="option.icon"></ion-icon>
+      <span class="card-label">{{ option.label | translate }}</span>
+      <p *ngIf="option.description" class="card-description">{{ option.description | translate }}</p>
+    </div>
+    
+    <!-- Radio button oculto para mantener funcionalidad -->
+    <input 
+      type="radio" 
+      [value]="option.value" 
+      [checked]="value() === option.value"
+      [disabled]="disabled() || option.disabled"
+      style="display: none;">
+  </div>
+</div>
