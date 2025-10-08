@@ -24,7 +24,7 @@ export interface User {
   age?: string;
   weight?: string;
   height?: string;
-  
+  levelId?: number;
 }
 
 export interface Category {

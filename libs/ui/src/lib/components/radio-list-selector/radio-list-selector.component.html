@@ -1,21 +1,14 @@
-<ion-radio-group [value]="value()" (ionChange)="onSelectionChange($event)">
-  <ion-item 
+
+<div class="radio-list">
+  <div 
     *ngFor="let option of options()" 
-    [class]="itemClass()"
-    [disabled]="disabled() || option.disabled">
-    <ion-icon 
-      *ngIf="option.icon" 
-      [name]="option.icon" 
-      slot="start">
-    </ion-icon>
-    <ion-radio 
-      slot="start" 
-      [value]="option.value" 
-      [disabled]="disabled() || option.disabled">
-    </ion-radio>
-    <ion-label>
-      {{ option.label | translate }}
-      <p *ngIf="option.description">{{ option.description | translate }}</p>
-    </ion-label>
-  </ion-item>
-</ion-radio-group>
+    class="radio-option"
+    [class.selected]="value() === option.value"
+    [class.disabled]="disabled() || option.disabled"
+    (click)="!disabled() && !option.disabled && onSelectionChange({detail: {value: option.value}})">
+    
+    <div class="option-content">
+      <div class="option-title">{{ option.label | translate }}</div>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, effect, OnInit, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
@@ -10,15 +10,17 @@ import {
   IonGrid,
 } from '@ionic/angular/standalone';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { 
-  ErrorMessageComponent, 
-  HeaderComponent, 
+import {
+  ErrorMessageComponent,
+  HeaderComponent,
   LayoutContentComponent,
   RadioListSelectorComponent,
-  SelectOption 
+  SelectOption
 } from '@monorepo-bb-app/ui';
-import { ToastService } from '@monorepo-bb-app/shared';
-import { LoaderUIService } from '@monorepo-bb-app/core';
+import { CatalogsService, CatalogType, ToastService } from '@monorepo-bb-app/shared';
+import { LoaderUIService, SesionService } from '@monorepo-bb-app/core';
+import { UserService } from '../../../services/user.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-select-level',
@@ -41,44 +43,53 @@ import { LoaderUIService } from '@monorepo-bb-app/core';
   ],
 })
 export class SelectLevelComponent implements OnInit {
-  
-  isLoading = signal(false);
-  
+
   form = this._fb.group({
     activityLevel: ['', Validators.required],
   });
-
-  // Opciones de nivel de actividad usando nuestro componente genérico
-  activityLevelOptions = signal<SelectOption[]>([
-    {
-      value: 'beginner',
-      label: 'onboarding.activity-level.beginner',
-      description: 'onboarding.activity-level.beginner-desc'
-    },
-    {
-      value: 'intermediate',
-      label: 'onboarding.activity-level.intermediate',
-      description: 'onboarding.activity-level.intermediate-desc'
-    },
-    {
-      value: 'advanced',
-      label: 'onboarding.activity-level.advanced',
-      description: 'onboarding.activity-level.advanced-desc'
-    }
-  ]);
-
+  activityLevelOptions = signal<SelectOption[]>([]);
   constructor(
     private _fb: FormBuilder,
     private _router: Router,
     private _toast: ToastService,
     private _translate: TranslateService,
     private _loader: LoaderUIService,
-  ) {}
-
-  ngOnInit() {}
+    private _catalogsService: CatalogsService,
+    private _userService: UserService,
+    private _sessionService: SesionService,
+  ) {
+    effect(() => {
+      this._sessionService.user$()
+    })
+  }
+  ngOnInit() {
+    this.getActivityLevel();
+  }
 
   onActivityLevelChange(selectedLevel: any): void {
     this.form.patchValue({ activityLevel: selectedLevel });
+  }
+
+  private getActivityLevel() {
+    this._loader.showLoader();
+    this._catalogsService.getCatalog(CatalogType.DIFFICULTY_LEVELS).subscribe({
+      next: (levels: any) => {
+        this._loader.hideLoader();
+        this.activityLevelOptions.set(levels.map(level => ({
+          label: level.description,
+          value: level.levelId,
+
+        })));
+      },
+      error: (error) => {
+        console.error('Error loading activity levels', error);
+        this._loader.hideLoader();
+        this._toast.error(
+          this._translate.instant('onboarding.select-level.load-error'),
+          { duration: 1000 }
+        );
+      }
+    });
   }
 
   async onContinue() {
@@ -87,27 +98,21 @@ export class SelectLevelComponent implements OnInit {
       return;
     }
 
-    this.isLoading.set(true);
-
     try {
-      // Aquí puedes guardar los datos en un servicio temporal
-      // await this.onboardingService.saveActivityLevel(this.form.value);
-      
-      this._toast.success(
-        this._translate.instant('onboarding.select-level.save-success'),
-        { duration: 1000 }
-      );
-      
-      // Navegar a la siguiente pantalla
-      this._router.navigate(['/profile-incomplete/profile-setup']);
-      
+      this._loader.showLoader();
+      const payload = { levelId: Number(this.form.value.activityLevel) };
+      this._userService.updateUser(this._sessionService.user$().userId, payload).pipe(take(1)).subscribe(response => {
+        this._loader.hideLoader();
+        this._toast.success(this._translate.instant('onboarding.select-level.save-success'));
+        this._router.navigate(['/profile-incomplete/profile-setup']);
+      });
+
     } catch (error) {
+      console.error('Error saving activity level:', error);
+      this._loader.hideLoader();
       this._toast.error(
-        this._translate.instant('onboarding.select-level.save-error'),
-        { duration: 1000 }
+        this._translate.instant('onboarding.select-level.save-error')
       );
-    } finally {
-      this.isLoading.set(false);
     }
   }
 }

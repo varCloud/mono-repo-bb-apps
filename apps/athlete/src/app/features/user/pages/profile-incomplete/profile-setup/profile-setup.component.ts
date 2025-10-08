@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import {
   Component,
+  effect,
   ElementRef,
   OnInit,
   signal,
@@ -19,27 +20,28 @@ import {
   IonLabel,
 } from '@ionic/angular/standalone';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import {  
-  AvatarPickerComponent, 
-  ErrorMessageComponent, 
-  HeaderComponent, 
-  InputPhoneComponent, 
-  LayoutContentComponent 
+import {
+  AvatarPickerComponent,
+  ErrorMessageComponent,
+  HeaderComponent,
+  InputPhoneComponent,
+  LayoutContentComponent
 } from '@monorepo-bb-app/ui';
-import { 
-  CompleteResultUpload, 
-  CONSTANTS, 
-  COUNTRY_CODES, 
-  Countrycode, 
-  guessFileType, 
-  ToastService 
+import {
+  CompleteResultUpload,
+  CONSTANTS,
+  COUNTRY_CODES,
+  Countrycode,
+  guessFileType,
+  ToastService
 } from '@monorepo-bb-app/shared';
-import { finalize } from 'rxjs';
+import { finalize, take } from 'rxjs';
 import { Photo } from '@capacitor/camera';
-import { 
-  LoaderUIService, 
-  UploadService, 
-  UserService 
+import {
+  LoaderUIService,
+  SesionService,
+  UploadService,
+  UserService
 } from '@monorepo-bb-app/core';
 
 @Component({
@@ -67,17 +69,16 @@ import {
   ],
 })
 export class ProfileSetupComponent implements OnInit {
-  
+
   @ViewChild('colorPicker') colorPicker!: ElementRef;
-  
+
   isLoading = signal(false);
   isoCode = signal<string>('+52');
-  
+
   form = this._fb.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     phone: ['', Validators.required],
-    profileColor: ['#000', Validators.required],
     nickName: ['', Validators.required],
   });
 
@@ -91,21 +92,18 @@ export class ProfileSetupComponent implements OnInit {
     private _translate: TranslateService,
     private _uploadService: UploadService,
     private _loader: LoaderUIService,
-  ) {}
+    private _sessionService: SesionService,
+  ) {
 
-  ngOnInit() {
-    // Inicializar con color por defecto
-    this.form.patchValue({
-      profileColor: CONSTANTS.USER_DEFAULT_COLOR || '#000'
-    });
+    effect(() => {
+      this._sessionService.user$()
+    })
   }
+
+  ngOnInit() { }
 
   async onImageSelected(image: any) {
     this.imageProfile = image;
-  }
-
-  openColorPicker() {
-    this.colorPicker.nativeElement.click();
   }
 
   onMaskSelected(mask: Countrycode) {
@@ -130,40 +128,31 @@ export class ProfileSetupComponent implements OnInit {
       console.error('Error uploading image:', error);
     }
 
-    const payload = {
-      firstName: this.form.value.firstName || '',
-      lastName: this.form.value.lastName || '',
-      profileColor: this.form.value.profileColor || CONSTANTS.USER_DEFAULT_COLOR,
-      nickName: this.form.value.nickName || '',
-      phone: this.form.value.phone ?? '',
-      isoCode: this.isoCode(),
-      profilePictureUrl: imageUrl,
-      // Aquí también puedes incluir los datos del onboarding previo
-      // gender: onboardingData.gender,
-      // birthdate: onboardingData.birthdate,
-      // goals: onboardingData.goals,
-      // activityLevel: onboardingData.activityLevel,
-    };
+
 
     try {
-      // En athlete, esto podría crear la cuenta final
-      // await this.onboardingService.completeOnboarding(payload);
-      
-      this._toast.success(
-        this._translate.instant('onboarding.profile-setup.save-success'),
-        { duration: 1000 }
-      );
-      
-      // Navegar al home o dashboard del athlete
-      this._router.navigate(['/home']);
-      
+      this._loader.showLoader();
+      const payload = {
+        firstName: this.form.value.firstName || '',
+        lastName: this.form.value.lastName || '',
+        nickName: this.form.value.nickName || '',
+        phone: this.form.value.phone ?? '',
+        isoCode: this.isoCode(),
+        profilePictureUrl: imageUrl,
+      };
+
+      this._userService.updateUser(this._sessionService.user$().userId, payload).pipe(
+        finalize(() => this._loader.hideLoader()),
+        take(1)
+      ).subscribe(response => {
+        this._loader.hideLoader();
+        this._toast.success(this._translate.instant('onboarding.profile-setup.save-success'));
+        this._router.navigate(['/home']);
+      });
     } catch (error) {
-      this._toast.error(
-        this._translate.instant('onboarding.profile-setup.save-error'),
-        { duration: 1000 }
-      );
-    } finally {
       this._loader.hideLoader();
+      this._toast.error(
+        this._translate.instant('onboarding.profile-setup.save-error'));
     }
   }
 

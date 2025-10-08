@@ -58,7 +58,8 @@
       "profile-color": "Color de perfil",
       "finish-button": "Finalizar registro",
       "save-success": "Perfil completado exitosamente",
-      "save-error": "Error al completar perfil"
+      "save-error": "Error al completar perfil",
+      "phone-label": "Número de celular"
     },
     "activity-level": {
       "beginner": "Principiante",
