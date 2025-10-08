@@ -21,6 +21,7 @@ export * from './lib/components/skeleton/list-skeleton/list-skeleton.component';
 export * from './lib/components/catalog-select/catalog-select.component';
 export * from './lib/components/add-recorded-class/add-recorded-class.component';
 export * from './lib/components/routine-form/routine-form.component';
+export * from './lib/components/card-list/card-list.component';
 
 export * from './lib/components/payment-frequency-settings/payment-frequency-settings.component';
 export * from './lib/components/reset-password-form/reset-password-form/reset-password-form.component';
