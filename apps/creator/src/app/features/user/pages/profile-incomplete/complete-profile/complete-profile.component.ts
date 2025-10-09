@@ -160,15 +160,8 @@ export class CompleteProfileComponent implements OnInit {
       .subscribe({
         next: () => {
           this._toast.success(
-            this._translate.instant('create-account-profile.save-success'),
-            {
-              duration: 1000,
-            },
-          );
-          this._localStorage.set(
-            KEY_LOCALSTORAGE.HAS_NULL_PROFILE_FIELDS,
-            false,
-          );
+          this._translate.instant('create-account-profile.save-success'),{ duration: 1000,},);
+          this._localStorage.set( KEY_LOCALSTORAGE.HAS_NULL_PROFILE_FIELDS,false);
           this._router.navigate(['/home']);
         },
         error: (err) => {

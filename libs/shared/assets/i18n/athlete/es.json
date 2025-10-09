@@ -10,6 +10,55 @@
     "previous": "Anterior",
     "skip": "Saltar"
   },
+  "go-back": "Regresar",
+  "login": {
+    "errors": {
+      "email-required": "El correo electrónico es obligatorio",
+      "invalid-credentials": "Correo electrónico y/o contraseña incorrectos",
+      "password-required": "La contraseña es obligatoria"
+    },
+    "forgot-password": "Olvidé mi contraseña",
+    "login": "Iniciar sesión",
+    "login-with": "Iniciar sesión con",
+    "no-account": "¿No tienes una cuenta?",
+    "recover-password": "Recupera tu contraseña",
+    "register": "Regístrate",
+    "welcome-user": "¡TE DAMOS LA BIENVENIDA!"
+  },
+  "forgot-password": {
+    "email-placeholder": "Escribe tu correo electrónico",
+    "send-link": "Enviar enlace de recuperación",
+    "subtitle": "Ingresa el correo electrónico al que enviaremos el código de verificación",
+    "title": "Olvidé mi contraseña"
+  },
+  "formErrors": {
+    "duplicate": "El valor ya existe",
+    "email": "El correo electrónico no es válido",
+    "max": "El valor debe ser menor o igual a {{max}}",
+    "maxlength": "El campo no puede tener más de {{maxlength}} caracteres",
+    "min": "El valor debe ser mayor o igual a {{min}}",
+    "minlength": "El campo debe tener al menos {{minlength}} caracteres",
+    "pattern": "El formato del campo no es válido",
+    "required": "Este campo es obligatorio",
+    "unique": "El valor debe ser único",
+    "zero": "El valor no puede ser cero",
+    "invalidUrl": "El valor debe ser una URL válida"
+  },
+  "reset-password": {
+    "confirm-password": "Confirmar contraseña",
+    "confirm-password-required": "La confirmación de la contraseña es obligatoria",
+    "new-password": "Nueva contraseña",
+    "password-min-length": "La contraseña debe tener al menos 6 caracteres",
+    "password-pattern": "La contraseña debe contener al menos una mayúscula, una minúscula y un número",
+    "password-required": "La contraseña es obligatoria",
+    "password-reset-failed": "Error al restablecer la contraseña",
+    "password-reset-success": "Contraseña restablecida exitosamente. Por favor, inicia sesión con tu nueva contraseña.",
+    "passwords-do-not-match": "Las contraseñas no coinciden",
+    "passwords-mismatch": "Las contraseñas no coinciden",
+    "reset-password": "Crear nueva contraseña",
+    "subtitle": "Ingresa tu nueva contraseña",
+    "title": "Restablecer contraseña"
+  },
   "onboarding": {
     "tell-about-us": {
       "title": "Cuéntanos sobre ti",
@@ -87,7 +136,15 @@
     "min-selections": "Debes seleccionar al menos una opción",
     "max-selections": "Máximo {{count}} selecciones permitidas",
     "invalid-email": "Formato de email inválido",
-    "invalid-phone": "Número de teléfono inválido"
+    "invalid-phone": "Número de teléfono inválido",
+    "default": "Ha ocurrido un error inesperado",
+    "email-required": "El correo electrónico es obligatorio",
+    "error-processing": "Error al procesar la solicitud. Por favor, inténtalo de nuevo más tarde.",
+    "max-categories-selected": "Puedes seleccionar hasta {{limit}} categorías",
+    "network": "Error de red. Por favor, verifica tu conexión a Internet.",
+    "not-found": "No se encontró el recurso solicitado.",
+    "password-required": "La contraseña es obligatoria",
+    "unauthorized": "No autorizado. Por favor, inicia sesión nuevamente."
   },
   "validation": {
     "email-required": "El correo electrónico es obligatorio",
@@ -95,5 +152,21 @@
     "password-min-length": "La contraseña debe tener al menos 8 caracteres",
     "confirm-password": "Confirmar contraseña",
     "passwords-match": "Las contraseñas no coinciden"
+  },
+   "user-create-account": {
+    "have-account": "¿Tienes una cuenta?",
+    "title": "Crear cuenta como creador",
+    "create-account": "Crear cuenta",
+    "create-account-success": "Cuenta creada exitosamente"
+  },
+  "mail": "Correo electrónico",
+  "mail-placeholder": "Escribe un correo electrónico",
+  "password": "Contraseña",
+    "otp": {
+    "not-received": "¿Aún no lo has recibido?",
+    "resend": "Reenviar código",
+    "subtitle": "Se ha enviado un código a tu correo {{email}}",
+    "title": "Ingresa el código de confirmación",
+    "valid":" El código es válido"
   }
 }

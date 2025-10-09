@@ -33,12 +33,14 @@ import {
   COUNTRY_CODES,
   Countrycode,
   guessFileType,
+  KEY_LOCALSTORAGE,
   ToastService
 } from '@monorepo-bb-app/shared';
 import { finalize, take } from 'rxjs';
 import { Photo } from '@capacitor/camera';
 import {
   LoaderUIService,
+  LocalStorageService,
   SesionService,
   UploadService,
   UserService
@@ -93,6 +95,7 @@ export class ProfileSetupComponent implements OnInit {
     private _uploadService: UploadService,
     private _loader: LoaderUIService,
     private _sessionService: SesionService,
+    private _localStorage: LocalStorageService,
   ) {
 
     effect(() => {
@@ -146,6 +149,7 @@ export class ProfileSetupComponent implements OnInit {
         take(1)
       ).subscribe(response => {
         this._loader.hideLoader();
+        this._localStorage.set(KEY_LOCALSTORAGE.HAS_NULL_PROFILE_FIELDS,false);
         this._toast.success(this._translate.instant('onboarding.profile-setup.save-success'));
         this._router.navigate(['/home']);
       });

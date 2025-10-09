@@ -6,6 +6,7 @@ export * from './lib/components/card/card.component';
 export * from './lib/components/categories-select/categories-select.component';
 export * from './lib/components/country-code-select/country-code-select.component';
 export * from './lib/components/cover-upload/cover-upload.component';
+export * from './lib/components/create-account-form/create-account-form.component';
 export * from './lib/components/currency/currency.component';
 export * from './lib/components/email-input-form/email-input-form.component';
 export * from './lib/components/error-message/error-message.component';

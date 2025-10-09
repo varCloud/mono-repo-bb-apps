@@ -6,6 +6,7 @@ import {
   IonCol,
   IonRow,
   IonText,
+  IonButton,
 } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
 import { HeaderComponent, LayoutContentComponent, CreateAccountFormComponent } from '@monorepo-bb-app/ui';
@@ -21,6 +22,7 @@ import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
   styleUrls: ['./create-account.component.scss'],
   imports: [
     IonText,
+    IonButton,
     IonRow,
     IonCol,
     IonGrid,
@@ -34,7 +36,7 @@ import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
   ],
 })
 export class CreateAccountComponent implements OnInit {
-  public userType = ENUM_TYPE_USER.CREATOR;
+  public userType = ENUM_TYPE_USER.ATHLETE;
 
   constructor(
     private createAccountService: CreateAccountService,

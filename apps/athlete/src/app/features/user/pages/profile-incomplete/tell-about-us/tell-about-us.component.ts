@@ -142,7 +142,7 @@ export class TellAboutUsComponent implements OnInit {
     this._loader.showLoader();
     try {
       const payload = {
-        gender: this.form.value.gender,
+        genderId: Number(this.form.value.gender),
         birthdate: this.form.value.birthdate,
         age: this.form.get('age')?.value.toString(),
         weight: this.form.value.weight.toString(),

@@ -99,7 +99,8 @@
     "not-received": "¿Aún no lo has recibido?",
     "resend": "Reenviar código",
     "subtitle": "Se ha enviado un código a tu correo {{email}}",
-    "title": "Ingresa el código de confirmación"
+    "title": "Ingresa el código de confirmación",
+    "valid":" El código es válido"
   },
   "password": "Contraseña",
   "payment-frequency": {
@@ -138,7 +139,9 @@
   },
   "user-create-account": {
     "have-account": "¿Tienes una cuenta?",
-    "title": "Crear cuenta como creador"
+    "title": "Crear cuenta como creador",
+    "create-account": "Crear cuenta",
+    "create-account-success": "Cuenta creada exitosamente"
   },
   "username": "Nombre de usuario",
   "validate-otp": {
