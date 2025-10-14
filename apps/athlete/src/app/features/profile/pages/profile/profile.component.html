@@ -17,40 +17,15 @@
               <span class="title">{{ this.sesionService.user$()?.nickName}}</span>
               <span class="subtitle">{{ this.sesionService.user$()?.email}}</span>
             </div>
-            <div class="container-messges">
-              <ion-button
-                [size]="'small'"
-                fill="outline"
-                (click)="onMenuItemClick('messages')"
-              >
-                <ion-icon
-                  slot="start"
-                  [name]="'chatbox-ellipses-outline'"
-                ></ion-icon>
-                Mensajes
-              </ion-button>
-            </div>
           </div>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
           <div class="container-link">
-            <div class="container-link-info">
-              <span class="title">Mi enlace</span>
-              <span class="subtitle"
-                >Boodybooster.com/Mariel-numero-de-usuario</span
-              >
-            </div>
-
-            <div class="container-link-button">
-              <ion-button
-                [size]="'small'"
-                fill="clear"
-                (click)="onMenuItemClick('messages')"
-              >
-                <ion-icon slot="start" [name]="'copy-outline'"></ion-icon>
-              </ion-button>
+            <div class="container-card" *ngFor="let item of menuOptions"  (click)="onMenuItemClick(item.action)" >
+              <img [src]="item.icon" alt="{{ item.name }}">
+              <span>{{ item.name }}</span>
             </div>
           </div>
         </ion-col>

@@ -117,4 +117,8 @@ export class OtpCreateAccountComponent implements OnInit {
         this._toastService.error(errorMessage);
         this._router.navigate(['/login']);
     }
+
+    public get userTypeId(): number {
+        return ENUM_TYPE_USER.CREATOR; // Creator
+    }
 }

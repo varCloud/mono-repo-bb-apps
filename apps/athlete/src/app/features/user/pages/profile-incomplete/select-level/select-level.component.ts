@@ -20,6 +20,7 @@ import {
 import { CatalogsService, CatalogType, ToastService } from '@monorepo-bb-app/shared';
 import { LoaderUIService, SesionService } from '@monorepo-bb-app/core';
 import { UserService } from '../../../services/user.service';
+import { OnboardingStateService } from '../../../services/onboarding-state.service';
 import { take } from 'rxjs';
 
 @Component({
@@ -57,6 +58,7 @@ export class SelectLevelComponent implements OnInit {
     private _catalogsService: CatalogsService,
     private _userService: UserService,
     private _sessionService: SesionService,
+    private _onboardingStateService: OnboardingStateService,
   ) {
     effect(() => {
       this._sessionService.user$()
@@ -64,6 +66,14 @@ export class SelectLevelComponent implements OnInit {
   }
   ngOnInit() {
     this.getActivityLevel();
+    this.loadSavedData();
+  }
+
+  private loadSavedData() {
+    const savedData = this._onboardingStateService.getSelectLevelData();
+    if (Object.keys(savedData).length > 0 && savedData.activityLevel) {
+      this.form.patchValue({ activityLevel: savedData.activityLevel });
+    }
   }
 
   onActivityLevelChange(selectedLevel: any): void {
@@ -97,6 +107,12 @@ export class SelectLevelComponent implements OnInit {
       this.form.markAllAsTouched();
       return;
     }
+
+    // Guardar datos en el servicio de estado antes de enviar
+    const formData = {
+      activityLevel: this.form.value.activityLevel,
+    };
+    this._onboardingStateService.setSelectLevelData(formData);
 
     try {
       this._loader.showLoader();

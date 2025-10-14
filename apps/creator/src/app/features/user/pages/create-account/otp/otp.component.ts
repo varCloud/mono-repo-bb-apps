@@ -18,6 +18,7 @@ import { API_URLS } from '@monorepo-bb-app/shared';
 import { LoginService } from '@monorepo-bb-app/core';
 import { ToastService } from '@monorepo-bb-app/shared';
 import { LoaderUIService } from '@monorepo-bb-app/core';
+import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
 
 @Component({
   selector: 'app-create-account-otp',
@@ -77,6 +78,7 @@ export class OtpCreateAccountComponent implements OnInit {
           .login({
             email: user.email,
             password: user.passwordHash,
+            userType:ENUM_TYPE_USER.CREATOR
           })
           .subscribe({
             next: (userResponse) => {

@@ -20,6 +20,7 @@ import {
 import { CatalogsService, CatalogType, SaveGoalsRequest, ToastService } from '@monorepo-bb-app/shared';
 import { LoaderUIService, SesionService } from '@monorepo-bb-app/core';
 import { UserService } from '../../../services/user.service';
+import { OnboardingStateService } from '../../../services/onboarding-state.service';
 import { take } from 'rxjs';
 
 @Component({
@@ -45,11 +46,11 @@ import { take } from 'rxjs';
 export class SelectGoalsComponent implements OnInit {
 
 
+  public maxGoalsSelection = 3;
   public form = this._fb.group({
-    goals: this._fb.control<any[]>([], [Validators.required, Validators.minLength(3)]),
+    goals: this._fb.control<any[]>([], [Validators.required, Validators.minLength(this.maxGoalsSelection)]),
   });
   public goalsOptions = signal<SelectOption[]>([]);
-  public maxGoalsSelection = 3;
 
   get goals() {
     return this.form.get('goals');
@@ -65,6 +66,7 @@ export class SelectGoalsComponent implements OnInit {
     private _catalogsService: CatalogsService,
     private _userService: UserService,
     private _sessionService: SesionService,
+    private _onboardingStateService: OnboardingStateService,
   ) {
 
     effect(() => {
@@ -74,6 +76,14 @@ export class SelectGoalsComponent implements OnInit {
 
   ngOnInit() {
     this.getGoalsOptions();
+    this.loadSavedData();
+  }
+
+  private loadSavedData() {
+    const savedData = this._onboardingStateService.getSelectGoalsData();
+    if (Object.keys(savedData).length > 0 && savedData.goals) {
+      this.form.patchValue({ goals: savedData.goals });
+    }
   }
 
   onGoalsChange(selectedGoals: any[]): void {
@@ -100,6 +110,12 @@ export class SelectGoalsComponent implements OnInit {
       this.form.markAllAsTouched();
       return;
     }
+
+    // Guardar datos en el servicio de estado antes de enviar
+    const formData = {
+      goals: this.form.value.goals,
+    };
+    this._onboardingStateService.setSelectGoalsData(formData);
 
     try {
       this._loader.showLoader();

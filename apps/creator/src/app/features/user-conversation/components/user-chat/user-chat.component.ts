@@ -45,14 +45,6 @@ export class UserChatComponent implements OnInit {
   newMessage: string = '';
 
   ngOnInit() {
-    // Initialize with mock data if no data is provided
-    // if (this.messages.length === 0) {
-    //   this.messages = mockMessages;
-    // }
-    // if (!this.userInfo) {
-    //   this.userInfo = mockUser;
-    // }
-
     this.getMessages();
   }
 

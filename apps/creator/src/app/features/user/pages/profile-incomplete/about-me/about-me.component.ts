@@ -15,7 +15,7 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastService } from '@monorepo-bb-app/shared';
 import { UserService } from '../../../services/user.service';
 import { finalize } from 'rxjs';
-import { SesionService } from '@monorepo-bb-app/core';
+import { LoaderUIService, SesionService } from '@monorepo-bb-app/core';
 
 @Component({
   selector: 'app-about-me',
@@ -44,6 +44,7 @@ export class AboutMeComponent implements OnInit {
     private _userService: UserService,
     private _translate: TranslateService,
     public _sesionService: SesionService,
+     private readonly _loaderUIService: LoaderUIService
   ) {
     effect(() => {
       this.bio.setValue(this._sesionService.user$()?.bio || '');
@@ -57,12 +58,16 @@ export class AboutMeComponent implements OnInit {
       return;
     }
     const bio = this.bio.value ?? '';
+    this._loaderUIService.showLoader();
     this.isLoading.set(true);
     this._userService
       .updateUser(this._sesionService.user$()?.userId || 0, {
         bio,
       })
-      .pipe(finalize(() => this.isLoading.set(false)))
+      .pipe(finalize(() => {
+        this.isLoading.set(false);
+        this._loaderUIService.hideLoader();
+      }))
       .subscribe({
         next: () => {
           this._toast.success(

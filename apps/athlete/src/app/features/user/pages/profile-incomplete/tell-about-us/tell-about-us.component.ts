@@ -25,7 +25,7 @@ import {
 } from '@monorepo-bb-app/ui';
 import { ToastService, User } from '@monorepo-bb-app/shared';
 import { LoaderUIService, SesionService, UserService } from '@monorepo-bb-app/core';
-import { OnboardingService } from '../../../services/onboarding.service';
+import { OnboardingStateService } from '../../../services/onboarding-state.service';
 import { take } from 'rxjs';
 
 @Component({
@@ -74,7 +74,8 @@ export class TellAboutUsComponent implements OnInit {
     private _translate: TranslateService,
     private _loader: LoaderUIService,
     private _userService: UserService,
-    private _sesionService: SesionService) {
+    private _sesionService: SesionService,
+    private _onboardingStateService: OnboardingStateService) {
     effect(() => {
       this.userSesion = this._sesionService.user$()!;
       console.log(this.genderOptions());
@@ -87,6 +88,32 @@ export class TellAboutUsComponent implements OnInit {
     });
     this.onBirthdateChange();
     this.loadGenderOptions();
+    this.loadSavedData();
+  }
+
+  private loadSavedData() {
+    const savedData = this._onboardingStateService.getTellAboutUsData();
+    if (Object.keys(savedData).length > 0) {
+      // Convertir los datos guardados al formato esperado por el formulario
+      const formData = {
+        gender: savedData.gender || '',
+        birthdate: savedData.birthdate || this.getMaxDate(),
+        weight: savedData.weight || '',
+        height: savedData.height || '',
+      };
+      
+      this.form.patchValue(formData);
+      
+      // Si hay edad guardada, la establecemos
+      if (savedData.age) {
+        this.form.get('age')?.setValue(savedData.age);
+      }
+      
+      // Recalcular edad si hay fecha de nacimiento
+      if (savedData.birthdate) {
+        this.onBirthdateChange();
+      }
+    }
   }
 
   private loadGenderOptions() {
@@ -138,6 +165,16 @@ export class TellAboutUsComponent implements OnInit {
       this.form.markAllAsTouched();
       return;
     }
+
+    // Guardar datos en el servicio de estado antes de enviar
+    const formData = {
+      gender: this.form.value.gender?.toString(),
+      birthdate: this.form.value.birthdate,
+      age: this.form.get('age')?.value?.toString(),
+      weight: this.form.value.weight?.toString(),
+      height: this.form.value.height?.toString(),
+    };
+    this._onboardingStateService.setTellAboutUsData(formData);
 
     this._loader.showLoader();
     try {

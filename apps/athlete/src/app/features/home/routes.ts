@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
-
 import { authGuard } from '@monorepo-bb-app/core';
-
+import { profileRoutes } from '../profile/profile.routes';
 
 export const homeRoutes: Routes = [
   {
@@ -9,7 +8,9 @@ export const homeRoutes: Routes = [
     canActivate: [authGuard],
     loadComponent: () =>
       import('./pages/home/home.component').then((m) => m.HomeComponent),
-    // children: [
+    children: [
+      ...profileRoutes,
+    ]
     //   {
     //     path: '',
     //     redirectTo: '/home/training',

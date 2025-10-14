@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { ToastService } from '@monorepo-bb-app/shared';
+import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
 
 @Component({
   selector: 'app-reset-password',
@@ -45,4 +46,8 @@ export class ResetPasswordComponent implements OnInit {
       );
     }
   }
+
+    public get userTypeId(): number {
+      return ENUM_TYPE_USER.ATHLETE; // Athlete
+    }
 }

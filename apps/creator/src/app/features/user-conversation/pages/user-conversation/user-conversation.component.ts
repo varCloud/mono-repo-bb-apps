@@ -2,14 +2,15 @@ import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { HeaderSearchComponent, LayoutContentComponent
+import { ConversationListComponent, HeaderSearchComponent, LayoutContentComponent
 
  } from '@monorepo-bb-app/ui';
 
-import { ConversationListComponent } from '../../components/conversation-list/conversation-list.component';
+
 import { ModalController, IonicModule } from '@ionic/angular';
-import { UserConversationModalComponent } from '../../components/user-conversation-modal/user-conversation-modal.component';
+
 import { Router } from '@angular/router';
+import { UserConversationModalComponent } from 'libs/ui/src/lib/components/user-conversation-modal/user-conversation-modal.component';
 
 @Component({
   selector: 'app-user-conversation',

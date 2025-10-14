@@ -45,6 +45,7 @@ import {
   UploadService,
   UserService
 } from '@monorepo-bb-app/core';
+import { OnboardingStateService } from '../../../services/onboarding-state.service';
 
 @Component({
   selector: 'app-profile-setup',
@@ -96,6 +97,7 @@ export class ProfileSetupComponent implements OnInit {
     private _loader: LoaderUIService,
     private _sessionService: SesionService,
     private _localStorage: LocalStorageService,
+    private _onboardingStateService: OnboardingStateService,
   ) {
 
     effect(() => {
@@ -103,7 +105,16 @@ export class ProfileSetupComponent implements OnInit {
     })
   }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.loadSavedData();
+  }
+
+  private loadSavedData() {
+    const savedData = this._onboardingStateService.getProfileSetupData();
+    if (Object.keys(savedData).length > 0) {
+      this.form.patchValue(savedData);
+    }
+  }
 
   async onImageSelected(image: any) {
     this.imageProfile = image;
@@ -119,6 +130,15 @@ export class ProfileSetupComponent implements OnInit {
       return;
     }
 
+    // Guardar datos en el servicio de estado antes de enviar
+    const formData = {
+      firstName: this.form.value.firstName,
+      lastName: this.form.value.lastName,
+      nickName: this.form.value.nickName,
+      phone: this.form.value.phone,
+    };
+    this._onboardingStateService.setProfileSetupData(formData);
+
     this._loader.showLoader();
 
     let imageUrl = '';
@@ -131,8 +151,6 @@ export class ProfileSetupComponent implements OnInit {
       console.error('Error uploading image:', error);
     }
 
-
-
     try {
       this._loader.showLoader();
       const payload = {
@@ -142,6 +160,7 @@ export class ProfileSetupComponent implements OnInit {
         phone: this.form.value.phone ?? '',
         isoCode: this.isoCode(),
         profilePictureUrl: imageUrl,
+        pushNotificationToken: await this._localStorage.get(KEY_LOCALSTORAGE.TOKEN_PUSH) || '',
       };
 
       this._userService.updateUser(this._sessionService.user$().userId, payload).pipe(
@@ -150,6 +169,8 @@ export class ProfileSetupComponent implements OnInit {
       ).subscribe(response => {
         this._loader.hideLoader();
         this._localStorage.set(KEY_LOCALSTORAGE.HAS_NULL_PROFILE_FIELDS,false);
+        // Limpiar el estado del onboarding al completar exitosamente
+        this._onboardingStateService.clearOnboardingState();
         this._toast.success(this._translate.instant('onboarding.profile-setup.save-success'));
         this._router.navigate(['/home']);
       });

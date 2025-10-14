@@ -13,6 +13,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CONSTANTS } from '@monorepo-bb-app/shared';
 import { PATTERNS } from '@monorepo-bb-app/shared';
 import { ForgotPasswordService, LoaderService } from '@monorepo-bb-app/core';
+import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
 
 @Component({
   selector: 'app-reset-password-form',
@@ -28,6 +29,7 @@ import { ForgotPasswordService, LoaderService } from '@monorepo-bb-app/core';
 })
 export class ResetPasswordFormComponent implements OnInit {
   public email = input.required<string>();
+  public userTypeId = input<number>(ENUM_TYPE_USER.PROSPECT);
   public resetPasswordForm: FormGroup;
   public resetSuccess = output<boolean>();
   constructor(
@@ -77,7 +79,7 @@ export class ResetPasswordFormComponent implements OnInit {
       const Payload = {
         email: this.email(),
         newPassword: formValue.password,
-        userTypeId: CONSTANTS.USER_TYPE_ID,
+        userTypeId: this.userTypeId(),
       };
 
       this.forgotPasswordService.resetPassword(Payload).subscribe(
