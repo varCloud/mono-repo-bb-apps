@@ -6,6 +6,7 @@ import {
   heart,
   search,
   notifications,
+  filterCircleOutline,
 } from 'ionicons/icons';
 import {
   IonIcon,
@@ -17,9 +18,10 @@ import {
   IonRow,
   IonInfiniteScroll,
   IonInfiniteScrollContent,
+  ModalController,
 } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
-import { CardListComponent } from '@monorepo-bb-app/ui';
+import { CardListComponent, FilterComponent } from '@monorepo-bb-app/ui';
 import {
   Paginator,
   ToastService,
@@ -27,7 +29,7 @@ import {
   WorkoutService,
 } from '@monorepo-bb-app/shared';
 import { LoaderUIService } from '@monorepo-bb-app/core';
-import { finalize } from 'rxjs';
+import { MODAL_RESPONSE } from 'libs/shared/constants/enums';
 
 @Component({
   selector: 'app-home',
@@ -53,19 +55,27 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private _workoutService: WorkoutService,
     private _loader: LoaderUIService,
-    private _toastService: ToastService
+    private _toastService: ToastService,
+    private modalCtrl: ModalController
   ) {
-    addIcons({ barbell, heart, bookmark, search, notifications });
+    addIcons({
+      barbell,
+      heart,
+      bookmark,
+      search,
+      notifications,
+      filterCircleOutline,
+    });
   }
 
   ngOnInit(): void {
     this.getWorkouts();
   }
 
-  private async getWorkouts(url?: string) {
+  private async getWorkouts(url?: string, params = {}) {
     this._loader.showLoader();
     try {
-      const res = await this._workoutService.getWorkouts(url);
+      const res = await this._workoutService.getWorkouts(url, params);
       this.workouts.update((current) => [...current, ...res.data]);
       this.paginator.set(res.paginator);
       console.log(res);
@@ -98,6 +108,18 @@ export class HomeComponent implements OnInit {
       await this.getWorkouts(this.paginator().links.next as string);
       event.target.complete();
       event.target.disabled = !this.paginator().links.next;
+    }
+  }
+
+  public async openFilter() {
+    const modal = await this.modalCtrl.create({
+      component: FilterComponent,
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+    if (role === MODAL_RESPONSE.CONFIRM) {
+      await this.getWorkouts(undefined, data);
     }
   }
 }

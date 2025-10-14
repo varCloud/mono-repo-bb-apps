@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">{{
+        'cancel' | translate
+      }}</ion-button>
+    </ion-buttons>
+    <ion-title>Filtro</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirm()" [strong]="true">{{
+        'accept' | translate
+      }}</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <div class="section">
+    <h2>{{ 'workout.routine.target' | translate }}</h2>
+    <lib-catalog-select
+      [control]="$any(filterForm.get('target'))"
+      [typeCatalog]="CATALOG_TYPE.TAGS"
+      blindValue="tagId"
+      placeholder="workout.routine.target-placeholder"
+    ></lib-catalog-select>
+  </div>
+</ion-content>

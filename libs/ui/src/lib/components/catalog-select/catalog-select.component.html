@@ -28,4 +28,26 @@
     </ng-template>
   </ng-select>
   <app-error-message [control]="control()"></app-error-message>
+  @if (useIonSelect()) {
+  <ion-list>
+    <ion-item>
+      <ion-select
+        mode="md"
+        [multiple]="true"
+        aria-label="fruit"
+        [label]="'workout.routine.difficulty' | translate"
+        fill="outline"
+        justify="space-between"
+        [placeholder]="'workout.routine.difficulty-placeholder' | translate"
+        [formControl]="control()"
+      >
+        @for (option of data(); track $index) {
+        <ion-select-option [value]="option[blindValue()]">
+          {{ option[blindLabel()] }}
+        </ion-select-option>
+        }
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  }
 </div>
