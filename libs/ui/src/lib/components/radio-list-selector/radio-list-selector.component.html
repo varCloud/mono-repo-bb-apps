@@ -1,0 +1,14 @@
+
+<div class="radio-list">
+  <div 
+    *ngFor="let option of options()" 
+    class="radio-option"
+    [class.selected]="value() === option.value"
+    [class.disabled]="disabled() || option.disabled"
+    (click)="!disabled() && !option.disabled && onSelectionChange({detail: {value: option.value}})">
+    
+    <div class="option-content">
+      <div class="option-title">{{ option.label | translate }}</div>
+    </div>
+  </div>
+</div>

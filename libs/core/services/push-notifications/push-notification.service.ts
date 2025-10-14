@@ -6,6 +6,8 @@ import {
 } from '@capacitor/push-notifications';
 import { isPlatform, ToastController } from '@ionic/angular';
 import { LoggerService } from '../../services/logger.service';
+import { LocalStorageService } from '../local-storage.service';
+import { KEY_LOCALSTORAGE } from 'libs/shared/constants/key-localstorage';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +16,7 @@ export class PushNotificationService {
   constructor(
     private logger: LoggerService,
     private toastController: ToastController,
+    private _localStorage: LocalStorageService,
   ) {}
 
   public initPushNotifications() {
@@ -32,7 +35,7 @@ export class PushNotificationService {
       PushNotifications.addListener('registration', (token: Token) => {
         console.log('Push registration success, token: ', token.value);
         this.logger.info('Push registration success', { token: token.value });
-        // Aquí debes enviar este token al backend
+        this._localStorage.set(KEY_LOCALSTORAGE.TOKEN_PUSH, token.value);
       });
 
       // Listener para notificaciones recibidas en primer plano

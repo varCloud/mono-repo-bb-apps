@@ -63,7 +63,6 @@ export class LoginComponent implements OnInit {
         this._loader.hideLoader();
         this._toastService.error(
           this._translate.instant('login.errors.invalid-credentials'),
-          { duration: 3000 }
         );
       },
     });

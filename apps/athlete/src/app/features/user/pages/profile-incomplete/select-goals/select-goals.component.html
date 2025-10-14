@@ -1,0 +1,63 @@
+<ion-content class="select-goals-content">
+  <app-layout-content
+    customClass="select-goals-page"
+    [useGoBack]="true"
+    [title]="'common.back' | translate"
+  >
+    <ion-grid content-header>
+      <ion-row>
+        <ion-col>
+          <app-header
+            [text]="'onboarding.select-goals.title' | translate | uppercase"
+            [subtext]="'onboarding.select-goals.subtitle' | translate"
+          ></app-header>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid content-body>
+      <form [formGroup]="form">
+        <ion-row>
+          <ion-col size="12">
+            <div class="section-title">
+              <h3>{{ 'onboarding.select-goals.goals-title' | translate }}</h3>
+              <p class="subtitle">{{ 'onboarding.select-goals.goals-subtitle' | translate }}</p>
+            </div>
+            
+            <app-checkbox-list-selector
+              [options]="goalsOptions()"
+              [selectedValues]="form.get('goals')?.value || []"
+              [maxSelections]="maxGoalsSelection"
+              (selectedValuesChange)="onGoalsChange($event)"
+            ></app-checkbox-list-selector>
+            
+            <app-error-message
+              [control]="$any(form.get('goals'))"
+            ></app-error-message>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <div class="info-card">
+              <p>{{ 'onboarding.select-goals.info-text' | translate }}</p>
+            </div>
+          </ion-col>
+        </ion-row>
+
+      </form>
+    </ion-grid>
+
+    <div content-footer class="ion-text-center">
+      <ion-button
+        color="tertiary"
+        class="bb-input"
+        expand="block"
+        shape="round"
+        [disabled]="form.invalid"
+        (click)="onContinue()"
+      >
+        {{ "common.continue" | translate }}
+      </ion-button>
+    </div>
+  </app-layout-content>
+</ion-content>

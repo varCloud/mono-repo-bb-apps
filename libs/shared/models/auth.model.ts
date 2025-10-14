@@ -6,6 +6,12 @@ export interface LoginCredentials {
   userType?: ENUM_TYPE_USER;
 }
 
+export interface UserCreateAccountPayload {
+  email: string;
+  passwordHash: string;
+  userTypeId?: number;
+}
+
 export interface UserResponse {
   userId: number;
   email: string;

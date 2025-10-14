@@ -15,6 +15,7 @@ import { finalize } from 'rxjs';
 import { ToastService } from '@monorepo-bb-app/shared';
 import { CommonModule } from '@angular/common';
 import { ProfileIncompleteService } from '../../../services/profile-incomplete.service';
+import { LoaderUIService } from '@monorepo-bb-app/core';
 
 @Component({
   selector: 'app-payment-frequency',
@@ -44,11 +45,16 @@ export class PaymentFrequencyComponent implements OnInit {
     private _toastService: ToastService,
     private _translate: TranslateService,
     private _profileIncompleteService: ProfileIncompleteService,
+    private readonly _loaderUIService: LoaderUIService
   ) {
     this.isLoading.set(true);
+    this._loaderUIService.showLoader();
     this._userService
       .getBillingCycles()
-      .pipe(finalize(() => this.isLoading.set(false)))
+      .pipe(finalize(() => {
+        this.isLoading.set(false)
+        this._loaderUIService.hideLoader();
+      }))
       .subscribe((cycles) => {
         this.defaultPaymentFrequency =
           cycles.map(
@@ -73,7 +79,7 @@ export class PaymentFrequencyComponent implements OnInit {
       return;
     }
     this.isNextButtonDisabled.set(true);
-
+    this._loaderUIService.showLoader();
     const payload: PaymentFrecuencyRequest[] = this.paymentFrecuency.map(
       (item) => ({
         cycleId: item.cycleId,
@@ -85,7 +91,10 @@ export class PaymentFrequencyComponent implements OnInit {
     );
     this._userService
       .savePaymentFrequency(payload)
-      .pipe(finalize(() => this.isNextButtonDisabled.set(false)))
+      .pipe(finalize(() => {
+        this._loaderUIService.hideLoader();
+        this.isNextButtonDisabled.set(false)
+      }))
       .subscribe({
         next: () => {
           this._toastService.success(

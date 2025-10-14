@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { LayoutContentComponent , OtpComponent} from '@monorepo-bb-app/ui';
 import { Router } from '@angular/router';
 import { API_URLS } from '@monorepo-bb-app/shared';
+import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
 
 @Component({
   selector: 'app-validate-otp-reset-password',
@@ -39,5 +40,9 @@ export class ValidateOtpResetPasswordComponent implements OnInit {
         state: { email: this.email },
       });
     }
+  }
+
+  public get userTypeId(): number {
+    return ENUM_TYPE_USER.ATHLETE; // Athlete
   }
 }

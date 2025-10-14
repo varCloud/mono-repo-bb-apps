@@ -10,61 +10,10 @@
       </ion-row>
     </ion-grid>
     <ion-grid content-body>
-      <form [formGroup]="createAccountForm" (ngSubmit)="onCreateAccount()">
-        <ion-grid>
-          <ion-row>
-            <ion-col size="12">
-              <ion-input
-                formControlName="email"
-                class="bb-input"
-                [label]="'mail' | translate"
-                label-placement="floating"
-                fill="outline"
-                [placeholder]="'mail-placeholder' | translate"
-                [errorText]="'error.email-required' | translate"
-                type="email"
-                mode="md"
-              ></ion-input>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="12">
-              <ion-input
-                formControlName="passwordHash"
-                class="bb-input"
-                [label]="'password' | translate"
-                label-placement="floating"
-                fill="outline"
-                [maxlength]="20"
-                [placeholder]="'password' | translate"
-                type="password"
-                [errorText]="'error.password-required' | translate"
-                mode="md"
-              >
-                @if (createAccountForm.get("password")?.value) {
-                  <ion-input-password-toggle
-                    slot="end"
-                    [color]="'secondary'"
-                  ></ion-input-password-toggle>
-                }
-              </ion-input>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="12">
-              <ion-button
-                color="tertiary"
-                class="bb-input ion-margin-top"
-                expand="block"
-                shape="round"
-                type="submit"
-              >
-                {{ "continue" | translate }}
-              </ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </form>
+      <app-create-account-form
+        [userType]="userType"
+        (createAccountSubmit)="onCreateAccount($event)"
+      ></app-create-account-form>
     </ion-grid>
     <div content-footer class="ion-text-center">
       <ion-button fill="clear" [routerLink]="['/login']">

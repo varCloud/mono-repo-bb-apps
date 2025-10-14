@@ -14,8 +14,8 @@
             >
             </app-avatar-profile>
             <div class="container-info">
-              <span class="title">Nick Name</span>
-              <span class="subtitle">alegomezgmail.com</span>
+              <span class="title">{{ this.sesionService.user$()?.nickName}}</span>
+              <span class="subtitle">{{ this.sesionService.user$()?.email}}</span>
             </div>
             <div class="container-messges">
               <ion-button

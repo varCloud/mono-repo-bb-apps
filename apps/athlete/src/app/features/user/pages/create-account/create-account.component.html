@@ -1,0 +1,30 @@
+<ion-content class="create-account-content">
+  <app-layout-content customClass="create-account-page">
+    <ion-grid content-header>
+      <ion-row>
+        <ion-col
+          ><app-header
+            [text]="'user-create-account.title' | translate | uppercase"
+          ></app-header
+        ></ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid content-body>
+      <app-create-account-form
+        [userType]="userType"
+        (createAccountSubmit)="onCreateAccount($event)"
+      ></app-create-account-form>
+    </ion-grid>
+    <div content-footer class="ion-text-center">
+      <ion-button fill="clear" [routerLink]="['/login']">
+        <ion-text class="question">{{
+          "user-create-account.have-account" | translate
+        }}</ion-text>
+        &nbsp;
+        <ion-text color="secondary" class="link">{{
+          "login.login" | translate | titlecase
+        }}</ion-text>
+      </ion-button>
+    </div>
+  </app-layout-content>
+</ion-content>

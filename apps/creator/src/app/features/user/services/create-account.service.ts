@@ -2,7 +2,7 @@ import { Injectable, signal } from '@angular/core';
 import {  environment} from '@monorepo-bb-app/shared';
 import { HttpClient } from '@angular/common/http';
 import { API_URLS } from '@monorepo-bb-app/shared';
-import { UserCreateAccountPayload } from '../models/user.interfaces';
+import { UserCreateAccountPayload } from '@monorepo-bb-app/shared';
 
 @Injectable({
   providedIn: 'root',

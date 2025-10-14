@@ -1,0 +1,47 @@
+.select-goals-content {
+  --background: var(--ion-color-light);
+}
+
+.select-goals-page {
+  .section-title {
+    margin: 24px 0 16px 0;
+    text-align: center;
+    
+    h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--ion-color-dark);
+      margin: 0 0 8px 0;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: var(--ion-color-medium);
+      margin: 0;
+    }
+  }
+
+  .info-card {
+    background: var(--ion-color-primary-tint);
+    border-radius: 12px;
+    padding: 16px;
+    margin: 24px 0;
+    
+    p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--ion-color-primary-shade);
+      text-align: center;
+    }
+  }
+
+  app-checkbox-list-selector {
+    margin: 16px 0;
+  }
+
+  ion-button {
+    margin: 16px 0;
+    height: 48px;
+    font-weight: 600;
+  }
+}
