@@ -7,20 +7,51 @@
     </ion-buttons>
     <ion-title>Filtro</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="confirm()" [strong]="true">{{
-        'accept' | translate
-      }}</ion-button>
+      <ion-button
+        (click)="resetFilters()"
+        [disabled]="filter.countFilters === 0"
+        >{{ 'filter.clearAll' | translate }}</ion-button
+      >
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content class="ion-padding">
-  <div class="section">
-    <h2>{{ 'workout.routine.target' | translate }}</h2>
-    <lib-catalog-select
-      [control]="$any(filterForm.get('target'))"
-      [typeCatalog]="CATALOG_TYPE.TAGS"
-      blindValue="tagId"
-      placeholder="workout.routine.target-placeholder"
-    ></lib-catalog-select>
-  </div>
+
+<ion-content class="filter-content">
+  <app-layout-content>
+    <ion-grid content-body>
+      @if(filter.showWorkoutTags){
+      <div class="section">
+        <h2>{{ 'workout.routine.target' | translate }}</h2>
+        <lib-catalog-select
+          [control]="$any(filterForm.get('workoutTags'))"
+          [typeCatalog]="CATALOG_TYPE.TAGS"
+          blindValue="tagId"
+          placeholder="workout.routine.target-placeholder"
+        ></lib-catalog-select>
+      </div>
+      } @if(filter.showLevels){
+      <div class="section">
+        <h2>{{ 'workout.routine.difficulty' | translate }}</h2>
+        <lib-catalog-select
+          [control]="$any(filterForm.get('levels'))"
+          [typeCatalog]="CATALOG_TYPE.DIFFICULTY_LEVELS"
+          blindValue="levelId"
+          blindLabel="description"
+          placeholder="workout.routine.difficulty-placeholder"
+        ></lib-catalog-select>
+      </div>
+      }
+    </ion-grid>
+    <div content-footer class="ion-text-center">
+      <ion-button
+        color="tertiary"
+        class="bb-input"
+        expand="block"
+        shape="round"
+        (click)="confirm()"
+      >
+        {{ 'filter.apply' | translate }}
+      </ion-button>
+    </div>
+  </app-layout-content>
 </ion-content>

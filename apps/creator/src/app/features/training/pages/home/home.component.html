@@ -14,7 +14,13 @@
         class="header-icon-btn"
         (click)="openFilter()"
       >
-        <ion-icon name="filter-circle-outline" slot="icon-only"></ion-icon>
+        <ion-icon
+          [name]="
+            filter.countFilters > 0 ? 'filter-circle' : 'filter-circle-outline'
+          "
+          slot="icon-only"
+          [color]="filter.countFilters > 0 ? 'secondary' : null"
+        ></ion-icon>
       </ion-button>
       <ion-button fill="clear" size="small" class="header-icon-btn">
         <ion-icon name="search" slot="icon-only"></ion-icon>
@@ -27,20 +33,6 @@
 </ion-header>
 
 <ion-content class="workout-home-content ion-safe-area">
-  <!-- Header con botón de nuevo entrenamiento -->
-  <div class="header-section">
-    <ion-button
-      expand="block"
-      fill="solid"
-      class="new-workout-btn"
-      color="tertiary"
-      (click)="onNewWorkoutClick()"
-    >
-      <ion-icon name="barbell" slot="start"></ion-icon>
-      Nuevo entrenamiento
-    </ion-button>
-  </div>
-
   <!-- Biblioteca de ejercicios -->
   <div class="section">
     <div class="section-header">
@@ -85,7 +77,18 @@
       }
     </ion-row>
   </ion-grid>
-
+  <ion-fab slot="fixed" vertical="bottom" horizontal="center">
+    <ion-button
+      expand="block"
+      fill="solid"
+      class="new-workout-btn"
+      color="tertiary"
+      (click)="onNewWorkoutClick()"
+    >
+      <ion-icon src="assets/icons/equipment.svg" slot="start"></ion-icon>
+      Nuevo entrenamiento
+    </ion-button>
+  </ion-fab>
   <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>

@@ -7,6 +7,7 @@ import {
   search,
   notifications,
   filterCircleOutline,
+  filterCircle,
 } from 'ionicons/icons';
 import {
   IonIcon,
@@ -19,16 +20,26 @@ import {
   IonInfiniteScroll,
   IonInfiniteScrollContent,
   ModalController,
+  IonBadge,
+  IonInput,
+  IonFab,
+  IonFabButton,
 } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { CardListComponent, FilterComponent } from '@monorepo-bb-app/ui';
 import {
+  FilterModel,
+  KEY_LOCALSTORAGE,
   Paginator,
   ToastService,
   WorkoutListModel,
   WorkoutService,
 } from '@monorepo-bb-app/shared';
-import { LoaderUIService } from '@monorepo-bb-app/core';
+import {
+  LoaderUIService,
+  LocalStorageService,
+  SesionService,
+} from '@monorepo-bb-app/core';
 import { MODAL_RESPONSE } from 'libs/shared/constants/enums';
 
 @Component({
@@ -36,6 +47,10 @@ import { MODAL_RESPONSE } from 'libs/shared/constants/enums';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   imports: [
+    IonFabButton,
+    IonFab,
+    IonInput,
+    IonBadge,
     IonInfiniteScrollContent,
     IonInfiniteScroll,
     IonRow,
@@ -51,12 +66,17 @@ import { MODAL_RESPONSE } from 'libs/shared/constants/enums';
 export class HomeComponent implements OnInit {
   workouts = signal<WorkoutListModel[]>([]);
   paginator = signal<Paginator>({} as Paginator);
+  filter: FilterModel = new FilterModel({
+    showWorkoutTags: true,
+    showLevels: true,
+  });
   constructor(
     private router: Router,
     private _workoutService: WorkoutService,
     private _loader: LoaderUIService,
     private _toastService: ToastService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private _localStorage: LocalStorageService
   ) {
     addIcons({
       barbell,
@@ -65,6 +85,7 @@ export class HomeComponent implements OnInit {
       search,
       notifications,
       filterCircleOutline,
+      filterCircle,
     });
   }
 
@@ -72,13 +93,17 @@ export class HomeComponent implements OnInit {
     this.getWorkouts();
   }
 
-  private async getWorkouts(url?: string, params = {}) {
+  private async getWorkouts(url?: string, reset = false) {
     this._loader.showLoader();
     try {
+      const params = await this.getParams();
       const res = await this._workoutService.getWorkouts(url, params);
-      this.workouts.update((current) => [...current, ...res.data]);
+      if (reset) {
+        this.workouts.set(res.data);
+      } else {
+        this.workouts.update((current) => [...current, ...res.data]);
+      }
       this.paginator.set(res.paginator);
-      console.log(res);
     } catch (error) {
       this._toastService.error('Error al cargar los entrenamientos', {
         duration: 3000,
@@ -86,17 +111,6 @@ export class HomeComponent implements OnInit {
     } finally {
       this._loader.hideLoader();
     }
-    // this._workoutService
-    //   .getWorkouts(url)
-    //   .pipe(finalize(() => this._loader.hideLoader()))
-    //   .subscribe({
-    //     next: (res) => {
-    //       this.workouts.update((current) => [...current, ...res.data]);
-    //       this.paginator.set(res.paginator);
-    //       console.log(res);
-    //     },
-    //     error: (err) => {},
-    //   });
   }
 
   onNewWorkoutClick() {
@@ -108,18 +122,37 @@ export class HomeComponent implements OnInit {
       await this.getWorkouts(this.paginator().links.next as string);
       event.target.complete();
       event.target.disabled = !this.paginator().links.next;
+    } else {
+      event.target.complete();
+      event.target.disabled = true;
     }
   }
 
   public async openFilter() {
     const modal = await this.modalCtrl.create({
       component: FilterComponent,
+      componentProps: {
+        filter: this.filter,
+      },
     });
     modal.present();
 
     const { data, role } = await modal.onWillDismiss();
+
     if (role === MODAL_RESPONSE.CONFIRM) {
-      await this.getWorkouts(undefined, data);
+      this.filter = data.filter;
+      await this.getWorkouts(undefined, true);
     }
+  }
+
+  private async getParams() {
+    const user = await this._localStorage.get(KEY_LOCALSTORAGE.USER);
+    let params = {
+      creatorId: user?.userId,
+    };
+    if (this.filter) {
+      params = { ...params, ...this.filter.toQueryParams() };
+    }
+    return params;
   }
 }

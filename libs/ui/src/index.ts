@@ -41,7 +41,6 @@ export * from './lib/const/training-types.constants';
 export * from './lib/components/card-onboarding/card-onboarding.component';
 export * from './lib/components/steps-onbording/steps-onboarding.component';
 
-
 export * from './lib/components/radio-card-selector/radio-card-selector.component';
 export * from './lib/components/checkbox-list-selector/checkbox-list-selector.component';
 export * from './lib/components/radio-list-selector/radio-list-selector.component';

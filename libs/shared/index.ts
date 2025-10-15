@@ -39,3 +39,4 @@ export * from './helpers/destroy-uppy';
 export * from './helpers/form-validators';
 export * from './models/workout-response-list';
 export * from './models/goals';
+export * from './models/filter.model';
