@@ -1,0 +1,22 @@
+<ion-card class="card-list-container">
+  <div class="image-container">
+    <img
+      [src]="workout().workoutUrl"
+      alt="Tabata"
+      class="card-image"
+      height="150"
+    />
+    <span class="likes-counter">
+      <ion-icon name="heart"></ion-icon>
+      {{ workout().totalRatings }} Seguidores</span
+    >
+    <span class="category">Fitness</span>
+  </div>
+
+  <ion-card-header style="padding: 0px 8px">
+    <ion-card-title class="card-title">{{ workout().title }}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content style="padding: 3px 0px 16px 8px" class="card-subtitle">
+    {{ level() }}
+  </ion-card-content>
+</ion-card>

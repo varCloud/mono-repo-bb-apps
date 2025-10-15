@@ -26,6 +26,8 @@ export * from './lib/components/skeleton/list-skeleton/list-skeleton.component';
 export * from './lib/components/catalog-select/catalog-select.component';
 export * from './lib/components/add-recorded-class/add-recorded-class.component';
 export * from './lib/components/routine-form/routine-form.component';
+export * from './lib/components/card-list/card-list.component';
+export * from './lib/components/filter/filter.component';
 
 export * from './lib/components/payment-frequency-settings/payment-frequency-settings.component';
 export * from './lib/components/reset-password-form/reset-password-form/reset-password-form.component';
@@ -38,7 +40,6 @@ export * from './lib/const/training-types.constants';
 
 export * from './lib/components/card-onboarding/card-onboarding.component';
 export * from './lib/components/steps-onbording/steps-onboarding.component';
-
 
 export * from './lib/components/radio-card-selector/radio-card-selector.component';
 export * from './lib/components/checkbox-list-selector/checkbox-list-selector.component';

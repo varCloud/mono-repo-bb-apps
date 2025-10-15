@@ -184,5 +184,9 @@
   "your-client-payment": "Your client will pay",
   "title": "Title",
   "example": "Example",
-  "video": "Video"
+  "video": "Video",
+  "filter": {
+    "clearAll": "Clear filters",
+    "apply": "Apply filters"
+  }
 }

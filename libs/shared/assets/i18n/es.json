@@ -100,7 +100,7 @@
     "resend": "Reenviar código",
     "subtitle": "Se ha enviado un código a tu correo {{email}}",
     "title": "Ingresa el código de confirmación",
-    "valid":" El código es válido"
+    "valid": " El código es válido"
   },
   "password": "Contraseña",
   "payment-frequency": {
@@ -194,5 +194,9 @@
     "steps-onboarding.step-1-title": "Encuentra a tus entrenadores favoritos en una sola plataforma",
     "steps-onboarding.step-2-title": "Descubre más de 1000 rutinas online y clases que se adaptan a tus necesidades",
     "steps-onboarding.step-3-title": "Suscríbete a tu entrenador favorito y comienza tu vida saludable"
+  },
+  "filter": {
+    "clearAll": "Limpiar filtros",
+    "apply": "Aplicar filtros"
   }
 }

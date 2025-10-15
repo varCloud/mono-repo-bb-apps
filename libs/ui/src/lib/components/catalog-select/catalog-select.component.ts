@@ -13,6 +13,7 @@ import {
   IonItem,
   IonSelect,
   IonSelectOption,
+  IonChip,
 } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
@@ -21,18 +22,24 @@ import { ErrorMessageComponent } from '../error-message/error-message.component'
 @Component({
   selector: 'lib-catalog-select',
   imports: [
+    IonChip,
     TranslateModule,
     NgMultiLabelTemplateDirective,
     NgSelectComponent,
     CommonModule,
     ErrorMessageComponent,
     ReactiveFormsModule,
+    IonList,
+    IonItem,
+    IonSelect,
+    IonSelectOption,
   ],
   templateUrl: './catalog-select.component.html',
   styleUrl: './catalog-select.component.scss',
 })
 export class CatalogSelectComponent implements OnInit {
   typeCatalog = input.required<CatalogType>();
+  useIonSelect = input<boolean>(false);
   blindValue = input<string>('id');
   blindLabel = input<string>('name');
   disabled = input<boolean>(false);
