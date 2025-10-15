@@ -1,22 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
   IonContent,
-  IonInput,
   IonGrid,
   IonCol,
   IonRow,
-  IonButton,
-  IonInputPasswordToggle,
   IonText,
 } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
-import { HeaderComponent, LayoutContentComponent } from '@monorepo-bb-app/ui';
+import { HeaderComponent, LayoutContentComponent, CreateAccountFormComponent } from '@monorepo-bb-app/ui';
 import { CreateAccountService } from '../../services/create-account.service';
-import { UserCreateAccountPayload } from '../../models/user.interfaces';
+import { UserCreateAccountPayload } from '@monorepo-bb-app/shared';
 import { Router, RouterLink } from '@angular/router';
 import { LoaderUIService } from '@monorepo-bb-app/core';
+import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
 
 @Component({
   selector: 'app-create-account',
@@ -24,28 +21,22 @@ import { LoaderUIService } from '@monorepo-bb-app/core';
   styleUrls: ['./create-account.component.scss'],
   imports: [
     IonText,
-    IonButton,
     IonRow,
     IonCol,
     IonGrid,
-    IonInput,
     IonContent,
     TranslateModule,
     LayoutContentComponent,
     HeaderComponent,
     CommonModule,
-    ReactiveFormsModule,
-    IonInputPasswordToggle,
+    CreateAccountFormComponent,
     RouterLink,
   ],
 })
 export class CreateAccountComponent implements OnInit {
-  createAccountForm = this.formBuilder.group({
-    email: ['', [Validators.required, Validators.email]],
-    passwordHash: ['', [Validators.required, Validators.minLength(6)]],
-  });
+  public userType = ENUM_TYPE_USER.CREATOR;
+
   constructor(
-    private formBuilder: FormBuilder,
     private createAccountService: CreateAccountService,
     private _router: Router,
     private _loader: LoaderUIService,
@@ -53,18 +44,15 @@ export class CreateAccountComponent implements OnInit {
 
   ngOnInit() {}
 
-  public onCreateAccount() {
-    if (this.createAccountForm.invalid) {
-      this.createAccountForm.markAllAsTouched();
-      return;
-    }
+  public onCreateAccount(payload: UserCreateAccountPayload) {
     this._loader.showLoader();
-    const formData = this.createAccountForm.value as UserCreateAccountPayload;
-    if (!formData.email || !formData.passwordHash) {
+    
+    if (!payload.email || !payload.passwordHash) {
       this._loader.hideLoader();
       return;
     }
-    this.createAccountService.setUser(formData);
+    
+    this.createAccountService.setUser(payload);
     this._loader.hideLoader();
     this._router.navigate(['/create-account/otp']);
   }

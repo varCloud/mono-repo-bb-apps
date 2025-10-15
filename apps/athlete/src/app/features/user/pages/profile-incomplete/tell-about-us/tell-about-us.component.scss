@@ -1,0 +1,96 @@
+.tell-about-us-content {
+  --background: var(--ion-color-light);
+}
+
+::ng-deep {
+  app-header {
+    .header-content {
+      .header-text {
+        font-size: 24px;
+      }
+
+      .header-subtext {
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+.section-title {
+  margin: 0px 0 16px 0;
+
+  h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ion-color-dark);
+    margin: 0;
+  }
+}
+
+// Estilos específicos para el selector de género horizontal
+.gender-selector {
+  margin: 16px 0;
+  
+  app-radio-card-selector {
+    display: block;
+  }
+}
+
+.birthdate-item {
+  border: 1px solid var(--ion-color-medium);
+  border-radius: 8px;
+  margin: 8px 0;
+
+  .label {
+    font-weight: 500;
+    color: var(--ion-color-dark);
+  }
+}
+
+ion-input.bb-input {
+  margin: 8px 0;
+}
+
+app-radio-card-selector {
+  margin: 16px 0;
+}
+
+// Responsive para tablets y pantallas más grandes
+@media (min-width: 768px) {
+  .gender-selector {
+    app-radio-card-selector {
+      ion-radio-group {
+        gap: 20px;
+        
+        ion-card {
+          min-height: 140px;
+          
+          ion-card-content {
+            padding: 24px 16px;
+            
+            .card-content {
+              .card-image {
+                width: 56px;
+                height: 56px;
+              }
+              
+              ion-icon {
+                font-size: 56px;
+              }
+              
+              ion-label {
+                font-size: 16px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+ion-button {
+  margin: 16px 0;
+  height: 48px;
+  font-weight: 600;
+}

@@ -42,7 +42,7 @@ export class ToastService {
       message,
       cssClass: (toastConf.cssClass || '') + ' bb-toast-success',
       color: ToastColor.Success,
-      duration: toastConf.duration,
+      duration: 2000,
     });
   }
 
@@ -52,7 +52,7 @@ export class ToastService {
       message,
       cssClass: (toastConf.cssClass || '') + ' bb-toast-error',
       color: ToastColor.Danger,
-      duration: toastConf.duration,
+      duration: 2000,
     });
   }
 

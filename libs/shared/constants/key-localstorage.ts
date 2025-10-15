@@ -5,4 +5,5 @@ export const KEY_LOCALSTORAGE = {
   CONFIG: 'app-config',
   HAS_NULL_PROFILE_FIELDS: 'hasNullProfileFields',
   TOKEN: 'token',
+  TOKEN_PUSH: 'push_token',
 };

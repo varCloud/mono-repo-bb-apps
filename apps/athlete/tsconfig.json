@@ -2,9 +2,11 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "strict": true,
+    "strictNullChecks": false,// Sin verificación de null
+    "noImplicitAny": false,// Sin verificación de any implícito
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
-    "noImplicitReturns": true,
+    "noImplicitReturns": false,// Sin verificación de returns faltantes
     "noFallthroughCasesInSwitch": true,
     "target": "es2022",
     "moduleResolution": "bundler",

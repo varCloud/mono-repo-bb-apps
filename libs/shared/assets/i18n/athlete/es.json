@@ -1,0 +1,172 @@
+{
+  "common": {
+    "back": "Regresar",
+    "continue": "Continuar",
+    "accept": "Aceptar",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "finish": "Finalizar",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "skip": "Saltar"
+  },
+  "go-back": "Regresar",
+  "login": {
+    "errors": {
+      "email-required": "El correo electrónico es obligatorio",
+      "invalid-credentials": "Correo electrónico y/o contraseña incorrectos",
+      "password-required": "La contraseña es obligatoria"
+    },
+    "forgot-password": "Olvidé mi contraseña",
+    "login": "Iniciar sesión",
+    "login-with": "Iniciar sesión con",
+    "no-account": "¿No tienes una cuenta?",
+    "recover-password": "Recupera tu contraseña",
+    "register": "Regístrate",
+    "welcome-user": "¡TE DAMOS LA BIENVENIDA!"
+  },
+  "forgot-password": {
+    "email-placeholder": "Escribe tu correo electrónico",
+    "send-link": "Enviar enlace de recuperación",
+    "subtitle": "Ingresa el correo electrónico al que enviaremos el código de verificación",
+    "title": "Olvidé mi contraseña"
+  },
+  "formErrors": {
+    "duplicate": "El valor ya existe",
+    "email": "El correo electrónico no es válido",
+    "max": "El valor debe ser menor o igual a {{max}}",
+    "maxlength": "El campo no puede tener más de {{maxlength}} caracteres",
+    "min": "El valor debe ser mayor o igual a {{min}}",
+    "minlength": "El campo debe tener al menos {{minlength}} caracteres",
+    "pattern": "El formato del campo no es válido",
+    "required": "Este campo es obligatorio",
+    "unique": "El valor debe ser único",
+    "zero": "El valor no puede ser cero",
+    "invalidUrl": "El valor debe ser una URL válida"
+  },
+  "reset-password": {
+    "confirm-password": "Confirmar contraseña",
+    "confirm-password-required": "La confirmación de la contraseña es obligatoria",
+    "new-password": "Nueva contraseña",
+    "password-min-length": "La contraseña debe tener al menos 6 caracteres",
+    "password-pattern": "La contraseña debe contener al menos una mayúscula, una minúscula y un número",
+    "password-required": "La contraseña es obligatoria",
+    "password-reset-failed": "Error al restablecer la contraseña",
+    "password-reset-success": "Contraseña restablecida exitosamente. Por favor, inicia sesión con tu nueva contraseña.",
+    "passwords-do-not-match": "Las contraseñas no coinciden",
+    "passwords-mismatch": "Las contraseñas no coinciden",
+    "reset-password": "Crear nueva contraseña",
+    "subtitle": "Ingresa tu nueva contraseña",
+    "title": "Restablecer contraseña"
+  },
+  "onboarding": {
+    "tell-about-us": {
+      "title": "Cuéntanos sobre ti",
+      "subtitle": "Para brindar una mejor experiencia y resultados necesitamos saber tus datos.",
+      "gender-title": "Género",
+      "birthdate-title": "¿Cuántos años tienes?",
+      "birthdate-label": "Selecciona tu fecha de nacimiento",
+      "age-label": "Edad",
+      "age-placeholder": "Tu edad",
+      "weight-title": "¿Cuál es tu peso?",
+      "weight-label": "Peso",
+      "weight-placeholder": "Ingrese su peso",
+      "height-title": "¿Cuánto mides?",
+      "height-label": "Estatura",
+      "height-placeholder": "Ingrese su estatura",
+      "save-success": "Información guardada exitosamente",
+      "save-error": "Error al guardar la información"
+    },
+    "select-goals": {
+      "title": "Selecciona tus objetivos",
+      "subtitle": "¿Cuáles son tus objetivos?",
+      "goals-title": "¿Qué objetivos quieres alcanzar?",
+      "goals-subtitle": "Puedes seleccionar máximo 3 objetivos",
+      "info-text": "Selecciona los objetivos que mejor describan lo que quieres lograr",
+      "save-success": "Objetivos guardados exitosamente",
+      "save-error": "Error al guardar objetivos"
+    },
+    "select-level": {
+      "title": "Selecciona tu nivel",
+      "subtitle": "Nivel de actividad física",
+      "level-title": "¿Cuál es tu nivel de actividad actual?",
+      "level-subtitle": "Esto nos ayudará a personalizar tu experiencia",
+      "info-text": "Selecciona el nivel que mejor describa tu actividad física actual",
+      "save-success": "Nivel guardado exitosamente",
+      "save-error": "Error al guardar nivel"
+    },
+    "profile-setup": {
+      "title": "Completa tu perfil",
+      "subtitle": "Últimos detalles para finalizar",
+      "first-name": "Nombre",
+      "first-name-placeholder": "Tu nombre",
+      "last-name": "Apellido",
+      "last-name-placeholder": "Tu apellido",
+      "nickname": "Nickname",
+      "nickname-placeholder": "Tu nickname",
+      "profile-color": "Color de perfil",
+      "finish-button": "Finalizar registro",
+      "save-success": "Perfil completado exitosamente",
+      "save-error": "Error al completar perfil",
+      "phone-label": "Número de celular"
+    },
+    "activity-level": {
+      "beginner": "Principiante",
+      "beginner-desc": "Poco o nada de ejercicio, sedentario",
+      "intermediate": "Intermedio",
+      "intermediate-desc": "Ejercicio moderado 2-3 veces por semana",
+      "advanced": "Avanzado",
+      "advanced-desc": "Ejercicio intenso 4-6 veces por semana"
+    }
+  },
+  "genders": {
+    "male": "Masculino",
+    "female": "Femenino",
+    "other": "Prefiero no decir"
+  },
+  "gender": {
+    "male": "Hombre",
+    "female": "Mujer",
+    "other": "Prefiero no decir"
+  },
+  "error": {
+    "required": "Este campo es obligatorio",
+    "min-age": "Debes tener al menos 13 años",
+    "max-age": "Edad máxima permitida: 100 años",
+    "min-selections": "Debes seleccionar al menos una opción",
+    "max-selections": "Máximo {{count}} selecciones permitidas",
+    "invalid-email": "Formato de email inválido",
+    "invalid-phone": "Número de teléfono inválido",
+    "default": "Ha ocurrido un error inesperado",
+    "email-required": "El correo electrónico es obligatorio",
+    "error-processing": "Error al procesar la solicitud. Por favor, inténtalo de nuevo más tarde.",
+    "max-categories-selected": "Puedes seleccionar hasta {{limit}} categorías",
+    "network": "Error de red. Por favor, verifica tu conexión a Internet.",
+    "not-found": "No se encontró el recurso solicitado.",
+    "password-required": "La contraseña es obligatoria",
+    "unauthorized": "No autorizado. Por favor, inicia sesión nuevamente."
+  },
+  "validation": {
+    "email-required": "El correo electrónico es obligatorio",
+    "password-required": "La contraseña es obligatoria",
+    "password-min-length": "La contraseña debe tener al menos 8 caracteres",
+    "confirm-password": "Confirmar contraseña",
+    "passwords-match": "Las contraseñas no coinciden"
+  },
+   "user-create-account": {
+    "have-account": "¿Tienes una cuenta?",
+    "title": "Crear cuenta  ",
+    "create-account": "Crear cuenta",
+    "create-account-success": "Cuenta creada exitosamente"
+  },
+  "mail": "Correo electrónico",
+  "mail-placeholder": "Escribe un correo electrónico",
+  "password": "Contraseña",
+    "otp": {
+    "not-received": "¿Aún no lo has recibido?",
+    "resend": "Reenviar código",
+    "subtitle": "Se ha enviado un código a tu correo {{email}}",
+    "title": "Ingresa el código de confirmación",
+    "valid":" El código es válido"
+  }
+}

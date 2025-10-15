@@ -1,0 +1,31 @@
+.checkbox-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+ion-item {
+  --background: transparent;
+  --border-color: var(--ion-color-light-shade);
+  border-radius: 8px;
+  margin: 4px 0;
+  transition: all 0.2s ease;
+}
+
+ion-item:hover {
+  --background: var(--ion-color-light-tint);
+}
+
+ion-item[disabled] {
+  opacity: 0.5;
+}
+
+ion-checkbox {
+  margin-right: 12px;
+}
+
+ion-label p {
+  color: var(--ion-color-medium);
+  font-size: 0.9rem;
+  margin-top: 4px;
+}

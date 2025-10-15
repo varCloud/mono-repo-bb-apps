@@ -1,0 +1,149 @@
+.radio-card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.radio-card {
+  background: white;
+  border: 2px solid #E5E5E5;
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &.selected {
+    border-color: #2196F3;
+    
+    .card-label {
+      color: #2196F3;
+      font-weight: 600;
+    }
+    
+    ion-icon {
+      color: #2196F3;
+    }
+  }
+  
+  &:hover:not(.selected):not(.disabled) {
+    border-color: #BBBBBB;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// Colores específicos por género
+.radio-card[data-gender="1"] {
+  background: var(--ion-color-primary-shade);  // Azul claro
+  
+  &.selected {
+    background:var(--ion-color-primary);  // Azul más intenso
+    border-color: #1976D2;
+    
+    .card-label {
+      color: white;
+    }
+    
+    .card-image {
+      filter: brightness(0) invert(1);  // Hacer la imagen blanca
+    }
+  }
+}
+
+.radio-card[data-gender="2"] {
+  background: var( --ion-color-secondary-shade);  // Naranja claro
+  
+  &.selected {
+    background: var(--ion-color-secondary);  // Naranja
+    border-color: #F57F17;
+    
+    .card-label {
+      color: white;
+    }
+    
+    .card-image {
+      filter: brightness(0) invert(1);  // Hacer la imagen blanca
+    }
+  }
+}
+
+.radio-card[data-gender="3"] {
+  background: #616161;  // Gris claro
+  
+  &.selected {
+    background: #9E9E9E;  // Gris
+    border-color: #616161;
+    
+    .card-label {
+      color: white;
+    }
+    
+    .card-image {
+      filter: brightness(0) invert(1);  // Hacer la imagen blanca
+    }
+  }
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.card-image {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.card-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333333;
+  margin: 0;
+}
+
+.card-description {
+  font-size: 12px;
+  color: #666666;
+  margin: 0;
+}
+
+ion-icon {
+  font-size: 32px;
+  color: #666666;
+}
+
+// Estilos específicos cuando se usa como selector horizontal de género
+:host(.gender-selector) {
+  .radio-card-container {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    
+    .radio-card {
+      flex: 1;
+      min-height: 100px;
+      
+      .card-image {
+        width: 40px;
+        height: 40px;
+      }
+      
+      ion-icon {
+        font-size: 40px;
+      }
+    }
+  }
+}

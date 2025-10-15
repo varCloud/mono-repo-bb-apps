@@ -29,11 +29,13 @@ import {
 } from '@ionic/angular/standalone';
 
 import { TranslateModule } from '@ngx-translate/core';
-import { TIME } from '@monorepo-bb-app/shared';
+import { CONSTANTS, TIME } from '@monorepo-bb-app/shared';
 import { MaskEmailPipe } from '@monorepo-bb-app/shared';
 import { OtpService } from '@monorepo-bb-app/shared';
 import { ToastService } from '@monorepo-bb-app/shared';
 import { LoaderUIService } from '@monorepo-bb-app/core';
+import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
+
 
 const otpRequiredLength = (length: number) => {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -68,6 +70,7 @@ export class OtpComponent implements OnInit, OnDestroy {
   public email = input.required<string>();
   public apiUrl = input.required<string>();
   public showButtonSend = input<boolean>(true);
+  public userTypeId = input<number>(ENUM_TYPE_USER.PROSPECT);
   public otpSuccess = output<boolean>();
   public otpForm = this._fb.group({
     otp: ['', [Validators.required, otpRequiredLength(4)]],
@@ -152,7 +155,7 @@ export class OtpComponent implements OnInit, OnDestroy {
       .getOtp({
         apiUrl: this.apiUrl(),
         email: this.email(),
-        userTypeId: 3,
+        userTypeId: this.userTypeId(),
       })
       .subscribe({
         next: () => {
@@ -175,7 +178,7 @@ export class OtpComponent implements OnInit, OnDestroy {
         apiUrl: this.apiUrl(),
         email: this.email(),
         otp,
-        userTypeId: 3,
+        userTypeId: this.userTypeId(),
       })
       .subscribe({
         next: () => {

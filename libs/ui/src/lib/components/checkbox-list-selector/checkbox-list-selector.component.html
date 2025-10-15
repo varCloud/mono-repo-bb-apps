@@ -1,0 +1,22 @@
+<div class="checkbox-container">
+  <ion-item 
+    *ngFor="let option of options()" 
+    [class]="itemClass()"
+    [disabled]="isDisabled(option.value)">
+    <ion-checkbox 
+      slot="start"
+      [checked]="isSelected(option.value)"
+      [disabled]="isDisabled(option.value)"
+      (ionChange)="onOptionChange(option.value, $event)">
+    </ion-checkbox>
+    <ion-label>
+      {{ option.label | translate }}
+      <p *ngIf="option.description">{{ option.description | translate }}</p>
+    </ion-label>
+    <ion-icon 
+      *ngIf="option.icon" 
+      [name]="option.icon" 
+      slot="end">
+    </ion-icon>
+  </ion-item>
+</div>

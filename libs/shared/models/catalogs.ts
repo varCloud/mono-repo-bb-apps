@@ -13,6 +13,6 @@ export enum CatalogType {
   TICKET_STATUS = 'ticket-status',
   TRANSACTION_STATUS = 'transaction-status',
   USER_TYPES = 'user-types',
-  WORKOUT_GOALS = 'workout-goals',
+  USER_GOALS = 'user-goals',
   TOOLS = 'tools',
 }

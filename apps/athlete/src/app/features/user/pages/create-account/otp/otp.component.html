@@ -1,0 +1,34 @@
+<ion-content class="create-account-otp-content">
+  <app-layout-content
+    customClass="create-account-page"
+    [useGoBack]="true"
+    [title]="'user-create-account.title' | translate"
+  >
+    <ion-grid content-header>
+      <ion-row>
+        <ion-col><app-header></app-header></ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid content-body>
+      <app-otp
+        [email]="email()"
+        [apiUrl]="apiUrl"
+        [showButtonSend]="false"
+        [userTypeId]="userTypeId"
+        (otpSuccess)="onOtpSuccess($event)"
+      ></app-otp>
+    </ion-grid>
+    <div content-footer class="ion-text-center">
+      <ion-button
+        color="tertiary"
+        class="bb-input"
+        expand="block"
+        shape="round"
+        [disabled]="!isSuccessOtp()"
+        (click)="createUserAccount()"
+      >
+        {{ "continue" | translate }}
+      </ion-button>
+    </div>
+  </app-layout-content>
+</ion-content>

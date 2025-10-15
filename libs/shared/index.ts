@@ -38,3 +38,4 @@ export * from './services/workout/workout.service';
 export * from './helpers/destroy-uppy';
 export * from './helpers/form-validators';
 export * from './models/workout-response-list';
+export * from './models/goals';

@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { ToastService } from '@monorepo-bb-app/shared';
+import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
 
 @Component({
   selector: 'app-reset-password',
@@ -32,7 +33,7 @@ export class ResetPasswordComponent implements OnInit {
     this.email = navigationExtras?.state?.['email'] || '';
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
   public onResetSuccess(success: boolean) {
     if (success) {
       this._toastService.success(
@@ -44,5 +45,9 @@ export class ResetPasswordComponent implements OnInit {
         this._translate.instant('reset-password.password-reset-failed'),
       );
     }
+  }
+
+  public get userTypeId(): number {
+    return ENUM_TYPE_USER.ATHLETE; // Athlete
   }
 }
