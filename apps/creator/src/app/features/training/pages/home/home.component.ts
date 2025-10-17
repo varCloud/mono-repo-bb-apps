@@ -67,7 +67,6 @@ import { MODAL_RESPONSE } from 'libs/shared/constants/enums';
     IonHeader,
     CardListComponent,
     CardMaxLikesComponent,
-    OnbordingComponent,
   ],
 })
 export class HomeComponent implements OnInit {
