@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LayoutContentComponent , ItemListComponent , AvatarProfileComponent} from '@monorepo-bb-app/ui';
 import {
-  PROFILE_MENU_ITEMS,
-} from '../../constants/profile-menu.constants';
+  LayoutContentComponent,
+  ItemListComponent,
+  AvatarProfileComponent,
+} from '@monorepo-bb-app/ui';
+import { PROFILE_MENU_ITEMS } from '../../constants/profile-menu.constants';
 import { addIcons } from 'ionicons';
 import {
   chatbox,
@@ -16,7 +18,12 @@ import {
   trashSharp,
 } from 'ionicons/icons';
 import { Router } from '@angular/router';
-import { LoaderUIService, LocalStorageService, SesionService } from '@monorepo-bb-app/core';
+import {
+  LoaderUIService,
+  LocalStorageService,
+  SesionService,
+} from '@monorepo-bb-app/core';
+import { StripeService } from '@monorepo-bb-app/shared';
 
 @Component({
   selector: 'app-profile',
@@ -42,6 +49,7 @@ export class ProfileComponent implements OnInit {
     private loaderUIService: LoaderUIService,
     private localStorageService: LocalStorageService,
     public sesionService: SesionService,
+    private _stripeService: StripeService
   ) {
     addIcons({
       trashSharp,
@@ -53,6 +61,12 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  openStripeOnboarding() {
+    this._stripeService.openStripeOnboarding(
+      this.sesionService.user$()?.userId!
+    );
+  }
 
   onMenuItemClick(action: string): void {
     switch (action) {

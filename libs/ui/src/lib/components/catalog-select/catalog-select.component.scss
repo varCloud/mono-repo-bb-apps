@@ -38,4 +38,11 @@
       border-color: var(--ion-color-success) !important;
     }
   }
+
+  ion-item {
+    --padding-start: 0;
+    --inner-padding-end: 0;
+    --background: transparent;
+    --inner-border-width: 0;
+  }
 }

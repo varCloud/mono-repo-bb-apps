@@ -1,0 +1,19 @@
+<ion-card class="card-list-container">
+  <div class="image-container">
+    <img
+      [src]="workout().workoutUrl"
+      alt="Tabata"
+      class="card-image"
+      height="150"
+    />
+    <div class="title-container">
+      <p class="title">{{ workout().title }}</p>
+      <span class="likes-counter">
+        <ion-icon name="heart"></ion-icon>
+        {{ workout().totalLikes }} Likes | {{ level() }}
+      </span>
+    </div>
+
+    <span class="category">Fitness</span>
+  </div>
+</ion-card>

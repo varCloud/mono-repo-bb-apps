@@ -14,8 +14,12 @@
             >
             </app-avatar-profile>
             <div class="container-info">
-              <span class="title">{{ this.sesionService.user$()?.nickName}}</span>
-              <span class="subtitle">{{ this.sesionService.user$()?.email}}</span>
+              <span class="title">{{
+                this.sesionService.user$()?.nickName
+              }}</span>
+              <span class="subtitle">{{
+                this.sesionService.user$()?.email
+              }}</span>
             </div>
             <div class="container-messges">
               <ion-button
@@ -55,6 +59,21 @@
           </div>
         </ion-col>
       </ion-row>
+
+      <ion-row class="menu-items">
+        <ion-col>
+          <ion-item
+            color="danger"
+            button
+            (click)="openStripeOnboarding()"
+            class="finish-stripe"
+          >
+            <ion-label
+              >Recibe tus pagos con Stripe, finaliza tu perfil</ion-label
+            >
+          </ion-item>
+        </ion-col></ion-row
+      >
 
       <ion-row class="menu-items">
         <ion-col size="12">
