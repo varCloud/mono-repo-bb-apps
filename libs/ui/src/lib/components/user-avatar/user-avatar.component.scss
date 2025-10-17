@@ -1,0 +1,19 @@
+ion-avatar {
+  &.small {
+    --size: 20px;
+  }
+  
+  &.medium {
+    --size: 20px;
+  }
+  
+  &.large {
+    --size: 20px;
+  }
+}
+
+img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}

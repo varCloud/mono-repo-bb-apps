@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { searchOutline } from 'ionicons/icons';
+import { search, searchOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-header-search',
@@ -17,7 +17,7 @@ export class HeaderSearchComponent {
   @Output() clickSearch = new EventEmitter<void>();
 
   constructor() {
-    addIcons({ searchOutline });
+    addIcons({ searchOutline , search });
   }
 
   searchClick(): void {

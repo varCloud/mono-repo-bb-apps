@@ -2,44 +2,58 @@ import { Component, effect, Input, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   ChatMessage,
   ChatUser,
   mockMessages,
   mockUser,
 } from '../../mocks/chat.mock';
-import { UserConversationService } from '../../services/user-conversation.services';
-import { Message, MessageModel, ENUM_MESSAGE_STATUS } from '@monorepo-bb-app/shared';
+
+import { Message, MessageModel, ENUM_MESSAGE_STATUS, UserConversationModel, UserSummary } from '@monorepo-bb-app/shared';
 import { take } from 'rxjs';
-import { SesionService } from '@monorepo-bb-app/core';
+import { SesionService, UserConversationService } from '@monorepo-bb-app/core';
 import { User } from '@monorepo-bb-app/shared';
 import { send, sendSharp } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { PaginatorModel } from '@monorepo-bb-app/shared';
+import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
+import { UserAvatarComponent } from '@monorepo-bb-app/ui';
 
 @Component({
   selector: 'app-user-chat',
   templateUrl: './user-chat.component.html',
   styleUrls: ['./user-chat.component.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule],
+  imports: [IonicModule, CommonModule, FormsModule, UserAvatarComponent],
 })
 export class UserChatComponent implements OnInit {
   @Input() messages: Message[] = [];
-  @Input() userInfo: ChatUser | null = null;
+  @Input() userInfo: UserSummary | null = null;
   public userSesion!: User;
   public paginator!: PaginatorModel;
+  public userConversationModel!: UserConversationModel;
 
   constructor(
     private _userConectionService: UserConversationService,
     private _sesionService: SesionService,
+    private router: Router,
   ) {
+
+    // Obtener datos de navigation extras usando el nuevo signal
+    const navigation = this.router.currentNavigation();
+    if (navigation?.extras.state?.['conversation']) {
+      this.userConversationModel = (navigation.extras.state['conversation'] as UserConversationModel);
+      console.log('Datos recibidos:', this.userConversationModel);
+    }
+
     effect(() => {
       const user = this._sesionService.user$();
       this.userSesion = user as User;
+      this.userInfo = user?.userTypeId === ENUM_TYPE_USER.ATHLETE ? this.userConversationModel.creatorUser : this.userConversationModel.athleteUser;
     });
-
     addIcons({ sendSharp });
+    
   }
 
   newMessage: string = '';
@@ -99,13 +113,14 @@ export class UserChatComponent implements OnInit {
         }),
         sentDate: now,
         messageStatusId: ENUM_MESSAGE_STATUS.UN_READ,
-        conversationId: 1,
+        conversationId: this.userConversationModel.userConversationId,
         sendMessageUserId: this.userSesion.userId,
       });
-
-      this.messages = [...this.messages, newMsg];
+      this.messages.unshift(newMsg);
       this.newMessage = '';
-      this._userConectionService.message(newMsg.createPayload()).subscribe(
+      const creatorUserId = this.userConversationModel.creatorUser.userId;
+      const athleteUserId = this.userConversationModel.athleteUser.userId;
+      this._userConectionService.message(newMsg.createPayload(creatorUserId,athleteUserId)).subscribe(
         (response) => {
           console.log('Message sent successfully', response);
         },
@@ -125,7 +140,7 @@ export class UserChatComponent implements OnInit {
 
   public async getMessages(uri: string = '', params: any = {}): Promise<void> {
     this._userConectionService
-      .getMessages(uri, 1, params)
+      .getMessagesByConversartion(uri, this.userConversationModel.userConversationId, params)
       .pipe(take(1))
       .subscribe(
         (data) => {
