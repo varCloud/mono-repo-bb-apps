@@ -18,6 +18,7 @@ import { WorkoutListModel } from '@monorepo-bb-app/shared';
 })
 export class CardListComponent implements OnInit {
   workout = input.required<WorkoutListModel>();
+  showLevel = input<boolean>(false);
   level = computed(() => {
     return this.workout()
       .difficultyLevels.map((level: any) => level.description ?? '---')

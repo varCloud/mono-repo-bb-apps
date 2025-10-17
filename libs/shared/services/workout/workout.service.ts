@@ -35,4 +35,15 @@ export class WorkoutService {
       );
     return await firstValueFrom($observer);
   }
+
+  public async getWorkoutMaxLikes(idCreator: number) {
+    const $observer = this._http
+      .get(`${this.BASE_URL}${API_URLS.WORKOUT}/${idCreator}/max-likes`)
+      .pipe(
+        map((res: any) => {
+          return new WorkoutListModel(res.data);
+        })
+      );
+    return await firstValueFrom($observer);
+  }
 }
