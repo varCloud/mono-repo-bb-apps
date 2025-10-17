@@ -11,7 +11,8 @@
     ></ion-searchbar>
   </div>
   <app-conversation-list
-    [conversations]="this.data.conversations"
+    [userId]="data.userId"
+    [userTypeId]="data.userTypeId"
     (conversationSelected)="onConversationSelected($event)"
   >
   </app-conversation-list>

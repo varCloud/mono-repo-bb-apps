@@ -1,18 +1,21 @@
 <div class="chat-container">
   <div class="chat-header">
     <div class="user-avatar">
-      <img
-        [src]="userInfo?.avatar || 'assets/default-avatar.png'"
-        [alt]="userInfo?.name"
-      />
+      <app-user-avatar
+        [src]="userInfo?.profilePictureUrl!"
+        [size]="'small'"
+        slot="start"
+        alt="user avatar"
+
+      ></app-user-avatar>
     </div>
     <div class="user-info">
-      <div class="user-name">{{ userInfo?.name }}</div>
-      <div class="timestamp">{{ userInfo?.lastSeen }}</div>
+      <div class="user-name">{{userInfo?.firstName}} ({{userInfo?.nickName}})</div>
+      <div class="timestamp">{{ this.userConversationModel.lastMessageDate | date }}</div>
     </div>
-    <ion-button fill="clear">
+    <!-- <ion-button fill="clear">
       <ion-icon slot="icon-only" name="search-outline"></ion-icon>
-    </ion-button>
+    </ion-button> -->
   </div>
 
   <div class="chat-messages">
@@ -45,7 +48,7 @@
       <div
         class="message"
         [ngClass]="{
-          sent: this.userSesion.userId === message.sendMessageUserId,
+          sent: this.userSesion.userId == message.sendMessageUserId,
           received: this.userSesion.userId !== message.sendMessageUserId,
         }"
       >

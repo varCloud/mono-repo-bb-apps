@@ -14,9 +14,10 @@
     [customClass]="'conversation-page'"
     [title]="'conversations.title' | translate"
   >
-    <ion-grid content-body class="ion-no-padding">
+    <ion-grid content-body class="ion-no-padding"  *ngIf="this.sesionService.user$()">
       <app-conversation-list
-        [conversations]="conversations"
+        [userId]="this.sesionService.user$()!.userId"
+        [userTypeId]="this.sesionService.user$()!.userTypeId"
         (conversationSelected)="onConversationSelected($event)"
       >
       </app-conversation-list>
