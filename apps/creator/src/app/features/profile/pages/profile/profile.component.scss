@@ -107,3 +107,10 @@
 .text-danger {
   --color: red !important;
 }
+
+.finish-stripe {
+  border-radius: 5px;
+  ion-label {
+    color: #fff;
+  }
+}

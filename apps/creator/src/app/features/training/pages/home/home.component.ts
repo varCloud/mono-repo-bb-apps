@@ -26,7 +26,12 @@ import {
   IonFabButton,
 } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
-import { CardListComponent, FilterComponent } from '@monorepo-bb-app/ui';
+import {
+  CardListComponent,
+  CardMaxLikesComponent,
+  FilterComponent,
+  OnbordingComponent,
+} from '@monorepo-bb-app/ui';
 import {
   FilterModel,
   KEY_LOCALSTORAGE,
@@ -61,11 +66,14 @@ import { MODAL_RESPONSE } from 'libs/shared/constants/enums';
     IonContent,
     IonHeader,
     CardListComponent,
+    CardMaxLikesComponent,
   ],
 })
 export class HomeComponent implements OnInit {
   workouts = signal<WorkoutListModel[]>([]);
+  workoutMaxLikes = signal<WorkoutListModel | null>(null);
   paginator = signal<Paginator>({} as Paginator);
+  idCreator = signal<number | null>(null);
   filter: FilterModel = new FilterModel({
     showWorkoutTags: true,
     showLevels: true,
@@ -91,6 +99,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getWorkouts();
+    this.getWorkoutMaxLikes();
   }
 
   private async getWorkouts(url?: string, reset = false) {
@@ -106,6 +115,22 @@ export class HomeComponent implements OnInit {
       this.paginator.set(res.paginator);
     } catch (error) {
       this._toastService.error('Error al cargar los entrenamientos', {
+        duration: 3000,
+      });
+    } finally {
+      this._loader.hideLoader();
+    }
+  }
+
+  private async getWorkoutMaxLikes() {
+    this._loader.showLoader();
+    try {
+      const user = await this._localStorage.get(KEY_LOCALSTORAGE.USER);
+      this.idCreator.set(user?.userId || null);
+      const res = await this._workoutService.getWorkoutMaxLikes(user.userId);
+      this.workoutMaxLikes.set(res);
+    } catch (error) {
+      this._toastService.error('Error al cargar los entrenamientos 222', {
         duration: 3000,
       });
     } finally {

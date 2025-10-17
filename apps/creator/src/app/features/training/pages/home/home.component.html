@@ -37,17 +37,9 @@
   <div class="section">
     <div class="section-header">
       <h2>Biblioteca de ejercicios</h2>
-      <ion-button
-        fill="clear"
-        size="small"
-        class="see-all-btn"
-        color="secondary"
-      >
-        Ver todo
-      </ion-button>
     </div>
 
-    <div class="exercise-card featured-card">
+    <!-- <div class="exercise-card featured-card">
       <img
         src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop"
         alt="HIIT Workout"
@@ -66,7 +58,10 @@
         </div>
         <div class="functional-badge">Funcional</div>
       </div>
-    </div>
+    </div> -->
+    @if (workoutMaxLikes()) {
+    <lib-card-max-likes [workout]="workoutMaxLikes()!"></lib-card-max-likes>
+    }
   </div>
   <ion-grid class="workout-grid">
     <ion-row gap="5px">
