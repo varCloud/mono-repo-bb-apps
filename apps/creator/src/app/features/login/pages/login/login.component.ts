@@ -11,7 +11,11 @@ import {
   IonHeader,
 } from '@ionic/angular/standalone';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { HeaderComponent, LayoutContentComponent, LoginFormComponent } from '@monorepo-bb-app/ui';
+import {
+  HeaderComponent,
+  LayoutContentComponent,
+  LoginFormComponent,
+} from '@monorepo-bb-app/ui';
 
 import { LoginService } from '../../services/login.service';
 import {

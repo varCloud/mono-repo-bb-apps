@@ -44,13 +44,13 @@
     <ion-row>
       <ion-col size="12">
         <ion-button (click)="addCard()">Agregar tarjeta</ion-button>
-        <app-onbording [userId]="48"></app-onbording>
+        <!-- <app-onbording [userId]="48"></app-onbording> -->
 
         @if (showPaymentMethod) {
-          <app-add-payment-method
-            customerId="cus_SVkfBmXuRCyS8H"
-            (succesAddPayment)="succesAddPayment($event)"
-          ></app-add-payment-method>
+        <app-add-payment-method
+          customerId="cus_SVkfBmXuRCyS8H"
+          (succesAddPayment)="succesAddPayment($event)"
+        ></app-add-payment-method>
         }
       </ion-col>
     </ion-row>

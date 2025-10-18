@@ -63,9 +63,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {}
 
   openStripeOnboarding() {
-    this._stripeService.openStripeOnboarding(
-      this.sesionService.user$()?.userId!
-    );
+    this.router.navigate(['/stripe-onbording']);
   }
 
   onMenuItemClick(action: string): void {
