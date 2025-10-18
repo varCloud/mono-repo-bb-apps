@@ -41,3 +41,4 @@ export * from './models/workout-response-list';
 export * from './models/goals';
 export * from './models/user-conversation';
 export * from './models/filter.model';
+export * from './models/stripe-status';

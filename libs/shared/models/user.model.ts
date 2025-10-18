@@ -13,7 +13,7 @@ export interface User {
   profilePictureUrl: string;
   lastLogin: Date;
   updatedAt: Date;
-  stripeStatus: boolean;
+  stripeStatus: string;
   categories: Category[];
   billingCycles: BillingCycle[];
   phone?: string;
@@ -60,7 +60,7 @@ export class UserModel implements User {
   profilePictureUrl = '';
   lastLogin = new Date();
   updatedAt = new Date();
-  stripeStatus = false;
+  stripeStatus = 'restricted';
   categories = [];
   billingCycles = [];
 

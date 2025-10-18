@@ -25,12 +25,31 @@ import {
   IonSelectOption,
 } from '@ionic/angular/standalone';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import {  AvatarPickerComponent, ErrorMessageComponent, HeaderComponent, InputPhoneComponent, LayoutContentComponent } from '@monorepo-bb-app/ui';
-import { CompleteResultUpload, CONSTANTS, COUNTRY_CODES, Countrycode, guessFileType, ToastService } from '@monorepo-bb-app/shared';
+import {
+  AvatarPickerComponent,
+  ErrorMessageComponent,
+  HeaderComponent,
+  InputPhoneComponent,
+  LayoutContentComponent,
+} from '@monorepo-bb-app/ui';
+import {
+  CompleteResultUpload,
+  CONSTANTS,
+  COUNTRY_CODES,
+  Countrycode,
+  guessFileType,
+  ToastService,
+} from '@monorepo-bb-app/shared';
 import { finalize } from 'rxjs';
 import { KEY_LOCALSTORAGE, GENDER_OPTIONS } from '@monorepo-bb-app/shared';
 import { Photo } from '@capacitor/camera';
-import { LoaderUIService, LocalStorageService, SesionService, UploadService, UserService } from '@monorepo-bb-app/core';
+import {
+  LoaderUIService,
+  LocalStorageService,
+  SesionService,
+  UploadService,
+  UserService,
+} from '@monorepo-bb-app/core';
 
 @Component({
   selector: 'app-complete-profile',
@@ -87,7 +106,7 @@ export class CompleteProfileComponent implements OnInit {
     private _translate: TranslateService,
     private _uploadService: UploadService,
     private _sesionService: SesionService,
-    private _loader: LoaderUIService,
+    private _loader: LoaderUIService
   ) {
     effect(() => {
       const user = this._sesionService.user$();
@@ -111,7 +130,7 @@ export class CompleteProfileComponent implements OnInit {
     const maxDate = new Date(
       today.getFullYear() - 18,
       today.getMonth(),
-      today.getDate(),
+      today.getDate()
     );
     return maxDate.toISOString();
   }
@@ -160,16 +179,21 @@ export class CompleteProfileComponent implements OnInit {
       .subscribe({
         next: () => {
           this._toast.success(
-          this._translate.instant('create-account-profile.save-success'),{ duration: 1000,},);
-          this._localStorage.set( KEY_LOCALSTORAGE.HAS_NULL_PROFILE_FIELDS,false);
-          this._router.navigate(['/home']);
+            this._translate.instant('create-account-profile.save-success'),
+            { duration: 500 }
+          );
+          this._localStorage.set(
+            KEY_LOCALSTORAGE.HAS_NULL_PROFILE_FIELDS,
+            false
+          );
+          this._router.navigate(['/stripe-onbording']);
         },
         error: (err) => {
           this._toast.error(
             this._translate.instant('create-account-profile.save-error'),
             {
               duration: 1000,
-            },
+            }
           );
         },
       });
@@ -185,7 +209,7 @@ export class CompleteProfileComponent implements OnInit {
       image.path!,
       fileName,
       fileType,
-      'public',
+      'public'
     );
     return result;
   }

@@ -1,1 +1,80 @@
-<ion-button (click)="openStripeOnboarding()">Onbording</ion-button>
+<div>
+  <!-- Header Section -->
+  <div class="header-section">
+    <ion-icon name="card-outline" class="main-icon"></ion-icon>
+    <h1>Habilitar Monetización</h1>
+    <p>
+      Configura tu cuenta de Stripe para recibir pagos por tus rutinas premium
+    </p>
+  </div>
+
+  <!-- Benefits List -->
+  <div class="benefits-list">
+    <div class="benefit-item">
+      <ion-icon name="checkmark-circle" color="success"></ion-icon>
+      <div>
+        <h3>Monetiza tu contenido</h3>
+        <p>Recibe pagos por rutinas y entrenamientos premium</p>
+      </div>
+    </div>
+
+    <div class="benefit-item">
+      <ion-icon name="shield-checkmark" color="success"></ion-icon>
+      <div>
+        <h3>Pagos seguros</h3>
+        <p>Stripe garantiza transacciones seguras y confiables</p>
+      </div>
+    </div>
+
+    <div class="benefit-item">
+      <ion-icon name="trending-up" color="success"></ion-icon>
+      <div>
+        <h3>Crece tu negocio</h3>
+        <p>Amplía tus ingresos como entrenador profesional</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Info Card -->
+  <ion-card>
+    <ion-card-content>
+      <div class="info-header">
+        <ion-icon name="information-circle" color="primary"></ion-icon>
+        <span>Información importante</span>
+      </div>
+      <p>
+        Una vez configurada tu cuenta de Stripe, podrás crear contenido premium
+        y recibir pagos directamente en tu cuenta bancaria.
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button
+    expand="block"
+    size="large"
+    (click)="startStripeOnboarding()"
+    color="tertiary"
+  >
+    Configurar Stripe
+  </ion-button>
+
+  <ion-button
+    expand="block"
+    fill="clear"
+    size="large"
+    (click)="skipForNow()"
+    class="secondary-button"
+  >
+    Saltar por ahora
+  </ion-button>
+
+  <!-- Footer Note -->
+  <div class="footer-note">
+    <ion-text color="medium">
+      <p>
+        <ion-icon name="lock-closed"></ion-icon>
+        Tus datos están <strong>protegidos</strong> con Stripe
+      </p>
+    </ion-text>
+  </div>
+</div>

@@ -10,6 +10,13 @@ export const appRoutes: Route[] = [
   ...loginRoutes,
   ...userRoutes,
   {
+    path: 'stripe-onbording',
+    loadComponent: () =>
+      import(
+        './features/profile/pages/stripe-onbording/stripe-onbording.component'
+      ).then((m) => m.StripeOnbordingComponent),
+  },
+  {
     path: '',
     redirectTo: 'onbording',
     pathMatch: 'full',
@@ -18,5 +25,4 @@ export const appRoutes: Route[] = [
     path: '**',
     redirectTo: 'workouts',
   },
-    
 ];

@@ -1,0 +1,106 @@
+.header-section {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.main-icon {
+  font-size: 4rem;
+  color: var(--ion-color-primary);
+  margin-bottom: 1rem;
+}
+
+.header-section h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  color: var(--ion-text-color);
+}
+
+.header-section p {
+  font-size: 1rem;
+  color: var(--ion-color-medium);
+  margin: 0;
+}
+
+.benefits-list {
+  padding: 0 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  background: var(--ion-color-light);
+  border-radius: 8px;
+}
+
+.benefit-item ion-icon {
+  font-size: 1.5rem;
+  margin-top: 0.25rem;
+  flex-shrink: 0;
+}
+
+.benefit-item h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem 0;
+  color: var(--ion-text-color);
+}
+
+.benefit-item p {
+  font-size: 0.875rem;
+  color: var(--ion-color-medium);
+  margin: 0;
+}
+
+ion-card {
+  margin: 0 1rem 1.5rem 1rem;
+}
+
+.info-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  color: var(--ion-color-primary);
+}
+
+.info-header ion-icon {
+  font-size: 1.25rem;
+}
+
+ion-card-content p {
+  margin: 0;
+  color: var(--ion-color-medium);
+  line-height: 1.4;
+}
+
+.primary-button {
+  margin-bottom: 0.75rem;
+}
+
+.secondary-button {
+  margin-bottom: 1rem;
+}
+
+.footer-note {
+  text-align: center;
+  padding: 0.75rem;
+}
+
+.footer-note p {
+  font-size: 0.75rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.footer-note ion-icon {
+  font-size: 0.875rem;
+}

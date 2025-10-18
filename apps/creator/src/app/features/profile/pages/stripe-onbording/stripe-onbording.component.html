@@ -1,0 +1,18 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Configurar Pagos</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="create-account-content">
+  <app-layout-content>
+    <ion-grid content-body>
+      @if(sesion.user$()){
+      <lib-onbording
+        [userId]="sesion.user$()?.userId!"
+        (skipOnboarding)="skipOnbording()"
+        (isSuccesOnbording)="isSuccesOnbording($event)"
+      ></lib-onbording>
+      }
+    </ion-grid>
+  </app-layout-content>
+</ion-content>
