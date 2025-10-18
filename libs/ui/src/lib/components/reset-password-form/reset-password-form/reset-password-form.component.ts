@@ -12,7 +12,7 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { CONSTANTS } from '@monorepo-bb-app/shared';
 import { PATTERNS } from '@monorepo-bb-app/shared';
-import { ForgotPasswordService, LoaderService } from '@monorepo-bb-app/core';
+import { ForgotPasswordService, LoaderUIService } from '@monorepo-bb-app/core';
 import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
 
 @Component({
@@ -35,7 +35,7 @@ export class ResetPasswordFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private forgotPasswordService: ForgotPasswordService,
-    private _loaderService: LoaderService,
+    private _loaderService: LoaderUIService,
   ) {
     this.resetPasswordForm = this.formBuilder.group(
       {
@@ -84,7 +84,7 @@ export class ResetPasswordFormComponent implements OnInit {
 
       this.forgotPasswordService.resetPassword(Payload).subscribe(
         (response:any) => {
-          this._loaderService.hideSpinner();
+          this._loaderService.hideLoader();
           this.resetSuccess.emit(true);
         },
         (error:any) => {

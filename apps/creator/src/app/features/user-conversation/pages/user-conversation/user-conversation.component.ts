@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, effect, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { ConversationListComponent, HeaderSearchComponent, LayoutContentComponent
@@ -11,6 +11,8 @@ import { ModalController, IonicModule } from '@ionic/angular';
 
 import { Router } from '@angular/router';
 import { UserConversationModalComponent } from 'libs/ui/src/lib/components/user-conversation-modal/user-conversation-modal.component';
+import { SesionService } from '@monorepo-bb-app/core';
+import { NgItemLabelDirective } from "@ng-select/ng-select";
 
 @Component({
   selector: 'app-user-conversation',
@@ -26,7 +28,8 @@ import { UserConversationModalComponent } from 'libs/ui/src/lib/components/user-
     LayoutContentComponent,
     HeaderSearchComponent,
     ConversationListComponent,
-  ],
+    NgItemLabelDirective
+],
 })
 export class UserConversationComponent implements OnInit, OnDestroy {
 
@@ -35,24 +38,16 @@ export class UserConversationComponent implements OnInit, OnDestroy {
   constructor(
     private modalCtrl: ModalController,
     private router: Router,
+    public sesionService: SesionService
   ) {
-    // Mock data for testing
-    this.conversations = [
-      {
-        name: 'Danny Hopkins',
-        email: 'dannylove@gmail.com',
-        date: '08:43',
-        avatar:
-          'https://bb-app-bucket-images.s3.amazonaws.com/uploads%2F75%2F1000127915.1756618728336_1756618743696_f17iz8vhqtv.jpeg',
-      },
-      {
-        name: 'Bobby Langford',
-        message: 'Super padre el entrenamiento 😊 ❤️',
-        date: 'Lun',
-        avatar:
-          'https://bb-app-bucket-images.s3.amazonaws.com/uploads%2F75%2F1000127915.1756618728336_1756618743696_f17iz8vhqtv.jpeg',
-      },
-    ];
+
+    effect(() => {
+      this.sesionService.user$()
+      console.log('Usuario en sesión:', this.sesionService.user$());
+      
+    });
+    
+
   }
 
   ngOnInit(): void {
@@ -66,7 +61,7 @@ export class UserConversationComponent implements OnInit, OnDestroy {
   onConversationSelected(conversation: any) {
     // Aquí puedes manejar el evento cuando se selecciona una conversación
     console.log('Conversación seleccionada:', conversation);
-    this.router.navigate(['/home/user-chat']);
+    this.router.navigate(['/home/user-chat'] , { state: { conversation } });
   }
 
   async openDetailModal(data?: any) {

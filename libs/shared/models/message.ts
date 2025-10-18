@@ -41,12 +41,12 @@ export class MessageModel implements Message {
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   }
 
-  public createPayload() {
+  public createPayload(creatorUserId: number, athleteUserId: number) {
     return {
       message: this.content,
       sendMessageUserId: this.sendMessageUserId,
-      creatorUserId: 75,
-      athleteUserId: 77,
+      creatorUserId: creatorUserId,
+      athleteUserId: athleteUserId,
     };
   }
 }
