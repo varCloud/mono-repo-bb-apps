@@ -24,6 +24,16 @@
           'login.register' | translate
         }}</ion-text>
       </ion-button>
+            <ion-row class="version-text">
+        <ion-col>
+          <ion-text color="medium" class="version-label">{{
+            'login.app-version' | translate}} {{env.appVersion}}</ion-text>
+        </ion-col>
+        <ion-col>
+          <ion-text color="medium" class="version-label">{{
+            'login.env' | translate}} {{env.production}}</ion-text>
+        </ion-col>
+      </ion-row>
     </div>
   </app-layout-content>
 </ion-content>

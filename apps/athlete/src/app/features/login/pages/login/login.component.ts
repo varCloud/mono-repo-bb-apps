@@ -15,6 +15,7 @@ import {
   LoginCredentials,
   UserResponse,
   ToastService,
+  environment,
 } from '@monorepo-bb-app/shared';
 import { Router, RouterLink } from '@angular/router';
 import { LoaderUIService } from '@monorepo-bb-app/core';
@@ -41,6 +42,7 @@ import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
 })
 export class LoginComponent implements OnInit {
   public userType =  ENUM_TYPE_USER.ATHLETE;
+  public env ={...environment}
   constructor(
     private _loginService: LoginService,
     private _toastService: ToastService,

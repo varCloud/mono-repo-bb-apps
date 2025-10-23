@@ -1,6 +1,6 @@
-<div class="avatar-profile" [class]="size">
+<div class="avatar-profile" [class]="size" (click)="onEditClick()">
   <ion-avatar>
-    <img [src]="imageUrl || defaultImage" [alt]="'Profile Photo'" />
+    <img [src]="imageUrl || defaultImage" [alt]="'Profile Photo'"  />
   </ion-avatar>
 
   <ion-button

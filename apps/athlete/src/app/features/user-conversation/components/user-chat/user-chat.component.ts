@@ -1,8 +1,8 @@
-import { AfterViewInit, Component, effect, Input, OnInit } from '@angular/core';
+import { Component, effect, Input, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Navigation, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 
 import { Message, MessageModel, ENUM_MESSAGE_STATUS, UserConversationModel, UserSummary } from '@monorepo-bb-app/shared';
@@ -22,22 +22,19 @@ import { UserAvatarComponent } from '@monorepo-bb-app/ui';
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule, UserAvatarComponent],
 })
-export class UserChatComponent  {
-
+export class UserChatComponent {
   @Input() messages: Message[] = [];
   public userInfo: UserSummary | null = null;
   public userSesion!: User;
   public paginator!: PaginatorModel;
   public userConversationModel!: UserConversationModel;
   public newMessage: string = '';
-  
   constructor(
     private _userConectionService: UserConversationService,
     private _sesionService: SesionService,
     private _loaderUIService: LoaderUIService
   ) {
     this._serUserInfo();
-
     effect(() => {
       const user = this._sesionService.user$();
       this.userSesion = user as User;

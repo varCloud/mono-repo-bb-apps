@@ -172,6 +172,7 @@ export class CompleteProfileComponent implements OnInit {
       isoCode: this.isoCode(),
       genderId: this.form.value.genderId || 3,
       profilePictureUrl: imageUrl,
+      pushNotificationToken: await this._localStorage.get(KEY_LOCALSTORAGE.TOKEN_PUSH) || '',
     };
     this._userService
       .updateUser(userId, payload)

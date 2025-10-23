@@ -1,13 +1,15 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
+import { cameraOutline, send, sendSharp } from 'ionicons/icons';
+import { addIcons } from 'ionicons';
 
 @Component({
   selector: 'app-avatar-profile',
   templateUrl: './avatar-profile.component.html',
   styleUrls: ['./avatar-profile.component.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule],
+  imports: [CommonModule, IonicModule ],
 })
 export class AvatarProfileComponent {
   @Input() imageUrl?: string;
@@ -16,8 +18,12 @@ export class AvatarProfileComponent {
   @Input() disabled: boolean = false;
   @Output() changeImage = new EventEmitter<void>();
 
+  constructor() {
+      addIcons({ sendSharp , cameraOutline });
+  }
+
   get defaultImage(): string {
-    return 'assets/images/default-avatar.png';
+    return 'assets/icon/default-avatar.png';
   }
 
   get avatarSize(): string {
@@ -34,4 +40,6 @@ export class AvatarProfileComponent {
       this.changeImage.emit();
     }
   }
+
+   
 }

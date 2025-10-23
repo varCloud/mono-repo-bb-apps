@@ -31,10 +31,10 @@ import { NgItemLabelDirective } from "@ng-select/ng-select";
     NgItemLabelDirective
 ],
 })
-export class UserConversationComponent implements OnInit, OnDestroy {
+export class UserConversationComponent{
 
   conversations: any[] = []; // Aquí definiremos el tipo correcto más adelante
-
+  reload: boolean = true;
   constructor(
     private modalCtrl: ModalController,
     private router: Router,
@@ -43,24 +43,23 @@ export class UserConversationComponent implements OnInit, OnDestroy {
 
     effect(() => {
       this.sesionService.user$()
-      console.log('Usuario en sesión:', this.sesionService.user$());
-      
     });
     
 
   }
 
-  ngOnInit(): void {
-    // Inicialización del componente
+  ionViewWillEnter() {
+      this.reload = true;
   }
 
-  ngOnDestroy(): void {
-    // Limpieza al destruir el componente
+  ionViewWillLeave() {
+    this.reload = false;
   }
+
 
   onConversationSelected(conversation: any) {
     console.log('Conversación seleccionada:', conversation);
-    this.router.navigate(['/home/user-chat'] , { state: { conversation }, replaceUrl:true });
+    this.router.navigate(['/home/user-chat'] , { state: { conversation } });
   }
 
   async openDetailModal(data?: any) {

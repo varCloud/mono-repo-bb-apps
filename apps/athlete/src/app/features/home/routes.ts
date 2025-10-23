@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { authGuard } from '@monorepo-bb-app/core';
 import { profileRoutes } from '../profile/profile.routes';
+import { userConversationRoutes } from '../user-conversation/user-conversation.routes';
 
 export const homeRoutes: Routes = [
   {
@@ -10,6 +11,7 @@ export const homeRoutes: Routes = [
       import('./pages/home/home.component').then((m) => m.HomeComponent),
     children: [
       ...profileRoutes,
+      ...userConversationRoutes
     ]
     //   {
     //     path: '',

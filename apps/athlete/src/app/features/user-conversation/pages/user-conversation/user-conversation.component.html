@@ -1,0 +1,26 @@
+<div class="header-container">
+  <app-header-search (clickSearch)="openDetailModal()"></app-header-search>
+  <section class="header-info-container">
+    <span class="title">Mensajes</span>
+    <span class="subTitle"
+      >¿Quisieras reportar algún usuario?
+      <span class="contact-link">Contáctanos</span></span
+    >
+  </section>
+</div>
+
+<ion-content >
+  <app-layout-content
+    [customClass]="'conversation-page'"
+    [title]="'conversations.title' | translate"
+  >
+    <ion-grid content-body class="ion-no-padding"  *ngIf="this.sesionService.user$() && reload">
+      <app-conversation-list
+        [userId]="this.sesionService.user$()!.userId"
+        [userTypeId]="this.sesionService.user$()!.userTypeId"
+        (conversationSelected)="onConversationSelected($event)"
+      >
+      </app-conversation-list>
+    </ion-grid>
+  </app-layout-content>
+</ion-content>
