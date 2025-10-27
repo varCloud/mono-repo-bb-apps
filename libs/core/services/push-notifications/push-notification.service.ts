@@ -77,6 +77,11 @@ export class PushNotificationService {
         pushNotificationToken: await this._localStorage.get(KEY_LOCALSTORAGE.TOKEN_PUSH) || '',
       };
 
+      if(payload.pushNotificationToken == '') {
+        this.logger.info('No hay token push guardado en local storage, no se actualiza el token push');
+        return;
+      }
+
       this.logger.info('Actualizando token push para usuario', { userId: user.userId, token });
       this._userService.updateUser(user.userId, payload).pipe(take(1)).subscribe({
         next: () => {
@@ -101,7 +106,7 @@ export class PushNotificationService {
       duration: 3000,
       buttons: [
         {
-          text: 'OK',
+          text: 'Aceptar',
           role: 'cancel',
         },
       ],
