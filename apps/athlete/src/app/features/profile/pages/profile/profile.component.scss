@@ -53,6 +53,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    gap: 8px;
     .container-card {
       display: flex;
       flex-direction: column;
@@ -61,8 +62,7 @@
       border-radius: 8px;
       background: #FFF;
       height: 70px;
-      flex-shrink: 0;
-      width: 116px;
+      width: 100%;
       padding: 10px;
     }
   }

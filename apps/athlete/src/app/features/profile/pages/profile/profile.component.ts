@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, effect, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LayoutContentComponent , ItemListComponent , AvatarProfileComponent} from '@monorepo-bb-app/ui';
+import { LayoutContentComponent , ItemListComponent , AvatarProfileComponent, UserAvatarComponent} from '@monorepo-bb-app/ui';
 import {
   PROFILE_MENU_ITEMS,
   OPTIONS_PROFILE_MENU
@@ -33,6 +33,7 @@ import { LoaderUIService, LocalStorageService, SesionService } from '@monorepo-b
     LayoutContentComponent,
     ItemListComponent,
     AvatarProfileComponent,
+    UserAvatarComponent
   ],
 })
 export class ProfileComponent implements OnInit {
@@ -44,6 +45,11 @@ export class ProfileComponent implements OnInit {
     private localStorageService: LocalStorageService,
     public sesionService: SesionService,
   ) {
+
+    effect(() => {
+      this.sesionService.user$();
+      console.log('Usuario en sesión:', this.sesionService.user$());
+    });
     addIcons({
       trashSharp,
       chatbox,

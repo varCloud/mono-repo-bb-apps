@@ -22,6 +22,7 @@ import {
   LoginCredentials,
   UserResponse,
   ToastService,
+  environment,
 } from '@monorepo-bb-app/shared';
 import { Router, RouterLink } from '@angular/router';
 import { LoaderUIService } from '@monorepo-bb-app/core';
@@ -55,6 +56,7 @@ export class LoginComponent implements OnInit {
     private _loader: LoaderUIService
   ) {}
   public userType = ENUM_TYPE_USER.CREATOR;
+  public env = { ...environment };
   ngOnInit() {}
 
   public async onLogin(credentials: LoginCredentials) {

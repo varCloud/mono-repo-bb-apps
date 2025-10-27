@@ -2,7 +2,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'io.bb.pp.cloud',
-  appName: 'body booster',
+  appName: 'BB Creator',
   webDir: '../../dist/apps/creator/browser',
   plugins: {
     SplashScreen: {
@@ -14,6 +14,12 @@ const config: CapacitorConfig = {
   },
   android: {
     allowMixedContent: true,
+    buildOptions: {
+      keystorePath: 'F:/Documents/BlueCloud/Proyectos/BB/key-android-creator/keystore.jks',
+      keystorePassword: 'bb2025',
+      keystoreAlias: 'body-booster',
+      keystoreAliasPassword: 'bb2025',
+    }
   },
 };
 

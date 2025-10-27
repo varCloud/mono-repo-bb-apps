@@ -21,7 +21,7 @@ export class ConversationListComponent implements OnInit {
 
   userId = input.required<number>();
   userTypeId = input.required<number>();
-  public  conversations: UserConversationModel[] = [];
+  public conversations: UserConversationModel[] = [];
   public userPropConversation : string = 'creatorUser'
 
   constructor(
@@ -32,6 +32,11 @@ export class ConversationListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getConversations();
+    this.userPropConversation = this.userTypeId() !== ENUM_TYPE_USER.ATHLETE ? 'athleteUser' : 'creatorUser';
+  }
+
+   ionViewWillEnter() {
     this.getConversations();
     this.userPropConversation = this.userTypeId() !== ENUM_TYPE_USER.ATHLETE ? 'athleteUser' : 'creatorUser';
   }

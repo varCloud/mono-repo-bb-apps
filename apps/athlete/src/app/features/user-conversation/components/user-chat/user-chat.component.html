@@ -1,0 +1,74 @@
+<div class="chat-container">
+  <div class="chat-header">
+    <div class="user-avatar">
+      <app-user-avatar
+        [src]="userInfo?.profilePictureUrl!"
+        [size]="'small'"
+        slot="start"
+        alt="user avatar"
+
+      ></app-user-avatar>
+    </div>
+    <div class="user-info">
+      <div class="user-name">{{userInfo?.firstName}} ({{userInfo?.nickName}})</div>
+      <div class="timestamp">{{ this.userConversationModel.lastMessageDate | date }}</div>
+    </div>
+    <!-- <ion-button fill="clear">
+      <ion-icon slot="icon-only" name="search-outline"></ion-icon>
+    </ion-button> -->
+  </div>
+
+  <div class="chat-messages">
+    <ion-refresher
+      slot="fixed"
+      [mode]="'ios'"
+      (ionRefresh)="loadMoreMessages($event)"
+      position="top"
+    >
+      <ion-refresher-content
+        pullingText="Desliza para cargar más mensajes"
+        refreshingText="Cargando..."
+      >
+      </ion-refresher-content>
+    </ion-refresher>
+    <ng-container
+      *ngFor="let message of messages.slice().reverse(); let i = index"
+    >
+      <!-- Date divider -->
+      <div
+        class="date-divider"
+        *ngIf="
+          shouldShowDateDivider(message, messages.slice().reverse()[i - 1])
+        "
+      >
+        <span>{{ formatDateDivider(message.sentDate) }} </span>
+      </div>
+
+      <!-- Message -->
+      <div
+        class="message"
+        [ngClass]="{
+          sent: this.userSesion.userId == message.sendMessageUserId,
+          received: this.userSesion.userId !== message.sendMessageUserId,
+        }"
+      >
+        <div class="message-content">{{ message.content }}</div>
+        <div class="message-time">{{ message.time }}</div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="chat-input">
+    <ion-textarea
+      placeholder="Mensaje"
+      [autoGrow]="true"
+      [rows]="1"
+      class="message-textarea"
+      [(ngModel)]="newMessage"
+    >
+    </ion-textarea>
+    <ion-button fill="clear" color="primary" (click)="sendMessage()">
+      <ion-icon slot="icon-only" name="send-sharp"></ion-icon>
+    </ion-button>
+  </div>
+</div>

@@ -25,6 +25,7 @@ export interface User {
   weight?: string;
   height?: string;
   levelId?: number;
+  pushNotificationToken?: string;
 }
 
 export interface Category {
@@ -63,6 +64,7 @@ export class UserModel implements User {
   stripeStatus = 'restricted';
   categories = [];
   billingCycles = [];
+  nickName?: string | undefined;
 
   constructor(data: any) {
     this.userId = data.userId || 0;
@@ -82,5 +84,6 @@ export class UserModel implements User {
     this.stripeStatus = data.stripeStatus || false;
     this.categories = data.categories || [];
     this.billingCycles = data.billingCycles || [];
+    this.nickName = data.nickName || '';
   }
 }
