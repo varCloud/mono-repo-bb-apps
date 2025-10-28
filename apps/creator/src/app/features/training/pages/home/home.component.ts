@@ -131,7 +131,9 @@ export class HomeComponent implements OnInit {
       const user = await this._localStorage.get(KEY_LOCALSTORAGE.USER);
       this.idCreator.set(user?.userId || null);
       const res = await this._workoutService.getWorkoutMaxLikes(user.userId);
-      this.workoutMaxLikes.set(res);
+      if (res.workoutId > 0) {
+        this.workoutMaxLikes.set(res);
+      }
     } catch (error) {
       this._toastService.error('Error al cargar los entrenamientos 222', {
         duration: 3000,

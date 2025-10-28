@@ -36,29 +36,8 @@
   <!-- Biblioteca de ejercicios -->
   <div class="section">
     <div class="section-header">
-      <h2>Biblioteca de ejercicios</h2>
+      <h2 class="title">Biblioteca de ejercicios</h2>
     </div>
-
-    <!-- <div class="exercise-card featured-card">
-      <img
-        src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop"
-        alt="HIIT Workout"
-      />
-      <div class="card-overlay">
-        <div class="card-content">
-          <h3>Hiit Workout 1</h3>
-          <div class="card-stats">
-            <div class="stat">
-              <ion-icon name="heart"></ion-icon>
-              <span>8.300 seguidores</span>
-            </div>
-            <span class="separator">•</span>
-            <span class="difficulty-text">Intermedio</span>
-          </div>
-        </div>
-        <div class="functional-badge">Funcional</div>
-      </div>
-    </div> -->
     @if (workoutMaxLikes()) {
     <lib-card-max-likes [workout]="workoutMaxLikes()!"></lib-card-max-likes>
     }
@@ -72,6 +51,20 @@
       }
     </ion-row>
   </ion-grid>
+  @if (workouts().length === 0 && !workoutMaxLikes()){
+  <div class="empty-section">
+    <img
+      src="/assets/images/empty/ejercices.png"
+      alt="No hay entrenamientos"
+      class="empty-image"
+    />
+    <p class="empty-title">Actualmente no tienes entrenamientos.</p>
+    <p class="empty-subtitle">
+      Da clic en el botón para crear tu primer entrenamiento .
+    </p>
+  </div>
+  }
+
   <ion-fab slot="fixed" vertical="bottom" horizontal="center">
     <ion-button
       expand="block"
