@@ -98,33 +98,67 @@
   }
 
   .chat-input {
-    padding: 1rem;
+    padding: 0.75rem 1rem;
     background-color: white;
     border-top: 1px solid #e0e0e0;
-    display: flex;
-    align-items: flex-end;
-    gap: 0.5rem;
 
-    ion-textarea {
-      flex: 1;
-      --padding-start: 1rem;
-      --padding-end: 1rem;
-      --background: #f5f5f5;
-      --border-radius: 20px;
-      min-height: 40px;
-      max-height: 120px;
-      margin: 0;
+    .input-container {
+      display: flex;
+      align-items: flex-end;
+      gap: 0.5rem;
+      background-color: #f8f9fa;
+      border-radius: 24px;
+      padding: 0.5rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 
-      &::part(textarea) {
-        margin: 8px 0;
-        min-height: 24px;
+      ion-textarea {
+        flex: 1;
+        background: transparent;
+        --padding-start: 0.75rem;
+        --padding-end: 0.75rem;
+        --background: transparent;
+        --border-radius: 0;
+        margin: 0;
+        font-size: 0.95rem;
+
+        &::part(textarea) {
+          margin: 0;
+          padding: 8px 0;
+          min-height: 24px;
+          max-height: 120px;
+        }
       }
-    }
 
-    ion-button {
-      --padding-start: 1rem;
-      --padding-end: 1rem;
-      margin-bottom: 4px;
+      .actions {
+        display: flex;
+        align-items: center;
+        
+        .send-button {
+          --padding-start: 0.5rem;
+          --padding-end: 0.5rem;
+          margin: 0;
+          height: 36px;
+          width: 36px;
+          --border-radius: 50%;
+          --background: var(--ion-color-primary);
+          --background-activated: var(--ion-color-primary-shade);
+
+          &:not([disabled]) {
+            ion-icon {
+              color: var(--ion-color-primary);
+            }
+          }
+
+          &[disabled] {
+            opacity: 0.5;
+          }
+
+          ion-icon {
+            font-size: 1.2rem;
+            margin-left: 2px;
+          }
+        }
+      }
     }
   }
 }

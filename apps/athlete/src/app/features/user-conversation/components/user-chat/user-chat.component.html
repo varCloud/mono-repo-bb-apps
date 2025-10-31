@@ -58,16 +58,21 @@
   </div>
 
   <div class="chat-input">
-    <ion-textarea
-      placeholder="Mensaje"
-      [autoGrow]="true"
-      [rows]="1"
-      class="message-textarea"
-      [(ngModel)]="newMessage"
-    >
-    </ion-textarea>
-    <ion-button fill="clear" color="primary" (click)="sendMessage()">
-      <ion-icon slot="icon-only" name="send-sharp"></ion-icon>
-    </ion-button>
+    <div class="input-container">
+      <ion-textarea
+        placeholder="Escribe un mensaje..."
+        [autoGrow]="true"
+        [rows]="1"
+        class="message-textarea"
+        [(ngModel)]="newMessage"
+        (keydown.enter)="onEnterPress($event)"
+      >
+      </ion-textarea>
+      <div class="actions">
+        <ion-button fill="clear" class="send-button" color="primary" (click)="sendMessage()" [disabled]="!newMessage?.trim()">
+          <ion-icon [slot]="'icon-only'" name="send-sharp"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
   </div>
 </div>
