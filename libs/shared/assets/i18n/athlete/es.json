@@ -153,7 +153,7 @@
     "confirm-password": "Confirmar contraseña",
     "passwords-match": "Las contraseñas no coinciden"
   },
-   "user-create-account": {
+  "user-create-account": {
     "have-account": "¿Tienes una cuenta?",
     "title": "Crear cuenta  ",
     "create-account": "Crear cuenta",
@@ -162,11 +162,17 @@
   "mail": "Correo electrónico",
   "mail-placeholder": "Escribe un correo electrónico",
   "password": "Contraseña",
-    "otp": {
+  "otp": {
     "not-received": "¿Aún no lo has recibido?",
     "resend": "Reenviar código",
     "subtitle": "Se ha enviado un código a tu correo {{email}}",
     "title": "Ingresa el código de confirmación",
-    "valid":" El código es válido"
-  }
+    "valid": " El código es válido"
+  },
+  "athlete": {
+    "steps-onboarding.step-1-title": "Encuentra a tus entrenadores favoritos en una sola plataforma",
+    "steps-onboarding.step-2-title": "Descubre más de 1000 rutinas online y clases que se adaptan a tus necesidades",
+    "steps-onboarding.step-3-title": "Suscríbete a tu entrenador favorito y comienza tu vida saludable"
+  },
+  "next": "Siguiente"
 }

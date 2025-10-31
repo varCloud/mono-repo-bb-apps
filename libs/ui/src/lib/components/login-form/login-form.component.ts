@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, OnChanges, output, SimpleChanges } from '@angular/core';
 import {
   FormBuilder,
   ReactiveFormsModule,
@@ -34,7 +34,7 @@ import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
   ],
 })
 export class LoginFormComponent {
-  // Outputs siguiendo estándares de la app
+  
   loginSubmit = output<LoginCredentials>();
   recoverPassword = output<void>();
   usertype = input<ENUM_TYPE_USER>();

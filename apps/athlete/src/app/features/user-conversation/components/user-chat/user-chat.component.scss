@@ -31,7 +31,13 @@
     flex: 1;
     padding: 1rem;
     overflow-y: auto;
-
+    
+    .messages-container {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      overflow-y: auto;
+    }
     .date-divider {
       text-align: center;
       margin: 1rem 0;
