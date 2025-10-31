@@ -1,0 +1,24 @@
+<ion-item lines="full">
+  @if (backLink()!=='') {
+    <ion-button size = "small" [href]= "backLink()" fill="clear">
+      <ion-icon [name]="leftIcon()" slot="start" aria-hidden="true" color="gray"></ion-icon>
+    </ion-button>
+  }
+  @if(title()!==''){
+    <ion-label>
+      <div class="title">{{ title() }}</div>
+    </ion-label>
+  }
+  <ion-buttons slot="end">
+  @if(emailLink()!==''){
+    <ion-button  [href]="'mailto:' + emailLink()" fill="clear">
+      <ion-icon slot="icon-only" [name]="emailIcon()" color="primary"></ion-icon>
+    </ion-button>
+  }
+  @if(phoneLink()!==''){
+    <ion-button  [href]="'tel:' + phoneLink()" fill="clear">
+      <ion-icon slot="icon-only" [name]="phoneIcon()" color="primary"></ion-icon>
+    </ion-button>
+  }
+  </ion-buttons>
+</ion-item>

@@ -1,0 +1,19 @@
+.search-component-container {
+  padding: 16px;
+  background: var(--ion-background-color, #f8f8f8);
+}
+
+.search-component-title {
+  font-size: 1.3em;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: var(--ion-text-color, #333);
+}
+
+ion-searchbar {
+  --background: var(--ion-color-light, #ffffff);
+  --border-radius: 8px;
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  padding: 0;
+}

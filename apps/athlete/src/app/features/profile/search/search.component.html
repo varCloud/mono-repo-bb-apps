@@ -1,0 +1,15 @@
+<div class="search-component-container">
+  <ion-text>
+    <h2 class="search-component-title">{{ headerTitle }}</h2>
+  </ion-text>
+
+  <ion-searchbar
+    [placeholder]="placeholder"
+    [debounce]="debounce"
+    [showClearButton]="'always'"
+    [(ngModel)]="currentInputValue"
+    (ionInput)="onSearchInput($event)"
+    (ionSearch)="onSearchSubmit($event)"
+    (ionClear)="onSearchClear()">
+  </ion-searchbar>
+</div>

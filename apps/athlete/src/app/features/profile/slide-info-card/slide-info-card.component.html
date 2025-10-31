@@ -1,0 +1,11 @@
+<div class="slider-container">
+  <app-info-card
+    *ngFor="let card of cards"
+    [color]="card.color"
+    [icon]="card.icon"
+    [title]="card.title"
+    [subtitle]="card.subtitle"
+    [isSelected]="card.title === selectedCardTitle"
+    (cardClicked)="onCardClicked($event)">
+  </app-info-card>
+</div>

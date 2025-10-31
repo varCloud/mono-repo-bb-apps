@@ -1,0 +1,69 @@
+/* Contenedor principal */
+.faq-container {
+  padding: 16px;
+}
+
+/* Encabezado (Título y "View all") */
+.faq-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+
+  h2 {
+    font-size: 1.3rem; // 1.3em
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .view-all-button {
+    font-size: 0.9rem; // 0.9em
+    font-weight: 500;
+    cursor: pointer; // Indica que es clickeable
+  }
+}
+
+/* Lista que contiene las tarjetas */
+.faq-list {
+  background: transparent;
+  padding: 0;
+}
+
+/* Envoltura de cada tarjeta (para la sombra y bordes) */
+.faq-item-wrapper {
+  margin-bottom: 12px;
+  border-radius: 12px;
+  overflow: hidden; // Para que el ion-item respete el borde redondeado
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); // Sombra suave
+}
+
+/* La barra de la pregunta */
+.faq-question {
+  --background: #ffffff; // Fondo blanco para la pregunta
+  --border-radius: 0;
+  --inner-padding-bottom: 12px;
+  --inner-padding-top: 12px;
+
+  ion-label {
+    font-weight: 500;
+  }
+}
+
+/* El contenido de la respuesta */
+.faq-answer {
+  background: #ffffff; // Fondo blanco
+  padding: 4px 16px 16px 16px; // Espaciado interno
+  font-size: 0.9rem; // 0.9em
+  color: #666;
+  line-height: 1.5;
+
+  p {
+    margin: 0;
+  }
+}
+
+/* Asegura que el acordeón no tenga fondo ni sombra propia */
+ion-accordion-group {
+  background: transparent;
+  box-shadow: none;
+}

@@ -1,0 +1,82 @@
+ion-card {
+  height: 135px; // Altura fija para todas las tarjetas
+  margin: 8px; // Margen alrededor de cada tarjeta
+  border-radius: 12px; // Bordes redondeados
+  display: flex; // Para centrar el contenido verticalmente
+  justify-content: center; // Para centrar el contenido horizontalmente
+  align-items: center; // Para centrar el contenido verticalmente
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); // Sombra suave
+
+  // Aquí se usan las variables CSS para el fondo
+  background: var(--background, var(--ion-background-color));
+  color: var(--ion-color-light-contrast, #fff); // Color del texto (blanco por defecto)
+
+  ion-card-content {
+    padding: 16px; // Espaciado interno
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%; // Ocupa toda la altura de la tarjeta
+  }
+
+  ion-icon {
+    font-size: 3em; // Tamaño del icono
+    margin-bottom: 8px; // Espacio entre icono y texto
+  }
+
+  .card-subtitle {
+    font-size: 0.9em;
+    font-weight: 400;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.8); // Color del subtítulo (más tenue)
+  }
+
+  .card-title {
+    font-size: 1.1em;
+    font-weight: 700;
+    margin: 4px 0 0 0;
+    color: var(--ion-color-light-contrast, #fff); // Color del título (blanco)
+  }
+}
+
+// Sobreescribir el color del texto si el fondo es claro
+ion-card[style*="--background: var(--ion-color-light)"],
+ion-card[style*="--background: #E0F7FA"] { /* Ejemplo si usas un color claro específico */
+  .card-subtitle, .card-title {
+    color: var(--ion-color-dark-contrast, #333);
+  }
+}
+
+// Color del icono para fondos claros
+ion-icon[color="dark"] {
+  color: var(--ion-color-dark-contrast, #333) !important;
+}
+
+// Asegurarse que el ripple effect no sobresalga si tienes overflow oculto
+.ripple-parent {
+  position: relative;
+  overflow: hidden;
+}
+
+ion-card {
+  // ... (todos tus estilos existentes)
+
+  // Añade una transición para que el contorno aparezca suavemente
+  transition: outline 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+/* * ¡ESTE BLOQUE ES NUEVO!
+ * Define el estilo para la tarjeta cuando tiene la clase '.selected'
+*/
+ion-card.selected {
+  /* Usamos 'outline' en lugar de 'border' para no afectar
+    el tamaño o la posición de la tarjeta.
+  */
+  outline: 3px solid var(--ion-color-primary); /* Color primario de tu app */
+
+  /* Un 'outline-offset' negativo lo mete un poco hacia adentro,
+    respetando los bordes redondeados.
+  */
+  outline-offset: -3px;
+}
