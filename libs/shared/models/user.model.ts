@@ -33,8 +33,9 @@ export interface Category {
   userId: number;
   categoryId: number;
   createdAt: Date;
+  name: string;
+  description: string;
 }
-
 export interface BillingCycle {
   userBillingCycleId: number;
   billingCycleId: number;

@@ -1,0 +1,60 @@
+.card-workout-info {
+  .content-card-workout-info {
+    padding: 8px 16px 0px 16px;
+    .title {
+      margin: 0;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 22px; /* 157.143% */
+      letter-spacing: 0.2px;
+      color: var(--ion-text-color);
+    }
+
+    .description {
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 18px;
+      letter-spacing: 0.2px;
+      color: var(--ion-color-medium-shade);
+      margin: 0;
+      height: 36px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2; /* number of lines to show */
+      -webkit-box-orient: vertical;
+    }
+
+    .categories {
+      ion-chip {
+        border-radius: 8px;
+        font-weight: 600;
+        margin: 0;
+        padding: 0 7px;
+        min-height: 25px;
+      }
+    }
+
+    .info-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 10px;
+      .total-likes {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .divider {
+        color: var(--ion-color-primary);
+      }
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 18px;
+      letter-spacing: 0.2px;
+    }
+  }
+}

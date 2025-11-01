@@ -35,6 +35,12 @@ export class UserService {
     );
   }
 
+  public getCreatorInfo(userId?: number): Observable<User> {
+    return this._http
+      .get<User>(`${this._baseUrl}${API_URLS.USER}/${userId}`)
+      .pipe(map((resp: any) => new UserModel(resp.data)));
+  }
+
   public getCategories() {
     return this._http
       .get<CategoryByUserModel[]>(`${this._baseUrl}${API_URLS.USER_CATEGORIES}`)

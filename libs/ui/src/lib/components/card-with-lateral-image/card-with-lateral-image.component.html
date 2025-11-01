@@ -1,0 +1,18 @@
+<ion-card class="card-lateral-image">
+  <ion-grid class="height-100">
+    <ion-row class="height-100">
+      <ion-col
+        size="4"
+        style="
+          background-image: url('{{ imageUrl() }}');
+          background-size: cover;
+          background-position: center;
+          object-fit: cover;
+        "
+      ></ion-col>
+      <ion-col size="8" class="ion-no-padding">
+        <ng-content></ng-content>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card>

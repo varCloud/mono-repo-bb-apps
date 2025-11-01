@@ -1,0 +1,58 @@
+// Header Styles
+.app-header {
+  --background: #ffffff;
+  --border-width: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  padding-top: env(safe-area-inset-top);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 44px;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+}
+
+.app-logo {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+
+.header-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.header-icon-btn {
+  --color: #64748b;
+  --background: transparent;
+  --background-hover: rgba(100, 116, 139, 0.1);
+  --padding-start: 8px;
+  --padding-end: 8px;
+  margin: 0;
+
+  ion-icon {
+    font-size: 24px;
+  }
+}
+.section-header .title {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 120% */
+}
+.empty-section {
+  text-align: center;
+  color: var(--ion-color-medium);
+  margin-top: 40px;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px; /* 120% */
+}
