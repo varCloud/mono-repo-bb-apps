@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { LoginCredentials, UserResponse } from '../models/user';
 import {
   API_URLS,
+  AppSettingsModel,
   Currency,
   environment,
   KEY_LOCALSTORAGE,
 } from '@monorepo-bb-app/shared';
 
 import { Router } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { firstValueFrom, map, Observable, tap } from 'rxjs';
 import {
   LocalStorageService,
   SesionService,
@@ -39,13 +40,20 @@ export class LoginService {
           resp.hasNullProfileFields
         );
         this._userService.getUser(resp.userId).subscribe();
+        const config = await this.getAppSettings();
+        console.log(config);
         this._localStorage.set(KEY_LOCALSTORAGE.CONFIG, {
-          currency: Currency.MXN,
-          amountTransactionStripe: 3,
-          percentTransactionStripe: 3.6,
-          percentBodyBooster: 20,
+          ...config,
+          currency: config.paymentCurrency,
         });
       })
     );
+  }
+
+  public async getAppSettings() {
+    const settings = this._http
+      .get(`${environment.API_URL}/app-settings`)
+      .pipe(map((resp: any) => new AppSettingsModel(resp.data)));
+    return await firstValueFrom(settings);
   }
 }

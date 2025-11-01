@@ -1,4 +1,4 @@
-<ion-card class="card-list-container">
+<ion-card class="card-list-container" (click)="onCardClick()">
   <div class="image-container">
     <img
       [src]="workout().workoutUrl"
@@ -15,11 +15,24 @@
     </span>
     <span class="category">Fitness</span>
   </div>
-
-  <ion-card-header style="padding: 0px 8px">
-    <ion-card-title class="card-title">{{ workout().title }}</ion-card-title>
-  </ion-card-header>
   <ion-card-content style="padding: 3px 0px 16px 8px" class="card-subtitle">
-    {{ level() }}
+    <div style="width: 70%">
+      <ion-card-title class="card-title">{{ workout().title }}</ion-card-title>
+      {{ level() }}
+    </div>
+    @if (useBookmark()) {
+    <ion-button
+      fill="clear"
+      size="small"
+      class="bookmark-btn"
+      (click)="toggleFavorite($event)"
+    >
+      <ion-icon
+        [name]="isFavorite() ? 'bookmark' : 'bookmark-outline'"
+        [color]="isFavorite() ? 'primary' : 'medium'"
+        class="bookmark-icon"
+      ></ion-icon>
+    </ion-button>
+    }
   </ion-card-content>
 </ion-card>

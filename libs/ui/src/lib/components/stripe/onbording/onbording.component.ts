@@ -2,6 +2,7 @@ import { Component, OnDestroy, output, input } from '@angular/core';
 import { Browser } from '@capacitor/browser';
 import {
   KEY_LOCALSTORAGE,
+  StripePropertiesAccount,
   StripeService,
   StripeStatus,
 } from '@monorepo-bb-app/shared';
@@ -11,14 +12,7 @@ import {
   IonCard,
   IonCardContent,
   IonText,
-  IonHeader,
-  IonContent,
-  IonBackButton,
-  IonToolbar,
-  IonButtons,
-  IonTitle,
 } from '@ionic/angular/standalone';
-import { LayoutContentComponent } from '../../layout-content/layout-content.component';
 import { addIcons } from 'ionicons';
 import {
   cardOutline,
@@ -39,20 +33,7 @@ import { finalize } from 'rxjs';
   selector: 'lib-onbording',
   templateUrl: './onbording.component.html',
   styleUrls: ['./onbording.component.scss'],
-  imports: [
-    IonButton,
-    IonIcon,
-    IonCard,
-    IonCardContent,
-    IonText,
-    IonHeader,
-    IonContent,
-    IonBackButton,
-    IonToolbar,
-    IonButtons,
-    IonTitle,
-    LayoutContentComponent,
-  ],
+  imports: [IonButton, IonIcon, IonCard, IonCardContent, IonText],
 })
 export class OnbordingComponent implements OnDestroy {
   userId = input.required<number>();
@@ -119,13 +100,18 @@ export class OnbordingComponent implements OnDestroy {
   checkStatus() {
     this._loader.showLoader();
     this._userService
-      .getUser(this.userId())
+      .statusAccountPaymentStripe(this.userId())
       .pipe(finalize(() => this._loader.hideLoader()))
       .subscribe({
-        next: (user) => {
-          this._localStorage.set(KEY_LOCALSTORAGE.USER, user);
-          if (user.stripeStatus === StripeStatus.ACTIVE) {
+        next: async (account: StripePropertiesAccount) => {
+          console.log(account);
+          if (account.isFullyActive) {
             this.isSuccesOnbording.emit(true);
+            const user = await this._localStorage.get(KEY_LOCALSTORAGE.USER);
+            this._localStorage.set(KEY_LOCALSTORAGE.USER, {
+              ...user,
+              stripeStatus: StripeStatus.ACTIVE,
+            });
           } else {
             this.isSuccesOnbording.emit(false);
           }

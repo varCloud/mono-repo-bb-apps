@@ -297,7 +297,7 @@ export class RoutineFormComponent implements OnInit {
   private async saveExerciseData() {
     this._loader.showLoader();
     let imageUrl =
-      'https://bb-app-bucket-images.s3.amazonaws.com/uploads%2F75%2Fundefined%2Fphoto-23_1757813844787_vojwj8y5qml.jpg';
+      'https://bb-app-bucket-images.s3.amazonaws.com/uploads%2F76%2Fundefined%2Fphoto-7_1761612307696_j5qjqz2qhtf.jpg';
     if (Capacitor.isNativePlatform()) {
       try {
         const file = this.routineForm.get('coverImage')?.value;

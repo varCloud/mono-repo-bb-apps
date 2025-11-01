@@ -1,0 +1,88 @@
+:host {
+  display: block;
+
+  .detail-creator-profile-content {
+    ::ng-deep {
+      .detail-creator-profile-page {
+        margin-top: -30px !important ;
+        margin-bottom: 40px !important;
+        min-height: auto !important;
+      }
+
+      .avatar-creator-profile {
+        border: 4px solid #ffffff !important;
+        height: 68px !important;
+        width: 68px !important;
+      }
+    }
+
+    .info-creator-profile {
+      .bio {
+        color: var(--ion-color-medium-shade);
+        font-style: normal;
+        font-weight: 400;
+        line-height: 18px;
+        letter-spacing: 0.2px;
+      }
+
+      .info-creator-profile-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .name {
+          color: #000;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+          margin: 0;
+        }
+
+        .btn-suscription {
+          --margin-top: 0;
+          --margin-bottom: 0;
+
+          height: auto;
+        }
+      }
+    }
+
+    .categories-creator-profile {
+      ion-chip.chip {
+        border-radius: 8px;
+        font-weight: 600;
+      }
+    }
+    .segment-creator-profile {
+      margin-top: 1rem;
+
+      .title {
+        color: var(--ion-color-medium-shade);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 140%;
+      }
+
+      .no-transform {
+        text-transform: none;
+      }
+
+      ion-segment-button {
+        --indicator-color: var(--ion-color-medium);
+        color: var(--ion-color-dark);
+        font-weight: 400;
+        line-height: 140%;
+        &.segment-button-checked {
+          .title {
+            font-weight: 600;
+          }
+        }
+      }
+
+      .cards-workouts {
+        margin-top: 1rem;
+      }
+    }
+  }
+}

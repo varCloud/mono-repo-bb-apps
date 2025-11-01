@@ -1,4 +1,11 @@
-import { Component, type OnInit, computed, input } from '@angular/core';
+import {
+  Component,
+  type OnInit,
+  computed,
+  input,
+  model,
+  output,
+} from '@angular/core';
 import { addIcons } from 'ionicons';
 import {
   IonCard,
@@ -6,13 +13,27 @@ import {
   IonCardTitle,
   IonIcon,
   IonCardContent,
+  IonButton,
+  IonGrid,
+  IonCol,
+  IonRow,
 } from '@ionic/angular/standalone';
-import { heart } from 'ionicons/icons';
+import { book, bookmarkOutline, heart } from 'ionicons/icons';
 import { WorkoutListModel } from '@monorepo-bb-app/shared';
 
 @Component({
   selector: 'lib-card-list',
-  imports: [IonCardContent, IonIcon, IonCardTitle, IonCardHeader, IonCard],
+  imports: [
+    IonRow,
+    IonCol,
+    IonGrid,
+    IonCardContent,
+    IonIcon,
+    IonCardTitle,
+    IonCardHeader,
+    IonCard,
+    IonButton,
+  ],
   templateUrl: './card-list.component.html',
   styleUrl: './card-list.component.scss',
 })
@@ -26,9 +47,25 @@ export class CardListComponent implements OnInit {
       .join(', ');
   });
 
+  isFavorite = model<boolean>(false);
+  useBookmark = input<boolean>(false);
+
+  clickCardEvent = output<WorkoutListModel>();
+  clickFavoriteEvent = output<WorkoutListModel>();
+
   constructor() {
-    addIcons({ heart });
+    addIcons({ heart, bookmarkOutline });
   }
 
   ngOnInit(): void {}
+
+  onCardClick() {
+    this.clickCardEvent.emit(this.workout());
+  }
+
+  toggleFavorite($event: Event) {
+    $event.stopPropagation();
+    this.isFavorite.set(!this.isFavorite());
+    this.clickFavoriteEvent.emit(this.workout());
+  }
 }

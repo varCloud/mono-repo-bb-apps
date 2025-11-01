@@ -1,0 +1,67 @@
+<ion-content
+  class="suscription-creator-content ion-no-padding"
+  [fullscreen]="true"
+>
+  <img
+    src="assets/images/suscription/suscription.png"
+    alt=""
+    style="
+      width: 100%;
+      height: 337px;
+      object-fit: cover;
+      object-position: center;
+    "
+  />
+  @if( creator() ) {
+  <app-layout-content customClass="uscription-creator-page ion-padding">
+    <ion-grid content-body>
+      <ion-radio-group
+        [ngModel]="selectedPaymentFrequencyId()"
+        (ngModelChange)="selectedPaymentFrequencyId.set($event)"
+      >
+        @for (payment of creator().billingCycles; track payment.billingCycleId)
+        {
+        <ion-item
+          lines="none"
+          (click)="selectPaymentFrequency(payment)"
+          [ngClass]="{
+                selected: payment.billingCycleId   === selectedPaymentFrequencyId(),
+              }"
+        >
+          <ion-radio
+            class="bb-radio"
+            slot="start"
+            [value]="payment.billingCycleId"
+          ></ion-radio>
+          <ion-label>
+            <ion-text
+              >{{ payment.interval }}
+              {{ payment.interval === 1 ? 'mes' : 'meses' }}</ion-text
+            >
+            <br />
+            <ion-note class="recommended-label">
+              {{ payment.description }}
+            </ion-note>
+          </ion-label>
+          <ion-text slot="end" class="payment-amount">
+            <app-currency [amount]="payment.amount"></app-currency>
+          </ion-text>
+        </ion-item>
+        }
+      </ion-radio-group>
+    </ion-grid>
+    <div content-footer class="ion-text-center">
+      <ion-button
+        color="tertiary"
+        class="bb-input"
+        expand="block"
+        shape="round"
+      >
+        {{ 'continue' | translate }}
+      </ion-button>
+    </div>
+  </app-layout-content>
+  }@else {
+  <app-list-skeleton [itemRepeat]="3"></app-list-skeleton>
+  }
+</ion-content>

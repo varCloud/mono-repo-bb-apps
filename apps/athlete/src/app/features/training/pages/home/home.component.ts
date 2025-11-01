@@ -176,13 +176,14 @@ export class HomeComponent implements OnInit {
   }
 
   private async getParams() {
-    const user = await this._localStorage.get(KEY_LOCALSTORAGE.USER);
-    let params = {
-      creatorId: user?.userId,
-    };
+    let params = {};
     if (this.filter) {
       params = { ...params, ...this.filter.toQueryParams() };
     }
     return params;
+  }
+
+  clickCard(workout: WorkoutListModel) {
+    this.router.navigate(['home/training/profile-creator', workout.creatorId]);
   }
 }
