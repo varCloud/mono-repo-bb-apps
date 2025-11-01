@@ -41,7 +41,7 @@ export class PushNotificationService {
         console.log('Push registration success, token: ', token.value);
         this.logger.info('Push registration success', { token: token.value });
         await this._localStorage.set(KEY_LOCALSTORAGE.TOKEN_PUSH, token.value);
-        this.updatePushTokenIfSessionActive(token.value);
+        this._userService.updatePushTokenIfSessionActive();
       });
 
       // Listener para notificaciones recibidas en primer plano
@@ -63,38 +63,6 @@ export class PushNotificationService {
     }
   }
 
-  /**
-   * Actualiza el token push si hay sesión activa y userId válido
-   */
-  public async updatePushTokenIfSessionActive(token: string): Promise<void> {
-    // Obtener usuario actual (puede ser signal o promesa)
-    let user = this._sesionService.user$?.();
-    if (!user) {
-      user = await this._sesionService.getUserFromLocalStorage();
-    }
-    if (user && user.userId) {
-       const payload = {
-        pushNotificationToken: await this._localStorage.get(KEY_LOCALSTORAGE.TOKEN_PUSH) || '',
-      };
-
-      if(payload.pushNotificationToken == '') {
-        this.logger.info('No hay token push guardado en local storage, no se actualiza el token push');
-        return;
-      }
-
-      this.logger.info('Actualizando token push para usuario', { userId: user.userId, token });
-      this._userService.updateUser(user.userId, payload).pipe(take(1)).subscribe({
-        next: () => {
-          this.logger.info('Token push actualizado correctamente para usuario', { userId: user.userId }); 
-        },
-        error: (error) => {
-          this.logger.error('Error al actualizar token push para usuario', { userId: user.userId, error });
-        }
-      });
-    } else {
-      this.logger.info('No hay sesión activa, no se actualiza el token push');
-    }
-  }
 
   private async showForegroundNotification(
     notification: PushNotificationSchema,

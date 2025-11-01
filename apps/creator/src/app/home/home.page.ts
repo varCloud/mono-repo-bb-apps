@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, effect } from '@angular/core';
+import { SesionService, UserService } from '@monorepo-bb-app/core';
 import {
   IonHeader,
   IonToolbar,
@@ -61,11 +61,19 @@ export class HomePage implements OnInit {
   constructor(
     private _translateService: TranslationService,
     private _themeService: ThemeService,
-    private http: HttpClient
-  ) {}
+    private http: HttpClient,
+    private _userService: UserService,
+    private _sesionService: SesionService
+  ) {
+      effect(() => {
+      const user = this._sesionService.user$();
+      console.log('Usuario en sesión:', this._sesionService.user$());
+      this._userService.updatePushTokenIfSessionActive();
+    });
+  }
 
   async ngOnInit() {
-    console.log('init');
+    
   }
 
   changeLanguage(value: string) {

@@ -19,7 +19,7 @@ export class AvatarProfileComponent {
   @Output() changeImage = new EventEmitter<void>();
 
   constructor() {
-      addIcons({ sendSharp , cameraOutline });
+      addIcons({ sendSharp , cameraOutline , send });
   }
 
   get defaultImage(): string {

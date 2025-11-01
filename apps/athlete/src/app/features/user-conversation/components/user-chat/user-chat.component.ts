@@ -1,8 +1,8 @@
-import { Component, effect, Input, OnInit } from '@angular/core';
+import { Component, effect, Input, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 import { Message, MessageModel, ENUM_MESSAGE_STATUS, UserConversationModel, UserSummary } from '@monorepo-bb-app/shared';
@@ -14,6 +14,7 @@ import { addIcons } from 'ionicons';
 import { PaginatorModel } from '@monorepo-bb-app/shared';
 import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
 import { UserAvatarComponent } from '@monorepo-bb-app/ui';
+import { LoggerService } from 'libs/core/services/logger.service';
 
 @Component({
   selector: 'app-user-chat',
@@ -22,17 +23,22 @@ import { UserAvatarComponent } from '@monorepo-bb-app/ui';
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule, UserAvatarComponent],
 })
-export class UserChatComponent {
+export class UserChatComponent  implements AfterViewChecked {
+  @ViewChild('messageContainer') private messageContainer!: ElementRef;
   @Input() messages: Message[] = [];
   public userInfo: UserSummary | null = null;
   public userSesion!: User;
   public paginator!: PaginatorModel;
   public userConversationModel!: UserConversationModel;
   public newMessage: string = '';
+  public conversationId: number;
+  private goToBottom: boolean = true;
   constructor(
     private _userConectionService: UserConversationService,
     private _sesionService: SesionService,
-    private _loaderUIService: LoaderUIService
+    private _loaderUIService: LoaderUIService,
+    private route: ActivatedRoute,
+    private logger: LoggerService,
   ) {
     this._serUserInfo();
     effect(() => {
@@ -40,6 +46,10 @@ export class UserChatComponent {
       this.userSesion = user as User;
     });
     addIcons({ sendSharp });
+    this.route.paramMap.subscribe(params => {
+      this.conversationId = Number(params.get('id') ?? 0);
+      this.logger.info('ID del conversationId:', this.conversationId);
+    });
   }
 
   ionViewWillEnter() {
@@ -48,6 +58,7 @@ export class UserChatComponent {
 
   ionViewWillLeave() {
     this.messages = [];
+    this.goToBottom = true;
   }
 
   private _serUserInfo() {
@@ -55,8 +66,8 @@ export class UserChatComponent {
     if (state?.conversation) {
       this.userConversationModel = (state.conversation as UserConversationModel);
       if (this.userConversationModel) {
-          this.userInfo = this.userSesion?.userTypeId === ENUM_TYPE_USER.ATHLETE ? 
-          this.userConversationModel.creatorUser : 
+        this.userInfo = this.userSesion?.userTypeId === ENUM_TYPE_USER.ATHLETE ?
+          this.userConversationModel.creatorUser :
           this.userConversationModel.athleteUser;
       }
       console.log('Datos recibidos:', this.userConversationModel);
@@ -86,7 +97,6 @@ export class UserChatComponent {
     } else if (date.toDateString() === yesterday.toDateString()) {
       return 'AYER';
     } else {
-      // Formato: "1 DE SEPTIEMBRE"
       return date
         .toLocaleDateString('es-ES', {
           day: 'numeric',
@@ -122,7 +132,8 @@ export class UserChatComponent {
       this.newMessage = '';
       const creatorUserId = this.userConversationModel.creatorUser.userId;
       const athleteUserId = this.userConversationModel.athleteUser.userId;
-      this._userConectionService.message(newMsg.createPayload(creatorUserId,athleteUserId)).subscribe(
+      this.goToBottom=true;
+      this._userConectionService.message(newMsg.createPayload(creatorUserId, athleteUserId)).subscribe(
         (response) => {
           console.log('Message sent successfully', response);
         },
@@ -135,15 +146,20 @@ export class UserChatComponent {
 
   async loadMoreMessages(event: any) {
     if (this.paginator && this.paginator.links.next) {
+      this.goToBottom = false;  
       await this.getMessages(this.paginator.links.next);
     }
     event.target.complete();
   }
 
   public async getMessages(uri: string = '', params: any = {}): Promise<void> {
+    if( !this.conversationId && this.conversationId === 0) {
+      return;
+    }
+
     this._loaderUIService.showLoader();
     this._userConectionService
-      .getMessagesByConversartion(uri, this.userConversationModel.userConversationId, params)
+      .getMessagesByConversartion(uri, this.conversationId, params)
       .pipe(take(1), finalize(() => this._loaderUIService.hideLoader()))
       .subscribe(
         (data) => {
@@ -160,5 +176,31 @@ export class UserChatComponent {
 
   get ENUM_STATUS_MESSAGE() {
     return ENUM_MESSAGE_STATUS;
+  }
+
+  ngAfterViewChecked() {
+    if(this.goToBottom){
+        this.scrollToBottom();
+    }
+  }
+
+  public scrollToBottom(): void {
+    try {
+    
+        this.messageContainer.nativeElement.scrollTop = this.messageContainer.nativeElement.scrollHeight + 15;
+        console.log('Scroll to bottom executed');
+
+    } catch(err) {
+      console.error('Error scrolling to bottom:', err);
+    }
+  }
+
+  public scrollToTop(): void {
+    try {
+        this.messageContainer.nativeElement.scrollTop = 0;
+        console.log('Scroll to top executed');
+    } catch(err) {
+      console.error('Error al hacer scroll al top:', err);
+    }
   }
 }
