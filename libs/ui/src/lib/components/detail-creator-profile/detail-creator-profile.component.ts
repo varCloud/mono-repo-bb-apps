@@ -1,8 +1,16 @@
-import { Component, computed, input, signal, type OnInit } from '@angular/core';
+import {
+  Component,
+  computed,
+  input,
+  output,
+  signal,
+  type OnInit,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { LoaderUIService, UserService } from '@monorepo-bb-app/core';
 import {
   Paginator,
+  ProcessSuscriptionService,
   ToastService,
   User,
   Workout,
@@ -50,6 +58,7 @@ import { ENUM_WORKOUT_TYPES } from '../../../../../shared/constants/enums';
 })
 export class DetailCreatorProfileComponent implements OnInit {
   idCreator = input.required<number>();
+  suscriptionEvent = output<boolean>();
   public tabActive = signal<string>('workouts');
   public workouts = signal<Workout[]>([]);
   public paginatorWorkouts = signal<Paginator>({} as Paginator);
@@ -69,7 +78,8 @@ export class DetailCreatorProfileComponent implements OnInit {
     private _router: Router,
     private _toastService: ToastService,
     private _loader: LoaderUIService,
-    private _workoutService: WorkoutService
+    private _workoutService: WorkoutService,
+    private _processSuscriptionService: ProcessSuscriptionService
   ) {}
 
   ngOnInit(): void {
@@ -85,6 +95,7 @@ export class DetailCreatorProfileComponent implements OnInit {
       .subscribe({
         next: (user) => {
           this.creator.set(user);
+          this._processSuscriptionService.setCreator(user);
         },
         error: (err) => {
           this._toastService.error('Failed to load creator profile.', {
@@ -129,5 +140,9 @@ export class DetailCreatorProfileComponent implements OnInit {
       event.target.complete();
       event.target.disabled = true;
     }
+  }
+
+  goToSuscriptionCreator() {
+    this.suscriptionEvent.emit(true);
   }
 }

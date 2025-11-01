@@ -19,6 +19,13 @@ export const trainingRoutes: Routes = [
           ).then((m) => m.DetailCreatorProfilePageComponent),
       },
       {
+        path: 'suscription-creator/:id',
+        loadComponent: () =>
+          import(
+            './pages/detail-suscription-creator/detail-suscription-creator.component'
+          ).then((m) => m.DetailSuscriptionCreatorComponent),
+      },
+      {
         path: '**',
         redirectTo: '',
         pathMatch: 'full',

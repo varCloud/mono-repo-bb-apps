@@ -35,6 +35,7 @@ export * from './constants/key-localstorage';
 export * from './constants/types-routines';
 export * from './environment/environment';
 export * from './services/workout/workout.service';
+export * from './services/suscription/process-suscription.service';
 export * from './helpers/destroy-uppy';
 export * from './helpers/form-validators';
 export * from './models/workout-response-list';

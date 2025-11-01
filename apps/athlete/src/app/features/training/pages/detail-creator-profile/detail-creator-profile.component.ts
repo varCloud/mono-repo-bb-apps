@@ -4,7 +4,8 @@ import {
   signal,
   type OnInit,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProcessSuscriptionService } from '@monorepo-bb-app/shared';
 import { DetailCreatorProfileComponent } from '@monorepo-bb-app/ui';
 
 @Component({
@@ -17,10 +18,20 @@ import { DetailCreatorProfileComponent } from '@monorepo-bb-app/ui';
 export class DetailCreatorProfilePageComponent implements OnInit {
   public idCreator = signal<number | null>(null);
 
-  constructor(private _router: ActivatedRoute) {}
+  constructor(
+    private _routerActivate: ActivatedRoute,
+    private _router: Router
+  ) {}
 
   ngOnInit(): void {
-    const id = this._router.snapshot.paramMap.get('id');
+    const id = this._routerActivate.snapshot.paramMap.get('id');
     this.idCreator.set(id ? +id : null);
+  }
+
+  goToSuscriptionCreator() {
+    this._router.navigate([
+      '/home/training/suscription-creator',
+      this.idCreator(),
+    ]);
   }
 }

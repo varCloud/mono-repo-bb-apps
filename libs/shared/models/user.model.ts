@@ -45,6 +45,8 @@ export interface BillingCycle {
   active: number;
   stripePriceId: string;
   amount: number;
+  interval: number;
+  description: string;
 }
 
 export class UserModel implements User {
