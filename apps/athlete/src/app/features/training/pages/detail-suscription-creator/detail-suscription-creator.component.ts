@@ -27,6 +27,7 @@ import {
 } from '@monorepo-bb-app/ui';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-detail-suscription-creator',
@@ -49,6 +50,7 @@ import { FormsModule } from '@angular/forms';
     ListSkeletonComponent,
     CommonModule,
     FormsModule,
+    RouterLink,
   ],
   templateUrl: './detail-suscription-creator.component.html',
   styleUrl: './detail-suscription-creator.component.scss',
@@ -60,9 +62,12 @@ export class DetailSuscriptionCreatorComponent implements OnInit {
   constructor(private _processSuscriptionService: ProcessSuscriptionService) {
     this.creator.set(this._processSuscriptionService.getCreator());
     this.creator.update((creator) => {
-      creator.billingCycles.sort((a, b) => a.interval - b.interval);
+      creator?.billingCycles.sort((a, b) => a.interval - b.interval);
       return creator;
     });
+    this.selectedPaymentFrequencyId.set(
+      this.creator()?.billingCycles[0]?.billingCycleId ?? null
+    );
   }
   ngOnInit(): void {}
 

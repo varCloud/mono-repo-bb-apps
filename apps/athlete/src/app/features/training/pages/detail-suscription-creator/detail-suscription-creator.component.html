@@ -13,7 +13,7 @@
     "
   />
   @if( creator() ) {
-  <app-layout-content customClass="uscription-creator-page ion-padding">
+  <app-layout-content customClass="suscription-creator-page ion-padding">
     <ion-grid content-body>
       <ion-radio-group
         [ngModel]="selectedPaymentFrequencyId()"
@@ -56,8 +56,9 @@
         class="bb-input"
         expand="block"
         shape="round"
+        routerLink="/home/profile/payment-methods"
       >
-        {{ 'continue' | translate }}
+        {{ 'Suscribirse' | translate }}
       </ion-button>
     </div>
   </app-layout-content>
