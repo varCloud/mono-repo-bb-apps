@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button color="medium" (click)="cancel()">{{
+        'cancel' | translate
+      }}</ion-button>
+    </ion-buttons>
+    <ion-title>Agregar nuevo método de pago</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="modal-payment-method-content">
+  <div class="wrapper-payment-method">
+    <app-add-payment-method
+      [customerId]="idCustomer"
+      (succesAddPayment)="succesAddPayment($event)"
+    ></app-add-payment-method>
+  </div>
+</ion-content>

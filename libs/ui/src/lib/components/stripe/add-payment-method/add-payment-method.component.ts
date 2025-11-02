@@ -16,6 +16,8 @@ import {
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { StripeService } from '@monorepo-bb-app/shared';
+import { LoaderUIService } from '@monorepo-bb-app/core';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-add-payment-method',
@@ -38,6 +40,7 @@ export class AddPaymentMethodComponent implements OnInit {
     private _fb: FormBuilder,
     private alertController: AlertController,
     private _translate: TranslatePipe,
+    private _loader: LoaderUIService
   ) {
     this.formPaymentMethod = this._fb.group({});
   }
@@ -59,22 +62,30 @@ export class AddPaymentMethodComponent implements OnInit {
         spacedAccordionItems: false,
       },
     };
+    this._loader.showLoader();
     this.isLoading.set(true);
-    this._stripeService.getSetupIntents(this.customerId()).subscribe(
-      (resp) => {
-        const { client_secret } = resp as any;
-        this.elements = this._stripeService.stripe.elements({
-          clientSecret: client_secret,
-          appearance,
-        });
-        this.card = this.elements.create('payment', options);
-        this.card.mount(this.paymentMethodElement()?.nativeElement);
-        this.isLoading.set(false);
-      },
-      (error) => {
-        this.succesAddPayment.emit({ data: null });
-      },
-    );
+    this._stripeService
+      .getSetupIntents(this.customerId())
+      .pipe(
+        finalize(() => {
+          this._loader.hideLoader();
+          this.isLoading.set(false);
+        })
+      )
+      .subscribe(
+        (resp: any) => {
+          const { client_secret } = resp.data as any;
+          this.elements = this._stripeService.stripe.elements({
+            clientSecret: client_secret,
+            appearance,
+          });
+          this.card = this.elements.create('payment', options);
+          this.card.mount(this.paymentMethodElement()?.nativeElement);
+        },
+        (error) => {
+          this.succesAddPayment.emit({ data: null });
+        }
+      );
   }
 
   public clearFields() {
@@ -84,12 +95,14 @@ export class AddPaymentMethodComponent implements OnInit {
   }
 
   async addPaymentMethod() {
+    this._loader.showLoader();
     const { setupIntent, error } =
       await this._stripeService.stripe.confirmSetup({
         elements: this.elements,
         confirmParams: {},
         redirect: 'if_required',
       });
+    this._loader.hideLoader();
     if (error) return;
     this.clearFields();
     this.succesAddPayment.emit({ data: setupIntent });

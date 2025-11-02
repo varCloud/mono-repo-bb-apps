@@ -2,6 +2,12 @@
   display: block;
 
   .suscription-creator-content {
+    ::ng-deep {
+      .suscription-creator-page {
+        min-height: auto;
+      }
+    }
+
     ion-item {
       margin-bottom: 24px;
       border-radius: 12px;

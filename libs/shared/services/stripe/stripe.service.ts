@@ -26,10 +26,7 @@ export class StripeService {
   }
 
   public getSetupIntents(customerId: string) {
-    //TODO: Cambiar nombre cuando se implemente el backend
-    return this._http.post(`${this.BASE_URL}/user/setupIntents`, {
-      id: customerId,
-    });
+    return this._http.get(`${this.BASE_URL}/user/${customerId}/setup-intents`);
   }
 
   public getAccountLink(userId: number) {

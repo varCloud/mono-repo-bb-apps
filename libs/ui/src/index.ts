@@ -33,6 +33,7 @@ export * from './lib/components/card-max-likes/card-max-likes.component';
 export * from './lib/components/detail-creator-profile/detail-creator-profile.component';
 export * from './lib/components/card-workout-info/card-workout-info.component';
 export * from './lib/components/card-with-lateral-image/card-with-lateral-image.component';
+export * from './lib/components/modal-add-payment-method/modal-add-payment-method.component';
 
 export * from './lib/components/payment-frequency-settings/payment-frequency-settings.component';
 export * from './lib/components/reset-password-form/reset-password-form/reset-password-form.component';
