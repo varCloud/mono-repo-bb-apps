@@ -51,3 +51,5 @@ export * from './lib/components/conversation-list/conversation-list.component';
 
 // Interfaces
 export * from './lib/interfaces/select-option.interface';
+export * from './lib/components/accordion/accordion.component';
+export * from './lib/components/user-conversation-modal/user-conversation-modal.component';

@@ -1,10 +1,11 @@
 ion-card {
-  height: 135px; // Altura fija para todas las tarjetas
-  margin: 8px; // Margen alrededor de cada tarjeta
-  border-radius: 12px; // Bordes redondeados
+// Ancho completo del contenedor padre
+  height: 105px; // Altura fija para todas las tarjetas
+  margin: 6px; // Margen alrededor de cada tarjeta
+  border-radius: 8px; // Bordes redondeados
   display: flex; // Para centrar el contenido verticalmente
-  justify-content: center; // Para centrar el contenido horizontalmente
-  align-items: center; // Para centrar el contenido verticalmente
+  justify-content: left; // Para centrar el contenido horizontalmente
+  align-items: left; // Para centrar el contenido verticalmente
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); // Sombra suave
 
   // Aquí se usan las variables CSS para el fondo
@@ -12,30 +13,35 @@ ion-card {
   color: var(--ion-color-light-contrast, #fff); // Color del texto (blanco por defecto)
 
   ion-card-content {
-    padding: 16px; // Espaciado interno
+    padding: 18px; // Espaciado interno
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: left;
+    align-items: left;
     height: 100%; // Ocupa toda la altura de la tarjeta
   }
-
+p{
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  align-self: left;
+}
   ion-icon {
-    font-size: 3em; // Tamaño del icono
+    font-size: 1.5em ; // Tamaño del icono
     margin-bottom: 8px; // Espacio entre icono y texto
   }
 
   .card-subtitle {
     font-size: 0.9em;
     font-weight: 400;
-    margin: 0;
-    color: rgba(255, 255, 255, 0.8); // Color del subtítulo (más tenue)
+
+    color: #616161; // Color del subtítulo (más tenue)
   }
 
   .card-title {
-    font-size: 1.1em;
+    font-size: 1.05em;
     font-weight: 700;
-    margin: 4px 0 0 0;
+    margin: 6px 0 0 0;
     color: var(--ion-color-light-contrast, #fff); // Color del título (blanco)
   }
 }

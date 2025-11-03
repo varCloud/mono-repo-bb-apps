@@ -44,17 +44,17 @@ export class ToolBarComponent {
 
   /** El texto del título principal   */
   //@Input() title?: string = 'Soporte';
-  public title = input<string>('Help');
+  public title = input<string>('ingresa un titlo');
 
   /**Icono y correo */
   //@Input() emailIcon?: string = 'mail-outline';
   //@Input() emailLink?: string ='gusmg90@gmail.com'; // El '?' lo hace opcional
-  public emailLink = input<string>('gusmg90@gmail.com');
+  public emailLink = input<string>('');
   public emailIcon = input<string>('mail-outline');
 
   /**Icono y numero para el teléfono*/
   //@Input() phoneIcon?: string = 'call-outline';
   //@Input() phoneLink?: string = '+524432426259';
   public phoneIcon = input<string>('call-outline');
-  public phoneLink = input<string>('+524432426259');
+  public phoneLink = input<string>('');
 }

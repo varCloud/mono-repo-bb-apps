@@ -1,0 +1,45 @@
+<div class="faq-header">
+  <h2>{{tittleaccordion()}}</h2>
+  <ion-button  fill="clear" (click)="toggleAll()">
+    {{ allExpanded() ? 'Collapse All' : 'View All' }}
+  </ion-button>
+</div>
+
+<ion-accordion-group
+  #accordionGroup
+  [multiple]="true"
+  (ionChange)="onAccordionChange($event)"
+
+>
+
+<!-- <ion-accordion
+    style="background-color: #FFFFFF;"
+    *ngFor="let item of items(); let i = index"
+    [value]="'item-' + i"
+    [toggleIcon]="'caret-down-circle'"
+    toggleIconSlot="end"
+    >-->
+<!--revisar por que no cambia el icono-->
+<ion-accordion
+    *ngFor="let item of items(); let i = index"
+    [value]="'item-' + i"
+    [toggleIcon]="'caret-down-circle'"
+    toggleIconSlot="end"
+    >
+
+    <ion-item slot="header" >
+
+      <ion-label>{{ item.question }}</ion-label>
+       {{isItemOpen(i)}}
+      </ion-item>
+
+    <div class="ion-padding" slot="content">
+{{ item.answer }}
+
+    </div>
+
+
+  </ion-accordion>
+</ion-accordion-group>
+
+

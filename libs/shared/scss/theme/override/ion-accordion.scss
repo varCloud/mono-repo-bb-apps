@@ -1,0 +1,81 @@
+
+ion-accordion-group {
+  padding: 0 16px;
+}
+ion-button {
+  color: #F79145 !important;
+}
+
+
+/* Estilo de CADA acordeón como una "tarjeta" individual
+*/
+ion-accordion {
+  background: var(--ion-color-light, #ffffff);
+  border-radius: 12px; // Esquinas redondeadas
+  margin-bottom: 12px; // Separación entre tarjetas
+
+  // Sombra sutil para el efecto de tarjeta
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  // Color del ícono (+ / -). Ajusta 'primary' si tu color es otro.
+  --icon-color: var(--ion-color-primary);
+}
+
+/* Estilo del header de la tarjeta (la pregunta)
+*/
+ion-accordion ion-item[slot='header'] {
+  // Eliminar todas las líneas de borde
+  --border-width: 0;
+  --inner-border-width: 0;
+
+  // Hacer el fondo transparente para que se vea el de la tarjeta
+  --background: transparent;
+
+  // Eliminar efectos visuales al hacer clic
+  --background-hover: transparent;
+  --background-activated: transparent;
+  --ripple-color: transparent;
+
+  // Texto de la pregunta (más bold)
+  ion-label {
+    font-weight: 600;
+    font-size: .8rem;
+  }
+}
+
+/* Estilo del contenido de la tarjeta (la respuesta)
+*/
+ion-accordion div[slot='content'] {
+  // El .ion-padding ya está en el HTML, pero ajustamos el texto
+  font-size: 0.9rem;
+  color: var(--ion-color-medium-shade, #737373); // Color gris para el texto
+  line-height: 1.5;
+
+  // Ajustes finos al padding que pone .ion-padding por defecto
+  padding-top: 4px; // Menos espacio arriba
+  padding-bottom: 16px; // Más espacio abajo
+}
+
+/* Asegura que el header no cambie de color cuando está expandido
+*/
+ion-accordion.accordion-expanded ion-item[slot='header'] {
+  --background: transparent;
+}
+
+
+
+
+  ion-accordion-group{
+    ion-accordion {
+        .ion-accordion-toggle-icon {
+            color:#F79145 !important;
+        }
+    }
+  }
+
+  ion-accordion {
+  --ion-accordion-toggle-icon: 'add';
+  --ion-accordion-toggle-icon-active: 'remove';
+  --ion-accordion-toggle-icon-color: var(--ion-color-primary);
+  --ion-accordion-toggle-icon-color-active: var(--ion-color-danger);
+}

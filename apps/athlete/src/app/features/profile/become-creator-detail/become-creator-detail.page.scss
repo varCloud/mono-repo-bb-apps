@@ -1,0 +1,59 @@
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 250px; // Adjust height as needed
+  overflow: hidden; // Ensures image doesn't overflow container
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; // Ensures the image covers the area without distortion
+    object-position: center; // Centers the image
+  }
+
+  .image-text-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white; // Text color
+    font-size: 1.5em; // Adjust font size as needed
+    background-color: rgba(0, 0, 0, 0.2); // Optional: a slight dark overlay for better text readability
+  }
+}
+
+.content-padding {
+  padding: 16px; // Standard Ionic padding
+  color: var(--ion-color-dark); // Or any color that fits your theme
+
+  h1 {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-top: 0; // Remove default top margin
+    margin-bottom: 10px;
+    color: var(--ion-color-dark); // Or a specific color for headings
+  }
+
+  p {
+    font-size: 1em;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    text-align: justify; // For justified text, as seen in the example
+  }
+}
+
+// Style for the "Volver al principio" button
+ion-fab-button {
+  --background: #f0ad4e; // Custom background color, matches the image's button
+  --color: #ffffff; // Text color
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 15px 30px; // Adjust padding to make it wider
+  border-radius: 30px; // More rounded corners
+  height: auto; // Allow height to adjust based on padding
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); // Subtle shadow
+}

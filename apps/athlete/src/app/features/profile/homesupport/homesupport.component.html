@@ -1,0 +1,55 @@
+<!-- toolbar-->
+
+  <app-tool-bar
+    leftIcon="arrow-back-outline"
+    title="Regresar"
+    emailIcon="mail"
+    emailLink=""
+    phoneIcon="call"
+    phoneLink="">
+  </app-tool-bar>
+  <!-- end toolbar-->
+<!-- simple search input-->
+  <app-simple-search-input
+    [searchValue]="mySearchText"
+    (searchValueChange)="onSearchTextChange($event)"
+    (searchSubmitted)="onSearchSubmit($event)"
+    (searchCleared)="onSearchClearEvent()"
+    headerTitle="¿Como podemos ayudarte?"
+    placeholder="Search" [debounce]="700">
+  </app-simple-search-input>
+<!-- end simple search input-->
+
+
+<!-- card slider-->
+
+  <app-card-slider
+    [cards]="cardCategories"
+    (cardSelected)="onSliderCardClicked($event)">
+  </app-card-slider>
+
+<!-- end card slider-->
+
+
+
+
+  <!-- <div style="padding: 16px;">
+    <p>El valor actual de la búsqueda es: <strong>{{ mySearchText }}</strong></p>
+    <ion-list *ngIf="mySearchText">
+      <ion-item>Resultado 1 para "{{ mySearchText }}"</ion-item>
+      <ion-item>Resultado 2 para "{{ mySearchText }}"</ion-item>
+    </ion-list>
+    <ion-text *ngIf="!mySearchText">
+      <p>Aún no has buscado nada...</p>
+    </ion-text>
+  </div> -->
+  <!-- end simple search input-->
+<!-- faq accordion-->
+
+
+  <app-faq-accordion [items]="myFaqList" tittleaccordion="Top questions"></app-faq-accordion>
+
+<!-- end faq accordion-->
+
+
+

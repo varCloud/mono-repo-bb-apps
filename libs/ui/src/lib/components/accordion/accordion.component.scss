@@ -1,0 +1,31 @@
+/* Estilos para el Encabezado ("Top Questions" / "View All")
+  (Ajustados para parecerse más a la imagen)
+*/
+.faq-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px; // Padding horizontal
+  margin-bottom: 8px; // Espacio antes del primer acordeón
+}
+
+.faq-header h2 {
+  margin: 0;
+  font-size: 1.0rem; // Un poco más grande
+  font-weight: 700; // Más bold
+}
+
+.faq-header ion-button {
+  text-transform: none;
+  --padding-end: 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  // Asumiendo que 'primary' es tu color naranja/destacado
+  --color: var(--ion-color-primary);
+}
+.content{
+  font-size: .5rem;
+}
+/* Contenedor principal del acordeón
+  Le damos el mismo padding horizontal que al header.
+*/

@@ -47,7 +47,9 @@
 @import '@uppy/core/dist/style.css';
 @import 'theme/override/ion-radio.scss';
 @import '@ng-select/ng-select/themes/default.theme.css';
+@import 'theme/override/ion-accordion.scss';
 // @import '@ionic/angular/css/palettes/dark.system.css';
+
 
 @font-face {
   font-family: 'SF Pro';
@@ -93,3 +95,6 @@
 ion-back-button {
   text-transform: none; /* or uppercase, lowercase, capitalize */
 }
+
+
+

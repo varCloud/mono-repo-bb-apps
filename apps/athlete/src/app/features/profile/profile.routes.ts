@@ -35,20 +35,31 @@ export const profileRoutes: Routes = [
       import('./home-slide-card/home-slide-card.component').then(
         (m) => m.HomeSlideCard,
       )
-    },      {
-      path: 'accordion',
+    },
+
+
+     {
+      path: 'homeaccordion',
       loadComponent: () =>
-      import('./home-faq-accordion/home-faq-accordion.component').then(
-        (m) => m.HomePageAccordion,
+      import('./home-dynamic-accordion.component/home-dynamic-accordion.component').then(
+        (m) => m.HomeAccordion,
+      )
+    },
+    {
+      path: 'homesupport',
+      loadComponent: () =>
+      import('./homesupport/homesupport.component').then(
+        (m) => m.homesupport,
       )
     },
         {
-      path: 'faq',
+      path: 'becomecreatordetail',
       loadComponent: () =>
-      import('./faq-accordion/faq-accordion.component').then(
-        (m) => m.FaqAccordionComponent,
+      import('./become-creator-detail/become-creator-detail.page').then(
+        (m) => m.BecomeCreatorDetailComponent,
       )
     },
+
 
 
 

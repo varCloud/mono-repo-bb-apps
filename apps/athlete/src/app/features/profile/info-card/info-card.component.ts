@@ -59,6 +59,7 @@ export class InfoCardComponent {
    */
   @Input() color?: string = 'tertiary';
 
+
   /**
    * @Input(): Nombre del icono de Ionicons a mostrar.
    * Por defecto: 'information-circle-outline'.
