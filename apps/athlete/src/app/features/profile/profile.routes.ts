@@ -22,8 +22,8 @@ export const profileRoutes: Routes = [
         (m) => m.homesupport,
       )
     },
-        {
-      path: 'becomecreatordetail',
+    {
+      path: 'profile/become-creator-detail',
       loadComponent: () =>
       import('./become-creator-detail/become-creator-detail.page').then(
         (m) => m.BecomeCreatorDetailComponent,

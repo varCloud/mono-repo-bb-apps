@@ -1,9 +1,11 @@
 import { Component, input, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // Importamos los módulos de Ionic que usaremos en el template
-import {IonButton, IonItem, IonLabel, IonButtons, IonIcon} from '@ionic/angular/standalone';
-import {callOutline, mailOutline, listOutline, mail, call, personCircleOutline, businessOutline, helpCircleOutline,
-arrowBackOutline} from 'ionicons/icons';
+import { IonButton, IonItem, IonLabel, IonButtons, IonIcon } from '@ionic/angular/standalone';
+import {
+  callOutline, mailOutline, listOutline, mail, call, personCircleOutline, businessOutline, helpCircleOutline,
+  arrowBackOutline
+} from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { Router, RouterLink } from '@angular/router';
 
@@ -65,6 +67,8 @@ export class ToolBarComponent {
   public phoneLink = input<string>('');
 
   onBackClick() {
-     this._router.navigateByUrl('/home');
-}
+    this._router.navigate(['/home/profile'], { replaceUrl: true }).catch(err => {
+      console.error('Navigation error:', err);
+    });
+  }
 }

@@ -87,6 +87,9 @@ export class ProfileComponent implements OnInit {
       case 'logout':
         this.logout();
         break;
+      case 'becomeCreator':
+        this.router.navigate(['/home/profile/become-creator-detail']);
+        break;
     }
   }
 
