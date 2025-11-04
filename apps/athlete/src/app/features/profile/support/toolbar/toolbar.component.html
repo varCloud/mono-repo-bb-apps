@@ -1,6 +1,6 @@
 <ion-item lines="full">
   @if (backLink()!=='') {
-    <ion-button size = "small" [href]= "backLink()" fill="clear">
+    <ion-button size = "small" (click)="onBackClick()" fill="clear">
       <ion-icon [name]="leftIcon()" slot="start" aria-hidden="true" color="gray"></ion-icon>
     </ion-button>
   }

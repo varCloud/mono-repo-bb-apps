@@ -1,7 +1,8 @@
 import { IonContent } from '@ionic/angular';
 import {ToolBarComponent} from '../support/toolbar/toolbar.component';
-import { input,Component, ViewChild } from '@angular/core';
+import { input,Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
 import { IonFab, IonFabButton } from '@ionic/angular/standalone';
+import { TabMenuService } from '@monorepo-bb-app/core';
 
 @Component({
   selector: 'app-become-creator-detail',
@@ -14,7 +15,20 @@ import { IonFab, IonFabButton } from '@ionic/angular/standalone';
   ],
 })
 
-export class BecomeCreatorDetailComponent {
+export class BecomeCreatorDetailComponent implements OnInit{
+// let obj= new BecomeCreatorDetailComponent();
+constructor(
+  private _tabMenuService : TabMenuService
+){
+
+}
+
+
+  ngOnInit(): void {
+    this._tabMenuService.hideLoader();
+   console.log('iniciando component de become-creator-detail');
+  }
+
 
 @ViewChild(IonContent, { static: false }) content: IonContent | undefined;
 
@@ -24,30 +38,25 @@ export class BecomeCreatorDetailComponent {
   }
 
 //------------------------------------------------------------- inicio contact item -------------------------------------------------
-
-/** Icono y enlace de back*/
-  //@Input() leftIcon?: string = 'arrow-back-outline'; // Un icono por defecto
-  //@Input() backLink?: string = 'algo de enlace';
   public leftIcon = input<string>('arrow-back-outline');
   public backLink = input<string>('https://google.com');
 
-  /** El texto del título principal   */
-  //@Input() title?: string = 'Soporte';
   public title = input<string>('Help');
 
-  /**Icono y correo */
-  //@Input() emailIcon?: string = 'mail-outline';
-  //@Input() emailLink?: string ='gusmg90@gmail.com'; // El '?' lo hace opcional
   public emailLink = input<string>('');
   public emailIcon = input<string>('mail-outline');
 
-  /**Icono y numero para el teléfono*/
-  //@Input() phoneIcon?: string = 'call-outline';
-  //@Input() phoneLink?: string = '+524432426259';
   public phoneIcon = input<string>('call-outline');
   public phoneLink = input<string>('');
 
 //------------------------------------------------------------- fin contact item -------------------------------------------------
+  // ngOnDestroy(): void {
+  //   console.log('destruyendo component de become-creator-detail');
+  //   this._tabMenuService.showMenu();
+  // }
 
-
+ionViewWillLeave() {
+console.log('destruyendo component de become-creator-detail');
+this._tabMenuService.showMenu();
+  }
 }

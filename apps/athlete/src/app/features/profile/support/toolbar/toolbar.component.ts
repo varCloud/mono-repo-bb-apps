@@ -5,6 +5,7 @@ import {IonButton, IonItem, IonLabel, IonButtons, IonIcon} from '@ionic/angular/
 import {callOutline, mailOutline, listOutline, mail, call, personCircleOutline, businessOutline, helpCircleOutline,
 arrowBackOutline} from 'ionicons/icons';
 import { addIcons } from 'ionicons';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-tool-bar',
@@ -18,11 +19,15 @@ import { addIcons } from 'ionicons';
     IonLabel,
     IonButtons,
     IonButton,
+    RouterLink
+
   ]
 })
 export class ToolBarComponent {
 
-  constructor() {
+  constructor(
+    private _router: Router
+  ) {
     addIcons({
       callOutline,
       mailOutline,
@@ -34,13 +39,14 @@ export class ToolBarComponent {
       helpCircleOutline,
       arrowBackOutline
     });
+
   }
 
   /** Icono y enlace de back*/
   //@Input() leftIcon?: string = 'arrow-back-outline'; // Un icono por defecto
   //@Input() backLink?: string = 'algo de enlace';
   public leftIcon = input<string>('arrow-back-outline');
-  public backLink = input<string>('https://google.com');
+  public backLink = input<string>('/home');
 
   /** El texto del título principal   */
   //@Input() title?: string = 'Soporte';
@@ -57,4 +63,8 @@ export class ToolBarComponent {
   //@Input() phoneLink?: string = '+524432426259';
   public phoneIcon = input<string>('call-outline');
   public phoneLink = input<string>('');
+
+  onBackClick() {
+     this._router.navigateByUrl('/home');
+}
 }

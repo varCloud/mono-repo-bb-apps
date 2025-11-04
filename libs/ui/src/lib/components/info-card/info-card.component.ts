@@ -5,9 +5,7 @@ import {
   IonCardContent,
   IonIcon,
   IonText,
-  IonRippleEffect,
-
-
+  IonRippleEffect
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { informationCircle,
@@ -19,15 +17,12 @@ import { informationCircle,
   cubeOutline
 } from 'ionicons/icons';
 
-
-
 @Component({
   selector: 'app-info-card', // Tu selector HTML
   templateUrl: './info-card.component.html',
   styleUrls: ['./info-card.component.scss'],
   standalone: true,
   imports: [
-
     CommonModule,
     IonCard,
     IonCardContent,

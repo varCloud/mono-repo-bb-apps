@@ -53,3 +53,6 @@ export * from './lib/components/conversation-list/conversation-list.component';
 export * from './lib/interfaces/select-option.interface';
 export * from './lib/components/accordion/accordion.component';
 export * from './lib/components/user-conversation-modal/user-conversation-modal.component';
+export * from './lib/components/search/search.component';
+export * from './lib/components/info-card/info-card.component';
+export * from './lib/components/slide-info-card/slide-info-card.component';

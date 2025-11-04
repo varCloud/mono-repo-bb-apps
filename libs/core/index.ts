@@ -17,3 +17,4 @@ export { PushNotificationService } from './services/push-notifications/push-noti
 export { httpInterceptor } from './interceptors/http.interceptor';
 export { UserService } from './services/user.service';
 export { UserConversationService } from './services/user-conversation/user-conversation.services';
+export { TabMenuService } from './services/tab-menu-service';

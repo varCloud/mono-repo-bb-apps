@@ -15,36 +15,6 @@ export const profileRoutes: Routes = [
         (m) => m.ToolBarComponent,
       )
   },
-  {
-      path: 'search',
-    loadComponent: () =>
-      import('./search/search.component').then(
-        (m) => m.SimpleSearchInputComponent,
-      )
-  },
-    {
-      path: 'infocard',
-    loadComponent: () =>
-      import('./info-card/info-card.component').then(
-        (m) => m.InfoCardComponent,
-      )
-    },
-      {
-      path: 'homeslide',
-      loadComponent: () =>
-      import('./home-slide-card/home-slide-card.component').then(
-        (m) => m.HomeSlideCard,
-      )
-    },
-
-
-     {
-      path: 'homeaccordion',
-      loadComponent: () =>
-      import('./home-dynamic-accordion.component/home-dynamic-accordion.component').then(
-        (m) => m.HomeAccordion,
-      )
-    },
     {
       path: 'homesupport',
       loadComponent: () =>
@@ -59,8 +29,4 @@ export const profileRoutes: Routes = [
         (m) => m.BecomeCreatorDetailComponent,
       )
     },
-
-
-
-
 ];

@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
 // ... otras importaciones
-import { CardSliderComponent, InfoCardData } from '../slide-info-card/slide-info-card.component'; // <-- 1. Importa
+import { CardSliderComponent, InfoCardData } from '@monorepo-bb-app/ui'; // <-- 1. Importa // <-- 1. Importa
 import {
 IonSearchbar,
 IonContent,
@@ -13,12 +13,11 @@ IonItem, IonLabel, IonList
 import { addIcons } from 'ionicons';
 import { informationCircle, informationCircleOutline, callOutline, mailOutline, listOutline, mail, call, personCircleOutline, businessOutline, helpCircleOutline,
 arrowBackOutline } from 'ionicons/icons';
-import{SimpleSearchInputComponent} from '../search/search.component';
 import { Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // Necesario para ngModel
 import {ToolBarComponent} from '../support/toolbar/toolbar.component';
-import { AccordionComponent } from '@monorepo-bb-app/ui';
+import { AccordionComponent, SimpleSearchInputComponent } from '@monorepo-bb-app/ui';
 import { Faq } from '@monorepo-bb-app/shared';
 
 
@@ -170,7 +169,9 @@ mySearchText?: string = ''; // Puedes darle un valor inicial
   }
 //-------------------------------------------------------------fin search -------------------------------------------------
 // ------------------------------------------------------------- inicio  accordion -------------------------------------------------
- myFaqList: Faq[] = [
+
+
+myFaqList: Faq[] = [
     {
       question: '¿Cómo crear una cuenta?',
       answer:
