@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import {
   PushNotifications,
   PushNotificationSchema,
@@ -11,6 +11,7 @@ import { KEY_LOCALSTORAGE } from 'libs/shared/constants/key-localstorage';
 import { SesionService } from '../sesion.service';
 import { UserService } from '../user.service';
 import { take } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +23,9 @@ export class PushNotificationService {
     private _localStorage: LocalStorageService,
     private _sesionService: SesionService,
     private _userService: UserService,
+    private _zone: NgZone,
+    private _router: Router,
+
   ) {}
 
   public initPushNotifications() {
@@ -54,30 +58,42 @@ export class PushNotificationService {
       );
 
       // Listener para notificaciones tocadas por el usuario
-      PushNotifications.addListener(
-        'pushNotificationActionPerformed',
-        (notification) => {
+      PushNotifications.addListener('pushNotificationActionPerformed',(notification) => {
+          this.logger.info('Notificación recibida por interacción', notification);
           this.logger.info('Push notification action performed', notification);
+          const data = notification.notification.data;
+          this.logger.info('Push notification data:', data);
+          this._zone.run(() => {
+            const url = `/home/${data.userConversationId}/user-chat`;
+          this._router.navigate([url] , { state: { data } });
+          
+        });
         },
       );
     }
   }
 
 
-  private async showForegroundNotification(
-    notification: PushNotificationSchema,
-  ) {
+  private handleNotificationTap(notification: PushNotificationSchema) {
+    // Aquí puedes agregar la lógica para manejar el tap en la notificación
+    // Por ejemplo, navegar a una página específica, actualizar datos, etc.
+    this.logger.info('Manejando tap en notificación', notification);
+  }
+
+  private async showForegroundNotification(notification: PushNotificationSchema) {
     const toast = await this.toastController.create({
       header: notification.title,
       message: notification.body,
       position: 'top',
       duration: 3000,
-      buttons: [
-        {
-          text: 'Aceptar',
-          role: 'cancel',
-        },
-      ],
+      cssClass: "interactive-toast",
+      animated: true
+    });
+
+    // Suscribirse al evento de tap
+    toast.addEventListener('click', () => {
+      this.handleNotificationTap(notification);
+      toast.dismiss();
     });
 
     await toast.present();

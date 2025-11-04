@@ -58,7 +58,6 @@ export class UserConversationComponent{
 
 
   onConversationSelected(conversation: any) {
-    console.log('Conversación seleccionada:', conversation.userConversationId);
     this.router.navigate([`/home/${conversation.userConversationId}/user-chat`] , { state: { conversation } });
   }
 
