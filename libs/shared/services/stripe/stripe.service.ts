@@ -60,4 +60,10 @@ export class StripeService {
       }
     );
   }
+
+  public getPaymentMethods(customerId: number) {
+    return this._http.get(
+      `${this.BASE_URL}/user/${customerId}/payment-methods`
+    );
+  }
 }
