@@ -1,0 +1,26 @@
+.title{
+  font-size: 20px;
+}
+ion-icon{
+  font-family: 'SF Pro Display';
+  color: black;
+}
+
+ion-button{
+  --padding-start: 3px;
+  --padding-end: 0px;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+ion-item{
+  --border-color: transparent;
+}
+
+.item-native{
+  --background: transparent;
+  --padding-start: 0px;
+  --padding-end: 0px;
+}
+
+
+

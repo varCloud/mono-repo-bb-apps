@@ -56,3 +56,4 @@ export * from './lib/components/user-conversation-modal/user-conversation-modal.
 export * from './lib/components/search/search.component';
 export * from './lib/components/info-card/info-card.component';
 export * from './lib/components/slide-info-card/slide-info-card.component';
+export * from './lib/components/toolbar/toolbar.component';

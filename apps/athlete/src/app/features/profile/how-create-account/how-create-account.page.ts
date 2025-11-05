@@ -1,4 +1,5 @@
 
+
 import { input, Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
 import { IonFab, IonFabButton, IonCol, IonContent, IonFooter, IonToolbar, IonButton } from '@ionic/angular/standalone';
 import { TabMenuService } from '@monorepo-bb-app/core';
@@ -6,8 +7,8 @@ import { LayoutContentComponent, ToolBarComponent } from '@monorepo-bb-app/ui';
 
 @Component({
   selector: 'app-become-creator-detail',
-  templateUrl: 'become-creator-detail.page.html',
-  styleUrls: ['become-creator-detail.page.scss'],
+  templateUrl: 'how-create-account.page.html',
+  styleUrls: ['how-create-account.page.scss'],
   standalone: true,
   imports: [
     ToolBarComponent,

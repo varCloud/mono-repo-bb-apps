@@ -9,13 +9,6 @@ export const profileRoutes: Routes = [
       )
   },
     {
-    path: 'support',
-    loadComponent: () =>
-      import('./support/toolbar/toolbar.component').then(
-        (m) => m.ToolBarComponent,
-      )
-  },
-    {
       path: 'homesupport',
       loadComponent: () =>
       import('./homesupport/homesupport.component').then(
@@ -26,6 +19,13 @@ export const profileRoutes: Routes = [
       path: 'profile/become-creator-detail',
       loadComponent: () =>
       import('./become-creator-detail/become-creator-detail.page').then(
+        (m) => m.BecomeCreatorDetailComponent,
+      )
+    },
+    {
+      path: 'profile/how-create-account',
+      loadComponent: () =>
+      import('./how-create-account/how-create-account.page').then(
         (m) => m.BecomeCreatorDetailComponent,
       )
     },

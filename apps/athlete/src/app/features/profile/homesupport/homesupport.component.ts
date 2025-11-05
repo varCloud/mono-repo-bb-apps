@@ -16,8 +16,7 @@ arrowBackOutline } from 'ionicons/icons';
 import { Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // Necesario para ngModel
-import {ToolBarComponent} from '../support/toolbar/toolbar.component';
-import { AccordionComponent, SimpleSearchInputComponent } from '@monorepo-bb-app/ui';
+import { AccordionComponent, SimpleSearchInputComponent, ToolBarComponent } from '@monorepo-bb-app/ui';
 import { Faq } from '@monorepo-bb-app/shared';
 
 
