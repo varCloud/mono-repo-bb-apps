@@ -67,9 +67,15 @@ ion-accordion.accordion-expanded ion-item[slot='header'] {
     ion-accordion {
         .ion-accordion-toggle-icon {
             color:#F79145 !important;
+
         }
     }
   }
+
+app-faq-accordion ion-button{
+  color:#F79145 !important;
+  font-weight: 600 !important;
+}
 
   ion-accordion {
   --ion-accordion-toggle-icon: 'add';

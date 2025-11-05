@@ -3,7 +3,8 @@
   overflow-x: auto;  /* ¡Magia! Habilita el scroll horizontal */
   overflow-y: hidden;
   white-space: nowrap; /* ¡Magia! Pone los elementos en una sola línea */
-  padding: 5px 3px; /* Un poco de espacio para que no se pegue */
+  padding-top: 3px; /* Un poco de espacio para que no se pegue */
+  padding-bottom: 3px;
 
   // Oculta la barra de scroll (estilo opcional)
   &::-webkit-scrollbar {
@@ -32,13 +33,13 @@ app-info-card {
 // Estilo para la primera y última tarjeta para que no se peguen a los bordes
 app-info-card:first-child {
   ::ng-deep ion-card {
-    margin-left: 10px;
+    margin-left: 0px;
   }
 }
 
 app-info-card:last-child {
   ::ng-deep ion-card {
-    margin-right: 10px;
+    margin-right: 0px;
   }
 
   .selected{
