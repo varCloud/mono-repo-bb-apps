@@ -8,7 +8,8 @@
     "finish": "Finalizar",
     "next": "Siguiente",
     "previous": "Anterior",
-    "skip": "Saltar"
+    "skip": "Saltar",
+    "save-changes": "Guardar cambios"
   },
   "go-back": "Regresar",
   "login": {
@@ -174,5 +175,61 @@
     "steps-onboarding.step-2-title": "Descubre más de 1000 rutinas online y clases que se adaptan a tus necesidades",
     "steps-onboarding.step-3-title": "Suscríbete a tu entrenador favorito y comienza tu vida saludable"
   },
-  "next": "Siguiente"
+  "next": "Siguiente",
+  "profile": {
+    "personal-data": "Datos personales",
+    "basic-info": "Información básica",
+    "physical-info": "Información física",
+    "save": {
+      "success": "Datos guardados correctamente",
+      "error": "Error al guardar los datos"
+    },
+    "validation": {
+      "error": "Por favor, completa todos los campos requeridos"
+    },
+    "fields": {
+      "firstName": {
+        "label": "Nombre",
+        "placeholder": "Ingresa tu nombre"
+      },
+      "nickName": {
+        "label": "Nombre de usuario",
+        "placeholder": "Ingresa tu nombre de usuario"
+      },
+      "lastName": {
+        "label": "Apellido",
+        "placeholder": "Ingresa tu apellido"
+      },
+      "email": {
+        "label": "Correo electrónico",
+        "placeholder": "Ingresa tu correo electrónico"
+      },
+      "phone": {
+        "label": "Teléfono",
+        "placeholder": "Ingresa tu número de teléfono"
+      },
+      "gender": {
+        "label": "Género",
+        "placeholder": "Selecciona tu género"
+      },
+      "birthdate": {
+        "label": "Fecha de nacimiento",
+        "placeholder": "Selecciona tu fecha de nacimiento"
+      },
+      "age": {
+        "label": "Edad",
+        "placeholder": "Tu edad"
+      },
+      "weight": {
+        "label": "Peso",
+        "placeholder": "Ingresa tu peso en kg",
+        "unit": "kg"
+      },
+      "height": {
+        "label": "Altura",
+        "placeholder": "Ingresa tu altura en cm",
+        "unit": "cm"
+      }
+    }
+  }
 }

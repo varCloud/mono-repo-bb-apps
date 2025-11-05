@@ -8,7 +8,8 @@
     "finish": "Finish",
     "next": "Next",
     "previous": "Previous",
-    "skip": "Skip"
+    "skip": "Skip",
+    "save-changes": "Save changes"
   },
   "onboarding": {
     "tell-about-us": {
@@ -95,5 +96,61 @@
     "password-min-length": "Password must be at least 8 characters",
     "confirm-password": "Confirm password",
     "passwords-match": "Passwords do not match"
+  },
+  "profile": {
+    "personal-data": "Personal Data",
+    "basic-info": "Basic Information",
+    "physical-info": "Physical Information",
+    "save": {
+      "success": "Data saved successfully",
+      "error": "Error saving data"
+    },
+    "validation": {
+      "error": "Please complete all required fields"
+    },
+    "fields": {
+      "firstName": {
+        "label": "First Name",
+        "placeholder": "Enter your first name"
+      },
+      "nickName": {
+        "label": "Username",
+        "placeholder": "Enter your username"
+      },
+      "lastName": {
+        "label": "Last Name",
+        "placeholder": "Enter your last name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email"
+      },
+      "phone": {
+        "label": "Phone",
+        "placeholder": "Enter your phone number"
+      },
+      "gender": {
+        "label": "Gender",
+        "placeholder": "Select your gender"
+      },
+      "birthdate": {
+        "label": "Birth Date",
+        "placeholder": "Select your birth date"
+      },
+      "age": {
+        "label": "Age",
+        "placeholder": "Your age"
+      },
+      "weight": {
+        "label": "Weight",
+        "placeholder": "Enter your weight in kg",
+        "unit": "kg"
+      },
+      "height": {
+        "label": "Height",
+        "placeholder": "Enter your height in cm",
+        "unit": "cm"
+      }
+    }
   }
 }

@@ -1,0 +1,83 @@
+<!-- Athlete Profile Basic Form -->
+<form [formGroup]="form" class="athlete-profile-basic-form">
+  <!-- Avatar Picker -->
+  <ion-row>
+    <ion-col size="12">
+      <div class="athlete-avatar-section">
+        <app-avatar-picker
+          [size]="'medium'"
+          [disabled]="false"
+          (imageChanged)="onImageSelected($event)"
+        ></app-avatar-picker>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <!-- First Name -->
+  <ion-row>
+    <ion-col size="12">
+      <ion-input
+        formControlName="firstName"
+        class="bb-input athlete-input"
+        [label]="'onboarding.profile-setup.first-name' | translate"
+        label-placement="floating"
+        fill="outline"
+        [placeholder]="'onboarding.profile-setup.first-name-placeholder' | translate"
+        type="text"
+        mode="md"
+      ></ion-input>
+      <app-error-message
+        [control]="$any(form.get('firstName'))"
+      ></app-error-message>
+    </ion-col>
+  </ion-row>
+
+  <!-- Last Name -->
+  <ion-row>
+    <ion-col size="12">
+      <ion-input
+        formControlName="lastName"
+        class="bb-input athlete-input"
+        [label]="'onboarding.profile-setup.last-name' | translate"
+        label-placement="floating"
+        fill="outline"
+        [placeholder]="'onboarding.profile-setup.last-name-placeholder' | translate"
+        type="text"
+        mode="md"
+      ></ion-input>
+      <app-error-message
+        [control]="$any(form.get('lastName'))"
+      ></app-error-message>
+    </ion-col>
+  </ion-row>
+
+  <!-- Nickname -->
+  <ion-row>
+    <ion-col size="12">
+      <ion-input
+        formControlName="nickName"
+        class="bb-input athlete-input"
+        [label]="'onboarding.profile-setup.nickname' | translate"
+        label-placement="floating"
+        fill="outline"
+        [placeholder]="'onboarding.profile-setup.nickname-placeholder' | translate"
+        type="text"
+        mode="md"
+      ></ion-input>
+      <app-error-message
+        [control]="$any(form.get('nickName'))"
+      ></app-error-message>
+    </ion-col>
+  </ion-row>
+
+  <!-- Phone -->
+  <ion-row>
+    <ion-col size="12">
+      <app-input-phone
+        [label]="'onboarding.profile-setup.phone-label' | translate"
+        [control]="$any(form.get('phone'))"
+        (maskSelected)="onMaskSelected($event)"
+      ></app-input-phone>
+    </ion-col>
+  </ion-row>
+</form>

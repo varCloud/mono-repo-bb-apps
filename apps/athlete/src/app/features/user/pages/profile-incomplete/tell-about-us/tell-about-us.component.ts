@@ -55,9 +55,6 @@ import { take } from 'rxjs';
   ],
 })
 export class TellAboutUsComponent implements OnInit {
-
-
-
   public form = this._fb.group({
     gender: ['', Validators.required],
     birthdate: ['', Validators.required],

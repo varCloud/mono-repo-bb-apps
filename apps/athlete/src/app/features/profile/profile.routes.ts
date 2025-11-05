@@ -20,6 +20,11 @@ export const profileRoutes: Routes = [
           ).then((m) => m.PaymentMethodsPageComponent),
       },
       {
+        path: 'personal-data',
+        loadComponent: () =>
+          import('./pages/personal-data/personal-data-page.component').then((m) => m.PersonalDataPageComponent),
+        },
+      {
         path: '**',
         redirectTo: '',
         pathMatch: 'full',

@@ -55,3 +55,7 @@ export * from './lib/components/conversation-list/conversation-list.component';
 
 // Interfaces
 export * from './lib/interfaces/select-option.interface';
+
+// Formularios reutilizables
+export * from './lib/athlete-profile-basic-form/athlete-profile-basic-form.component';
+export * from './lib/athlete-physical-info-form/athlete-physical-info-form.component';

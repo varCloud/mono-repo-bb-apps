@@ -1,0 +1,17 @@
+.athlete-profile-basic-form {
+  .athlete-avatar-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+}
+
+:host ::ng-deep {
+  ion-row {
+    margin-bottom: 1rem;
+  }
+
+  .athlete-input {
+    width: 100%;
+  }
+}
