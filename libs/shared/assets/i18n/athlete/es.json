@@ -174,5 +174,26 @@
     "steps-onboarding.step-2-title": "Descubre más de 1000 rutinas online y clases que se adaptan a tus necesidades",
     "steps-onboarding.step-3-title": "Suscríbete a tu entrenador favorito y comienza tu vida saludable"
   },
-  "next": "Siguiente"
+  "next": "Siguiente",
+  "payment-method": "Método de pago",
+  "expires": "Vence",
+  "default": "Por defecto",
+  "no-payment-methods": "No hay métodos de pago",
+  "add-first-payment-method": "Agrega tu primer método de pago",
+  "add-payment-method": "Agregar método de pago",
+  "subtotal": "Subtotal",
+  "discount": "Descuento",
+  "taxes": "Impuestos",
+  "total": "Total",
+  "monthly": "mensual",
+  "yearly": "anual",
+  "weekly": "semanal",
+  "daily": "diario",
+  "checkout": {
+    "change-payment-method": "Cambiar método de pago",
+    "order-summary": "Resumen del pedido",
+    "subscription-terms": "Al confirmar, aceptas los términos y condiciones de la suscripción",
+    "secure-payment": "Tu pago está protegido con encriptación de nivel bancario",
+    "pay-now": "Pagar ahora"
+  }
 }

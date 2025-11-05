@@ -59,19 +59,18 @@ import { RouterLink } from '@angular/router';
 export class DetailSuscriptionCreatorComponent implements OnInit {
   creator = signal<User | null>(null);
   selectedPaymentFrequencyId = signal<number | null>(null);
-  constructor(private _processSuscriptionService: ProcessSuscriptionService) {
+  constructor(private _processSuscriptionService: ProcessSuscriptionService) {}
+  ngOnInit(): void {
     this.creator.set(this._processSuscriptionService.getCreator());
     this.creator.update((creator) => {
       creator?.billingCycles.sort((a, b) => a.interval - b.interval);
       return creator;
     });
-    this.selectedPaymentFrequencyId.set(
-      this.creator()?.billingCycles[0]?.billingCycleId ?? null
-    );
+    this.selectPaymentFrequency(this.creator()?.billingCycles[0]);
   }
-  ngOnInit(): void {}
 
   selectPaymentFrequency(payment: any) {
     this.selectedPaymentFrequencyId.set(payment.billingCycleId);
+    this._processSuscriptionService.setSelectedBillingCycle(payment);
   }
 }

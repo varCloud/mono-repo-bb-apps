@@ -49,6 +49,14 @@ export interface BillingCycle {
   description: string;
 }
 
+export interface PaymentMethod {
+  id: string;
+  brand: string;
+  last4: string;
+  exp_month: number;
+  exp_year: number;
+}
+
 export class UserModel implements User {
   userId = 0;
   userTypeId = 0;

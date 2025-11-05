@@ -95,5 +95,26 @@
     "password-min-length": "Password must be at least 8 characters",
     "confirm-password": "Confirm password",
     "passwords-match": "Passwords do not match"
+  },
+  "payment-method": "Payment Method",
+  "expires": "Expires",
+  "default": "Default",
+  "no-payment-methods": "No payment methods",
+  "add-first-payment-method": "Add your first payment method",
+  "add-payment-method": "Add Payment Method",
+  "subtotal": "Subtotal",
+  "discount": "Discount",
+  "taxes": "Taxes",
+  "total": "Total",
+  "monthly": "monthly",
+  "yearly": "yearly",
+  "weekly": "weekly",
+  "daily": "daily",
+  "checkout": {
+    "change-payment-method": "Change payment method",
+    "order-summary": "Order Summary",
+    "subscription-terms": "By confirming, you agree to the subscription terms and conditions",
+    "secure-payment": "Your payment is protected with bank-level encryption",
+    "pay-now": "Pay Now"
   }
 }

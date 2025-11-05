@@ -105,6 +105,7 @@ export class AddPaymentMethodComponent implements OnInit {
     this._loader.hideLoader();
     if (error) return;
     this.clearFields();
+    console.log(setupIntent);
     this.succesAddPayment.emit({ data: setupIntent });
     const alert = await this.alertController.create({
       header: this._translate.transform('payment-method-added'),
