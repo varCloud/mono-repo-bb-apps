@@ -2,15 +2,7 @@ import { Component, input } from '@angular/core';
 // ... otras importaciones
 import { CardSliderComponent, InfoCardData } from '@monorepo-bb-app/ui'; // <-- 1. Importa // <-- 1. Importa
 import {
-  IonSearchbar,
   IonContent,
-  IonText,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
-  IonItem,
-  IonLabel,
-  IonList,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
@@ -48,15 +40,7 @@ import { FaqService } from '@monorepo-bb-app/core';
     // ... otras importaciones
     CardSliderComponent, // <-- 2. Añade a imports
     SimpleSearchInputComponent,
-    IonSearchbar,
-    IonText,
     IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
-    IonItem,
-    IonLabel,
-    IonList,
     AccordionComponent,
   ],
 })
