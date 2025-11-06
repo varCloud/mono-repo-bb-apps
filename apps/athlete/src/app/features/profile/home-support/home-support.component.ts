@@ -32,8 +32,8 @@ import { take } from 'rxjs';
 @Component({
   selector: 'app-home-support',
 
-  templateUrl: 'homesupport.component.html',
-  styleUrls: ['homesupport.component.scss'],
+  templateUrl: 'home-support.component.html',
+  styleUrls: ['home-support.component.scss'],
   standalone: true,
   imports: [
     ToolBarComponent,
@@ -45,7 +45,7 @@ import { take } from 'rxjs';
     AccordionComponent,
   ],
 })
-export class homesupport {
+export class HomeSupport {
   constructor(private faqService: FaqService, private catalogService: CatalogsService ) {
     addIcons({
       informationCircle,
@@ -74,8 +74,6 @@ export class homesupport {
     });
   }
 
-
-
   // toolbar
   public leftIcon = input<string>('arrow-back-outline');
   public backLink = input<string>('https://google.com');
@@ -84,7 +82,6 @@ export class homesupport {
   public emailIcon = input<string>('mail-outline');
   public phoneIcon = input<string>('call-outline');
   public phoneLink = input<string>('+524432426259');
-
 
   //info slider
   cardCategories: InfoCardData[] = [

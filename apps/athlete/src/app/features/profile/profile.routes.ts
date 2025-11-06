@@ -9,10 +9,10 @@ export const profileRoutes: Routes = [
       )
   },
     {
-      path: 'homesupport',
+      path: 'home-support',
       loadComponent: () =>
-      import('./homesupport/homesupport.component').then(
-        (m) => m.homesupport,
+      import('./home-support/home-support.component').then(
+        (m) => m.HomeSupport,
       )
     },
     {

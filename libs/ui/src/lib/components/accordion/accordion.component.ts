@@ -15,7 +15,6 @@ import {
   IonItem,
   IonLabel,
   AccordionGroupCustomEvent,
-  IonIcon,
 } from '@ionic/angular/standalone';
 
 import { addIcons } from 'ionicons';
