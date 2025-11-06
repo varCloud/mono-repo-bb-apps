@@ -39,7 +39,7 @@ export class AccordionComponent {
 
   items = input.required<Faq[]>();
 
-public tittleaccordion ?=   input<string>('Frecuent Questions');
+public tittleaccordion = input<string>('Frecuent Questions');
 
   accordionGroup = viewChild.required<IonAccordionGroup>('accordionGroup');
   currentOpenValue = signal<string[]>([]);

@@ -10,8 +10,8 @@
   [multiple]="true"
   (ionChange)="onAccordionChange($event)"
 >
+  @for (item of items(); track item.question; let i = $index) {
   <ion-accordion
-    *ngFor="let item of items(); let i = index"
     [value]="'item-' + i"
     [toggleIcon]="'caret-down-circle'"
     toggleIconSlot="end"
@@ -24,4 +24,9 @@
       {{ item.answer }}
     </div>
   </ion-accordion>
+  } @empty {
+  <ion-item lines="none">
+    <ion-label>No hay preguntas frecuentes disponibles.</ion-label>
+  </ion-item>
+  }
 </ion-accordion-group>
