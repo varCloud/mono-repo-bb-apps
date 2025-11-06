@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, input, output, model } from '@angular/core'; 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
@@ -18,23 +18,21 @@ import {
     IonText
   ]
 })
-export class SimpleSearchInputComponent implements OnInit {
-  @Input() searchValue ?: string  = '';
-  @Input() placeholder ?: string = 'Search';
-  @Input() headerTitle?: string = '¿Cómo podemos ayudarte?';
-  @Input() debounce?: number = 300;
-  @Output() searchValueChange = new EventEmitter<string>();
-  @Output() searchSubmitted = new EventEmitter<string>();
-  @Output() searchCleared = new EventEmitter<void>();
-  currentInputValue?: string = '';
 
-  ngOnInit() {
-    this.currentInputValue = this.searchValue;
-  }
+export class SimpleSearchInputComponent {
+
+  searchValue = model<string>('');
+  placeholder = input<string>('Search');
+  headerTitle = input<string>('¿Cómo podemos ayudarte?');
+  debounce = input<number>(300);
+
+  searchSubmitted = output<string>();
+  searchCleared = output<void>();
+
+  constructor() {}
 
   onSearchInput(event: any) {
-    this.currentInputValue = event.detail.value || '';
-    this.searchValueChange.emit(this.currentInputValue);
+    this.searchValue.set(event.detail.value || '');
   }
 
   onSearchSubmit(event: any) {
@@ -42,8 +40,7 @@ export class SimpleSearchInputComponent implements OnInit {
   }
 
   onSearchClear() {
-    this.currentInputValue = '';
+    this.searchValue.set('');
     this.searchCleared.emit();
-    this.searchValueChange.emit('');
   }
 }

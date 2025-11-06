@@ -1,10 +1,4 @@
-export interface InfoCardData {
-  color: string;
-  icon: string;
-  title: string;
-  subtitle: string;
-
-}
+import { InfoCardData } from '@monorepo-bb-app/shared';
 
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common'; // <-- Necesario para *ngFor
@@ -13,12 +7,7 @@ import { CommonModule } from '@angular/common'; // <-- Necesario para *ngFor
 import { InfoCardComponent } from '../info-card/info-card.component';
 
 // Definimos la interfaz aquí mismo para simplificar
-export interface InfoCardData {
-  color: string;
-  icon: string;
-  title: string;
-  subtitle: string;
-}
+
 
 @Component({
   selector: 'app-card-slider',

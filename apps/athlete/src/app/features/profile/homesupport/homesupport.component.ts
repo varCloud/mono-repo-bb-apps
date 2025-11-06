@@ -1,6 +1,7 @@
 import { Component, input } from '@angular/core';
+import { InfoCardData } from '@monorepo-bb-app/shared';
 // ... otras importaciones
-import { CardSliderComponent, InfoCardData } from '@monorepo-bb-app/ui'; // <-- 1. Importa // <-- 1. Importa
+import { CardSliderComponent } from '@monorepo-bb-app/ui'; // <-- 1. Importa // <-- 1. Importa
 import {
   IonContent,
 } from '@ionic/angular/standalone';
@@ -25,27 +26,27 @@ import {
   SimpleSearchInputComponent,
   ToolBarComponent,
 } from '@monorepo-bb-app/ui';
-import { Faq } from '@monorepo-bb-app/shared';
+import { CatalogsService, Faq, RequestFaqs } from '@monorepo-bb-app/shared';
 import { FaqService } from '@monorepo-bb-app/core';
-
+import { take } from 'rxjs';
 @Component({
   selector: 'app-home-support',
+
   templateUrl: 'homesupport.component.html',
   styleUrls: ['homesupport.component.scss'],
   standalone: true,
   imports: [
     ToolBarComponent,
-    FormsModule, // IMPORTER ESTO ES CRUCIAL PARA [(ngModel)]
+    FormsModule,
     CommonModule,
-    // ... otras importaciones
-    CardSliderComponent, // <-- 2. Añade a imports
+    CardSliderComponent,
     SimpleSearchInputComponent,
     IonContent,
     AccordionComponent,
   ],
 })
 export class homesupport {
-  constructor(private faqService: FaqService) {
+  constructor(private faqService: FaqService, private catalogService: CatalogsService ) {
     addIcons({
       informationCircle,
       informationCircleOutline,
@@ -63,10 +64,17 @@ export class homesupport {
   }
 
   public getFacts() {
-    this.faqService.getFact(1, 1).subscribe((varResponse: any) => {
-      console.log('Respuesta de FAQs:', varResponse);
+    const payload:RequestFaqs = {
+      categoryId:1,
+      userTypeId:1
+    }
+    this.faqService.getFaqs(payload).pipe(take(1)).subscribe((response: Faq[]) => {
+      console.log('Respuesta de FAQs:', response);
+      this.myFaqList = response;
     });
   }
+
+
 
   // toolbar
   public leftIcon = input<string>('arrow-back-outline');

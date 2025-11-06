@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core'; 
 import { CommonModule } from '@angular/common';
 import {
   IonCard,
@@ -8,7 +8,8 @@ import {
   IonRippleEffect
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { informationCircle,
+import {
+  informationCircle,
   informationCircleOutline,
   restaurantOutline,
   chatbubblesOutline,
@@ -18,7 +19,7 @@ import { informationCircle,
 } from 'ionicons/icons';
 
 @Component({
-  selector: 'app-info-card', // Tu selector HTML
+  selector: 'app-info-card',
   templateUrl: './info-card.component.html',
   styleUrls: ['./info-card.component.scss'],
   standalone: true,
@@ -41,28 +42,26 @@ export class InfoCardComponent {
       restaurantOutline,
       notificationsOutline,
       cubeOutline
-
     });
   }
 
-  @Input() color?: string = 'tertiary';
-  @Input() icon?: string = 'information-circle-outline';
-  @Input() title?: string = 'Título no definido';
-  @Input() subtitle?: string = 'Subtítulo no definido';
-  @Output() cardClicked = new EventEmitter<string>();
+  color = input<string>('tertiary');
+  icon = input<string>('information-circle-outline');
+  title = input<string>('Título no definido');
+  subtitle = input<string>('Subtítulo no definido');
+  isSelected = input<boolean>(false);
+  cardClicked = output<string>();
 
   onCardClick() {
-    this.cardClicked.emit(this.title);
+    this.cardClicked.emit(this.title());
   }
 
-  @Input() isSelected?: boolean = false;
+  iconColor = computed(() => {
+    return this.isIonicColor(this.color()) ? 'light' : 'dark';
+  });
 
-  isIonicColor(colorName: string): boolean {
+  public isIonicColor(colorName: string): boolean {
     const ionicColors = ['primary', 'secondary', 'tertiary', 'success', 'warning', 'danger', 'light', 'medium', 'dark'];
     return ionicColors.includes(colorName);
-  }
-
-  getIconColor(): string {
-    return this.isIonicColor(this.color) ? 'light' : 'dark';
   }
 }

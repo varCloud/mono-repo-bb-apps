@@ -42,4 +42,5 @@ export * from './models/goals';
 export * from './models/user-conversation';
 export * from './models/filter.model';
 export * from './models/stripe-status';
-export * from './models/faq';
+export * from './models/faqs/faqs.model';
+export * from './models/slide-info-card.model';
