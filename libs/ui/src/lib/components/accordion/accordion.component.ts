@@ -1,4 +1,11 @@
-import { Component, ChangeDetectionStrategy, signal, computed, input, viewChild } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  signal,
+  computed,
+  input,
+  viewChild,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
@@ -8,22 +15,22 @@ import {
   IonItem,
   IonLabel,
   AccordionGroupCustomEvent,
-  IonIcon
+  IonIcon,
 } from '@ionic/angular/standalone';
 
 import { addIcons } from 'ionicons';
-import { addOutline, removeOutline, caretDownCircle,add } from 'ionicons/icons';
+import {
+  addOutline,
+  removeOutline,
+  caretDownCircle,
+  add,
+} from 'ionicons/icons';
 import { Faq } from '@monorepo-bb-app/shared';
-
-// Definimos una interfaz para la data
-
-
 @Component({
   selector: 'app-faq-accordion',
   templateUrl: './accordion.component.html',
   styleUrls: ['./accordion.component.scss'],
   standalone: true,
-  // 1. Añade ChangeDetectionStrategy.OnPush (mejor performance con signals)
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CommonModule,
@@ -32,14 +39,12 @@ import { Faq } from '@monorepo-bb-app/shared';
     IonItem,
     IonLabel,
     IonButton,
-
   ],
 })
 export class AccordionComponent {
-
   items = input.required<Faq[]>();
 
-public tittleaccordion = input<string>('Frecuent Questions');
+  public tittleaccordion = input<string>('Frecuent Questions');
 
   accordionGroup = viewChild.required<IonAccordionGroup>('accordionGroup');
   currentOpenValue = signal<string[]>([]);
@@ -50,7 +55,7 @@ public tittleaccordion = input<string>('Frecuent Questions');
   });
 
   constructor() {
-    addIcons({ addOutline, removeOutline, caretDownCircle,add });
+    addIcons({ addOutline, removeOutline, caretDownCircle, add });
   }
 
   toggleAll() {
@@ -58,9 +63,7 @@ public tittleaccordion = input<string>('Frecuent Questions');
       this.accordionGroup().value = [];
       this.currentOpenValue.set([]);
     } else {
-      const allItemValues = this.items().map(
-        (_, index) => 'item-' + index
-      );
+      const allItemValues = this.items().map((_, index) => 'item-' + index);
       this.accordionGroup().value = allItemValues;
       this.currentOpenValue.set(allItemValues);
     }
