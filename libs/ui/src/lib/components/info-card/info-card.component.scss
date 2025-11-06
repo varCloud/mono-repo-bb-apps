@@ -66,23 +66,10 @@ ion-icon[color="dark"] {
 }
 
 ion-card {
-  // ... (todos tus estilos existentes)
-
-  // Añade una transición para que el contorno aparezca suavemente
   transition: outline 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-/* * ¡ESTE BLOQUE ES NUEVO!
- * Define el estilo para la tarjeta cuando tiene la clase '.selected'
-*/
 ion-card.selected {
-  /* Usamos 'outline' en lugar de 'border' para no afectar
-    el tamaño o la posición de la tarjeta.
-  */
-  outline: 3px solid var(--ion-color-primary); /* Color primario de tu app */
-
-  /* Un 'outline-offset' negativo lo mete un poco hacia adentro,
-    respetando los bordes redondeados.
-  */
+  outline: 3px solid var(--ion-color-primary);
   outline-offset: -3px;
 }

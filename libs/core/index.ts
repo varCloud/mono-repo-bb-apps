@@ -18,3 +18,4 @@ export { httpInterceptor } from './interceptors/http.interceptor';
 export { UserService } from './services/user.service';
 export { UserConversationService } from './services/user-conversation/user-conversation.services';
 export { TabMenuService } from './services/tab-menu-service';
+export { FaqService } from './services/faqs/faqs.service';

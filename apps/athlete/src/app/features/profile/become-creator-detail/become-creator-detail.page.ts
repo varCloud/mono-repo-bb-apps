@@ -1,8 +1,8 @@
 
-import { input, Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
-import { IonFab, IonFabButton, IonCol, IonContent, IonFooter, IonToolbar, IonButton } from '@ionic/angular/standalone';
+import { input, Component, ViewChild, OnInit } from '@angular/core';
+import { IonCol, IonContent, IonFooter, IonToolbar, IonButton } from '@ionic/angular/standalone';
 import { TabMenuService } from '@monorepo-bb-app/core';
-import { LayoutContentComponent, ToolBarComponent } from '@monorepo-bb-app/ui';
+import { ToolBarComponent } from '@monorepo-bb-app/ui';
 
 @Component({
   selector: 'app-become-creator-detail',
@@ -11,14 +11,13 @@ import { LayoutContentComponent, ToolBarComponent } from '@monorepo-bb-app/ui';
   standalone: true,
   imports: [
     ToolBarComponent,
-    IonFab, IonFabButton, LayoutContentComponent,
     IonCol,
     IonContent, IonFooter, IonToolbar, IonButton
 ],
 })
 
 export class BecomeCreatorDetailComponent implements OnInit {
-  // let obj= new BecomeCreatorDetailComponent();
+
   constructor(
     private _tabMenuService: TabMenuService
   ) {}
@@ -33,10 +32,9 @@ export class BecomeCreatorDetailComponent implements OnInit {
 
 
   scrollToTop() {
-    this.content?.scrollToTop(500); // Scrolls to the top with a 500ms animation
+    this.content?.scrollToTop(500);
   }
 
-  //------------------------------------------------------------- inicio contact item -------------------------------------------------
   public leftIcon = input<string>('arrow-back-outline');
   public backLink = input<string>('https://google.com');
 
@@ -48,14 +46,8 @@ export class BecomeCreatorDetailComponent implements OnInit {
   public phoneIcon = input<string>('call-outline');
   public phoneLink = input<string>('');
 
-  //------------------------------------------------------------- fin contact item -------------------------------------------------
-  // ngOnDestroy(): void {
-  //   console.log('destruyendo component de become-creator-detail');
-  //   this._tabMenuService.showMenu();
-  // }
 
   ionViewWillLeave() {
-    console.log('destruyendo component de become-creator-detail');
     this._tabMenuService.showMenu();
   }
 }

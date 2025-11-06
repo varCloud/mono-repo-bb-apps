@@ -1,18 +1,14 @@
-/* Estilos para el Encabezado ("Top Questions" / "View All")
-  (Ajustados para parecerse más a la imagen)
-*/
 .faq-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-   // Padding horizontal
-  margin-bottom: 8px; // Espacio antes del primer acordeón
+  margin-bottom: 8px;
 }
 
 .faq-header h2 {
   margin: 0;
-  font-size: 1.0rem; // Un poco más grande
-  font-weight: 700; // Más bold
+  font-size: 1.0rem;
+  font-weight: 700;
 }
 
 .faq-header ion-button {
@@ -20,7 +16,7 @@
   --padding-end: 0;
   font-size: 0.9rem;
   font-weight: 500;
-  // Asumiendo que 'primary' es tu color naranja/destacado
+
   --color: var(--ion-color-primary);
 }
 .content{

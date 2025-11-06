@@ -1,36 +1,28 @@
 .slider-container {
   width: 100%;
-  overflow-x: auto;  /* ¡Magia! Habilita el scroll horizontal */
+  overflow-x: auto;
   overflow-y: hidden;
-  white-space: nowrap; /* ¡Magia! Pone los elementos en una sola línea */
-  padding-top: 3px; /* Un poco de espacio para que no se pegue */
+  white-space: nowrap;
+  padding-top: 3px;
   padding-bottom: 3px;
 
-  // Oculta la barra de scroll (estilo opcional)
   &::-webkit-scrollbar {
     display: none;
   }
-  -ms-overflow-style: none;  /* IE y Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-/*
-  Cada tarjeta dentro del slider
-*/
 app-info-card {
-  display: inline-block; /* ¡Magia! Para que se alinien horizontalmente */
+  display: inline-block;
   vertical-align: top;
-  width: 150px; /* Ancho fijo para cada tarjeta (ajusta a tu gusto) */
-
-  // Sobreescribe el margen de ion-card para que esté dentro del componente
-  // Esto es para que no se vea cortado en el slider
+  width: 150px;
   ::ng-deep ion-card {
     margin-left: 5px;
     margin-right: 5px;
   }
 }
 
-// Estilo para la primera y última tarjeta para que no se peguen a los bordes
 app-info-card:first-child {
   ::ng-deep ion-card {
     margin-left: 0px;
@@ -41,7 +33,6 @@ app-info-card:last-child {
   ::ng-deep ion-card {
     margin-right: 0px;
   }
-
   .selected{
     background-color: black;
   }

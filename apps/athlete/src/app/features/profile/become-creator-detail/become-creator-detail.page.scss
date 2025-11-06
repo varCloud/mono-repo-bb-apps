@@ -1,55 +1,48 @@
   h1 {
     font-size: 1.3em !important;
     font-weight: bold;
-    margin-top: 0; // Remove default top margin
+    margin-top: 0;
     margin-bottom: 10px;
-    color: var(--ion-color-dark); // Or a specific color for headings
+    color: var(--ion-color-dark);
     padding: 16px 0px;
   }
 
 .image-container {
   position: relative;
   width: 100%;
-  height: 250px; // Adjust height as needed
-  overflow: hidden; // Ensures image doesn't overflow container
+  height: 250px;
+  overflow: hidden;
 
   img {
     width: 100%;
     height: 100%;
-    object-fit: cover; // Ensures the image covers the area without distortion
-    object-position: center; // Centers the image
+    object-fit: cover;
+    object-position: center;
   }
-
-
 }
 
 .content-padding {
-  padding: 0px; // Standard Ionic padding
-  color: var(--ion-color-dark); // Or any color that fits your theme
+  padding: 0px;
+  color: var(--ion-color-dark);
 
   h1 {
     font-size: 1.2em !important;
     font-weight: bold;
-    margin-top: 0; // Remove default top margin
+    margin-top: 0;
     margin-bottom: 10px;
-    color: var(--ion-color-dark); // Or a specific color for headings
+    color: var(--ion-color-dark);
   }
-
-
-
   p {
     font-size: .9m;
     line-height: 1.6;
     margin-bottom: 15px;
-    text-align: justify; // For justified text, as seen in the example
+    text-align: justify;
     color: #757575;
   }
 }
 
 ion-button {
   --background: #F79145;
-
-// Style for the "Volver al principio" button
 }
 
 ion-footer, ion-toolbar {
