@@ -9,7 +9,7 @@ export const profileRoutes: Routes = [
       )
   },
     {
-      path: 'home-support',
+      path: 'profile/home-support',
       loadComponent: () =>
       import('./home-support/home-support.component').then(
         (m) => m.HomeSupport,
@@ -27,6 +27,13 @@ export const profileRoutes: Routes = [
       loadComponent: () =>
       import('./how-create-account/how-create-account.page').then(
         (m) => m.BecomeCreatorDetailComponent,
+      )
+    },
+    {
+      path: 'profile/my-subscriptions',
+      loadComponent: () =>
+      import('./my-subscriptions-user-card/my-subscriptions-user-card.page').then(
+        (m) => m.mySubscriptionsUserCardPage,
       )
     },
 ];

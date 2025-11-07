@@ -79,7 +79,7 @@ export class ProfileComponent implements OnInit {
         this.showTerms();
         break;
       case 'support':
-        this.contactSupport();
+        this.router.navigate(['/profile/home-support']);
         break;
       case 'deleteAccount':
         this.deleteAccount();

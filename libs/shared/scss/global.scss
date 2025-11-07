@@ -96,5 +96,8 @@ ion-back-button {
   text-transform: none; /* or uppercase, lowercase, capitalize */
 }
 
-
+.bottom-sheet-modal {
+  --border-radius: 50px; /* Ajusta el valor según tus necesidades */
+  /* Opcionalmente puedes definir otras propiedades como ancho y alto */
+}
 
