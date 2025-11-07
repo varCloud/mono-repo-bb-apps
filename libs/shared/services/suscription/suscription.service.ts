@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'libs/shared/environment/environment';
-import { API_URLS } from '@monorepo-bb-app/shared';
-
+import { environment } from '../../environment/environment';
+import { API_URLS } from '../../constants/api-urls';
 @Injectable({
   providedIn: 'root',
 })
