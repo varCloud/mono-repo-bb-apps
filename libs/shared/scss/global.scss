@@ -126,3 +126,14 @@
 ion-back-button {
   text-transform: none; /* or uppercase, lowercase, capitalize */
 }
+.bb-goback {
+  --icon-margin-end: 24px;
+  --color: #757575;
+  --margin-bottom: 30px;
+  --padding-end: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  text-transform: none !important;
+  --icon-font-size: 20px;
+}

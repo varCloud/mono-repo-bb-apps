@@ -1,0 +1,198 @@
+:host {
+  display: block;
+}
+
+.checkout-page {
+  --padding-top: 16px;
+}
+
+// Cards generales
+ion-card {
+  margin-bottom: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+// Card de suscripción
+.subscription-card {
+  color: #000;
+  --background: linear-gradient(
+    135deg,
+    var(--ion-color-tertiary) 0%,
+    var(--ion-color-tertiary-shade) 100%
+  );
+  // --color: white;
+
+  ion-card-title {
+    // color: white;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .title-icon {
+    font-size: 24px;
+  }
+
+  // Información del entrenador
+  .trainer-info {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+    .trainer-avatar {
+      width: 80px;
+      height: 80px;
+      flex-shrink: 0;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .trainer-details {
+      flex: 1;
+
+      .trainer-name {
+        font-size: 20px;
+        font-weight: 600;
+        margin: 0 0 8px 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .trainer-rating {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-bottom: 8px;
+
+        ion-icon {
+          font-size: 16px;
+        }
+      }
+
+      .trainer-specialties {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+
+        .specialty-badge {
+          background: rgba(255, 255, 255, 0.2);
+          // color: white;
+          font-size: 12px;
+          --border-radius: 12px;
+        }
+      }
+    }
+  }
+
+  // Información del plan
+  .plan-info {
+    .plan-name {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0 0 8px 0;
+    }
+
+    .subscription-description {
+      margin-bottom: 16px;
+    }
+
+    .price-display {
+      text-align: center;
+
+      .price {
+        font-size: 32px;
+        font-weight: bold;
+      }
+
+      .billing-cycle {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .features-list {
+    border-radius: 8px;
+    margin-bottom: 16px;
+
+    ion-item {
+      --background: transparent;
+    }
+  }
+}
+
+// Card de método de pago
+.payment-method-card {
+  .title-icon {
+    font-size: 20px;
+    margin-right: 8px;
+  }
+
+  .selected-payment-method {
+    --background: var(--ion-color-light);
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+
+  .change-payment-btn {
+    width: 100%;
+    --color: var(--ion-color-primary);
+  }
+}
+
+// Card de resumen de costos
+.cost-summary-card {
+  .title-icon {
+    font-size: 20px;
+    margin-right: 8px;
+  }
+
+  .total-item {
+    --background: var(--ion-color-light);
+    border-radius: 8px;
+    margin-top: 8px;
+
+    .total-amount {
+      font-size: 18px;
+      color: var(--ion-color-primary);
+    }
+  }
+}
+
+// Card de información legal
+.legal-info-card {
+  --background: var(--ion-color-light);
+
+  .legal-text {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 12px;
+    color: var(--ion-color-medium);
+
+    .info-icon {
+      font-size: 16px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+  }
+}
+
+// Botón de pago
+.pay-button {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  --background: var(--ion-color-success);
+  --background-hover: var(--ion-color-success-shade);
+  height: 56px;
+  font-size: 18px;
+  font-weight: 600;
+}

@@ -8,6 +8,7 @@ import {
   notifications,
   filterCircleOutline,
   filterCircle,
+  bookmarkOutline,
 } from 'ionicons/icons';
 import {
   IonIcon,
@@ -94,6 +95,7 @@ export class HomeComponent implements OnInit {
       notifications,
       filterCircleOutline,
       filterCircle,
+      bookmarkOutline,
     });
   }
 
@@ -184,6 +186,9 @@ export class HomeComponent implements OnInit {
   }
 
   clickCard(workout: WorkoutListModel) {
-    this.router.navigate(['home/training/profile-creator', workout.creatorId]);
+    this.router.navigate([
+      'home/suscriptions/profile-creator',
+      workout.creatorId,
+    ]);
   }
 }

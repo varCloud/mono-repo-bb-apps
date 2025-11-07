@@ -198,5 +198,25 @@
   "filter": {
     "clearAll": "Limpiar filtros",
     "apply": "Aplicar filtros"
+  },
+  "payment-method": "Método de pago",
+  "expires": "Vence",
+  "default": "Por defecto",
+  "no-payment-methods": "No hay métodos de pago",
+  "add-first-payment-method": "Agrega tu primer método de pago",
+  "subtotal": "Subtotal",
+  "discount": "Descuento",
+  "taxes": "Impuestos",
+  "total": "Total",
+  "monthly": "mensual",
+  "yearly": "anual",
+  "weekly": "semanal",
+  "daily": "diario",
+  "checkout": {
+    "change-payment-method": "Cambiar método de pago",
+    "order-summary": "Resumen del pedido",
+    "subscription-terms": "Al confirmar, aceptas los términos y condiciones de la suscripción",
+    "secure-payment": "Tu pago está protegido con encriptación de nivel bancario",
+    "pay-now": "Pagar ahora"
   }
 }

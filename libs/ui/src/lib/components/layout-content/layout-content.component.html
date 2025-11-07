@@ -3,7 +3,7 @@
     <div class="goBack" *ngIf="useGoBack()">
       <ion-back-button
         icon="arrow-back-outline"
-        defaultHref="/home"
+        [defaultHref]="defaultHref()"
         class="ion-no-padding bb-goback"
         uppercase="false"
         [text]="title()"

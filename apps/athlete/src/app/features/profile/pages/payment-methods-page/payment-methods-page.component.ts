@@ -14,9 +14,13 @@ import {
   IonBadge,
   IonRadio,
   IonRadioGroup,
+  IonText,
 } from '@ionic/angular/standalone';
 import { LoaderUIService, SesionService } from '@monorepo-bb-app/core';
-import { StripeService } from '@monorepo-bb-app/shared';
+import {
+  ProcessSuscriptionService,
+  StripeService,
+} from '@monorepo-bb-app/shared';
 import {
   AddPaymentMethodComponent,
   LayoutContentComponent,
@@ -28,10 +32,12 @@ import { finalize } from 'rxjs';
 import { addIcons } from 'ionicons';
 import { cardOutline } from 'ionicons/icons';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-payment-methods-page',
   imports: [
+    IonText,
     IonRadioGroup,
     IonRadio,
     IonCheckbox,
@@ -49,6 +55,7 @@ import { FormsModule } from '@angular/forms';
     TitleCasePipe,
     FormsModule,
     CommonModule,
+    RouterLink,
   ],
   templateUrl: './payment-methods-page.component.html',
   styleUrl: './payment-methods-page.component.scss',
@@ -61,7 +68,8 @@ export class PaymentMethodsPageComponent implements OnInit {
     public _sesisonService: SesionService,
     private modalCtrl: ModalController,
     private stripeService: StripeService,
-    private _loader: LoaderUIService
+    private _loader: LoaderUIService,
+    private _processSuscriptionService: ProcessSuscriptionService
   ) {
     addIcons({ cardOutline });
   }
@@ -70,22 +78,9 @@ export class PaymentMethodsPageComponent implements OnInit {
     this.loadPaymentMethods();
   }
 
-  public selectPaymentMethod(methodId: string) {
-    this.selectedPaymentMethod.set(methodId);
-  }
-
-  public getBrandIcon(brand: string): string {
-    const brandIcons: { [key: string]: string } = {
-      visa: 'card-outline',
-      mastercard: 'card-outline',
-      amex: 'card-outline',
-      discover: 'card-outline',
-      diners: 'card-outline',
-      jcb: 'card-outline',
-      unionpay: 'card-outline',
-      default: 'card-outline',
-    };
-    return brandIcons[brand?.toLowerCase()] || brandIcons['default'];
+  public selectPaymentMethod(method: any) {
+    this.selectedPaymentMethod.set(method.id);
+    this._processSuscriptionService.setSelectedPaymentMethod(method);
   }
 
   public async openModalAddPaymentMethod() {
@@ -100,11 +95,11 @@ export class PaymentMethodsPageComponent implements OnInit {
     const { data, role } = await modal.onWillDismiss();
 
     if (role === MODAL_RESPONSE.CONFIRM) {
-      this.loadPaymentMethods();
+      this.loadPaymentMethods(data?.payment_method);
     }
   }
 
-  public async loadPaymentMethods() {
+  public async loadPaymentMethods(idPaymentMethod = null) {
     const customerId = this._sesisonService.user$().userId;
     this._loader.showLoader();
     this.stripeService
@@ -113,6 +108,14 @@ export class PaymentMethodsPageComponent implements OnInit {
       .subscribe({
         next: (resp: any) => {
           this.paymentMethods.set(resp.data);
+          if (idPaymentMethod) {
+            const findPaymentMethod = resp.data.find(
+              (pm: any) => pm.id === idPaymentMethod
+            );
+            if (findPaymentMethod) {
+              this.selectPaymentMethod(findPaymentMethod);
+            }
+          }
         },
         error: (error) => {
           console.error('Error loading payment methods:', error);

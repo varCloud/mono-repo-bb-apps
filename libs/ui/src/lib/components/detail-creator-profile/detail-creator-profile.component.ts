@@ -30,14 +30,18 @@ import {
   IonSegmentView,
   IonInfiniteScroll,
   IonInfiniteScrollContent,
+  IonBackButton,
 } from '@ionic/angular/standalone';
 import { LayoutContentComponent } from '../layout-content';
 import { CardWorkoutInfoComponent } from '../card-workout-info/card-workout-info.component';
 import { ENUM_WORKOUT_TYPES } from '../../../../../shared/constants/enums';
+import { addIcons } from 'ionicons';
+import { arrowBackOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'lib-detail-creator-profile',
   imports: [
+    IonBackButton,
     IonInfiniteScrollContent,
     IonInfiniteScroll,
     IonSegmentButton,
@@ -58,6 +62,7 @@ import { ENUM_WORKOUT_TYPES } from '../../../../../shared/constants/enums';
 })
 export class DetailCreatorProfileComponent implements OnInit {
   idCreator = input.required<number>();
+  defaultHref = input<string>('/home');
   suscriptionEvent = output<boolean>();
   public tabActive = signal<string>('workouts');
   public workouts = signal<Workout[]>([]);
@@ -80,7 +85,9 @@ export class DetailCreatorProfileComponent implements OnInit {
     private _loader: LoaderUIService,
     private _workoutService: WorkoutService,
     private _processSuscriptionService: ProcessSuscriptionService
-  ) {}
+  ) {
+    addIcons({ arrowBackOutline });
+  }
 
   ngOnInit(): void {
     this.getCreatorProfile();

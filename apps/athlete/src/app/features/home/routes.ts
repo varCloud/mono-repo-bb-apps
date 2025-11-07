@@ -3,6 +3,7 @@ import { authGuard } from '@monorepo-bb-app/core';
 import { profileRoutes } from '../profile/profile.routes';
 import { userConversationRoutes } from '../user-conversation/user-conversation.routes';
 import { trainingRoutes } from '../training/routes';
+import { suscriptionRoutes } from '../suscriptions/suscription.routes';
 
 export const homeRoutes: Routes = [
   {
@@ -14,6 +15,7 @@ export const homeRoutes: Routes = [
       ...trainingRoutes,
       ...profileRoutes,
       ...userConversationRoutes,
+      ...suscriptionRoutes,
       {
         path: '',
         redirectTo: '/home/training',

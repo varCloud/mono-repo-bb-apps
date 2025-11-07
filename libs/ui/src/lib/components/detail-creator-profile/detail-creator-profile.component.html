@@ -2,6 +2,14 @@
   class="detail-creator-profile-content ion-no-padding"
   [fullscreen]="true"
 >
+  <ion-back-button
+    icon="arrow-back-outline"
+    class="ion-no-padding bb-goback"
+    [defaultHref]="defaultHref()"
+    uppercase="false"
+    text=""
+    style="position: absolute; top: 16px; left: 16px; z-index: 10"
+  ></ion-back-button>
   <img
     src="https://bb-app-bucket-images.s3.amazonaws.com/uploads%2F76%2Fundefined%2Fphoto-7_1761612307696_j5qjqz2qhtf.jpg"
     alt=""

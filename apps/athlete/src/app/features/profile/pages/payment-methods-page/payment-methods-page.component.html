@@ -1,5 +1,12 @@
 <ion-content class="payment-methods-content">
-  <app-layout-content customClass="payment-methods-page">
+  <app-layout-content
+    customClass="payment-methods-page"
+    [useGoBack]="true"
+    [defaultHref]="
+      '/home/suscriptions/suscription-creator/' + _sesisonService.user$().userId
+    "
+    [title]="'go-back' | translate"
+  >
     <ion-grid content-body>
       <ion-grid>
         <ion-row>
@@ -22,7 +29,7 @@
               @for (method of paymentMethods(); track method.id) {
               <ion-item
                 lines="none"
-                (click)="selectPaymentMethod(method.id)"
+                (click)="selectPaymentMethod(method)"
                 [ngClass]="{
                   selected: method.id === selectedPaymentMethod()
                 }"
@@ -54,7 +61,6 @@
                 <ion-radio
                   slot="end"
                   class="bb-radio"
-                  (ionChange)="selectPaymentMethod(method.id)"
                   [value]="method.id"
                 ></ion-radio>
               </ion-item>
@@ -77,5 +83,15 @@
         </ion-row>
       </ion-grid>
     </ion-grid>
+    <div content-footer class="ion-text-center">
+      <ion-button
+        color="tertiary"
+        expand="block"
+        [disabled]="!selectedPaymentMethod()"
+        [routerLink]="['/home/suscriptions/checkout']"
+      >
+        <ion-text class="question">{{ 'Suscribete' | translate }}</ion-text>
+      </ion-button>
+    </div>
   </app-layout-content>
 </ion-content>
