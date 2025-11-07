@@ -1,5 +1,10 @@
 <ion-content class="checkout-content">
-  <app-layout-content customClass="checkout-page">
+  <app-layout-content
+    customClass="checkout-page"
+    [useGoBack]="true"
+    [defaultHref]="'/home/profile/payment-methods'"
+    [title]="'go-back' | translate"
+  >
     <ion-grid content-body>
       <ion-row>
         <ion-col size="12">
@@ -36,13 +41,7 @@
                 </div>
               </div>
 
-              <!-- Información del Plan -->
               <div class="plan-info">
-                <!-- <h3 class="plan-name">{{ billingCycle().description }}</h3> -->
-                <!-- <p class="subscription-description">
-                  {{ subscription().description }}
-                </p> -->
-
                 <div class="price-display">
                   <span class="price">{{
                     billingCycle().amount | currency : 'MXN'
@@ -136,12 +135,11 @@
             </ion-card-content>
           </ion-card>
 
-          <!-- Botón de Pago -->
           <ion-button
             expand="block"
             size="large"
             shape="round"
-            color="primary"
+            color="tertiary"
             class="pay-button"
             (click)="processPayment()"
           >

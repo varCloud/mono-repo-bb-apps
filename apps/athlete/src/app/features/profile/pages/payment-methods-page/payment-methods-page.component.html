@@ -1,5 +1,12 @@
 <ion-content class="payment-methods-content">
-  <app-layout-content customClass="payment-methods-page">
+  <app-layout-content
+    customClass="payment-methods-page"
+    [useGoBack]="true"
+    [defaultHref]="
+      '/home/suscriptions/suscription-creator/' + _sesisonService.user$().userId
+    "
+    [title]="'go-back' | translate"
+  >
     <ion-grid content-body>
       <ion-grid>
         <ion-row>
@@ -80,6 +87,7 @@
       <ion-button
         color="tertiary"
         expand="block"
+        [disabled]="!selectedPaymentMethod()"
         [routerLink]="['/home/suscriptions/checkout']"
       >
         <ion-text class="question">{{ 'Suscribete' | translate }}</ion-text>

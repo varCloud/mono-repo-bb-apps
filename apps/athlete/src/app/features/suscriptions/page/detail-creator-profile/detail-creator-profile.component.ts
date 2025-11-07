@@ -30,7 +30,7 @@ export class DetailCreatorProfilePageComponent implements OnInit {
 
   goToSuscriptionCreator() {
     this._router.navigate([
-      '/home/training/suscription-creator',
+      '/home/suscriptions/suscription-creator',
       this.idCreator(),
     ]);
   }

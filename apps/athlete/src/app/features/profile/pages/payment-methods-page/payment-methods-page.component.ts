@@ -81,7 +81,6 @@ export class PaymentMethodsPageComponent implements OnInit {
   public selectPaymentMethod(method: any) {
     this.selectedPaymentMethod.set(method.id);
     this._processSuscriptionService.setSelectedPaymentMethod(method);
-    console.log(this._processSuscriptionService.getSelectedPaymentMethod());
   }
 
   public async openModalAddPaymentMethod() {

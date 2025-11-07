@@ -8,14 +8,10 @@ import {
   viewChild,
 } from '@angular/core';
 
-import {
-  IonButton,
-  AlertController,
-  IonSpinner,
-} from '@ionic/angular/standalone';
+import { IonButton, IonSpinner } from '@ionic/angular/standalone';
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { StripeService } from '@monorepo-bb-app/shared';
+import { StripeService, ToastService } from '@monorepo-bb-app/shared';
 import { LoaderUIService } from '@monorepo-bb-app/core';
 import { finalize } from 'rxjs';
 
@@ -38,9 +34,9 @@ export class AddPaymentMethodComponent implements OnInit {
   constructor(
     private _stripeService: StripeService,
     private _fb: FormBuilder,
-    private alertController: AlertController,
     private _translate: TranslatePipe,
-    private _loader: LoaderUIService
+    private _loader: LoaderUIService,
+    private _toastService: ToastService
   ) {
     this.formPaymentMethod = this._fb.group({});
   }
@@ -107,12 +103,9 @@ export class AddPaymentMethodComponent implements OnInit {
     this.clearFields();
     console.log(setupIntent);
     this.succesAddPayment.emit({ data: setupIntent });
-    const alert = await this.alertController.create({
-      header: this._translate.transform('payment-method-added'),
-      message: this._translate.transform('payment-method-added-success'),
-      buttons: ['OK'],
-    });
-
-    await alert.present();
+    this._toastService.success(
+      this._translate.transform('payment-method-added'),
+      { duration: 2000 }
+    );
   }
 }

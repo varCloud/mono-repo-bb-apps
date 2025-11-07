@@ -18,21 +18,36 @@ import {
   IonNote,
   IonItemDivider,
   IonAvatar,
+  IonBackButton,
 } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
 import { LayoutContentComponent } from '@monorepo-bb-app/ui';
 import { addIcons } from 'ionicons';
-import { cardOutline, diamondOutline, starOutline, star } from 'ionicons/icons';
+import {
+  cardOutline,
+  diamondOutline,
+  starOutline,
+  star,
+  chevronForward,
+  receiptOutline,
+  lockClosed,
+} from 'ionicons/icons';
 import {
   PaymentMethod,
   ProcessSuscriptionService,
+  SuscriptionService,
+  ToastService,
   User,
 } from '@monorepo-bb-app/shared';
 import { BillingCycle } from '../../../../../../../../libs/shared/models/user.model';
+import { LoaderUIService, SesionService } from '@monorepo-bb-app/core';
+import { finalize } from 'rxjs';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout-suscription',
   imports: [
+    IonBackButton,
     IonContent,
     IonGrid,
     IonRow,
@@ -59,51 +74,46 @@ import { BillingCycle } from '../../../../../../../../libs/shared/models/user.mo
   styleUrl: './checkout-suscription.component.scss',
 })
 export class CheckoutSuscriptionComponent implements OnInit {
-  // Información del entrenador
-  trainer = signal<User | null>(null);
-  paymentMethod = signal<PaymentMethod | null>(null);
-  billingCycle = signal<BillingCycle | null>(null);
+  trainer = computed(() => {
+    return this._processSuscriptionService.getCreator();
+  });
 
-  // fullName = computed(() => {
-  //   return this.trainer().firstName + ' ' + this.trainer().lastName;
-  // });
+  paymentMethod = computed(() => {
+    return this._processSuscriptionService.getSelectedPaymentMethod();
+  });
 
-  // subtotal = computed(() => {
-  //   return this.billingCycle().amount || 0;
-  // });
+  billingCycle = computed(() => {
+    return this._processSuscriptionService.getSelectedBillingCycle();
+  });
 
-  // total = computed(() => {
-  //   return this.subtotal();
-  // });
+  subtotal = computed(() => {
+    return this.billingCycle().amount || 0;
+  });
 
-  constructor(private _processSuscriptionService: ProcessSuscriptionService) {
-    addIcons({ diamondOutline, cardOutline, starOutline, star });
+  total = computed(() => {
+    return this.subtotal();
+  });
+
+  constructor(
+    private _processSuscriptionService: ProcessSuscriptionService,
+    private _suscriptionService: SuscriptionService,
+    private _sesionService: SesionService,
+    private _loader: LoaderUIService,
+    private _toastService: ToastService,
+    private _router: Router
+  ) {
+    addIcons({
+      diamondOutline,
+      cardOutline,
+      starOutline,
+      star,
+      chevronForward,
+      receiptOutline,
+      lockClosed,
+    });
   }
 
-  ngOnInit(): void {
-    console.log('ngOnInit checkout');
-    this.loadCheckoutData();
-  }
-
-  ionViewWillEnter(): void {
-    console.log('ionViewWillEnter checkout - se ejecuta cada vez que entras');
-    this.loadCheckoutData();
-  }
-
-  private loadCheckoutData(): void {
-    this.billingCycle.set(
-      this._processSuscriptionService.getSelectedBillingCycle()
-    );
-    this.trainer.set(this._processSuscriptionService.getCreator());
-    this.paymentMethod.set(
-      this._processSuscriptionService.getSelectedPaymentMethod()
-    );
-  }
-
-  ngOnDestroy(): void {
-    console.log('ondestroy');
-    this._processSuscriptionService.clear();
-  }
+  ngOnInit(): void {}
 
   private loadSubscriptionData() {
     // Lógica para cargar datos reales
@@ -115,7 +125,28 @@ export class CheckoutSuscriptionComponent implements OnInit {
   }
 
   public processPayment() {
-    // Lógica para procesar el pago
-    console.log('Procesando pago...');
+    this._loader.showLoader();
+    const data = {
+      athleteId: this._sesionService.user$().userId,
+      creatorId: this.trainer()?.userId,
+      userBillingCycleId: this.billingCycle().userBillingCycleId,
+      paymentMethodId: this.paymentMethod()?.id,
+    };
+    this._suscriptionService
+      .createSuscription(data)
+      .pipe(finalize(() => this._loader.hideLoader()))
+      .subscribe({
+        next: (response) => {
+          this._toastService.success('Suscripción creada con éxito.', {
+            duration: 1000,
+          });
+          this._router.navigate(['/home']);
+        },
+        error: (error) => {
+          this._toastService.error('Error al crear la suscripción.', {
+            duration: 1000,
+          });
+        },
+      });
   }
 }

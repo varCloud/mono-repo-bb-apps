@@ -15,7 +15,8 @@ import { arrowBackOutline } from 'ionicons/icons';
 export class LayoutContentComponent implements OnInit {
   public customClass = input<string>('');
   public useGoBack = input<boolean>(false);
-  public title = input<string>('');
+  public defaultHref = input<string>('/home');
+  public title = input<string>('go-back');
   public goBackClicked = output<void>();
 
   constructor() {

@@ -18,6 +18,7 @@ import {
   IonRadio,
   IonLabel,
   IonText,
+  IonBackButton,
 } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
 import {
@@ -32,6 +33,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-detail-suscription-creator',
   imports: [
+    IonBackButton,
     IonText,
     IonLabel,
     IonRadio,
