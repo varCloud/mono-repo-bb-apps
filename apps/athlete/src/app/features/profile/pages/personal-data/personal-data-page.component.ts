@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, effect, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   IonBackButton,
@@ -12,9 +12,12 @@ import {
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AthletePhysicalInfoFormComponent, AthleteProfileBasicFormComponent, LayoutContentComponent } from '@monorepo-bb-app/ui';
 
-import { LoaderUIService, SesionService } from '@monorepo-bb-app/core';
-import { ToastService } from '@monorepo-bb-app/shared';
+import { LoaderUIService, SesionService, UploadService, UserService } from '@monorepo-bb-app/core';
+import { CompleteResultUpload, Countrycode, guessFileType, proceessUploadPhoto, ToastService } from '@monorepo-bb-app/shared';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { endWith, finalize, take } from 'rxjs';
+import { Photo } from '@capacitor/camera';
+import { BUCKET_TYPE } from 'libs/shared/constants/enums';
 
 @Component({
   selector: 'app-personal-data-page',
@@ -40,14 +43,23 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 export class PersonalDataPageComponent implements OnInit {
   basicForm!: FormGroup;
   physicalForm!: FormGroup;
-
+  imageProfile: Photo | null = null;
+  isoCode = signal<string>('+52');
   constructor(
     private fb: FormBuilder,
     private _translateService: TranslateService,
     private toastService: ToastService,
     private _loaderService: LoaderUIService,
-    private sesionService: SesionService
-  ) {}
+    private sesionService: SesionService,
+    private _userService: UserService,
+    private _uploadService: UploadService,
+
+  ) {
+    effect(() => {
+       const user = this.sesionService.user$();
+       console.log(`efecto en personal data page: ${user.firstName}`);
+    });
+  }
 
   ngOnInit() {
     this.initializeForms();
@@ -56,21 +68,20 @@ export class PersonalDataPageComponent implements OnInit {
 
   private loadUserData() {
     const currentUser = this.sesionService.user$();
+
     if (currentUser) {
-      // Cargar datos básicos
+
       this.basicForm.patchValue({
-        avatar: currentUser.profilePictureUrl || '',
+        profilePictureUrl: currentUser.profilePictureUrl || '',
         firstName: currentUser.firstName || '',
         lastName: currentUser.lastName || '',
         email: currentUser.email || '',
         nickName: currentUser.nickName || '',
         phone: currentUser.phone || '',
       });
-
-      // Cargar datos físicos
       this.physicalForm.patchValue({
-        gender: currentUser.gender || '',
-        birthdate: currentUser.birthdate || '',
+        genderId: currentUser.genderId || '',
+        birthdate: new Date(currentUser.birthdate).toISOString() || '',
         age: currentUser.age || '',
         weight: currentUser.weight || '',
         height: currentUser.height || '',
@@ -79,9 +90,8 @@ export class PersonalDataPageComponent implements OnInit {
   }
 
   private initializeForms() {
-    // Initialize basic form
     this.basicForm = this.fb.group({
-      avatar: [''],
+      profilePictureUrl: [''],
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
@@ -89,9 +99,8 @@ export class PersonalDataPageComponent implements OnInit {
       phone: ['', [Validators.required]],
     });
 
-    // Initialize physical form
     this.physicalForm = this.fb.group({
-      gender: ['', [Validators.required]],
+      genderId: ['', [Validators.required]],
       birthdate: ['', [Validators.required]],
       age: [{ value: '', disabled: true }],
       weight: ['', [Validators.required, Validators.min(30), Validators.max(200)]],
@@ -101,66 +110,69 @@ export class PersonalDataPageComponent implements OnInit {
 
   async onBasicFormSubmit(formValue: any) {
     if (this.basicForm.valid) {
-      await this.saveChanges('basic', formValue);
+      console.log('Basic Form Value:', formValue);
     }
   }
 
   async onPhysicalFormSubmit(formValue: any) {
     if (this.physicalForm.valid) {
-      await this.saveChanges('physical', formValue);
+      console.log('Physical Form Value:', formValue);
     }
   }
 
+  async onImageSelected(event: any) {
+    this.imageProfile = event;
+  }
+
+  async onMaskSelected(mask: Countrycode) {
+    this.isoCode.set(mask.dialCode);
+  }
+
+
   async saveAllChanges() {
+
+    this._loaderService.showLoader();
     if (this.isFormsValid()) {
       try {
-        await this._loaderService.showLoader();
+        debugger
+        if (this.validateImageProfile()) {
+          const uploadResult = await this.uploadPhoto(this.imageProfile!);
+          this.basicForm.patchValue({ profilePictureUrl: uploadResult.location });
+        }
+
         const combinedData = {
           ...this.basicForm.value,
           ...this.physicalForm.value,
+           height: this.physicalForm.value.height.toString(),
+            weight: this.physicalForm.value.weight.toString(),
         };
 
-        // Actualizar datos en el servicio de sesión
         const currentUser = this.sesionService.user$();
         if (currentUser) {
           const updatedUser = {
             ...currentUser,
-            ...combinedData
+            ...combinedData,
           };
           
-          // Aquí iría la llamada al servicio para actualizar en el backend
-          // await this.userService.updateProfile(updatedUser);
-          //this.sesionService.updateUser(updatedUser);
-          await this.showSuccessMessage('profile.save.success');
+          this.sesionService.setUser(updatedUser)
+          this._userService.updateUser(currentUser.userId, combinedData)
+            .pipe(take(1),
+              finalize(() => this._loaderService.hideLoader())
+            )
+            .subscribe(() => {
+              this.showSuccessMessage('profile.save.success');
+              this.loadUserData();
+            });
+
         }
       } catch (error) {
+        this._loaderService.hideLoader();
+        console.log('Error saving profile data:', error);
         await this.showErrorMessage('profile.save.error');
-      } finally {
-        await this._loaderService.hideLoader();
       }
     } else {
+      this._loaderService.hideLoader();
       await this.showErrorMessage('profile.validation.error');
-    }
-  }
-
-  private async saveChanges(type: 'basic' | 'physical', formValue: any) {
-    try {
-      await this._loaderService.showLoader();
-      const currentUser = this.sesionService.user$();
-      
-      if (currentUser) {
-        const updatedUser = {
-          ...currentUser,
-          ...formValue
-        };
-        
-        //this.sesionService.updateUser(updatedUser);
-        await this.showSuccessMessage('profile.save.success');
-      }
-    } catch (error) {
-      await this.showErrorMessage('profile.save.error');
-    } finally {
-      await this._loaderService.hideLoader();
     }
   }
 
@@ -176,5 +188,26 @@ export class PersonalDataPageComponent implements OnInit {
 
   isFormsValid(): boolean {
     return this.basicForm.valid && this.physicalForm.valid;
+  }
+
+  private validateImageProfile(): boolean {
+    return this.imageProfile !== null;
+  }
+
+  private async uploadPhoto(image: Photo): Promise<CompleteResultUpload> {
+    try {
+      const dataPhoto = await proceessUploadPhoto(image);
+      const result: CompleteResultUpload = await this._uploadService.uploadFile(
+        dataPhoto.fileData,
+        dataPhoto.fileName,
+        dataPhoto.fileType,
+        BUCKET_TYPE.PUBLIC
+      );
+
+      return result;
+    } catch (error) {
+      console.error('Error in uploadPhoto:', error);
+      throw error;
+    }
   }
 }

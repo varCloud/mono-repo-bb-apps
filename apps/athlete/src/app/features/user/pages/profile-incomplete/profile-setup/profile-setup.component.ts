@@ -182,14 +182,79 @@ export class ProfileSetupComponent implements OnInit {
   }
 
   private async uploadPhoto(image: Photo): Promise<CompleteResultUpload> {
-    const fileName = image.path!.split('/').pop() || `file_${Date.now()}`;
-    const fileType = guessFileType(fileName);
-    const result: CompleteResultUpload = await this._uploadService.uploadFile(
-      image.path!,
-      fileName,
-      fileType,
-      'public',
-    );
-    return result;
+    try {
+      let fileName: string;
+      let fileData: string;
+      
+      if (image.webPath) {
+        // Caso web
+        const blob = await (await fetch(image.webPath)).blob();
+        fileData = await this.blobToBase64(blob);
+        fileName = `file_${Date.now()}.${this.getFileExtFromMimeType(image.format)}`;
+      } else if (image.base64String) {
+        // Caso base64
+        fileData = image.base64String;
+        fileName = `file_${Date.now()}.${this.getFileExtFromMimeType(image.format)}`;
+      } else if (image.path) {
+        // Caso móvil - usar el path directamente
+        fileData = image.path;
+        fileName = image.path.split('/').pop() || `file_${Date.now()}`;
+      } else {
+        throw new Error('No valid image data found');
+      }
+
+      const fileType = guessFileType(fileName);
+      
+      const result: CompleteResultUpload = await this._uploadService.uploadFile(
+        fileData,
+        fileName,
+        fileType,
+        'public'
+      );
+      
+      return result;
+    } catch (error) {
+      console.error('Error in uploadPhoto:', error);
+      throw error;
+    }
+  }
+
+  private blobToBase64(blob: Blob): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  }
+
+  private getFileExtFromMimeType(format: string = 'jpeg'): string {
+    const mimeTypeMap: { [key: string]: string } = {
+      'jpeg': 'jpg',
+      'jpg': 'jpg',
+      'png': 'png',
+      'gif': 'gif',
+      'webp': 'webp'
+    };
+    return mimeTypeMap[format.toLowerCase()] || 'jpg';
+  }
+
+  private base64ToBlob(base64: string, contentType: string = ''): Blob {
+    const byteCharacters = atob(base64);
+    const byteArrays = [];
+
+    for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+      const slice = byteCharacters.slice(offset, offset + 512);
+      const byteNumbers = new Array(slice.length);
+      
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+
+    return new Blob(byteArrays, { type: contentType });
   }
 }

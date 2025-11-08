@@ -86,4 +86,21 @@ export class S3Service {
     }
     return new CompleteResultUploadModel(response);
   }
+
+  async getSignedUrlForDirectUpload(payload: {
+    fileName: string;
+    mimeType: string;
+    fileSize: number;
+    typeImageBucket?: string;
+  }): Promise<string> {
+    const userId = this._sesionService.user$()?.userId || 0;
+    const response = await this.http
+      .post<{ signedUrl: string }>(`${this.BASE_URL}/${userId}/direct-upload`, payload)
+      .toPromise();
+
+    if (!response || !response.signedUrl) {
+      throw new Error('Failed to get signed URL for direct upload');
+    }
+    return response.signedUrl;
+  }
 }

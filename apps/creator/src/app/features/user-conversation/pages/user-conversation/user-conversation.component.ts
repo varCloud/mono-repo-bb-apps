@@ -42,9 +42,7 @@ export class UserConversationComponent implements OnInit, OnDestroy {
   ) {
 
     effect(() => {
-      this.sesionService.user$()
-      console.log('Usuario en sesión:', this.sesionService.user$());
-      
+      this.sesionService.user$()      
     });
     
 

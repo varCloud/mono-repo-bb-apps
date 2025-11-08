@@ -5,6 +5,7 @@
     <ion-col size="12">
       <div class="athlete-avatar-section">
         <app-avatar-picker
+          [currentImage]="form.get('profilePictureUrl')?.value"
           [size]="'medium'"
           [disabled]="false"
           (imageChanged)="onImageSelected($event)"

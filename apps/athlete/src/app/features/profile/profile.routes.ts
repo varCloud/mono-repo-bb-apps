@@ -3,7 +3,6 @@ import { Routes } from '@angular/router';
 export const profileRoutes: Routes = [
   {
     path: 'profile',
-
     children: [
       {
         path: '',
@@ -23,11 +22,6 @@ export const profileRoutes: Routes = [
         path: 'personal-data',
         loadComponent: () =>
           import('./pages/personal-data/personal-data-page.component').then((m) => m.PersonalDataPageComponent),
-        },
-      {
-        path: '**',
-        redirectTo: '',
-        pathMatch: 'full',
       },
     ],
   },

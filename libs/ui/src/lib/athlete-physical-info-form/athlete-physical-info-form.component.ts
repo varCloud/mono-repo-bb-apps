@@ -1,9 +1,11 @@
-import { Component, EventEmitter, Input, Output, OnInit, signal } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, signal, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ErrorMessageComponent, RadioCardSelectorComponent, SelectOption } from '@monorepo-bb-app/ui';
+import { addIcons } from 'ionicons';
+import { cardOutline, female, femaleOutline, maleOutline } from 'ionicons/icons';
+import { IonInput,IonCol, IonLabel,IonDatetime ,IonDatetimeButton, IonItemDivider,IonItem, IonRow, IonModal} from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-athlete-physical-info-form',
@@ -12,24 +14,39 @@ import { ErrorMessageComponent, RadioCardSelectorComponent, SelectOption } from 
   standalone: true,
   imports: [
     CommonModule,
-    IonicModule,
+    
     ReactiveFormsModule,
     TranslateModule,
     ErrorMessageComponent,
     RadioCardSelectorComponent,
-    TranslateModule
+    TranslateModule,
+    IonDatetime,
+    IonDatetimeButton,
+    IonRow, 
+    IonCol,
+    IonItem,
+    IonLabel,
+    IonItemDivider,
+    IonModal,
+    IonInput
   ]
 })
-export class AthletePhysicalInfoFormComponent implements OnInit {
+export class AthletePhysicalInfoFormComponent implements OnInit , OnChanges {
   @Input() form!: FormGroup;
   @Input() initialData: any = {};
   @Output() formSubmit = new EventEmitter<any>();
   @Output() genderChange = new EventEmitter<string>();
   @Output() birthdateChange = new EventEmitter<void>();
   public genderOptions = signal<SelectOption[]>([]);
-  constructor(
-    private _translate: TranslateService
-  ) {}
+  public maxDate = signal<string>('');
+  
+  constructor( private _translate: TranslateService) {
+     addIcons({ cardOutline, femaleOutline, maleOutline, });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('Changes detected:', changes);
+  }
 
   ngOnInit() {
     if (!this.form) {
@@ -40,6 +57,7 @@ export class AthletePhysicalInfoFormComponent implements OnInit {
       this.form.patchValue(this.initialData);
     }
     this.loadGenderOptions();
+    this.initializeMaxDate();
   }
 
   onGenderChange(value: string) {
@@ -49,12 +67,29 @@ export class AthletePhysicalInfoFormComponent implements OnInit {
 
   onBirthdateChange() {
     this.birthdateChange.emit();
+     const birthdate = this.form.get('birthdate')?.value;
+    if (birthdate) {
+      const age = this.calculateAge(new Date(birthdate));
+      this.form.patchValue({ age: age.toString() });
+    }
   }
 
-  getMaxDate(): string {
+  private calculateAge(birthdate: Date): number {
+    const today = new Date();
+    let age = today.getFullYear() - birthdate.getFullYear();
+    const monthDiff = today.getMonth() - birthdate.getMonth();
+
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthdate.getDate())) {
+      age--;
+    }
+
+    return age;
+  }
+
+  private initializeMaxDate(): void {
     const date = new Date();
     date.setFullYear(date.getFullYear() - 13);
-    return date.toISOString();
+    this.maxDate.set(date.toISOString());
   }
 
   isValid(): boolean {

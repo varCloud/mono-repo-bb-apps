@@ -47,8 +47,8 @@ export class ProfileComponent implements OnInit {
   ) {
 
     effect(() => {
-      this.sesionService.user$();
-      console.log('Usuario en sesión:', this.sesionService.user$());
+       const user = this.sesionService.user$();
+       console.log(`efecto en profile page: ${user.firstName}`);
     });
     addIcons({
       trashSharp,

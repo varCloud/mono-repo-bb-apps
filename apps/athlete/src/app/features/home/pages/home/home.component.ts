@@ -1,5 +1,5 @@
 import { Component, effect, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import {
   IonTabs,
   IonTabBar,
@@ -16,12 +16,21 @@ import {
   personOutline,
   pricetagOutline,
 } from 'ionicons/icons';
+import { IonicModule } from "@ionic/angular";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  imports: [IonText, IonTabs, IonTabBar, IonTabButton, IonIcon, IonContent],
+  imports: [
+    IonText,
+    IonTabs,
+    IonTabBar,
+    IonTabButton,
+    IonIcon,
+    IonContent,
+    RouterLink],
 })
 export class HomeComponent implements OnInit {
   constructor(
@@ -38,14 +47,11 @@ export class HomeComponent implements OnInit {
 
     effect(() => {
       const user = this._sesionService.user$();
-      console.log('Usuario en sesión:', this._sesionService.user$());
       this._userService.updatePushTokenIfSessionActive();
     });
   }
-  
-  ngOnInit() {
 
-  }
+  ngOnInit() { }
 
   onRedirectTabButton(url: string) {
     console.log('Redirecting to:', url);

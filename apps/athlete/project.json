@@ -10,6 +10,7 @@
       "executor": "@angular/build:application",
       "outputs": ["{options.outputPath}"],
       "options": {
+       
         "outputPath": "dist/apps/athlete",
         "browser": "apps/athlete/src/main.ts",
         "polyfills": ["zone.js"],
@@ -48,10 +49,12 @@
         "development": {
           "optimization": false,
           "extractLicenses": false,
-          "sourceMap": false
+          "sourceMap": true,
+          "namedChunks": true,
+          "outputHashing": "none"
         }
       },
-      "defaultConfiguration": "production"
+      "defaultConfiguration": "development"
     },
     "serve": {
       "continuous": true,

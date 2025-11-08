@@ -2,7 +2,7 @@
 
   .athlete-section-title {
     margin-bottom: 16px;
-    
+
     h3 {
       margin: 0;
       font-size: 18px;
@@ -25,26 +25,28 @@
   }
 
   .athlete-input {
-    margin-bottom: 16px;
+    margin-bottom: 15px;
 
     &:last-child {
       margin-bottom: 0;
     }
   }
 
-  ion-datetime {
-    --background: var(--bb-background);
-    --background-rgb: var(--bb-background-rgb);
-    --title-color: var(--bb-text-color);
-    --placeholder-color: var(--bb-text-color-light);
-    --ion-color-primary: var(--bb-primary);
-  }
 }
 
 .gender-selector {
   margin: 16px 0;
-  
+
   app-radio-card-selector {
     display: block;
+  }
+}
+
+::ng-deep {
+  ion-datetime-button::part(native) {
+    background: #f79145;
+    color: white;
+    border-radius: 12px;
+    border: 2px solid #ff9f43;
   }
 }

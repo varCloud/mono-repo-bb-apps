@@ -109,11 +109,12 @@ export class DetailCreatorProfileComponent implements OnInit {
     this.isLoadingWorkouts.set(true);
     const params = {
       creatorId: this.idCreator(),
-      // workoutTypes: [
-      //   ENUM_WORKOUT_TYPES.RUTINE_VIDEO,
-      //   ENUM_WORKOUT_TYPES.CLASS_VIDEO,
-      // ],
+       workoutTypes: [
+         ENUM_WORKOUT_TYPES.RUTINE_VIDEO,
+         ENUM_WORKOUT_TYPES.CLASS_VIDEO,
+      ],
     };
+    
     try {
       const workouts = await this._workoutService.getWorkouts(url, params);
       this.paginatorWorkouts.set(workouts.paginator);
