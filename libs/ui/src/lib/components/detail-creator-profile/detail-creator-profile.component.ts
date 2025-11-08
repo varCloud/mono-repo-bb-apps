@@ -9,11 +9,9 @@ import {
 import { Router } from '@angular/router';
 import { LoaderUIService, UserService } from '@monorepo-bb-app/core';
 import {
-  Paginator,
   ProcessSuscriptionService,
   ToastService,
   User,
-  Workout,
   WorkoutService,
 } from '@monorepo-bb-app/shared';
 import { finalize } from 'rxjs';
@@ -28,22 +26,20 @@ import {
   IonSegmentButton,
   IonSegmentContent,
   IonSegmentView,
-  IonInfiniteScroll,
-  IonInfiniteScrollContent,
   IonBackButton,
+  IonSkeletonText,
 } from '@ionic/angular/standalone';
 import { LayoutContentComponent } from '../layout-content';
 import { CardWorkoutInfoComponent } from '../card-workout-info/card-workout-info.component';
 import { ENUM_WORKOUT_TYPES } from '../../../../../shared/constants/enums';
 import { addIcons } from 'ionicons';
 import { arrowBackOutline } from 'ionicons/icons';
+import { WorkoutByTypesComponent } from '../workout-by-types/workout-by-types.component';
 
 @Component({
   selector: 'lib-detail-creator-profile',
   imports: [
     IonBackButton,
-    IonInfiniteScrollContent,
-    IonInfiniteScroll,
     IonSegmentButton,
     IonSegment,
     IonLabel,
@@ -53,9 +49,8 @@ import { arrowBackOutline } from 'ionicons/icons';
     IonGrid,
     LayoutContentComponent,
     IonButton,
-    IonSegmentContent,
-    IonSegmentView,
-    CardWorkoutInfoComponent,
+    WorkoutByTypesComponent,
+    IonSkeletonText,
   ],
   templateUrl: './detail-creator-profile.component.html',
   styleUrl: './detail-creator-profile.component.scss',
@@ -64,10 +59,7 @@ export class DetailCreatorProfileComponent implements OnInit {
   idCreator = input.required<number>();
   defaultHref = input<string>('/home');
   suscriptionEvent = output<boolean>();
-  public tabActive = signal<string>('workouts');
-  public workouts = signal<Workout[]>([]);
-  public paginatorWorkouts = signal<Paginator>({} as Paginator);
-  public isLoadingWorkouts = signal<boolean>(false);
+  public tabActive = signal<number>(ENUM_WORKOUT_TYPES.RUTINE_VIDEO);
   public WORKOUT_TYPES = ENUM_WORKOUT_TYPES;
 
   public creator = signal<User | null>(null);
@@ -91,7 +83,6 @@ export class DetailCreatorProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCreatorProfile();
-    this.getWorkoutsByCreator();
   }
 
   private getCreatorProfile() {
@@ -111,42 +102,8 @@ export class DetailCreatorProfileComponent implements OnInit {
         },
       });
   }
-
-  private async getWorkoutsByCreator(url: undefined | string = undefined) {
-    this.isLoadingWorkouts.set(true);
-    const params = {
-      creatorId: this.idCreator(),
-      // workoutTypes: [
-      //   ENUM_WORKOUT_TYPES.RUTINE_VIDEO,
-      //   ENUM_WORKOUT_TYPES.CLASS_VIDEO,
-      // ],
-    };
-    try {
-      const workouts = await this._workoutService.getWorkouts(url, params);
-      this.paginatorWorkouts.set(workouts.paginator);
-      this.workouts.update((current) => [...current, ...workouts.data]);
-    } catch (error) {
-      this._toastService.error('Failed to load workouts.', {
-        duration: 1000,
-      });
-    }
-  }
-
   public changeTab(event: any) {
     this.tabActive.set(event.detail.value);
-  }
-
-  async onIonInfinite(event: any) {
-    if (this.paginatorWorkouts().links.next) {
-      await this.getWorkoutsByCreator(
-        this.paginatorWorkouts().links.next as string
-      );
-      event.target.complete();
-      event.target.disabled = !this.paginatorWorkouts().links.next;
-    } else {
-      event.target.complete();
-      event.target.disabled = true;
-    }
   }
 
   goToSuscriptionCreator() {
