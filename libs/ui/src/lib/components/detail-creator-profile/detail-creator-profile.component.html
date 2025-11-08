@@ -4,11 +4,10 @@
 >
   <ion-back-button
     icon="arrow-back-outline"
-    class="ion-no-padding bb-goback"
+    class="ion-no-padding bb-goback goback-button"
     [defaultHref]="defaultHref()"
     uppercase="false"
     text=""
-    style="position: absolute; top: 16px; left: 16px; z-index: 10"
   ></ion-back-button>
   <img
     src="https://bb-app-bucket-images.s3.amazonaws.com/uploads%2F76%2Fundefined%2Fphoto-7_1761612307696_j5qjqz2qhtf.jpg"
@@ -43,7 +42,13 @@
               Suscribirse
             </ion-button>
           </div>
+          @if(creator()?.bio) {
           <p class="bio">{{ creator()?.bio }}</p>
+          }@else{
+          <ion-skeleton-text animated></ion-skeleton-text>
+          <ion-skeleton-text animated></ion-skeleton-text>
+          <ion-skeleton-text animated></ion-skeleton-text>
+          }
         </div>
 
         <div class="categories-creator-profile">
@@ -55,7 +60,11 @@
         </div>
       </div>
       <div class="segment-creator-profile">
-        <ion-segment mode="md" (ionChange)="changeTab($event)">
+        <ion-segment
+          mode="md"
+          (ionChange)="changeTab($event)"
+          [value]="tabActive()"
+        >
           <ion-segment-button
             [value]="WORKOUT_TYPES.RUTINE_VIDEO"
             content-id="first"
@@ -69,19 +78,27 @@
             <ion-label class="no-transform title">Documentos</ion-label>
           </ion-segment-button>
         </ion-segment>
-        <ion-segment-view>
-          <ion-segment-content id="first">
-            @for (workout of workouts(); track workout.workoutId) {
-            <lib-card-workout-info [workout]="workout"></lib-card-workout-info>
-            }
-          </ion-segment-content>
-          <ion-segment-content id="second">Second</ion-segment-content>
-        </ion-segment-view>
+        <div class="segment-content-wrapper" style="height: 350px">
+          @if (tabActive() === WORKOUT_TYPES.RUTINE_VIDEO) {
+          <ion-content class="segment-scroll-content ion-no-padding">
+            <lib-workout-by-types
+              [idCreator]="idCreator()"
+              [workoutTypes]="[
+                WORKOUT_TYPES.RUTINE_VIDEO,
+                WORKOUT_TYPES.CLASS_VIDEO
+              ]"
+            ></lib-workout-by-types>
+          </ion-content>
+          } @if (tabActive() === WORKOUT_TYPES.DOCUMENT) {
+          <ion-content class="segment-scroll-content ion-no-padding">
+            <lib-workout-by-types
+              [idCreator]="idCreator()"
+              [workoutTypes]="[WORKOUT_TYPES.DOCUMENT]"
+            ></lib-workout-by-types>
+          </ion-content>
+          }
+        </div>
       </div>
     </ion-grid>
-    <div content-footer class="ion-text-center"></div>
   </app-layout-content>
-  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
-    <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
 </ion-content>
