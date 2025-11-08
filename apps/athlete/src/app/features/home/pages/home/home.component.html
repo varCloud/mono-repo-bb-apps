@@ -1,7 +1,9 @@
+
 <ion-content>
-  <ion-tabs>
-    <ion-tab-bar slot="bottom">
-      <ion-tab-button tab="training">
+
+<ion-tabs >
+    <ion-tab-bar slot="bottom" [ngClass]="{'tab-bar-hidden': !this.showMenu}">
+      <ion-tab-button tab="">
         <ion-icon name="home-outline" color="secondary"></ion-icon>
         <ion-text color="dark">Entrenamientos</ion-text>
       </ion-tab-button>
@@ -19,4 +21,6 @@
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>
+
 </ion-content>
+

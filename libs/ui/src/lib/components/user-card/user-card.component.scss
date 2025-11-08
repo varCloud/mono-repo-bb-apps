@@ -1,0 +1,75 @@
+/* :host aplica los estilos al componente en sí (app-subscription-card) */
+:host {
+  display: block; // Necesario para que ocupe el ancho
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 16px; // Bordes bien redondeados
+  padding: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); // Sombra sutil
+  box-sizing: border-box; // Asegura que el padding no afecte el ancho
+}
+
+.card-wrapper {
+  display: flex;
+  align-items: center; // Centra verticalmente los items
+  width: 100%;
+}
+
+/* 1. El Avatar */
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; // Círculo perfecto
+  object-fit: cover; // Evita que la imagen se distorsione
+  margin-right: 12px;
+  flex-shrink: 0; // Evita que el avatar se encoja
+}
+
+/* 2. Contenido Principal */
+.card-content {
+  flex: 1; // Ocupa el espacio disponible
+  display: flex;
+  flex-direction: column; // Apila los elementos verticalmente
+  gap: 2px; // Pequeño espacio entre líneas
+
+  // Para evitar que el texto se desborde si es muy largo
+  min-width: 0;
+}
+
+.name {
+  font-size: 1rem; // 16px
+  font-weight: 600;
+  color: #000;
+
+  // Truncar texto si es muy largo
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.description {
+  font-size: 0.8rem; // 13px
+  color: #666666;
+  margin-bottom: 4px;
+}
+
+.tag {
+  font-size: 0.75rem; // 12px
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 8px;
+  align-self: flex-start; // Se ajusta al ancho del texto
+}
+
+/* 3. Botón de Acciones */
+.actions {
+  margin-left: auto; // Empuja el ícono a la derecha
+  padding-left: 10px; // Espacio para que no esté pegado al texto
+  flex-shrink: 0;
+
+  ion-icon {
+    font-size: 24px;
+    color: #888888;
+    cursor: pointer; // Indica que es clickeable
+  }
+}

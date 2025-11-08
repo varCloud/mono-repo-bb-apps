@@ -27,12 +27,12 @@ export const PROFILE_MENU_ITEMS: ProfileMenuItem[] = [
   },
   {
     text: 'Contactar a soporte',
-    action: 'bankInfo',
+    action: 'support',
     showArrow: true,
   },
   {
     text: '¿Cómo convertirme en creador de contenido?',
-    action: 'terms',
+    action: 'becomeCreator',
     showArrow: true,
   },
   {

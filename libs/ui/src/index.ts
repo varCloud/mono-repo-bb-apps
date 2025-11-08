@@ -56,3 +56,11 @@ export * from './lib/components/conversation-list/conversation-list.component';
 
 // Interfaces
 export * from './lib/interfaces/select-option.interface';
+export * from './lib/components/accordion/accordion.component';
+export * from './lib/components/user-conversation-modal/user-conversation-modal.component';
+export * from './lib/components/search/search.component';
+export * from './lib/components/info-card/info-card.component';
+export * from './lib/components/slide-info-card/slide-info-card.component';
+export * from './lib/components/toolbar/toolbar.component';
+export * from './lib/components/user-card/user-card.component';
+export * from './lib/components/options-subscriptor-modal/options-subscriptor-modal.component';

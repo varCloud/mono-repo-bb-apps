@@ -1,0 +1,40 @@
+.slider-container {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding-top: 3px;
+  padding-bottom: 3px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+app-info-card {
+  display: inline-block;
+  vertical-align: top;
+  width: 150px;
+  ::ng-deep ion-card {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
+
+app-info-card:first-child {
+  ::ng-deep ion-card {
+    margin-left: 0px;
+  }
+}
+
+app-info-card:last-child {
+  ::ng-deep ion-card {
+    margin-right: 0px;
+  }
+  .selected{
+    background-color: black;
+  }
+
+}

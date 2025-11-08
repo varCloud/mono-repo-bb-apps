@@ -1,0 +1,24 @@
+<div class="card-wrapper">
+
+  <img [src]="imageUrl()" [alt]="name()" class="avatar" />
+
+  <div class="card-content">
+    <span class="name">{{ name() }}</span>
+    <span class="description">{{ description() }}</span>
+
+    <span
+      class="tag"
+      [style.background-color]="tagColor()"
+      [style.color]="tagTextColor()">
+      {{ tagText() }}
+    </span>
+  </div>
+
+  <div class="actions">
+    <ion-icon
+      name="ellipsis-horizontal"
+      (click)="onMoreOptions($event)">
+    </ion-icon>
+  </div>
+
+</div>

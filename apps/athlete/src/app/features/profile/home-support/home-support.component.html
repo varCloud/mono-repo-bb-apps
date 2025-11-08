@@ -1,0 +1,34 @@
+<ion-content content-body>
+  <!-- toolbar-->
+  <app-tool-bar
+    leftIcon="arrow-back-outline"
+    title="Regresar"
+    emailIcon="mail"
+    emailLink=""
+    phoneIcon="call"
+    phoneLink="">
+  </app-tool-bar>
+
+  <!-- simple search input-->
+  <app-simple-search-input
+    [searchValue]="mySearchText"
+    (searchValueChange)="onSearchTextChange($event)"
+    (searchSubmitted)="onSearchSubmit($event)"
+    (searchCleared)="onSearchClearEvent()"
+    headerTitle="¿Como podemos ayudarte?"
+    placeholder="Search"
+    [debounce]="700">
+  </app-simple-search-input>
+
+  <!-- card slider-->
+  <app-card-slider
+    [cards]="cardCategories"
+    (cardSelected)="onSliderCardClicked($event)">
+  </app-card-slider>
+
+  <!-- faq accordion-->
+  <app-faq-accordion
+    [items]="myFaqList"
+    tittleaccordion="Top questions"
+  ></app-faq-accordion>
+</ion-content>

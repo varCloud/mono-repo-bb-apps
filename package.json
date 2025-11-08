@@ -24,7 +24,8 @@
     "sync-files-creator:android": "cd apps/creator && npx cap sync android && cd ../../ && node scripts/sync-android-files-creator.js",
     "sync-files-creator:athlete": "cd apps/athlete && npx cap sync android && cd ../../ && node scripts/sync-android-files-athlete.js",
     "resources:android:athlete": "cd apps/athlete &&  npx capacitor-assets generate --android",
-    "resources:android:creator": "cd apps/creator &&  npx capacitor-assets generate --android"
+    "resources:android:creator": "cd apps/creator &&  npx capacitor-assets generate --android",
+    "dev:athlete:celular:windows" : " cd apps/athlete ; npx cap sync ; npx cap open android ; npx cap run android -l --host=192.168.1.28 --port=3001"
   },
   "private": true,
   "dependencies": {

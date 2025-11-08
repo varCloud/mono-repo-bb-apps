@@ -79,13 +79,16 @@ export class ProfileComponent implements OnInit {
         this.showTerms();
         break;
       case 'support':
-        this.contactSupport();
+        this.router.navigate(['home/profile/home-support']);
         break;
       case 'deleteAccount':
         this.deleteAccount();
         break;
       case 'logout':
         this.logout();
+        break;
+      case 'becomeCreator':
+        this.router.navigate(['home/profile/become-creator-detail']);
         break;
     }
   }
