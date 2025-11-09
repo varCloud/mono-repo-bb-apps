@@ -38,3 +38,8 @@ export enum MODAL_RESPONSE {
   CONFIRM = 'confirm',
   CANCEL = 'cancel',
 }
+
+export enum BUCKET_TYPE {
+  PUBLIC = 'public',
+  PRIVATE = 'private',
+}

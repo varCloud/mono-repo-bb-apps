@@ -47,10 +47,19 @@ export const profileRoutes: Routes = [
           )
       },
       {
-        path: '**',
-        redirectTo: '',
-        pathMatch: 'full',
-      },
+        path: 'personal-data',
+        loadComponent: () =>
+          import('./pages/personal-data/personal-data-page.component').then(
+            (m) => m.PersonalDataPageComponent,
+          )
+      }
     ],
-  }
+  },
+  // {
+  //   path: 'personal-data',
+  //   loadComponent: () =>
+  //     import('./pages/personal-data/personal-data-page.component').then(
+  //       (m) => m.PersonalDataPageComponent,
+  //     )
+  // }
 ];

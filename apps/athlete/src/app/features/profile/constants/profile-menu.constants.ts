@@ -12,7 +12,7 @@ export interface ProfileMenuItem {
 export const PROFILE_MENU_ITEMS: ProfileMenuItem[] = [
   {
     text: 'Datos personales',
-    action: 'viewAsClient',
+    action: 'personalData',
     showArrow: true,
   },
   {

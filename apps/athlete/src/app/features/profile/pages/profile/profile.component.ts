@@ -47,8 +47,8 @@ export class ProfileComponent implements OnInit {
   ) {
 
     effect(() => {
-      this.sesionService.user$();
-      console.log('Usuario en sesión:', this.sesionService.user$());
+       const user = this.sesionService.user$();
+       console.log(`efecto en profile page: ${user.firstName}`);
     });
     addIcons({
       trashSharp,
@@ -63,8 +63,8 @@ export class ProfileComponent implements OnInit {
 
   onMenuItemClick(action: string): void {
     switch (action) {
-      case 'viewAsClient':
-        this.viewAsClient();
+      case 'personalData':
+        this.personalData();
         break;
       case 'myClients':
         this.navigateToMyClients();
@@ -93,8 +93,8 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  private viewAsClient(): void {
-    // Implementar visualización como cliente
+  private personalData(): void {
+    this.router.navigate(['home/profile/personal-data']);
   }
 
   private navigateToMyClients(): void {

@@ -18,25 +18,35 @@ export class UploadService {
   ) {}
 
   async uploadFile(
-    filePath: string,
+    filePathOrData: string,
     fileName: string,
     mimeType: string,
     typeImageBucket?: string,
   ): Promise<CompleteResultUpload> {
     let fileSize = 0;
+    let isBase64 = false;
     try {
-      console.log('uploadFile', filePath, fileName, mimeType);
-      // 1. Obtener información del archivo
-      try {
-        // Verificar si es una URL del capacitor y convertirla a una ruta de archivo local
-        const processedPath = this.processFilePath(filePath);
-        console.log('processedPath', processedPath);
-
-        const stat = await Filesystem.stat({ path: processedPath });
-        fileSize = stat.size;
-      } catch (error) {
-        console.error('Error obteniendo información del archivo:', error);
-        throw error;
+      console.log('uploadFile', fileName, mimeType);
+      
+      // Determinar si es base64 o ruta de archivo
+      if (filePathOrData.startsWith('data:') || /^[A-Za-z0-9+/=]+$/.test(filePathOrData)) {
+        isBase64 = true;
+        // Si es base64, calcular el tamaño desde los datos
+        const base64 = filePathOrData.includes('base64,') 
+          ? filePathOrData.split('base64,')[1] 
+          : filePathOrData;
+        fileSize = Math.ceil((base64.length * 3) / 4);
+      } else {
+        try {
+          // Es una ruta de archivo
+          const processedPath = this.processFilePath(filePathOrData);
+          console.log('processedPath', processedPath);
+          const stat = await Filesystem.stat({ path: processedPath });
+          fileSize = stat.size;
+        } catch (error) {
+          console.error('Error obteniendo información del archivo:', error);
+          throw error;
+        }
       }
 
       const payLoad = {
@@ -59,14 +69,16 @@ export class UploadService {
       let partNumber = 1;
       const uploadedParts = [];
 
-      // Procesar la ruta del archivo antes de leer fragmentos
-      const processedPath = this.processFilePath(filePath);
+      // Preparar la ruta o los datos para la lectura
+      const processedPath = isBase64 ? filePathOrData : this.processFilePath(filePathOrData);
 
-      while (offset < fileSize) {
+      // Para archivos pequeños, subir en una sola parte
+      if (fileSize <= this.CHUNK_SIZE) {
         const chunk = await this.readFileChunk(
           processedPath,
-          offset,
-          this.CHUNK_SIZE,
+          0,
+          fileSize,
+          isBase64
         );
 
         const partUrl = await this.s3Service.getSignedPartUrl(
@@ -78,13 +90,35 @@ export class UploadService {
 
         const etag = await this.uploadChunk(partUrl, chunk);
         uploadedParts.push({ PartNumber: partNumber, ETag: etag });
+        console.log('Progreso: 100%');
+      } else {
+        // Para archivos grandes, subir en chunks
+        while (offset < fileSize) {
+          const currentChunkSize = Math.min(this.CHUNK_SIZE, fileSize - offset);
+          const chunk = await this.readFileChunk(
+            processedPath,
+            offset,
+            currentChunkSize,
+            isBase64
+          );
 
-        offset += chunk.byteLength;
-        partNumber++;
+          const partUrl = await this.s3Service.getSignedPartUrl(
+            startMultipartUpload.uploadId,
+            startMultipartUpload.fileName,
+            partNumber,
+            startMultipartUpload.s3Key,
+          );
 
-        // Opcional: Emitir progreso
-        const progress = Math.round((offset / fileSize) * 100);
-        console.log(`Progreso: ${progress}%`);
+          const etag = await this.uploadChunk(partUrl, chunk);
+          uploadedParts.push({ PartNumber: partNumber, ETag: etag });
+
+          offset += currentChunkSize;
+          partNumber++;
+
+          // Opcional: Emitir progreso
+          const progress = Math.round((offset / fileSize) * 100);
+          console.log(`Progreso: ${progress}%`);
+        }
       }
 
       // 4. Completar subida
@@ -104,16 +138,26 @@ export class UploadService {
   }
 
   private async readFileChunk(
-    path: string,
+    pathOrData: string,
     offset: number,
     length: number,
+    isBase64: boolean = false
   ): Promise<ArrayBuffer> {
-    const result = await Filesystem.readFile({
-      path,
-    });
+    let base64: string;
+    
+    if (isBase64) {
+      // Si ya es base64, usarlo directamente
+      base64 = pathOrData.includes('base64,') 
+        ? pathOrData.split('base64,')[1] 
+        : pathOrData;
+    } else {
+      // Si es una ruta de archivo, leerlo
+      const result = await Filesystem.readFile({
+        path: pathOrData,
+      });
+      base64 = result.data as string;
+    }
 
-    // Capacitor returns base64 string, so decode it
-    const base64 = result.data as string;
     const binaryString = atob(base64);
     const totalLength = binaryString.length;
     const end = Math.min(offset + length, totalLength);

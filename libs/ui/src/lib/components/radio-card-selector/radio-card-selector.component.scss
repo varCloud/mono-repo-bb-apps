@@ -8,7 +8,7 @@
   background: white;
   border: 2px solid #E5E5E5;
   border-radius: 12px;
-  padding: 16px;
+  padding: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
   min-height: 80px;
@@ -40,12 +40,12 @@
   }
 }
 
-// Colores específicos por género
+
 .radio-card[data-gender="1"] {
-  background: var(--ion-color-primary-shade);  // Azul claro
+  background: white;  
   
   &.selected {
-    background:var(--ion-color-primary);  // Azul más intenso
+    background:var(--ion-color-primary);  
     border-color: #1976D2;
     
     .card-label {
@@ -53,16 +53,16 @@
     }
     
     .card-image {
-      filter: brightness(0) invert(1);  // Hacer la imagen blanca
+      filter: brightness(0) invert(1);  
     }
   }
 }
 
 .radio-card[data-gender="2"] {
-  background: var( --ion-color-secondary-shade);  // Naranja claro
+  background: white;
   
   &.selected {
-    background: var(--ion-color-secondary);  // Naranja
+    background: var(--ion-color-secondary);  
     border-color: #F57F17;
     
     .card-label {
@@ -70,16 +70,16 @@
     }
     
     .card-image {
-      filter: brightness(0) invert(1);  // Hacer la imagen blanca
+      filter: brightness(0) invert(1);  
     }
   }
 }
 
 .radio-card[data-gender="3"] {
-  background: #616161;  // Gris claro
+  background: white; 
   
   &.selected {
-    background: #9E9E9E;  // Gris
+    background: #9E9E9E;  
     border-color: #616161;
     
     .card-label {
@@ -87,7 +87,7 @@
     }
     
     .card-image {
-      filter: brightness(0) invert(1);  // Hacer la imagen blanca
+      filter: brightness(0) invert(1);  
     }
   }
 }
@@ -122,10 +122,10 @@
 
 ion-icon {
   font-size: 32px;
-  color: #666666;
+  color: black;
 }
 
-// Estilos específicos cuando se usa como selector horizontal de género
+
 :host(.gender-selector) {
   .radio-card-container {
     display: flex;
