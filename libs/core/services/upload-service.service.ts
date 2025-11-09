@@ -72,11 +72,12 @@ export class UploadService {
       // Preparar la ruta o los datos para la lectura
       const processedPath = isBase64 ? filePathOrData : this.processFilePath(filePathOrData);
 
-      while (offset < fileSize) {
+      // Para archivos pequeños, subir en una sola parte
+      if (fileSize <= this.CHUNK_SIZE) {
         const chunk = await this.readFileChunk(
           processedPath,
-          offset,
-          this.CHUNK_SIZE,
+          0,
+          fileSize,
           isBase64
         );
 
@@ -89,13 +90,35 @@ export class UploadService {
 
         const etag = await this.uploadChunk(partUrl, chunk);
         uploadedParts.push({ PartNumber: partNumber, ETag: etag });
+        console.log('Progreso: 100%');
+      } else {
+        // Para archivos grandes, subir en chunks
+        while (offset < fileSize) {
+          const currentChunkSize = Math.min(this.CHUNK_SIZE, fileSize - offset);
+          const chunk = await this.readFileChunk(
+            processedPath,
+            offset,
+            currentChunkSize,
+            isBase64
+          );
 
-        offset += chunk.byteLength;
-        partNumber++;
+          const partUrl = await this.s3Service.getSignedPartUrl(
+            startMultipartUpload.uploadId,
+            startMultipartUpload.fileName,
+            partNumber,
+            startMultipartUpload.s3Key,
+          );
 
-        // Opcional: Emitir progreso
-        const progress = Math.round((offset / fileSize) * 100);
-        console.log(`Progreso: ${progress}%`);
+          const etag = await this.uploadChunk(partUrl, chunk);
+          uploadedParts.push({ PartNumber: partNumber, ETag: etag });
+
+          offset += currentChunkSize;
+          partNumber++;
+
+          // Opcional: Emitir progreso
+          const progress = Math.round((offset / fileSize) * 100);
+          console.log(`Progreso: ${progress}%`);
+        }
       }
 
       // 4. Completar subida
