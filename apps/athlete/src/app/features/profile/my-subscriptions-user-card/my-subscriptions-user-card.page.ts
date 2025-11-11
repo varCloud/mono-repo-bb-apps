@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonList } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonList,IonButton, IonAccordion, IonIcon, IonButtons } from '@ionic/angular/standalone';
 // Importamos nuestro nuevo componente
 import { UserCardComponent } from '@monorepo-bb-app/ui';
 import { ModalController } from '@ionic/angular/standalone';
@@ -25,7 +25,7 @@ interface Subscription {
   standalone: true,
   imports: [
     IonHeader, IonToolbar, IonTitle, IonContent, IonList,
-    UserCardComponent, OptionsSubscritporModalComponent
+    UserCardComponent, OptionsSubscritporModalComponent, IonButton, IonIcon, IonButtons
 
   ]
 })
@@ -65,11 +65,33 @@ export class mySubscriptionsUserCardPage {
   constructor(private modalCtrl: ModalController) {}
 
 
+  async openSearchModal() {
+    const modal = await this.modalCtrl.create({
+      component: OptionsSubscritporModalComponent,
+      componentProps: {
+        // Pasa la lista COMPLETA de suscripciones al modal
+        allSubscriptions: this.subscriptions()
+      }
+    });
 
+    await modal.present();
+
+    // Opcional: Escucha si el usuario seleccionó un resultado
+    const { data, role } = await modal.onWillDismiss();
+    if (role === 'selected' && data) {
+      console.log('Usuario seleccionó desde búsqueda:', data);
+      // Aquí podrías hacer algo, como navegar al detalle de esa suscripción
+    }
+  }
+
+  // ... (tu método existente 'onShowOptions' no cambia) ...
 
 
 
   // Método para manejar el clic en los '...'
+
+
+
 
 async onShowOptions(subscription: Subscription, event: Event) {
 
@@ -78,11 +100,11 @@ async onShowOptions(subscription: Subscription, event: Event) {
       componentProps: {
         subscription: subscription // Pasa la data de la suscripción al modal
       },
-      // --- Estilo de Bottom-Sheet ---
-      breakpoints: [0.4, 1],      // Permite que crezca de 0.1 a 1
-      initialBreakpoint: 0.4, // Empieza pequeño
-      handle: false,            // Oculta el "asa" por defecto (usamos el nuestro)
-      cssClass: 'bottom-sheet-modal' // Clase para styling global
+
+      breakpoints: [0.4, 1],
+      initialBreakpoint: 0.4,
+      handle: false,
+      cssClass: 'bottom-sheet-modal'
     });
 
     await modal.present();
@@ -96,13 +118,15 @@ async onShowOptions(subscription: Subscription, event: Event) {
       console.log('¡CANCELAR LA SUSCRIPCIÓN!', subscription.name);
       // Aquí llamas a tu servicio para cancelar
       this.cancelSubscription(subscription.id);
+    }else if(role==='share'){
+         console.log('metodo de busqueda aqui');
     }
        console.log('Mostrar opciones para:', subscription.name);
   }
 
-  // Método para manejar la cancelación real
+
   cancelSubscription(id: number) {
-    // Por ahora, solo lo quitamos de la lista
+
     this.subscriptions.update(subs =>
       subs.filter(s => s.id !== id)
     );

@@ -1,35 +1,33 @@
-/* home.page.scss */
+
 
 ion-list {
-  background: transparent; // El fondo lo da el content
-  padding: 0px 0px; // Padding lateral en la lista
-  margin: 0px !important; // Elimina el margen por defecto
+  background: transparent;
+  padding: 0px 0px;
+  margin: 0px !important; 
 }
 
 
 
-/* Esto añade un margen inferior a cada tarjeta,
-  excepto a la última
-*/
+
 .card-item {
-  display: block; // Necesario para aplicar el margen
+  display: block;
   margin-bottom: 12px;
 }
 
 /* src/global.scss */
 
 .bottom-sheet-modal {
-  /* ¡Esta es la clave para que la altura se ajuste al contenido! */
+
   --height: auto;
 
 
 
-  /* Ajusta el "backdrop" (fondo oscuro) */
+
   .ion-backdrop {
     opacity: 0.5;
   }
 
-  /* Necesario para que --height: auto funcione bien */
+
   .ion-page {
     position: relative;
     contain: content;
@@ -38,4 +36,8 @@ ion-list {
 
 ion-modal {
    --border-radius: 6px;
+}
+
+img{
+  max-width: 1.5rem;
 }

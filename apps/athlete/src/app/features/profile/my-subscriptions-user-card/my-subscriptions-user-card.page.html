@@ -1,5 +1,20 @@
 
+
+
 <ion-content content-body [fullscreen]="true" class="ion-padding">
+
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <img src="assets/images/logo/logo.svg" alt="BodyBooster Logo" slot="start" class="header-logo" />
+
+    <ion-buttons slot="end">
+      <ion-button (click)="openSearchModal()">
+        <ion-icon slot="icon-only" name="search-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 
   <ion-list  [lines]="'none'" >
 
