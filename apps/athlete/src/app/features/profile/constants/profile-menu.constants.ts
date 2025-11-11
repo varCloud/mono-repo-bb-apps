@@ -17,7 +17,7 @@ export const PROFILE_MENU_ITEMS: ProfileMenuItem[] = [
   },
   {
     text: 'Mis Suscripciones',
-    action: 'myClients',
+    action: 'mySubscriptions',
     showArrow: true,
   },
   {

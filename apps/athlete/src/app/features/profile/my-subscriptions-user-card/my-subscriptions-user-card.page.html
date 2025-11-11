@@ -1,20 +1,13 @@
 
 
 
-<ion-content content-body [fullscreen]="true" class="ion-padding">
-
-<ion-header class="ion-no-border">
-  <ion-toolbar>
-    <img src="assets/images/logo/logo.svg" alt="BodyBooster Logo" slot="start" class="header-logo" />
-
-    <ion-buttons slot="end">
-      <ion-button (click)="openSearchModal()">
-        <ion-icon slot="icon-only" name="search-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
+<div class="header-container">
+  <app-header-search (clickSearch)="openDetailModal()"></app-header-search>
+  <section class="header-info-container">
+    <h2 class="title">Mis Suscripciones</h2>
+  </section>
+</div>
+<ion-content app-layout-content>
 
   <ion-list  [lines]="'none'" >
 

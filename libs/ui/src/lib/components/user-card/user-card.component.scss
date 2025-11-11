@@ -5,7 +5,7 @@
   background-color: #ffffff;
   border-radius: 16px; // Bordes bien redondeados
   padding: 6px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); // Sombra sutil
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25); // Sombra sutil
   box-sizing: border-box; // Asegura que el padding no afecte el ancho
 }
 
@@ -54,10 +54,10 @@
 }
 
 .tag {
-  font-size: 0.75rem; // 12px
-  font-weight: 500;
-  padding: 4px 8px;
-  border-radius: 8px;
+  font-size: 0.80rem; // 12px
+  font-weight: 600;
+  padding: 3px 6px;
+  border-radius: 4px;
   align-self: flex-start; // Se ajusta al ancho del texto
 }
 

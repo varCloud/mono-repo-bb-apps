@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { InfoCardData } from '@monorepo-bb-app/shared';
+import { FaqCategories, InfoCardData } from '@monorepo-bb-app/shared';
 // ... otras importaciones
 import { CardSliderComponent } from '@monorepo-bb-app/ui'; // <-- 1. Importa // <-- 1. Importa
 import {
@@ -27,7 +27,7 @@ import {
   ToolBarComponent,
 } from '@monorepo-bb-app/ui';
 import { CatalogsService, Faq, RequestFaqs } from '@monorepo-bb-app/shared';
-import { FaqService } from '@monorepo-bb-app/core';
+import { FaqService, FaqCategoriesService } from '@monorepo-bb-app/core';
 import { take } from 'rxjs';
 @Component({
   selector: 'app-home-support',
@@ -46,7 +46,7 @@ import { take } from 'rxjs';
   ],
 })
 export class HomeSupport {
-  constructor(private faqService: FaqService, private catalogService: CatalogsService ) {
+  constructor(private faqService: FaqService, private catalogService: CatalogsService, private faqCategoriesService: FaqCategoriesService ) {
     addIcons({
       informationCircle,
       informationCircleOutline,
@@ -61,6 +61,7 @@ export class HomeSupport {
       arrowBackOutline,
     });
     this.getFacts();
+    this.getFaqsCategories();
   }
 
   public getFacts() {
@@ -71,6 +72,14 @@ export class HomeSupport {
     this.faqService.getFaqs(payload).pipe(take(1)).subscribe((response: Faq[]) => {
       console.log('Respuesta de FAQs:', response);
       this.myFaqList = response;
+    });
+  }
+
+  public getFaqsCategories(){
+
+    this.faqCategoriesService.getFaqsCategories().pipe(take(1)).subscribe((response: FaqCategories[]) => {
+      console.log('Respuesta de FAQs Categories :', response);
+      //this.cardCategories = response;
     });
   }
 

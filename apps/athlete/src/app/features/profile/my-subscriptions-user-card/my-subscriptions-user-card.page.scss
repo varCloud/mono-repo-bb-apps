@@ -3,7 +3,7 @@
 ion-list {
   background: transparent;
   padding: 0px 0px;
-  margin: 0px !important; 
+  margin: 0px !important;
 }
 
 
@@ -38,6 +38,31 @@ ion-modal {
    --border-radius: 6px;
 }
 
-img{
-  max-width: 1.5rem;
+.header-logo{
+  max-width: 40% !important;
+}
+
+
+:host {
+  .header-container {
+    background-color: white;
+    min-height: 100px;
+    padding-left: 24px;
+    padding-right: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    padding-top: 15px;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+  }
+}
+app-header-search{
+  padding-bottom: 0px;
+
+}
+
+h2{
+  font-size: 1.2em !important;
+  font-weight: 600;
 }

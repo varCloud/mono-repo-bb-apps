@@ -1,9 +1,12 @@
 import { Component, signal } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonList,IonButton, IonAccordion, IonIcon, IonButtons } from '@ionic/angular/standalone';
 // Importamos nuestro nuevo componente
-import { UserCardComponent } from '@monorepo-bb-app/ui';
+import { HeaderSearchComponent, UserCardComponent } from '@monorepo-bb-app/ui';
 import { ModalController } from '@ionic/angular/standalone';
 import { OptionsSubscritporModalComponent } from '@monorepo-bb-app/ui';
+import { IonSearchbar } from '@ionic/angular';
+import { addIcons } from 'ionicons';
+
 
 
 
@@ -25,7 +28,7 @@ interface Subscription {
   standalone: true,
   imports: [
     IonHeader, IonToolbar, IonTitle, IonContent, IonList,
-    UserCardComponent, OptionsSubscritporModalComponent, IonButton, IonIcon, IonButtons
+    UserCardComponent, OptionsSubscritporModalComponent, IonButton, IonIcon, IonButtons,HeaderSearchComponent
 
   ]
 })
@@ -39,8 +42,8 @@ export class mySubscriptionsUserCardPage {
       name: 'Gerardo Contreras',
       description: 'Pago por 3 meses',
       tag: 'Kick boxing',
-      tagBg: '#e0f7fa', // Azul claro
-      tagText: '#00796b' // Azul oscuro
+      tagBg: '#43e3ffff', // Azul claro
+      tagText: '#000000ff' // Azul oscuro
     },
     {
       id: 2,
@@ -48,8 +51,8 @@ export class mySubscriptionsUserCardPage {
       name: 'Alejandro López',
       description: 'Pago por 3 meses',
       tag: 'Running',
-      tagBg: '#e8f5e9', // Verde claro
-      tagText: '#388e3c' // Verde oscuro
+      tagBg: '#aeff6cff', // Verde claro
+      tagText: '#333333' // Verde oscuro
     },
     {
       id: 3,
@@ -57,12 +60,14 @@ export class mySubscriptionsUserCardPage {
       name: 'Brenda Gutiérrez',
       description: 'Pago por 3 meses',
       tag: 'Fitness',
-      tagBg: '#e1bee7', // Morado claro
+      tagBg: '#a049c2ff', // Morado claro
       tagText: '#ffffff' // Texto blanco (como en tu imagen)
     }
   ]);
 
-  constructor(private modalCtrl: ModalController) {}
+  constructor(private modalCtrl: ModalController) {
+
+  }
 
 
   async openSearchModal() {
@@ -71,7 +76,11 @@ export class mySubscriptionsUserCardPage {
       componentProps: {
         // Pasa la lista COMPLETA de suscripciones al modal
         allSubscriptions: this.subscriptions()
-      }
+      },
+      breakpoints: [0.4, 1],
+      initialBreakpoint: 0.4,
+      handle: false,
+      cssClass: 'bottom-sheet-modal'
     });
 
     await modal.present();
@@ -134,8 +143,24 @@ async onShowOptions(subscription: Subscription, event: Event) {
   }
 
 
+  async openDetailModal(data?: any) {
+    const modal = await this.modalCtrl.create({
+      component: UserCardComponent,
+      componentProps: {
+        data: {
+           allSubscriptions: this.subscriptions(),
+        },
+      },
+      breakpoints: [0, 0.25, 0.5, 0.75, 1],
+    });
 
+    await modal.present();
 
-
+    const result = await modal.onDidDismiss();
+    if (result.data) {
+      // Manejar los datos retornados del modal si es necesario
+      console.log('Modal Data:', result.data);
+    }
+  }
 
 }

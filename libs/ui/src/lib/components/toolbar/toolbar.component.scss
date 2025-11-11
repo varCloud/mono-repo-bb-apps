@@ -11,6 +11,8 @@ ion-button{
   --padding-end: 0px;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
+ --border-radius: 15px !important;
+
 }
 ion-item{
   --border-color: transparent;
@@ -18,9 +20,49 @@ ion-item{
 
 .item-native{
   --background: transparent;
-  --padding-start: 0px;
+  --padding-start : 0px !important;
   --padding-end: 0px;
+  
+
 }
 
 
+  .goBack {
+    display: flex;
+    justify-content: flex-start;
+    .bb-goback {
+      --icon-margin-end: 24px;
+      --color: #757575;
+      --margin-bottom: 30px;
+      --padding-end: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 24px;
+      text-transform: none !important;
+      --icon-font-size: 20px;
+    }
+  }
 
+ .radius-border{
+  --border-color: #c5e1fd;
+  --border-style: solid;
+  --border-width: 1px;
+  margin-left: 10px;
+
+
+  }
+
+  .icon-toolbar{
+    padding-right:10px ;
+    padding-left:10px ;
+  }
+
+  ion-item{
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+  }
+
+
+  .backButton{
+    padding-right: 10px !important;
+  }
