@@ -45,3 +45,4 @@ export * from './models/user-conversation';
 export * from './models/filter.model';
 export * from './models/stripe-status';
 export * from './models/app-settings';
+export * from './models/subscription-response';

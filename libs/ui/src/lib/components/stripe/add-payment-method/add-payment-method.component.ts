@@ -73,6 +73,7 @@ export class AddPaymentMethodComponent implements OnInit {
           const { client_secret } = resp.data as any;
           this.elements = this._stripeService.stripe.elements({
             clientSecret: client_secret,
+            locale: 'es',
             appearance,
           });
           this.card = this.elements.create('payment', options);
