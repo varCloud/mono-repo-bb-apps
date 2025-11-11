@@ -46,3 +46,6 @@ export * from './models/filter.model';
 export * from './models/stripe-status';
 export * from './models/app-settings';
 export * from './models/subscription-response';
+export * from './models/faqs/faqs.model';
+export * from './models/slide-info-card.model';
+export * from './helpers/manage-photo-to-upload';

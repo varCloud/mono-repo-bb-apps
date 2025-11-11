@@ -1,0 +1,40 @@
+  .title {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+  }
+  
+.personal-data-page {
+  ion-grid {
+    padding: 16px;
+  }
+
+  .container-header {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    background: var(--bb-background);
+    
+    ion-back-button {
+      margin-left: 0;
+    }
+
+    .header-title {
+      margin-left: 8px;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--bb-text-color);
+    }
+  }
+
+  athlete-profile-basic-form,
+  athlete-physical-info-form {
+    display: block;
+    margin-bottom: 32px;
+  }
+
+  ion-button {
+    margin: 24px 0;
+  }
+}

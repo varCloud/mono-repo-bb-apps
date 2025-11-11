@@ -1,0 +1,29 @@
+.faq-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.faq-header h2 {
+  margin: 0;
+  font-size: 1.0rem;
+  font-weight: 700;
+}
+
+.faq-header ion-button {
+  text-transform: none;
+  --padding-end: 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+
+  --color: var(--ion-color-primary);
+}
+.content{
+  font-size: .5rem;
+}
+
+ion-accordion-group {
+  padding: 0px 0px;
+}
+

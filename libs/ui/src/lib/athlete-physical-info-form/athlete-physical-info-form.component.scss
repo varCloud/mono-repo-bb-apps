@@ -1,0 +1,52 @@
+.athlete-physical-info-form {
+
+  .athlete-section-title {
+    margin-bottom: 16px;
+
+    h3 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--bb-text-color);
+    }
+  }
+
+  .athlete-birthdate-item {
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --background: var(--bb-input-background);
+    border-radius: 8px;
+    margin-bottom: 16px;
+
+    .athlete-label {
+      color: var(--bb-text-color);
+      margin: 0;
+    }
+  }
+
+  .athlete-input {
+    margin-bottom: 15px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+}
+
+.gender-selector {
+  margin: 16px 0;
+
+  app-radio-card-selector {
+    display: block;
+  }
+}
+
+::ng-deep {
+  ion-datetime-button::part(native) {
+    background: #f79145;
+    color: white;
+    border-radius: 12px;
+    border: 2px solid #ff9f43;
+  }
+}

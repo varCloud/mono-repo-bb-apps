@@ -1,0 +1,25 @@
+
+<ion-content content-body [fullscreen]="true" class="ion-padding">
+
+  <ion-list  [lines]="'none'" >
+
+    @for (sub of subscriptions(); track sub.id) {
+
+      <lib-user-card
+        [imageUrl]="sub.imageUrl"
+        [name]="sub.name"
+        [description]="sub.description"
+        [tagText]="sub.tag"
+        [tagColor]="sub.tagBg"
+        [tagTextColor]="sub.tagText"
+        (optionsClick)="onShowOptions(sub, $event)"
+        class="card-item"
+      >
+      </lib-user-card>
+
+    } @empty {
+      <p style="padding: 20px;">No tienes suscripciones activas.</p>
+    }
+
+  </ion-list>
+</ion-content>

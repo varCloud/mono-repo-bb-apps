@@ -10,4 +10,5 @@ export const API_URLS = {
   WORKOUT: '/workout',
   USER_GOALS: '/user-goals',
   SUSCRIPTIONS: '/subscriptions',
+  FAQS : '/faqs',
 };

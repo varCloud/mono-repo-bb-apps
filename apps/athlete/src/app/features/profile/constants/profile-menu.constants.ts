@@ -12,7 +12,7 @@ export interface ProfileMenuItem {
 export const PROFILE_MENU_ITEMS: ProfileMenuItem[] = [
   {
     text: 'Datos personales',
-    action: 'viewAsClient',
+    action: 'personalData',
     showArrow: true,
   },
   {
@@ -27,12 +27,12 @@ export const PROFILE_MENU_ITEMS: ProfileMenuItem[] = [
   },
   {
     text: 'Contactar a soporte',
-    action: 'bankInfo',
+    action: 'support',
     showArrow: true,
   },
   {
     text: '¿Cómo convertirme en creador de contenido?',
-    action: 'terms',
+    action: 'becomeCreator',
     showArrow: true,
   },
   {

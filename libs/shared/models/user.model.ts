@@ -63,7 +63,7 @@ export class UserModel implements User {
   firstName = '';
   lastName = '';
   email = '';
-  genderId = 1;
+  genderId ;
   registrationDate = new Date();
   stripeAccountId = '';
   profileColor = '';
@@ -76,7 +76,12 @@ export class UserModel implements User {
   categories = [];
   billingCycles = [];
   nickName?: string | undefined;
-
+  phone?: string;
+  weight?: string;
+  height?: string;
+  levelId?: number;
+  birthdate?: string;
+  age?: string;
   constructor(data: any) {
     this.userId = data.userId || 0;
     this.userTypeId = data.userTypeId || 0;
@@ -96,5 +101,11 @@ export class UserModel implements User {
     this.categories = data.categories || [];
     this.billingCycles = data.billingCycles || [];
     this.nickName = data.nickName || '';
+    this.phone = data.phone || '';
+    this.weight = data.weight || '';
+    this.height = data.height || '';
+    this.levelId = data.levelId || 0;
+    this.birthdate = data.birthdate || '';
+    this.age = data.age || '';
   }
 }

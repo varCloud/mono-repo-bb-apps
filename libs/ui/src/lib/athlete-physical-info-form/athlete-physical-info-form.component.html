@@ -1,0 +1,98 @@
+<!-- Athlete Physical Info Form -->
+<form [formGroup]="form" class="athlete-physical-info-form">
+
+  <!-- Gender Selection -->
+  <ion-row>
+    <ion-col size="12">
+      <div class="athlete-section-title">
+        <h3>{{ 'onboarding.tell-about-us.gender-title' | translate }}</h3>
+      </div>
+
+      <div class="gender-selector">
+        <app-radio-card-selector class="gender-selector" [options]="genderOptions()"
+          [value]="form.get('genderId')?.value" (valueChange)="onGenderChange($event)" cardClass="gender-card">
+        </app-radio-card-selector>
+      </div>
+
+      <app-error-message [control]="$any(form.get('genderId'))"></app-error-message>
+    </ion-col>
+  </ion-row>
+
+  <!-- Birthdate -->
+  <ion-row>
+    <ion-col size="12">
+      <div class="athlete-section-title">
+        <h3>{{ 'onboarding.tell-about-us.birthdate-title' | translate }}</h3>
+      </div>
+
+      <ion-item lines="none" class="athlete-birthdate-item">
+        <ion-label class="athlete-label">
+          {{ "onboarding.tell-about-us.birthdate-label" | translate }}
+        </ion-label>
+        <ion-datetime-button [color]="'secondary'" datetime="datetime" mode="md" slot="end"></ion-datetime-button>
+      </ion-item>
+
+      <ion-modal [keepContentsMounted]="true">
+        <ng-template>
+          <ion-datetime id="datetime" mode="ios" resentation="date" [showDefaultButtons]="true"
+            [doneText]="'common.accept' | translate" [cancelText]="'common.cancel' | translate" [max]="maxDate()"
+            presentation="date"
+              locale="es-ES"
+            [formatOptions]="{
+        date: {
+          year: 'numeric',
+          month: 'long',
+          day: '2-digit',
+        },}" formControlName="birthdate" (ionChange)="onBirthdateChange()"></ion-datetime>
+        </ng-template>
+      </ion-modal>
+
+      <app-error-message [control]="$any(form.get('birthdate'))"></app-error-message>
+    </ion-col>
+  </ion-row>
+
+  <!-- Age (auto-calculated) -->
+  <ion-row>
+    <ion-col size="12">
+      <ion-input formControlName="age" class="bb-input athlete-input"
+        [label]="'onboarding.tell-about-us.age-label' | translate" label-placement="floating" fill="outline"
+        [placeholder]="'onboarding.tell-about-us.age-placeholder' | translate" type="number" mode="md" readonly>
+      </ion-input>
+      <app-error-message [control]="$any(form.get('age'))"></app-error-message>
+    </ion-col>
+  </ion-row>
+
+  <!-- Weight -->
+  <ion-row>
+    <ion-col size="12">
+      <div class="athlete-section-title">
+        <h3>{{ 'onboarding.tell-about-us.weight-title' | translate }}</h3>
+      </div>
+    </ion-col>
+    <ion-col size="12">
+      <ion-input formControlName="weight" class="bb-input athlete-input"
+        [label]="'onboarding.tell-about-us.weight-label' | translate" label-placement="floating" fill="outline"
+        [placeholder]="'onboarding.tell-about-us.weight-placeholder' | translate" type="number" mode="md">
+        <span [slot]="'end'">kg</span>
+      </ion-input>
+      <app-error-message [control]="$any(form.get('weight'))"></app-error-message>
+    </ion-col>
+  </ion-row>
+
+  <!-- Height -->
+  <ion-row>
+    <ion-col size="12">
+      <div class="athlete-section-title">
+        <h3>{{ 'onboarding.tell-about-us.height-title' | translate }}</h3>
+      </div>
+    </ion-col>
+    <ion-col size="12">
+      <ion-input formControlName="height" class="bb-input athlete-input"
+        [label]="'onboarding.tell-about-us.height-label' | translate" label-placement="floating" fill="outline"
+        [placeholder]="'onboarding.tell-about-us.height-placeholder' | translate" type="number" mode="md">
+        <span [slot]="'end'">cm</span>
+      </ion-input>
+      <app-error-message [control]="$any(form.get('height'))"></app-error-message>
+    </ion-col>
+  </ion-row>
+</form>

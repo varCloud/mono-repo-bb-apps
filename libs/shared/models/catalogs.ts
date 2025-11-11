@@ -15,4 +15,5 @@ export enum CatalogType {
   USER_TYPES = 'user-types',
   USER_GOALS = 'user-goals',
   TOOLS = 'tools',
+  FAQS_CATEGORIES = 'faq-categories'
 }

@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, effect, input, output } from '@angular/core';
 import {
   IonIcon,
 } from '@ionic/angular/standalone';
@@ -18,18 +18,22 @@ import { SelectOption } from '../../interfaces/select-option.interface';
   ],
 })
 export class RadioCardSelectorComponent {
-  // Inputs siguiendo estándares de la app
   options = input<SelectOption[]>([]);
   value = input<any>();
   disabled = input<boolean>(false);
   cardClass = input<string>('');
-
-  // Output siguiendo estándares de la app
+  public selectedValue = -1
   valueChange = output<any>();
 
-  // Método para seleccionar una opción al hacer click en la tarjeta
+  constructor() {
+    effect(() => {
+      this.selectedValue = this.value();
+    })
+  }
   selectOption(value: any) {
+    
     if (!this.disabled()) {
+      this.selectedValue = value;
       this.valueChange.emit(value);
     }
   }
