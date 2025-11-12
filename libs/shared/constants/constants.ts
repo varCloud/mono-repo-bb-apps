@@ -7,7 +7,7 @@ export const CONSTANTS = {
     APP_VERSION: 'app-version',
     AMOUNT_TRANSACTION_STRIPE: 'amount-transaction-stripe',
     PERCENT_TRANSACTION_STRIPE: 'percent-transaction-stripe',
-    PERCENT_BODY_BOOSTER: 'percent-body-booster'
-  }
-
+    PERCENT_BODY_BOOSTER: 'percent-body-booster',
+  },
+  DEFAULT_URL_AVATAR: 'https://ionicframework.com/docs/img/demos/avatar.svg',
 };

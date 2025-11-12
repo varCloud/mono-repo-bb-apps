@@ -37,6 +37,7 @@ import { ENUM_WORKOUT_TYPES } from '../../../../../shared/constants/enums';
 import { addIcons } from 'ionicons';
 import { arrowBackOutline } from 'ionicons/icons';
 import { WorkoutByTypesComponent } from '../workout-by-types/workout-by-types.component';
+import { CONSTANTS } from '../../../../../shared/constants/constants';
 
 @Component({
   selector: 'lib-detail-creator-profile',
@@ -70,8 +71,7 @@ export class DetailCreatorProfileComponent implements OnInit {
     const creator = this.creator();
     return creator ? `${creator.firstName} ${creator.lastName}` : '';
   });
-  public defaultProfilePicture =
-    'https://ionicframework.com/docs/img/demos/avatar.svg';
+  public defaultProfilePicture = CONSTANTS.DEFAULT_URL_AVATAR;
 
   constructor(
     private _user: UserService,

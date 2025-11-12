@@ -1,0 +1,30 @@
+<ion-content class="payment-methods-content">
+  <app-layout-content
+    customClass="payment-methods-page"
+    [useGoBack]="true"
+    [defaultHref]="
+      '/home/suscriptions/suscription-creator/' + _sesisonService.user$().userId
+    "
+    [title]="'go-back' | translate"
+  >
+    <ion-grid content-body>
+      @if( _sesisonService.user$().userId ){
+      <lib-payment-methods-list
+        (selectedPaymentMethodEvent)="selectPaymentMethod($event)"
+        [userId]="_sesisonService.user$().userId"
+        [selectPaymentMethodId]="paymentMethodId()"
+      ></lib-payment-methods-list>
+      }
+    </ion-grid>
+    <div content-footer class="ion-text-center">
+      <ion-button
+        color="tertiary"
+        expand="block"
+        [disabled]="!isSelectedPaymentMethod()"
+        [routerLink]="['/home/suscriptions/checkout']"
+      >
+        <ion-text class="question">{{ 'Suscribete' | translate }}</ion-text>
+      </ion-button>
+    </div>
+  </app-layout-content>
+</ion-content>

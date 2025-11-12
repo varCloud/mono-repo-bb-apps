@@ -12,47 +12,40 @@ export const profileRoutes: Routes = [
           ),
       },
       {
-        path: 'payment-methods',
-        loadComponent: () =>
-          import(
-            './pages/payment-methods-page/payment-methods-page.component'
-          ).then((m) => m.PaymentMethodsPageComponent),
-      },
-      {
         path: 'home-support',
         loadComponent: () =>
           import('./home-support/home-support.component').then(
-            (m) => m.HomeSupport,
-          )
+            (m) => m.HomeSupport
+          ),
       },
       {
         path: 'become-creator-detail',
         loadComponent: () =>
           import('./become-creator-detail/become-creator-detail.page').then(
-            (m) => m.BecomeCreatorDetailComponent,
-          )
+            (m) => m.BecomeCreatorDetailComponent
+          ),
       },
       {
         path: 'how-create-account',
         loadComponent: () =>
           import('./how-create-account/how-create-account.page').then(
-            (m) => m.BecomeCreatorDetailComponent,
-          )
+            (m) => m.BecomeCreatorDetailComponent
+          ),
       },
       {
         path: 'my-subscriptions',
         loadComponent: () =>
-          import('./my-subscriptions-user-card/my-subscriptions-user-card.page').then(
-            (m) => m.mySubscriptionsUserCardPage,
-          )
+          import(
+            './my-subscriptions-user-card/my-subscriptions-user-card.page'
+          ).then((m) => m.mySubscriptionsUserCardPage),
       },
       {
         path: 'personal-data',
         loadComponent: () =>
           import('./pages/personal-data/personal-data-page.component').then(
-            (m) => m.PersonalDataPageComponent,
-          )
-      }
+            (m) => m.PersonalDataPageComponent
+          ),
+      },
     ],
   },
   // {

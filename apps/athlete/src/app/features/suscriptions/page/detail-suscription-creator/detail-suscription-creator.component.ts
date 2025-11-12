@@ -1,16 +1,14 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   signal,
   type OnInit,
 } from '@angular/core';
 import { ProcessSuscriptionService, User } from '@monorepo-bb-app/shared';
 import {
   IonContent,
-  IonRow,
   IonGrid,
-  IonCol,
-  IonInput,
   IonButton,
   IonItem,
   IonRadioGroup,
@@ -41,10 +39,7 @@ import { RouterLink } from '@angular/router';
     IonRadioGroup,
     IonItem,
     IonButton,
-    IonInput,
-    IonCol,
     IonGrid,
-    IonRow,
     IonContent,
     TranslateModule,
     LayoutContentComponent,
@@ -61,6 +56,11 @@ import { RouterLink } from '@angular/router';
 export class DetailSuscriptionCreatorComponent implements OnInit {
   creator = signal<User | null>(null);
   selectedPaymentFrequencyId = signal<number | null>(null);
+  fullName = computed(() => {
+    const creator = this.creator();
+    if (!creator) return '';
+    return `${creator.firstName} ${creator.lastName}`;
+  });
   constructor(private _processSuscriptionService: ProcessSuscriptionService) {}
   ngOnInit(): void {
     this.creator.set(this._processSuscriptionService.getCreator());
