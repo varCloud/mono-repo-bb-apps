@@ -102,7 +102,6 @@ export class AddPaymentMethodComponent implements OnInit {
     this._loader.hideLoader();
     if (error) return;
     this.clearFields();
-    console.log(setupIntent);
     this.succesAddPayment.emit({ data: setupIntent });
     this._toastService.success(
       this._translate.transform('payment-method-added'),

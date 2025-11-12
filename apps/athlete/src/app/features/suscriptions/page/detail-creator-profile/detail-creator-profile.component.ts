@@ -5,7 +5,6 @@ import {
   type OnInit,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProcessSuscriptionService } from '@monorepo-bb-app/shared';
 import { DetailCreatorProfileComponent } from '@monorepo-bb-app/ui';
 
 @Component({
