@@ -15,6 +15,7 @@ import { KEY_LOCALSTORAGE } from '../../shared/constants/key-localstorage';
 import { LocalStorageService } from './local-storage.service';
 import { SesionService } from './sesion.service';
 import { LoggerService } from './logger.service';
+import { SubscriptionResponse } from '../../shared/models/subscription-response';
 
 @Injectable({
   providedIn: 'root',
@@ -135,5 +136,16 @@ export class UserService {
     } else {
       this.logger.info('No hay sesión activa, no se actualiza el token push');
     }
+  }
+
+  public getSubscriptionInformation(
+    userId: number,
+    creatorId: number
+  ): Observable<SubscriptionResponse> {
+    return this._http
+      .get<{ hasActiveSuscription: boolean }>(
+        `${this._baseUrl}${API_URLS.USER}/${userId}/subscription-status/${creatorId}`
+      )
+      .pipe(map((resp: any) => resp.data));
   }
 }

@@ -73,6 +73,7 @@ export class AddPaymentMethodComponent implements OnInit {
           const { client_secret } = resp.data as any;
           this.elements = this._stripeService.stripe.elements({
             clientSecret: client_secret,
+            locale: 'es',
             appearance,
           });
           this.card = this.elements.create('payment', options);
@@ -101,7 +102,6 @@ export class AddPaymentMethodComponent implements OnInit {
     this._loader.hideLoader();
     if (error) return;
     this.clearFields();
-    console.log(setupIntent);
     this.succesAddPayment.emit({ data: setupIntent });
     this._toastService.success(
       this._translate.transform('payment-method-added'),

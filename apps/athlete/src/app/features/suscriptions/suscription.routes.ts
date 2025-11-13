@@ -19,6 +19,13 @@ export const suscriptionRoutes: Routes = [
           ).then((m) => m.DetailSuscriptionCreatorComponent),
       },
       {
+        path: 'payment-methods',
+        loadComponent: () =>
+          import(
+            '../suscriptions/page/payment-methods-page/payment-methods-page.component'
+          ).then((m) => m.PaymentMethodsPageComponent),
+      },
+      {
         path: 'checkout',
         loadComponent: () =>
           import(

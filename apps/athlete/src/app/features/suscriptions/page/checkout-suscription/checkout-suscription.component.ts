@@ -1,4 +1,4 @@
-import { Component, signal, type OnInit, computed } from '@angular/core';
+import { Component, type OnInit, computed } from '@angular/core';
 import { TitleCasePipe, CurrencyPipe } from '@angular/common';
 import {
   IonContent,
@@ -18,7 +18,6 @@ import {
   IonNote,
   IonItemDivider,
   IonAvatar,
-  IonBackButton,
 } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
 import { LayoutContentComponent } from '@monorepo-bb-app/ui';
@@ -33,21 +32,18 @@ import {
   lockClosed,
 } from 'ionicons/icons';
 import {
-  PaymentMethod,
+  CONSTANTS,
   ProcessSuscriptionService,
   SuscriptionService,
   ToastService,
-  User,
 } from '@monorepo-bb-app/shared';
-import { BillingCycle } from '../../../../../../../../libs/shared/models/user.model';
 import { LoaderUIService, SesionService } from '@monorepo-bb-app/core';
 import { finalize } from 'rxjs';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout-suscription',
   imports: [
-    IonBackButton,
     IonContent,
     IonGrid,
     IonRow,
@@ -74,6 +70,7 @@ import { Route, Router } from '@angular/router';
   styleUrl: './checkout-suscription.component.scss',
 })
 export class CheckoutSuscriptionComponent implements OnInit {
+  public defaultProfilePicture = CONSTANTS.DEFAULT_URL_AVATAR;
   trainer = computed(() => {
     return this._processSuscriptionService.getCreator();
   });
@@ -115,13 +112,8 @@ export class CheckoutSuscriptionComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  private loadSubscriptionData() {
-    // Lógica para cargar datos reales
-  }
-
   public selectPaymentMethod() {
-    // Lógica para abrir modal de selección de método de pago
-    console.log('Seleccionar método de pago');
+    this._router.navigate(['/home/suscriptions/payment-methods']);
   }
 
   public processPayment() {

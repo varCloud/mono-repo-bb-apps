@@ -7,9 +7,14 @@ import {
   type OnInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoaderUIService, UserService } from '@monorepo-bb-app/core';
+import {
+  LoaderUIService,
+  SesionService,
+  UserService,
+} from '@monorepo-bb-app/core';
 import {
   ProcessSuscriptionService,
+  SubscriptionStatus,
   ToastService,
   User,
   WorkoutService,
@@ -24,17 +29,15 @@ import {
   IonLabel,
   IonSegment,
   IonSegmentButton,
-  IonSegmentContent,
-  IonSegmentView,
   IonBackButton,
   IonSkeletonText,
 } from '@ionic/angular/standalone';
 import { LayoutContentComponent } from '../layout-content';
-import { CardWorkoutInfoComponent } from '../card-workout-info/card-workout-info.component';
 import { ENUM_WORKOUT_TYPES } from '../../../../../shared/constants/enums';
 import { addIcons } from 'ionicons';
 import { arrowBackOutline } from 'ionicons/icons';
 import { WorkoutByTypesComponent } from '../workout-by-types/workout-by-types.component';
+import { CONSTANTS } from '../../../../../shared/constants/constants';
 
 @Component({
   selector: 'lib-detail-creator-profile',
@@ -57,6 +60,7 @@ import { WorkoutByTypesComponent } from '../workout-by-types/workout-by-types.co
 })
 export class DetailCreatorProfileComponent implements OnInit {
   idCreator = input.required<number>();
+  hasSubscriptionActive = signal<boolean>(false);
   defaultHref = input<string>('/home');
   suscriptionEvent = output<boolean>();
   public tabActive = signal<number>(ENUM_WORKOUT_TYPES.RUTINE_VIDEO);
@@ -67,22 +71,22 @@ export class DetailCreatorProfileComponent implements OnInit {
     const creator = this.creator();
     return creator ? `${creator.firstName} ${creator.lastName}` : '';
   });
-  public defaultProfilePicture =
-    'https://ionicframework.com/docs/img/demos/avatar.svg';
+  public defaultProfilePicture = CONSTANTS.DEFAULT_URL_AVATAR;
 
   constructor(
     private _user: UserService,
     private _router: Router,
     private _toastService: ToastService,
     private _loader: LoaderUIService,
-    private _workoutService: WorkoutService,
-    private _processSuscriptionService: ProcessSuscriptionService
+    private _processSuscriptionService: ProcessSuscriptionService,
+    private _sesionService: SesionService
   ) {
     addIcons({ arrowBackOutline });
   }
 
   ngOnInit(): void {
     this.getCreatorProfile();
+    this.checkSubscription();
   }
 
   private getCreatorProfile() {
@@ -101,6 +105,24 @@ export class DetailCreatorProfileComponent implements OnInit {
           });
         },
       });
+  }
+
+  private checkSubscription() {
+    const userId = this._sesionService.user$()?.userId || 0;
+    const suscription = this._user
+      .getSubscriptionInformation(userId, this.idCreator())
+      .subscribe({
+        next: (resp) => {
+          const status =
+            resp.paymentSubscriptionStatus.status === SubscriptionStatus.ACTIVE;
+          console.log(status);
+          this.hasSubscriptionActive.set(status);
+        },
+        error: (err) => {
+          this.hasSubscriptionActive.set(false);
+        },
+      });
+    return suscription !== null;
   }
   public changeTab(event: any) {
     this.tabActive.set(event.detail.value);

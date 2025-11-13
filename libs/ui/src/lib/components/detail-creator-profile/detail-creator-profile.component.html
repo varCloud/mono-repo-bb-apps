@@ -32,6 +32,7 @@
         <div class="info-creator-profile">
           <div class="info-creator-profile-header">
             <h2 class="name">{{ fullName() }}</h2>
+            @if(!hasSubscriptionActive()){
             <ion-button
               size="small"
               color="tertiary"
@@ -41,6 +42,7 @@
             >
               Suscribirse
             </ion-button>
+            }
           </div>
           @if(creator()?.bio) {
           <p class="bio">{{ creator()?.bio }}</p>
