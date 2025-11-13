@@ -20,6 +20,7 @@
       @if (!isLoading()) {
         <app-payment-frequency-settings
           (PaymentFrecuencySelected)="onPaymentFrequencySelected($event)"
+          (PaymentFrecuencyFree)="onPaymentFrequencyFree($event)"
           [defaultValues]="defaultPaymentFrequency"
         ></app-payment-frequency-settings>
       }

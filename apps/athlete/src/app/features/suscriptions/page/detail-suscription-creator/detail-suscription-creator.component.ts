@@ -59,6 +59,7 @@ import { RouterLink } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailSuscriptionCreatorComponent implements OnInit {
+  
   creator = signal<User | null>(null);
   selectedPaymentFrequencyId = signal<number | null>(null);
   constructor(private _processSuscriptionService: ProcessSuscriptionService) {}

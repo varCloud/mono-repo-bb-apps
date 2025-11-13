@@ -71,6 +71,7 @@ import { PaymentFrecuency, PaymentFrecuencyModel } from '@monorepo-bb-app/shared
 })
 export class PaymentFrequencySettingsComponent implements OnInit {
   PaymentFrecuencySelected = output<PaymentFrecuency[]>();
+  PaymentFrecuencyFree = output<PaymentFrecuency>();
   defaultValues = input<PaymentFrecuency[]>([]);
   isLoading = signal<boolean>(false);
   paymentFrecuency = signal<PaymentFrecuency[]>([]);
@@ -118,13 +119,14 @@ export class PaymentFrequencySettingsComponent implements OnInit {
       .pipe(finalize(() => this.isLoading.set(false)))
       .subscribe({
         next: (data: any) => {
-          const payments = data.map(
+          const payments = data.filter((item: any) => item.isTrialSubscription != 1).map(
             (item: any) => new PaymentFrecuencyModel(item),
           );
           payments.sort(
             (a: PaymentFrecuencyModel, b: PaymentFrecuencyModel) =>
               a.interval - b.interval,
           );
+          this.setFreeFrequency(data)
           payments[0].isRecommended = true;
           if (this.defaultValues()?.length > 0) {
             payments.forEach((payment: any) => {
@@ -150,7 +152,7 @@ export class PaymentFrequencySettingsComponent implements OnInit {
     this._setCurrency();
   }
 
-  public selectPaymentFrequency(payment: PaymentFrecuencyModel) {
+  public selectPaymentFrequency(payment: PaymentFrecuency) {
     this.selectedPaymentFrequencyId.set(payment.cycleId);
     this.setValidators();
   }
@@ -211,5 +213,12 @@ export class PaymentFrequencySettingsComponent implements OnInit {
     const config = await this._localStorage.get(KEY_LOCALSTORAGE.CONFIG);
     this.config.set(config);
     this.currency.set(config?.currency || 'MXN');
+  }
+
+  private setFreeFrequency(data:any) {
+    const freeFrequency = data.find(
+      (item:any) => item.isTrialSubscription === 1,
+    );
+    this.PaymentFrecuencyFree.emit(new PaymentFrecuencyModel(freeFrequency)!);
   }
 }

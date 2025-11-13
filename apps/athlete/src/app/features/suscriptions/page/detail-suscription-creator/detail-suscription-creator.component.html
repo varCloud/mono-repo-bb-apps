@@ -44,10 +44,18 @@
             [value]="payment.billingCycleId"
           ></ion-radio>
           <ion-label>
-            <ion-text
-              >{{ payment.interval }}
-              {{ payment.interval === 1 ? 'mes' : 'meses' }}</ion-text
-            >
+            <ion-text>{{ payment.interval }}</ion-text>
+            @if (!payment.isTrialSubscription) {
+                <ion-text>
+                    {{ payment.interval === 1 ? 'mes' : 'meses' }}
+                </ion-text>
+            }
+            @if (payment.isTrialSubscription) {
+                <ion-text>
+                    {{ 'días (Prueba gratis)' }}
+                </ion-text>
+            }
+            
             <br />
             <ion-note class="recommended-label">
               {{ payment.description }}

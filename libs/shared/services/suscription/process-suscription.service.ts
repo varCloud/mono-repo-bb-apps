@@ -20,8 +20,8 @@ export class ProcessSuscriptionService {
     this.billingCycle.set(null);
     this.paymentMethod.set(null);
   }
-
   public getCreator() {
+
     return this.creatorSelected();
   }
 

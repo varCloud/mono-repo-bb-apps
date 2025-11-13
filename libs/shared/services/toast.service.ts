@@ -11,7 +11,7 @@ export class ToastService {
   constructor(private toastController: ToastController) {
     addIcons({ closeCircleOutline });
   }
-
+  readonly DURATION_DEFAULT = 3000;
   private async createToast({
     position = ToastPosition.Bottom,
     message = '',
@@ -42,7 +42,7 @@ export class ToastService {
       message,
       cssClass: (toastConf.cssClass || '') + ' bb-toast-success',
       color: ToastColor.Success,
-      duration: 2000,
+      duration: this.DURATION_DEFAULT,
     });
   }
 
@@ -52,7 +52,7 @@ export class ToastService {
       message,
       cssClass: (toastConf.cssClass || '') + ' bb-toast-error',
       color: ToastColor.Danger,
-      duration: 2000,
+      duration: this.DURATION_DEFAULT,
     });
   }
 

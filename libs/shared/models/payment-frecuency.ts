@@ -9,6 +9,7 @@ export interface PaymentFrecuency {
   amountMin: number;
   amountMax: number;
   isRecommended?: boolean;
+  isTrialSubscription?: boolean;
 }
 
 export interface PaymentFrecuencyRequest {
@@ -29,7 +30,8 @@ export class PaymentFrecuencyModel implements PaymentFrecuency {
   amount = 0;
   amountMin = 0;
   amountMax = 0;
-  isRecommended? = false;
+  isRecommended = false;
+  isTrialSubscription = false;
 
   constructor(item: any) {
     this.cycleId = item.cycleId ?? item.cycle_id ?? this.cycleId;
@@ -44,5 +46,14 @@ export class PaymentFrecuencyModel implements PaymentFrecuency {
     this.amountMax = item.amountMax ?? item.amount_max ?? this.amountMax;
     this.amount = item.amount ?? this.amountMin ?? this.amount;
     this.isRecommended = item.isRecommended ?? this.isRecommended;
+    this.isTrialSubscription =
+      item.isTrialSubscription ?? this.isTrialSubscription;
+   this.setPaymentDescrition!()
+  }
+
+  setPaymentDescrition?(): void {
+    if (this.isTrialSubscription) {
+      this.description = `Prueba gratuita de ${this.interval} día(s)`;
+    }
   }
 }

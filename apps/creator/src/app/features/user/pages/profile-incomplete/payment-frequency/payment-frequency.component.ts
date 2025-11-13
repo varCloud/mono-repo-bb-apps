@@ -37,6 +37,7 @@ import { LoaderUIService } from '@monorepo-bb-app/core';
 export class PaymentFrequencyComponent implements OnInit {
   public paymentFrecuency: PaymentFrecuency[] = [];
   public defaultPaymentFrequency: PaymentFrecuency[] = [];
+  public paymentFrecuencyFree: PaymentFrecuency | null = null;
   public isLoading = signal(true);
   public isNextButtonDisabled = signal(true);
   constructor(
@@ -75,11 +76,13 @@ export class PaymentFrequencyComponent implements OnInit {
   }
 
   onNextButtonClick() {
+   debugger
     if (this.paymentFrecuency.length < 1) {
       return;
     }
     this.isNextButtonDisabled.set(true);
     this._loaderUIService.showLoader();
+    this.paymentFrecuency.push(this.paymentFrecuencyFree!);
     const payload: PaymentFrecuencyRequest[] = this.paymentFrecuency.map(
       (item) => ({
         cycleId: item.cycleId,
@@ -114,5 +117,8 @@ export class PaymentFrequencyComponent implements OnInit {
           );
         },
       });
+  }
+  onPaymentFrequencyFree(event: PaymentFrecuency) {
+    this.paymentFrecuencyFree = event;
   }
 }
