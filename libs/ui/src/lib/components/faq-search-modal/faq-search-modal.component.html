@@ -1,0 +1,14 @@
+<ion-content class="ion-padding" >
+  <div class="container-search-bar">
+    <ion-searchbar
+      [placeholder]="'search' | translate"
+      [mode]="'ios'"
+      [debounce]="300"
+      show-cancel-button="always"
+      [cancelButtonText]="'cancel' | translate"
+      (ionCancel)="dismiss()"
+      (ionInput)="onSearch($event)"
+    ></ion-searchbar>
+  </div>
+
+</ion-content>

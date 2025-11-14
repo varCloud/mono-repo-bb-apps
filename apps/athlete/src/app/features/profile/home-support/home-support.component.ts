@@ -1,7 +1,7 @@
 import { Component, input, signal } from '@angular/core';
 import { FaqCategories, InfoCardData } from '@monorepo-bb-app/shared';
 import { CardSliderComponent } from '@monorepo-bb-app/ui';
-import { IonContent } from '@ionic/angular/standalone';
+import { IonContent, ModalController } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
   informationCircle,
@@ -54,7 +54,8 @@ export class HomeSupport {
 
   constructor(
     private faqCategoriesService: FaqCategoriesService,
-    private faqService: FaqService
+    private faqService: FaqService,
+    private modalCtrl: ModalController
   ) {
     addIcons({
       informationCircle,
@@ -97,6 +98,35 @@ export class HomeSupport {
         this.myFaqList = response;
       });
   }
+
+
+
+
+
+
+  myFaqListSearch : Faq[] = this.myFaqList;
+
+
+  async openSearchModal(data?: any) {
+    const modal = await this.modalCtrl.create({
+      component: AccordionComponent,
+      componentProps: {
+        data: {
+          faqs: this.myFaqListSearch,
+        },
+      },
+      breakpoints: [0, 0.25, 0.5, 0.75, 1],
+    });
+
+    await modal.present();
+
+    const result = await modal.onDidDismiss();
+    if (result.data) {
+      console.log('Modal Data:', result.data);
+    }
+  }
+
+
   //info slider
 
   onSliderCardClicked(cardId: string) {

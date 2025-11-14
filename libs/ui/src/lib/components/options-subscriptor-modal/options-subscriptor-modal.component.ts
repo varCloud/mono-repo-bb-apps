@@ -1,7 +1,7 @@
 import { Component, input, signal } from '@angular/core';
 import { ModalController, IonIcon, IonButton } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { close } from 'ionicons/icons';
+import { close, closeCircleOutline } from 'ionicons/icons';
 
 // Define la interfaz de Suscripción aquí o impórtala si la tienes
 // en un archivo separado.
@@ -33,7 +33,7 @@ export class OptionsSubscritporModalComponent {
   viewState = signal<'options' | 'confirm'>('options');
 
   constructor(private modalCtrl: ModalController) {
-    addIcons({ close });
+    addIcons({ closeCircleOutline });
   }
 
   // --- Métodos de Control ---
