@@ -53,7 +53,6 @@ export class CreateAccountComponent implements OnInit {
       this._loader.hideLoader();
       return;
     }
-    
     this.createAccountService.setUser(payload);
     this._loader.hideLoader();
     this._router.navigate(['/create-account/otp']);

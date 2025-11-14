@@ -151,6 +151,7 @@ export class OtpComponent implements OnInit, OnDestroy {
       return;
     }
     this._globalBlockUIService.showLoader();
+    console.log(this.userTypeId())
     this._otpService
       .getOtp({
         apiUrl: this.apiUrl(),
