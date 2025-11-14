@@ -80,7 +80,6 @@ export class HomeSupport {
       .getFaqsCategories()
       .pipe(take(1))
       .subscribe((response: FaqCategories[]) => {
-        console.log('Respuesta de FAQs Categories :', response);
         this.cardCategories = response;
         this.getFacts(Number(this.cardCategories[0].id));
       });
