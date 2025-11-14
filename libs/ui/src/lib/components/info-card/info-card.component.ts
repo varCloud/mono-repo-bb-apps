@@ -1,11 +1,11 @@
-import { Component, computed, input, output } from '@angular/core'; 
+import { Component, computed, input, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   IonCard,
   IonCardContent,
   IonIcon,
   IonText,
-  IonRippleEffect
+  IonRippleEffect,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
@@ -15,7 +15,9 @@ import {
   chatbubblesOutline,
   calendarOutline,
   notificationsOutline,
-  cubeOutline
+  cubeOutline,
+  keyOutline,
+  cardOutline,
 } from 'ionicons/icons';
 
 @Component({
@@ -29,8 +31,8 @@ import {
     IonCardContent,
     IonIcon,
     IonText,
-    IonRippleEffect
-  ]
+    IonRippleEffect,
+  ],
 })
 export class InfoCardComponent {
   constructor() {
@@ -41,19 +43,23 @@ export class InfoCardComponent {
       chatbubblesOutline,
       restaurantOutline,
       notificationsOutline,
-      cubeOutline
+      cubeOutline,
+      keyOutline,
+      cardOutline,
     });
   }
 
   color = input<string>('tertiary');
   icon = input<string>('information-circle-outline');
-  title = input<string>('Título no definido');
-  subtitle = input<string>('Subtítulo no definido');
+  id = input<string>('1');
+  name = input<string>('Título no definido');
+  description = input<string>('Subtítulo no definido');
   isSelected = input<boolean>(false);
+  //
   cardClicked = output<string>();
 
   onCardClick() {
-    this.cardClicked.emit(this.title());
+    this.cardClicked.emit(this.id());
   }
 
   iconColor = computed(() => {
@@ -61,7 +67,17 @@ export class InfoCardComponent {
   });
 
   public isIonicColor(colorName: string): boolean {
-    const ionicColors = ['primary', 'secondary', 'tertiary', 'success', 'warning', 'danger', 'light', 'medium', 'dark'];
+    const ionicColors = [
+      'primary',
+      'secondary',
+      'tertiary',
+      'success',
+      'warning',
+      'danger',
+      'light',
+      'medium',
+      'dark',
+    ];
     return ionicColors.includes(colorName);
   }
 }

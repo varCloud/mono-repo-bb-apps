@@ -16,7 +16,7 @@ export class FaqCategoriesService {
       .pipe(
         map((respuesta: any) => {
           let faqsCategories: FaqCategories[] = [];
-          faqsCategories = respuesta.data.map((item: any) => {
+          faqsCategories = respuesta.map((item: any) => {
             return new FaqCategoriesModel(item);
           });
           return faqsCategories;

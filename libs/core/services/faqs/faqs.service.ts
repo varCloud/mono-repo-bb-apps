@@ -10,7 +10,7 @@ import { map, Observable } from 'rxjs';
 export class FaqService {
   readonly BASE_URL = environment.API_URL;
   constructor(private httpClient: HttpClient) {}
-  public getFaqs(params: RequestFaqs):Observable<Faq[]> {
+  public getFaqs(params: RequestFaqs): Observable<Faq[]> {
     return this.httpClient
       .get(`${this.BASE_URL}/faqs`, { params: { ...params } }) //destructuracion
       .pipe(

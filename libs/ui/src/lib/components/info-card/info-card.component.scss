@@ -1,65 +1,70 @@
 ion-card {
-// Ancho completo del contenedor padre
-  height: 105px; // Altura fija para todas las tarjetas
-  margin: 6px; // Margen alrededor de cada tarjeta
-  border-radius: 8px; // Bordes redondeados
-  display: flex; // Para centrar el contenido verticalmente
-  justify-content: left; // Para centrar el contenido horizontalmente
-  align-items: left; // Para centrar el contenido verticalmente
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); // Sombra suave
+  height: 125px;
+  margin: 6px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 
-  // Aquí se usan las variables CSS para el fondo
+
   background: var(--background, var(--ion-background-color));
-  color: var(--ion-color-light-contrast, #fff); // Color del texto (blanco por defecto)
+  color: var(--ion-color-light-contrast, #fff);
 
   ion-card-content {
-    padding: 18px; // Espaciado interno
+    padding: 5px;
     display: flex;
     flex-direction: column;
     justify-content: left;
     align-items: left;
-    height: 100%; // Ocupa toda la altura de la tarjeta
+    height: 100%;
   }
 p{
   text-align: left;
   margin: 0;
   padding: 0;
   align-self: left;
+  white-space:normal;
+  height: 56px;
+
 }
   ion-icon {
-    font-size: 1.5em ; // Tamaño del icono
-    margin-bottom: 8px; // Espacio entre icono y texto
+    font-size: 1.5em ;
+    margin-bottom: 8px; //
   }
+
+h3{
+  text-align: left;
+  vertical-align:bottom;
+  padding-bottom: 5px;
+}
+
 
   .card-subtitle {
     font-size: 0.9em;
     font-weight: 400;
-
-    color: #616161; // Color del subtítulo (más tenue)
+    color: #616161;
   }
 
   .card-title {
     font-size: 1.05em;
     font-weight: 700;
     margin: 6px 0 0 0;
-    color: var(--ion-color-light-contrast, #fff); // Color del título (blanco)
+    color: var(--ion-color-light-contrast, #fff);
   }
 }
 
-// Sobreescribir el color del texto si el fondo es claro
 ion-card[style*="--background: var(--ion-color-light)"],
-ion-card[style*="--background: #E0F7FA"] { /* Ejemplo si usas un color claro específico */
+ion-card[style*="--background: #E0F7FA"] {
   .card-subtitle, .card-title {
     color: var(--ion-color-dark-contrast, #333);
   }
 }
 
-// Color del icono para fondos claros
 ion-icon[color="dark"] {
   color: var(--ion-color-dark-contrast, #333) !important;
 }
 
-// Asegurarse que el ripple effect no sobresalga si tienes overflow oculto
 .ripple-parent {
   position: relative;
   overflow: hidden;

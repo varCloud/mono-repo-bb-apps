@@ -1,51 +1,30 @@
-/* 1. AJUSTE DEL TOOLBAR
-  Cumplimos tu requisito de "sin márgenes ni padding" en el toolbar.
-  --padding-start y --padding-end controlan el espacio interior.
-*/
-ion-toolbar {
+*/ ion-toolbar {
   --padding-start: 0px;
   --padding-end: 0px;
 }
-
-/* 2. AJUSTE DE BOTONES IZQUIERDOS
-  Aunque el padding del toolbar es 0, le damos un pequeño
-  margen al grupo de botones para que no esté pegado al borde.
-*/
-ion-buttons[slot="start"] {
+ion-buttons[slot='start'] {
   margin-left: 8px;
 }
 
-/* 3. AJUSTE DE BOTONES DERECHOS
-  Igualmente, damos un margen derecho al grupo de botones.
-*/
-ion-buttons[slot="end"] {
+ion-buttons[slot='end'] {
   margin-right: 8px;
 }
 
-/* 4. ESTILO DE LOS BOTONES DE ACCIÓN (Teléfono y Correo)
-  Esta es la clase personalizada que aplicamos en el HTML.
-*/
 .action-button {
-  /* Forzamos un tamaño fijo para hacerlos cuadrados */
   width: 40px;
   height: 40px;
 
-  /* Quitamos los paddings internos del botón */
   --padding-start: 0;
   --padding-end: 0;
   --padding-top: 0;
   --padding-bottom: 0;
 
-  /* Color de fondo y bordes redondeados como en la imagen */
-  background: #f0f4f9; // Un color gris/azul muy claro
+  background: #f0f4f9;
   border-radius: 12px;
 
-  /* Damos un pequeño margen izquierdo para separarlos entre sí */
   margin-left: 6px;
 
-  /* Ajustamos el tamaño del ícono dentro del botón */
   ion-icon {
     font-size: 24px;
-    /* El color azul lo define 'color="primary"' en el HTML */
   }
 }

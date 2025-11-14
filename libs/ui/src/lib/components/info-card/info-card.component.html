@@ -1,14 +1,17 @@
 <ion-card
-  class="ion-activatable ripple-parent" [class.selected]="isSelected()"
-  [style.--background]="isIonicColor(color()) ? 'var(--ion-color-' + color() + ')' : color()"
+  class="ion-activatable ripple-parent"
+  [class.selected]="isSelected()"
+  [style.--background]="
+    isIonicColor(color()) ? 'var(--ion-color-' + color() + ')' : color()"
   (click)="onCardClick()"
 >
-  <ion-card-content class="ion-text-center">
+  <ion-card-content class="ion-text-center" id="{{ id() }}">
     <ion-icon [name]="icon()"></ion-icon>
     <ion-text>
-      <p class="card-subtitle">{{subtitle()}}</p>
-      <h3 class="card-title">{{title()}}</h3>
+      <p class="card-subtitle">{{ description() }}</p>
+      <h3 class="card-title">{{ name() }}</h3>
     </ion-text>
     <ion-ripple-effect></ion-ripple-effect>
   </ion-card-content>
 </ion-card>
+<pre></pre>
