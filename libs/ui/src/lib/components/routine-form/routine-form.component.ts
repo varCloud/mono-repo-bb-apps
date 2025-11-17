@@ -179,6 +179,7 @@ export class RoutineFormComponent implements OnInit {
       }),
       file: new FormControl<UppyFile | null>(null),
       url: new FormControl('', { nonNullable: true }),
+      s3Key: new FormControl('', { nonNullable: true }),
       uppyFileId: new FormControl<string | null>(null, {
         validators: [Validators.required],
       }),
@@ -309,6 +310,7 @@ export class RoutineFormComponent implements OnInit {
         console.error('Error uploading image:', error);
       }
     }
+
     const payload = convertToPayload({
       ...this.routineForm.value,
       creatorId: this._sesionService.user$()?.userId,

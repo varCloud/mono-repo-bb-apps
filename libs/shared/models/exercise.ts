@@ -19,4 +19,5 @@ export interface ExerciseFormControls {
   retryUpload: FormControl<boolean>;
   upload: FormControl<boolean>;
   uploadStatus: FormControl<StatusUpload>;
+  s3Key: FormControl<string>;
 }
