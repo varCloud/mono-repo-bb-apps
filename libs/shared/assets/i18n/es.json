@@ -152,6 +152,7 @@
     "verify": "Verificar código"
   },
   "workout": {
+    "selection-title": "Entrenamientos",
     "routine": {
       "add-exercise": "Agregar ejercicio",
       "category": "Categoría",
@@ -183,7 +184,8 @@
       "created-success": "Rutina creada exitosamente",
       "updated-success": "Rutina actualizada exitosamente",
       "error": "Error al guardar la rutina",
-      "upload-error": "Error al subir el archivo {{fileName}}"
+      "upload-error": "Error al subir el archivo {{fileName}}",
+      "image-cover": "Carga la portada de tu rutina"
     }
   },
   "your-client-payment": "Tu cliente pagará",

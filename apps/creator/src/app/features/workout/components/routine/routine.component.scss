@@ -59,7 +59,8 @@
   font-size: 24px;
   font-style: normal;
   font-weight: 600;
-  line-height: 24px; /* 100% */
+  line-height: 24px; 
+  margin-top: 15px;
 }
 
 .container-header {
@@ -71,6 +72,7 @@
   color: #333;
   padding: 15px;
   padding-top: var(--ion-safe-area-top);
+  min-height: 101px;
 }
 
 ion-item {
@@ -108,11 +110,13 @@ ion-title {
 }
 
 ion-back-button {
-  ion-icon {
-    width: 24px;
-    height: 24px;
-  }
   --icon-font-size: 24px;
   --icon-margin-start: -10px;
   --padding-start: 0;
+  --icon-margin-bottom: 5px;
+  --icon-margin-top: 10px;
+}
+
+.bb-icon{
+  --color:black;
 }

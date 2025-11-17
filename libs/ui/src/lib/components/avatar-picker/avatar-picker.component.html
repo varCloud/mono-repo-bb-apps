@@ -2,6 +2,7 @@
   <app-dashed-area
     (clickEvent)="selectImage()"
     [imageSrc]="currentImage"
+    [label]="label()"
   ></app-dashed-area>
 } @else {
   <div class="avatar-picker" [class]="'avatar-picker--' + size">
