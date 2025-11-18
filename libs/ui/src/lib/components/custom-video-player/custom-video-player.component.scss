@@ -1,0 +1,312 @@
+.video-player-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-element {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
+}
+
+// Loading Overlay
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 10;
+
+  ion-spinner {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+// Error Overlay
+.error-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 10;
+
+  .error-content {
+    text-align: center;
+    color: white;
+    padding: 20px;
+
+    ion-icon {
+      font-size: 64px;
+      margin-bottom: 16px;
+      color: var(--ion-color-danger, #eb445a);
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+// Controls Overlay
+.controls-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+  z-index: 5;
+  animation: fadeIn 0.3s ease-in-out;
+  touch-action: none;
+}
+
+// Gradients for better visibility
+.gradient-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.gradient-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 150px;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+// Top Controls
+.controls-top {
+  display: flex;
+  justify-content: flex-end;
+  z-index: 2;
+
+  ion-button {
+    --background: rgba(0, 0, 0, 0.5);
+    --border-radius: 8px;
+    font-weight: 600;
+    min-width: 60px;
+  }
+}
+
+// Center Controls
+.controls-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex: 1;
+  z-index: 2;
+
+  .control-button {
+    --background: rgba(0, 0, 0, 0.6);
+    --border-radius: 50%;
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --padding-top: 16px;
+    --padding-bottom: 16px;
+    width: 56px;
+    height: 56px;
+    backdrop-filter: blur(10px);
+    transition: transform 0.2s ease;
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    ion-icon {
+      font-size: 28px;
+    }
+
+    &.play-button {
+      width: 72px;
+      height: 72px;
+      --background: rgba(255, 255, 255, 0.9);
+      --color: #000;
+
+      ion-icon {
+        font-size: 40px;
+      }
+    }
+  }
+}
+
+// Bottom Controls
+.controls-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 2;
+
+  .progress-container {
+    width: 100%;
+
+    .progress-bar {
+      --bar-height: 4px;
+      --bar-background: rgba(255, 255, 255, 0.3);
+      --bar-background-active: var(--ion-color-light, #fff);
+      --knob-size: 16px;
+      --knob-background: var(--ion-color-light, #fff);
+      padding: 8px 0;
+
+      &::part(tick) {
+        background: transparent;
+      }
+
+      &::part(pin) {
+        display: none;
+      }
+    }
+
+    .time-display {
+      font-size: 12px;
+      color: white;
+      font-weight: 500;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+      min-width: 45px;
+    }
+  }
+
+  .control-buttons-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .volume-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+      max-width: 200px;
+
+      ion-button {
+        --padding-start: 8px;
+        --padding-end: 8px;
+      }
+
+      .volume-slider {
+        --bar-height: 3px;
+        --bar-background: rgba(255, 255, 255, 0.3);
+        --bar-background-active: var(--ion-color-light, #fff);
+        --knob-size: 14px;
+        --knob-background: var(--ion-color-light, #fff);
+        flex: 1;
+
+        &::part(tick) {
+          background: transparent;
+        }
+
+        &::part(pin) {
+          display: none;
+        }
+      }
+    }
+
+    ion-button {
+      --color: white;
+      --background: transparent;
+      --padding-start: 8px;
+      --padding-end: 8px;
+
+      ion-icon {
+        font-size: 24px;
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .controls-bottom {
+    .control-buttons-row {
+      .volume-controls {
+        max-width: 150px;
+      }
+    }
+  }
+}
+
+// Hide volume controls on very small screens
+@media (max-width: 480px) {
+  .controls-bottom {
+    .control-buttons-row {
+      .volume-controls {
+        .volume-slider {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+// Fullscreen specific styles
+:host ::ng-deep {
+  .video-element:fullscreen {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .video-element:-webkit-full-screen {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .video-element:-moz-full-screen {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .video-element:-ms-fullscreen {
+    width: 100vw;
+    height: 100vh;
+  }
+}
+

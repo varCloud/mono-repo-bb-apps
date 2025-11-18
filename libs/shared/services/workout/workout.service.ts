@@ -4,6 +4,7 @@ import { environment } from '../../environment/environment';
 import { API_URLS } from '../../constants/api-urls';
 import { firstValueFrom, map } from 'rxjs';
 import { WorkoutListModel } from '../../models/workout-response-list';
+import { WorkoutDetailModel } from '../../models/workout-detail';
 import { PaginatorModel } from 'libs/shared/models/paginator';
 
 @Injectable({
@@ -42,6 +43,17 @@ export class WorkoutService {
       .pipe(
         map((res: any) => {
           return new WorkoutListModel(res.data);
+        })
+      );
+    return await firstValueFrom($observer);
+  }
+
+  public async getWorkoutById(workoutId: number): Promise<WorkoutDetailModel> {
+    const $observer = this._http
+      .get(`${this.BASE_URL}${API_URLS.WORKOUT}/${workoutId}`)
+      .pipe(
+        map((res: any) => {
+          return new WorkoutDetailModel(res.data);
         })
       );
     return await firstValueFrom($observer);

@@ -1,0 +1,172 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/training"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ workout()?.title || 'Entrenamiento' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Loading State -->
+  @if (isLoading()) {
+  <div class="loading-container">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Cargando entrenamiento...</p>
+  </div>
+  }
+
+  <!-- Error State -->
+  @if (hasError() && !isLoading()) {
+  <div class="error-container">
+    <ion-icon name="alert-circle" size="large"></ion-icon>
+    <h2>Error al cargar</h2>
+    <p>No se pudo cargar el entrenamiento. Por favor, intenta nuevamente.</p>
+    <ion-button (click)="goBack()" expand="block">
+      Volver a entrenamientos
+    </ion-button>
+  </div>
+  }
+  
+  <!-- Video Player Content -->
+  @if (workout() && !isLoading() && !hasError()) {
+  <div class="video-player-page">
+    <!-- Video Player -->
+    <div class="video-container">
+    
+      <lib-custom-video-player
+        [videoUrl]="workout()!.assets[0].signedUrl"
+        [poster]="workout()!.workoutUrl"
+        (onPlay)="onVideoPlay()"
+        (onPause)="onVideoPause()"
+        (onEnded)="onVideoEnded()"
+        (onTimeUpdate)="onTimeUpdate($event)"
+      ></lib-custom-video-player>
+    </div>
+
+    <!-- Video Information -->
+    <div class="video-info-container">
+      <ion-card class="info-card">
+        <ion-card-header>
+          <div class="header-content">
+            <div class="title-section">
+              <ion-card-title>{{ workout()!.title }}</ion-card-title>
+              <ion-card-subtitle>
+                {{ getCategoryNames() }}
+              </ion-card-subtitle>
+            </div>
+            <div class="action-buttons">
+              <ion-button
+                fill="clear"
+                size="large"
+                (click)="toggleLike()"
+                [color]="isLiked() ? 'danger' : 'medium'"
+              >
+                <ion-icon
+                  slot="icon-only"
+                  [name]="isLiked() ? 'heart' : 'heart-outline'"
+                ></ion-icon>
+              </ion-button>
+              <ion-button fill="clear" size="large" (click)="shareWorkout()">
+                <ion-icon slot="icon-only" name="share"></ion-icon>
+              </ion-button>
+            </div>
+          </div>
+        </ion-card-header>
+
+        <ion-card-content>
+          <!-- Stats Row -->
+          <div class="stats-row">
+            <div class="stat-item">
+              <ion-icon name="heart"></ion-icon>
+              <span>{{ workout()!.totalLikes }} likes</span>
+            </div>
+            <div class="stat-item">
+              <ion-icon name="star"></ion-icon>
+              <span>{{ workout()!.averageRating || '0' }} / 5</span>
+            </div>
+            @if (workout()!.durationMinutes) {
+            <div class="stat-item">
+              <ion-icon name="time"></ion-icon>
+              <span>{{ workout()!.durationMinutes }} min</span>
+            </div>
+            }
+          </div>
+
+          <!-- Tags -->
+          <div class="tags-container">
+            @if (workout()!.difficultyLevels.length > 0) {
+            <ion-chip color="primary">
+              <ion-label>{{ getDifficultyNames() }}</ion-label>
+            </ion-chip>
+            } @for (tag of workout()!.tags; track tag.id) {
+            <ion-chip color="tertiary">
+              <ion-label>{{ tag.description }}</ion-label>
+            </ion-chip>
+            }
+          </div>
+
+          <!-- Description -->
+          @if (workout()!.description) {
+          <div class="description-section">
+            <h3>Descripción</h3>
+            <p>{{ workout()!.description }}</p>
+          </div>
+          }
+
+          <!-- Tools/Equipment -->
+          @if (workout()!.tools && workout()!.tools.length > 0) {
+          <div class="tools-section">
+            <h3>Equipamiento necesario</h3>
+            <div class="tools-list">
+              @for (tool of workout()!.tools; track tool.id) {
+              <ion-chip color="secondary" outline="true">
+                <ion-label>{{ tool.description }}</ion-label>
+              </ion-chip>
+              }
+            </div>
+          </div>
+          }
+
+          <!-- Location Type -->
+          @if (workout()!.locations && workout()!.locations.length > 0) {
+          <div class="location-section">
+            <h3>Ubicación</h3>
+            <div class="location-list">
+              @for (location of workout()!.locations; track location.id) {
+              <ion-chip color="success" outline="true">
+                <ion-icon name="location"></ion-icon>
+                <ion-label>{{ location.description }}</ion-label>
+              </ion-chip>
+              }
+            </div>
+          </div>
+          }
+
+          <!-- Additional Assets -->
+          @if (workout()!.assets && workout()!.assets.length > 1) {
+          <div class="assets-section">
+            <h3>Ejercicios incluidos</h3>
+            <div class="assets-list">
+              @for (asset of workout()!.assets; track asset.workoutAssetId) { @if
+              (asset.name) {
+              <div class="asset-item">
+                <ion-icon name="barbell"></ion-icon>
+                <div class="asset-info">
+                  <h4>{{ asset.name }}</h4>
+                  @if (asset.description) {
+                  <p>{{ asset.description }}</p>
+                  }
+                </div>
+              </div>
+              } }
+            </div>
+          </div>
+          }
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+  }
+</ion-content>
+

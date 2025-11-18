@@ -10,6 +10,13 @@ export const trainingRoutes: Routes = [
           import('./pages/home/home.component').then((m) => m.HomeComponent),
       },
       {
+        path: 'video/:id',
+        loadComponent: () =>
+          import('./pages/video-player/video-player.page').then(
+            (m) => m.VideoPlayerPage
+          ),
+      },
+      {
         path: '**',
         redirectTo: '',
         pathMatch: 'full',

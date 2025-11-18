@@ -36,6 +36,7 @@ export * from './lib/components/card-with-lateral-image/card-with-lateral-image.
 export * from './lib/components/modal-add-payment-method/modal-add-payment-method.component';
 export * from './lib/components/workout-by-types/workout-by-types.component';
 export * from './lib/components/payment-methods-list/payment-methods-list.component';
+export * from './lib/components/custom-video-player/custom-video-player.component';
 
 export * from './lib/components/payment-frequency-settings/payment-frequency-settings.component';
 export * from './lib/components/reset-password-form/reset-password-form/reset-password-form.component';

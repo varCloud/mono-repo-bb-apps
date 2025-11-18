@@ -23,6 +23,7 @@ export * from './models/paginator';
 export * from './models/storage';
 export * from './models/tags';
 export * from './models/workout';
+export * from './models/workout-detail';
 export * from './models/toast';
 export * from './models/payment-frecuency';
 export * from './services/stripe/stripe.service';

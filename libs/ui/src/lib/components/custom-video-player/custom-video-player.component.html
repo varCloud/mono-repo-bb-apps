@@ -1,0 +1,152 @@
+
+<div class="video-player-container" (click)="onControlsAreaClick($event)">
+  <!-- Video Element -->
+  <video
+    #videoElement
+    class="video-element"
+    [src]="videoUrl"
+    playsinline
+    webkit-playsinline
+    (click)="onVideoClick()"
+  ></video>
+
+  <!-- Loading Spinner -->
+  @if (isLoading() && !hasError()) {
+  <div class="loading-overlay">
+    <ion-spinner name="crescent" color="light"></ion-spinner>
+  </div>
+  }
+
+  <!-- Error Message -->
+  @if (hasError()) {
+  <div class="error-overlay">
+    <div class="error-content">
+      <ion-icon name="alert-circle" size="large"></ion-icon>
+      <p>Error al cargar el video</p>
+      <ion-button (click)="video.load()" fill="outline" color="light">
+        Reintentar
+      </ion-button>
+    </div>
+  </div>
+  }
+
+  <!-- Controls Overlay -->
+  @if (showControls() && !hasError()) {
+  <div class="controls-overlay" (click)="onControlsAreaClick($event)">
+    <!-- Top Controls -->
+    <div class="controls-top">
+      <ion-button
+        fill="clear"
+        color="light"
+        size="small"
+        (click)="changePlaybackRate()"
+      >
+        {{ playbackRate() }}x
+      </ion-button>
+    </div>
+
+    <!-- Center Controls -->
+    <div class="controls-center">
+      <ion-button
+        fill="clear"
+        color="light"
+        size="large"
+        (click)="skipTime(-10)"
+        class="control-button"
+      >
+        <ion-icon slot="icon-only" name="play-back"></ion-icon>
+      </ion-button>
+
+      <ion-button
+        fill="clear"
+        color="light"
+        size="large"
+        (click)="togglePlay()"
+        class="control-button play-button"
+      >
+        <ion-icon
+          slot="icon-only"
+          [name]="isPlaying() ? 'pause' : 'play'"
+          size="large"
+        ></ion-icon>
+      </ion-button>
+
+      <ion-button
+        fill="clear"
+        color="light"
+        size="large"
+        (click)="skipTime(10)"
+        class="control-button"
+      >
+        <ion-icon slot="icon-only" name="play-forward"></ion-icon>
+      </ion-button>
+    </div>
+
+    <!-- Bottom Controls -->
+    <div class="controls-bottom">
+      <!-- Progress Bar -->
+      <div class="progress-container">
+        <ion-range
+          [value]="currentTime()"
+          [min]="0"
+          [max]="duration()"
+          (ionChange)="seek($event)"
+          class="progress-bar"
+          color="light"
+        >
+          <div slot="start" class="time-display">
+            {{ formatTime(currentTime()) }}
+          </div>
+          <div slot="end" class="time-display">
+            {{ formatTime(duration()) }}
+          </div>
+        </ion-range>
+      </div>
+
+      <!-- Control Buttons Row -->
+      <div class="control-buttons-row">
+        <!-- Volume Controls -->
+        <div class="volume-controls">
+          <ion-button
+            fill="clear"
+            color="light"
+            size="small"
+            (click)="toggleMute()"
+          >
+            <ion-icon
+              slot="icon-only"
+              [name]="isMuted() ? 'volume-mute' : 'volume-high'"
+            ></ion-icon>
+          </ion-button>
+          <ion-range
+            [value]="volume()"
+            [min]="0"
+            [max]="100"
+            (ionChange)="changeVolume($event)"
+            class="volume-slider"
+            color="light"
+          ></ion-range>
+        </div>
+
+        <!-- Fullscreen Button -->
+        <ion-button
+          fill="clear"
+          color="light"
+          size="small"
+          (click)="toggleFullscreen()"
+        >
+          <ion-icon
+            slot="icon-only"
+            [name]="isFullscreen() ? 'contract' : 'expand'"
+          ></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+
+    <!-- Gradient Overlays for better readability -->
+    <div class="gradient-top"></div>
+    <div class="gradient-bottom"></div>
+  </div>
+  }
+</div>
+

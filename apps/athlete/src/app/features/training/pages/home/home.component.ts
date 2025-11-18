@@ -186,9 +186,6 @@ export class HomeComponent implements OnInit {
   }
 
   clickCard(workout: WorkoutListModel) {
-    this.router.navigate([
-      'home/suscriptions/profile-creator',
-      workout.creatorId,
-    ]);
+    this.router.navigate(['/training/video', workout.workoutId]);
   }
 }
