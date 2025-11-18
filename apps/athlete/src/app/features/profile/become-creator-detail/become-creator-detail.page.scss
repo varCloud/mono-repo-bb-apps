@@ -1,54 +1,414 @@
-  h1 {
-    font-size: 1.3em !important;
-    font-weight: bold;
-    margin-top: 0;
-    margin-bottom: 10px;
-    color: var(--ion-color-dark);
-    padding: 16px 0px;
-  }
+// Modern Become Creator Design
+.become-creator-content {
+  --padding-start: 0;
+  --padding-end: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
 
-.image-container {
+// Hero Section
+.hero-section {
   position: relative;
-  width: 100%;
-  height: 250px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
+  
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+      rgba(102, 126, 234, 0.9) 0%, 
+      rgba(118, 75, 162, 0.8) 100%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .hero-title {
+    color: white;
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin: 0 0 15px 0;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    
+    .hero-icon {
+      font-size: 2rem;
+      color: #FFD700;
+      animation: pulse 2s infinite;
+    }
+  }
+  
+  .hero-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    margin: 0;
+    font-weight: 300;
+    max-width: 300px;
+    line-height: 1.4;
+  }
+  
+  .image-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0.7;
+    }
   }
 }
 
-.content-padding {
-  padding: 0px;
-  color: var(--ion-color-dark);
+// Main Content
+.main-content {
+  background: #f8f9fa;
+  border-radius: 25px 25px 0 0;
+  margin-top: -20px;
+  position: relative;
+  z-index: 3;
+  padding: 30px 20px 20px;
+  min-height: calc(100vh - 280px);
+}
 
-  h1 {
-    font-size: 1.2em !important;
-    font-weight: bold;
-    margin-top: 0;
-    margin-bottom: 10px;
-    color: var(--ion-color-dark);
+// Intro Section
+.intro-section {
+  text-align: center;
+  margin-bottom: 30px;
+  
+  .main-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin: 0 0 15px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    
+    .title-icon {
+      font-size: 1.8rem;
+      color: #F79145;
+      animation: bounce 2s infinite;
+    }
   }
-  p {
-    font-size: .9m;
+  
+  .intro-text {
+    font-size: 1rem;
     line-height: 1.6;
-    margin-bottom: 15px;
-    text-align: justify;
-    color: #757575;
+    color: #4a5568;
+    margin: 0;
+    text-align: center;
+    
+    .highlight-text {
+      background: linear-gradient(45deg, #F79145, #ff6b6b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 600;
+    }
   }
 }
 
-ion-button {
-  --background: #F79145;
+// Steps Container
+.steps-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
+// Step Cards
+.step-card {
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+  }
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+  }
+  
+  .step-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    
+    .step-icon-container {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      &.purple {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+      }
+      &.blue {
+        background: linear-gradient(45deg, #4facfe, #00f2fe);
+      }
+      &.green {
+        background: linear-gradient(45deg, #43e97b, #38f9d7);
+      }
+      &.orange {
+        background: linear-gradient(45deg, #fa709a, #fee140);
+      }
+      
+      .step-icon {
+        font-size: 1.5rem;
+        color: white;
+      }
+    }
+    
+    .step-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #e2e8f0;
+    }
+  }
+  
+  .step-content {
+    .step-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #2d3748;
+      margin: 0 0 15px 0;
+    }
+    
+    .step-description {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #4a5568;
+      margin: 0 0 20px 0;
+      
+      .emphasis {
+        color: #F79145;
+        font-weight: 600;
+      }
+      
+      .highlight-orange {
+        background: linear-gradient(45deg, #F79145, #ff8a65);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+// Step Tags
+.step-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  
+  .tag {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+}
+
+// Quality Points
+.quality-points {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  
+  .quality-point {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+    .point-icon {
+      color: #4facfe;
+      font-size: 1.1rem;
+    }
+    
+    span {
+      font-size: 0.9rem;
+      color: #4a5568;
+      font-weight: 500;
+    }
+  }
+}
+
+// Revenue Highlight
+.revenue-highlight {
+  background: linear-gradient(45deg, #43e97b, #38f9d7);
+  padding: 15px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  
+  .revenue-icon {
+    color: white;
+    font-size: 1.3rem;
+  }
+  
+  .revenue-text {
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 500;
+    
+    strong {
+      font-size: 1.2rem;
+      font-weight: 800;
+    }
+  }
+}
+
+// Consistency Tips
+.consistency-tips {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  
+  .tip {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+    .tip-icon {
+      color: #fa709a;
+      font-size: 1.1rem;
+    }
+    
+    span {
+      font-size: 0.9rem;
+      color: #4a5568;
+      font-weight: 500;
+    }
+  }
+}
+
+// CTA Section
+.cta-section {
+  margin-top: 30px;
+  text-align: center;
+  
+  .cta-content {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    padding: 30px 25px;
+    border-radius: 20px;
+    color: white;
+    
+    .cta-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 0 0 15px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      
+      .cta-icon {
+        font-size: 1.5rem;
+        color: #FFD700;
+        animation: bounce 2s infinite;
+      }
+    }
+    
+    .cta-description {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin: 0 0 25px 0;
+      opacity: 0.9;
+    }
+    
+    .cta-button {
+      --background: linear-gradient(45deg, #F79145, #ff6b6b);
+      --color: white;
+      --border-radius: 25px;
+      --padding-start: 30px;
+      --padding-end: 30px;
+      font-weight: 600;
+      text-transform: none;
+      font-size: 1rem;
+    }
+  }
+}
+
+// Footer
 ion-footer, ion-toolbar {
+  --background: #ffffff;
+  --background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+  box-shadow: none;
+}
 
---background: #ffffff;
---background: linear-gradient(0deg,rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
-box-shadow: none;
+.footer-start-button {
+  ion-button {
+    --background: linear-gradient(45deg, #F79145, #ff8a65);
+    --color: white;
+    --border-radius: 25px;
+    font-weight: 600;
+  }
+}
 
+// Animations
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 1.5rem;
+    line-height: 1.3;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .main-content {
+    padding: 25px 15px 20px;
+  }
+  
+  .step-card {
+    padding: 20px;
+  }
 }

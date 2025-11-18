@@ -1,4 +1,4 @@
-<ion-content content-body [fullscreen]="true" class="ion-padding">
+<ion-content content-body [fullscreen]="true" class="become-creator-content">
   <app-tool-bar
     leftIcon="arrow-back-outline"
     title="Regresar"
@@ -7,21 +7,153 @@
     phoneIcon="call"
     phoneLink="">
   </app-tool-bar>
-  <div >
-  <h1 class = "titlebecome">¿Como convertirne en creador de contenido?</h1>
-    <div>
-      <img src="/assets/images/becomecreator.png" width="100%" alt="Fitness Trainer" />
+  
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="hero-overlay">
+      <h1 class="hero-title">
+        <ion-icon name="star-outline" class="hero-icon"></ion-icon>
+        ¿Cómo convertirte en creador de contenido?
+      </h1>
+      <p class="hero-subtitle">Transforma tu pasión por el fitness en una fuente de ingresos</p>
+    </div>
+    <div class="image-container">
+      <img src="/assets/images/becomecreator.png" alt="Fitness Trainer" />
     </div>
   </div>
-<ion-col >
-  <h1>Lorem Ipsum is simply</h1>
-  <p style='text-align: justify;'>
-    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.
-    Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC.
-  This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet," comes from a line in section 1.10.32. The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
-    There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
-  </p>
-  </ion-col>
+  <!-- Main Content Section -->
+  <div class="main-content">
+    <div class="intro-section">
+      <h2 class="main-title">
+        <ion-icon name="flash" class="title-icon"></ion-icon>
+        ¡Monetiza tu Pasión por el Fitness!
+      </h2>
+      <p class="intro-text">
+        El camino para convertirte en un creador exitoso en BodyBooster se basa en la 
+        <span class="highlight-text">calidad</span>, la <span class="highlight-text">consistencia</span> 
+        y una estrategia de <span class="highlight-text">monetización inteligente</span>. 
+        Sigue estos pasos clave:
+      </p>
+    </div>
+
+    <!-- Steps Container -->
+    <div class="steps-container">
+
+      <!-- Step 1 -->
+      <div class="step-card step-1">
+        <div class="step-header">
+          <div class="step-icon-container purple">
+            <ion-icon name="trophy" class="step-icon"></ion-icon>
+          </div>
+          <div class="step-number">01</div>
+        </div>
+        <div class="step-content">
+          <h3 class="step-title">Especialízate y Define tu Nicho</h3>
+          <p class="step-description">
+            Identifica tu área de experticia <span class="emphasis">(Yoga, HIIT, Levantamiento, Danza, etc.)</span>. 
+            Un nicho claro y bien definido facilita la atracción de una audiencia fiel que busca exactamente lo que ofreces.
+          </p>
+          <div class="step-tags">
+            <span class="tag">Yoga</span>
+            <span class="tag">HIIT</span>
+            <span class="tag">Danza</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step-card step-2">
+        <div class="step-header">
+          <div class="step-icon-container blue">
+            <ion-icon name="videocam" class="step-icon"></ion-icon>
+          </div>
+          <div class="step-number">02</div>
+        </div>
+        <div class="step-content">
+          <h3 class="step-title">Produce Contenido de Alta Calidad</h3>
+          <p class="step-description">
+            BodyBooster vende <span class="highlight-orange">clases y entrenamientos</span>. 
+            Asegúrate de grabar tus videos con excelente iluminación, audio claro y un entorno profesional. 
+            La calidad es lo que justifica el modelo de suscripción.
+          </p>
+          <div class="quality-points">
+            <div class="quality-point">
+              <ion-icon name="bulb" class="point-icon"></ion-icon>
+              <span>Excelente iluminación</span>
+            </div>
+            <div class="quality-point">
+              <ion-icon name="volume-high" class="point-icon"></ion-icon>
+              <span>Audio profesional</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step-card step-3">
+        <div class="step-header">
+          <div class="step-icon-container green">
+            <ion-icon name="wallet" class="step-icon"></ion-icon>
+          </div>
+          <div class="step-number">03</div>
+        </div>
+        <div class="step-content">
+          <h3 class="step-title">Configura tu Monetización</h3>
+          <p class="step-description">
+            Utiliza la <span class="highlight-orange">App del Creador</span> para completar el onboarding requerido con 
+            <span class="highlight-orange">Stripe</span>. Define tus planes de suscripción para maximizar tus ingresos.
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="step-card step-4">
+        <div class="step-header">
+          <div class="step-icon-container orange">
+            <ion-icon name="calendar" class="step-icon"></ion-icon>
+          </div>
+          <div class="step-number">04</div>
+        </div>
+        <div class="step-content">
+          <h3 class="step-title">Sé Consistente y Administra</h3>
+          <p class="step-description">
+            Mantén un calendario de publicación regular de nuevas rutinas y gestiona a tus suscriptores 
+            desde tu perfil de creador. La consistencia fomenta la retención de usuarios.
+          </p>
+          <div class="consistency-tips">
+            <div class="tip">
+              <ion-icon name="checkmark-circle" class="tip-icon"></ion-icon>
+              <span>Publicación regular</span>
+            </div>
+            <div class="tip">
+              <ion-icon name="people" class="tip-icon"></ion-icon>
+              <span>Gestión de suscriptores</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Call to Action Section -->
+    <div class="cta-section">
+      <div class="cta-content">
+        <h3 class="cta-title">
+          <ion-icon name="rocket" class="cta-icon"></ion-icon>
+          ¡Comienza tu Transformación Hoy!
+        </h3>
+        <p class="cta-description">
+          Miles de usuarios están esperando por tu contenido único. 
+          Da el primer paso hacia tu libertad financiera.
+        </p>
+        <!-- Uncomment when ready to add registration
+        <ion-button expand="block" class="cta-button" href="#">
+          <ion-icon slot="start" name="arrow-forward-circle"></ion-icon>
+          Regístrate como Creador
+        </ion-button>
+        -->
+      </div>
+    </div>
+  </div>
 </ion-content>
 <ion-footer content-footer  class="ion-text-center">
   <ion-toolbar class = "footer-start-button">
