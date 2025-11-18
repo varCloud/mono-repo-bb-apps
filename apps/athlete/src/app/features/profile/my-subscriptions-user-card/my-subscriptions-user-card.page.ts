@@ -1,166 +1,151 @@
-import { Component, signal } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonList,IonButton, IonAccordion, IonIcon, IonButtons } from '@ionic/angular/standalone';
+import { Component, signal, OnInit, Input, input } from '@angular/core';
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonList,
+  IonButton,
+  IonAccordion,
+  IonIcon,
+  IonButtons,
+} from '@ionic/angular/standalone';
 // Importamos nuestro nuevo componente
-import { HeaderSearchComponent, UserCardComponent } from '@monorepo-bb-app/ui';
+import { HeaderSearchComponent, SimpleSearchInputComponent, UserCardComponent } from '@monorepo-bb-app/ui';
 import { ModalController } from '@ionic/angular/standalone';
 import { OptionsSubscritporModalComponent } from '@monorepo-bb-app/ui';
-import { IonSearchbar } from '@ionic/angular';
+import { IonInput, IonSearchbar } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-
-
-
-
-// Definimos una interfaz para los datos (¡buena práctica!)
-interface Subscription {
-  id: number;
-  imageUrl: string;
-  name: string;
-  description: string;
-  tag: string;
-  tagBg: string;
-  tagText: string;
-}
-
+import { Subscription, ApiResponse } from '@monorepo-bb-app/shared';
+import { UserSuscriptionsIdService } from '@monorepo-bb-app/core';
+import { JsonPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { EmptyElementsComponent } from '@monorepo-bb-app/ui';
+import { ReactiveFormsModule, FormControl,FormGroup, Validators } from '@angular/forms';
+import { MySubscriptionsSearchModalComponent } from '@monorepo-bb-app/ui';
 @Component({
   selector: 'app-home',
   templateUrl: 'my-subscriptions-user-card.page.html',
   styleUrls: ['my-subscriptions-user-card.page.scss'],
   standalone: true,
   imports: [
-    IonHeader, IonToolbar, IonTitle, IonContent, IonList,
-    UserCardComponent, OptionsSubscritporModalComponent, IonButton, IonIcon, IonButtons,HeaderSearchComponent
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonList,
+    UserCardComponent,
+    OptionsSubscritporModalComponent,
+    IonButton,
+    IonIcon,
+    IonButtons,
+    HeaderSearchComponent,
+    JsonPipe,
+    CommonModule,
+    EmptyElementsComponent,
+    ReactiveFormsModule,
+    MySubscriptionsSearchModalComponent,
 
-  ]
+  ],
 })
-export class mySubscriptionsUserCardPage {
+export class mySubscriptionsUserCardPage implements OnInit {
+  subscriptions = signal<Subscription[]>([]);
+  public userId = signal<number>(88);
+  public subscriptionId = signal<number>(1);
+  public imgUrl = signal<string>('assets/images/empty/emptyelements.png');
+  public textMessage = signal<string>(
+    'Actualmente no tienes suscripciones  Busca entrenamientos y comienza tu sucripción con tu coach favorito.'
+  );
+  public searchControl = new FormControl('');
 
-  // Definimos la lista de suscripciones como un Signal
-  subscriptions = signal<Subscription[]>([
-    {
-      id: 1,
-      imageUrl: 'assets/images/gerardo.jpg', // Reemplaza con tus assets
-      name: 'Gerardo Contreras',
-      description: 'Pago por 3 meses',
-      tag: 'Kick boxing',
-      tagBg: '#43e3ffff', // Azul claro
-      tagText: '#000000ff' // Azul oscuro
-    },
-    {
-      id: 2,
-      imageUrl: 'assets/images/alejandro.jpg',
-      name: 'Alejandro López',
-      description: 'Pago por 3 meses',
-      tag: 'Running',
-      tagBg: '#aeff6cff', // Verde claro
-      tagText: '#333333' // Verde oscuro
-    },
-    {
-      id: 3,
-      imageUrl: 'assets/images/brenda.jpg',
-      name: 'Brenda Gutiérrez',
-      description: 'Pago por 3 meses',
-      tag: 'Fitness',
-      tagBg: '#a049c2ff', // Morado claro
-      tagText: '#ffffff' // Texto blanco (como en tu imagen)
-    }
-  ]);
+  constructor(
+    private UserSuscriptionsIdService: UserSuscriptionsIdService,
+    private modalCtrl: ModalController
+  ) {}
 
-  constructor(private modalCtrl: ModalController) {
-
+  ngOnInit() {
+    this.getSubscriptionsForUser(this.userId(), this.subscriptionId());
   }
 
+  getSubscriptionsForUser(userId: number, subscriptionId: number): void {
+    return console.log(
+      this.UserSuscriptionsIdService.getSubscriptions(userId, subscriptionId)
+        .pipe()
+        .subscribe((subs: Subscription[]) => {
+          this.subscriptions.set(subs);
+          console.log('Suscripciones obtenidas:', subs);
+        })
+    );
+  }
 
-  async openSearchModal() {
-    const modal = await this.modalCtrl.create({
-      component: OptionsSubscritporModalComponent,
+  async openSearchSubscriptionsModal() {
+    const modalSearch = await this.modalCtrl.create({
+      component: MySubscriptionsSearchModalComponent, // El componente que creamos
       componentProps: {
-        // Pasa la lista COMPLETA de suscripciones al modal
-        allSubscriptions: this.subscriptions()
+        allSubscriptions: this.subscriptions, // Pasa la data de las suscripciones al modal
       },
       breakpoints: [0.4, 1],
-      initialBreakpoint: 0.4,
+      initialBreakpoint: 1,
       handle: false,
-      cssClass: 'bottom-sheet-modal'
+      cssClass: 'bottom-sheet-modal',
     });
+    await modalSearch.present();
 
-    await modal.present();
-
-    // Opcional: Escucha si el usuario seleccionó un resultado
-    const { data, role } = await modal.onWillDismiss();
-    if (role === 'selected' && data) {
-      console.log('Usuario seleccionó desde búsqueda:', data);
-      // Aquí podrías hacer algo, como navegar al detalle de esa suscripción
-    }
+    console.log('Abrir modal de búsqueda de suscripciones');
   }
 
-  // ... (tu método existente 'onShowOptions' no cambia) ...
 
-
-
-  // Método para manejar el clic en los '...'
-
-
-
-
-async onShowOptions(subscription: Subscription, event: Event) {
-
+  async onShowOptions(subscription: Subscription, event: Event) {
     const modal = await this.modalCtrl.create({
       component: OptionsSubscritporModalComponent, // El componente que creamos
       componentProps: {
-        subscription: subscription // Pasa la data de la suscripción al modal
+        subscription: this.subscriptions, // Pasa la data de la suscripción al modal
       },
-
       breakpoints: [0.4, 1],
       initialBreakpoint: 0.4,
       handle: false,
-      cssClass: 'bottom-sheet-modal'
+      cssClass: 'bottom-sheet-modal',
     });
-
     await modal.present();
-
     // --- Escucha el resultado cuando el modal se cierra ---
     const { data, role } = await modal.onWillDismiss();
-
     // Si el 'role' es 'confirm', significa que el usuario
     // presionó "Si, Cancelar plan"
     if (role === 'confirm' && data?.confirmed) {
-      console.log('¡CANCELAR LA SUSCRIPCIÓN!', subscription.name);
+      console.log('¡CANCELAR LA SUSCRIPCIÓN!', subscription.user.name);
       // Aquí llamas a tu servicio para cancelar
-      this.cancelSubscription(subscription.id);
-    }else if(role==='share'){
-         console.log('metodo de busqueda aqui');
+      // this.cancelSubscription(subscription.user.id);
+    } else if (role === 'share') {
+      console.log('metodo de busqueda aqui');
     }
-       console.log('Mostrar opciones para:', subscription.name);
+    console.log('Mostrar opciones para:', subscription.user.name);
   }
 
+  //   cancelSubscription(id: number) {
+  //     console.log('Suscripción cancelada y eliminada de la lista:', id);
 
-  cancelSubscription(id: number) {
+  //     this.subscriptions.update(subs =>
+  //       subs.filter(s => s.user.id !== id)
+  //     );
+  //   }
 
-    this.subscriptions.update(subs =>
-      subs.filter(s => s.id !== id)
-    );
-    console.log('Suscripción cancelada y eliminada de la lista:', id);
-  }
+  //   async openDetailModal(data?: any) {
+  //     const modal = await this.modalCtrl.create({
+  //       component: UserCardComponent,
+  //       componentProps: {
+  //         data: {
+  //            allSubscriptions: this.subscriptions(),
+  //         },
+  //       },
+  //       breakpoints: [0, 0.25, 0.5, 0.75, 1],
+  //     });
 
+  //     await modal.present();
 
-  async openDetailModal(data?: any) {
-    const modal = await this.modalCtrl.create({
-      component: UserCardComponent,
-      componentProps: {
-        data: {
-           allSubscriptions: this.subscriptions(),
-        },
-      },
-      breakpoints: [0, 0.25, 0.5, 0.75, 1],
-    });
-
-    await modal.present();
-
-    const result = await modal.onDidDismiss();
-    if (result.data) {
-      // Manejar los datos retornados del modal si es necesario
-      console.log('Modal Data:', result.data);
-    }
-  }
-
+  //     const result = await modal.onDidDismiss();
+  //     if (result.data) {
+  //       // Manejar los datos retornados del modal si es necesario
+  //       console.log('Modal Data:', result.data);
+  //     }
+  //   }
 }

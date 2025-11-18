@@ -1,42 +1,88 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, computed, input, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule, ModalController } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
-import { ConversationListComponent } from '../conversation-list/conversation-list.component';
-import { TranslateModule } from '@ngx-translate/core';
+
+// Importaciones de Ionic
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent, 
+  IonButtons,
+  IonButton,
+  IonIcon,
+  IonSearchbar,
+  ModalController // Importa ModalController
+} from '@ionic/angular/standalone';
+
+// Importa los íconos
+import { addIcons } from 'ionicons';
+import { closeOutline } from 'ionicons/icons';
+
+// Importa nuestro acordeón y la interfaz
+import {Faq } from '@monorepo-bb-app/shared';
+import { AccordionComponent } from '../accordion/accordion.component';
+
 
 @Component({
-  selector: 'lib-faq-search-modal',
+  selector: 'app-faq-search-modal',
   templateUrl: './faq-search-modal.component.html',
   styleUrls: ['./faq-search-modal.component.scss'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CommonModule,
-    IonicModule,
-    FormsModule,
-    ConversationListComponent,
-    TranslateModule,
-  ],
+    // Componentes Ionic
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonButtons,
+    IonButton,
+    IonIcon,
+    IonSearchbar,
+    // Nuestro componente de acordeón
+    AccordionComponent,
+  ]
 })
-export class UserConversationModalComponent implements OnInit {
-  @Input() data: any; // Aquí recibiremos los datos enviados
+export class FaqSearchModalComponent {
 
-  constructor(private modalCtrl: ModalController) {}
+  // 1. Recibe la lista completa de FAQs desde la página
+  allFaqs = input.required<Faq[]>();
 
-  ngOnInit() {
-    console.log('Datos recibidos en el modal:', this.data);
+  // 2. Inyecta el ModalController para poder cerrarlo
+  private modalCtrl = inject(ModalController);
+
+  // 3. Signal para el término de búsqueda
+  searchTerm = signal('');
+
+  // 4. Signal computado para la lista filtrada
+  filteredFaqs = computed(() => {
+    const term = this.searchTerm().toLowerCase();
+    const faqs = this.allFaqs();
+
+    if (!term) {
+      return faqs; // Si no hay búsqueda, muestra todo
+    }
+
+    // Filtra por pregunta O respuesta
+    return faqs.filter(
+      (item) =>
+        item.question.toLowerCase().includes(term) ||
+        item.answer.toLowerCase().includes(term)
+    );
+  });
+
+  constructor() {
+    addIcons({ closeOutline });
   }
 
-  dismiss(data?: any) {
-    this.modalCtrl.dismiss(data);
+  // 5. Función para cerrar el modal
+  dismiss() {
+    this.modalCtrl.dismiss();
   }
 
-  onConversationSelected(conversation: any) {
-    console.log('Conversación seleccionada en el modal:', conversation);
-  }
-
-  onSearch(event: Event) {
-    const target = event.target as HTMLIonSearchbarElement;
-    const query = target.value?.toLowerCase() || '';
+  // 6. Función que actualiza el signal de búsqueda
+  onSearchChange(event: any) {
+    this.searchTerm.set(event.detail.value || '');
   }
 }

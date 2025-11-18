@@ -10,6 +10,10 @@ ion-content {
   gap: 5px;
 }
 
+ion-header{
+  box-shadow: none;
+  margin-top: 10px !important;
+}
 
 /* Estilo para el contenedor principal del modal */
 .modal-content {

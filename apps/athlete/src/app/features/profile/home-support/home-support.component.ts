@@ -1,7 +1,9 @@
-import { Component, input, signal } from '@angular/core';
-import { FaqCategories, InfoCardData } from '@monorepo-bb-app/shared';
-import { CardSliderComponent } from '@monorepo-bb-app/ui';
+import { Component, input, signal, WritableSignal, inject } from '@angular/core';
+import { FaqCategories, InfoCardData, AppConfig2Model } from '@monorepo-bb-app/shared';
+import { CardSliderComponent, FaqSearchModalComponent } from '@monorepo-bb-app/ui';
 import { IonContent, ModalController } from '@ionic/angular/standalone';
+
+
 import { addIcons } from 'ionicons';
 import {
   informationCircle,
@@ -24,8 +26,10 @@ import {
   ToolBarComponent,
 } from '@monorepo-bb-app/ui';
 import { Faq, RequestFaqs } from '@monorepo-bb-app/shared';
-import { FaqService, FaqCategoriesService } from '@monorepo-bb-app/core';
+import { FaqService, FaqCategoriesService,AppConfig2Service } from '@monorepo-bb-app/core';
 import { take } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-home-support',
 
@@ -40,6 +44,9 @@ import { take } from 'rxjs';
     SimpleSearchInputComponent,
     IonContent,
     AccordionComponent,
+    TranslateModule,
+    FaqSearchModalComponent,
+
   ],
 })
 export class HomeSupport {
@@ -51,11 +58,18 @@ export class HomeSupport {
   public phoneIcon = input<string>('call-outline');
   public phoneLink = input<string>('+524432426259');
   public mySearchText?: string = '';
+  cardCategories: InfoCardData[] = [];
+  appConfig2: AppConfig2Model[] = [];
+  phoneLinkSignal = signal('');
+  mailLinkSignal = signal('');
+
+  public myFaqList: WritableSignal<Faq[]> = signal([]);
 
   constructor(
     private faqCategoriesService: FaqCategoriesService,
     private faqService: FaqService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private appConfig2Service: AppConfig2Service
   ) {
     addIcons({
       informationCircle,
@@ -71,10 +85,20 @@ export class HomeSupport {
       arrowBackOutline,
     });
     this.getFaqsCategories();
+    this.getAppConfig();
   }
 
-  cardCategories: InfoCardData[] = [];
-  myFaqList: Faq[] = []; //accordion
+
+    public getAppConfig() {
+    this.appConfig2Service
+      .getAppConfig()
+      .pipe(take(1))
+      .subscribe((response: AppConfig2Model[]) => {
+        this.appConfig2 = response;
+        this.phoneLinkSignal.set(this.appConfig2[13]['value'] || '');
+        this.mailLinkSignal.set(this.appConfig2[12]['value'] || '');
+      });
+  }
 
   public getFaqsCategories() {
     this.faqCategoriesService
@@ -95,8 +119,9 @@ export class HomeSupport {
       .getFaqs(payload)
       .pipe(take(1))
       .subscribe((response: Faq[]) => {
-        this.myFaqList = response;
+        this.myFaqList.set(response);
       });
+
   }
 
 
@@ -104,18 +129,15 @@ export class HomeSupport {
 
 
 
-  myFaqListSearch : Faq[] = this.myFaqList;
-
-
-  async openSearchModal(data?: any) {
+  async openSearchModal() {
     const modal = await this.modalCtrl.create({
-      component: AccordionComponent,
+      component: FaqSearchModalComponent,
       componentProps: {
-        data: {
-          faqs: this.myFaqListSearch,
-        },
+        allFaqs: this.myFaqList
+
       },
       breakpoints: [0, 0.25, 0.5, 0.75, 1],
+      cssClass: 'bottom-sheet-modal',
     });
 
     await modal.present();
@@ -127,21 +149,12 @@ export class HomeSupport {
   }
 
 
+
+
   //info slider
 
   onSliderCardClicked(cardId: string) {
     this.getFacts(Number(cardId));
   }
 
-  //search input
-
-  onSearchTextChange(newText: string) {
-    this.mySearchText = newText;
-  }
-
-  onSearchSubmit(submittedText: string) {}
-
-  onSearchClearEvent() {
-    this.mySearchText = '';
-  }
 }

@@ -1,0 +1,31 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-searchbar
+     [placeholder]="'Buscar'"
+      [mode]="'ios'"
+      [debounce]="300"
+      show-cancel-button="always"
+      [cancelButtonText]="'cancel'"
+      (ionCancel)="dismiss()"
+      (ionInput)="onSearchChange($event)"
+    ></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+
+  @for (sub of filteredSubscriptions(); track sub) {
+ <lib-user-card
+        [imageUrl]="sub.user.profilePictureUrl"
+        [name]="sub.user.name"
+        [descriptionPlan]="'Pago por 3 meses'"
+        [tagText]="'Running'"
+        [tagColor]="'#aeff6cff'"
+        [tagTextColor]="'#333333'"
+        class="card-item"
+
+      ></lib-user-card>
+  }@empty {
+    sin resultados
+    }
+

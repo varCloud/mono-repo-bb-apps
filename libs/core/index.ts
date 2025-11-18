@@ -1,3 +1,4 @@
+import { getLocaleExtraDayPeriodRules } from '@angular/common';
 
 
 export { LocalStorageService } from './services/local-storage.service';
@@ -19,4 +20,6 @@ export { UserService } from './services/user.service';
 export { UserConversationService } from './services/user-conversation/user-conversation.services';
 export { TabMenuService } from './services/tab-menu-service';
 export { FaqService } from './services/faqs/faqs.service';
-export { FaqCategoriesService } from './services/faqs/faqs-categories.service'
+export { FaqCategoriesService } from './services/faqs/faqs-categories.service';
+export { UserSuscriptionsIdService } from './services/user-suscriptions-id.service';
+export { AppConfig2Service } from './services/app-config2.service';

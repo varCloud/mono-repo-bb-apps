@@ -2,26 +2,23 @@ import { Component, input, output } from '@angular/core';
 import { IonIcon } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { ellipsisHorizontal } from 'ionicons/icons';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'lib-user-card',
   templateUrl: './user-card.component.html',
   styleUrls: ['./user-card.component.scss'],
   standalone: true,
-  imports: [IonIcon],
+  imports: [IonIcon, CommonModule],
 })
 export class UserCardComponent {
 
-
   imageUrl = input.required<string>();
   name = input.required<string>();
-  description = input.required<string>();
+  descriptionPlan = input.required<string>();
   tagText = input.required<string>();
-
   tagColor = input<string>('#f0f0f0');
   tagTextColor = input<string>('#333333');
-
-
   optionsClick = output<Event>();
 
   constructor() {

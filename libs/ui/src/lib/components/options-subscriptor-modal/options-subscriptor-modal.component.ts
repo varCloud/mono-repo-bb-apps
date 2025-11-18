@@ -27,9 +27,7 @@ export class OptionsSubscritporModalComponent {
   // Recibe la suscripción seleccionada desde la página
   subscription = input.required<Subscription>();
 
-  // Signal para controlar la vista del modal
-  // Estado 1: 'options' (la primera imagen)
-  // Estado 2: 'confirm' (la segunda imagen)
+
   viewState = signal<'options' | 'confirm'>('options');
 
   constructor(private modalCtrl: ModalController) {

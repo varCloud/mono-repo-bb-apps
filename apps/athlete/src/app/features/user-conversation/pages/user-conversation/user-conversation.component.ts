@@ -44,7 +44,7 @@ export class UserConversationComponent{
     effect(() => {
       this.sesionService.user$()
     });
-    
+
 
   }
 
@@ -70,6 +70,7 @@ export class UserConversationComponent{
         },
       },
       breakpoints: [0, 0.25, 0.5, 0.75, 1],
+      cssClass: 'bottom-sheet-modal'
     });
 
     await modal.present();

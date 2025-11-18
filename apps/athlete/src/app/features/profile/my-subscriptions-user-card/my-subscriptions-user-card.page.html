@@ -1,33 +1,31 @@
-
-
-
 <div class="header-container">
-  <app-header-search (clickSearch)="openDetailModal()"></app-header-search>
+  <app-header-search
+    (click)="openSearchSubscriptionsModal()"
+  ></app-header-search>
   <section class="header-info-container">
     <h2 class="title">Mis Suscripciones</h2>
   </section>
 </div>
 <ion-content app-layout-content>
+  <ion-list [lines]="'none'">
+    @for (sub of subscriptions(); track sub) {
+    <lib-user-card
+      [imageUrl]="sub.user.profilePictureUrl"
+      [name]="sub.user.name"
+      [descriptionPlan]="'Pago por 3 meses'"
+      [tagText]="'Running'"
+      [tagColor]="'#aeff6cff'"
+      [tagTextColor]="'#333333'"
+      class="card-item"
+      (optionsClick)="onShowOptions(sub, $event)"
+    ></lib-user-card>
+    }@empty {
+    <lib-empty-elements-component
+      [imgPath]="imgUrl()"
+      [message]="textMessage()"
+    >
+    </lib-empty-elements-component>
 
-  <ion-list  [lines]="'none'" >
-
-    @for (sub of subscriptions(); track sub.id) {
-
-      <lib-user-card
-        [imageUrl]="sub.imageUrl"
-        [name]="sub.name"
-        [description]="sub.description"
-        [tagText]="sub.tag"
-        [tagColor]="sub.tagBg"
-        [tagTextColor]="sub.tagText"
-        (optionsClick)="onShowOptions(sub, $event)"
-        class="card-item"
-      >
-      </lib-user-card>
-
-    } @empty {
-      <p style="padding: 20px;">No tienes suscripciones activas.</p>
     }
-
   </ion-list>
 </ion-content>

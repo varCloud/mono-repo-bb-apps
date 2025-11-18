@@ -68,3 +68,6 @@ export * from './lib/components/options-subscriptor-modal/options-subscriptor-mo
 // Formularios reutilizables
 export * from './lib/athlete-profile-basic-form/athlete-profile-basic-form.component';
 export * from './lib/athlete-physical-info-form/athlete-physical-info-form.component';
+export * from './lib/components/faq-search-modal/faq-search-modal.component';
+export * from './lib/components/empty-elements/empty-elements.component';
+export * from './lib/components/my-subscriptions-search-modal/my-subscriptions-search-modal.component';
