@@ -1,22 +1,29 @@
-import { Component, signal } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonList } from '@ionic/angular/standalone';
+import { Component, signal, OnInit} from '@angular/core';
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonList,
+  IonButton,
+  IonIcon,
+  IonButtons,
+  IonRefresherContent,
+  IonRefresher
+} from '@ionic/angular/standalone';
 // Importamos nuestro nuevo componente
-import { UserCardComponent } from '@monorepo-bb-app/ui';
+import { HeaderSearchComponent, UserCardComponent } from '@monorepo-bb-app/ui';
 import { ModalController } from '@ionic/angular/standalone';
 import { OptionsSubscritporModalComponent } from '@monorepo-bb-app/ui';
 
+import { CONSTANTS, PaginatorModel, Subscription} from '@monorepo-bb-app/shared';
+import { UserSuscriptionsIdService } from '@monorepo-bb-app/core';
+import { JsonPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { EmptyElementsComponent } from '@monorepo-bb-app/ui';
+import { ReactiveFormsModule, FormControl} from '@angular/forms';
+import { MySubscriptionsSearchModalComponent } from '@monorepo-bb-app/ui';
 
-
-// Definimos una interfaz para los datos (¡buena práctica!)
-interface Subscription {
-  id: number;
-  imageUrl: string;
-  name: string;
-  description: string;
-  tag: string;
-  tagBg: string;
-  tagText: string;
-}
 
 @Component({
   selector: 'app-home',
@@ -24,94 +31,90 @@ interface Subscription {
   styleUrls: ['my-subscriptions-user-card.page.scss'],
   standalone: true,
   imports: [
-    IonHeader, IonToolbar, IonTitle, IonContent, IonList,
-    UserCardComponent, OptionsSubscritporModalComponent
-
-  ]
+    IonRefresherContent,
+    IonContent,
+    IonList,
+    UserCardComponent,
+    OptionsSubscritporModalComponent,
+    HeaderSearchComponent,
+    CommonModule,
+    EmptyElementsComponent,
+    ReactiveFormsModule,
+    MySubscriptionsSearchModalComponent,
+    IonRefresher
+  ],
 })
-export class mySubscriptionsUserCardPage {
+export class mySubscriptionsUserCardPage implements OnInit {
+  subscriptions = signal<Subscription[]>([]);
+  public userId = signal<number>(88);
+  public subscriptionId = signal<number>(1);
+  public imgUrl = signal<string>('assets/images/empty/emptyelements.png');
+  public textMessage = signal<string>(
+    'Actualmente no tienes suscripciones  Busca entrenamientos y comienza tu sucripción con tu coach favorito.'
+  );
+  public searchControl = new FormControl('');
+  public paginator!: PaginatorModel;
+  public readonly DEFAULT_AVATAR = CONSTANTS.DEFAULT_AVATAR;
+  constructor(
+    private UserSuscriptionsIdService: UserSuscriptionsIdService,
+    private modalCtrl: ModalController
+  ) {}
 
-  // Definimos la lista de suscripciones como un Signal
-  subscriptions = signal<Subscription[]>([
-    {
-      id: 1,
-      imageUrl: 'assets/images/gerardo.jpg', // Reemplaza con tus assets
-      name: 'Gerardo Contreras',
-      description: 'Pago por 3 meses',
-      tag: 'Kick boxing',
-      tagBg: '#e0f7fa', // Azul claro
-      tagText: '#00796b' // Azul oscuro
-    },
-    {
-      id: 2,
-      imageUrl: 'assets/images/alejandro.jpg',
-      name: 'Alejandro López',
-      description: 'Pago por 3 meses',
-      tag: 'Running',
-      tagBg: '#e8f5e9', // Verde claro
-      tagText: '#388e3c' // Verde oscuro
-    },
-    {
-      id: 3,
-      imageUrl: 'assets/images/brenda.jpg',
-      name: 'Brenda Gutiérrez',
-      description: 'Pago por 3 meses',
-      tag: 'Fitness',
-      tagBg: '#e1bee7', // Morado claro
-      tagText: '#ffffff' // Texto blanco (como en tu imagen)
+  ngOnInit() {
+    this.getSubscriptionsForUser(`/user/${this.userId()}/suscriptions/${this.subscriptionId()}`, {page:1, limit:25});
+  }
+
+  getSubscriptionsForUser(uri : string = '', params: any = {}): void {
+    this.UserSuscriptionsIdService.getSubscriptions(uri, params)
+        .pipe()
+        .subscribe((data) => {
+          this.subscriptions.set([...this.subscriptions(), ...data.subscription]);
+          this.paginator = data.paginator;
+        })
+  }
+
+  loadMoreSubscriptions(event: any) {
+     if (this.paginator && this.paginator.links.next) {
+      this.getSubscriptionsForUser(this.paginator.links.next);
     }
-  ]);
+    event.target.complete();
+  }
 
-  constructor(private modalCtrl: ModalController) {}
-
-
-
-
-
-
-  // Método para manejar el clic en los '...'
-
-async onShowOptions(subscription: Subscription, event: Event) {
-
-    const modal = await this.modalCtrl.create({
-      component: OptionsSubscritporModalComponent, // El componente que creamos
+  async openSearchSubscriptionsModal() {
+    const modalSearch = await this.modalCtrl.create({
+      component: MySubscriptionsSearchModalComponent,
       componentProps: {
-        subscription: subscription // Pasa la data de la suscripción al modal
+        allSubscriptions: this.subscriptions,
       },
-      // --- Estilo de Bottom-Sheet ---
-      breakpoints: [0.4, 1],      // Permite que crezca de 0.1 a 1
-      initialBreakpoint: 0.4, // Empieza pequeño
-      handle: false,            // Oculta el "asa" por defecto (usamos el nuestro)
-      cssClass: 'bottom-sheet-modal' // Clase para styling global
+      breakpoints: [0.4, 1],
+      initialBreakpoint: 1,
+      handle: false,
+      cssClass: 'bottom-sheet-modal',
     });
+    await modalSearch.present();
+  }
 
+
+  async onShowOptions(subscription: Subscription, event: Event) {
+    const modal = await this.modalCtrl.create({
+      component: OptionsSubscritporModalComponent,
+      componentProps: {
+        subscription: this.subscriptions,
+      },
+      breakpoints: [0.4, 1],
+      initialBreakpoint: 0.4,
+      handle: false,
+      cssClass: 'bottom-sheet-modal',
+    });
     await modal.present();
-
-    // --- Escucha el resultado cuando el modal se cierra ---
     const { data, role } = await modal.onWillDismiss();
-
-    // Si el 'role' es 'confirm', significa que el usuario
-    // presionó "Si, Cancelar plan"
     if (role === 'confirm' && data?.confirmed) {
-      console.log('¡CANCELAR LA SUSCRIPCIÓN!', subscription.name);
-      // Aquí llamas a tu servicio para cancelar
-      this.cancelSubscription(subscription.id);
+     // funcion para cancelar suscripcion
+    } else if (role === 'share') {
+      // opciones de busqueda
     }
-       console.log('Mostrar opciones para:', subscription.name);
+    //mostrar opciones para  subscription.user.name
   }
-
-  // Método para manejar la cancelación real
-  cancelSubscription(id: number) {
-    // Por ahora, solo lo quitamos de la lista
-    this.subscriptions.update(subs =>
-      subs.filter(s => s.id !== id)
-    );
-    console.log('Suscripción cancelada y eliminada de la lista:', id);
-  }
-
-
-
-
 
 
 }

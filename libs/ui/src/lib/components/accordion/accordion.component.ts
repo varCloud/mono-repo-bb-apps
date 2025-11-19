@@ -41,6 +41,7 @@ import { Faq } from '@monorepo-bb-app/shared';
   ],
 })
 export class AccordionComponent {
+  showHeader = input(true);
   items = input.required<Faq[]>();
 
   public tittleaccordion = input<string>('Frecuent Questions');

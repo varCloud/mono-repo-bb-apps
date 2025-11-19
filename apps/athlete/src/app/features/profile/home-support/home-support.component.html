@@ -4,19 +4,16 @@
     leftIcon="arrow-back-outline"
     title="Regresar"
     emailIcon="mail"
-    emailLink=""
+    emailLink="{{mailLinkSignal()}}"
     phoneIcon="call"
-    phoneLink="">
+    phoneLink="{{phoneLinkSignal()}}">
   </app-tool-bar>
 
   <!-- simple search input-->
   <app-simple-search-input
-    [searchValue]="mySearchText"
-    (searchValueChange)="onSearchTextChange($event)"
-    (searchSubmitted)="onSearchSubmit($event)"
-    (searchCleared)="onSearchClearEvent()"
+    (click)="openSearchModal()"
     headerTitle="¿Como podemos ayudarte?"
-    placeholder="Search"
+    placeholder="{{'common.search' | translate}}"
     [debounce]="700">
   </app-simple-search-input>
 
@@ -28,7 +25,7 @@
 
   <!-- faq accordion-->
   <app-faq-accordion
-    [items]="myFaqList"
+    [items]="myFaqList()"
     tittleaccordion="Top questions"
   ></app-faq-accordion>
 </ion-content>

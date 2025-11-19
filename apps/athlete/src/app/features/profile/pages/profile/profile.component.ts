@@ -66,8 +66,8 @@ export class ProfileComponent implements OnInit {
       case 'personalData':
         this.personalData();
         break;
-      case 'myClients':
-        this.navigateToMyClients();
+      case 'mySubscriptions':
+        this.router.navigate(['home/profile/my-subscriptions']);
         break;
       case 'themeColor':
         this.changeThemeColor();

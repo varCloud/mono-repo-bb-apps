@@ -8,8 +8,9 @@
     "finish": "Finish",
     "next": "Next",
     "previous": "Previous",
-    "skip": "common",
-    "save-changes": "Save changes"
+    "save-changes": "Save changes",
+    "skip": "Skip",
+    "search": "Search"
   },
   "onboarding": {
     

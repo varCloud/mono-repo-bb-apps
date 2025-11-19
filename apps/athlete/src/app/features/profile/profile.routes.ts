@@ -46,6 +46,11 @@ export const profileRoutes: Routes = [
             (m) => m.PersonalDataPageComponent
           ),
       },
+      {
+        path: '**',
+        redirectTo: '',
+        pathMatch: 'full',
+      },
     ],
   },
   // {

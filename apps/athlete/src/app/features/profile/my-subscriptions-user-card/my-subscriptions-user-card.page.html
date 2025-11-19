@@ -1,25 +1,39 @@
-
-<ion-content content-body [fullscreen]="true" class="ion-padding">
-
-  <ion-list  [lines]="'none'" >
-
-    @for (sub of subscriptions(); track sub.id) {
-
-      <lib-user-card
-        [imageUrl]="sub.imageUrl"
-        [name]="sub.name"
-        [description]="sub.description"
-        [tagText]="sub.tag"
-        [tagColor]="sub.tagBg"
-        [tagTextColor]="sub.tagText"
-        (optionsClick)="onShowOptions(sub, $event)"
-        class="card-item"
-      >
-      </lib-user-card>
-
-    } @empty {
-      <p style="padding: 20px;">No tienes suscripciones activas.</p>
+<div class="header-container">
+  <app-header-search
+    (click)="openSearchSubscriptionsModal()"
+  ></app-header-search>
+  <section class="header-info-container">
+    <h2 class="title">Mis Suscripciones</h2>
+  </section>
+</div>
+<ion-content app-layout-content>
+  <ion-refresher
+    slot="fixed"
+    [mode]="'ios'"
+    (ionRefresh)="loadMoreSubscriptions($event)"
+    position="top"
+  >
+    <ion-refresher-content
+      pullingText="Desliza para cargar más subscriptions"
+      refreshingText="Cargando..."
+    >
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-list [lines]="'none'">
+    @for (sub of subscriptions(); track sub) {
+    <lib-user-card
+      [imageUrl]="sub.user.profilePictureUrl"
+      [name]="sub.user.name"
+      [descriptionPlan]="sub.fullDescription"
+      class="card-item"
+      (optionsClick)="onShowOptions(sub, $event)"
+    ></lib-user-card>
+    }@empty {
+    <lib-empty-elements-component
+      [imgPath]="imgUrl()"
+      [message]="textMessage()"
+    >
+    </lib-empty-elements-component>
     }
-
   </ion-list>
 </ion-content>
