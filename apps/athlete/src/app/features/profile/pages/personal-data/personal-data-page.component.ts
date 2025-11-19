@@ -134,7 +134,6 @@ export class PersonalDataPageComponent implements OnInit {
     this._loaderService.showLoader();
     if (this.isFormsValid()) {
       try {
-        debugger
         if (this.validateImageProfile()) {
           const uploadResult = await this.uploadPhoto(this.imageProfile!);
           this.basicForm.patchValue({ profilePictureUrl: uploadResult.location });

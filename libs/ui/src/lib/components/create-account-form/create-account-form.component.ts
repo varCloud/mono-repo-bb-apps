@@ -54,16 +54,11 @@ export class CreateAccountFormComponent {
       const payload: UserCreateAccountPayload = {
         email: this.createAccountForm.value.email,
         passwordHash: this.createAccountForm.value.passwordHash,
-        userTypeId: this.getUserTypeId()
+        userTypeId: this.userType(),
       };
       this.createAccountSubmit.emit(payload);
     } else {
       this.createAccountForm.markAllAsTouched();
     }
-  }
-
-  private getUserTypeId(): number {
-    // CREATOR = 2, ATHLETE = 1 (basado en el código existente)
-    return this.userType() === ENUM_TYPE_USER.CREATOR ? 2 : 1;
   }
 }

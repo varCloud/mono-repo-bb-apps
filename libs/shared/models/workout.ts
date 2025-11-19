@@ -25,6 +25,7 @@ export const convertToPayload = (data: any) => {
       assetUrl: exercise.url || '',
       name: exercise.name,
       description: exercise.description,
+      s3Key: exercise.s3Key,
     })),
     idempotencyKey: data.idempotencyKey,
   };

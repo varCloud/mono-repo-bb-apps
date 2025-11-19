@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, input } from '@angular/core';
 import {
   ActionSheetController,
   AlertController,
@@ -25,6 +25,7 @@ export class AvatarPickerComponent {
   @Input() size: 'small' | 'medium' | 'large' = 'medium';
   @Input() disabled: boolean = false;
   @Input() useOnlyDashedElement = false;
+  label = input('');
   @Output() imageSelected = new EventEmitter<string>();
   @Output() imageChanged = new EventEmitter<any | null>();
 

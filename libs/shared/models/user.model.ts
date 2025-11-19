@@ -47,6 +47,7 @@ export interface BillingCycle {
   amount: number;
   interval: number;
   description: string;
+  isTrialSubscription: boolean;
 }
 
 export interface PaymentMethod {

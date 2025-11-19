@@ -135,7 +135,8 @@ export class CheckoutSuscriptionComponent implements OnInit {
           this._router.navigate(['/home']);
         },
         error: (error) => {
-          this._toastService.error('Error al crear la suscripción.', {
+          const messageError = error?.error?.message || 'Error al crear la suscripción.';
+          this._toastService.error(messageError, {
             duration: 1000,
           });
         },

@@ -149,6 +149,7 @@ export class AddExerciseComponent implements AfterViewInit, OnDestroy {
       this.exerciseForm().patchValue({
         file: file,
         url: videoUrl,
+        s3Key: response.body.key || '',
       });
       this.exerciseForm().patchValue({
         uploadStatus: StatusUpload.SUCCESS,

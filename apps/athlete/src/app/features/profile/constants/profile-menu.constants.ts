@@ -20,11 +20,11 @@ export const PROFILE_MENU_ITEMS: ProfileMenuItem[] = [
     action: 'myClients',
     showArrow: true,
   },
-  {
-    text: 'Notificaciones',
-    action: 'themeColor',
-    showArrow: true,
-  },
+  // {
+  //   text: 'Notificaciones',
+  //   action: 'themeColor',
+  //   showArrow: true,
+  // },
   {
     text: 'Contactar a soporte',
     action: 'support',

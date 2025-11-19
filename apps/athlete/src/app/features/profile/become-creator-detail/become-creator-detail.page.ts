@@ -1,6 +1,7 @@
 
 import { input, Component, ViewChild, OnInit } from '@angular/core';
-import { IonCol, IonContent, IonFooter, IonToolbar, IonButton } from '@ionic/angular/standalone';
+
+import { IonCol, IonContent, IonFooter, IonToolbar, IonButton , IonCard, IonCardHeader, IonCardTitle, IonIcon, IonCardContent } from '@ionic/angular/standalone';
 import { TabMenuService } from '@monorepo-bb-app/core';
 import { ToolBarComponent } from '@monorepo-bb-app/ui';
 
@@ -12,7 +13,10 @@ import { ToolBarComponent } from '@monorepo-bb-app/ui';
   imports: [
     ToolBarComponent,
     IonCol,
-    IonContent, IonFooter, IonToolbar, IonButton
+    IonContent, IonFooter, IonToolbar, IonButton,
+    IonCard , IonCardHeader , IonCardTitle,
+    IonCardContent,
+    IonIcon
 ],
 })
 

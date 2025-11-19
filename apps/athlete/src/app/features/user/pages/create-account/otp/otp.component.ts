@@ -42,7 +42,7 @@ export class OtpCreateAccountComponent implements OnInit {
     email = signal<string>('');
     isSuccessOtp = signal<boolean>(false);
     apiUrl = API_URLS.USER_OTP;
-    
+    readonly userTypeId = ENUM_TYPE_USER.PROSPECT;
     private readonly SUCCESS_DELAY_MS = 1500;
 
     constructor(
@@ -78,7 +78,7 @@ export class OtpCreateAccountComponent implements OnInit {
         const user = {
             email: this.email(),
             passwordHash: this._createAccountService.getUser()!.passwordHash,
-            userTypeId: ENUM_TYPE_USER.ATHLETE,
+            userTypeId: this._createAccountService.getUser()!.userTypeId,
         };
 
         this._createAccountService.createAccount(user)
@@ -116,9 +116,5 @@ export class OtpCreateAccountComponent implements OnInit {
         const errorMessage = error?.error?.message || this._translate.transform('error-processing');
         this._toastService.error(errorMessage);
         this._router.navigate(['/login']);
-    }
-
-    public get userTypeId(): number {
-        return ENUM_TYPE_USER.CREATOR; // Creator
     }
 }
