@@ -7,6 +7,7 @@ export interface SubscriptionUser {
   email: string;
   profilePictureUrl: string;
   phone: string;
+  fullDescription: string;
 }
 
 export class SubscriptionUserModel implements SubscriptionUser {
@@ -16,10 +17,12 @@ export class SubscriptionUserModel implements SubscriptionUser {
   email: string;
   profilePictureUrl: string;
   phone: string;
+  fullDescription: string;
   constructor(data) {
     this.email = data.email;
     this.id = data.id;
     this.name = data.name;
+    this.fullDescription = data.fullDescription;
     this.nickName = data.nickName;
     this.phone = data.phone;
     this.profilePictureUrl = data.profilePictureUrl;
@@ -58,6 +61,7 @@ export class SubscriptionModel implements Subscription {
 
   constructor(data: any) {
     this.subscriptionId = data.subscriptionId;
+    this.fullDescription = data.fullDescription;
     this.startDate = data.startDate;
     this.endDate = data.endDate;
     this.billingCycleId = data.billingCycleId;
