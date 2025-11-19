@@ -8,10 +8,11 @@
     "finish": "Finish",
     "next": "Next",
     "previous": "Previous",
-    "skip": "Skip",
+    "skip": "common",
     "save-changes": "Save changes"
   },
   "onboarding": {
+    
     "tell-about-us": {
       "title": "Tell us about yourself",
       "subtitle": "To provide a better experience and results we need to know your data.",
