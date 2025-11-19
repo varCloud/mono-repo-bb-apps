@@ -61,23 +61,4 @@ export class InfoCardComponent {
   onCardClick() {
     this.cardClicked.emit(this.id());
   }
-
-  iconColor = computed(() => {
-    return this.isIonicColor(this.color()) ? 'light' : 'dark';
-  });
-
-  public isIonicColor(colorName: string): boolean {
-    const ionicColors = [
-      'primary',
-      'secondary',
-      'tertiary',
-      'success',
-      'warning',
-      'danger',
-      'light',
-      'medium',
-      'dark',
-    ];
-    return ionicColors.includes(colorName);
-  }
 }

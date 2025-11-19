@@ -26,6 +26,7 @@ export class PaginatorMetaModel implements PaginatorMeta {
   currentPage: number;
 
   constructor(data: PaginatorMeta) {
+
     this.totalItems = data.totalItems;
     this.itemCount = data.itemCount;
     this.itemsPerPage = data.itemsPerPage;

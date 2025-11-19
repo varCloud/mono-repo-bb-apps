@@ -48,11 +48,12 @@ export class ToolBarComponent {
   public backLink = input<string>('/home/profile');
 
   public title = input<string>('ingresa un titlo');
-  public emailLink = input<string>('algo');
+
+  public emailLink = input<string>('');
   public emailIcon = input<string>('mail-outline');
 
   public phoneIcon = input<string>('call-outline');
-  public phoneLink = input<string>('algo');
+  public phoneLink = input<string>('');
 
   onBackClick() {
     this._router.navigate(['/home/profile'], { replaceUrl: true }).catch(err => {

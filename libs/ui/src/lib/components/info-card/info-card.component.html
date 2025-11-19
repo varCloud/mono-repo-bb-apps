@@ -2,7 +2,7 @@
   class="ion-activatable ripple-parent"
   [class.selected]="isSelected()"
   [style.--background]="
-    isIonicColor(color()) ? 'var(--ion-color-' + color() + ')' : color()"
+    color()"
   (click)="onCardClick()"
 >
   <ion-card-content class="ion-text-center" id="{{ id() }}">

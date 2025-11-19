@@ -1,32 +1,19 @@
-
-
 ion-list {
   background: transparent;
   padding: 0px 0px;
   margin: 0px !important;
 }
 
-
-
-
 .card-item {
   display: block;
   margin-bottom: 12px;
 }
 
-/* src/global.scss */
-
 .bottom-sheet-modal {
-
   --height: auto;
-
-
-
-
   .ion-backdrop {
     opacity: 0.5;
   }
-
 
   .ion-page {
     position: relative;
@@ -41,7 +28,6 @@ ion-modal {
 .header-logo{
   max-width: 40% !important;
 }
-
 
 :host {
   .header-container {

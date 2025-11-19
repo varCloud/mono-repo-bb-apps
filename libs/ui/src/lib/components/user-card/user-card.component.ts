@@ -16,9 +16,6 @@ export class UserCardComponent {
   imageUrl = input.required<string>();
   name = input.required<string>();
   descriptionPlan = input.required<string>();
-  tagText = input.required<string>();
-  tagColor = input<string>('#f0f0f0');
-  tagTextColor = input<string>('#333333');
   optionsClick = output<Event>();
 
   constructor() {
@@ -26,10 +23,7 @@ export class UserCardComponent {
   }
 
   onMoreOptions(event: Event) {
-    // Detenemos la propagación para evitar que se active
-    // cualquier otro clic en la tarjeta (si lo hubiera)
     event.stopPropagation();
-    // Emitimos el evento hacia el componente padre
     this.optionsClick.emit(event);
   }
 }

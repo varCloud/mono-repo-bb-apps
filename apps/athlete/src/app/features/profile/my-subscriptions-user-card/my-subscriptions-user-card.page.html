@@ -7,15 +7,24 @@
   </section>
 </div>
 <ion-content app-layout-content>
+  <ion-refresher
+    slot="fixed"
+    [mode]="'ios'"
+    (ionRefresh)="loadMoreSubscriptions($event)"
+    position="top"
+  >
+    <ion-refresher-content
+      pullingText="Desliza para cargar más subscriptions"
+      refreshingText="Cargando..."
+    >
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-list [lines]="'none'">
     @for (sub of subscriptions(); track sub) {
     <lib-user-card
       [imageUrl]="sub.user.profilePictureUrl"
       [name]="sub.user.name"
-      [descriptionPlan]="'Pago por 3 meses'"
-      [tagText]="'Running'"
-      [tagColor]="'#aeff6cff'"
-      [tagTextColor]="'#333333'"
+      [descriptionPlan]="sub.fullDescription"
       class="card-item"
       (optionsClick)="onShowOptions(sub, $event)"
     ></lib-user-card>
@@ -25,7 +34,6 @@
       [message]="textMessage()"
     >
     </lib-empty-elements-component>
-
     }
   </ion-list>
 </ion-content>

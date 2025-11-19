@@ -1,4 +1,4 @@
-import { Component, signal, OnInit, Input, input } from '@angular/core';
+import { Component, signal, OnInit} from '@angular/core';
 import {
   IonHeader,
   IonToolbar,
@@ -6,46 +6,42 @@ import {
   IonContent,
   IonList,
   IonButton,
-  IonAccordion,
   IonIcon,
   IonButtons,
+  IonRefresherContent,
+  IonRefresher
 } from '@ionic/angular/standalone';
 // Importamos nuestro nuevo componente
-import { HeaderSearchComponent, SimpleSearchInputComponent, UserCardComponent } from '@monorepo-bb-app/ui';
+import { HeaderSearchComponent, UserCardComponent } from '@monorepo-bb-app/ui';
 import { ModalController } from '@ionic/angular/standalone';
 import { OptionsSubscritporModalComponent } from '@monorepo-bb-app/ui';
-import { IonInput, IonSearchbar } from '@ionic/angular';
-import { addIcons } from 'ionicons';
-import { Subscription, ApiResponse } from '@monorepo-bb-app/shared';
+
+import { CONSTANTS, PaginatorModel, Subscription} from '@monorepo-bb-app/shared';
 import { UserSuscriptionsIdService } from '@monorepo-bb-app/core';
 import { JsonPipe } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { EmptyElementsComponent } from '@monorepo-bb-app/ui';
-import { ReactiveFormsModule, FormControl,FormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormControl} from '@angular/forms';
 import { MySubscriptionsSearchModalComponent } from '@monorepo-bb-app/ui';
+
+
 @Component({
   selector: 'app-home',
   templateUrl: 'my-subscriptions-user-card.page.html',
   styleUrls: ['my-subscriptions-user-card.page.scss'],
   standalone: true,
   imports: [
-    IonHeader,
-    IonToolbar,
-    IonTitle,
+    IonRefresherContent,
     IonContent,
     IonList,
     UserCardComponent,
     OptionsSubscritporModalComponent,
-    IonButton,
-    IonIcon,
-    IonButtons,
     HeaderSearchComponent,
-    JsonPipe,
     CommonModule,
     EmptyElementsComponent,
     ReactiveFormsModule,
     MySubscriptionsSearchModalComponent,
-
+    IonRefresher
   ],
 })
 export class mySubscriptionsUserCardPage implements OnInit {
@@ -57,32 +53,38 @@ export class mySubscriptionsUserCardPage implements OnInit {
     'Actualmente no tienes suscripciones  Busca entrenamientos y comienza tu sucripción con tu coach favorito.'
   );
   public searchControl = new FormControl('');
-
+  public paginator!: PaginatorModel;
+  public readonly DEFAULT_AVATAR = CONSTANTS.DEFAULT_AVATAR;
   constructor(
     private UserSuscriptionsIdService: UserSuscriptionsIdService,
     private modalCtrl: ModalController
   ) {}
 
   ngOnInit() {
-    this.getSubscriptionsForUser(this.userId(), this.subscriptionId());
+    this.getSubscriptionsForUser(`/user/${this.userId()}/suscriptions/${this.subscriptionId()}`, {page:1, limit:25});
   }
 
-  getSubscriptionsForUser(userId: number, subscriptionId: number): void {
-    return console.log(
-      this.UserSuscriptionsIdService.getSubscriptions(userId, subscriptionId)
+  getSubscriptionsForUser(uri : string = '', params: any = {}): void {
+    this.UserSuscriptionsIdService.getSubscriptions(uri, params)
         .pipe()
-        .subscribe((subs: Subscription[]) => {
-          this.subscriptions.set(subs);
-          console.log('Suscripciones obtenidas:', subs);
+        .subscribe((data) => {
+          this.subscriptions.set([...this.subscriptions(), ...data.subscription]);
+          this.paginator = data.paginator;
         })
-    );
+  }
+
+  loadMoreSubscriptions(event: any) {
+     if (this.paginator && this.paginator.links.next) {
+      this.getSubscriptionsForUser(this.paginator.links.next);
+    }
+    event.target.complete();
   }
 
   async openSearchSubscriptionsModal() {
     const modalSearch = await this.modalCtrl.create({
-      component: MySubscriptionsSearchModalComponent, // El componente que creamos
+      component: MySubscriptionsSearchModalComponent,
       componentProps: {
-        allSubscriptions: this.subscriptions, // Pasa la data de las suscripciones al modal
+        allSubscriptions: this.subscriptions,
       },
       breakpoints: [0.4, 1],
       initialBreakpoint: 1,
@@ -90,16 +92,14 @@ export class mySubscriptionsUserCardPage implements OnInit {
       cssClass: 'bottom-sheet-modal',
     });
     await modalSearch.present();
-
-    console.log('Abrir modal de búsqueda de suscripciones');
   }
 
 
   async onShowOptions(subscription: Subscription, event: Event) {
     const modal = await this.modalCtrl.create({
-      component: OptionsSubscritporModalComponent, // El componente que creamos
+      component: OptionsSubscritporModalComponent,
       componentProps: {
-        subscription: this.subscriptions, // Pasa la data de la suscripción al modal
+        subscription: this.subscriptions,
       },
       breakpoints: [0.4, 1],
       initialBreakpoint: 0.4,
@@ -107,45 +107,14 @@ export class mySubscriptionsUserCardPage implements OnInit {
       cssClass: 'bottom-sheet-modal',
     });
     await modal.present();
-    // --- Escucha el resultado cuando el modal se cierra ---
     const { data, role } = await modal.onWillDismiss();
-    // Si el 'role' es 'confirm', significa que el usuario
-    // presionó "Si, Cancelar plan"
     if (role === 'confirm' && data?.confirmed) {
-      console.log('¡CANCELAR LA SUSCRIPCIÓN!', subscription.user.name);
-      // Aquí llamas a tu servicio para cancelar
-      // this.cancelSubscription(subscription.user.id);
+     // funcion para cancelar suscripcion
     } else if (role === 'share') {
-      console.log('metodo de busqueda aqui');
+      // opciones de busqueda
     }
-    console.log('Mostrar opciones para:', subscription.user.name);
+    //mostrar opciones para  subscription.user.name
   }
 
-  //   cancelSubscription(id: number) {
-  //     console.log('Suscripción cancelada y eliminada de la lista:', id);
 
-  //     this.subscriptions.update(subs =>
-  //       subs.filter(s => s.user.id !== id)
-  //     );
-  //   }
-
-  //   async openDetailModal(data?: any) {
-  //     const modal = await this.modalCtrl.create({
-  //       component: UserCardComponent,
-  //       componentProps: {
-  //         data: {
-  //            allSubscriptions: this.subscriptions(),
-  //         },
-  //       },
-  //       breakpoints: [0, 0.25, 0.5, 0.75, 1],
-  //     });
-
-  //     await modal.present();
-
-  //     const result = await modal.onDidDismiss();
-  //     if (result.data) {
-  //       // Manejar los datos retornados del modal si es necesario
-  //       console.log('Modal Data:', result.data);
-  //     }
-  //   }
 }

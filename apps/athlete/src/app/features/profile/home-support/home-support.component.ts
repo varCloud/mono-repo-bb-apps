@@ -2,8 +2,6 @@ import { Component, input, signal, WritableSignal, inject } from '@angular/core'
 import { FaqCategories, InfoCardData, AppConfig2Model } from '@monorepo-bb-app/shared';
 import { CardSliderComponent, FaqSearchModalComponent } from '@monorepo-bb-app/ui';
 import { IonContent, ModalController } from '@ionic/angular/standalone';
-
-
 import { addIcons } from 'ionicons';
 import {
   informationCircle,
@@ -124,11 +122,6 @@ export class HomeSupport {
 
   }
 
-
-
-
-
-
   async openSearchModal() {
     const modal = await this.modalCtrl.create({
       component: FaqSearchModalComponent,
@@ -147,12 +140,7 @@ export class HomeSupport {
       console.log('Modal Data:', result.data);
     }
   }
-
-
-
-
   //info slider
-
   onSliderCardClicked(cardId: string) {
     this.getFacts(Number(cardId));
   }
