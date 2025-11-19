@@ -1,0 +1,41 @@
+.bottom-sheet-modal-rounded {
+  --border-radius: 50px 50px 0px 0px;
+}
+
+.search-modal{
+.ion-page{
+  height: auto !important;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+lib-my-subscription-search-modal-component{
+  overflow: auto !important;
+}
+
+
+
+ion-header{
+  box-shadow: none;
+  margin-top: 10px !important;
+}
+
+ion-searchbar{
+  padding: 2px !important;
+}
+ion-modal{
+ height: auto !important;
+ --overflow: auto !important;
+
+}
+lib-user-card{
+  margin-bottom: 6px;
+}
+
+}
+
+.scroll{
+  overflow: auto;
+}
+
+
