@@ -46,4 +46,15 @@ export class WorkoutService {
       );
     return await firstValueFrom($observer);
   }
+
+  public async getWorkoutById(id: number) {
+    const $observer = this._http
+      .get(`${this.BASE_URL}${API_URLS.WORKOUT}/${id}`)
+      .pipe(
+        map((res: any) => {
+          return res.data;
+        })
+      );
+    return await firstValueFrom($observer);
+  }
 }

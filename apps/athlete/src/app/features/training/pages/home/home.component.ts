@@ -99,7 +99,9 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  ionViewWillEnter() {
     this._loader.showLoader();
     setTimeout(() => {
       this.getWorkouts();
