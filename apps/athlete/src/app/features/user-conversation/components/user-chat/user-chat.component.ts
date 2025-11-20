@@ -188,7 +188,6 @@ export class UserChatComponent  implements AfterViewChecked {
     try {
     
         this.messageContainer.nativeElement.scrollTop = this.messageContainer.nativeElement.scrollHeight + 15;
-        console.log('Scroll to bottom executed');
 
     } catch(err) {
       console.error('Error scrolling to bottom:', err);
