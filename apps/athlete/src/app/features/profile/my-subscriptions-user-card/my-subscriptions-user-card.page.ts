@@ -89,7 +89,7 @@ export class mySubscriptionsUserCardPage implements OnInit {
       breakpoints: [0.4, 1],
       initialBreakpoint: 1,
       handle: false,
-      cssClass: 'bottom-sheet-modal',
+      cssClass: 'search-modal',
     });
     await modalSearch.present();
   }
@@ -104,7 +104,7 @@ export class mySubscriptionsUserCardPage implements OnInit {
       breakpoints: [0.4, 1],
       initialBreakpoint: 0.4,
       handle: false,
-      cssClass: 'bottom-sheet-modal',
+      cssClass: 'bottom-sheet-modal-rounded',
     });
     await modal.present();
     const { data, role } = await modal.onWillDismiss();

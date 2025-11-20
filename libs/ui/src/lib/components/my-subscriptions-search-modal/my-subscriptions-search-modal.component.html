@@ -12,8 +12,7 @@
     ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
-
-
+<div class="scroll" style="overflow:scroll">
   @for (sub of filteredSubscriptions(); track sub) {
  <lib-user-card
         [imageUrl]="sub.user.profilePictureUrl"
@@ -25,4 +24,4 @@
   }@empty {
     sin resultados
     }
-
+</div>
