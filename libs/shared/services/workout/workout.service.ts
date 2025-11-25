@@ -57,4 +57,12 @@ export class WorkoutService {
       );
     return await firstValueFrom($observer);
   }
+
+  public getWorkoutBySubs(id: number) {
+    return this._http.get(`${this.BASE_URL}${API_URLS.WORKOUT}/${id}`).pipe(
+      map((res: any) => {
+        return res.data;
+      })
+    );
+  }
 }
