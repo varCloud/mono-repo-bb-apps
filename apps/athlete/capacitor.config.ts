@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.bb.athlete',
-  appName: 'BB Athlete',
+  appId: 'io.bb.body.booster.athlete',
+  appName: 'Body Booster',
   webDir: '../../dist/apps/athlete/browser',
   plugins: {
     SplashScreen: {
@@ -12,6 +12,7 @@ const config: CapacitorConfig = {
       presentationOptions: ['badge', 'sound', 'alert'],
     },
   },
-}
+};
 
 export default config;
+

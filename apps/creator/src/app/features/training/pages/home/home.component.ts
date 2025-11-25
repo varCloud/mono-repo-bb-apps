@@ -98,11 +98,15 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  ionViewWillEnter() {
     this._loader.showLoader();
     setTimeout(() => {
       this.getWorkouts();
       this.getWorkoutMaxLikes();
     }, 1000);
+
   }
 
   private async getWorkouts(url?: string, reset = false) {
