@@ -42,8 +42,10 @@
     }
     .card-image {
       width: 100%;
+    }
+    ion-img::part(image) {
       min-height: 150px;
-      max-height: 250px;
+      max-height: 150px;
       object-fit: cover;
       object-position: center;
     }

@@ -17,6 +17,7 @@ export class UserCardComponent {
   name = input.required<string>();
   descriptionPlan = input.required<string>();
   optionsClick = output<Event>();
+  nickName = input.required<string>();
 
   constructor() {
     addIcons({ ellipsisHorizontal });

@@ -1,11 +1,6 @@
 <ion-card class="card-list-container" (click)="onCardClick()">
   <div class="image-container">
-    <img
-      [src]="workout().workoutUrl"
-      alt="Tabata"
-      class="card-image"
-      height="150"
-    />
+    <ion-img [src]="workout().workoutUrl" alt="Tabata" class="card-image" />
     <div></div>
     <span class="likes-counter">
       <ion-icon name="heart"></ion-icon>

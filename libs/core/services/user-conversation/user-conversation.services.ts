@@ -67,4 +67,11 @@ export class UserConversationService {
         }),
       );
   }
+
+  createConversation(payload: any): Observable<any> {
+    return this._http.post<any>(
+      `${this.BASE_URL}${API_URLS.USER_CONVERSATION}/conversation`,
+      payload,
+    );
+  }
 }

@@ -1,4 +1,18 @@
 {
+  "common": {
+    "back": "Regresar",
+    "continue": "Continuar",
+    "accept": "Aceptar",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "finish": "Finalizar",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "skip": "Saltar",
+    "save-changes": "Guardar cambios",
+    "search": "Buscar"
+  },
+
   "about-me": {
     "placeholder": "Escribe algo sobre ti",
     "save-error": "Error al guardar la descripción.",

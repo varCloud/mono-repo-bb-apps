@@ -4,6 +4,7 @@ import { profileRoutes } from '../profile/profile.routes';
 import { userConversationRoutes } from '../user-conversation/user-conversation.routes';
 import { trainingRoutes } from '../training/routes';
 import { suscriptionRoutes } from '../suscriptions/suscription.routes';
+import { workoutRoutes } from '../workouts/routes';
 
 export const homeRoutes: Routes = [
   {
@@ -16,6 +17,7 @@ export const homeRoutes: Routes = [
       ...profileRoutes,
       ...userConversationRoutes,
       ...suscriptionRoutes,
+      ...workoutRoutes,
       {
         path: '',
         redirectTo: '/home/training',

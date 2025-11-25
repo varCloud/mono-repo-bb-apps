@@ -18,7 +18,7 @@ export class SubscriptionUserModel implements SubscriptionUser {
   profilePictureUrl: string;
   phone: string;
   fullDescription: string;
-  constructor(data: any) {
+  constructor(data : any) {
     this.email = data.email;
     this.id = data.id;
     this.name = data.name;
