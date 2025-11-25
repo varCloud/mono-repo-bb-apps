@@ -1,11 +1,11 @@
 <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-
   <ion-row>
       <ion-col size="12">
         <app-avatar-picker
           [size]="'medium'"
           [disabled]="false"
           (imageChanged)="onImageSelected($event)"
+          [currentImage]="this.userData.profilePictureUrl"
         >
         </app-avatar-picker>
       </ion-col>
@@ -67,6 +67,6 @@
   </ion-col>
 
   <ion-button expand="block" type="submit" class="ion-margin-top submit-btn" [disabled]="!profileForm.valid">
-    {{ initialData ? 'Guardar cambios' : 'Crear cuenta' }}
+    {{ userData ? 'Guardar cambios' : 'Crear cuenta' }}
   </ion-button>
 </form>

@@ -49,11 +49,11 @@ export class FormPersonalDataCreatorComponent implements OnInit {
   profileForm: FormGroup;
   showLogoHeader = input<boolean>(false);
   genderOpt = GENDER_OPTIONS;
-
-  @Input() initialData: any;
+  @Input() userData: any;
   @Output() saveClicked = new EventEmitter();
-  @Output() imageSelected = new EventEmitter<string>();
+  @Output() imageSelected = new EventEmitter<any>();
   @ViewChild('colorPicker') colorPicker!: ElementRef;
+
   constructor(private fb: FormBuilder) {
     this.profileForm = this.fb.group({
       firstName: ['', Validators.required],
@@ -72,9 +72,10 @@ export class FormPersonalDataCreatorComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.initialData) {
-      this.profileForm.patchValue(this.initialData);
+    if (this.userData) {
+      this.profileForm.patchValue(this.userData);
     }
+
   }
 
   onMaskSelected(mask: Countrycode) {
@@ -89,7 +90,7 @@ export class FormPersonalDataCreatorComponent implements OnInit {
   onSubmit() {
     if (this.profileForm.valid) {
       const formData: any = {
-        ...this.initialData,
+        ...this.userData,
         ...this.profileForm.value,
       };
       this.saveClicked.emit(formData);
@@ -99,7 +100,8 @@ export class FormPersonalDataCreatorComponent implements OnInit {
     }
   }
 
-   onImageSelected(image: string) {
+   onImageSelected(image: any) {
+    debugger
     this.imageSelected.emit(image);
   }
 }

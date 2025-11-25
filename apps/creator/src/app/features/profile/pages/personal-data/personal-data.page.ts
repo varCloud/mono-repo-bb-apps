@@ -11,6 +11,7 @@ import {
   ToastService,
   GENDER_OPTIONS,
   User,
+  proceessUploadPhoto,
 } from '@monorepo-bb-app/shared';
 import {
   IonItem,
@@ -38,6 +39,7 @@ import {
 import { Photo } from '@capacitor/camera';
 import { AvatarPickerComponent } from '@monorepo-bb-app/ui';
 import { Router } from '@angular/router';
+import { BUCKET_TYPE } from 'libs/shared/constants/enums';
 
 @Component({
   selector: 'app-personal-data',
@@ -80,7 +82,7 @@ export class PersonalDataPage implements OnInit {
     private _toast: ToastService,
     private _loader: LoaderUIService,
     private _router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.currentUserData = {
@@ -92,10 +94,12 @@ export class PersonalDataPage implements OnInit {
       countryCodePrefix: '+52',
       phoneNumber: this.user?.phone || '',
       profileColor: this.user?.profileColor || '#000000',
+      profilePictureUrl: this.user?.profilePictureUrl || CONSTANTS.DEFAULT_AVATAR,
     };
   }
 
-  takeDataPhoto(image: Photo) {
+  onImageSelected(image: Photo | any) {
+
     this.dataPhoto = image;
   }
 
@@ -107,6 +111,8 @@ export class PersonalDataPage implements OnInit {
       if (this.dataPhoto) {
         const img = await this.uploadPhoto(this.dataPhoto);
         imageUrl = img?.location || '';
+      }else{
+        imageUrl = this.user?.profilePictureUrl || '';
       }
     } catch (error) {
       console.error('Error uploading image:', error);
@@ -125,7 +131,17 @@ export class PersonalDataPage implements OnInit {
       pushNotificationToken:
         (await this._localStorage.get(KEY_LOCALSTORAGE.TOKEN_PUSH)) || '',
     };
-    console.log('payload', payload, 'userid', userId, 'updateddata', updatedData);
+
+
+    if (this.user) {
+      const updatedUser = {
+        ...this.user,
+        ...payload,
+      };
+      this._sesionService.setUser(updatedUser)
+    }
+
+
     this._userService
       .updateUser(userId, payload)
       .pipe(finalize(() => this._loader.hideLoader()))
@@ -152,14 +168,20 @@ export class PersonalDataPage implements OnInit {
   }
 
   private async uploadPhoto(image: Photo): Promise<CompleteResultUpload> {
-    const fileName = image.path || `file_${Date.now()}`;
-    const fileType = guessFileType(fileName);
-    const result: CompleteResultUpload = await this._uploadService.uploadFile(
-      image.path!,
-      fileName,
-      fileType,
-      'public'
-    );
-    return result;
+    try {
+      const dataPhoto = await proceessUploadPhoto(image);
+      const result: CompleteResultUpload = await this._uploadService.uploadFile(
+        dataPhoto.fileData,
+        dataPhoto.fileName,
+        dataPhoto.fileType,
+        BUCKET_TYPE.PUBLIC
+      );
+
+      return result;
+    } catch (error) {
+      console.error('Error in uploadPhoto:', error);
+      throw error;
+    }
   }
+
 }

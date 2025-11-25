@@ -67,15 +67,16 @@ export class ProfileComponent implements OnInit {
   }
 
   onMenuItemClick(action: string): void {
+
     switch (action) {
       case 'viewAsClient':
         this.viewAsClient();
         break;
-      case 'PersonalData':
+      case 'personalData':
         this.personalData();
         break;
-      case 'themeColor':
-        this.changeThemeColor();
+      case 'portada':
+        this.navigateToPortada();
         break;
       case 'bankInfo':
         this.navigateToBankInfo();
@@ -103,16 +104,12 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['home/profile/personal-data']);
   }
 
-  private changeThemeColor(): void {
-    // Implementar cambio de color
+  private navigateToPortada(): void {
+    this.router.navigate(['home/profile/portada']);
   }
 
   private navigateToBankInfo(): void {
     // Implementar navegación a información bancaria
-  }
-
-  private personalData(): void {
-    // Implementar navegación a personal data
   }
 
   private showTerms(): void {

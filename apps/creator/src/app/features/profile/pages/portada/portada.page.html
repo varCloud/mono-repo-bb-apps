@@ -1,0 +1,82 @@
+<app-layout-content 
+  customClass="portada-page" 
+  [useGoBack]="true" 
+  [title]="'portada.title' | translate"
+>
+  <div content-body>
+    <ion-grid>
+      <!-- Preview Section -->
+      <ion-row>
+        <ion-col size="12">
+          <div class="cover-preview-section">
+            <h3 class="section-title">{{ 'portada.preview' | translate }}</h3>
+            <div class="cover-preview-container">
+              <div 
+                class="cover-preview"
+                [style.background-image]="selectedCoverImage?.webPath ? 'url(' + selectedCoverImage.webPath + ')' : (currentUser?.profilePictureUrl ? 'url(' + currentUser.profilePictureUrl + ')' : 'none')"
+                [class.no-image]="!selectedCoverImage?.webPath && !currentUser?.profilePictureUrl"
+              >
+                <div class="profile-overlay">
+                  <div class="avatar-container">
+                    <img 
+                      [src]="currentUser?.profilePictureUrl || '/assets/images/default-avatar.png'"
+                      [alt]="currentUser?.nickName"
+                      class="profile-avatar"
+                    />
+                  </div>
+                  <div class="profile-info">
+                    <h4 class="profile-name">{{ currentUser?.nickName }}</h4>
+                    <p class="profile-title">FITNESS COACH</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <!-- Upload Section -->
+      <ion-row>
+        <ion-col size="12">
+          <div class="upload-section">
+            <h3 class="section-title">{{ 'portada.select-image' | translate }}</h3>
+            <p class="section-description">{{ 'portada.image-description' | translate }}</p>
+            
+            <app-avatar-picker
+              [useOnlyDashedElement]="true"
+              [label]="'portada.upload-label' | translate"
+              [currentImage]="selectedCoverImage?.webPath || ''"
+              (imageChanged)="onCoverImageSelected($event)"
+            ></app-avatar-picker>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <!-- Action Buttons -->
+      <ion-row class="action-buttons">
+        <ion-col size="6">
+          <ion-button 
+            fill="outline" 
+            expand="block"
+            type="button"
+            (click)="onCancel()"
+            [disabled]="isLoading()"
+          >
+            {{ 'common.cancel' | translate }}
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button 
+            expand="block"
+            type="button"
+            (click)="onSave()"
+            [disabled]="!selectedCoverImage || isLoading()"
+          >
+            {{ 'common.save' | translate }}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </div>
+</app-layout-content>

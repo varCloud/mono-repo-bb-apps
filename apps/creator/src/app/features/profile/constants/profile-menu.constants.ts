@@ -21,8 +21,8 @@ export const PROFILE_MENU_ITEMS: ProfileMenuItem[] = [
     showArrow: true,
   },
   {
-    text: 'Color',
-    action: 'themeColor',
+    text: 'Portada',
+    action: 'portada',
     showArrow: true,
   },
   {
