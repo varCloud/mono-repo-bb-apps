@@ -29,6 +29,7 @@ import { CommonModule } from '@angular/common';
 import { ViewChild, ElementRef } from '@angular/core';
 import { InputPhoneComponent } from '../input-phone/input-phone.component';
 import { UploadService } from '@monorepo-bb-app/core';
+import { AvatarPickerComponent } from '../avatar-picker/avatar-picker.component';
 
 @Component({
   selector: 'lib-app-profile-editor',
@@ -44,6 +45,7 @@ import { UploadService } from '@monorepo-bb-app/core';
     LayoutContentComponent,
     TranslateModule,
     ErrorMessageComponent,
+    AvatarPickerComponent
   ],
 })
 export class FormPersonalDataCreatorComponent implements OnInit {
@@ -53,6 +55,7 @@ export class FormPersonalDataCreatorComponent implements OnInit {
 
   @Input() initialData: any;
   @Output() saveClicked = new EventEmitter();
+  @Output() imageSelected = new EventEmitter<string>();
   @ViewChild('colorPicker') colorPicker!: ElementRef;
   constructor(private fb: FormBuilder) {
     this.profileForm = this.fb.group({
@@ -97,5 +100,9 @@ export class FormPersonalDataCreatorComponent implements OnInit {
       this.profileForm.markAllAsTouched();
       console.error('El formulario no es válido');
     }
+  }
+
+   onImageSelected(image: string) {
+    this.imageSelected.emit(image);
   }
 }

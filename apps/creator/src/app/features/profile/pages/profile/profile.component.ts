@@ -71,8 +71,8 @@ export class ProfileComponent implements OnInit {
       case 'viewAsClient':
         this.viewAsClient();
         break;
-      case 'myClients':
-        this.navigateToMyClients();
+      case 'PersonalData':
+        this.personalData();
         break;
       case 'themeColor':
         this.changeThemeColor();
@@ -99,8 +99,8 @@ export class ProfileComponent implements OnInit {
     // Implementar visualización como cliente
   }
 
-  private navigateToMyClients(): void {
-    // Implementar navegación a clientes
+  private personalData(): void {
+    this.router.navigate(['home/profile/personal-data']);
   }
 
   private changeThemeColor(): void {

@@ -23,6 +23,8 @@ import {
   IonTitle,
   IonHeader,
   IonContent,
+  IonItemGroup,
+  IonGrid,
 } from '@ionic/angular/standalone';
 import { LayoutContentComponent } from '@monorepo-bb-app/ui';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -57,6 +59,8 @@ import { Router } from '@angular/router';
     IonInput,
     FormPersonalDataCreatorComponent,
     TranslateModule,
+    IonItemGroup,
+    IonGrid
   ],
   templateUrl: './personal-data.page.html',
   styleUrls: ['./personal-data.page.scss'],
@@ -96,10 +100,7 @@ export class PersonalDataPage implements OnInit {
   }
 
   async handleSaveProfile(updatedData: PersonalData) {
-    console.log(
-      'Datos recibidos del componente hijo para guardar:',
-      updatedData + 'filedata:' + this.dataPhoto
-    );
+
     const userId = this._sesionService.user$()?.userId || 0;
     let imageUrl = '';
     try {
