@@ -12,7 +12,7 @@ export class DetailRutine implements OnInit {
 
   player: Plyr;
 
-  // ESTA URL DEBE VENIR DE TU BACKEND (Ver sección de Seguridad abajo)
+  // URL DE PRUEBA
   videoUrl =
     'https://bb-app-bucket.s3.amazonaws.com/uploads/107/691f9d9b31502749ed25b1f0/VID_20251120_170324_1763683521528_i4j1s82tobh.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUQKGH4ZXZCMXSLHU%2F20251121%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20251121T010353Z&X-Amz-Expires=3600&X-Amz-Signature=7feb2f11891b019679f5162ac27e7217cbdf64dc336357253b8543d4f5d14f26&X-Amz-SignedHeaders=host';
   tituloVideo = 'Entrenamiento de Fuerza';
