@@ -1,7 +1,7 @@
 import { Component, effect, OnInit, signal } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { RouterModule } from '@angular/router';
-
+import { ScreenOrientation } from '@capacitor/screen-orientation';
 import {
   LoaderUIService,
   PushNotificationService,
@@ -16,9 +16,8 @@ import { LoaderComponent } from '@monorepo-bb-app/ui';
   styleUrl: './app.scss',
   standalone: true,
   imports: [RouterModule, IonRouterOutlet, IonApp, LoaderComponent],
-  
 })
-export class App  {
+export class App implements OnInit {
   protected title = 'creator';
   public isLoading = signal(false);
   constructor(
@@ -38,5 +37,13 @@ export class App  {
         this.isLoading.set(false);
       }
     });
+  }
+
+  async ngOnInit(): Promise<void> {
+    try {
+      await ScreenOrientation.lock({ orientation: 'portrait' });
+    } catch (error) {
+      console.log('Error unlocking orientation:', error);
+    }
   }
 }

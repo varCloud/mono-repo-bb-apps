@@ -25,6 +25,7 @@ import {
   IonInput,
   IonFab,
   IonFabButton,
+  IonImg,
 } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import {
@@ -47,6 +48,7 @@ import {
   SesionService,
 } from '@monorepo-bb-app/core';
 import { MODAL_RESPONSE } from 'libs/shared/constants/enums';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -68,6 +70,7 @@ import { MODAL_RESPONSE } from 'libs/shared/constants/enums';
     IonHeader,
     CardListComponent,
     CardMaxLikesComponent,
+    IonImg,
   ],
 })
 export class HomeComponent implements OnInit {
@@ -99,10 +102,12 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  ionViewWillEnter() {
     this._loader.showLoader();
     setTimeout(() => {
-      this.getWorkouts();
+      this.getWorkouts(undefined, true);
       this.getWorkoutMaxLikes();
     }, 1000);
   }
@@ -185,10 +190,13 @@ export class HomeComponent implements OnInit {
     return params;
   }
 
-  clickCard(workout: WorkoutListModel) {
+  async clickCard(workout: WorkoutListModel) {
+    const user = await this._localStorage.get(KEY_LOCALSTORAGE.USER);
     this.router.navigate([
-      'home/suscriptions/profile-creator',
+      'home/workouts',
+      workout.workoutId,
       workout.creatorId,
+      user.userId,
     ]);
   }
 }

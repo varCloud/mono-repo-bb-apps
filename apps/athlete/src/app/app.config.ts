@@ -23,9 +23,8 @@ import { AppRoutes } from './app.routes';
 
 register();
 export function createTranslateLoader(httpClient: HttpClient) {
-  return new TranslateHttpLoader(httpClient, './assets/i18n/athlete/', '.json');
+  return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json');
 }
-
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -44,6 +43,6 @@ export const appConfig: ApplicationConfig = {
         },
       })
     ),
-    importProvidersFrom(IonicStorageModule.forRoot({name: 'db-athlete'})),
+    importProvidersFrom(IonicStorageModule.forRoot({ name: 'db-athlete' })),
   ],
 };
