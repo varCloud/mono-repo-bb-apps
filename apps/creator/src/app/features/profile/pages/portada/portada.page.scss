@@ -1,9 +1,10 @@
-.portada-page {
+
   .section-title {
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--ion-color-dark);
     margin: 0 0 12px 0;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
   }
 
   .section-description {
@@ -12,7 +13,7 @@
     margin: 0 0 20px 0;
     line-height: 1.5;
   }  
-}
+
 
 :host{
   ::ng-deep .cover-dashed-area {
