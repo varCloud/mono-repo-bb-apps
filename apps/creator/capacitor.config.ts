@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.bb.pp.cloud',
-  appName: 'BB Creator',
+  appId: 'io.bb.body.booster.creator',
+  appName: 'Coach Body Booster',
   webDir: '../../dist/apps/creator/browser',
   plugins: {
     SplashScreen: {
