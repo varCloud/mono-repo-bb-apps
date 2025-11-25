@@ -14,21 +14,18 @@ import {
 } from '@angular/forms';
 import {
   GENDER_OPTIONS,
-  COUNTRY_CODES,
   Countrycode,
 } from '@monorepo-bb-app/shared';
 import { Photo } from '@capacitor/camera';
 import { IonicModule } from '@ionic/angular';
 import { LayoutContentComponent } from '../layout-content';
 import { TranslateModule } from '@ngx-translate/core';
-
 import { ErrorMessageComponent } from '../error-message/error-message.component';
 import { IonContent } from '@ionic/angular/standalone';
-import { CompleteResultUpload, guessFileType } from '@monorepo-bb-app/shared';
 import { CommonModule } from '@angular/common';
 import { ViewChild, ElementRef } from '@angular/core';
 import { InputPhoneComponent } from '../input-phone/input-phone.component';
-import { UploadService } from '@monorepo-bb-app/core';
+
 
 @Component({
   selector: 'lib-app-profile-editor',
