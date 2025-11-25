@@ -1,0 +1,114 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  <ion-label position="floating">Nombre(s)</ion-label>
+  <ion-input
+    type="text"
+    fill="outline"
+    class="bb-input"
+    formControlName="firstName"
+  ></ion-input>
+  <app-error-message
+    [control]="$any(profileForm.get('firstName'))"
+  ></app-error-message>
+
+  <ion-label position="floating">Apellidos</ion-label>
+  <ion-input
+    type="text"
+    fill="outline"
+    class="bb-input"
+    formControlName="lastName"
+  ></ion-input>
+  <app-error-message
+    [control]="$any(profileForm.get('lastName'))"
+  ></app-error-message>
+
+  <ion-label position="floating">Nickname</ion-label>
+  <ion-input
+    type="text"
+    fill="outline"
+    class="bb-input"
+    formControlName="nickname"
+  ></ion-input>
+  <app-error-message
+    [control]="$any(profileForm.get('lastName'))"
+  ></app-error-message>
+
+  <ion-item
+    fill="outline"
+    class="ion-margin-bottom rounded-input datetime-item"
+    lines="none"
+  >
+    <ion-label class="bold-label">Fecha de nacimiento</ion-label>
+    <ion-datetime-button datetime="birthdatePicker"></ion-datetime-button>
+
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime
+          id="birthdatePicker"
+          presentation="date"
+          formControlName="birthDate"
+          [showDefaultButtons]="true"
+          doneText="Aceptar"
+          cancelText="Cancelar"
+        >
+        </ion-datetime>
+      </ng-template>
+    </ion-modal>
+  </ion-item>
+
+  <ion-item fill="outline" class="ion-margin-bottom rounded-input" lines="none">
+    <ion-label class="bold-label">Género</ion-label>
+    <ion-select
+      formControlName="gender"
+      [placeholder]="'create-account-profile.gender' | translate"
+      slot="end"
+    >
+      @for (item of genderOpt; track $index) {
+      <ion-select-option [value]="item.value">{{
+        item.label | translate
+      }}</ion-select-option>
+      }
+    </ion-select>
+  </ion-item>
+
+  <div class="phone-container ion-margin-bottom">
+    <ion-item
+      fill="outline"
+      class="rounded-input phone-input-item"
+      lines="none"
+    >
+      <ion-col size="12">
+        <app-input-phone
+          [control]="$any(profileForm.get('phoneNumber'))"
+          [isoCode]="'+52'"
+          (maskSelected)="onMaskSelected($event)"
+        ></app-input-phone>
+      </ion-col>
+    </ion-item>
+  </div>
+
+  <ion-col size="12">
+    <ion-item lines="none" button="" (click)="openColorPicker()">
+      <ion-label class="label">{{
+        'create-account-profile.profile-color' | translate
+      }}</ion-label>
+      <input
+        formControlName="profileColor"
+        type="color"
+        class="custom-color-input"
+        #colorPicker
+      />
+    </ion-item>
+    <app-error-message
+      [control]="$any(profileForm.get('profileColor'))"
+    ></app-error-message>
+  </ion-col>
+
+  <ion-button
+    expand="block"
+    type="submit"
+    class="ion-margin-top submit-btn"
+    [disabled]="!profileForm.valid"
+  >
+    {{ initialData ? 'Guardar cambios' : 'Crear cuenta' }}
+  </ion-button>
+</form>

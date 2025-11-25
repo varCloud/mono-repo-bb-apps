@@ -1,0 +1,26 @@
+  <app-layout-content
+    customClass="complete-profile-page"
+    [useGoBack]="true"
+    [title]="'go-back' | translate"
+  >
+</app-layout-content>
+
+<ion-content >
+      <ion-row>
+      <ion-col size="12">
+        <app-avatar-picker
+          [size]="'medium'"
+          [disabled]="false"
+          (imageChanged)="takeDataPhoto($event)"
+        >
+        </app-avatar-picker>
+      </ion-col>
+    </ion-row>
+  <lib-app-profile-editor
+    *ngIf="currentUserData"
+    [initialData]="currentUserData"
+    (saveClicked)="handleSaveProfile($event)"
+    >
+  </lib-app-profile-editor>
+</ion-content>
+

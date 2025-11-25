@@ -30,6 +30,11 @@ export const PROFILE_MENU_ITEMS: ProfileMenuItem[] = [
     action: 'bankInfo',
     showArrow: true,
   },
+    {
+    text: 'Datos Personales',
+    action: 'PersonalData',
+    showArrow: true,
+  },
   {
     text: 'Términos de servicio',
     action: 'terms',

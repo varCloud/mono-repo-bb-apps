@@ -52,3 +52,4 @@ export * from './helpers/manage-photo-to-upload';
 export * from './models/faqs/faqs-categories.model';
 export * from './models/user-subscription-id';
 export * from './models/app-settings-2';
+export * from './models/personal-data';

@@ -8,4 +8,11 @@ export const profileRoutes: Routes = [
         (m) => m.ProfileComponent,
       ),
   },
+    {
+    path: 'personal-data',
+    loadComponent: () =>
+      import('./pages/personal-data/personal-data.page').then(
+        (m) => m.PersonalDataPage,
+      ),
+  },
 ];
