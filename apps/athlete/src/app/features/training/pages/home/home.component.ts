@@ -107,7 +107,7 @@ export class HomeComponent implements OnInit {
   ionViewWillEnter() {
     this._loader.showLoader();
     setTimeout(() => {
-      this.getWorkouts();
+      this.getWorkouts(undefined, true);
       this.getWorkoutMaxLikes();
     }, 1000);
   }
