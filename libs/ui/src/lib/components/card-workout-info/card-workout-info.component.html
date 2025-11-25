@@ -1,4 +1,8 @@
-<div class="card-workout-info">
+<div
+  class="card-workout-info"
+  (click)="goToDetail()"
+  [ngClass]="{ clickable: canClick() }"
+>
   <lib-card-with-lateral-image [imageUrl]="workout().workoutUrl">
     <div class="content-card-workout-info">
       <h2 class="title">{{ workout().title }}</h2>

@@ -1,8 +1,7 @@
-
 <ion-header>
   <ion-toolbar>
     <ion-searchbar
-     [placeholder]="'Buscar'"
+      [placeholder]="'Buscar'"
       [mode]="'ios'"
       [debounce]="300"
       show-cancel-button="always"
@@ -12,7 +11,7 @@
     ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
-<div class="scroll" style="overflow:scroll">
+<div class="scroll" style="overflow: scroll">
   @for (sub of filteredSubscriptions(); track sub) {
  <lib-user-card
         [imageUrl]="sub.user.profilePictureUrl"

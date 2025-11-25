@@ -15,11 +15,12 @@ const config: CapacitorConfig = {
   android: {
     allowMixedContent: true,
     buildOptions: {
-      keystorePath: 'F:/Documents/BlueCloud/Proyectos/BB/key-android-creator/keystore.jks',
+      keystorePath:
+        'F:/Documents/BlueCloud/Proyectos/BB/key-android-creator/keystore.jks',
       keystorePassword: 'bb2025',
       keystoreAlias: 'body-booster',
       keystoreAliasPassword: 'bb2025',
-    }
+    },
   },
 };
 

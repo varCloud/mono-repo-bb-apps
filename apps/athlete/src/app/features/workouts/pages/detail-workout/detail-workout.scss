@@ -1,0 +1,18 @@
+:host {
+  .detail-workout-content {
+    .bb-goback {
+      --margin-bottom: 0;
+      --icon-margin-start: 16px;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: black;
+
+      .lovely-btn {
+        margin-right: 16px;
+      }
+    }
+  }
+}
