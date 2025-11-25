@@ -1,12 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import {
-  IonGrid,
-  IonRow,
-  IonCol,
-  IonButton,
-} from '@ionic/angular/standalone';
+import { IonGrid, IonRow, IonCol, IonButton, IonContent } from '@ionic/angular/standalone';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import {
   LayoutContentComponent,
@@ -20,11 +15,13 @@ import {
 import {
   ToastService,
   CompleteResultUpload,
-  guessFileType
+  guessFileType,
+  proceessUploadPhoto
 } from '@monorepo-bb-app/shared';
 import { UserService } from '../../../user/services/user.service';
 import { Photo } from '@capacitor/camera';
 import { finalize } from 'rxjs';
+import { BUCKET_TYPE } from 'libs/shared/constants/enums';
 
 @Component({
   selector: 'app-portada',
@@ -40,7 +37,8 @@ import { finalize } from 'rxjs';
     IonButton,
     LayoutContentComponent,
     AvatarPickerComponent,
-  ]
+    IonContent
+]
 })
 export class PortadaPage implements OnInit {
   isLoading = signal(false);
@@ -51,7 +49,7 @@ export class PortadaPage implements OnInit {
     private router: Router,
     private userService: UserService,
     private sesionService: SesionService,
-    private uploadService: UploadService,
+    private _uploadService: UploadService,
     private loaderService: LoaderUIService,
     private toastService: ToastService,
     private translateService: TranslateService
@@ -59,6 +57,7 @@ export class PortadaPage implements OnInit {
 
   ngOnInit() {
     this.currentUser = this.sesionService.user$();
+    console.log('Current user:', this.currentUser);
   }
 
   onCoverImageSelected(image: Photo | null) {
@@ -80,14 +79,14 @@ export class PortadaPage implements OnInit {
       const userId = this.sesionService.user$()?.userId || 0;
       
       // Subir imagen de portada
-      const uploadResult = await this.uploadCoverPhoto(this.selectedCoverImage);
+      const uploadResult = await this.uploadPhoto(this.selectedCoverImage);
       
       if (!uploadResult?.location) {
         throw new Error('Error al subir la imagen');
       }
 
       const payload = {
-        profilePictureUrl: uploadResult.location
+        frontPageUrl: uploadResult.location
       };
 
       this.userService.updateUser(userId, payload)
@@ -100,7 +99,7 @@ export class PortadaPage implements OnInit {
             this.toastService.success(
               this.translateService.instant('portada.save-success')
             );
-            // Actualizar el usuario en el servicio de sesión - recargar usuario
+
             this.userService.getUser(userId).subscribe();
             this.router.navigate(['home/profile']);
           },
@@ -113,7 +112,6 @@ export class PortadaPage implements OnInit {
         });
 
     } catch (error) {
-      console.error('Error saving cover image:', error);
       this.toastService.error(
         this.translateService.instant('portada.save-error')
       );
@@ -122,16 +120,21 @@ export class PortadaPage implements OnInit {
     }
   }
 
-  private async uploadCoverPhoto(photo: Photo): Promise<CompleteResultUpload | null> {
+  private async uploadPhoto(image: Photo): Promise<CompleteResultUpload> {
     try {
-      return await this.uploadService.uploadPhoto(photo);
+      const dataPhoto = await proceessUploadPhoto(image);
+      const result: CompleteResultUpload = await this._uploadService.uploadFile(
+        dataPhoto.fileData,
+        dataPhoto.fileName,
+        dataPhoto.fileType,
+        BUCKET_TYPE.PUBLIC
+      );
+
+      return result;
     } catch (error) {
-      console.error('Error uploading cover photo:', error);
-      return null;
+      console.error('Error in uploadPhoto:', error);
+      throw error;
     }
   }
 
-  onCancel() {
-    this.router.navigate(['home/profile']);
-  }
 }

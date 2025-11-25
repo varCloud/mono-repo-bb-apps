@@ -183,5 +183,4 @@ export class PersonalDataPage implements OnInit {
       throw error;
     }
   }
-
 }

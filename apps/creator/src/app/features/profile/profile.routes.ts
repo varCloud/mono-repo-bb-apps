@@ -25,6 +25,11 @@ export const profileRoutes: Routes = [
             (m) => m.PortadaPage,
           ),
       },
+            {
+        path: '**',
+        redirectTo: '',
+        pathMatch: 'full',
+      },
     ]
   }
 ]

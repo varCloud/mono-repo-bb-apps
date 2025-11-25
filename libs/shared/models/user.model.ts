@@ -26,6 +26,7 @@ export interface User {
   height?: string;
   levelId?: number;
   pushNotificationToken?: string;
+  frontPageUrl?: string;
 }
 
 export interface Category {
@@ -83,6 +84,7 @@ export class UserModel implements User {
   levelId?: number;
   birthdate?: string;
   age?: string;
+  frontPageUrl?: string;
   constructor(data: any) {
     this.userId = data.userId || 0;
     this.userTypeId = data.userTypeId || 0;
@@ -108,5 +110,6 @@ export class UserModel implements User {
     this.levelId = data.levelId || 0;
     this.birthdate = data.birthdate || '';
     this.age = data.age || '';
+    this.frontPageUrl = data.frontPageUrl || '';
   }
 }
