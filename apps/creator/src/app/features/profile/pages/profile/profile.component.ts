@@ -80,6 +80,9 @@ export class ProfileComponent implements OnInit {
       case 'bankInfo':
         this.navigateToBankInfo();
         break;
+      case 'personalData':
+        this.router.navigate(['home//personal-data']);
+        break;
       case 'terms':
         this.showTerms();
         break;
@@ -109,6 +112,10 @@ export class ProfileComponent implements OnInit {
 
   private navigateToBankInfo(): void {
     // Implementar navegación a información bancaria
+  }
+
+  private personalData(): void {
+    // Implementar navegación a personal data
   }
 
   private showTerms(): void {

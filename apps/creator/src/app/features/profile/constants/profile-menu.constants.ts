@@ -32,7 +32,7 @@ export const PROFILE_MENU_ITEMS: ProfileMenuItem[] = [
   },
     {
     text: 'Datos Personales',
-    action: 'PersonalData',
+    action: 'personalData',
     showArrow: true,
   },
   {
