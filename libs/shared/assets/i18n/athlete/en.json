@@ -8,10 +8,12 @@
     "finish": "Finish",
     "next": "Next",
     "previous": "Previous",
+    "save-changes": "Save changes",
     "skip": "Skip",
-    "save-changes": "Save changes"
+    "search": "Search"
   },
   "onboarding": {
+    
     "tell-about-us": {
       "title": "Tell us about yourself",
       "subtitle": "To provide a better experience and results we need to know your data.",

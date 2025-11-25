@@ -1,22 +1,32 @@
-import { Component, signal } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonList } from '@ionic/angular/standalone';
+import { Component, signal, OnInit, effect } from '@angular/core';
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonList,
+  IonButton,
+  IonIcon,
+  IonButtons,
+  IonRefresherContent,
+  IonRefresher
+} from '@ionic/angular/standalone';
 // Importamos nuestro nuevo componente
-import { UserCardComponent } from '@monorepo-bb-app/ui';
+import { HeaderSearchComponent, UserCardComponent } from '@monorepo-bb-app/ui';
 import { ModalController } from '@ionic/angular/standalone';
 import { OptionsSubscritporModalComponent } from '@monorepo-bb-app/ui';
 
+import { CONSTANTS, PaginatorModel, Subscription } from '@monorepo-bb-app/shared';
+import { LoaderUIService, SesionService, UserConversationService, UserSuscriptionsIdService } from '@monorepo-bb-app/core';
+import { JsonPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { EmptyElementsComponent } from '@monorepo-bb-app/ui';
+import { ReactiveFormsModule, FormControl } from '@angular/forms';
+import { MySubscriptionsSearchModalComponent } from '@monorepo-bb-app/ui';
+import { Router } from '@angular/router';
+import { finalize, take } from 'rxjs';
+import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
 
-
-// Definimos una interfaz para los datos (¡buena práctica!)
-interface Subscription {
-  id: number;
-  imageUrl: string;
-  name: string;
-  description: string;
-  tag: string;
-  tagBg: string;
-  tagText: string;
-}
 
 @Component({
   selector: 'app-home',
@@ -24,94 +34,120 @@ interface Subscription {
   styleUrls: ['my-subscriptions-user-card.page.scss'],
   standalone: true,
   imports: [
-    IonHeader, IonToolbar, IonTitle, IonContent, IonList,
-    UserCardComponent, OptionsSubscritporModalComponent
-
-  ]
+    IonRefresherContent,
+    IonContent,
+    IonList,
+    UserCardComponent,
+    OptionsSubscritporModalComponent,
+    HeaderSearchComponent,
+    CommonModule,
+    EmptyElementsComponent,
+    ReactiveFormsModule,
+    MySubscriptionsSearchModalComponent,
+    IonRefresher
+  ],
 })
-export class mySubscriptionsUserCardPage {
+export class mySubscriptionsUserCardPage implements OnInit {
+  subscriptions = signal<Subscription[]>([]);
+  
+  public imgUrl = signal<string>('assets/images/empty/emptyelements.png');
+  public textMessage = signal<string>(
+    'Actualmente no tienes suscripciones  Busca entrenamientos y comienza tu sucripción con tu coach favorito.'
+  );
+  public searchControl = new FormControl('');
+  public paginator!: PaginatorModel;
+  public readonly DEFAULT_AVATAR = CONSTANTS.DEFAULT_AVATAR;
+  constructor(
+    private UserSuscriptionsIdService: UserSuscriptionsIdService,
+    private modalCtrl: ModalController,
+    private _userConversationService: UserConversationService,
+    private _loaderUIService: LoaderUIService,
+    private router: Router,
+    private sesionService: SesionService
 
-  // Definimos la lista de suscripciones como un Signal
-  subscriptions = signal<Subscription[]>([
-    {
-      id: 1,
-      imageUrl: 'assets/images/gerardo.jpg', // Reemplaza con tus assets
-      name: 'Gerardo Contreras',
-      description: 'Pago por 3 meses',
-      tag: 'Kick boxing',
-      tagBg: '#e0f7fa', // Azul claro
-      tagText: '#00796b' // Azul oscuro
-    },
-    {
-      id: 2,
-      imageUrl: 'assets/images/alejandro.jpg',
-      name: 'Alejandro López',
-      description: 'Pago por 3 meses',
-      tag: 'Running',
-      tagBg: '#e8f5e9', // Verde claro
-      tagText: '#388e3c' // Verde oscuro
-    },
-    {
-      id: 3,
-      imageUrl: 'assets/images/brenda.jpg',
-      name: 'Brenda Gutiérrez',
-      description: 'Pago por 3 meses',
-      tag: 'Fitness',
-      tagBg: '#e1bee7', // Morado claro
-      tagText: '#ffffff' // Texto blanco (como en tu imagen)
+  ) { 
+    effect(() => {
+      this.sesionService.user$().userId
+    })
+  }
+
+  ngOnInit() {
+    this.getSubscriptionsForUser(`/user/${this.sesionService.user$()?.userId}/suscriptions/${ENUM_TYPE_USER.ATHLETE}`, { page: 1, limit: 25 });
+  }
+
+  getSubscriptionsForUser(uri: string = '', params: any = {}): void {
+    this.UserSuscriptionsIdService.getSubscriptions(uri, params)
+      .pipe()
+      .subscribe((data) => {
+        this.subscriptions.set([...this.subscriptions(), ...data.subscription]);
+        this.paginator = data.paginator;
+      })
+  }
+
+  loadMoreSubscriptions(event: any) {
+    if (this.paginator && this.paginator.links.next) {
+      this.getSubscriptionsForUser(this.paginator.links.next);
     }
-  ]);
+    event.target.complete();
+  }
 
-  constructor(private modalCtrl: ModalController) {}
-
-
-
-
-
-
-  // Método para manejar el clic en los '...'
-
-async onShowOptions(subscription: Subscription, event: Event) {
-
-    const modal = await this.modalCtrl.create({
-      component: OptionsSubscritporModalComponent, // El componente que creamos
+  async openSearchSubscriptionsModal() {
+    const modalSearch = await this.modalCtrl.create({
+      component: MySubscriptionsSearchModalComponent,
       componentProps: {
-        subscription: subscription // Pasa la data de la suscripción al modal
+        allSubscriptions: this.subscriptions,
       },
-      // --- Estilo de Bottom-Sheet ---
-      breakpoints: [0.4, 1],      // Permite que crezca de 0.1 a 1
-      initialBreakpoint: 0.4, // Empieza pequeño
-      handle: false,            // Oculta el "asa" por defecto (usamos el nuestro)
-      cssClass: 'bottom-sheet-modal' // Clase para styling global
+      breakpoints: [0.4, 1],
+      initialBreakpoint: 1,
+      handle: false,
+      cssClass: 'search-modal',
     });
+    await modalSearch.present();
+  }
 
+
+  async onShowOptions(subscription: Subscription, event: Event) {
+    const modal = await this.modalCtrl.create({
+      component: OptionsSubscritporModalComponent,
+      componentProps: {
+        subscription: this.subscriptions,
+      },
+      breakpoints: [0.4, 1],
+      initialBreakpoint: 0.4,
+      handle: false,
+      cssClass: 'bottom-sheet-modal-rounded',
+    });
     await modal.present();
-
-    // --- Escucha el resultado cuando el modal se cierra ---
     const { data, role } = await modal.onWillDismiss();
-
-    // Si el 'role' es 'confirm', significa que el usuario
-    // presionó "Si, Cancelar plan"
     if (role === 'confirm' && data?.confirmed) {
-      console.log('¡CANCELAR LA SUSCRIPCIÓN!', subscription.name);
-      // Aquí llamas a tu servicio para cancelar
-      this.cancelSubscription(subscription.id);
+      // funcion para cancelar suscripcion
+    } else if (data?.createConversation) {
+          this.createConversation(subscription);  
     }
-       console.log('Mostrar opciones para:', subscription.name);
-  }
-
-  // Método para manejar la cancelación real
-  cancelSubscription(id: number) {
-    // Por ahora, solo lo quitamos de la lista
-    this.subscriptions.update(subs =>
-      subs.filter(s => s.id !== id)
-    );
-    console.log('Suscripción cancelada y eliminada de la lista:', id);
+    //mostrar opciones para  subscription.user.name
   }
 
 
-
-
+  createConversation(subscription: Subscription) {
+    const payload = {
+      creatorUserId: subscription.user.id,
+      athleteUserId: this.sesionService.user$()?.userId,
+      sendMessageUserId: this.sesionService.user$()?.userId
+    };
+    this._loaderUIService.showLoader();
+    this._userConversationService.createConversation(payload).pipe(
+      take(1),
+      finalize(() => this._loaderUIService.hideLoader())).
+      subscribe({
+        next: (conversation) => {
+          console.log('Conversación seleccionada:', conversation);
+          this.router.navigate([`home/${conversation.data.userConversationId}/user-chat`], { state: { conversation: conversation.data }, });
+        },
+        error: (error) => {
+          console.error('Error al crear la conversación:', error);
+        }
+      });
+  }
 
 
 }

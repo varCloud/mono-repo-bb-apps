@@ -1,37 +1,27 @@
 import { InfoCardData } from '@monorepo-bb-app/shared';
-
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { CommonModule } from '@angular/common'; // <-- Necesario para *ngFor
-
-// Importa el componente que creaste antes
+import { CommonModule } from '@angular/common';
 import { InfoCardComponent } from '../info-card/info-card.component';
-
-// Definimos la interfaz aquí mismo para simplificar
-
-
 @Component({
   selector: 'app-card-slider',
   templateUrl: './slide-info-card.component.html',
   styleUrls: ['./slide-info-card.component.scss'],
   standalone: true,
-  imports: [
-    CommonModule,
-    InfoCardComponent
-  ]
+  imports: [CommonModule, InfoCardComponent],
 })
-export class CardSliderComponent {
 
+export class CardSliderComponent {
   @Input() cards: InfoCardData[] = [];
   @Output() cardSelected = new EventEmitter<string>();
 
-onCardClicked(clickedTitle: string) {
-    if (this.selectedCardTitle === clickedTitle) {
-      this.selectedCardTitle = null;
+  onCardClicked(clickedId: string) {
+    if (this.selectedCardId === clickedId) {
+      this.selectedCardId = null;
       this.cardSelected.emit(undefined);
     } else {
-      this.selectedCardTitle = clickedTitle;
-      this.cardSelected.emit(clickedTitle);
+      this.selectedCardId = clickedId;
+      this.cardSelected.emit(clickedId);
     }
   }
-  public selectedCardTitle: string | null = null;
+  public selectedCardId: string | null = null;
 }

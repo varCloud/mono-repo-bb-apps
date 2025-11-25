@@ -1,7 +1,8 @@
 export interface InfoCardData {
-  color: string;
-  icon: string;
-  title: string;
-  subtitle: string;
-
+id:string;
+name:string;
+description:string;
+icon:string;
+color:string;
+isSelected?:boolean;
 }

@@ -15,11 +15,11 @@ export const PROFILE_MENU_ITEMS: ProfileMenuItem[] = [
     action: 'personalData',
     showArrow: true,
   },
-  {
-    text: 'Mis Suscripciones',
-    action: 'myClients',
-    showArrow: true,
-  },
+  // {
+  //   text: 'Mis Suscripciones',
+  //   action: 'mySubscriptions',
+  //   showArrow: true,
+  // },
   // {
   //   text: 'Notificaciones',
   //   action: 'themeColor',

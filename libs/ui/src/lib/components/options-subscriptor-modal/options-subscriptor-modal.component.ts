@@ -1,7 +1,10 @@
 import { Component, input, signal } from '@angular/core';
+import { Router, RouterEvent } from '@angular/router';
 import { ModalController, IonIcon, IonButton } from '@ionic/angular/standalone';
+import { LoaderUIService, UserConversationService } from '@monorepo-bb-app/core';
 import { addIcons } from 'ionicons';
-import { close } from 'ionicons/icons';
+import { chatbubbleOutline, close, closeCircleOutline, chatboxEllipsesOutline ,send, create } from 'ionicons/icons';
+import { finalize, take } from 'rxjs';
 
 // Define la interfaz de Suscripción aquí o impórtala si la tienes
 // en un archivo separado.
@@ -26,36 +29,30 @@ export class OptionsSubscritporModalComponent {
 
   // Recibe la suscripción seleccionada desde la página
   subscription = input.required<Subscription>();
-
-  // Signal para controlar la vista del modal
-  // Estado 1: 'options' (la primera imagen)
-  // Estado 2: 'confirm' (la segunda imagen)
   viewState = signal<'options' | 'confirm'>('options');
 
-  constructor(private modalCtrl: ModalController) {
-    addIcons({ close });
+  constructor(private modalCtrl: ModalController,
+    private _userConversationService:  UserConversationService,
+    private _loaderUIService: LoaderUIService,
+    private router: Router
+  ) {
+    addIcons({ closeCircleOutline , send, chatbubbleOutline , chatboxEllipsesOutline });
   }
 
-  // --- Métodos de Control ---
-
-  // Cierra el modal sin hacer nada
   closeModal() {
     this.modalCtrl.dismiss(null, 'cancel');
   }
-
-  // Cambia a la vista de confirmación
   showConfirmView() {
     this.viewState.set('confirm');
   }
-
-  // Vuelve a la vista de opciones (botón "Cancelar" en la vista 2)
   showOptionsView() {
     this.viewState.set('options');
   }
-
-  // Confirma la cancelación y cierra el modal
-  confirmCancellation() {
-    // Cierra el modal y envía el 'role' = 'confirm'
+  confirmCancellation(){
     this.modalCtrl.dismiss({ confirmed: true }, 'confirm');
+  }
+
+  sendMessage() {
+    this.modalCtrl.dismiss({ createConversation:true }, 'confirm');
   }
 }

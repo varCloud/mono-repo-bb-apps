@@ -9,7 +9,8 @@
     "next": "Siguiente",
     "previous": "Anterior",
     "skip": "Saltar",
-    "save-changes": "Guardar cambios"
+    "save-changes": "Guardar cambios",
+    "search": "Buscar"
   },
   "go-back": "Regresar",
   "login": {
@@ -61,6 +62,7 @@
     "title": "Restablecer contraseña"
   },
   "onboarding": {
+    "title":"Impulsa tu vida",
     "tell-about-us": {
       "title": "Cuéntanos sobre ti",
       "subtitle": "Para brindar una mejor experiencia y resultados necesitamos saber tus datos.",

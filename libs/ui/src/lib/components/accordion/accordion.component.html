@@ -1,4 +1,5 @@
-<div class="faq-header">
+
+<div class="faq-header" *ngIf="showHeader()">
   <h2>{{ tittleaccordion() }}</h2>
   <ion-button fill="clear" (click)="toggleAll()">
     {{ allExpanded() ? 'Collapse All' : 'View All' }}

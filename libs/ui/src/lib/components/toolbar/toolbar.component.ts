@@ -1,13 +1,13 @@
 import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { IonButton, IonItem, IonLabel, IonButtons, IonIcon } from '@ionic/angular/standalone';
+import { IonButton, IonItem, IonButtons, IonIcon,IonLabel, IonHeader, IonToolbar } from '@ionic/angular/standalone';
 import {
   callOutline, mailOutline, listOutline, mail, call, personCircleOutline, businessOutline, helpCircleOutline,
   arrowBackOutline
 } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
-import { Router, RouterLink } from '@angular/router';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-tool-bar',
@@ -21,6 +21,8 @@ import { Router, RouterLink } from '@angular/router';
     IonLabel,
     IonButtons,
     IonButton,
+    IonHeader,
+    IonToolbar
   ]
 })
 export class ToolBarComponent {
@@ -43,9 +45,10 @@ export class ToolBarComponent {
   }
 
   public leftIcon = input<string>('arrow-back-outline');
-  public backLink = input<string>('/home');
+  public backLink = input<string>('/home/profile');
 
   public title = input<string>('ingresa un titlo');
+
   public emailLink = input<string>('');
   public emailIcon = input<string>('mail-outline');
 
