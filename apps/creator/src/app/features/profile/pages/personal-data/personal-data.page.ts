@@ -81,7 +81,7 @@ export class PersonalDataPage implements OnInit {
     private _translate: TranslateService,
     private _toast: ToastService,
     private _loader: LoaderUIService,
-    private _router: Router
+
   ) { }
 
   ngOnInit() {
@@ -95,6 +95,7 @@ export class PersonalDataPage implements OnInit {
       phoneNumber: this.user?.phone || '',
       profileColor: this.user?.profileColor || '#000000',
       profilePictureUrl: this.user?.profilePictureUrl || CONSTANTS.DEFAULT_AVATAR,
+      bio: this.user?.bio || '',
     };
   }
 
@@ -130,6 +131,8 @@ export class PersonalDataPage implements OnInit {
       profilePictureUrl: imageUrl,
       pushNotificationToken:
         (await this._localStorage.get(KEY_LOCALSTORAGE.TOKEN_PUSH)) || '',
+      bio: updatedData.bio || '',
+
     };
 
 

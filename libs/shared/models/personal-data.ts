@@ -8,4 +8,5 @@ export interface PersonalData {
   countryCodePrefix: string;
   phoneNumber: string;
   profileColor: string;
+  bio: string;
 }

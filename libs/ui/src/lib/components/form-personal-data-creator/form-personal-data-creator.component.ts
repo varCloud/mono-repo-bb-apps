@@ -57,6 +57,7 @@ export class FormPersonalDataCreatorComponent implements OnInit {
   constructor(private fb: FormBuilder) {
     this.profileForm = this.fb.group({
       firstName: ['', Validators.required],
+
       lastName: ['', Validators.required],
       nickname: ['', Validators.required],
       birthDate: [new Date().toISOString(), Validators.required],
@@ -68,6 +69,7 @@ export class FormPersonalDataCreatorComponent implements OnInit {
       ],
       profileColor: ['#000000'],
       imageProfile: ['/prueba/', Validators.required],
+      bio: ['', Validators.required, Validators.minLength(10)],
     });
   }
 
@@ -75,7 +77,6 @@ export class FormPersonalDataCreatorComponent implements OnInit {
     if (this.userData) {
       this.profileForm.patchValue(this.userData);
     }
-
   }
 
   onMaskSelected(mask: Countrycode) {
