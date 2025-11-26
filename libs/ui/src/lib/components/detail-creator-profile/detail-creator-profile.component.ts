@@ -63,6 +63,7 @@ export class DetailCreatorProfileComponent implements OnInit {
   hasSubscriptionActive = signal<boolean>(false);
   defaultHref = input<string>('/home');
   suscriptionEvent = output<boolean>();
+  defaultCoverPicture = CONSTANTS.DEFAULT_FRONT_PAGE_URL;
   public tabActive = signal<number>(ENUM_WORKOUT_TYPES.RUTINE_VIDEO);
   public WORKOUT_TYPES = ENUM_WORKOUT_TYPES;
 

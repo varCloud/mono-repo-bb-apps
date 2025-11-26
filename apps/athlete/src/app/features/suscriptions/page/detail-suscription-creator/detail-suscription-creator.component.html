@@ -28,7 +28,7 @@
 
   @if( creator() ) {
   <app-layout-content customClass="suscription-creator-page ion-padding">
-    <ion-grid content-body>
+    <ion-grid content-body class="ion-margin-top">
       <ion-radio-group
         [ngModel]="selectedPaymentFrequencyId()"
         (ngModelChange)="selectedPaymentFrequencyId.set($event)"
@@ -50,16 +50,15 @@
           <ion-label>
             <ion-text>{{ payment.interval }}</ion-text>
             @if (!payment.isTrialSubscription) {
-                <ion-text>
-                    {{ payment.interval === 1 ? 'mes' : 'meses' }}
-                </ion-text>
+            <ion-text>
+              {{ payment.interval === 1 ? 'mes' : 'meses' }}
+            </ion-text>
+            } @if (payment.isTrialSubscription) {
+            <ion-text>
+              {{ 'días (Prueba gratis)' }}
+            </ion-text>
             }
-            @if (payment.isTrialSubscription) {
-                <ion-text>
-                    {{ 'días (Prueba gratis)' }}
-                </ion-text>
-            }
-            
+
             <br />
             <ion-note class="recommended-label">
               {{ payment.description }}

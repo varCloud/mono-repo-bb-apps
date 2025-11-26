@@ -11,6 +11,7 @@ export interface User {
   bio: string;
   accountStatusId: number;
   profilePictureUrl: string;
+  frontPageUrl?: string;
   lastLogin: Date;
   updatedAt: Date;
   stripeStatus: string;
@@ -64,7 +65,7 @@ export class UserModel implements User {
   firstName = '';
   lastName = '';
   email = '';
-  genderId ;
+  genderId;
   registrationDate = new Date();
   stripeAccountId = '';
   profileColor = '';
