@@ -10,4 +10,6 @@ export const CONSTANTS = {
     PERCENT_BODY_BOOSTER: 'percent-body-booster',
   },
   DEFAULT_URL_AVATAR: 'https://ionicframework.com/docs/img/demos/avatar.svg',
+  DEFAULT_FRONT_PAGE_URL:
+    'assets/images/suscription/default-front-page-url.png',
 };
