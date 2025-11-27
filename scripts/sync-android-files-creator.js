@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = require('path');
 
 const filesToCopy = {
-  '../files-build/android/files/MainActivity.java':
-    '../apps/creator/android/app/src/main/java/io/bb/pp/cloud/MainActivity.java',
+  '../files-build/android/files/creator/MainActivity.java':'../apps/creator/android/app/src/main/java/io/bb/body/booster/creator/MainActivity.java',
+  '../files-build/android/files/creator/google-services.json': '../apps/creator/android/app/google-services.json',
 };
 
 Object.entries(filesToCopy).forEach(([source, dest]) => {

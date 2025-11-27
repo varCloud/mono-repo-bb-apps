@@ -29,6 +29,16 @@
     "save-success": "Categorías guardadas exitosamente",
     "title": "Categorías"
   },
+  "portada": {
+    "title": "Portada",
+    "preview": "Vista Previa",
+    "select-image": "Seleccionar Imagen",
+    "image-description": "Selecciona una imagen que represente tu perfil profesional. Se recomienda una foto en el gimnasio o entrenando.",
+    "upload-label": "Sube tu imagen de portada",
+    "no-image-selected": "Por favor selecciona una imagen",
+    "save-success": "Imagen de portada actualizada correctamente",
+    "save-error": "Error al actualizar la imagen de portada"
+  },
   "clear": "Limpiar",
   "continue": "Continuar",
   "create-account": "Crear cuenta",

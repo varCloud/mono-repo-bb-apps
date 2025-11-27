@@ -1,0 +1,155 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  <ion-row>
+    <ion-col size="12">
+      <app-avatar-picker
+        [size]="'medium'"
+        [disabled]="false"
+        (imageChanged)="onImageSelected($event)"
+        [currentImage]="this.userData.profilePictureUrl"
+      >
+      </app-avatar-picker>
+    </ion-col>
+  </ion-row>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-input
+          type="text"
+          fill="outline"
+          [label]="'create-account-profile.firstnames' | translate"
+          class="bb-input"
+          label-placement="floating"
+          [placeholder]="'create-account-profile.into-firstnames' | translate"
+          formControlName="firstName"
+          mode="md"
+        ></ion-input>
+        <app-error-message
+          [control]="$any(profileForm.get('firstName'))"
+        ></app-error-message>
+      </ion-col>
+      <ion-col size="12">
+        <ion-input
+          type="text"
+          fill="outline"
+          class="bb-input"
+          formControlName="lastName"
+          [label]="'create-account-profile.lastnames' | translate"
+          label-placement="floating"
+          mode="md"
+          [placeholder]="'create-account-profile.into-lastnames' | translate"
+        ></ion-input>
+        <app-error-message
+          [control]="$any(profileForm.get('lastName'))"
+        ></app-error-message>
+      </ion-col>
+      <ion-col size="12">
+        <ion-input
+          type="text"
+          fill="outline"
+          class="bb-input"
+          [label]="'Nickname' | translate"
+          formControlName="nickname"
+          label-placement="floating"
+          [placeholder]="'create-account-profile.into-nick-name' | translate"
+          mode="md"
+        ></ion-input>
+        <app-error-message
+          [control]="$any(profileForm.get('lastName'))"
+        ></app-error-message>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item lines="none">
+          <ion-label class="label">{{
+            'create-account-profile.birthdate' | translate
+          }}</ion-label>
+          <ion-datetime-button datetime="birthdate"></ion-datetime-button>
+        </ion-item>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime
+              id="birthdate"
+              presentation="date"
+              formControlName="birthdate"
+              [showDefaultButtons]="true"
+              [doneText]="'accept' | translate"
+              [cancelText]="'cancel' | translate"
+              mode="md"
+
+            >
+            </ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item lines="none">
+          <ion-label class="label">
+            {{ 'create-account-profile.gender' | translate }}
+          </ion-label>
+          <ion-select
+            formControlName="gender"
+            [placeholder]="'create-account-profile.gender' | translate"
+            slot="end"
+          >
+            @for (item of genderOpt; track $index) {
+            <ion-select-option [value]="item.value">{{
+              item.label | translate
+            }}</ion-select-option>
+            }
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+
+          <ion-col size="12">
+            <app-input-phone
+            gendercelular  [control]="$any(profileForm.get('phoneNumber'))"
+              [isoCode]="'+52'"
+              (maskSelected)="onMaskSelected($event)"
+            ></app-input-phone>
+          </ion-col>
+
+      <ion-col size="12">
+        <ion-item lines="none" button="" (click)="openColorPicker()">
+          <ion-label class="label">{{
+            'create-account-profile.profile-color' | translate
+          }}</ion-label>
+          <input
+            formControlName="profileColor"
+            type="color"
+            class="custom-color-input"
+            #colorPicker
+          />
+        </ion-item>
+        <app-error-message
+          [control]="$any(profileForm.get('profileColor'))"
+        ></app-error-message>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-textarea
+          mode="md"
+          label="{{ 'description' | translate }}"
+          labelPlacement="floating"
+          fill="outline"
+          placeholder="{{ 'about-me.placeholder' | translate }}"
+          rows="10"
+          formControlName="bio"
+        ></ion-textarea>
+      </ion-col>
+      <ion-col size="12">
+        <ion-button
+
+                color="tertiary"
+        class="bb-input"
+        expand="block"
+        shape="round"
+          type="submit"
+
+          [disabled]="!profileForm.valid"
+        >
+          {{ userData ? 'Guardar cambios' : 'Crear cuenta' }}
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</form>

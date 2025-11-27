@@ -21,13 +21,18 @@ export const PROFILE_MENU_ITEMS: ProfileMenuItem[] = [
     showArrow: true,
   },
   {
-    text: 'Color',
-    action: 'themeColor',
+    text: 'Portada',
+    action: 'portada',
     showArrow: true,
   },
   {
     text: 'Información bancaria y pagos',
     action: 'bankInfo',
+    showArrow: true,
+  },
+    {
+    text: 'Datos Personales',
+    action: 'personalData',
     showArrow: true,
   },
   {

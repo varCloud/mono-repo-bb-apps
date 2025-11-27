@@ -143,7 +143,7 @@ export class PersonalDataPageComponent implements OnInit {
           ...this.basicForm.value,
           ...this.physicalForm.value,
            height: this.physicalForm.value.height.toString(),
-            weight: this.physicalForm.value.weight.toString(),
+           weight: this.physicalForm.value.weight.toString(),
         };
 
         const currentUser = this.sesionService.user$();

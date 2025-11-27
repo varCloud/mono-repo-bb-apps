@@ -2,12 +2,15 @@ import { Component, effect, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LoaderComponent } from '@monorepo-bb-app/ui';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
+
 import {
+  DeepLinkService,
   LoaderUIService,
   PushNotificationService,
   ThemeService,
   TranslationService,
 } from '@monorepo-bb-app/core';
+
 
 @Component({
   standalone: true,
@@ -23,11 +26,14 @@ export class App {
     public globalBlockUIService: LoaderUIService,
     private pushNotificationService: PushNotificationService,
     private _themeService: ThemeService,
-    private _translationService: TranslationService
+    private _translationService: TranslationService,
+    private _deepLinkService: DeepLinkService
   ) {
     this._themeService.initializeTheme();
     this._translationService.setDefaultConfig();
     this.pushNotificationService.initPushNotifications();
+    this._deepLinkService.initialize();
+    
     effect(() => {
       const blockUIState = this.globalBlockUIService.getLoading();
       if (blockUIState) {
@@ -37,4 +43,7 @@ export class App {
       }
     });
   }
+
+
+
 }
