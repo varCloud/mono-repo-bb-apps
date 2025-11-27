@@ -60,7 +60,7 @@ export class FormPersonalDataCreatorComponent implements OnInit {
 
       lastName: ['', Validators.required],
       nickname: ['', Validators.required],
-      birthDate: [new Date().toISOString(), Validators.required],
+      birthdate: [new Date().toISOString(), Validators.required],
       gender: [3, Validators.required],
       countryCodePrefix: ['+52', Validators.required],
       phoneNumber: [
@@ -69,7 +69,7 @@ export class FormPersonalDataCreatorComponent implements OnInit {
       ],
       profileColor: ['#000000'],
       imageProfile: ['/prueba/', Validators.required],
-      bio: ['', Validators.required, Validators.minLength(10)],
+      bio: ['', [Validators.required, Validators.minLength(10)]],
     });
   }
 

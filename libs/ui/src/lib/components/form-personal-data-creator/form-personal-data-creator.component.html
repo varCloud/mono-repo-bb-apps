@@ -62,14 +62,14 @@
           <ion-label class="label">{{
             'create-account-profile.birthdate' | translate
           }}</ion-label>
-          <ion-datetime-button datetime="birthDate"></ion-datetime-button>
+          <ion-datetime-button datetime="birthdate"></ion-datetime-button>
         </ion-item>
         <ion-modal [keepContentsMounted]="true">
           <ng-template>
             <ion-datetime
-              id="birthDate"
+              id="birthdate"
               presentation="date"
-              formControlName="birthDate"
+              formControlName="birthdate"
               [showDefaultButtons]="true"
               [doneText]="'accept' | translate"
               [cancelText]="'cancel' | translate"
@@ -138,9 +138,13 @@
       </ion-col>
       <ion-col size="12">
         <ion-button
-          expand="block"
+
+                color="tertiary"
+        class="bb-input"
+        expand="block"
+        shape="round"
           type="submit"
-          class="ion-margin-top submit-btn"
+
           [disabled]="!profileForm.valid"
         >
           {{ userData ? 'Guardar cambios' : 'Crear cuenta' }}
