@@ -2,9 +2,10 @@ const fs = require('fs');
 const path = require('path');
 
 const filesToCopy = {
-  '../files-build/android/files/MainActivity.java':
-    '../apps/athlete/android/app/src/main/java/io/bb/pp/cloud/MainActivity.java',
+  '../files-build/android/files/MainActivity.java': '..apps/athlete/android/app/src/main/java/io/bb/body/booster/athlete/MainActivity.java',
+  '../files-build/android/files/athlete/google-services.json': '../apps/athlete/android/app/google-services.json',
 };
+
 
 Object.entries(filesToCopy).forEach(([source, dest]) => {
   const sourcePath = path.join(__dirname, source);

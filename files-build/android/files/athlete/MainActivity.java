@@ -1,4 +1,4 @@
-package io.bb.pp.cloud;
+package io.bb.body.booster.athlete;
 
 import android.content.Intent;
 import android.util.Log;
