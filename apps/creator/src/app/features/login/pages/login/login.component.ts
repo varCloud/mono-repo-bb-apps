@@ -59,8 +59,7 @@ export class LoginComponent implements OnInit {
   public userType = ENUM_TYPE_USER.CREATOR;
   public env = { ...environment };
   ngOnInit() {
-
-    Browser.open({ url: 'https://bluecloud.com.mx/2023/bodybooster/fin-onboarding.html' });
+    // Browser.open({ url: 'https://bluecloud.com.mx/2023/bodybooster/fin-onboarding.html' });
   }
 
   public async onLogin(credentials: LoginCredentials) {
