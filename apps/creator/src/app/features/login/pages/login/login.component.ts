@@ -27,6 +27,7 @@ import {
 import { Router, RouterLink } from '@angular/router';
 import { LoaderUIService } from '@monorepo-bb-app/core';
 import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
+import { Browser } from '@capacitor/browser';
 
 @Component({
   selector: 'app-login',
@@ -57,7 +58,10 @@ export class LoginComponent implements OnInit {
   ) {}
   public userType = ENUM_TYPE_USER.CREATOR;
   public env = { ...environment };
-  ngOnInit() {}
+  ngOnInit() {
+
+    Browser.open({ url: 'https://bluecloud.com.mx/2023/bodybooster/fin-onboarding.html' });
+  }
 
   public async onLogin(credentials: LoginCredentials) {
     this._loader.showLoader();
