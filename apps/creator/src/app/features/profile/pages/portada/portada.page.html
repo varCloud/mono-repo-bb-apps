@@ -1,0 +1,31 @@
+<ion-content>
+    <app-layout-content customClass="portada-page" [useGoBack]="true" [title]="'portada.title' | translate">
+        <div content-body>
+            <ion-grid>
+                <ion-row>
+                    <ion-col size="12">
+                        <div class="upload-section">
+                            <p class="section-title">{{ 'portada.select-image' | translate }}</p>
+                            <p class="section-description">{{ 'portada.image-description' | translate }}</p>
+                            <app-avatar-picker [useOnlyDashedElement]="true" [label]="'portada.upload-label' | translate"
+                                [currentImage]="selectedCoverImage?.webPath || this.currentUser?.frontPageUrl"
+                                (imageChanged)="onCoverImageSelected($event)"></app-avatar-picker>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+        <div content-footer>
+            <ion-grid>
+                <ion-row class="action-buttons">
+                    <ion-col size="12">
+                        <ion-button expand="block" type="button" [color]="'tertiary'" (click)="onSave()"
+                            [disabled]="!selectedCoverImage || isLoading()">
+                            {{ 'common.save' | translate }}
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+    </app-layout-content>
+</ion-content>

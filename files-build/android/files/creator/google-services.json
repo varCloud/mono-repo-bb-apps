@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "471200663734",
+    "project_id": "body-booster-f008b",
+    "storage_bucket": "body-booster-f008b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:471200663734:android:fe9b8804055f5830ed7e17",
+        "android_client_info": {
+          "package_name": "io.bb.body.booster.athlete"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTn7aS0CDTB23Jbo-ALAFkiYRPYxgyJXk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:471200663734:android:142207587b82d73bed7e17",
+        "android_client_info": {
+          "package_name": "io.bb.body.booster.creator"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTn7aS0CDTB23Jbo-ALAFkiYRPYxgyJXk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -16,6 +16,16 @@
     "save-success": "Categories saved successfully",
     "title": "Categories"
   },
+  "portada": {
+    "title": "Cover",
+    "preview": "Preview",
+    "select-image": "Select Image",
+    "image-description": "Select an image that represents your professional profile. A photo at the gym or training is recommended.",
+    "upload-label": "Upload your cover image",
+    "no-image-selected": "Please select an image",
+    "save-success": "Cover image updated successfully",
+    "save-error": "Error updating cover image"
+  },
   "clear": "Clear",
   "continue": "Continue",
   "create-account": "Create Account",

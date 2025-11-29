@@ -49,7 +49,7 @@ import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
 })
 export class mySubscriptionsUserCardPage implements OnInit {
   subscriptions = signal<Subscription[]>([]);
-  
+
   public imgUrl = signal<string>('assets/images/empty/emptyelements.png');
   public textMessage = signal<string>(
     'Actualmente no tienes suscripciones  Busca entrenamientos y comienza tu sucripción con tu coach favorito.'
@@ -65,7 +65,7 @@ export class mySubscriptionsUserCardPage implements OnInit {
     private router: Router,
     private sesionService: SesionService
 
-  ) { 
+  ) {
     effect(() => {
       this.sesionService.user$().userId
     })
@@ -122,7 +122,7 @@ export class mySubscriptionsUserCardPage implements OnInit {
     if (role === 'confirm' && data?.confirmed) {
       // funcion para cancelar suscripcion
     } else if (data?.createConversation) {
-          this.createConversation(subscription);  
+      this.createConversation(subscription);
     }
     //mostrar opciones para  subscription.user.name
   }

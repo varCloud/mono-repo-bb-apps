@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { LayoutContentComponent , OtpComponent} from '@monorepo-bb-app/ui';
 import { Router } from '@angular/router';
 import { API_URLS } from '@monorepo-bb-app/shared';
+import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
 
 
 @Component({
@@ -23,7 +24,7 @@ import { API_URLS } from '@monorepo-bb-app/shared';
 })
 export class ValidateOtpResetPasswordComponent implements OnInit {
   public readonly BASE_URL = `${API_URLS.FORGOT_PASSWORD}`;
-  
+  public readonly userTypeId = ENUM_TYPE_USER.CREATOR
   public email: string = '';
   
   constructor(private readonly router: Router) {

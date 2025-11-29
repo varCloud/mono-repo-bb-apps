@@ -48,6 +48,6 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   public get userTypeId(): number {
-    return ENUM_TYPE_USER.ATHLETE; // Athlete
+    return ENUM_TYPE_USER.CREATOR;
   }
 }

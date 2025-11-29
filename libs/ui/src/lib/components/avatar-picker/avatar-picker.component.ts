@@ -9,7 +9,7 @@ import { Capacitor } from '@capacitor/core';
 import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
 import { camera, close, folder, images, pencil } from 'ionicons/icons';
-import { ToastService } from '@monorepo-bb-app/shared';
+import { CONSTANTS, ToastService } from '@monorepo-bb-app/shared';
 import { IonAvatar, IonIcon, IonText } from '@ionic/angular/standalone';
 import { DashedAreaComponent } from '../dashed-area/dashed-area.component';
 
@@ -21,7 +21,7 @@ import { DashedAreaComponent } from '../dashed-area/dashed-area.component';
 })
 export class AvatarPickerComponent {
   @Input() currentImage: string = '';
-  @Input() defaultImage: string = '/assets/icon/default-avatar.png';
+  @Input() defaultImage: string = CONSTANTS.DEFAULT_AVATAR
   @Input() size: 'small' | 'medium' | 'large' = 'medium';
   @Input() disabled: boolean = false;
   @Input() useOnlyDashedElement = false;
