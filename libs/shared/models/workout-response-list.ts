@@ -54,6 +54,10 @@ export interface Asset {
   idempotencyKey: string;
   name: string;
   description: string;
+  signedUrl: string;
+  duration: number;
+  messages: number;
+  likes: number;
 }
 
 export interface CategoryList {

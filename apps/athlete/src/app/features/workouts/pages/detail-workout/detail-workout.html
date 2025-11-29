@@ -1,5 +1,5 @@
 <ion-content class="detail-workout-content ion-no-padding" [fullscreen]="true">
-  <div class="header">
+  <div class="header" [ngClass]="{'ios-platform': isIos}">
     <ion-back-button
       icon="arrow-back-outline"
       class="bb-goback"
@@ -23,24 +23,82 @@
     </ion-button>
   </div>
 
-  <div class="container-header-subscription">
-    <img src="assets/images/logo/logo.svg" alt="" class="img-logo" />
+  <div
+    class="container-header-img-workout"
+    [style.background-image]="'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000 101.65%), url('+ workout.workoutUrl +')'"
+    style="
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    "
+  >
+    <div class="container-header">
+      <h1>{{ workout.title }}</h1>
+      <div class="info-workout">
+        <span class="workout-likes">
+          <ion-icon name="heart"></ion-icon>
 
-    <ion-text class="description" color="white"
-      >Obtén acceso a la selección de entrenamientos y clases que se ofrecen en
-      la aplicación.</ion-text
-    >
+          {{ workout.totalLikes }} {{ 'likes' | translate }} | {{ level }}</span
+        >
+        <ion-chip class="chip">
+          <ion-label>{{ tag }}</ion-label>
+        </ion-chip>
+      </div>
+    </div>
   </div>
-  <app-layout-content customClass="detail-workout-page">
-    <ion-grid content-body>
-      <ion-button
-        color="tertiary"
-        class="bb-input"
-        expand="block"
-        shape="round"
+  <ion-grid class="ion-padding">
+    <ion-row>
+      <ion-col class="ion-no-padding">
+        <div class="categories-creator-profile">
+          @for (category of $any(workout?.categories); track
+          category.categoryId) {
+          <ion-chip [outline]="true" class="chip">
+            <ion-label>{{ category?.category?.name || '--' }}</ion-label>
+          </ion-chip>
+          }
+        </div></ion-col
       >
-        {{ 'continue' | translate }}
-      </ion-button>
-    </ion-grid>
-  </app-layout-content>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-no-padding">
+        <p>{{ workout.description }}</p></ion-col
+      >
+    </ion-row>
+    @for( video of workout.assets; let i = $index ; track video.workoutAssetId
+    ){
+    <ion-item lines="none" class="workouts-items">
+      <div class="container-video" slot="start">
+        <video #player playsinline class="video">
+          <source
+            [src]="video.signedUrl"
+            type="video/mp4"
+            style="width: 120px; height: 125px"
+          />
+          Tu navegador no soporta este video.
+        </video>
+      </div>
+      <div class="info-workout-item">
+        <div class="body">
+          <ion-text color="secondary" class="exercise-number"
+            >{{ 'exercise' | translate }} {{ i + 1 }}</ion-text
+          >
+          <ion-text class="exercise-description">{{ video.name }}</ion-text>
+        </div>
+        <div class="footer">
+          <ion-text>
+            <ion-icon name="timer-sharp"></ion-icon> {{ video.duration || 0 }}
+            m</ion-text
+          >|
+          <ion-text>
+            <ion-icon name="heart"></ion-icon> {{ video.likes || 0 }}</ion-text
+          >
+          <ion-text>
+            <ion-icon name="chatbox-sharp"></ion-icon> {{ video.messages || 0
+            }}</ion-text
+          >
+        </div>
+      </div>
+    </ion-item>
+    }
+  </ion-grid>
 </ion-content>

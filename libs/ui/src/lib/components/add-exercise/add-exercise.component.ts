@@ -175,6 +175,16 @@ export class AddExerciseComponent implements AfterViewInit, OnDestroy {
 
     this.uppy.on('file-added', (file) => {
       this.hideCoverUpload.set(true);
+      if (file.type && file.type.startsWith('video/')) {
+        const video = document.createElement('video');
+        video.preload = 'metadata';
+        video.onloadedmetadata = () => {
+          window.URL.revokeObjectURL(video.src);
+          const minutes = Math.floor(video.duration / 60);
+          this.exerciseForm().patchValue({ duration: minutes });
+        };
+        video.src = URL.createObjectURL(file.data);
+      }
       this.exerciseForm().patchValue({
         uppyFileId: file?.id,
       });
