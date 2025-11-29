@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -7,6 +8,7 @@ import {
   type OnInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Capacitor } from '@capacitor/core';
 import {
   IonButton,
   IonGrid,
@@ -16,16 +18,30 @@ import {
   IonBackButton,
   IonText,
   IonIcon,
+  IonBadge,
+  IonChip,
+  IonLabel,
+  IonItem,
 } from '@ionic/angular/standalone';
+import { Workout } from '@monorepo-bb-app/shared';
 import { LayoutContentComponent } from '@monorepo-bb-app/ui';
 import { TranslateModule } from '@ngx-translate/core';
 import { addIcons } from 'ionicons';
-import { heart, heartOutline } from 'ionicons/icons';
+import {
+  arrowBackOutline,
+  chatboxSharp,
+  heart,
+  heartOutline,
+  timerSharp,
+} from 'ionicons/icons';
 import * as PlyrModule from 'plyr';
 
 @Component({
   selector: 'app-detail-workout',
   imports: [
+    IonItem,
+    IonLabel,
+    IonChip,
     IonIcon,
     IonText,
     IonBackButton,
@@ -34,8 +50,8 @@ import * as PlyrModule from 'plyr';
     IonCol,
     IonGrid,
     IonButton,
-    LayoutContentComponent,
     TranslateModule,
+    NgClass,
   ],
   templateUrl: './detail-workout.html',
   styleUrl: './detail-workout.scss',
@@ -43,15 +59,26 @@ import * as PlyrModule from 'plyr';
 })
 export class DetailWorkout implements OnInit {
   @ViewChild('player') videoElement: ElementRef<HTMLVideoElement>;
+  isIos = Capacitor.getPlatform() === 'ios';
   isFavorite = signal<boolean>(false);
-  data = this.activatedRoute.snapshot.data['workout'];
+  workout = this.activatedRoute.snapshot.data['workout'] as Workout;
   player: Plyr;
-  videoUrl = this.data.assets[0].signedUrl || null;
+  videoUrl = this.workout.assets[0].signedUrl || null;
+  difficulty;
+  level = (this.workout.difficultyLevels[0] as any).level?.description || '';
+  tag = (this.workout.tags[0] as any)?.tag.name || '';
+
   constructor(private activatedRoute: ActivatedRoute) {
-    addIcons({ heart, heartOutline });
+    addIcons({
+      heart,
+      heartOutline,
+      arrowBackOutline,
+      timerSharp,
+      chatboxSharp,
+    });
   }
   ngOnInit(): void {
-    console.log(this.videoUrl, this.data);
+    console.log(this.videoUrl, this.workout);
   }
 
   toggleFavorite($event: Event) {
@@ -60,27 +87,9 @@ export class DetailWorkout implements OnInit {
 
   ngAfterViewInit() {
     this.player = new PlyrModule.default(this.videoElement.nativeElement, {
-      ratio: '1:1',
-      hideControls: true,
-      clickToPlay: true,
-      playsinline: true,
       controls: [
         'play-large', // The large play button in the center
-        // 'restart', // Restart playback
-        'rewind', // Rewind by the seek time (default 10 seconds)
-        'play', // Play/pause playback
-        'fast-forward', // Fast forward by the seek time (default 10 seconds)
-        'progress', // The progress bar and scrubber for playback and buffering
-        'current-time', // The current time of playback
-        'duration', // The full duration of the media
-        'mute', // Toggle mute
-        // 'volume', // Volume control
-        // 'captions', // Toggle captions
-        'fullscreen', // Toggle fullscreen
-        'settings', // Settings menu
-        // 'pip', // Picture-in-picture (currently Safari only)
-        // 'airplay', // Airplay (currently Safari only)
       ],
-    } as any);
+    });
   }
 }

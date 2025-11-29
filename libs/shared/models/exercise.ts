@@ -20,4 +20,5 @@ export interface ExerciseFormControls {
   upload: FormControl<boolean>;
   uploadStatus: FormControl<StatusUpload>;
   s3Key: FormControl<string>;
+  duration: FormControl<number>;
 }
