@@ -53,6 +53,7 @@ export class FormPersonalDataCreatorComponent implements OnInit {
   @Output() saveClicked = new EventEmitter();
   @Output() imageSelected = new EventEmitter<any>();
   @ViewChild('colorPicker') colorPicker!: ElementRef;
+  @Input() textButton ?: any;
 
   constructor(private fb: FormBuilder) {
     this.profileForm = this.fb.group({
