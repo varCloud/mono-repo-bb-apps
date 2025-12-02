@@ -11,7 +11,6 @@ export interface User {
   bio: string;
   accountStatusId: number;
   profilePictureUrl: string;
-  frontPageUrl?: string;
   lastLogin: Date;
   updatedAt: Date;
   stripeStatus: string;

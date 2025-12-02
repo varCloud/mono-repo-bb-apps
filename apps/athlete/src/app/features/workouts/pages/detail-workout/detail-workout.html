@@ -66,7 +66,13 @@
     </ion-row>
     @for( video of workout.assets; let i = $index ; track video.workoutAssetId
     ){
-    <ion-item lines="none" class="workouts-items">
+    <ion-item
+      lines="none"
+      class="workouts-items"
+      (click)="viewDetailRutine(video)"
+      detail="false"
+      [button]="true"
+    >
       <div class="container-video" slot="start">
         <video #player playsinline class="video">
           <source

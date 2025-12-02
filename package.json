@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "add:android:athlete":"cd apps/athlete && npx cap add android && npx cap open android",
-    "add:android:creator":"cd apps/creator && npx cap add android && npx cap open android",
+    "add:android:athlete": "cd apps/athlete && npx cap add android && npx cap open android",
+    "add:android:creator": "cd apps/creator && npx cap add android && npx cap open android",
     "start:creator": "nx serve creator --port=4300",
-    "start:athlete": "nx serve athlete --port=4301",
+    "start:athlete": "nx serve athlete --port=4200",
     "start:all": "nx run-many --target=serve --projects=creator,athlete --parallel=true",
     "athlete:open": "cd apps/athlete && npx cap open android ",
     "creator:open": "cd apps/creator && npx cap open android",
