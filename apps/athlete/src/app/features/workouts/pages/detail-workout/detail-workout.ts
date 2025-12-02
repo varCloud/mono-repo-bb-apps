@@ -7,7 +7,7 @@ import {
   ViewChild,
   type OnInit,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Capacitor } from '@capacitor/core';
 import {
   IonButton,
@@ -23,7 +23,8 @@ import {
   IonLabel,
   IonItem,
 } from '@ionic/angular/standalone';
-import { Workout } from '@monorepo-bb-app/shared';
+import { LocalStorageService } from '@monorepo-bb-app/core';
+import { Asset, KEY_LOCALSTORAGE, Workout } from '@monorepo-bb-app/shared';
 import { LayoutContentComponent } from '@monorepo-bb-app/ui';
 import { TranslateModule } from '@ngx-translate/core';
 import { addIcons } from 'ionicons';
@@ -68,7 +69,11 @@ export class DetailWorkout implements OnInit {
   level = (this.workout.difficultyLevels[0] as any).level?.description || '';
   tag = (this.workout.tags[0] as any)?.tag.name || '';
 
-  constructor(private activatedRoute: ActivatedRoute) {
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private _router: Router,
+    private _localstorage: LocalStorageService
+  ) {
     addIcons({
       heart,
       heartOutline,
@@ -91,5 +96,17 @@ export class DetailWorkout implements OnInit {
         'play-large', // The large play button in the center
       ],
     });
+  }
+
+  async viewDetailRutine(workoutAsset: Asset) {
+    const user = await this._localstorage.get(KEY_LOCALSTORAGE.USER);
+    this._router.navigate([
+      'home/workouts/workoutAsset',
+      this.workout.workoutId, // TODO QUITAR CUANDO EXISTA EL SERVICIO
+      // workoutAsset.workoutAssetId,
+      this.workout.creatorId,
+      user.userId,
+      workoutAsset.workoutAssetId,
+    ]);
   }
 }
