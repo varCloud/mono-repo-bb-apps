@@ -29,6 +29,12 @@
 
   .video-container {
     .description-text {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      ion-text {
+        font-weight: 600;
+      }
       margin-top: 32px;
     }
   }
