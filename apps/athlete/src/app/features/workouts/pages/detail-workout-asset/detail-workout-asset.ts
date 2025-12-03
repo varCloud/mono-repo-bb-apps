@@ -6,11 +6,57 @@ import {
   type OnInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Workout, WorkoutService } from '@monorepo-bb-app/shared';
+import { Asset, Workout, WorkoutService } from '@monorepo-bb-app/shared';
 import * as PlyrModule from 'plyr';
+import { addIcons } from 'ionicons';
+import {
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonButton,
+  IonIcon,
+  IonText,
+  IonContent,
+  IonHeader,
+  IonBackButton,
+  IonItemDivider,
+  IonFab,
+} from '@ionic/angular/standalone';
+import {
+  arrowBackOutline,
+  bookmark,
+  bookmarkOutline,
+  heart,
+  heartOutline,
+  star,
+  starOutline,
+} from 'ionicons/icons';
+import {
+  WorkoutInformationTimeLikesComents,
+  CommentListComponent,
+  Comment,
+} from '@monorepo-bb-app/ui';
+import { TranslateModule } from '@ngx-translate/core';
+import { Capacitor } from '@capacitor/core';
+import { StatusBar } from '@capacitor/status-bar';
 @Component({
   selector: 'app-detail-workout-asset',
-  imports: [],
+  imports: [
+    IonFab,
+    IonItemDivider,
+    IonBackButton,
+    IonText,
+    IonIcon,
+    IonCol,
+    IonRow,
+    IonGrid,
+    IonButton,
+    WorkoutInformationTimeLikesComents,
+    IonContent,
+    IonHeader,
+    CommentListComponent,
+    TranslateModule,
+  ],
   templateUrl: './detail-workout-asset.html',
   styleUrl: './detail-workout-asset.scss',
 })
@@ -25,10 +71,75 @@ export class DetailWorkoutAsset implements OnInit {
   tituloVideo = signal<string>('');
   descripcion = signal<string>('');
 
+  workoutAsset = signal<Asset | null>(null);
+  //TODO: Se quitaran cuando se regresen los comentarios desde el backend
+  comments = signal<Comment[]>([
+    {
+      id: 1,
+      author: {
+        name: 'María García',
+        avatar: 'https://ionicframework.com/docs/img/demos/avatar.svg',
+      },
+      text: '¡Excelente rutina! Me ha ayudado mucho a mejorar mi técnica.',
+      timeAgo: '2024-01-15',
+      rating: 4,
+    },
+    {
+      id: 2,
+      author: {
+        name: 'Carlos Rodríguez',
+        avatar: 'https://ionicframework.com/docs/img/demos/avatar.svg',
+      },
+      text: 'Los ejercicios están muy bien explicados. Definitivamente los voy a incluir en mi entrenamiento.',
+      timeAgo: '2024-01-14',
+      rating: 5,
+    },
+    {
+      id: 3,
+      author: {
+        name: 'Ana Martínez',
+        avatar: 'https://ionicframework.com/docs/img/demos/avatar.svg',
+      },
+      text: '¿Cuántas veces a la semana recomiendan hacer esta rutina?',
+      timeAgo: '2024-01-13',
+      rating: 2,
+    },
+    {
+      id: 5,
+      author: {
+        name: 'Ana Martínez',
+        avatar: 'https://ionicframework.com/docs/img/demos/avatar.svg',
+      },
+      text: '¿Cuántas veces a la semana recomiendan hacer esta rutina?',
+      timeAgo: '2024-01-13',
+      rating: 2,
+    },
+    {
+      id: 3,
+      author: {
+        name: 'Ana Martínez',
+        avatar: 'https://ionicframework.com/docs/img/demos/avatar.svg',
+      },
+      text: '¿Cuántas veces a la semana recomiendan hacer esta rutina?',
+      timeAgo: '2024-01-13',
+      rating: 2,
+    },
+  ]);
+
   constructor(
     private workoutService: WorkoutService,
     private _activatedRoute: ActivatedRoute
-  ) {}
+  ) {
+    addIcons({
+      heart,
+      heartOutline,
+      bookmark,
+      bookmarkOutline,
+      star,
+      starOutline,
+      arrowBackOutline,
+    });
+  }
 
   ngOnInit(): void {
     const video = this.workout.assets.find(
@@ -38,6 +149,7 @@ export class DetailWorkoutAsset implements OnInit {
       this.videoUrl.set(video.signedUrl);
       this.tituloVideo.set(video.name);
       this.descripcion.set(video.description || '');
+      this.workoutAsset.set(video);
     }
   }
 
@@ -73,5 +185,19 @@ export class DetailWorkoutAsset implements OnInit {
         // 'airplay', // Airplay (currently Safari only)
       ],
     });
+
+    this.player.on('exitfullscreen', async () => {
+      if (Capacitor.isNativePlatform() && Capacitor.getPlatform() === 'ios') {
+        await StatusBar.setOverlaysWebView({ overlay: false });
+      }
+    });
+  }
+
+  playVideo() {
+    if (this.player?.playing) {
+      this.player.pause();
+      return;
+    }
+    this.player.play();
   }
 }
