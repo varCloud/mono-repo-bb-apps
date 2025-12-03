@@ -1,3 +1,35 @@
 :host {
-  display: block;
+  .header-contariner-workoutasset {
+    position: relative;
+    .bb-goback {
+      position: absolute;
+      margin-left: 24px;
+      z-index: 2;
+      margin-top: var(--ion-safe-area-top, 24px);
+    }
+  }
+
+  .btn-option {
+    border-radius: 8px;
+    border: 1px solid var(--ion-color-tertiary, #97e4ff);
+    background: #fff;
+    height: 70px;
+    font-size: 14px;
+    .container {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      gap: 10px;
+
+      ion-icon {
+        font-size: 24px;
+      }
+    }
+  }
+
+  .video-container {
+    .description-text {
+      margin-top: 32px;
+    }
+  }
 }

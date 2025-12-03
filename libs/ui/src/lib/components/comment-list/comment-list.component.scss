@@ -1,0 +1,74 @@
+:host {
+  display: block;
+
+  .comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .comment-card {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .comment-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      .comment-header {
+        display: flex;
+        justify-content: space-between;
+
+        .user-info {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 14px;
+          flex-wrap: wrap;
+
+          .name {
+            font-weight: 600;
+            color: var(--ion-color-dark, #222);
+          }
+
+          .time {
+            color: var(--ion-color-medium, #666);
+            font-size: 12px;
+          }
+        }
+
+        .rating {
+          display: flex;
+          gap: 2px;
+
+          ion-icon {
+            font-size: 14px;
+            color: var(--ion-color-tertiary);
+
+            &.filled {
+              color: #ffc409;
+            }
+          }
+        }
+      }
+
+      .comment-text {
+        font-size: 14px;
+        color: var(--ion-color-dark, #333);
+        line-height: 1.4;
+      }
+    }
+  }
+}
