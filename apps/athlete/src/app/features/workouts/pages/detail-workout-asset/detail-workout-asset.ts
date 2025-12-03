@@ -37,6 +37,8 @@ import {
   Comment,
 } from '@monorepo-bb-app/ui';
 import { TranslateModule } from '@ngx-translate/core';
+import { Capacitor } from '@capacitor/core';
+import { StatusBar } from '@capacitor/status-bar';
 @Component({
   selector: 'app-detail-workout-asset',
   imports: [
@@ -182,6 +184,12 @@ export class DetailWorkoutAsset implements OnInit {
         // 'pip', // Picture-in-picture (currently Safari only)
         // 'airplay', // Airplay (currently Safari only)
       ],
+    });
+
+    this.player.on('exitfullscreen', async () => {
+      if (Capacitor.isNativePlatform() && Capacitor.getPlatform() === 'ios') {
+        await StatusBar.setOverlaysWebView({ overlay: false });
+      }
     });
   }
 

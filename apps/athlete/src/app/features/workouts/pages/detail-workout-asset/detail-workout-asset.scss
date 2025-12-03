@@ -8,13 +8,13 @@
       margin-top: var(--ion-safe-area-top, 24px);
     }
   }
-
   .btn-option {
     border-radius: 8px;
     border: 1px solid var(--ion-color-tertiary, #97e4ff);
     background: #fff;
     height: 70px;
     font-size: 14px;
+    width: 100%;
     .container {
       display: flex;
       align-items: center;
