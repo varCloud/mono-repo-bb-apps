@@ -21,6 +21,7 @@ import {
   IonBackButton,
   IonItemDivider,
   IonFab,
+  ModalController,
 } from '@ionic/angular/standalone';
 import {
   arrowBackOutline,
@@ -35,10 +36,12 @@ import {
   WorkoutInformationTimeLikesComents,
   CommentListComponent,
   Comment,
+  SubmitReviewComponent,
 } from '@monorepo-bb-app/ui';
 import { TranslateModule } from '@ngx-translate/core';
 import { Capacitor } from '@capacitor/core';
 import { StatusBar } from '@capacitor/status-bar';
+import { MODAL_RESPONSE } from 'libs/shared/constants/enums';
 @Component({
   selector: 'app-detail-workout-asset',
   imports: [
@@ -128,7 +131,8 @@ export class DetailWorkoutAsset implements OnInit {
 
   constructor(
     private workoutService: WorkoutService,
-    private _activatedRoute: ActivatedRoute
+    private _activatedRoute: ActivatedRoute,
+    private modalCtrl: ModalController
   ) {
     addIcons({
       heart,
@@ -188,7 +192,8 @@ export class DetailWorkoutAsset implements OnInit {
 
     this.player.on('exitfullscreen', async () => {
       if (Capacitor.isNativePlatform() && Capacitor.getPlatform() === 'ios') {
-        await StatusBar.setOverlaysWebView({ overlay: false });
+        await StatusBar.setOverlaysWebView({ overlay: true });
+        await StatusBar.show();
       }
     });
   }
@@ -199,5 +204,21 @@ export class DetailWorkoutAsset implements OnInit {
       return;
     }
     this.player.play();
+  }
+
+  public async openReview() {
+    const modal = await this.modalCtrl.create({
+      component: SubmitReviewComponent,
+      componentProps: {
+        coachName: 'Hola munod',
+        avatarUrl: '',
+      },
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role === MODAL_RESPONSE.CONFIRM) {
+    }
   }
 }
