@@ -1,0 +1,77 @@
+<ion-header collapse="condense" class="header-contariner-workoutasset">
+  <ion-back-button
+    icon="arrow-back-outline"
+    class="bb-goback"
+    [defaultHref]="
+      '/home'
+    "
+    uppercase="false"
+    text=""
+  ></ion-back-button>
+  <video #player playsinline controls>
+    <source [src]="videoUrl()" type="video/mp4" />
+    {{ 'workout-asset.browser-not-supported' | translate }}
+  </video>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <div class="video-container">
+    <ion-grid class="ion-margin-top">
+      <ion-row>
+        <ion-col>
+          <ion-button fill="clear" class="btn-option">
+            <div class="container">
+              <ion-icon name="heart-outline" color="secondary"></ion-icon>
+              <ion-text>{{ 'workout-asset.like' | translate }}</ion-text>
+            </div>
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button fill="clear" class="btn-option">
+            <div class="container">
+              <ion-icon name="bookmark-outline" color="secondary"></ion-icon>
+              <ion-text>{{ 'workout-asset.save' | translate }}</ion-text>
+            </div>
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button fill="clear" class="btn-option" (click)="openReview()">
+            <div class="container">
+              <ion-icon name="star-outline" color="secondary"></ion-icon>
+              <ion-text>{{ 'workout-asset.rate' | translate }}</ion-text>
+            </div>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div class="description-text">
+      <ion-text> {{ workoutAsset().name }} </ion-text>
+      <lib-workout-information-time-likes-coments
+        [workoutAsset]="workoutAsset()"
+      ></lib-workout-information-time-likes-coments>
+    </div>
+  </div>
+
+  <ion-item-divider mode="md"></ion-item-divider>
+  <div style="margin-bottom: 70px">
+    <lib-comment-list [comments]="comments()"></lib-comment-list>
+  </div>
+
+  <ion-fab
+    slot="fixed"
+    vertical="bottom"
+    class="ion-padding"
+    style="width: 100%"
+    horizontal="center"
+  >
+    <ion-button
+      expand="block"
+      fill="solid"
+      color="tertiary"
+      shape="round"
+      (click)="playVideo()"
+    >
+      {{ this.player?.playing ? ('workout-asset.pause' | translate) :
+      ('workout-asset.start' | translate) }}
+    </ion-button>
+  </ion-fab>
+</ion-content>

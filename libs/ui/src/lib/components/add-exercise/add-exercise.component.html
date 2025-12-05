@@ -1,9 +1,10 @@
 <div class="exercise-form">
-  <ion-accordion-group>
+  <ion-accordion-group style="padding: 0">
     <ion-accordion
       toggleIconSlot="start"
       [value]="'exercise' + exerciseNumber"
       [ngClass]="{ 'upload-error': isUploadError() }"
+      style="margin-bottom: 0"
     >
       <ion-item slot="header" [color]="isUploadError() ? 'danger' : null">
         <ion-label>
