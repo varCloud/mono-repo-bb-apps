@@ -1,4 +1,4 @@
-import { AboutMeComponent2 } from '@monorepo-bb-app/ui';
+import { AboutMeComponent } from '@monorepo-bb-app/ui';
 import {
   PersonalData,
   CompleteResultUpload,
@@ -50,7 +50,7 @@ import { finalize } from 'rxjs';
   selector: 'app-personal-data',
   standalone: true,
   imports: [
-    AboutMeComponent2,
+    AboutMeComponent,
     IonRow,
     IonCol,
     IonButton,
@@ -101,6 +101,7 @@ export class PersonalDataPage implements OnInit {
       this.formAboutMe.patchValue({
         bio: this.user.bio || '',
       });
+
       this.currentUserData.patchValue({
         firstName: this.user?.firstName || '',
         lastName: this.user?.lastName || '',
@@ -130,11 +131,11 @@ export class PersonalDataPage implements OnInit {
       gender: [3, Validators.required],
       countryCodePrefix: ['+52', Validators.required],
       phoneNumber: [
-        '9898989898',
+        '',
         [Validators.required, Validators.pattern('^[0-9]*$')],
       ],
       profileColor: ['#000000'],
-      imageProfile: ['/prueba/', Validators.required],
+      profilePictureUrl: [''],
     });
   }
 
@@ -168,6 +169,7 @@ export class PersonalDataPage implements OnInit {
   }
 
   async saveAllChanges() {
+
     const userId = this._sesionService.user$()?.userId || 0;
     this._loaderService.showLoader();
 
@@ -186,18 +188,14 @@ export class PersonalDataPage implements OnInit {
           firstName: this.currentUserData.get('firstName')?.value || '',
           lastName: this.currentUserData.get('lastName')?.value || '',
           profileColor:
-            this.currentUserData.get('profileCOlor')?.value ||
+            this.currentUserData.get('profileColor')?.value ||
             CONSTANTS.USER_DEFAULT_COLOR,
           nickName: this.currentUserData.get('nickname')?.value || '',
           birthdate: this.currentUserData.get('birthdate')?.value || '',
           phone: this.currentUserData.get('phoneNumber')?.value ?? '',
           isoCode: this.currentUserData.get('countryCodePrefix')?.value,
-          genderId: Number(this.currentUserData.get('gender')?.value), //agregar dato dinamico
-          profilePictureUrl: this.currentUserData.get('imageProfile')?.value,
-          pushNotificationToken:
-            (await this._localStorageService.get(
-              KEY_LOCALSTORAGE.TOKEN_PUSH
-            )) || '',
+          genderId: Number(this.currentUserData.get('gender')?.value),
+          profilePictureUrl: imageUrl,
           bio: this.formAboutMe.get('bio')?.value || '',
         };
         if (this.user) {
@@ -215,7 +213,7 @@ export class PersonalDataPage implements OnInit {
             next: () => {
               this._toast.success(
                 this._translateService.instant(
-                  'create-account-profile.save-success'
+                  'update-user-data.success'
                 ),
                 { duration: 500 }
               );

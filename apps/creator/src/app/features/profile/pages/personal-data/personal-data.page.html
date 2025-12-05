@@ -4,14 +4,15 @@
     [useGoBack]="true"
     [title]="'go-back' | translate"
   >
+
     <div content-body>
       <ion-grid>
         <ion-row>
           <ion-col size="12">
+              <h2 class="title">{{ 'profile.basic-info' | translate }}</h2>
             <lib-app-profile-editor
               [profileForm]="currentUserData"
               [textButton]="'common.save-changes' | translate"
-
               (imageSelected)="onImageSelected($event)"
             >
             </lib-app-profile-editor>
@@ -20,24 +21,19 @@
 
         <ion-row>
           <ion-col size="12">
-            <span> Acerca de Mi</span>
-          </ion-col>
-          <ion-col size="12">
-
+             <h2 class="title">{{ 'about-me.title' | translate }}</h2>
             <lib-about-me
               [formAboutMe]="formAboutMe"
-              
+
             >
             </lib-about-me>
           </ion-col>
         </ion-row>
+
       </ion-grid>
     </div>
-  </app-layout-content>
-</ion-content>
-
-<ion-footer class="ion-no-border">
-  <div class="ion-padding">
+    <div content-footer class="ion-padding">
+      
     <ion-button
       shape="round"
       expand="block"
@@ -48,4 +44,9 @@
       {{ 'common.save-changes' | translate }}
     </ion-button>
   </div>
-</ion-footer>
+  </app-layout-content>
+</ion-content>
+
+
+
+

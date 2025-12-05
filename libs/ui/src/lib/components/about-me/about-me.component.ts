@@ -42,7 +42,7 @@ import { ErrorMessageComponent } from '@monorepo-bb-app/ui';
   ErrorMessageComponent
   ],
 })
-export class AboutMeComponent2 implements OnInit {
+export class AboutMeComponent implements OnInit {
 @Input() formAboutMe!: FormGroup;
 @Input() initialDataAboutMe: any = {};
 @Output() formSubmit = new EventEmitter<any>();

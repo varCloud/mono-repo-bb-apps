@@ -5,7 +5,7 @@
         [size]="'medium'"
         [disabled]="false"
         (imageChanged)="onImageSelected($event)"
-        [currentImage]="this.initialData.profilePictureUrl"
+        [currentImage]="$any(profileForm.get('profilePictureUrl')?.value)"
       >
       </app-avatar-picker>
     </ion-col>
