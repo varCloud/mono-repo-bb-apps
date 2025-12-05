@@ -92,11 +92,11 @@ export class PersonalDataPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.inicializateForms();
-    this.loadUserData();
+    this.createForm();
+    this.loadFormData();
   }
 
-  private loadUserData() {
+  private loadFormData() {
     if (this.user) {
       this.formAboutMe.patchValue({
         bio: this.user.bio || '',
@@ -117,10 +117,11 @@ export class PersonalDataPage implements OnInit {
     }
   }
 
-  private inicializateForms() {
+  private createForm() {
     this.formAboutMe = this.fb.group({
       bio: ['', Validators.required],
     });
+
     this.currentUserData = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
