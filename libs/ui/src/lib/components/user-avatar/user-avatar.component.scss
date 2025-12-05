@@ -2,13 +2,18 @@ ion-avatar {
   &.small {
     --size: 20px;
   }
-  
+
   &.medium {
     --size: 20px;
   }
-  
+
   &.large {
     --size: 20px;
+  }
+  &.extra-large {
+    --size: 80px;
+    width: 80px;
+    height: 80px;
   }
 }
 

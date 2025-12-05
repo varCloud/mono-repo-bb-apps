@@ -38,6 +38,7 @@ export * from './lib/components/workout-by-types/workout-by-types.component';
 export * from './lib/components/payment-methods-list/payment-methods-list.component';
 export * from './lib/components/workout-information-time-likes-coments/workout-information-time-likes-coments.component';
 export * from './lib/components/comment-list/comment-list.component';
+export * from './lib/components/submit-review/submit-review.component';
 
 export * from './lib/components/payment-frequency-settings/payment-frequency-settings.component';
 export * from './lib/components/reset-password-form/reset-password-form/reset-password-form.component';

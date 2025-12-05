@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button color="medium" (click)="cancel()">{{
+        'cancel' | translate
+      }}</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="review-container">
+  <div class="header">
+    <app-user-avatar
+      [src]="avatarUrl"
+      size="extra-large"
+      class="avatar"
+    ></app-user-avatar>
+
+    <h2 class="title">Déjale una evaluación a {{ coachName }}</h2>
+
+    <p class="subtitle">
+      ¿Quisieras contar tu experiencia en la app?
+      <br />
+      Déjanos un review
+    </p>
+  </div>
+
+  <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+    <div class="rating-section">
+      @for (star of stars; track $index) {
+      <ion-icon
+        [name]="
+          reviewForm.get('rating')?.value >= star ? 'star' : 'star-outline'
+        "
+        class="star-icon"
+        (click)="setRating(star)"
+      >
+      </ion-icon>
+      }
+    </div>
+
+    <div class="input-section">
+      <ion-text class="input-label">Descripción</ion-text>
+      <div class="textarea-wrapper">
+        <ion-textarea
+          formControlName="description"
+          rows="6"
+          mode="md"
+          class="custom-textarea"
+        >
+        </ion-textarea>
+      </div>
+    </div>
+
+    <div class="button-section">
+      <ion-button
+        type="submit"
+        expand="block"
+        shape="round"
+        class="submit-btn"
+        [disabled]="reviewForm.invalid"
+      >
+        Publicar evaluación
+      </ion-button>
+    </div>
+  </form>
+</ion-content>
