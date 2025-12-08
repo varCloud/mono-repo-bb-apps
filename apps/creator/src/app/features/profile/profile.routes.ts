@@ -18,6 +18,13 @@ export const profileRoutes: Routes = [
             (m) => m.PersonalDataPage,
           ),
       },
+            {
+        path: 'support-creator',
+        loadComponent: () =>
+          import('./pages/support-creator/support-creator').then(
+            (m) => m.SupportCreator,
+          ),
+      },
       {
         path: 'portada',
         loadComponent: () =>
