@@ -73,11 +73,11 @@ import { finalize } from 'rxjs';
   styleUrls: ['./personal-data.page.scss'],
 })
 export class PersonalDataPage implements OnInit {
-  dataPhoto: Photo | null = null;
-  formAboutMe!: FormGroup;
-  user = this._sesionService.user$();
-  currentUserData!: FormGroup;
-  isDisabled!: 'true';
+  public dataPhoto: Photo | null = null;
+  public formAboutMe!: FormGroup;
+  public user = this._sesionService.user$();
+  public currentUserData!: FormGroup;
+  public isDisabled!: 'true';
 
   constructor(
     private fb: FormBuilder,
@@ -108,13 +108,12 @@ export class PersonalDataPage implements OnInit {
         nickname: this.user?.nickName || '',
         birthdate: this.user?.birthdate || '',
         gender: this.user?.genderId || '',
-        countryCodePrefix: '+52',
+        countryCodePrefix: CONSTANTS.DEFAULT_COUNTRY_PREFIX,
         phoneNumber: this.user?.phone || '',
-        profileColor: this.user?.profileColor || '#000000',
+        profileColor: this.user?.profileColor || CONSTANTS.USER_DEFAULT_COLOR,
         profilePictureUrl:
           this.user?.profilePictureUrl || CONSTANTS.DEFAULT_AVATAR,
       });
-      console.log('url:' + this.user.profilePictureUrl);
     }
   }
 
@@ -128,13 +127,13 @@ export class PersonalDataPage implements OnInit {
       lastName: ['', Validators.required],
       nickname: ['', Validators.required],
       birthdate: [new Date().toISOString(), Validators.required],
-      gender: [3, Validators.required],
-      countryCodePrefix: ['+52', Validators.required],
+      gender: ['', Validators.required],
+      countryCodePrefix: [CONSTANTS.DEFAULT_COUNTRY_PREFIX, Validators.required],
       phoneNumber: [
         '',
         [Validators.required, Validators.pattern('^[0-9]*$')],
       ],
-      profileColor: ['#000000'],
+      profileColor: [CONSTANTS.USER_DEFAULT_COLOR],
       profilePictureUrl: [''],
     });
   }

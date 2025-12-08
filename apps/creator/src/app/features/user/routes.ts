@@ -53,6 +53,13 @@ export const userRoutes: Routes = [
             (m) => m.AboutMeComponent,
           ),
       },
+            {
+        path: 'about-me2',
+        loadComponent: () =>
+          import('./pages/profile-incomplete/about-me2/about-me2.component').then(
+            (m) => m.AboutMeComponent2,
+          ),
+      },
       {
         path: 'complete-profile',
         loadComponent: () =>

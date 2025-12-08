@@ -11,16 +11,17 @@ import {
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { HeaderComponent, LayoutContentComponent } from '@monorepo-bb-app/ui';
 import { ProfileIncompleteService } from '../../../services/profile-incomplete.service';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ToastService } from '@monorepo-bb-app/shared';
 import { UserService } from '../../../services/user.service';
 import { finalize } from 'rxjs';
 import { LoaderUIService, SesionService } from '@monorepo-bb-app/core';
+import { AboutMeComponent } from '@monorepo-bb-app/ui';
 
 @Component({
   selector: 'app-about-me',
-  templateUrl: './about-me.component.html',
-  styleUrls: ['./about-me.component.scss'],
+  templateUrl: './about-me2.component.html',
+  styleUrls: ['./about-me2.component.scss'],
   imports: [
     IonTextarea,
     IonRow,
@@ -32,10 +33,12 @@ import { LoaderUIService, SesionService } from '@monorepo-bb-app/core';
     HeaderComponent,
     TranslateModule,
     ReactiveFormsModule,
+    AboutMeComponent
   ],
 })
-export class AboutMeComponent implements OnInit {
-  bio = new FormControl('', [Validators.required, Validators.minLength(10)]);
+export class AboutMeComponent2 implements OnInit {
+  bio! : FormGroup
+  //= new FormControl('', [Validators.required, Validators.minLength(10)]);
   isLoading = signal(false);
   constructor(
     private router: Router,
@@ -44,21 +47,42 @@ export class AboutMeComponent implements OnInit {
     private _userService: UserService,
     private _translate: TranslateService,
     public _sesionService: SesionService,
+    private fb: FormBuilder,
      private readonly _loaderUIService: LoaderUIService
   ) {
-    effect(() => {
-      this.bio.setValue(this._sesionService.user$()?.bio || '');
-    });
+    // effect(() => {
+    //   this.bio.setValue(this._sesionService.user$()?.bio || '');
+    // });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.createForm();
+    this.loadFormData();
+  }
+
+  private createForm() {
+    this.bio = this.fb.group({
+      bio: ['', Validators.required],
+    });
+  }
+  isFormsValid(): boolean {
+    return this.bio.valid;
+  }
+
+private loadFormData() {
+    if (this.bio) {
+      this.bio.patchValue({
+        bio: this._sesionService.user$()?.bio || '',
+      });
+    }
+  }
 
   async goToNextStep() {
     if (this.bio.invalid) {
       return;
     }
-    const bio = this.bio.value ?? '';
-    console.log('bio'+bio);
+    const bio = this.bio.get('bio')?.value ?? '';
+    console.log('bio:'+bio);
     debugger
     this._loaderUIService.showLoader();
     this.isLoading.set(true);

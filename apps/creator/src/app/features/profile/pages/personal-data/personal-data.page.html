@@ -4,12 +4,11 @@
     [useGoBack]="true"
     [title]="'go-back' | translate"
   >
-
     <div content-body>
       <ion-grid>
         <ion-row>
           <ion-col size="12">
-              <h2 class="title">{{ 'profile.basic-info' | translate }}</h2>
+            <h2 class="title">{{ 'profile.basic-info' | translate }}</h2>
             <lib-app-profile-editor
               [profileForm]="currentUserData"
               [textButton]="'common.save-changes' | translate"
@@ -18,35 +17,24 @@
             </lib-app-profile-editor>
           </ion-col>
         </ion-row>
-
         <ion-row>
           <ion-col size="12">
-             <h2 class="title">{{ 'about-me.title' | translate }}</h2>
-            <lib-about-me
-              [formAboutMe]="formAboutMe"
-
-            >
-            </lib-about-me>
+            <h2 class="title">{{'about-me.title' | translate }}</h2>
+            <lib-about-me [formAboutMe]="formAboutMe"></lib-about-me>
           </ion-col>
         </ion-row>
-
       </ion-grid>
     </div>
     <div content-footer class="ion-padding">
-      
-    <ion-button
-      shape="round"
-      expand="block"
-      color="tertiary"
-      (click)="saveAllChanges()"
-      [disabled]="!isFormsValid()"
-    >
-      {{ 'common.save-changes' | translate }}
-    </ion-button>
-  </div>
+      <ion-button
+        shape="round"
+        expand="block"
+        color="tertiary"
+        (click)="saveAllChanges()"
+        [disabled]="!isFormsValid()"
+      >
+        {{ 'common.save-changes' | translate }}
+      </ion-button>
+    </div>
   </app-layout-content>
 </ion-content>
-
-
-
-
