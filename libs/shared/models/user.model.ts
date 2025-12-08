@@ -26,7 +26,7 @@ export interface User {
   height?: string;
   levelId?: number;
   pushNotificationToken?: string;
-  frontPageUrl?: string;
+
 }
 
 export interface Category {
