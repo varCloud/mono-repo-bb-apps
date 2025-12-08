@@ -40,7 +40,7 @@ import {
   guessFileType,
   ToastService,
 } from '@monorepo-bb-app/shared';
-import { finalize } from 'rxjs';
+import { finalize, take } from 'rxjs';
 import { KEY_LOCALSTORAGE, GENDER_OPTIONS } from '@monorepo-bb-app/shared';
 import { Photo } from '@capacitor/camera';
 import {
@@ -177,18 +177,14 @@ export class CompleteProfileComponent implements OnInit {
     };
     this._userService
       .updateUser(userId, payload)
-      .pipe(finalize(() => this._loader.hideLoader()))
       .subscribe({
         next: () => {
           this._toast.success(
             this._translate.instant('create-account-profile.save-success'),
             { duration: 500 }
           );
-          this._localStorage.set(
-            KEY_LOCALSTORAGE.HAS_NULL_PROFILE_FIELDS,
-            false
-          );
-          this._router.navigate(['/stripe-onbording'], { replaceUrl: true });
+          this._localStorage.set( KEY_LOCALSTORAGE.HAS_NULL_PROFILE_FIELDS,false);
+          this.getUserData();
         },
         error: (err) => {
           this._toast.error(
@@ -204,6 +200,7 @@ export class CompleteProfileComponent implements OnInit {
   onMaskSelected(mask: Countrycode) {
     this.isoCode.set(mask.dialCode);
   }
+
   private async uploadPhoto(image: Photo): Promise<CompleteResultUpload> {
     const fileName = image.path!.split('/').pop() || `file_${Date.now()}`;
     const fileType = guessFileType(fileName);
@@ -214,5 +211,16 @@ export class CompleteProfileComponent implements OnInit {
       'public'
     );
     return result;
+  }
+
+    public getUserData() {
+    this._userService.getUser(this._sesionService.user$().userId).pipe(
+      take(1),
+      finalize(() => this._loader.hideLoader()),
+    ).subscribe((response) => {
+      this._router.navigate(['/stripe-onbording'], { replaceUrl: true });
+    }, (error) => {
+      this._loader.hideLoader();
+    });
   }
 }
