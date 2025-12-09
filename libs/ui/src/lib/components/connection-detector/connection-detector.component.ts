@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Import CommonModule for ngIf
+import { CommonModule } from '@angular/common';
 import { ConnectionDetectorService } from'@monorepo-bb-app/ui';
 import { Observable } from 'rxjs';
 import { IonContent, ModalController, IonButton, IonModal } from '@ionic/angular/standalone';
-import { OverlayEventDetail } from '@ionic/core/components'; // Importante para tipado
+import { OverlayEventDetail } from '@ionic/core/components';
 
 @Component({
   selector: 'lib-connection-detector',
-  standalone: true, // Asume un proyecto standalone (típico en Angular 18)
+  standalone: true,
   imports: [CommonModule, IonContent, IonButton, IonModal],
   templateUrl: './connection-detector.component.html',
   styleUrls: ['./coonection-detector.component.scss']
@@ -26,9 +26,8 @@ export class ConnectionDetectorComponent implements OnInit {
 
 
 onModalDismiss(event: CustomEvent<OverlayEventDetail>) {
-    this.isSearchModalOpen = false; // Aseguramos que la variable se resetee
+    this.isSearchModalOpen = false;
 
-    // Aquí recibes la data: event.detail.data
     const data = event.detail.data;
 
     if (data) {
