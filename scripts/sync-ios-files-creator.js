@@ -6,6 +6,7 @@ const filesToCopy = {
     '../apps/creator/ios/App/App/AppDelegate.swift',
   '../files-build/ios/files/Info.plist':
     '../apps/creator/ios/App/App/Info.plist',
+  '../files-build/ios/files/Podfile': '../apps/athlete/ios/App/Podfile',
 };
 
 Object.entries(filesToCopy).forEach(([source, dest]) => {

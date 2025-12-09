@@ -105,7 +105,7 @@ export class ProfileSetupComponent implements OnInit {
     })
   }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.loadSavedData();
   }
 
@@ -164,15 +164,12 @@ export class ProfileSetupComponent implements OnInit {
       };
 
       this._userService.updateUser(this._sessionService.user$().userId, payload).pipe(
-        finalize(() => this._loader.hideLoader()),
         take(1)
       ).subscribe(response => {
-        this._loader.hideLoader();
-        this._localStorage.set(KEY_LOCALSTORAGE.HAS_NULL_PROFILE_FIELDS,false);
-        // Limpiar el estado del onboarding al completar exitosamente
+        this._localStorage.set(KEY_LOCALSTORAGE.HAS_NULL_PROFILE_FIELDS, false);
         this._onboardingStateService.clearOnboardingState();
-        this._toast.success(this._translate.instant('onboarding.profile-setup.save-success'));
-        this._router.navigate(['/home']);
+        this.getUserData();
+
       });
     } catch (error) {
       this._loader.hideLoader();
@@ -185,7 +182,7 @@ export class ProfileSetupComponent implements OnInit {
     try {
       let fileName: string;
       let fileData: string;
-      
+
       if (image.webPath) {
         // Caso web
         const blob = await (await fetch(image.webPath)).blob();
@@ -204,14 +201,14 @@ export class ProfileSetupComponent implements OnInit {
       }
 
       const fileType = guessFileType(fileName);
-      
+
       const result: CompleteResultUpload = await this._uploadService.uploadFile(
         fileData,
         fileName,
         fileType,
         'public'
       );
-      
+
       return result;
     } catch (error) {
       console.error('Error in uploadPhoto:', error);
@@ -239,22 +236,18 @@ export class ProfileSetupComponent implements OnInit {
     return mimeTypeMap[format.toLowerCase()] || 'jpg';
   }
 
-  private base64ToBlob(base64: string, contentType: string = ''): Blob {
-    const byteCharacters = atob(base64);
-    const byteArrays = [];
 
-    for (let offset = 0; offset < byteCharacters.length; offset += 512) {
-      const slice = byteCharacters.slice(offset, offset + 512);
-      const byteNumbers = new Array(slice.length);
-      
-      for (let i = 0; i < slice.length; i++) {
-        byteNumbers[i] = slice.charCodeAt(i);
-      }
-
-      const byteArray = new Uint8Array(byteNumbers);
-      byteArrays.push(byteArray);
-    }
-
-    return new Blob(byteArrays, { type: contentType });
+  public getUserData() {
+    this._userService.getUser(this._sessionService.user$().userId).pipe(
+      take(1),
+      finalize(() => this._loader.hideLoader()),
+    ).subscribe((response) => {
+      this._toast.success(this._translate.instant('onboarding.profile-setup.save-success'));
+      this._router.navigate(['/home']);
+    }, (error) => {
+      this._loader.hideLoader();
+      this._toast.error(this._translate.instant('onboarding.profile-setup.save-error'));
+    });
   }
+
 }

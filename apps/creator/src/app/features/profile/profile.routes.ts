@@ -18,7 +18,7 @@ export const profileRoutes: Routes = [
             (m) => m.PersonalDataPage,
           ),
       },
-           
+
       {
         path: 'portada',
         loadComponent: () =>

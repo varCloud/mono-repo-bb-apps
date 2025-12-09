@@ -24,8 +24,7 @@ export class PushNotificationService {
     private _sesionService: SesionService,
     private _userService: UserService,
     private _zone: NgZone,
-    private _router: Router,
-
+    private _router: Router
   ) {}
 
   public initPushNotifications() {
@@ -33,10 +32,15 @@ export class PushNotificationService {
     if (isPlatform('capacitor')) {
       console.log('Platform is Capacitor, setting up push notifications.');
       PushNotifications.requestPermissions().then((result) => {
+        console.log(result);
         if (result.receive === 'granted') {
-           PushNotifications.register();
+          console.log(
+            'Push notification permissions granted.**************************'
+          );
+          this.logger.info('Permisos concedidos para notificaciones push');
+          PushNotifications.register();
         } else {
-            this.logger.info('Permisos no concedidos para notificaciones push');
+          this.logger.info('Permisos NO concedidos para notificaciones push');
         }
       });
 
@@ -54,25 +58,28 @@ export class PushNotificationService {
         (notification: PushNotificationSchema) => {
           this.logger.info('Push notification received', notification);
           this.showForegroundNotification(notification);
-        },
+        }
       );
 
       // Listener para notificaciones tocadas por el usuario
-      PushNotifications.addListener('pushNotificationActionPerformed',(notification) => {
-          this.logger.info('Notificación recibida por interacción', notification);
+      PushNotifications.addListener(
+        'pushNotificationActionPerformed',
+        (notification) => {
+          this.logger.info(
+            'Notificación recibida por interacción',
+            notification
+          );
           this.logger.info('Push notification action performed', notification);
           const data = notification.notification.data;
           this.logger.info('Push notification data:', data);
           this._zone.run(() => {
             const url = `/home/${data.userConversationId}/user-chat`;
-          this._router.navigate([url] , { state: { data } });
-          
-        });
-        },
+            this._router.navigate([url], { state: { data } });
+          });
+        }
       );
     }
   }
-
 
   private handleNotificationTap(notification: PushNotificationSchema) {
     // Aquí puedes agregar la lógica para manejar el tap en la notificación
@@ -80,14 +87,16 @@ export class PushNotificationService {
     this.logger.info('Manejando tap en notificación', notification);
   }
 
-  private async showForegroundNotification(notification: PushNotificationSchema) {
+  private async showForegroundNotification(
+    notification: PushNotificationSchema
+  ) {
     const toast = await this.toastController.create({
       header: notification.title,
       message: notification.body,
       position: 'top',
       duration: 3000,
-      cssClass: "interactive-toast",
-      animated: true
+      cssClass: 'interactive-toast',
+      animated: true,
     });
 
     // Suscribirse al evento de tap
