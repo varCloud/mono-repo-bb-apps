@@ -1,4 +1,6 @@
-{
+{      "update-user-data": {
+    "success": "Data Updated successfully"
+  },
   "about-me": {
     "placeholder": "Write something about yourself",
     "save-error": "Error saving description.",
@@ -151,6 +153,9 @@
     "step-3-description": "Monitor your clients' training, goals, and objectives.",
     "step-3-title": "Progress"
   },
+
+
+
   "user-create-account": {
     "have-account": "Do you have an account?",
     "title": "Create account as creator"

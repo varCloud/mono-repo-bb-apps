@@ -12,6 +12,11 @@
     "save-changes": "Guardar cambios",
     "search": "Buscar"
   },
+    "update-user-data": {
+    "success": "Datos Actualizados"
+  },
+
+
   "about-me": {
     "placeholder": "Escribe algo sobre ti",
     "save-error": "Error al guardar la descripción.",
