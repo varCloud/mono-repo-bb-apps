@@ -117,7 +117,7 @@ export class ProfileComponent implements OnInit {
   }
 
   private contactSupport(): void {
-    // Implementar contacto con soporte
+     this.router.navigate(['home/profile/support-creator']);
   }
 
   private deleteAccount(): void {

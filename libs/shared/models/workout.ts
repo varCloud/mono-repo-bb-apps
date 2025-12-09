@@ -26,6 +26,7 @@ export const convertToPayload = (data: any) => {
       name: exercise.name,
       description: exercise.description,
       s3Key: exercise.s3Key,
+      duration: data.duration,
     })),
     idempotencyKey: data.idempotencyKey,
   };
@@ -68,6 +69,7 @@ export const payloadToDocumentForm = (data: any) => {
       assetUrl: exercise.url || '',
       name: exercise.name,
       description: exercise.description,
+      duration: data.duration,
     })),
     idempotencyKey: data.idempotencyKey,
   };

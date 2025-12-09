@@ -365,5 +365,14 @@
         "unit": "cm"
       }
     }
+  },
+  "exercise": "Exercise",
+  "workout-asset": {
+    "browser-not-supported": "Your browser does not support this video.",
+    "like": "Like",
+    "save": "Save",
+    "rate": "Rate",
+    "pause": "Pause",
+    "start": "Start"
   }
 }

@@ -188,6 +188,7 @@ export class RoutineFormComponent implements OnInit {
       uploadStatus: new FormControl<StatusUpload>(StatusUpload.PENDING, {
         nonNullable: true,
       }),
+      duration: new FormControl<number>(0, { nonNullable: true }),
     });
 
     if (this.typeRoutine() === TrainingTypeEnum.DOCUMENT) {

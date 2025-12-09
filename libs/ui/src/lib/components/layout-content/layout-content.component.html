@@ -1,15 +1,19 @@
-<div class="layout-content ion-safe-area" [ngClass]="customClass()">
+<div class="layout-content ion-safe-area" [ngClass]="[customClass()]">
   <div>
-    <div class="goBack" *ngIf="useGoBack()">
-      <ion-back-button
-        icon="arrow-back-outline"
-        [defaultHref]="defaultHref()"
-        class="ion-no-padding bb-goback"
-        uppercase="false"
-        [text]="title()"
-        (click)="onGoBackClick()"
-      ></ion-back-button>
-    </div>
+    @if (useGoBack()) {
+      <div class="go-back">
+        <ion-back-button
+          icon="arrow-back-outline"
+          [defaultHref]="defaultHref()"
+          class="ion-no-padding bb-goback"
+          uppercase="false"
+          [text]="title()"
+          (click)="onGoBackClick()"
+        ></ion-back-button>
+      </div>
+    } @else {
+      <div class="divider"></div>
+    }
     <ng-content select="[content-header]"></ng-content>
     <ng-content select="[content-body]"></ng-content>
   </div>

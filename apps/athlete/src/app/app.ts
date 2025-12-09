@@ -9,6 +9,8 @@ import {
   TranslationService,
 } from '@monorepo-bb-app/core';
 import { LoaderComponent } from '@monorepo-bb-app/ui';
+import { Capacitor } from '@capacitor/core';
+import { StatusBar } from '@capacitor/status-bar';
 
 @Component({
   selector: 'app-root',
@@ -42,6 +44,12 @@ export class App implements OnInit {
   async ngOnInit(): Promise<void> {
     try {
       await ScreenOrientation.lock({ orientation: 'portrait' });
+      if (
+        Capacitor.isNativePlatform() &&
+        Capacitor.getPlatform() === 'android'
+      ) {
+        StatusBar.setOverlaysWebView({ overlay: false });
+      }
     } catch (error) {
       console.log('Error unlocking orientation:', error);
     }
