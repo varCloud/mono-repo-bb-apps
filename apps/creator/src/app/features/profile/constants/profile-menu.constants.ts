@@ -11,13 +11,8 @@ export interface ProfileMenuItem {
 
 export const PROFILE_MENU_ITEMS: ProfileMenuItem[] = [
   {
-    text: 'Visualizar Perfil como Cliente',
+    text: 'Visualizar perfil como atleta',
     action: 'viewAsClient',
-    showArrow: true,
-  },
-  {
-    text: 'Mis clientes',
-    action: 'myClients',
     showArrow: true,
   },
   {

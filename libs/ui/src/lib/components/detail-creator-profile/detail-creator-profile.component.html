@@ -11,7 +11,7 @@
   ></ion-back-button>
   <img
     [src]="defaultCoverPicture"
-    alt=""
+    [alt]="'Portada de ' + fullName()"
     style="
       width: 100%;
       height: 200px;
@@ -22,9 +22,12 @@
   <app-layout-content customClass="detail-creator-profile-page ion-padding">
     <ion-grid content-body>
       <div class="header-creator-profile">
-        <ion-avatar class="avatar-creator-profile">
+        <ion-avatar 
+          class="avatar-creator-profile"
+          [style.border-color]="creatorColor()"
+        >
           <img
-            alt="Silhouette of a person's head"
+            [alt]="'Avatar de ' + fullName()"
             [src]="creator()?.profilePictureUrl || defaultProfilePicture"
           />
         </ion-avatar>
@@ -32,30 +35,35 @@
         <div class="info-creator-profile">
           <div class="info-creator-profile-header">
             <h2 class="name">{{ fullName() }}</h2>
-            @if(!hasSubscriptionActive()){
-            <ion-button
-              size="small"
-              color="tertiary"
-              shape="round"
-              class="btn-suscription"
-              (click)="goToSuscriptionCreator()"
-            >
-              Suscribirse
-            </ion-button>
+            @if (!hasSubscriptionActive()) {
+              <ion-button
+                size="small"
+                color="tertiary"
+                shape="round"
+                class="btn-suscription"
+                [style.border-color]="creatorColor()"
+                (click)="goToSuscriptionCreator()"
+              >
+                Suscribirse
+              </ion-button>
             }
           </div>
-          @if(creator()?.bio) {
-          <p class="bio">{{ creator()?.bio }}</p>
-          }@else{
-          <ion-skeleton-text animated></ion-skeleton-text>
-          <ion-skeleton-text animated></ion-skeleton-text>
-          <ion-skeleton-text animated></ion-skeleton-text>
+          @if (creator()?.bio) {
+            <p class="bio">{{ creator()?.bio }}</p>
+          } @else {
+            <ion-skeleton-text animated></ion-skeleton-text>
+            <ion-skeleton-text animated></ion-skeleton-text>
+            <ion-skeleton-text animated></ion-skeleton-text>
           }
         </div>
 
         <div class="categories-creator-profile">
           @for (category of creator()?.categories; track category.categoryId) {
-          <ion-chip [outline]="true" class="chip">
+          <ion-chip 
+            [outline]="true" 
+            class="chip"
+            [style.border-color]="creatorColor()"
+          >
             <ion-label>{{ category.name }}</ion-label>
           </ion-chip>
           }
@@ -66,6 +74,7 @@
           mode="md"
           (ionChange)="changeTab($event)"
           [value]="tabActive()"
+          [style.--indicator-color]="creatorColor()"
         >
           <ion-segment-button
             [value]="WORKOUT_TYPES.RUTINE_VIDEO"
@@ -91,7 +100,7 @@
               ]"
             ></lib-workout-by-types>
           </ion-content>
-          } @if (tabActive() === WORKOUT_TYPES.DOCUMENT) {
+          } @else if (tabActive() === WORKOUT_TYPES.DOCUMENT) {
           <ion-content class="segment-scroll-content ion-no-padding">
             <lib-workout-by-types
               [idCreator]="idCreator()"

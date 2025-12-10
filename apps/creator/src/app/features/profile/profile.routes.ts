@@ -18,7 +18,6 @@ export const profileRoutes: Routes = [
             (m) => m.PersonalDataPage,
           ),
       },
-
       {
         path: 'portada',
         loadComponent: () =>
@@ -26,7 +25,14 @@ export const profileRoutes: Routes = [
             (m) => m.PortadaPage,
           ),
       },
-            {
+      {
+        path: 'creator-profile',
+        loadComponent: () =>
+          import('./pages/detail-creator-profile/detail-creator-profile.component').then(
+            (m) => m.DetailCreatorProfilePageComponent,
+          ),
+      },
+      {
         path: '**',
         redirectTo: '',
         pathMatch: 'full',

@@ -112,7 +112,7 @@ export class PersonalDataPage implements OnInit {
         phoneNumber: this.user?.phone || '',
         profileColor: this.user?.profileColor || CONSTANTS.USER_DEFAULT_COLOR,
         profilePictureUrl:
-          this.user?.profilePictureUrl || CONSTANTS.DEFAULT_AVATAR,
+          this.user?.profilePictureUrl || CONSTANTS.DEFAULT_URL_AVATAR,
       });
     }
   }

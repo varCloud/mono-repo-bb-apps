@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { ProfileColorService } from '@monorepo-bb-app/core';
 import {
   IonTabs,
   IonTabBar,
@@ -23,7 +24,10 @@ import {
   imports: [IonText, IonTabs, IonTabBar, IonTabButton, IonIcon, IonContent,RouterLink],
 })
 export class HomeComponent implements OnInit {
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    public colorService: ProfileColorService
+  ) {
     addIcons({
       homeOutline,
       chatboxEllipsesOutline,

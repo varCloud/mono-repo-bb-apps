@@ -9,6 +9,7 @@ export * from './services/catalogos/catalogs.service';
 export * from './services/errors-msg/errors-messages.service';
 export * from './pipes/mask-email.pipe';
 export * from './directives/app-ion-mask.directive';
+export * from './directives/profile-color.directive';
 export * from './models/catalogs';
 export * from './models/currencies';
 export * from './models/customMessage';

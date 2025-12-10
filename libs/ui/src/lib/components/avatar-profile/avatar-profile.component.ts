@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { cameraOutline, send, sendSharp } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
+import { CONSTANTS } from '@monorepo-bb-app/shared';
 
 @Component({
   selector: 'app-avatar-profile',
@@ -23,7 +24,7 @@ export class AvatarProfileComponent {
   }
 
   get defaultImage(): string {
-    return 'assets/icon/default-avatar.png';
+    return CONSTANTS.DEFAULT_URL_AVATAR;
   }
 
   get avatarSize(): string {

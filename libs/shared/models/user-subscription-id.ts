@@ -31,7 +31,7 @@ export class SubscriptionUserModel implements SubscriptionUser {
 
   private _setProfilePictureUrl() {
     if (this.profilePictureUrl == "") {
-      this.profilePictureUrl = CONSTANTS.DEFAULT_AVATAR;
+      this.profilePictureUrl = CONSTANTS.DEFAULT_URL_AVATAR;
     }
   }
 }

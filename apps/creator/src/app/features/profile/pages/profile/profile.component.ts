@@ -96,8 +96,12 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  public messages(): void {
+    this.router.navigate(['home/user-conversations']);
+  }
+
   private viewAsClient(): void {
-    // Implementar visualización como cliente
+    this.router.navigate(['home/profile/creator-profile']);
   }
 
   private personalData(): void {

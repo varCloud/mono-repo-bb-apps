@@ -1,21 +1,23 @@
 :host {
   display: block;
+  
   .goback-button {
     position: absolute;
     top: var(--ion-safe-area-top);
     left: 16px;
     z-index: 10;
   }
+  
   .detail-creator-profile-content {
     ::ng-deep {
       .detail-creator-profile-page {
-        margin-top: -30px !important ;
-        // margin-bottom: 40px !important;
+        margin-top: -30px !important;
         min-height: auto !important;
       }
 
       .avatar-creator-profile {
-        border: 4px solid #ffffff !important;
+        border: 4px solid;
+        border-color: inherit;
         height: 68px !important;
         width: 68px !important;
       }
@@ -46,7 +48,8 @@
         .btn-suscription {
           --margin-top: 0;
           --margin-bottom: 0;
-
+          --color: white;
+          
           height: auto;
         }
       }
@@ -58,6 +61,7 @@
         font-weight: 600;
       }
     }
+    
     .segment-creator-profile {
       margin-top: 1rem;
 
@@ -74,10 +78,10 @@
       }
 
       ion-segment-button {
-        --indicator-color: var(--ion-color-medium);
         color: var(--ion-color-dark);
         font-weight: 400;
         line-height: 140%;
+        
         &.segment-button-checked {
           .title {
             font-weight: 600;
