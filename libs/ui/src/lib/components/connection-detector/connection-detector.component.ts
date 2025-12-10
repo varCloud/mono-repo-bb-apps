@@ -14,9 +14,9 @@ import {HeaderComponent} from '@monorepo-bb-app/ui';
       <div class="center-container">
 
 
-<app-header></app-header>
 
-<img src="../../assets/images/logo-con-letras.svg" alt="Logo App" class="logo-img" />
+
+<img src="../../../../shared/assets/images/logo-con-letras.svg" alt="Logo App" class="logo-img" />
 
         <ion-text color="medium">
           <h2>Hemos perdido conexion</h2>
