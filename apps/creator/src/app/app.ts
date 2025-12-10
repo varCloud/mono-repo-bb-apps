@@ -1,7 +1,10 @@
-import { Component, effect, signal } from '@angular/core';
+import { Component, effect, signal, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LoaderComponent } from '@monorepo-bb-app/ui';
-import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
+import { IonApp, IonRouterOutlet, ModalController } from '@ionic/angular/standalone';
+import { ConnectionDetectorService } from '@monorepo-bb-app/core';
+import { ConnectionDetectorComponent } from '@monorepo-bb-app/ui';
+
 
 import {
   DeepLinkService,
@@ -20,6 +23,12 @@ import {
   styleUrl: './app.scss',
 })
 export class App {
+  private networkService = inject(ConnectionDetectorService);
+  private modalCtrl = inject(ModalController);
+  private offlineModal: HTMLIonModalElement | null = null;
+
+
+
   protected title = 'creator';
   public isLoading = signal(false);
   constructor(
@@ -33,7 +42,13 @@ export class App {
     this._translationService.setDefaultConfig();
     this.pushNotificationService.initPushNotifications();
     this._deepLinkService.initialize();
-    
+
+    effect(() => {
+      const isOnline = this.networkService.isOnline();
+      this.handleNetworkChange(isOnline);
+    });
+
+
     effect(() => {
       const blockUIState = this.globalBlockUIService.getLoading();
       if (blockUIState) {
@@ -44,6 +59,33 @@ export class App {
     });
   }
 
+async handleNetworkChange(isOnline: boolean) {
+    if (!isOnline) {
+      if (!this.offlineModal) {
+        await this.presentOfflineModal();
+      }
+    } else {
+      if (this.offlineModal) {
+        await this.offlineModal.dismiss();
+        this.offlineModal = null;
+      }
+    }
+  }
 
+  async presentOfflineModal() {
+    this.offlineModal = await this.modalCtrl.create({
+      component: ConnectionDetectorComponent,
+      backdropDismiss: false,
+      cssClass: 'offline-modal',
+      breakpoints: [0, .6],
+      initialBreakpoint: .6
+    });
+
+    await this.offlineModal.present();
+    const { role } = await this.offlineModal.onDidDismiss();
+    if (role !== 'gesture') {
+       this.offlineModal = null;
+    }
+  }
 
 }

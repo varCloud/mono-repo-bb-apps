@@ -4,7 +4,7 @@ import { Network } from '@capacitor/network';
 @Injectable({
   providedIn: 'root'
 })
-export class ConnectionDetectorService {
+export class ConnectionDetectorService2 {
 
   public isOnline: WritableSignal<boolean> = signal(true);
 

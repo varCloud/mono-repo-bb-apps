@@ -79,5 +79,5 @@ export * from './lib/components/form-personal-data-creator/form-personal-data-cr
 export * from './lib/components/about-me/about-me.component';
 
 //servicios de aviso de conexion
-export * from './lib/components/connection-detector-service/connection-detector.service';
+
 export * from './lib/components/connection-detector/connection-detector.component';
