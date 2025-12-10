@@ -20,13 +20,14 @@
           "
           slot="icon-only"
           [color]="filter.countFilters > 0 ? 'secondary' : null"
+          appProfileColor="color"
         ></ion-icon>
       </ion-button>
       <ion-button fill="clear" size="small" class="header-icon-btn">
-        <ion-icon name="search" slot="icon-only"></ion-icon>
+        <ion-icon name="search" slot="icon-only" appProfileColor="color"></ion-icon>
       </ion-button>
       <ion-button fill="clear" size="small" class="header-icon-btn">
-        <ion-icon name="notifications" slot="icon-only"></ion-icon>
+        <ion-icon name="notifications" slot="icon-only" appProfileColor="color"></ion-icon>
       </ion-button>
     </div>
   </div>

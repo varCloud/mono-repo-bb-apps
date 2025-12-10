@@ -1,3 +1,4 @@
+import { ProfileColorService } from './../../core/services/profile-color.service';
 import {
   Directive,
   ElementRef,
@@ -25,7 +26,7 @@ import {
   selector: '[appProfileColor]',
   standalone: true,
 })
-export class ProfileColorDirective implements OnInit {
+export class ProfileColorDirective  {
   /**
    * Tipo de estilo a aplicar:
    * - 'border': aplica border-color
@@ -46,25 +47,15 @@ export class ProfileColorDirective implements OnInit {
   private injector = inject(Injector);
   private colorService: any;
 
-  async ngOnInit() {
-    // Carga dinámica del servicio para evitar dependencias circulares
-    try {
-      const { ProfileColorService } = await import('@monorepo-bb-app/core');
-      this.colorService = this.injector.get(ProfileColorService);
-      
-      // Efecto reactivo que se ejecuta cada vez que cambia el color de perfil
+  constructor(private profileColorService: ProfileColorService) {
       effect(() => {
-        const color = this.colorService.profileColor();
+        const color = this.profileColorService.profileColor();
         this.applyColor(color);
       });
-    } catch (error) {
-      console.error('Error loading ProfileColorService:', error);
-    }
   }
 
   private applyColor(color: string): void {
     const element = this.el.nativeElement;
-
     switch (this.appProfileColor) {
       case 'border':
         this.renderer.setStyle(element, 'border-color', color);
@@ -84,6 +75,7 @@ export class ProfileColorDirective implements OnInit {
 
       case 'color':
         this.renderer.setStyle(element, '--color', color);
+        this.renderer.setStyle(element, 'color', color);
         break;
 
       default:

@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { cameraOutline, send, sendSharp } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
-import { CONSTANTS } from '@monorepo-bb-app/shared';
+import { CONSTANTS, ProfileColorDirective } from '@monorepo-bb-app/shared';
 
 @Component({
   selector: 'app-avatar-profile',
   templateUrl: './avatar-profile.component.html',
   styleUrls: ['./avatar-profile.component.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule ],
+  imports: [CommonModule, IonicModule, ProfileColorDirective],
 })
 export class AvatarProfileComponent {
   @Input() imageUrl?: string;

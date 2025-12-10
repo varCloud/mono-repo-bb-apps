@@ -11,6 +11,11 @@ export interface ProfileMenuItem {
 
 export const PROFILE_MENU_ITEMS: ProfileMenuItem[] = [
   {
+    text: 'Datos Personales',
+    action: 'personalData',
+    showArrow: true,
+  },
+  {
     text: 'Visualizar perfil como atleta',
     action: 'viewAsClient',
     showArrow: true,
@@ -25,21 +30,12 @@ export const PROFILE_MENU_ITEMS: ProfileMenuItem[] = [
     action: 'bankInfo',
     showArrow: true,
   },
-    {
-    text: 'Datos Personales',
-    action: 'personalData',
-    showArrow: true,
-  },
   {
     text: 'Términos de servicio',
     action: 'terms',
     showArrow: true,
   },
-  {
-    text: 'Contactar a soporte',
-    action: 'support',
-    showArrow: true,
-  },
+
   {
     text: 'Eliminar cuenta',
     action: 'deleteAccount',

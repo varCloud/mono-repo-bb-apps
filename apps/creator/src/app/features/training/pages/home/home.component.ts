@@ -32,14 +32,7 @@ import {
   FilterComponent,
   OnbordingComponent,
 } from '@monorepo-bb-app/ui';
-import {
-  FilterModel,
-  KEY_LOCALSTORAGE,
-  Paginator,
-  ToastService,
-  WorkoutListModel,
-  WorkoutService,
-} from '@monorepo-bb-app/shared';
+import { FilterModel, KEY_LOCALSTORAGE, Paginator, ToastService, WorkoutListModel, WorkoutService, ProfileColorDirective } from '@monorepo-bb-app/shared';
 import {
   LoaderUIService,
   LocalStorageService,
@@ -67,7 +60,8 @@ import { MODAL_RESPONSE } from 'libs/shared/constants/enums';
     IonHeader,
     CardListComponent,
     CardMaxLikesComponent,
-  ],
+    ProfileColorDirective
+],
 })
 export class HomeComponent implements OnInit {
   workouts = signal<WorkoutListModel[]>([]);
