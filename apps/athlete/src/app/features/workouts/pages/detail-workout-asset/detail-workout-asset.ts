@@ -205,11 +205,12 @@ export class DetailWorkoutAsset implements OnInit {
         hideControls: true,
         clickToPlay: true,
         youtube: {
-          noCookie: true,
+          noCookie: false,
           rel: 0,
-          showinfo: 0,
+          showinfo: 1,
           iv_load_policy: 3,
-          modestbranding: 1,
+          modestbranding: 0,
+          origin: 'http://localhost',
         },
         controls: [
           'play-large', // The large play button in the center
