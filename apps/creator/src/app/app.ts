@@ -78,7 +78,10 @@ async handleNetworkChange(isOnline: boolean) {
       backdropDismiss: false,
       cssClass: 'offline-modal',
       breakpoints: [0, .6],
-      initialBreakpoint: .6
+      initialBreakpoint: .6,
+      showBackdrop:false,
+      handle: false
+
     });
 
     await this.offlineModal.present();

@@ -8,7 +8,7 @@ import {HeaderComponent} from '@monorepo-bb-app/ui';
 
 
 @Component({
-  selector: 'app-no-internet',
+  selector: 'lib-connection-detector',
   template:`
     <ion-content class="ion-padding no-internet-content">
       <div class="center-container">
