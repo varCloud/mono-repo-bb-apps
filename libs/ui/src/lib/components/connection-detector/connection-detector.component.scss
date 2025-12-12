@@ -1,0 +1,27 @@
+
+    .no-internet-content { --background: #ffffff; }
+    .logo-img {
+      width: 150px;
+      height: auto;
+      margin-bottom: 30px;
+      object-fit: contain;
+    }
+    .center-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 50%;
+      text-align: center;
+      padding: 0 20px;
+    }
+    .big-icon { font-size: 80px; color: var(--ion-color-medium); }
+    .description { margin-bottom: 30px; line-height: 1.5; color: #666; }
+    .spinner-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .waiting-text { font-size: 0.9rem; font-weight: 500; }
+  
