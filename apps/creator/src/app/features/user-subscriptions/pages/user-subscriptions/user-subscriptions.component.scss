@@ -1,82 +1,54 @@
+ion-list {
+  background: transparent;
+  padding: 0px 0px;
+  margin: 0px !important;
+}
+
+.card-item {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.bottom-sheet-modal {
+  --height: auto;
+  .ion-backdrop {
+    opacity: 0.5;
+  }
+
+  .ion-page {
+    position: relative;
+    contain: content;
+  }
+}
+
+ion-modal {
+   --border-radius: 6px;
+}
+
+.header-logo{
+  max-width: 40% !important;
+}
+
 :host {
   .header-container {
     background-color: white;
-    min-height: 110px;
+    min-height: 100px;
     padding-left: 24px;
     padding-right: 24px;
     display: flex;
     flex-direction: column;
     justify-content: end;
-  }
-
-  .header-info-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    text-align: center;
-    margin-bottom: 15px;
-    margin-top: 15px;
-    gap: 4px;
-
-    .title {
-      font-size: 20px;
-      font-weight: 600;
-      color: var(--ion-color-dark);
-    }
-  }
-
-  ion-list {
-    background: transparent;
-    padding: 16px 0;
-
-    .subscription-item {
-      --padding-start: 16px;
-      --padding-end: 16px;
-      --padding-top: 12px;
-      --padding-bottom: 12px;
-      --background: white;
-      margin-bottom: 8px;
-      border-radius: 12px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-      ion-avatar {
-        width: 48px;
-        height: 48px;
-        margin-right: 12px;
-      }
-
-      ion-label {
-        h2 {
-          font-weight: 600;
-          font-size: 16px;
-          margin-bottom: 4px;
-          color: var(--ion-color-dark);
-        }
-
-        p {
-          color: var(--ion-color-medium);
-          font-size: 14px;
-          margin: 0;
-        }
-      }
-
-      ion-button {
-        --padding-start: 8px;
-        --padding-end: 8px;
-        height: 100%;
-        margin: 0;
-      }
-    }
+    padding-top: 15px;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
   }
 }
+app-header-search{
+  padding-bottom: 0px;
 
-::ng-deep {
-  .subscriptions-page {
-    padding-top: 0 !important;
+}
 
-    ion-grid {
-      padding: 16px;
-    }
-  }
+h2{
+  font-size: 1.2em !important;
+  font-weight: 600;
 }
