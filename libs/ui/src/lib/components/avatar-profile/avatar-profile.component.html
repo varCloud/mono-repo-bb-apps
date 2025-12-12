@@ -1,5 +1,5 @@
 <div class="avatar-profile" [class]="size" (click)="onEditClick()">
-  <ion-avatar appProfileColor="border">
+  <ion-avatar [style.border-color]="COLOR">
     <img [src]="imageUrl || defaultImage" [alt]="'Profile Photo'"  />
   </ion-avatar>
 

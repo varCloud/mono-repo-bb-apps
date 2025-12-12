@@ -1,5 +1,4 @@
-import { getLocaleExtraDayPeriodRules } from '@angular/common';
-
+import { ProfileColorService } from './services/profile-color.service';
 
 export { LocalStorageService } from './services/local-storage.service';
 export { SesionService } from './services/sesion.service';
@@ -25,3 +24,4 @@ export { FaqService } from './services/faqs/faqs.service';
 export { FaqCategoriesService } from './services/faqs/faqs-categories.service';
 export { UserSuscriptionsIdService } from './services/user-suscriptions-id.service';
 export { AppConfig2Service } from './services/app-config2.service';
+export { ProfileColorDirective } from './directives/profile-color.directive';

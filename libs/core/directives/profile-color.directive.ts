@@ -1,20 +1,20 @@
-import { ProfileColorService } from './../../core/services/profile-color.service';
 import {
   Directive,
   ElementRef,
   Input,
-  OnInit,
   Renderer2,
   effect,
   inject,
   Injector,
+  runInInjectionContext,
 } from '@angular/core';
-
-// Nota: El servicio se inyecta dinámicamente para evitar dependencias circulares
-// ProfileColorService debe estar disponible en el injector de la aplicación
+import { ProfileColorService } from '../services/profile-color.service';
 
 /**
  * Directiva para aplicar automáticamente el color de perfil del usuario a elementos
+ * 
+ * Nota: El servicio ProfileColorService se inyecta dinámicamente para evitar 
+ * dependencias circulares (shared → core → shared)
  * 
  * Uso:
  * <ion-avatar appProfileColor="border"></ion-avatar>
@@ -26,7 +26,7 @@ import {
   selector: '[appProfileColor]',
   standalone: true,
 })
-export class ProfileColorDirective  {
+export class ProfileColorDirective {
   /**
    * Tipo de estilo a aplicar:
    * - 'border': aplica border-color
@@ -45,13 +45,14 @@ export class ProfileColorDirective  {
   private el = inject(ElementRef);
   private renderer = inject(Renderer2);
   private injector = inject(Injector);
-  private colorService: any;
 
-  constructor(private profileColorService: ProfileColorService) {
-      effect(() => {
-        const color = this.profileColorService.profileColor();
-        this.applyColor(color);
-      });
+  constructor(profileColorService : ProfileColorService) {
+    // Inyección dinámica para evitar referencia circular
+
+          effect(() => {
+            const color = profileColorService.profileColor();
+            this.applyColor(color);
+          });
   }
 
   private applyColor(color: string): void {

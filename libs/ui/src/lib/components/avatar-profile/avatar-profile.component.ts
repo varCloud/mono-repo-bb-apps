@@ -1,16 +1,18 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+
+import { Component, effect, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { cameraOutline, send, sendSharp } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
-import { CONSTANTS, ProfileColorDirective } from '@monorepo-bb-app/shared';
+import { CONSTANTS } from '@monorepo-bb-app/shared';
+import { ProfileColorService } from '@monorepo-bb-app/core';
 
 @Component({
   selector: 'app-avatar-profile',
   templateUrl: './avatar-profile.component.html',
   styleUrls: ['./avatar-profile.component.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, ProfileColorDirective],
+  imports: [CommonModule, IonicModule],
 })
 export class AvatarProfileComponent {
   @Input() imageUrl?: string;
@@ -18,9 +20,12 @@ export class AvatarProfileComponent {
   @Input() showEditButton: boolean = false;
   @Input() disabled: boolean = false;
   @Output() changeImage = new EventEmitter<void>();
-
-  constructor() {
-      addIcons({ sendSharp , cameraOutline , send });
+  COLOR:string=CONSTANTS.USER_DEFAULT_COLOR;
+  constructor(private profileColorService: ProfileColorService) {
+      addIcons({ sendSharp , cameraOutline , send })
+      effect(() => {
+        this.COLOR = this.profileColorService.profileColor();
+      });
   }
 
   get defaultImage(): string {
