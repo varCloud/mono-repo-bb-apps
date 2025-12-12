@@ -5,12 +5,12 @@
 >
   <div #paymentMethod></div>
   @if (!isLoading()) {
-    
+
   <div class="actions">
-    <ion-button (click)="clearFields()" shape="clear">{{
+    <ion-button (click)="clearFields()" shape="outline" expand="block">{{
       'clear' | translate
     }}</ion-button>
-    <ion-button type="submit"  expand="block"  color="tertiary">{{
+    <ion-button type="submit" expand="block" color="tertiary">{{
       'add-payment-method' | translate
     }}</ion-button>
   </div>

@@ -6,7 +6,12 @@ import {
   type OnInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Asset, Workout, WorkoutService } from '@monorepo-bb-app/shared';
+import {
+  Asset,
+  TrainingTypeEnum,
+  Workout,
+  WorkoutService,
+} from '@monorepo-bb-app/shared';
 import * as PlyrModule from 'plyr';
 import { addIcons } from 'ionicons';
 import {
@@ -65,6 +70,12 @@ import { MODAL_RESPONSE } from 'libs/shared/constants/enums';
 })
 export class DetailWorkoutAsset implements OnInit {
   @ViewChild('player') videoElement: ElementRef;
+  @ViewChild('youtubePlayer') youtubeElement: ElementRef;
+
+  isYoutube = signal<boolean>(false);
+  isRoutine = signal<boolean>(false);
+  isDocument = signal<boolean>(false);
+
   workout = this._activatedRoute.snapshot.data['workout'] as Workout;
   workoutAssetId =
     this._activatedRoute.snapshot.paramMap.get('workoutAssetIdP');
@@ -149,11 +160,27 @@ export class DetailWorkoutAsset implements OnInit {
     const video = this.workout.assets.find(
       (asset) => asset.workoutAssetId === +this.workoutAssetId
     );
-    if (video && video.signedUrl) {
-      this.videoUrl.set(video.signedUrl);
+    if (video && (video.signedUrl || video.assetUrl)) {
+      this.workoutAsset.set(video);
+
+      this.isYoutube.set(
+        this.workout.workoutTypeId === TrainingTypeEnum.RECORDED_CLASSES
+      );
+      this.isRoutine.set(
+        this.workout.workoutTypeId === TrainingTypeEnum.ROUTINES
+      );
+      this.isDocument.set(
+        this.workout.workoutTypeId === TrainingTypeEnum.DOCUMENT
+      );
+
+      const url = this.isYoutube()
+        ? this.extractYoutubeId(video.assetUrl) || ''
+        : video.signedUrl;
+      console.log('Video URL:', url);
+
+      this.videoUrl.set(url);
       this.tituloVideo.set(video.name);
       this.descripcion.set(video.description || '');
-      this.workoutAsset.set(video);
     }
   }
 
@@ -166,36 +193,53 @@ export class DetailWorkoutAsset implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.player = new PlyrModule.default(this.videoElement.nativeElement, {
-      ratio: '1:1',
-      hideControls: true,
-      clickToPlay: true,
+    if (this.isYoutube() || this.isRoutine()) {
+      const element = this.isYoutube()
+        ? this.youtubeElement?.nativeElement
+        : this.videoElement?.nativeElement;
 
-      controls: [
-        'play-large', // The large play button in the center
-        // 'restart', // Restart playback
-        'rewind', // Rewind by the seek time (default 10 seconds)
-        'play', // Play/pause playback
-        'fast-forward', // Fast forward by the seek time (default 10 seconds)
-        'progress', // The progress bar and scrubber for playback and buffering
-        'current-time', // The current time of playback
-        'duration', // The full duration of the media
-        // 'mute', // Toggle mute
-        // 'volume', // Volume control
-        // 'captions', // Toggle captions
-        'fullscreen', // Toggle fullscreen
-        'settings', // Settings menu
-        // 'pip', // Picture-in-picture (currently Safari only)
-        // 'airplay', // Airplay (currently Safari only)
-      ],
-    });
+      if (!element) return;
 
-    this.player.on('exitfullscreen', async () => {
-      if (Capacitor.isNativePlatform() && Capacitor.getPlatform() === 'ios') {
-        await StatusBar.setOverlaysWebView({ overlay: true });
-        await StatusBar.show();
-      }
-    });
+      this.player = new PlyrModule.default(element, {
+        ratio: '1:1',
+        hideControls: true,
+        clickToPlay: true,
+        youtube: {
+          noCookie: true,
+          rel: 0,
+          showinfo: 0,
+          iv_load_policy: 3,
+          modestbranding: 1,
+        },
+        controls: [
+          'play-large', // The large play button in the center
+          // 'restart', // Restart playback
+          'rewind', // Rewind by the seek time (default 10 seconds)
+          'play', // Play/pause playback
+          'fast-forward', // Fast forward by the seek time (default 10 seconds)
+          'progress', // The progress bar and scrubber for playback and buffering
+          'current-time', // The current time of playback
+          'duration', // The full duration of the media
+          // 'mute', // Toggle mute
+          // 'volume', // Volume control
+          // 'captions', // Toggle captions
+          'fullscreen', // Toggle fullscreen
+          'settings', // Settings menu
+          // 'pip', // Picture-in-picture (currently Safari only)
+          // 'airplay', // Airplay (currently Safari only)
+        ],
+      });
+
+      this.player.on('exitfullscreen', () => {
+        console.log(Capacitor.getPlatform());
+        if (Capacitor.isNativePlatform() && Capacitor.getPlatform() === 'ios') {
+          setTimeout(async () => {
+            await StatusBar.setOverlaysWebView({ overlay: true });
+            await StatusBar.show();
+          }, 500);
+        }
+      });
+    }
   }
 
   playVideo() {
@@ -220,5 +264,12 @@ export class DetailWorkoutAsset implements OnInit {
 
     if (role === MODAL_RESPONSE.CONFIRM) {
     }
+  }
+
+  private extractYoutubeId(url: string): string | null {
+    const regExp =
+      /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    return match && match[2].length === 11 ? match[2] : null;
   }
 }
