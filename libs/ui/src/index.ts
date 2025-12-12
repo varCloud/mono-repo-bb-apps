@@ -77,3 +77,4 @@ export * from './lib/components/empty-elements/empty-elements.component';
 export * from './lib/components/my-subscriptions-search-modal/my-subscriptions-search-modal.component';
 export * from './lib/components/form-personal-data-creator/form-personal-data-creator.component';
 export * from './lib/components/about-me/about-me.component';
+export * from './lib/components/no-connection-modal/no-connection-modal.component';
