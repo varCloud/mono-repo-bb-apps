@@ -21,7 +21,7 @@ import { DashedAreaComponent } from '../dashed-area/dashed-area.component';
 })
 export class AvatarPickerComponent {
   @Input() currentImage: string = '';
-  @Input() defaultImage: string = CONSTANTS.DEFAULT_AVATAR
+  @Input() defaultImage: string = CONSTANTS.DEFAULT_URL_AVATAR
   @Input() size: 'small' | 'medium' | 'large' = 'medium';
   @Input() disabled: boolean = false;
   @Input() useOnlyDashedElement = false;

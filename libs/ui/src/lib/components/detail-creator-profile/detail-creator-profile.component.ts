@@ -9,6 +9,7 @@ import {
 import { Router } from '@angular/router';
 import {
   LoaderUIService,
+  ProfileColorService,
   SesionService,
   UserService,
 } from '@monorepo-bb-app/core';
@@ -72,6 +73,12 @@ export class DetailCreatorProfileComponent implements OnInit {
     const creator = this.creator();
     return creator ? `${creator.firstName} ${creator.lastName}` : '';
   });
+
+  // Computed que retorna el color del creador o el color de perfil del usuario logueado
+  public creatorColor = computed(() => 
+    this.creator()?.profileColor || this.colorService.profileColor()
+  );
+
   public defaultProfilePicture = CONSTANTS.DEFAULT_URL_AVATAR;
 
   constructor(
@@ -80,7 +87,8 @@ export class DetailCreatorProfileComponent implements OnInit {
     private _toastService: ToastService,
     private _loader: LoaderUIService,
     private _processSuscriptionService: ProcessSuscriptionService,
-    private _sesionService: SesionService
+    private _sesionService: SesionService,
+    public colorService: ProfileColorService
   ) {
     addIcons({ arrowBackOutline });
   }

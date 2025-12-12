@@ -12,10 +12,7 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import {
-  GENDER_OPTIONS,
-  Countrycode,
-} from '@monorepo-bb-app/shared';
+import { GENDER_OPTIONS, Countrycode } from '@monorepo-bb-app/shared';
 import { Photo } from '@capacitor/camera';
 import { IonicModule } from '@ionic/angular';
 import { LayoutContentComponent } from '../layout-content';
@@ -42,45 +39,29 @@ import { AvatarPickerComponent } from '../avatar-picker/avatar-picker.component'
     LayoutContentComponent,
     TranslateModule,
     ErrorMessageComponent,
-    AvatarPickerComponent
+    AvatarPickerComponent,
   ],
 })
 export class FormPersonalDataCreatorComponent implements OnInit {
-  profileForm: FormGroup;
+  @Input() profileForm!: FormGroup;
   showLogoHeader = input<boolean>(false);
   genderOpt = GENDER_OPTIONS;
-  @Input() userData: any;
-  @Output() saveClicked = new EventEmitter();
-  @Output() imageSelected = new EventEmitter<any>();
+  @Input() initialData: any = {};
+  @Output() saveClicked = new EventEmitter<any>();
+  @Output() imageSelected = new EventEmitter<string>();
   @ViewChild('colorPicker') colorPicker!: ElementRef;
+  @Input() textButton?: any;
+  @Output() maskSelected = new EventEmitter<Countrycode>();
 
-  constructor(private fb: FormBuilder) {
-    this.profileForm = this.fb.group({
-      firstName: ['', Validators.required],
-
-      lastName: ['', Validators.required],
-      nickname: ['', Validators.required],
-      birthdate: [new Date().toISOString(), Validators.required],
-      gender: [3, Validators.required],
-      countryCodePrefix: ['+52', Validators.required],
-      phoneNumber: [
-        '9898989898',
-        [Validators.required, Validators.pattern('^[0-9]*$')],
-      ],
-      profileColor: ['#000000'],
-      imageProfile: ['/prueba/', Validators.required],
-      bio: ['', [Validators.required, Validators.minLength(10)]],
-    });
-  }
+  constructor() {}
 
   ngOnInit() {
-    if (this.userData) {
-      this.profileForm.patchValue(this.userData);
+    if (this.initialData) {
+      this.profileForm.patchValue(this.initialData);
     }
   }
-
   onMaskSelected(mask: Countrycode) {
-    this.profileForm.controls['countryCodePrefix'].setValue(mask.dialCode);
+    this.maskSelected.emit(mask);
   }
 
   openColorPicker() {
@@ -88,21 +69,14 @@ export class FormPersonalDataCreatorComponent implements OnInit {
     console.log(this.colorPicker);
   }
 
-  onSubmit() {
-    if (this.profileForm.valid) {
-      const formData: any = {
-        ...this.userData,
-        ...this.profileForm.value,
-      };
-      this.saveClicked.emit(formData);
-    } else {
-      this.profileForm.markAllAsTouched();
-      console.error('El formulario no es válido');
-    }
+  onImageSelected(image: any) {
+    this.imageSelected.emit(image);
   }
 
-   onImageSelected(image: any) {
-    debugger
-    this.imageSelected.emit(image);
+  isValid(): boolean {
+    return this.profileForm.valid;
+  }
+  getValue(): any {
+    return this.profileForm.value;
   }
 }

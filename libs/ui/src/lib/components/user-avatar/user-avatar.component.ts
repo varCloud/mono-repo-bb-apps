@@ -20,7 +20,7 @@ export class UserAvatarComponent implements OnInit, OnChanges {
   @Input() slot: string = 'start';
   @Input() size: 'small' | 'medium' | 'large' | 'extra-large' = 'medium';
 
-  private _avatarUrl: string = CONSTANTS.DEFAULT_AVATAR;
+  private _avatarUrl: string = CONSTANTS.DEFAULT_URL_AVATAR;
 
   get avatarUrl(): string {
     return this._avatarUrl;
@@ -40,13 +40,13 @@ export class UserAvatarComponent implements OnInit, OnChanges {
 
   private setAvatarUrl(): void {
     if (!this.src || this.src.trim() === '') {
-      this._avatarUrl = CONSTANTS.DEFAULT_AVATAR;
+      this._avatarUrl = CONSTANTS.DEFAULT_URL_AVATAR;
     } else {
       this._avatarUrl = this.src;
     }
   }
 
   onImageError(): void {
-    this._avatarUrl = CONSTANTS.DEFAULT_AVATAR;
+    this._avatarUrl = CONSTANTS.DEFAULT_URL_AVATAR;
   }
 }

@@ -58,6 +58,8 @@ export class AboutMeComponent implements OnInit {
       return;
     }
     const bio = this.bio.value ?? '';
+    console.log('bio'+bio);
+    debugger
     this._loaderUIService.showLoader();
     this.isLoading.set(true);
     this._userService

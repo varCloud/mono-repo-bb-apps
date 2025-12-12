@@ -1,36 +1,23 @@
 <ion-content>
-  <app-layout-content
-    customClass="profile-page"
-    [title]="'profile.title' | translate"
-  >
+  <app-layout-content customClass="profile-page" [title]="'profile.title' | translate">
     <ion-grid content-body class="ion-no-padding">
       <ion-row>
         <ion-col size="12" class="ion-text-center">
           <div class="container-avatar">
-            <app-avatar-profile
-              size="small"
-              [imageUrl]="this.sesionService.user$()?.profilePictureUrl"
-              (changeImage)="onMenuItemClick('changePhoto')"
-            >
+            <app-avatar-profile size="small" [imageUrl]="this.sesionService.user$()?.profilePictureUrl"
+              (changeImage)="onMenuItemClick('changePhoto')">
             </app-avatar-profile>
             <div class="container-info">
               <span class="title">{{
                 this.sesionService.user$()?.nickName
-              }}</span>
+                }}</span>
               <span class="subtitle">{{
                 this.sesionService.user$()?.email
-              }}</span>
+                }}</span>
             </div>
             <div class="container-messges">
-              <ion-button
-                [size]="'small'"
-                fill="outline"
-                (click)="onMenuItemClick('messages')"
-              >
-                <ion-icon
-                  slot="start"
-                  [name]="'chatbox-ellipses-outline'"
-                ></ion-icon>
+              <ion-button [size]="'small'" fill="outline" (click)="messages()">
+                <ion-icon slot="start" [name]="'chatbox-ellipses-outline'"></ion-icon>
                 Mensajes
               </ion-button>
             </div>
@@ -42,17 +29,11 @@
           <div class="container-link">
             <div class="container-link-info">
               <span class="title">Mi enlace</span>
-              <span class="subtitle"
-                >Boodybooster.com/Mariel-numero-de-usuario</span
-              >
+              <span class="subtitle">Bodybooster.com/{{this.sesionService.user$()?.nickName}}</span>
             </div>
 
             <div class="container-link-button">
-              <ion-button
-                [size]="'small'"
-                fill="clear"
-                (click)="onMenuItemClick('messages')"
-              >
+              <ion-button [size]="'small'" fill="clear" (click)="onMenuItemClick('messages')">
                 <ion-icon slot="start" [name]="'copy-outline'"></ion-icon>
               </ion-button>
             </div>
@@ -60,32 +41,21 @@
         </ion-col>
       </ion-row>
 
+      @if(this.sesionService.user$()?.stripeAccountId == null || this.sesionService.user$()?.stripeStatus != 'active'){
       <ion-row class="menu-items">
         <ion-col>
-          <ion-item
-            color="danger"
-            button
-            (click)="openStripeOnboarding()"
-            class="finish-stripe"
-          >
-            <ion-label
-              >Recibe tus pagos con Stripe, finaliza tu perfil</ion-label
-            >
+          <ion-item color="danger" button (click)="openStripeOnboarding()" class="finish-stripe">
+            <ion-label>Recibe tus pagos con Stripe, finaliza tu perfil</ion-label>
           </ion-item>
-        </ion-col></ion-row
-      >
+        </ion-col>
+      </ion-row>
+      }
 
       <ion-row class="menu-items">
         <ion-col size="12">
-          <app-item-list
-            *ngFor="let item of menuItems"
-            [text]="item.text"
-            [icon]="item.icon"
-            [iconEnd]="item.iconEnd"
-            [showArrow]="item.showArrow ?? false"
-            [labelClass]="item.labelClass"
-            (itemClick)="onMenuItemClick(item.action)"
-          >
+          <app-item-list *ngFor="let item of menuItems" [text]="item.text" [icon]="item.icon" [iconEnd]="item.iconEnd"
+            [showArrow]="item.showArrow ?? false" [labelClass]="item.labelClass"
+            (itemClick)="onMenuItemClick(item.action)">
           </app-item-list>
         </ion-col>
       </ion-row>

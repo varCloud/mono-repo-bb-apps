@@ -56,7 +56,7 @@ export class mySubscriptionsUserCardPage implements OnInit {
   );
   public searchControl = new FormControl('');
   public paginator!: PaginatorModel;
-  public readonly DEFAULT_AVATAR = CONSTANTS.DEFAULT_AVATAR;
+  public readonly DEFAULT_URL_AVATAR = CONSTANTS.DEFAULT_URL_AVATAR;
   constructor(
     private UserSuscriptionsIdService: UserSuscriptionsIdService,
     private modalCtrl: ModalController,

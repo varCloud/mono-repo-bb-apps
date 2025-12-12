@@ -1,0 +1,25 @@
+<form [formGroup]="formAboutMe" class="athlete-profile-basic-form">
+  <ion-row>
+    <ion-col size="12">
+       <ion-textarea
+        formControlName="bio"
+        class="bb-input athlete-input"
+        [label]="'Descripcion'"
+        label-placement="floating"
+        fill="outline"
+        [placeholder]="'Descripcion'"
+        type="text"
+        mode="md"
+        rows="5"
+        [maxlength]="255"
+        [counter]="true"
+        [autoGrow]="true"
+        (ionInput)="onInputChange($event)"
+
+      ></ion-textarea>
+        <app-error-message
+        [control]="$any(formAboutMe.get('bio'))"
+      ></app-error-message>
+    </ion-col>
+  </ion-row>
+</form>

@@ -11,7 +11,7 @@
     padding-bottom: 10px;
   }
 
-  .goBack {
+  .go-back {
     display: flex;
     justify-content: flex-start;
     .bb-goback {
@@ -25,5 +25,10 @@
       text-transform: none !important;
       --icon-font-size: 20px;
     }
+  }
+
+  .divider{
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 }
