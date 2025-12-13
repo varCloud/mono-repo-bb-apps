@@ -1,11 +1,12 @@
-import { Component, effect, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { LoaderComponent } from '@monorepo-bb-app/ui';
+import { LoaderComponent, NoConnectionModalComponent } from '@monorepo-bb-app/ui';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 
 import {
   DeepLinkService,
   LoaderUIService,
+  NetworkService,
   PushNotificationService,
   ThemeService,
   TranslationService,
@@ -14,7 +15,7 @@ import {
 
 @Component({
   standalone: true,
-  imports: [RouterModule, IonRouterOutlet, IonApp, LoaderComponent],
+  imports: [RouterModule, IonRouterOutlet, IonApp, LoaderComponent, NoConnectionModalComponent],
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrl: './app.scss',
@@ -22,12 +23,15 @@ import {
 export class App {
   protected title = 'creator';
   public isLoading = signal(false);
+  public showNoConnection = this._networkService.showNoConnectionModal;
+  
   constructor(
     public globalBlockUIService: LoaderUIService,
     private pushNotificationService: PushNotificationService,
     private _themeService: ThemeService,
     private _translationService: TranslationService,
-    private _deepLinkService: DeepLinkService
+    private _deepLinkService: DeepLinkService,
+    private _networkService: NetworkService
   ) {
     this._themeService.initializeTheme();
     this._translationService.setDefaultConfig();
@@ -36,6 +40,7 @@ export class App {
     
     effect(() => {
       const blockUIState = this.globalBlockUIService.getLoading();
+      this.showNoConnection = this._networkService.showNoConnectionModal;
       if (blockUIState) {
         this.isLoading.set(true);
       } else {
@@ -44,6 +49,10 @@ export class App {
     });
   }
 
-
-
+  /**
+   * Llamado cuando el usuario da click en "Reintentar" en el modal de sin conexión
+   */
+  async onRetryConnection(): Promise<void> {
+    await this._networkService.onRetryConnection();
+  }
 }

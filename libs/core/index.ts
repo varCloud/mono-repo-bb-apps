@@ -25,3 +25,4 @@ export { FaqCategoriesService } from './services/faqs/faqs-categories.service';
 export { UserSuscriptionsIdService } from './services/user-suscriptions-id.service';
 export { AppConfig2Service } from './services/app-config2.service';
 export { ProfileColorDirective } from './directives/profile-color.directive';
+export { NetworkService } from './services/network.service';

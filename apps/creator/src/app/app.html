@@ -7,3 +7,7 @@
   <app-loader></app-loader>
 }
 
+@if (showNoConnection()) {
+  <app-no-connection-modal (retry)="onRetryConnection()"></app-no-connection-modal>
+}
+
