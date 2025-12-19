@@ -39,6 +39,7 @@ export * from './services/suscription/process-suscription.service';
 export * from './services/suscription/suscription.service';
 export * from './helpers/destroy-uppy';
 export * from './helpers/form-validators';
+export * from './helpers/functions';
 export * from './models/workout-response-list';
 export * from './models/goals';
 export * from './models/user-conversation';

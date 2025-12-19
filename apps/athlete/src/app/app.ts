@@ -44,12 +44,8 @@ export class App implements OnInit {
   async ngOnInit(): Promise<void> {
     try {
       await ScreenOrientation.lock({ orientation: 'portrait' });
-      if (
-        Capacitor.isNativePlatform() &&
-        Capacitor.getPlatform() === 'android'
-      ) {
-        StatusBar.setOverlaysWebView({ overlay: false });
-      }
+      const overlay = Capacitor.getPlatform() === 'ios';
+      await StatusBar.setOverlaysWebView({ overlay });
     } catch (error) {
       console.log('Error unlocking orientation:', error);
     }
