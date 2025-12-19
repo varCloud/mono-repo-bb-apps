@@ -11,4 +11,13 @@ export const CONSTANTS = {
   DEFAULT_FRONT_PAGE_URL:
     'assets/images/suscription/default-front-page-url.png',
   DEFAULT_COUNTRY_PREFIX: '+52',
+  URL_VIDEO_PLAYER: 'https://wondrous-marzipan-491d5a.netlify.app',
+  COMMANDS_VIDEO_PLAYER: {
+    PLAY: 'PLAY',
+    PAUSE: 'PAUSE',
+    STOP: 'STOP',
+    MUTE: 'MUTE',
+    UNMUTE: 'UNMUTE',
+    DESTROY: 'DESTROY',
+  },
 };

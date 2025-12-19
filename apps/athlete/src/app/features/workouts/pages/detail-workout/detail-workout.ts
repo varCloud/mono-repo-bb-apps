@@ -66,7 +66,7 @@ export class DetailWorkout implements OnInit {
   player: Plyr;
   videoUrl = this.workout.assets[0].signedUrl || null;
   difficulty;
-  level = (this.workout.difficultyLevels[0] as any).level?.description || '';
+  level = (this.workout.difficultyLevels[0] as any)?.level?.description || '';
   tag = (this.workout.tags[0] as any)?.tag.name || '';
 
   constructor(
