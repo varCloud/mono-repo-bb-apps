@@ -38,4 +38,15 @@
       margin-top: 32px;
     }
   }
+
+  ion-grid.player-video-container {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--ion-background-color);
+    gap: 0;
+    ion-col {
+      padding: 0;
+    }
+  }
 }
