@@ -174,12 +174,20 @@ export class CustomVideoPlayerComponent implements OnInit, OnDestroy {
   private handleTimeUpdate = (): void => {
     this.currentTime.set(this.video.currentTime);
     this.timeUpdate.emit(this.video.currentTime);
+
+    // Iniciar timer para ocultar controles una vez que el video está reproduciéndose
+    if (this.isPlaying() && this.showControls() && !this.hideControlsTimeout) {
+      this.startHideControlsTimer();
+    }
   };
 
   private handlePlay = (): void => {
     this.isPlaying.set(true);
     this.videoPlay.emit();
-    this.startHideControlsTimer();
+    // Solo ocultar controles si el video ya tiene progreso (evita iOS auto-play glitch)
+    if (this.video.currentTime > 0.1) {
+      this.startHideControlsTimer();
+    }
   };
 
   private handlePause = (): void => {
@@ -418,9 +426,16 @@ export class CustomVideoPlayerComponent implements OnInit, OnDestroy {
   // UI INTERACTIONS
   // ═══════════════════════════════════════════════════════════════════════════
 
-  /** Handler para clic en el video - alterna play/pause */
+  /** Handler para clic en el video - muestra controles o alterna play/pause */
   onVideoClick(): void {
-    this.togglePlay();
+    if (!this.showControls()) {
+      // Si los controles están ocultos, mostrarlos
+      this.showControls.set(true);
+      this.resetHideControlsTimer();
+    } else {
+      // Si los controles están visibles, alternar play/pause
+      this.togglePlay();
+    }
   }
 
   /** Handler para clic en el área de controles - muestra controles */
