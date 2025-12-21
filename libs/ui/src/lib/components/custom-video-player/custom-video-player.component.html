@@ -72,7 +72,7 @@
         ></ion-icon>
       </ion-button>
 
-      <span class="time">{{ formatTime(currentTime()) }}</span>
+      <span class="time">{{ timeFormat(currentTime()) }}</span>
 
       <ion-range
         class="progress-bar"
@@ -82,7 +82,7 @@
         (ionChange)="seek($event)"
       ></ion-range>
 
-      <span class="time">{{ formatTime(duration()) }}</span>
+      <span class="time">{{ timeFormat(duration()) }}</span>
 
       <ion-button class="action-btn" fill="clear" (click)="toggleFullscreen()">
         <ion-icon

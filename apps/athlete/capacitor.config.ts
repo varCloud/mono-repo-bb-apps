@@ -11,11 +11,6 @@ const config: CapacitorConfig = {
     cleartext: true,
   },
   plugins: {
-    StatusBar: {
-      style: 'DARK',
-      backgroundColor: '#000000', // Asegura que la barra inicie negra
-      overlaysWebView: false,
-    },
     SplashScreen: {
       launchShowDuration: 0,
     },

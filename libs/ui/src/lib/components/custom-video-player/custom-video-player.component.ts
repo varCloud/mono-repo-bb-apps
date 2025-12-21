@@ -28,6 +28,7 @@ import {
   playForward,
   alertCircle,
 } from 'ionicons/icons';
+import { formatTime } from '@monorepo-bb-app/shared';
 
 /** Tiempo en ms para ocultar los controles automáticamente */
 const HIDE_CONTROLS_DELAY = 3000;
@@ -285,6 +286,16 @@ export class CustomVideoPlayerComponent implements OnInit, OnDestroy {
       'MSFullscreenChange',
       this.handleFullscreenChange
     );
+
+    // iOS Safari: eventos en el elemento <video>
+    this.video.addEventListener(
+      'webkitbeginfullscreen',
+      this.handleIOSFullscreenChange
+    );
+    this.video.addEventListener(
+      'webkitendfullscreen',
+      this.handleIOSFullscreenChange
+    );
   }
 
   /** Remueve los listeners de fullscreen */
@@ -305,12 +316,30 @@ export class CustomVideoPlayerComponent implements OnInit, OnDestroy {
       'MSFullscreenChange',
       this.handleFullscreenChange
     );
+
+    // iOS Safari: remover eventos del elemento <video>
+    this.video.removeEventListener(
+      'webkitbeginfullscreen',
+      this.handleIOSFullscreenChange
+    );
+    this.video.removeEventListener(
+      'webkitendfullscreen',
+      this.handleIOSFullscreenChange
+    );
   }
 
   /** Handler para cambios de fullscreen - sincroniza el estado */
   private handleFullscreenChange = (): void => {
     const isCurrentlyFullscreen = this.isDocumentFullscreen();
     this.isFullscreen.set(isCurrentlyFullscreen);
+  };
+
+  /** Handler para cambios de fullscreen en iOS - sincroniza el estado */
+  private handleIOSFullscreenChange = (event: Event): void => {
+    const videoEl = this.video as any;
+    // webkitDisplayingFullscreen indica si el video está en fullscreen nativo de iOS
+    const isInFullscreen = videoEl.webkitDisplayingFullscreen === true;
+    this.isFullscreen.set(isInFullscreen);
   };
 
   /** Verifica si el documento está actualmente en fullscreen */
@@ -338,62 +367,50 @@ export class CustomVideoPlayerComponent implements OnInit, OnDestroy {
   /** Activa/desactiva el modo pantalla completa */
   async toggleFullscreen(): Promise<void> {
     try {
-      // Verificar el estado REAL del fullscreen, no el del signal
-      const isCurrentlyFullscreen = this.isDocumentFullscreen();
-
-      if (isCurrentlyFullscreen) {
-        await this.exitFullscreen();
-      } else {
+      if (!this.isFullscreen()) {
         await this.enterFullscreen();
+      } else {
+        await this.exitFullscreen();
       }
+      this.isFullscreen.set(false);
     } catch (error) {
-      console.error('Error al cambiar pantalla completa:', error);
+      console.error('Error toggling fullscreen:', error);
     }
     this.resetHideControlsTimer();
   }
 
   private async enterFullscreen(): Promise<void> {
-    // Usar el contenedor para fullscreen (incluye controles)
-    const container = this.playerContainer?.nativeElement;
-
-    // Verificar que el elemento está conectado al DOM
-    if (!container || !container.isConnected) {
-      console.warn('El contenedor no está conectado al DOM');
-      return;
+    const videoEl = this.video as any;
+    // Entrar en fullscreen
+    if (this.video.requestFullscreen) {
+      await this.video.requestFullscreen();
+    } else if (videoEl.webkitEnterFullscreen) {
+      // iOS Safari - fullscreen nativo del video
+      videoEl.webkitEnterFullscreen();
+    } else if (videoEl.mozRequestFullScreen) {
+      await videoEl.mozRequestFullScreen();
+    } else if (videoEl.msRequestFullscreen) {
+      await videoEl.msRequestFullscreen();
     }
-
-    const el = container as any;
-
-    if (el.requestFullscreen) {
-      await el.requestFullscreen();
-    } else if (el.webkitRequestFullscreen) {
-      await el.webkitRequestFullscreen();
-    } else if (el.webkitEnterFullscreen) {
-      el.webkitEnterFullscreen(); // iOS Safari
-    } else if (el.mozRequestFullScreen) {
-      await el.mozRequestFullScreen();
-    } else if (el.msRequestFullscreen) {
-      await el.msRequestFullscreen();
-    }
+    this.isFullscreen.set(true);
   }
 
   private async exitFullscreen(): Promise<void> {
-    // Verificar que realmente estamos en fullscreen antes de intentar salir
-    if (!this.isDocumentFullscreen()) {
-      this.isFullscreen.set(false);
-      return;
-    }
-
-    const doc = document as any;
-
-    if (doc.exitFullscreen) {
-      await doc.exitFullscreen();
-    } else if (doc.webkitExitFullscreen) {
-      doc.webkitExitFullscreen();
-    } else if (doc.mozCancelFullScreen) {
-      doc.mozCancelFullScreen();
-    } else if (doc.msExitFullscreen) {
-      doc.msExitFullscreen();
+    const videoEl = this.video as any;
+    if (videoEl.webkitDisplayingFullscreen && videoEl.webkitExitFullscreen) {
+      videoEl.webkitExitFullscreen();
+    } else if (this.isDocumentFullscreen()) {
+      // Fullscreen API estándar
+      const doc = document as any;
+      if (doc.exitFullscreen) {
+        await doc.exitFullscreen();
+      } else if (doc.webkitExitFullscreen) {
+        doc.webkitExitFullscreen();
+      } else if (doc.mozCancelFullScreen) {
+        doc.mozCancelFullScreen();
+      } else if (doc.msExitFullscreen) {
+        doc.msExitFullscreen();
+      }
     }
   }
 
@@ -431,7 +448,6 @@ export class CustomVideoPlayerComponent implements OnInit, OnDestroy {
   /** Reinicia el temporizador para ocultar controles */
   private resetHideControlsTimer(): void {
     this.showControls.set(true);
-
     if (this.isPlaying()) {
       this.startHideControlsTimer();
     }
@@ -445,23 +461,9 @@ export class CustomVideoPlayerComponent implements OnInit, OnDestroy {
     }
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // UTILITIES
-  // ═══════════════════════════════════════════════════════════════════════════
-
   /** Formatea segundos a formato mm:ss o hh:mm:ss */
-  formatTime(seconds: number): string {
-    if (!seconds || isNaN(seconds)) return '0:00';
-
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const secs = Math.floor(seconds % 60);
-
-    const pad = (n: number) => n.toString().padStart(2, '0');
-
-    return hours > 0
-      ? `${hours}:${pad(minutes)}:${pad(secs)}`
-      : `${minutes}:${pad(secs)}`;
+  timeFormat(seconds: number): string {
+    return formatTime(seconds);
   }
 
   /** Porcentaje de progreso del video */
