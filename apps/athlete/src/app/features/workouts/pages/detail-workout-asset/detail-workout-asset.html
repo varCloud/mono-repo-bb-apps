@@ -22,9 +22,9 @@
 
           } @if( isRoutine() ){
           <div style="width: 100%; height: 337px; background-color: black">
-            <!-- <lib-aws-video [urlVideo]="url()" [playVideo]="isPlaying()"></lib-aws-video> -->
             <lib-custom-video-player
               [videoUrl]="url()"
+              [playVideo]="isPlaying()"
             ></lib-custom-video-player>
           </div>
 

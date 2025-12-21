@@ -80,7 +80,8 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 export class DetailWorkoutAsset implements OnInit {
   @ViewChild(YoutubeVideoComponent)
   youtubeVideoComponent: YoutubeVideoComponent;
-  @ViewChild(AwsVideoComponent) awsVideoComponent: AwsVideoComponent;
+  @ViewChild(CustomVideoPlayerComponent)
+  customVideoPlayerComponent: CustomVideoPlayerComponent;
 
   isYoutube = signal<boolean>(false);
   isRoutine = signal<boolean>(false);
@@ -205,7 +206,7 @@ export class DetailWorkoutAsset implements OnInit {
 
   ionViewWillLeave() {
     this.youtubeVideoComponent?.destroy();
-    this.awsVideoComponent?.destroy();
+    this.customVideoPlayerComponent?.destroy();
   }
 
   playVideo() {

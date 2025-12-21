@@ -8,6 +8,8 @@ import {
   OnInit,
   OnDestroy,
   signal,
+  input,
+  effect,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -56,6 +58,7 @@ export class CustomVideoPlayerComponent implements OnInit, OnDestroy {
   @Input() videoUrl = '';
   @Input() poster = '';
   @Input() autoplay = false;
+  playVideo = input<boolean>(false);
 
   // ─────────────────────────────────────────────────────────────────────────────
   // OUTPUTS
@@ -87,6 +90,13 @@ export class CustomVideoPlayerComponent implements OnInit, OnDestroy {
 
   constructor() {
     this.registerIcons();
+    effect(() => {
+      if (this.playVideo()) {
+        this.play();
+      } else {
+        this.pause();
+      }
+    });
   }
 
   /** Registra los iconos de Ionicons necesarios */
@@ -119,9 +129,31 @@ export class CustomVideoPlayerComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.destroy();
+  }
+
+  public destroy(): void {
+    if (this.video) {
+      // 1. Pausar el video
+      this.video.pause();
+
+      // 2. Remover el src y forzar liberación de recursos
+      this.video.removeAttribute('src');
+      this.video.load(); // Esto aborta cualquier descarga y libera el buffer
+    }
+
+    // 3. Remover todos los event listeners
     this.removeVideoListeners();
     this.removeFullscreenListeners();
+
+    // 4. Limpiar timers
     this.clearHideControlsTimer();
+
+    // 5. Resetear estado
+    this.isPlaying.set(false);
+    this.isLoading.set(true);
+    this.currentTime.set(0);
+    this.duration.set(0);
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
