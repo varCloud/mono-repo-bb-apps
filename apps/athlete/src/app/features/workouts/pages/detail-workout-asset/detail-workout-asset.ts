@@ -1,11 +1,6 @@
 import { Component, signal, ViewChild, type OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-  Asset,
-  TrainingTypeEnum,
-  Workout,
-  WorkoutService,
-} from '@monorepo-bb-app/shared';
+import { Asset, TrainingTypeEnum, Workout } from '@monorepo-bb-app/shared';
 import { addIcons } from 'ionicons';
 import {
   IonGrid,
@@ -42,7 +37,6 @@ import {
 } from '@monorepo-bb-app/ui';
 import { TranslateModule } from '@ngx-translate/core';
 import { MODAL_RESPONSE } from 'libs/shared/constants/enums';
-import { DomSanitizer } from '@angular/platform-browser';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 @Component({
   selector: 'app-detail-workout-asset',
@@ -144,11 +138,8 @@ export class DetailWorkoutAsset implements OnInit {
   ]);
 
   constructor(
-    private workoutService: WorkoutService,
     private _activatedRoute: ActivatedRoute,
-    private modalCtrl: ModalController,
-    public sanitizer: DomSanitizer,
-    private platform: Platform
+    private modalCtrl: ModalController
   ) {
     addIcons({
       heart,
@@ -210,14 +201,14 @@ export class DetailWorkoutAsset implements OnInit {
     const modal = await this.modalCtrl.create({
       component: SubmitReviewComponent,
       componentProps: {
-        coachName: 'Hola munod',
-        avatarUrl: '',
+        userId: this.workout.creatorId,
+        workoutId: this.workout.workoutId,
       },
     });
     modal.present();
 
     const { data, role } = await modal.onWillDismiss();
-
+    console.log(role);
     if (role === MODAL_RESPONSE.CONFIRM) {
     }
   }

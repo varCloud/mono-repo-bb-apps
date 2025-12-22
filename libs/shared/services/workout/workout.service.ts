@@ -65,4 +65,37 @@ export class WorkoutService {
       })
     );
   }
+
+  public workoutRate(workoutId: number, rating: number, comment: string) {
+    return this._http
+      .post(`${this.BASE_URL}${API_URLS.WORKOUT_RATINGS}/${workoutId}/rate`, {
+        rating,
+        comment,
+      })
+      .pipe(
+        map((res: any) => {
+          return res.data;
+        })
+      );
+  }
+
+  public async getWorkoutComments(url = null, workoutId: number, params = {}) {
+    const _url = url ? url : `${API_URLS.WORKOUT}/${workoutId}/comments`;
+    const $observer = this._http
+      .get(`${this.BASE_URL}${url}`, {
+        params: new HttpParams({ fromObject: params }),
+      })
+      .pipe(
+        map((res: any) => {
+          const data = res.data.workouts.map(
+            (item: any) => new WorkoutListModel(item)
+          );
+          return {
+            paginator: new PaginatorModel(res.data),
+            data: data,
+          };
+        })
+      );
+    return await firstValueFrom($observer);
+  }
 }
