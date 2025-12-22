@@ -1,15 +1,7 @@
-import {
-  Component,
-  ElementRef,
-  HostListener,
-  signal,
-  ViewChild,
-  type OnInit,
-} from '@angular/core';
+import { Component, signal, ViewChild, type OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   Asset,
-  CONSTANTS,
   TrainingTypeEnum,
   Workout,
   WorkoutService,
@@ -44,7 +36,6 @@ import {
   CommentListComponent,
   Comment,
   SubmitReviewComponent,
-  AwsVideoComponent,
   YoutubeVideoComponent,
   CustomVideoPlayerComponent,
 } from '@monorepo-bb-app/ui';
@@ -70,7 +61,6 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     CommentListComponent,
     TranslateModule,
     PdfViewerModule,
-    AwsVideoComponent,
     YoutubeVideoComponent,
     CustomVideoPlayerComponent,
   ],

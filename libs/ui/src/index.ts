@@ -39,7 +39,6 @@ export * from './lib/components/payment-methods-list/payment-methods-list.compon
 export * from './lib/components/workout-information-time-likes-coments/workout-information-time-likes-coments.component';
 export * from './lib/components/comment-list/comment-list.component';
 export * from './lib/components/submit-review/submit-review.component';
-export * from './lib/components/aws-video/aws-video.component';
 export * from './lib/components/youtube-video.component/youtube-video.component';
 export * from './lib/components/custom-video-player/custom-video-player.component';
 
