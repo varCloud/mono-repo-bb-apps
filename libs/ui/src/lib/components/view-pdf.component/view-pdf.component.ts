@@ -20,7 +20,6 @@ import { IonIcon, IonSpinner } from '@ionic/angular/standalone';
 })
 export class ViewPdfComponent {
   url = input.required<string>();
-  height = input<string>('400px');
 
   readonly zoom = signal(CONSTANTS.ZOOM_CONFIG.DEFAULT);
   readonly isFullscreen = signal(false);

@@ -79,6 +79,7 @@ export class DetailWorkoutAsset implements OnInit {
   isRoutine = signal<boolean>(false);
   isDocument = signal<boolean>(false);
   isPlaying = signal<boolean>(false);
+  heigthVideo = '400px';
   workout = this._activatedRoute.snapshot.data['workout'] as Workout;
   workoutAssetId =
     this._activatedRoute.snapshot.paramMap.get('workoutAssetIdP');

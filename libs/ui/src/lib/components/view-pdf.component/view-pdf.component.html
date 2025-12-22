@@ -1,8 +1,4 @@
-<div
-  class="pdf-container"
-  [class.fullscreen]="isFullscreen()"
-  [style.height]="height()"
->
+<div class="pdf-container" [class.fullscreen]="isFullscreen()">
   <!-- Loading Overlay -->
   @if (isLoading()) {
   <div class="loading-overlay">
