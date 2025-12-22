@@ -14,10 +14,14 @@ export const CONSTANTS = {
   URL_VIDEO_PLAYER: 'https://wondrous-marzipan-491d5a.netlify.app',
   COMMANDS_VIDEO_PLAYER: {
     PLAY: 'PLAY',
+    PLAYING: 'PLAYING',
     PAUSE: 'PAUSE',
+    PAUSED: 'PAUSED',
+    ENDED: 'ENDED',
     STOP: 'STOP',
     MUTE: 'MUTE',
     UNMUTE: 'UNMUTE',
     DESTROY: 'DESTROY',
+    STATE_CHANGE: 'STATE_CHANGE',
   },
 };

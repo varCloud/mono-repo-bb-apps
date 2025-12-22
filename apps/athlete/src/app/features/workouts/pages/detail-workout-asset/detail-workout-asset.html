@@ -18,6 +18,7 @@
           <lib-youtube-video
             [videoUrl]="url()"
             [playVideo]="isPlaying()"
+            (isPlaying)="isPlaying.set($event)"
           ></lib-youtube-video>
 
           } @if( isRoutine() ){
@@ -25,6 +26,8 @@
             <lib-custom-video-player
               [videoUrl]="url()"
               [playVideo]="isPlaying()"
+              (videoPlay)="isPlaying.set(true)"
+              (videoPause)="isPlaying.set(false)"
             ></lib-custom-video-player>
           </div>
 

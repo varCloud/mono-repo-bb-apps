@@ -302,7 +302,7 @@ export class CustomVideoPlayerComponent implements OnInit, OnDestroy {
   /** Activa/desactiva el silencio */
   toggleMute(): void {
     const shouldUnmute = this.isMuted();
-    this.video.volume = shouldUnmute ? this.volume() / 100 : 0;
+    this.video.muted = !shouldUnmute;
     this.isMuted.set(!shouldUnmute);
     this.resetHideControlsTimer();
   }
