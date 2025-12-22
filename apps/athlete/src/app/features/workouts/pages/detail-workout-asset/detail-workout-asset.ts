@@ -38,6 +38,7 @@ import {
   SubmitReviewComponent,
   YoutubeVideoComponent,
   CustomVideoPlayerComponent,
+  ViewPdfComponent,
 } from '@monorepo-bb-app/ui';
 import { TranslateModule } from '@ngx-translate/core';
 import { MODAL_RESPONSE } from 'libs/shared/constants/enums';
@@ -63,6 +64,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     PdfViewerModule,
     YoutubeVideoComponent,
     CustomVideoPlayerComponent,
+    ViewPdfComponent,
   ],
   templateUrl: './detail-workout-asset.html',
   styleUrl: './detail-workout-asset.scss',

@@ -12,12 +12,7 @@ import {
   effect,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  IonButton,
-  IonIcon,
-  IonRange,
-  IonSpinner,
-} from '@ionic/angular/standalone';
+import { IonButton, IonIcon, IonRange } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
   play,
@@ -30,20 +25,14 @@ import {
   playForward,
   alertCircle,
 } from 'ionicons/icons';
-import { formatTime } from '@monorepo-bb-app/shared';
-
-/** Tiempo en ms para ocultar los controles automáticamente */
-const HIDE_CONTROLS_DELAY = 3000;
-
-/** Velocidades de reproducción disponibles */
-const PLAYBACK_RATES = [0.5, 0.75, 1, 1.25, 1.5, 2];
+import { CONSTANTS, formatTime } from '@monorepo-bb-app/shared';
 
 @Component({
   selector: 'lib-custom-video-player',
   templateUrl: './custom-video-player.component.html',
   styleUrls: ['./custom-video-player.component.scss'],
   standalone: true,
-  imports: [CommonModule, IonButton, IonIcon, IonRange, IonSpinner],
+  imports: [CommonModule, IonButton, IonIcon, IonRange],
 })
 export class CustomVideoPlayerComponent implements OnInit, OnDestroy {
   @ViewChild('videoElement', { static: true })
@@ -395,9 +384,9 @@ export class CustomVideoPlayerComponent implements OnInit, OnDestroy {
 
   /** Cambia la velocidad de reproducción al siguiente valor disponible */
   changePlaybackRate(): void {
-    const currentIndex = PLAYBACK_RATES.indexOf(this.playbackRate());
-    const nextIndex = (currentIndex + 1) % PLAYBACK_RATES.length;
-    const newRate = PLAYBACK_RATES[nextIndex];
+    const currentIndex = CONSTANTS.PLAYBACK_RATES.indexOf(this.playbackRate());
+    const nextIndex = (currentIndex + 1) % CONSTANTS.PLAYBACK_RATES.length;
+    const newRate = CONSTANTS.PLAYBACK_RATES[nextIndex];
 
     this.playbackRate.set(newRate);
     this.video.playbackRate = newRate;
@@ -489,7 +478,7 @@ export class CustomVideoPlayerComponent implements OnInit, OnDestroy {
       if (this.isPlaying()) {
         this.showControls.set(false);
       }
-    }, HIDE_CONTROLS_DELAY);
+    }, CONSTANTS.HIDE_CONTROLS_DELAY);
   }
 
   /** Reinicia el temporizador para ocultar controles */
