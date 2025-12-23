@@ -24,10 +24,9 @@ import { Capacitor } from '@capacitor/core';
 })
 export class YoutubeVideoComponent implements OnInit {
   @ViewChild('videoPlayer') videoPlayer: ElementRef;
-
+  pointerEventsEnabled = signal<boolean>(false);
   url = signal<string>('');
   videoUrl = input.required<string>();
-  destroyVideo = input<boolean>(false);
   playVideo = input<boolean>(false);
   isPlaying = output<boolean>();
 
@@ -44,15 +43,16 @@ export class YoutubeVideoComponent implements OnInit {
     const youtubeId = extractYoutubeId(this.videoUrl() || '');
     const url = `${CONSTANTS.URL_VIDEO_PLAYER}/?yt=${youtubeId}`;
     this.url.set(this.sanitizer.bypassSecurityTrustResourceUrl(url) as string);
+    if (Capacitor.isNativePlatform()) {
+      this.pointerEventsEnabled.set(true);
+    }
   }
 
   ngOnDestroy(): void {
-    console.log('Destruyendo por ngOnDestroy (Salida de página)');
     this.executeCommandOnIframe(CONSTANTS.COMMANDS_VIDEO_PLAYER.DESTROY);
   }
 
   public destroy(): void {
-    console.log('destroy() llamado directamente');
     this.executeCommandOnIframe(CONSTANTS.COMMANDS_VIDEO_PLAYER.DESTROY);
   }
 

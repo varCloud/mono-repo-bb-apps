@@ -15,7 +15,6 @@ import {
   IonItemDivider,
   IonFab,
   ModalController,
-  Platform,
 } from '@ionic/angular/standalone';
 import {
   arrowBackOutline,
@@ -28,8 +27,6 @@ import {
 } from 'ionicons/icons';
 import {
   WorkoutInformationTimeLikesComents,
-  CommentListComponent,
-  Comment,
   SubmitReviewComponent,
   YoutubeVideoComponent,
   CustomVideoPlayerComponent,
@@ -54,7 +51,6 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     WorkoutInformationTimeLikesComents,
     IonContent,
     IonHeader,
-    CommentListComponent,
     TranslateModule,
     PdfViewerModule,
     YoutubeVideoComponent,
@@ -85,59 +81,6 @@ export class DetailWorkoutAsset implements OnInit {
 
   workoutAsset = signal<Asset | null>(null);
   latestComment = signal<Rating | null>(null);
-
-  comments = signal<Comment[]>([
-    {
-      id: 1,
-      author: {
-        name: 'María García',
-        avatar: 'https://ionicframework.com/docs/img/demos/avatar.svg',
-      },
-      text: '¡Excelente rutina! Me ha ayudado mucho a mejorar mi técnica.',
-      timeAgo: '2024-01-15',
-      rating: 4,
-    },
-    {
-      id: 2,
-      author: {
-        name: 'Carlos Rodríguez',
-        avatar: 'https://ionicframework.com/docs/img/demos/avatar.svg',
-      },
-      text: 'Los ejercicios están muy bien explicados. Definitivamente los voy a incluir en mi entrenamiento.',
-      timeAgo: '2024-01-14',
-      rating: 5,
-    },
-    {
-      id: 3,
-      author: {
-        name: 'Ana Martínez',
-        avatar: 'https://ionicframework.com/docs/img/demos/avatar.svg',
-      },
-      text: '¿Cuántas veces a la semana recomiendan hacer esta rutina?',
-      timeAgo: '2024-01-13',
-      rating: 2,
-    },
-    {
-      id: 5,
-      author: {
-        name: 'Ana Martínez',
-        avatar: 'https://ionicframework.com/docs/img/demos/avatar.svg',
-      },
-      text: '¿Cuántas veces a la semana recomiendan hacer esta rutina?',
-      timeAgo: '2024-01-13',
-      rating: 2,
-    },
-    {
-      id: 3,
-      author: {
-        name: 'Ana Martínez',
-        avatar: 'https://ionicframework.com/docs/img/demos/avatar.svg',
-      },
-      text: '¿Cuántas veces a la semana recomiendan hacer esta rutina?',
-      timeAgo: '2024-01-13',
-      rating: 2,
-    },
-  ]);
 
   constructor(
     private _activatedRoute: ActivatedRoute,
@@ -193,6 +136,7 @@ export class DetailWorkoutAsset implements OnInit {
   }
 
   public async openReview() {
+    (document.activeElement as HTMLElement)?.blur();
     const modal = await this.modalCtrl.create({
       component: SubmitReviewComponent,
       componentProps: {

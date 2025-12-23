@@ -7,7 +7,7 @@
           <div class="comment-header">
             <div class="user-info">
               <span class="name">{{ comment?.user?.nickName }}</span>
-              <span class="time">• {{ comment.createAt }}</span>
+              <span class="time">• {{ comment.updatedAt }}</span>
             </div>
             <div class="rating">
               @for (star of [1, 2, 3, 4, 5]; track star) {

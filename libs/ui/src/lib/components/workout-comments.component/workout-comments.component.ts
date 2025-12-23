@@ -23,8 +23,8 @@ import { chatbubbleEllipsesOutline } from 'ionicons/icons';
     ListSkeletonComponent,
     TranslateModule,
   ],
-  templateUrl: './workoutComments.component.html',
-  styleUrl: './workoutComments.component.scss',
+  templateUrl: './workout-comments.component.html',
+  styleUrl: './workout-comments.component.scss',
 })
 export class WorkoutCommentsComponent implements OnInit {
   workoutAssetId = input.required<number>();

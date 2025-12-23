@@ -4,7 +4,7 @@ export interface Rating {
   rating: number;
   comment: string;
   user: UserRating;
-  createAt?: string;
+  updatedAt?: string;
 }
 
 export interface UserRating {
@@ -20,7 +20,7 @@ export class RatingModel implements Rating {
   rating: number;
   comment: string;
   user: UserRating;
-  createAt?: string;
+  updatedAt?: string;
 
   constructor(data: Rating) {
     this.ratingId = data.ratingId;
@@ -28,6 +28,8 @@ export class RatingModel implements Rating {
     this.rating = +data.rating;
     this.comment = data.comment;
     this.user = data.user;
-    this.createAt = data.createAt;
+    this.updatedAt = data.updatedAt
+      ? new Date(data.updatedAt).toISOString().split('T')[0]
+      : undefined;
   }
 }
