@@ -1,20 +1,14 @@
 <ion-content class="detail-workout-content ion-no-padding" [fullscreen]="true">
-  <div class="header" [ngClass]="{'ios-platform': isIos}">
+  <div class="header" [ngClass]="{ 'ios-platform': isIos }">
     <ion-back-button
+      color="secondary"
       icon="arrow-back-outline"
       class="bb-goback"
-      [defaultHref]="
-      '/home'
-    "
+      [defaultHref]="'/home'"
       uppercase="false"
       text=""
     ></ion-back-button>
-    <ion-button
-      fill="clear"
-      size="small"
-      class="lovely-btn"
-      (click)="toggleFavorite($event)"
-    >
+    <ion-button fill="clear" size="small" class="lovely-btn" (click)="toggleFavorite($event)">
       <ion-icon
         [name]="isFavorite() ? 'heart' : 'heart-outline'"
         color="secondary"
@@ -25,12 +19,10 @@
 
   <div
     class="container-header-img-workout"
-    [style.background-image]="'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000 101.65%), url('+ workout.workoutUrl +')'"
-    style="
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
+    [style.background-image]="
+      'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000 101.65%), url(' + workout.workoutUrl + ')'
     "
+    style="background-size: cover; background-position: center; background-repeat: no-repeat"
   >
     <div class="container-header">
       <h1>{{ workout.title }}</h1>
@@ -50,11 +42,10 @@
     <ion-row>
       <ion-col class="ion-no-padding">
         <div class="categories-creator-profile">
-          @for (category of $any(workout?.categories); track
-          category.categoryId) {
-          <ion-chip [outline]="true" class="chip">
-            <ion-label>{{ category?.category?.name || '--' }}</ion-label>
-          </ion-chip>
+          @for (category of $any(workout?.categories); track category.categoryId) {
+            <ion-chip [outline]="true" class="chip">
+              <ion-label>{{ category?.category?.name || '--' }}</ion-label>
+            </ion-chip>
           }
         </div></ion-col
       >
@@ -64,47 +55,37 @@
         <p>{{ workout.description }}</p></ion-col
       >
     </ion-row>
-    @for( video of workout.assets; let i = $index ; track video.workoutAssetId
-    ){
-    <ion-item
-      lines="none"
-      class="workouts-items"
-      (click)="viewDetailRutine(video)"
-      detail="false"
-      [button]="true"
-    >
-      <div class="container-video" slot="start">
-        <video #player playsinline class="video">
-          <source
-            [src]="video.signedUrl"
-            type="video/mp4"
-            style="width: 120px; height: 125px"
-          />
-          Tu navegador no soporta este video.
-        </video>
-      </div>
-      <div class="info-workout-item">
-        <div class="body">
-          <ion-text color="secondary" class="exercise-number"
-            >{{ 'exercise' | translate }} {{ i + 1 }}</ion-text
-          >
-          <ion-text class="exercise-description">{{ video.name }}</ion-text>
+    @for (asset of workout.assets; let i = $index; track asset.workoutAssetId) {
+      <ion-item
+        lines="none"
+        class="workouts-items"
+        (click)="viewDetailRutine(asset)"
+        detail="false"
+        [button]="true"
+      >
+        <div class="container-video" slot="start">
+          <ion-icon
+            [name]="workout.workoutTypeId === TYPE_ASSETS.DOCUMENT ? 'document' : 'play'"
+          ></ion-icon>
         </div>
-        <div class="footer">
-          <ion-text>
-            <ion-icon name="timer-sharp"></ion-icon> {{ video.duration || 0 }}
-            m</ion-text
-          >|
-          <ion-text>
-            <ion-icon name="heart"></ion-icon> {{ video.likes || 0 }}</ion-text
-          >
-          <ion-text>
-            <ion-icon name="chatbox-sharp"></ion-icon> {{ video.messages || 0
-            }}</ion-text
-          >
+        <div class="info-workout-item">
+          <div class="body">
+            <ion-text color="secondary" class="exercise-number"
+              >{{ 'exercise' | translate }} {{ i + 1 }}</ion-text
+            >
+            <ion-text class="exercise-description">{{ asset.name }}</ion-text>
+          </div>
+          <div class="footer">
+            <ion-text>
+              <ion-icon name="timer-sharp"></ion-icon> {{ asset.duration || 0 }} m</ion-text
+            >|
+            <ion-text> <ion-icon name="heart"></ion-icon> {{ asset.likes || 0 }}</ion-text>
+            <ion-text>
+              <ion-icon name="chatbox-sharp"></ion-icon> {{ asset.messages || 0 }}</ion-text
+            >
+          </div>
         </div>
-      </div>
-    </ion-item>
+      </ion-item>
     }
   </ion-grid>
 </ion-content>

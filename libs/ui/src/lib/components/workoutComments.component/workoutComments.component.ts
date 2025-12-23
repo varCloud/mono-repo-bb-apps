@@ -31,6 +31,7 @@ export class WorkoutCommentsComponent implements OnInit {
   newComment = input<Rating | null>(null);
 
   paginatorComments = signal<Paginator>({} as Paginator);
+  isInfiniteScrollDisabled = signal<boolean>(false);
   isLoadingComments = signal<boolean>(false);
   comments = signal<Rating[]>([]);
 
@@ -66,6 +67,7 @@ export class WorkoutCommentsComponent implements OnInit {
         const newComments = response.data.filter((c: any) => !currentIds.has(c.ratingId));
         return [...current, ...newComments];
       });
+      this.isInfiniteScrollDisabled.set(!response.paginator.links.next);
     } catch (error) {
       this._toastService.error('Failed to load comments.', {
         duration: 1000,
@@ -76,15 +78,9 @@ export class WorkoutCommentsComponent implements OnInit {
   }
 
   async onIonInfinite(event: any) {
-    if (this.paginatorComments()?.links?.next) {
+    if (this.paginatorComments().links.next) {
       await this.getWorkoutComments(this.paginatorComments().links.next as string);
-      event.target.complete();
-      if (!this.paginatorComments().links.next) {
-        event.target.disabled = true;
-      }
-    } else {
-      event.target.complete();
-      event.target.disabled = true;
     }
+    event.target.complete();
   }
 }

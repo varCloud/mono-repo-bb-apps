@@ -18,7 +18,6 @@ import {
   IonBackButton,
   IonText,
   IonIcon,
-  IonBadge,
   IonChip,
   IonLabel,
   IonItem,
@@ -27,20 +26,21 @@ import { LocalStorageService } from '@monorepo-bb-app/core';
 import {
   Asset,
   KEY_LOCALSTORAGE,
+  TrainingTypeEnum,
   Workout,
   WorkoutInformationSelect,
 } from '@monorepo-bb-app/shared';
-import { LayoutContentComponent } from '@monorepo-bb-app/ui';
 import { TranslateModule } from '@ngx-translate/core';
 import { addIcons } from 'ionicons';
 import {
   arrowBackOutline,
   chatboxSharp,
+  document,
   heart,
   heartOutline,
+  play,
   timerSharp,
 } from 'ionicons/icons';
-import * as PlyrModule from 'plyr';
 
 @Component({
   selector: 'app-detail-workout',
@@ -64,13 +64,10 @@ import * as PlyrModule from 'plyr';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailWorkout implements OnInit {
-  @ViewChild('player') videoElement: ElementRef<HTMLVideoElement>;
-  isIos = Capacitor.getPlatform() === 'ios';
   isFavorite = signal<boolean>(false);
+  TYPE_ASSETS = TrainingTypeEnum;
+  isIos = Capacitor.getPlatform() === 'ios';
   workout = this.activatedRoute.snapshot.data['workout'] as Workout;
-  player: Plyr;
-  videoUrl = this.workout.assets[0].signedUrl || null;
-  difficulty;
   level = (this.workout.difficultyLevels[0] as any)?.level?.description || '';
   tag = (this.workout.tags[0] as any)?.tag.name || '';
 
@@ -86,22 +83,14 @@ export class DetailWorkout implements OnInit {
       arrowBackOutline,
       timerSharp,
       chatboxSharp,
+      play,
+      document,
     });
   }
-  ngOnInit(): void {
-    console.log(this.videoUrl, this.workout);
-  }
+  ngOnInit(): void {}
 
   toggleFavorite($event: Event) {
     this.isFavorite.set(!this.isFavorite());
-  }
-
-  ngAfterViewInit() {
-    this.player = new PlyrModule.default(this.videoElement.nativeElement, {
-      controls: [
-        'play-large', // The large play button in the center
-      ],
-    });
   }
 
   async viewDetailRutine(workoutAsset: Asset) {

@@ -76,6 +76,7 @@ export class HomeComponent implements OnInit {
   workoutMaxLikes = signal<WorkoutListModel | null>(null);
   paginator = signal<Paginator>({} as Paginator);
   idCreator = signal<number | null>(null);
+  isInfiniteScrollDisabled = signal<boolean>(false);
   filter: FilterModel = new FilterModel({
     showWorkoutTags: true,
     showLevels: true,
@@ -120,6 +121,7 @@ export class HomeComponent implements OnInit {
         this.workouts.update((current) => [...current, ...res.data]);
       }
       this.paginator.set(res.paginator);
+      this.isInfiniteScrollDisabled.set(!res.paginator?.links?.next);
     } catch (error) {
       this._toastService.error('Error al cargar los entrenamientos', {
         duration: 3000,
@@ -152,16 +154,10 @@ export class HomeComponent implements OnInit {
   }
 
   async onIonInfinite(event: any) {
-    if (this.paginator().links.next) {
+    if (this.paginator()?.links?.next) {
       await this.getWorkouts(this.paginator().links.next as string);
-      event.target.complete();
-      if (!this.paginator().links.next) {
-        event.target.disabled = true;
-      }
-    } else {
-      event.target.complete();
-      event.target.disabled = true;
     }
+    event.target.complete();
   }
 
   public async openFilter() {

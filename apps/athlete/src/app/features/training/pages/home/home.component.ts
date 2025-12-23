@@ -51,10 +51,6 @@ import { IonicModule } from '@ionic/angular';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   imports: [
-    IonFabButton,
-    IonFab,
-    IonInput,
-    IonBadge,
     IonInfiniteScrollContent,
     IonInfiniteScroll,
     IonRow,
@@ -74,6 +70,7 @@ export class HomeComponent implements OnInit {
   workoutMaxLikes = signal<WorkoutListModel | null>(null);
   paginator = signal<Paginator>({} as Paginator);
   idCreator = signal<number | null>(null);
+  isInfiniteScrollDisabled = signal<boolean>(false);
   filter: FilterModel = new FilterModel({
     showWorkoutTags: true,
     showLevels: true,
@@ -121,6 +118,7 @@ export class HomeComponent implements OnInit {
       } else {
         this.workouts.update((current) => [...current, ...res.data]);
       }
+      this.isInfiniteScrollDisabled.set(!res.paginator?.links?.next);
       this.paginator.set(res.paginator);
     } catch (error) {
       this._toastService.error('Error al cargar los entrenamientos', {
@@ -159,14 +157,8 @@ export class HomeComponent implements OnInit {
   async onIonInfinite(event: any) {
     if (this.paginator()?.links?.next) {
       await this.getWorkouts(this.paginator().links.next as string);
-      event.target.complete();
-      if (!this.paginator().links.next) {
-        event.target.disabled = true;
-      }
-    } else {
-      event.target.complete();
-      event.target.disabled = true;
     }
+    event.target.complete();
   }
 
   public async openFilter() {
