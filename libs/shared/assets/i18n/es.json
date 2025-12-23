@@ -17,11 +17,9 @@
     "no-connection-message": "Parece que has perdido la conexión a internet. Verifica tu conexión e inténtalo de nuevo.",
     "retry": "Reintentar"
   },
-    "update-user-data": {
+  "update-user-data": {
     "success": "Datos Actualizados"
   },
-
-
   "about-me": {
     "placeholder": "Escribe algo sobre ti",
     "save-error": "Error al guardar la descripción.",
@@ -398,5 +396,8 @@
     "rate": "Calificar",
     "pause": "Pausar",
     "start": "Comenzar"
+  },
+  "workout-comments": {
+    "no-comments": "Aún no hay comentarios. Sé el primero en comentar."
   }
 }

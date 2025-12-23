@@ -55,3 +55,4 @@ export * from './models/user-subscription-id';
 export * from './models/app-settings-2';
 export * from './models/personal-data';
 export * from './services/workout/workout-information-select.service';
+export * from './models/rating.model';

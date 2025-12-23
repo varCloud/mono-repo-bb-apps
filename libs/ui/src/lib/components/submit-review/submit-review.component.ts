@@ -1,19 +1,6 @@
-import {
-  Component,
-  computed,
-  Input,
-  input,
-  OnInit,
-  output,
-  signal,
-} from '@angular/core';
+import { Component, computed, Input, input, OnInit, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { UserAvatarComponent } from '../user-avatar/user-avatar.component';
 import { addIcons } from 'ionicons';
@@ -23,24 +10,19 @@ import { ModalController } from '@ionic/angular/standalone';
 import { MODAL_RESPONSE } from 'libs/shared/constants/enums';
 import { LoaderUIService, UserService } from '@monorepo-bb-app/core';
 import { finalize } from 'rxjs';
-import { ToastService, User, WorkoutService } from '@monorepo-bb-app/shared';
+import { RatingModel, ToastService, User, WorkoutService } from '@monorepo-bb-app/shared';
 
 @Component({
   selector: 'lib-submit-review',
   templateUrl: './submit-review.component.html',
   styleUrls: ['./submit-review.component.scss'],
   standalone: true,
-  imports: [
-    IonicModule,
-    ReactiveFormsModule,
-    UserAvatarComponent,
-    TranslateModule,
-  ],
+  imports: [IonicModule, ReactiveFormsModule, UserAvatarComponent, TranslateModule],
 })
 export class SubmitReviewComponent implements OnInit {
   reviewForm: FormGroup;
   @Input() userId = null;
-  @Input() workoutId = null;
+  @Input() workoutAssetId = null;
 
   creator = signal<User | null>(null);
   fullName = computed(() => {
@@ -87,16 +69,16 @@ export class SubmitReviewComponent implements OnInit {
 
     this._workoutService
       .workoutRate(
-        this.workoutId!,
+        this.workoutAssetId!,
         +this.reviewForm.value.rating,
         this.reviewForm.value.comment
       )
       .subscribe({
-        next: () => {
+        next: (resp) => {
           this._toastService.success('¡Gracias por tu evaluación!', {
             duration: 2000,
           });
-          this.modalCtrl.dismiss(null, MODAL_RESPONSE.SUCCESS);
+          this.modalCtrl.dismiss(new RatingModel(resp), MODAL_RESPONSE.SUCCESS);
         },
         error: () => {
           this._toastService.error(

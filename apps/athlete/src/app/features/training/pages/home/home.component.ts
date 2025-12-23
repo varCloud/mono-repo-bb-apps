@@ -42,11 +42,7 @@ import {
   WorkoutListModel,
   WorkoutService,
 } from '@monorepo-bb-app/shared';
-import {
-  LoaderUIService,
-  LocalStorageService,
-  SesionService,
-} from '@monorepo-bb-app/core';
+import { LoaderUIService, LocalStorageService, SesionService } from '@monorepo-bb-app/core';
 import { MODAL_RESPONSE } from 'libs/shared/constants/enums';
 import { IonicModule } from '@ionic/angular';
 
@@ -55,10 +51,6 @@ import { IonicModule } from '@ionic/angular';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   imports: [
-    IonFabButton,
-    IonFab,
-    IonInput,
-    IonBadge,
     IonInfiniteScrollContent,
     IonInfiniteScroll,
     IonRow,
@@ -78,6 +70,7 @@ export class HomeComponent implements OnInit {
   workoutMaxLikes = signal<WorkoutListModel | null>(null);
   paginator = signal<Paginator>({} as Paginator);
   idCreator = signal<number | null>(null);
+  isInfiniteScrollDisabled = signal<boolean>(false);
   filter: FilterModel = new FilterModel({
     showWorkoutTags: true,
     showLevels: true,
@@ -88,7 +81,8 @@ export class HomeComponent implements OnInit {
     private _loader: LoaderUIService,
     private _toastService: ToastService,
     private modalCtrl: ModalController,
-    private _localStorage: LocalStorageService
+    private _localStorage: LocalStorageService,
+    private _sesionService: SesionService
   ) {
     addIcons({
       barbell,
@@ -102,14 +96,16 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._loader.showLoader();
+    this.getWorkouts(undefined, true);
+    this.getWorkoutMaxLikes();
+  }
 
   ionViewWillEnter() {
     this._loader.showLoader();
-    setTimeout(() => {
-      this.getWorkouts(undefined, true);
-      this.getWorkoutMaxLikes();
-    }, 1000);
+    this.getWorkouts(undefined, true);
+    this.getWorkoutMaxLikes();
   }
 
   private async getWorkouts(url?: string, reset = false) {
@@ -122,6 +118,7 @@ export class HomeComponent implements OnInit {
       } else {
         this.workouts.update((current) => [...current, ...res.data]);
       }
+      this.isInfiniteScrollDisabled.set(!res.paginator?.links?.next);
       this.paginator.set(res.paginator);
     } catch (error) {
       this._toastService.error('Error al cargar los entrenamientos', {
@@ -135,7 +132,10 @@ export class HomeComponent implements OnInit {
   private async getWorkoutMaxLikes() {
     this._loader.showLoader();
     try {
-      const user = await this._localStorage.get(KEY_LOCALSTORAGE.USER);
+      let user = this._sesionService.user$();
+      if (!user) {
+        user = await this._sesionService.getUserFromLocalStorage();
+      }
       this.idCreator.set(user?.userId || null);
       const res = await this._workoutService.getWorkoutMaxLikes(user.userId);
       if (res.workoutId > 0) {
@@ -155,14 +155,10 @@ export class HomeComponent implements OnInit {
   }
 
   async onIonInfinite(event: any) {
-    if (this.paginator().links.next) {
+    if (this.paginator()?.links?.next) {
       await this.getWorkouts(this.paginator().links.next as string);
-      event.target.complete();
-      event.target.disabled = !this.paginator().links.next;
-    } else {
-      event.target.complete();
-      event.target.disabled = true;
     }
+    event.target.complete();
   }
 
   public async openFilter() {
@@ -192,11 +188,6 @@ export class HomeComponent implements OnInit {
 
   async clickCard(workout: WorkoutListModel) {
     const user = await this._localStorage.get(KEY_LOCALSTORAGE.USER);
-    this.router.navigate([
-      'home/workouts',
-      workout.workoutId,
-      workout.creatorId,
-      user.userId,
-    ]);
+    this.router.navigate(['home/workouts', workout.workoutId, workout.creatorId, user.userId]);
   }
 }

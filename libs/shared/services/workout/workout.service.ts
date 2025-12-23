@@ -5,6 +5,7 @@ import { API_URLS } from '../../constants/api-urls';
 import { firstValueFrom, map } from 'rxjs';
 import { WorkoutListModel } from '../../models/workout-response-list';
 import { PaginatorModel } from 'libs/shared/models/paginator';
+import { RatingModel } from '../../models/rating.model';
 
 @Injectable({
   providedIn: 'root',
@@ -24,9 +25,7 @@ export class WorkoutService {
       })
       .pipe(
         map((res: any) => {
-          const data = res.data.workouts.map(
-            (item: any) => new WorkoutListModel(item)
-          );
+          const data = res.data.workouts.map((item: any) => new WorkoutListModel(item));
           return {
             paginator: new PaginatorModel(res.data),
             data: data,
@@ -48,13 +47,11 @@ export class WorkoutService {
   }
 
   public async getWorkoutById(id: number) {
-    const $observer = this._http
-      .get(`${this.BASE_URL}${API_URLS.WORKOUT}/${id}`)
-      .pipe(
-        map((res: any) => {
-          return res.data;
-        })
-      );
+    const $observer = this._http.get(`${this.BASE_URL}${API_URLS.WORKOUT}/${id}`).pipe(
+      map((res: any) => {
+        return res.data;
+      })
+    );
     return await firstValueFrom($observer);
   }
 
@@ -79,20 +76,18 @@ export class WorkoutService {
       );
   }
 
-  public async getWorkoutComments(url = null, workoutId: number, params = {}) {
-    const _url = url ? url : `${API_URLS.WORKOUT}/${workoutId}/comments`;
+  public async getWorkoutComments(url: any = undefined, workoutAssetId: number, params = {}) {
+    const _url = url ? url : `${API_URLS.WORKOUT_RATINGS}/${workoutAssetId}/ratings`;
     const $observer = this._http
-      .get(`${this.BASE_URL}${url}`, {
+      .get(`${this.BASE_URL}${_url}`, {
         params: new HttpParams({ fromObject: params }),
       })
       .pipe(
         map((res: any) => {
-          const data = res.data.workouts.map(
-            (item: any) => new WorkoutListModel(item)
-          );
+          const data = res.data.ratings.map((item: any) => new RatingModel(item));
           return {
             paginator: new PaginatorModel(res.data),
-            data: data,
+            data,
           };
         })
       );

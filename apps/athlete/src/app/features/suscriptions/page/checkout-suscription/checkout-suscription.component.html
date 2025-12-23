@@ -31,11 +31,10 @@
                   </h2>
 
                   <div class="trainer-specialties">
-                    @for (specialty of trainer().categories.slice(0, 2); track
-                    specialty) {
-                    <ion-badge color="medium" class="specialty-badge">{{
-                      specialty.description
-                    }}</ion-badge>
+                    @for (specialty of trainer().categories.slice(0, 2); track specialty) {
+                      <ion-badge color="medium" class="specialty-badge">{{
+                        specialty.description
+                      }}</ion-badge>
                     }
                   </div>
                 </div>
@@ -43,12 +42,8 @@
 
               <div class="plan-info">
                 <div class="price-display">
-                  <span class="price">{{
-                    billingCycle().amount | currency : 'MXN'
-                  }}</span>
-                  <span class="billing-cycle"
-                    >/ {{ billingCycle().description | translate }}</span
-                  >
+                  <span class="price">{{ billingCycle().amount | currency: 'MXN' }}</span>
+                  <span class="billing-cycle">/ {{ billingCycle().description | translate }}</span>
                 </div>
               </div>
             </ion-card-content>
@@ -64,11 +59,7 @@
             </ion-card-header>
             <ion-card-content>
               <ion-item lines="none" class="selected-payment-method">
-                <ion-icon
-                  name="card-outline"
-                  slot="start"
-                  size="large"
-                ></ion-icon>
+                <ion-icon name="card-outline" slot="start" size="large"></ion-icon>
                 <ion-label>
                   <h2>
                     <strong>{{ paymentMethod().brand | titlecase }}</strong>
@@ -76,9 +67,7 @@
                   <p>•••• •••• •••• {{ paymentMethod().last4 }}</p>
                   <p>
                     {{ 'expires' | translate }}
-                    {{ paymentMethod().exp_month }}/{{
-                      paymentMethod().exp_year
-                    }}
+                    {{ paymentMethod().exp_month }}/{{ paymentMethod().exp_year }}
                   </p>
                 </ion-label>
               </ion-item>
@@ -105,21 +94,17 @@
               <ion-list lines="none">
                 <ion-item>
                   <ion-label>{{ 'subtotal' | translate }}</ion-label>
-                  <ion-note slot="end">{{
-                    billingCycle().amount | currency : 'MXN'
-                  }}</ion-note>
+                  <ion-note slot="end">{{ billingCycle().amount | currency: 'MXN' }}</ion-note>
                 </ion-item>
 
-                <ion-item-divider></ion-item-divider>
+                <ion-item-divider mode="md"></ion-item-divider>
 
                 <ion-item class="total-item">
                   <ion-label
                     ><strong>{{ 'total' | translate }}</strong></ion-label
                   >
                   <ion-note slot="end" class="total-amount">
-                    <strong>{{
-                      billingCycle().amount | currency : 'MXN'
-                    }}</strong>
+                    <strong>{{ billingCycle().amount | currency: 'MXN' }}</strong>
                   </ion-note>
                 </ion-item>
               </ion-list>
@@ -136,7 +121,7 @@
           >
             <ion-icon name="lock-closed" slot="start"></ion-icon>
             {{ 'checkout.pay-now' | translate }}
-            {{ billingCycle().amount | currency : 'MXN' }}
+            {{ billingCycle().amount | currency: 'MXN' }}
           </ion-button>
         </ion-col>
       </ion-row>

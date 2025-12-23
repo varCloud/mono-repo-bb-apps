@@ -1,28 +1,25 @@
 @if (comments().length > 0) {
-<div class="comments-list">
-  @for (comment of comments(); track comment.id) {
-  <div class="comment-card">
-    <img [src]="comment.author.avatar" class="avatar" alt="avatar" />
-    <div class="comment-content">
-      <div class="comment-header">
-        <div class="user-info">
-          <span class="name">{{ comment.author.name }}</span>
-          <span class="time">• {{ comment.timeAgo }}</span>
-        </div>
-        <div class="rating">
-          @for (star of [1, 2, 3, 4, 5]; track star) {
-          <ion-icon
-            name="star"
-            [class.filled]="star <= comment.rating"
-          ></ion-icon>
-          }
+  <div class="comments-list">
+    @for (comment of comments(); track comment.ratingId) {
+      <div class="comment-card">
+        <img [src]="comment?.user?.avatar" class="avatar" alt="avatar" />
+        <div class="comment-content">
+          <div class="comment-header">
+            <div class="user-info">
+              <span class="name">{{ comment?.user?.nickName }}</span>
+              <span class="time">• {{ comment.updatedAt }}</span>
+            </div>
+            <div class="rating">
+              @for (star of [1, 2, 3, 4, 5]; track star) {
+                <ion-icon name="star" [class.filled]="star <= comment.rating"></ion-icon>
+              }
+            </div>
+          </div>
+          <div class="comment-text">
+            {{ comment.comment }}
+          </div>
         </div>
       </div>
-      <div class="comment-text">
-        {{ comment.text }}
-      </div>
-    </div>
+    }
   </div>
-  }
-</div>
 }

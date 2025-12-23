@@ -6,17 +6,9 @@ import {
   signal,
   type OnInit,
 } from '@angular/core';
-import {
-  Paginator,
-  ToastService,
-  Workout,
-  WorkoutService,
-} from '@monorepo-bb-app/shared';
+import { Paginator, ToastService, Workout, WorkoutService } from '@monorepo-bb-app/shared';
 import { ENUM_WORKOUT_TYPES } from 'libs/shared/constants/enums';
-import {
-  IonInfiniteScroll,
-  IonInfiniteScrollContent,
-} from '@ionic/angular/standalone';
+import { IonInfiniteScroll, IonInfiniteScrollContent } from '@ionic/angular/standalone';
 import { CardWorkoutInfoComponent } from '../card-workout-info/card-workout-info.component';
 import { ListSkeletonComponent } from '../skeleton/list-skeleton/list-skeleton.component';
 
@@ -36,6 +28,7 @@ export class WorkoutByTypesComponent implements OnInit {
   public idCreator = input.required<number>();
   workoutTypes = input.required<ENUM_WORKOUT_TYPES[]>();
   public workouts = signal<Workout[]>([]);
+  isInfiniteScrollDisabled = signal<boolean>(false);
   public paginatorWorkouts = signal<Paginator>({} as Paginator);
   public isLoadingWorkouts = signal<boolean>(false);
   public WORKOUT_TYPES = ENUM_WORKOUT_TYPES;
@@ -58,6 +51,7 @@ export class WorkoutByTypesComponent implements OnInit {
     try {
       const workouts = await this._workoutService.getWorkouts(url, params);
       this.paginatorWorkouts.set(workouts.paginator);
+      this.isInfiniteScrollDisabled.set(!workouts.paginator.links.next);
       this.workouts.update((current) => [...current, ...workouts.data]);
     } catch (error) {
       this._toastService.error('Failed to load workouts.', {
@@ -70,14 +64,8 @@ export class WorkoutByTypesComponent implements OnInit {
 
   async onIonInfinite(event: any) {
     if (this.paginatorWorkouts().links.next) {
-      await this.getWorkoutsByCreator(
-        this.paginatorWorkouts().links.next as string
-      );
-      event.target.complete();
-      event.target.disabled = !this.paginatorWorkouts().links.next;
-    } else {
-      event.target.complete();
-      event.target.disabled = true;
+      await this.getWorkoutsByCreator(this.paginatorWorkouts().links.next as string);
     }
+    event.target.complete();
   }
 }

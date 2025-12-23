@@ -1,0 +1,21 @@
+<div class="container-workout-list" style="margin-bottom: 50px">
+  @if (!isLoadingComments()) {
+    @if (comments().length > 0) {
+      @for (comment of comments(); track comment.ratingId) {
+        <lib-comment-list [comments]="comments()"></lib-comment-list>
+      }
+    } @else {
+      <div class="no-comments-container">
+        <ion-icon name="chatbubble-ellipses-outline" size="large" color="medium"></ion-icon>
+        <ion-text class="no-comments-text">
+          {{ 'workout-comments.no-comments' | translate }}
+        </ion-text>
+      </div>
+    }
+  } @else {
+    <app-list-skeleton [itemRepeat]="2"></app-list-skeleton>
+  }
+</div>
+<ion-infinite-scroll (ionInfinite)="onIonInfinite($event)" [disabled]="isInfiniteScrollDisabled()">
+  <ion-infinite-scroll-content></ion-infinite-scroll-content>
+</ion-infinite-scroll>

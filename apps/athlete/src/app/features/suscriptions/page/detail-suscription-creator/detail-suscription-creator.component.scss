@@ -4,12 +4,14 @@
   .suscription-creator-content {
     ::ng-deep {
       .suscription-creator-page {
+        padding-top: 0px;
         min-height: auto;
         margin-bottom: 45px;
       }
     }
     .container-header-subscription {
-      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000 101.65%),
+      background:
+        linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000 101.65%),
         url('/assets/images/suscription/suscription.png');
       background-size: cover;
       background-position: center;
@@ -57,7 +59,8 @@
       font-weight: 600;
       --min-height: 92px;
 
-      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3),
+      box-shadow:
+        0 1px 2px 0 rgba(0, 0, 0, 0.3),
         0 1px 3px 1px rgba(0, 0, 0, 0.15);
 
       .payment-amount {

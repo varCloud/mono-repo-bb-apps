@@ -32,7 +32,14 @@ import {
   FilterComponent,
   OnbordingComponent,
 } from '@monorepo-bb-app/ui';
-import { FilterModel, KEY_LOCALSTORAGE, Paginator, ToastService, WorkoutListModel, WorkoutService } from '@monorepo-bb-app/shared';
+import {
+  FilterModel,
+  KEY_LOCALSTORAGE,
+  Paginator,
+  ToastService,
+  WorkoutListModel,
+  WorkoutService,
+} from '@monorepo-bb-app/shared';
 import {
   LoaderUIService,
   LocalStorageService,
@@ -61,14 +68,15 @@ import { MODAL_RESPONSE } from 'libs/shared/constants/enums';
     IonHeader,
     CardListComponent,
     CardMaxLikesComponent,
-    ProfileColorDirective
-],
+    ProfileColorDirective,
+  ],
 })
 export class HomeComponent implements OnInit {
   workouts = signal<WorkoutListModel[]>([]);
   workoutMaxLikes = signal<WorkoutListModel | null>(null);
   paginator = signal<Paginator>({} as Paginator);
   idCreator = signal<number | null>(null);
+  isInfiniteScrollDisabled = signal<boolean>(false);
   filter: FilterModel = new FilterModel({
     showWorkoutTags: true,
     showLevels: true,
@@ -92,8 +100,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ionViewWillEnter() {
     this._loader.showLoader();
@@ -101,7 +108,6 @@ export class HomeComponent implements OnInit {
       this.getWorkouts();
       this.getWorkoutMaxLikes();
     }, 1000);
-
   }
 
   private async getWorkouts(url?: string, reset = false) {
@@ -115,6 +121,7 @@ export class HomeComponent implements OnInit {
         this.workouts.update((current) => [...current, ...res.data]);
       }
       this.paginator.set(res.paginator);
+      this.isInfiniteScrollDisabled.set(!res.paginator?.links?.next);
     } catch (error) {
       this._toastService.error('Error al cargar los entrenamientos', {
         duration: 3000,
@@ -147,14 +154,10 @@ export class HomeComponent implements OnInit {
   }
 
   async onIonInfinite(event: any) {
-    if (this.paginator().links.next) {
+    if (this.paginator()?.links?.next) {
       await this.getWorkouts(this.paginator().links.next as string);
-      event.target.complete();
-      event.target.disabled = !this.paginator().links.next;
-    } else {
-      event.target.complete();
-      event.target.disabled = true;
     }
+    event.target.complete();
   }
 
   public async openFilter() {

@@ -1,11 +1,12 @@
 <div class="container-workout-list" style="margin-bottom: 50px">
-  @if (!isLoadingWorkouts()) { @for (workout of workouts(); track
-  workout.workoutId) {
-  <lib-card-workout-info [workout]="workout"></lib-card-workout-info>
-  } } @else {
-  <app-list-skeleton [itemRepeat]="3"></app-list-skeleton>
+  @if (!isLoadingWorkouts()) {
+    @for (workout of workouts(); track workout.workoutId) {
+      <lib-card-workout-info [workout]="workout"></lib-card-workout-info>
+    }
+  } @else {
+    <app-list-skeleton [itemRepeat]="3"></app-list-skeleton>
   }
 </div>
-<ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+<ion-infinite-scroll (ionInfinite)="onIonInfinite($event)" [disabled]="isInfiniteScrollDisabled()">
   <ion-infinite-scroll-content></ion-infinite-scroll-content>
 </ion-infinite-scroll>
