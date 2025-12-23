@@ -18,6 +18,9 @@ export class UserCardComponent {
   descriptionPlan = input.required<string>();
   optionsClick = output<Event>();
   nickName = input.required<string>();
+  email = input.required<string>();
+  endData = input.required<string>()
+amount = input.required<string>();
 
   constructor() {
     addIcons({ ellipsisHorizontal });

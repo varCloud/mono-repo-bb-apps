@@ -26,6 +26,10 @@
       [name]="sub.user.name"
       [descriptionPlan]="sub.fullDescription"
       [nickName]="sub.user.nickName"
+      [email]="sub.user.email"
+      [endData] = "sub.endDate"
+      [amount] = "sub.amount"
+
       class="card-item"
       (optionsClick)="onShowOptions(sub, $event)"
     ></lib-user-card>
