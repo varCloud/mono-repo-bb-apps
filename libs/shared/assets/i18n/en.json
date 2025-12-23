@@ -2,6 +2,24 @@
   "update-user-data": {
     "success": "Data Updated successfully"
   },
+  "common": {
+    "back": "Go back",
+    "continue": "Continue",
+    "accept": "Accept",
+    "cancel": "Cancel",
+    "save": "Save",
+    "finish": "Finish",
+    "next": "Next",
+    "previous": "Previous",
+    "skip": "Skip",
+    "save-changes": "Save changes",
+    "search": "Search"
+  },
+  "network": {
+    "no-connection-title": "No internet connection",
+    "no-connection-message": "It seems you have lost your internet connection. Please check your connection and try again.",
+    "retry": "Retry"
+  },
   "about-me": {
     "placeholder": "Write something about yourself",
     "save-error": "Error saving description.",

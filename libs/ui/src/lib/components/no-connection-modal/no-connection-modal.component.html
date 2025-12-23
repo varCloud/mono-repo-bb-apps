@@ -1,0 +1,22 @@
+<div class="modal-overlay">
+  <div class="modal-container">
+    <div class="modal-icon">
+      <ion-icon name="cloud-offline-outline"></ion-icon>
+    </div>
+    
+    <h2 class="modal-title">{{ 'network.no-connection-title' | translate }}</h2>
+    
+    <p class="modal-message">
+      {{ 'network.no-connection-message' | translate }}
+    </p>
+    
+    <ion-button 
+      expand="block" 
+      color="tertiary"
+      (click)="onRetry()"
+      class="retry-button">
+      <ion-icon name="wifi" slot="start"></ion-icon>
+      {{ 'network.retry' | translate }}
+    </ion-button>
+  </div>
+</div>

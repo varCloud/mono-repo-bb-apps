@@ -12,10 +12,14 @@
     "save-changes": "Guardar cambios",
     "search": "Buscar"
   },
+  "network": {
+    "no-connection-title": "Sin conexión a internet",
+    "no-connection-message": "Parece que has perdido la conexión a internet. Verifica tu conexión e inténtalo de nuevo.",
+    "retry": "Reintentar"
+  },
   "update-user-data": {
     "success": "Datos Actualizados"
   },
-
   "about-me": {
     "placeholder": "Escribe algo sobre ti",
     "save-error": "Error al guardar la descripción.",
