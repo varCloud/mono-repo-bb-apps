@@ -21,7 +21,7 @@
   </ion-refresher>
   <ion-list [lines]="'none'">
     @for (sub of subscriptions(); track sub) {
-    <lib-user-card
+    <lib-user-card class = "bottomButtons"
       [imageUrl]="sub.user.profilePictureUrl"
       [name]="sub.user.name"
       [descriptionPlan]="sub.fullDescription"
