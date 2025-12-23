@@ -9,6 +9,7 @@ import { catchError, finalize, Observable, of } from 'rxjs';
 import { WorkoutService } from '../workout/workout.service';
 import { ToastService } from '../toast.service';
 import { LoaderUIService } from '../../../core/services/loader-ui.service';
+import { WorkoutInformationSelect } from '../workout/workout-information-select.service';
 
 @Injectable({ providedIn: 'root' })
 export class WorkoutAssetDataResolver implements Resolve<any> {
@@ -16,14 +17,20 @@ export class WorkoutAssetDataResolver implements Resolve<any> {
     private workoutService: WorkoutService,
     private _loader: LoaderUIService,
     private _toastService: ToastService,
-    private _router: Router
+    private _router: Router,
+    private _workoutInformationSelect: WorkoutInformationSelect
   ) {}
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<any> {
     this._loader.showLoader();
-    const id = route.paramMap.get('workoutAssetId') ?? 0;
+    const workout = this._workoutInformationSelect.getWorkout();
+    if (workout) {
+      this._loader.hideLoader();
+      return of(workout);
+    }
+    const id = route.paramMap.get('workoutId') ?? 0;
     if (!id) {
       this._toastService.error('No se encontró el entrenamiento', {
         duration: 1000,

@@ -39,6 +39,9 @@ export * from './lib/components/payment-methods-list/payment-methods-list.compon
 export * from './lib/components/workout-information-time-likes-coments/workout-information-time-likes-coments.component';
 export * from './lib/components/comment-list/comment-list.component';
 export * from './lib/components/submit-review/submit-review.component';
+export * from './lib/components/youtube-video.component/youtube-video.component';
+export * from './lib/components/custom-video-player/custom-video-player.component';
+export * from './lib/components/view-pdf.component/view-pdf.component';
 
 export * from './lib/components/payment-frequency-settings/payment-frequency-settings.component';
 export * from './lib/components/reset-password-form/reset-password-form/reset-password-form.component';
@@ -77,3 +80,4 @@ export * from './lib/components/empty-elements/empty-elements.component';
 export * from './lib/components/my-subscriptions-search-modal/my-subscriptions-search-modal.component';
 export * from './lib/components/form-personal-data-creator/form-personal-data-creator.component';
 export * from './lib/components/about-me/about-me.component';
+export * from './lib/components/no-connection-modal/no-connection-modal.component';

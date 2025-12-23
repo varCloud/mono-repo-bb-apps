@@ -1,0 +1,98 @@
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<div
+  #playerContainer
+  class="video-player-container"
+  (click)="onControlsAreaClick($event)"
+>
+  <!-- Video -->
+  <video
+    #videoElement
+    class="video-element"
+    [src]="videoUrl"
+    [poster]="poster"
+    playsinline
+    webkit-playsinline
+    (click)="onVideoClick()"
+  ></video>
+
+  <!-- Error -->
+  @if (hasError()) {
+  <div class="error-overlay">
+    <div class="error-content">
+      <ion-icon name="alert-circle"></ion-icon>
+      <p>Error al cargar el video</p>
+      <ion-button (click)="video.load()" fill="outline" color="light">
+        Reintentar
+      </ion-button>
+    </div>
+  </div>
+  }
+
+  <!-- Controles -->
+  @if (showControls() && !hasError()) {
+  <div class="controls-overlay" [class.hidden]="!showControls()">
+    <div class="gradient-bottom"></div>
+
+    <!-- Top: Velocidad -->
+    <div class="controls-top">
+      <ion-button
+        class="speed-btn"
+        fill="clear"
+        color="light"
+        size="small"
+        (click)="changePlaybackRate()"
+      >
+        {{ playbackRate() }}x
+      </ion-button>
+    </div>
+
+    <!-- Center: Play/Pause y Skip -->
+    <div class="controls-center">
+      <ion-button class="skip-btn" fill="clear" (click)="skipTime(-10)">
+        <ion-icon slot="icon-only" name="play-back"></ion-icon>
+      </ion-button>
+
+      <ion-button class="play-btn" fill="clear" (click)="togglePlay()">
+        <ion-icon
+          slot="icon-only"
+          [name]="isPlaying() ? 'pause' : 'play'"
+        ></ion-icon>
+      </ion-button>
+
+      <ion-button class="skip-btn" fill="clear" (click)="skipTime(10)">
+        <ion-icon slot="icon-only" name="play-forward"></ion-icon>
+      </ion-button>
+    </div>
+
+    <!-- Bottom: Mute, Progreso, Fullscreen -->
+    <div class="controls-bottom">
+      <ion-button class="action-btn" fill="clear" (click)="toggleMute()">
+        <ion-icon
+          slot="icon-only"
+          [name]="isMuted() ? 'volume-mute' : 'volume-high'"
+        ></ion-icon>
+      </ion-button>
+
+      <span class="time">{{ timeFormat(currentTime()) }}</span>
+
+      <ion-range
+        class="progress-bar"
+        [value]="currentTime()"
+        [min]="0"
+        [max]="duration()"
+        (ionChange)="seek($event)"
+      ></ion-range>
+
+      <span class="time">{{ timeFormat(duration()) }}</span>
+
+      <ion-button class="action-btn" fill="clear" (click)="toggleFullscreen()">
+        <ion-icon
+          slot="icon-only"
+          [name]="isFullscreen() ? 'contract' : 'expand'"
+        ></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+  }
+</div>

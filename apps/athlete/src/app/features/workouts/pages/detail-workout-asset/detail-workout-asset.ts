@@ -1,13 +1,6 @@
-import {
-  Component,
-  ElementRef,
-  signal,
-  ViewChild,
-  type OnInit,
-} from '@angular/core';
+import { Component, signal, ViewChild, type OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Asset, Workout, WorkoutService } from '@monorepo-bb-app/shared';
-import * as PlyrModule from 'plyr';
+import { Asset, TrainingTypeEnum, Workout } from '@monorepo-bb-app/shared';
 import { addIcons } from 'ionicons';
 import {
   IonGrid,
@@ -22,6 +15,7 @@ import {
   IonItemDivider,
   IonFab,
   ModalController,
+  Platform,
 } from '@ionic/angular/standalone';
 import {
   arrowBackOutline,
@@ -37,11 +31,13 @@ import {
   CommentListComponent,
   Comment,
   SubmitReviewComponent,
+  YoutubeVideoComponent,
+  CustomVideoPlayerComponent,
+  ViewPdfComponent,
 } from '@monorepo-bb-app/ui';
 import { TranslateModule } from '@ngx-translate/core';
-import { Capacitor } from '@capacitor/core';
-import { StatusBar } from '@capacitor/status-bar';
 import { MODAL_RESPONSE } from 'libs/shared/constants/enums';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 @Component({
   selector: 'app-detail-workout-asset',
   imports: [
@@ -59,18 +55,30 @@ import { MODAL_RESPONSE } from 'libs/shared/constants/enums';
     IonHeader,
     CommentListComponent,
     TranslateModule,
+    PdfViewerModule,
+    YoutubeVideoComponent,
+    CustomVideoPlayerComponent,
+    ViewPdfComponent,
   ],
   templateUrl: './detail-workout-asset.html',
   styleUrl: './detail-workout-asset.scss',
 })
 export class DetailWorkoutAsset implements OnInit {
-  @ViewChild('player') videoElement: ElementRef;
+  @ViewChild(YoutubeVideoComponent)
+  youtubeVideoComponent: YoutubeVideoComponent;
+  @ViewChild(CustomVideoPlayerComponent)
+  customVideoPlayerComponent: CustomVideoPlayerComponent;
+
+  isYoutube = signal<boolean>(false);
+  isRoutine = signal<boolean>(false);
+  isDocument = signal<boolean>(false);
+  isPlaying = signal<boolean>(false);
+  heigthVideo = '400px';
   workout = this._activatedRoute.snapshot.data['workout'] as Workout;
   workoutAssetId =
     this._activatedRoute.snapshot.paramMap.get('workoutAssetIdP');
-  player: Plyr;
 
-  videoUrl = signal<string | null>('');
+  url = signal<string | null>('');
   tituloVideo = signal<string>('');
   descripcion = signal<string>('');
 
@@ -130,7 +138,6 @@ export class DetailWorkoutAsset implements OnInit {
   ]);
 
   constructor(
-    private workoutService: WorkoutService,
     private _activatedRoute: ActivatedRoute,
     private modalCtrl: ModalController
   ) {
@@ -146,78 +153,62 @@ export class DetailWorkoutAsset implements OnInit {
   }
 
   ngOnInit(): void {
-    const video = this.workout.assets.find(
+    const asset = this.workout.assets.find(
       (asset) => asset.workoutAssetId === +this.workoutAssetId
     );
-    if (video && video.signedUrl) {
-      this.videoUrl.set(video.signedUrl);
-      this.tituloVideo.set(video.name);
-      this.descripcion.set(video.description || '');
-      this.workoutAsset.set(video);
-    }
-  }
+    if (asset && (asset.signedUrl || asset.assetUrl)) {
+      this.workoutAsset.set(asset);
 
-  ngOnDestroy(): void {
-    this.player.destroy();
+      this.isYoutube.set(
+        this.workout.workoutTypeId === TrainingTypeEnum.RECORDED_CLASSES
+      );
+      this.isRoutine.set(
+        this.workout.workoutTypeId === TrainingTypeEnum.ROUTINES
+      );
+      this.isDocument.set(
+        this.workout.workoutTypeId === TrainingTypeEnum.DOCUMENT
+      );
+
+      if (this.isRoutine()) {
+        this.url.set(asset.signedUrl || '');
+      }
+
+      if (this.isDocument()) {
+        this.url.set(
+          asset.signedUrl ||
+            'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf'
+        );
+      }
+      if (this.isYoutube()) {
+        this.url.set(asset.assetUrl);
+      }
+
+      this.tituloVideo.set(asset.name);
+      this.descripcion.set(asset.description || '');
+    }
   }
 
   ionViewWillLeave() {
-    this.player.destroy();
-  }
-
-  ngAfterViewInit() {
-    this.player = new PlyrModule.default(this.videoElement.nativeElement, {
-      ratio: '1:1',
-      hideControls: true,
-      clickToPlay: true,
-
-      controls: [
-        'play-large', // The large play button in the center
-        // 'restart', // Restart playback
-        'rewind', // Rewind by the seek time (default 10 seconds)
-        'play', // Play/pause playback
-        'fast-forward', // Fast forward by the seek time (default 10 seconds)
-        'progress', // The progress bar and scrubber for playback and buffering
-        'current-time', // The current time of playback
-        'duration', // The full duration of the media
-        // 'mute', // Toggle mute
-        // 'volume', // Volume control
-        // 'captions', // Toggle captions
-        'fullscreen', // Toggle fullscreen
-        'settings', // Settings menu
-        // 'pip', // Picture-in-picture (currently Safari only)
-        // 'airplay', // Airplay (currently Safari only)
-      ],
-    });
-
-    this.player.on('exitfullscreen', async () => {
-      if (Capacitor.isNativePlatform() && Capacitor.getPlatform() === 'ios') {
-        await StatusBar.setOverlaysWebView({ overlay: true });
-        await StatusBar.show();
-      }
-    });
+    this.youtubeVideoComponent?.destroy();
+    this.customVideoPlayerComponent?.destroy();
   }
 
   playVideo() {
-    if (this.player?.playing) {
-      this.player.pause();
-      return;
-    }
-    this.player.play();
+    this.isPlaying.update((value) => !value);
   }
 
   public async openReview() {
     const modal = await this.modalCtrl.create({
       component: SubmitReviewComponent,
       componentProps: {
-        coachName: 'Hola munod',
-        avatarUrl: '',
+        userId: this.workout.creatorId,
+        workoutId: this.workout.workoutId,
       },
     });
     modal.present();
 
     const { data, role } = await modal.onWillDismiss();
-
+    console.log(role);
     if (role === MODAL_RESPONSE.CONFIRM) {
     }
   }

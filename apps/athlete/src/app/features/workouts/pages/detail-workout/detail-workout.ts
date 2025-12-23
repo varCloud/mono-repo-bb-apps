@@ -24,7 +24,12 @@ import {
   IonItem,
 } from '@ionic/angular/standalone';
 import { LocalStorageService } from '@monorepo-bb-app/core';
-import { Asset, KEY_LOCALSTORAGE, Workout } from '@monorepo-bb-app/shared';
+import {
+  Asset,
+  KEY_LOCALSTORAGE,
+  Workout,
+  WorkoutInformationSelect,
+} from '@monorepo-bb-app/shared';
 import { LayoutContentComponent } from '@monorepo-bb-app/ui';
 import { TranslateModule } from '@ngx-translate/core';
 import { addIcons } from 'ionicons';
@@ -66,13 +71,14 @@ export class DetailWorkout implements OnInit {
   player: Plyr;
   videoUrl = this.workout.assets[0].signedUrl || null;
   difficulty;
-  level = (this.workout.difficultyLevels[0] as any).level?.description || '';
+  level = (this.workout.difficultyLevels[0] as any)?.level?.description || '';
   tag = (this.workout.tags[0] as any)?.tag.name || '';
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private _router: Router,
-    private _localstorage: LocalStorageService
+    private _localstorage: LocalStorageService,
+    private _workoutInformationSelect: WorkoutInformationSelect
   ) {
     addIcons({
       heart,
@@ -100,10 +106,10 @@ export class DetailWorkout implements OnInit {
 
   async viewDetailRutine(workoutAsset: Asset) {
     const user = await this._localstorage.get(KEY_LOCALSTORAGE.USER);
+    this._workoutInformationSelect.setWorkout(this.workout);
     this._router.navigate([
       'home/workouts/workoutAsset',
-      this.workout.workoutId, // TODO QUITAR CUANDO EXISTA EL SERVICIO
-      // workoutAsset.workoutAssetId,
+      this.workout.workoutId,
       this.workout.creatorId,
       user.userId,
       workoutAsset.workoutAssetId,

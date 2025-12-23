@@ -70,6 +70,7 @@ export const payloadToDocumentForm = (data: any) => {
       name: exercise.name,
       description: exercise.description,
       duration: data.duration,
+      s3Key: exercise.s3Key,
     })),
     idempotencyKey: data.idempotencyKey,
   };

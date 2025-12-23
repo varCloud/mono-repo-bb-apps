@@ -19,7 +19,7 @@ export const workoutRoutes: Routes = [
           ),
       },
       {
-        path: 'workoutAsset/:workoutAssetId/:creatorId/:userId/:workoutAssetIdP',
+        path: 'workoutAsset/:workoutId/:creatorId/:userId/:workoutAssetIdP',
         canActivate: [checkSubscriptionGuard],
         resolve: {
           workout: WorkoutAssetDataResolver,

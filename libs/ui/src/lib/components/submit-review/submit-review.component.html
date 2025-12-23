@@ -10,12 +10,12 @@
 <ion-content class="review-container">
   <div class="header">
     <app-user-avatar
-      [src]="avatarUrl"
+      [src]="creator()?.profilePictureUrl!"
       size="extra-large"
       class="avatar"
     ></app-user-avatar>
 
-    <h2 class="title">Déjale una evaluación a {{ coachName }}</h2>
+    <h2 class="title">Déjale una evaluación a {{ fullName() }}</h2>
 
     <p class="subtitle">
       ¿Quisieras contar tu experiencia en la app?
@@ -42,7 +42,7 @@
       <ion-text class="input-label">Descripción</ion-text>
       <div class="textarea-wrapper">
         <ion-textarea
-          formControlName="description"
+          formControlName="comment"
           rows="6"
           mode="md"
           class="custom-textarea"

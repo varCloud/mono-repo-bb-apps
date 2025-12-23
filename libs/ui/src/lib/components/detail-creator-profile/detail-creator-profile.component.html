@@ -10,7 +10,7 @@
     text=""
   ></ion-back-button>
   <img
-    [src]="defaultCoverPicture"
+    [src]="creator()?.frontPageUrl || defaultCoverPicture"
     [alt]="'Portada de ' + fullName()"
     style="
       width: 100%;
@@ -22,7 +22,7 @@
   <app-layout-content customClass="detail-creator-profile-page ion-padding">
     <ion-grid content-body>
       <div class="header-creator-profile">
-        <ion-avatar 
+        <ion-avatar
           class="avatar-creator-profile"
           [style.border-color]="creatorColor()"
         >
@@ -36,31 +36,31 @@
           <div class="info-creator-profile-header">
             <h2 class="name">{{ fullName() }}</h2>
             @if (!hasSubscriptionActive()) {
-              <ion-button
-                size="small"
-                color="tertiary"
-                shape="round"
-                class="btn-suscription"
-                [style.border-color]="creatorColor()"
-                (click)="goToSuscriptionCreator()"
-              >
-                Suscribirse
-              </ion-button>
+            <ion-button
+              size="small"
+              color="tertiary"
+              shape="round"
+              class="btn-suscription"
+              [style.border-color]="creatorColor()"
+              (click)="goToSuscriptionCreator()"
+            >
+              Suscribirse
+            </ion-button>
             }
           </div>
           @if (creator()?.bio) {
-            <p class="bio">{{ creator()?.bio }}</p>
+          <p class="bio">{{ creator()?.bio }}</p>
           } @else {
-            <ion-skeleton-text animated></ion-skeleton-text>
-            <ion-skeleton-text animated></ion-skeleton-text>
-            <ion-skeleton-text animated></ion-skeleton-text>
+          <ion-skeleton-text animated></ion-skeleton-text>
+          <ion-skeleton-text animated></ion-skeleton-text>
+          <ion-skeleton-text animated></ion-skeleton-text>
           }
         </div>
 
         <div class="categories-creator-profile">
           @for (category of creator()?.categories; track category.categoryId) {
-          <ion-chip 
-            [outline]="true" 
+          <ion-chip
+            [outline]="true"
             class="chip"
             [style.border-color]="creatorColor()"
           >

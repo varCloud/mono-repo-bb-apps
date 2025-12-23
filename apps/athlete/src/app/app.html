@@ -1,6 +1,11 @@
 <ion-app>
   <ion-router-outlet></ion-router-outlet>
 </ion-app>
+
 @if (isLoading()) {
   <app-loader></app-loader>
+}
+
+@if (showNoConnection()) {
+  <app-no-connection-modal (retry)="onRetryConnection()"></app-no-connection-modal>
 }
