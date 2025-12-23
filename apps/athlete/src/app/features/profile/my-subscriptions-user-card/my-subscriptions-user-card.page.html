@@ -27,7 +27,11 @@
       [descriptionPlan]="sub.fullDescription"
       [nickName]="sub.user.nickName"
       class="card-item"
-      (optionsClick)="onShowOptions(sub, $event)"
+      (optionsClick)="onShowOptions(sub, $event)
+      "
+      [email]="sub.user.email"
+      [endData] = "sub.endDate"
+      [amount] = "sub.amount"
     ></lib-user-card>
     }@empty {
     <lib-empty-elements-component

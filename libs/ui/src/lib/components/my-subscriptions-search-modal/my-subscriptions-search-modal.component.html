@@ -19,6 +19,9 @@
         [nickName]="sub.user.nickName"
         [descriptionPlan]="sub.fullDescription"
         class="card-item"
+      [email]="sub.user.email"
+      [endData] = "sub.endDate"
+      [amount] = "sub.amount"
 
       ></lib-user-card>
   }@empty {
