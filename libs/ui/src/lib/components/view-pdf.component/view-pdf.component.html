@@ -1,0 +1,77 @@
+<div class="pdf-container" [class.fullscreen]="isFullscreen()">
+  <!-- Loading Overlay -->
+  @if (isLoading()) {
+  <div class="loading-overlay">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+    <p>Cargando PDF...</p>
+  </div>
+  }
+
+  <!-- Error Overlay -->
+  @if (hasError()) {
+  <div class="error-overlay">
+    <ion-icon name="alert-circle-outline" color="danger"></ion-icon>
+    <p>Error al cargar el PDF</p>
+  </div>
+  }
+
+  <!-- Visor PDF -->
+  <div class="pdf-viewer-wrapper" [class.hidden]="isLoading() || hasError()">
+    <pdf-viewer
+      [src]="url()"
+      [render-text]="true"
+      [original-size]="false"
+      [zoom]="zoom()"
+      [fit-to-page]="false"
+      (after-load-complete)="onPdfLoaded()"
+      (error)="onPdfError()"
+      (on-progress)="onPdfLoadingStart()"
+    ></pdf-viewer>
+  </div>
+
+  <!-- Footer Toolbar -->
+  <div class="pdf-toolbar">
+    <div class="toolbar-content">
+      <!-- Botón Zoom Out -->
+      <button
+        class="control-btn"
+        (click)="zoomOut()"
+        [disabled]="!canZoomOut"
+        title="Reducir zoom"
+      >
+        <ion-icon name="remove-outline"></ion-icon>
+      </button>
+
+      <!-- Indicador de Zoom -->
+      <button class="zoom-level" (click)="resetZoom()" title="Restablecer zoom">
+        {{ zoomPercentage }}%
+      </button>
+
+      <!-- Botón Zoom In -->
+      <button
+        class="control-btn"
+        (click)="zoomIn()"
+        [disabled]="!canZoomIn"
+        title="Aumentar zoom"
+      >
+        <ion-icon name="add-outline"></ion-icon>
+      </button>
+
+      <!-- Separador -->
+      <span class="separator"></span>
+
+      <!-- Botón Fullscreen -->
+      <button
+        class="control-btn"
+        (click)="toggleFullscreen()"
+        [title]="
+          isFullscreen() ? 'Salir de pantalla completa' : 'Pantalla completa'
+        "
+      >
+        <ion-icon
+          [name]="isFullscreen() ? 'contract-outline' : 'expand-outline'"
+        ></ion-icon>
+      </button>
+    </div>
+  </div>
+</div>

@@ -8,74 +8,78 @@
     uppercase="false"
     text=""
   ></ion-back-button>
-  <div style="overflow: hidden; width: 100%; height: 100%">
-    @if( isYoutube() ){
-    <lib-youtube-video
-      [videoUrl]="url()"
-      [playVideo]="isPlaying()"
-    ></lib-youtube-video>
-
-    } @if( isRoutine() ){
-    <div style="width: 100%; height: 337px; background-color: black">
-      <lib-aws-video
-        [urlVideo]="url()"
-        [playVideo]="isPlaying()"
-      ></lib-aws-video>
-    </div>
-
-    } @if( isDocument() ){
-    <pdf-viewer
-      [src]="url()"
-      [render-text]="true"
-      [original-size]="false"
-      style="width: 100%; height: 337px"
-    ></pdf-viewer>
-    }
-  </div>
 </ion-header>
-<ion-content [fullscreen]="true">
-  <div class="video-container">
-    <ion-grid class="ion-margin-top">
-      <ion-row>
-        <ion-col>
-          <ion-button fill="clear" class="btn-option">
-            <div class="container">
-              <ion-icon name="heart-outline" color="secondary"></ion-icon>
-              <ion-text>{{ 'workout-asset.like' | translate }}</ion-text>
-            </div>
-          </ion-button>
-        </ion-col>
-        <ion-col>
-          <ion-button fill="clear" class="btn-option">
-            <div class="container">
-              <ion-icon name="bookmark-outline" color="secondary"></ion-icon>
-              <ion-text>{{ 'workout-asset.save' | translate }}</ion-text>
-            </div>
-          </ion-button>
-        </ion-col>
-        <ion-col>
-          <ion-button fill="clear" class="btn-option" (click)="openReview()">
-            <div class="container">
-              <ion-icon name="star-outline" color="secondary"></ion-icon>
-              <ion-text>{{ 'workout-asset.rate' | translate }}</ion-text>
-            </div>
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    <div class="description-text">
-      <ion-text> {{ workoutAsset()?.name }} </ion-text>
-      <lib-workout-information-time-likes-coments
-        [workoutAsset]="workoutAsset()"
-      ></lib-workout-information-time-likes-coments>
+<ion-content [fullscreen]="true" class="ion-no-padding">
+  <ion-grid class="player-video-container">
+    <ion-row>
+      <ion-col>
+        <div style="overflow: hidden; width: 100%; height: 400px">
+          @if( isYoutube() ){
+          <lib-youtube-video
+            [videoUrl]="url()"
+            [playVideo]="isPlaying()"
+            (isPlaying)="isPlaying.set($event)"
+          ></lib-youtube-video>
+
+          } @if( isRoutine() ){
+          <lib-custom-video-player
+            [videoUrl]="url()"
+            [playVideo]="isPlaying()"
+            (videoPlay)="isPlaying.set(true)"
+            (videoPause)="isPlaying.set(false)"
+          ></lib-custom-video-player>
+
+          } @if( isDocument() ){
+          <lib-view-pdf [url]="url()"></lib-view-pdf>
+          }
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div class="ion-padding">
+    <div class="video-container">
+      <ion-grid class="ion-margin-top">
+        <ion-row>
+          <ion-col>
+            <ion-button fill="clear" class="btn-option">
+              <div class="container">
+                <ion-icon name="heart-outline" color="secondary"></ion-icon>
+                <ion-text>{{ 'workout-asset.like' | translate }}</ion-text>
+              </div>
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button fill="clear" class="btn-option">
+              <div class="container">
+                <ion-icon name="bookmark-outline" color="secondary"></ion-icon>
+                <ion-text>{{ 'workout-asset.save' | translate }}</ion-text>
+              </div>
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button fill="clear" class="btn-option" (click)="openReview()">
+              <div class="container">
+                <ion-icon name="star-outline" color="secondary"></ion-icon>
+                <ion-text>{{ 'workout-asset.rate' | translate }}</ion-text>
+              </div>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <div class="description-text">
+        <ion-text> {{ workoutAsset()?.name }} </ion-text>
+        <lib-workout-information-time-likes-coments
+          [workoutAsset]="workoutAsset()"
+        ></lib-workout-information-time-likes-coments>
+      </div>
+    </div>
+
+    <ion-item-divider mode="md"></ion-item-divider>
+    <div style="margin-bottom: 70px">
+      <lib-comment-list [comments]="comments()"></lib-comment-list>
     </div>
   </div>
-
-  <ion-item-divider mode="md"></ion-item-divider>
-  <div style="margin-bottom: 70px">
-    <lib-comment-list [comments]="comments()"></lib-comment-list>
-  </div>
-
+  @if(!isDocument()){
   <ion-fab
     slot="fixed"
     vertical="bottom"
@@ -94,4 +98,5 @@
       ('workout-asset.start' | translate) }}
     </ion-button>
   </ion-fab>
+  }
 </ion-content>

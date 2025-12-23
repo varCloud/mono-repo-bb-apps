@@ -1,19 +1,6 @@
-import {
-  Component,
-  ElementRef,
-  HostListener,
-  signal,
-  ViewChild,
-  type OnInit,
-} from '@angular/core';
+import { Component, signal, ViewChild, type OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-  Asset,
-  CONSTANTS,
-  TrainingTypeEnum,
-  Workout,
-  WorkoutService,
-} from '@monorepo-bb-app/shared';
+import { Asset, TrainingTypeEnum, Workout } from '@monorepo-bb-app/shared';
 import { addIcons } from 'ionicons';
 import {
   IonGrid,
@@ -44,12 +31,12 @@ import {
   CommentListComponent,
   Comment,
   SubmitReviewComponent,
-  AwsVideoComponent,
   YoutubeVideoComponent,
+  CustomVideoPlayerComponent,
+  ViewPdfComponent,
 } from '@monorepo-bb-app/ui';
 import { TranslateModule } from '@ngx-translate/core';
 import { MODAL_RESPONSE } from 'libs/shared/constants/enums';
-import { DomSanitizer } from '@angular/platform-browser';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 @Component({
   selector: 'app-detail-workout-asset',
@@ -69,8 +56,9 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     CommentListComponent,
     TranslateModule,
     PdfViewerModule,
-    AwsVideoComponent,
     YoutubeVideoComponent,
+    CustomVideoPlayerComponent,
+    ViewPdfComponent,
   ],
   templateUrl: './detail-workout-asset.html',
   styleUrl: './detail-workout-asset.scss',
@@ -78,12 +66,14 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 export class DetailWorkoutAsset implements OnInit {
   @ViewChild(YoutubeVideoComponent)
   youtubeVideoComponent: YoutubeVideoComponent;
-  @ViewChild(AwsVideoComponent) awsVideoComponent: AwsVideoComponent;
+  @ViewChild(CustomVideoPlayerComponent)
+  customVideoPlayerComponent: CustomVideoPlayerComponent;
 
   isYoutube = signal<boolean>(false);
   isRoutine = signal<boolean>(false);
   isDocument = signal<boolean>(false);
   isPlaying = signal<boolean>(false);
+  heigthVideo = '400px';
   workout = this._activatedRoute.snapshot.data['workout'] as Workout;
   workoutAssetId =
     this._activatedRoute.snapshot.paramMap.get('workoutAssetIdP');
@@ -148,11 +138,8 @@ export class DetailWorkoutAsset implements OnInit {
   ]);
 
   constructor(
-    private workoutService: WorkoutService,
     private _activatedRoute: ActivatedRoute,
-    private modalCtrl: ModalController,
-    public sanitizer: DomSanitizer,
-    private platform: Platform
+    private modalCtrl: ModalController
   ) {
     addIcons({
       heart,
@@ -203,7 +190,7 @@ export class DetailWorkoutAsset implements OnInit {
 
   ionViewWillLeave() {
     this.youtubeVideoComponent?.destroy();
-    this.awsVideoComponent?.destroy();
+    this.customVideoPlayerComponent?.destroy();
   }
 
   playVideo() {
@@ -214,14 +201,14 @@ export class DetailWorkoutAsset implements OnInit {
     const modal = await this.modalCtrl.create({
       component: SubmitReviewComponent,
       componentProps: {
-        coachName: 'Hola munod',
-        avatarUrl: '',
+        userId: this.workout.creatorId,
+        workoutId: this.workout.workoutId,
       },
     });
     modal.present();
 
     const { data, role } = await modal.onWillDismiss();
-
+    console.log(role);
     if (role === MODAL_RESPONSE.CONFIRM) {
     }
   }

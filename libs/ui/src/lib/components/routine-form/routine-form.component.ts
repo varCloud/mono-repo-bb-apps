@@ -33,6 +33,8 @@ import {
   WorkoutService,
   destroyUppy,
   urlValidator,
+  CompleteResultUpload,
+  proceessUploadPhoto,
 } from '@monorepo-bb-app/shared';
 import { UppyFile } from '@uppy/utils';
 import { finalize } from 'rxjs';
@@ -54,6 +56,7 @@ import { AddRecordedClassComponent } from '../add-recorded-class/add-recorded-cl
 import { DashedAreaComponent } from '../dashed-area/dashed-area.component';
 import { TrainingTypeEnum } from '../../../../../shared/constants/types-routines';
 import Uppy from '@uppy/core';
+import { BUCKET_TYPE } from 'libs/shared/constants/enums';
 
 @Component({
   selector: 'lib-routine-form',
@@ -297,19 +300,13 @@ export class RoutineFormComponent implements OnInit {
   }
 
   private async saveExerciseData() {
+    debugger
     this._loader.showLoader();
-    let imageUrl =
-      'https://bb-app-bucket-images.s3.amazonaws.com/uploads%2F76%2Fundefined%2Fphoto-7_1761612307696_j5qjqz2qhtf.jpg';
-    if (Capacitor.isNativePlatform()) {
-      try {
-        const file = this.routineForm.get('coverImage')?.value;
-        if (file) {
-          const img = await this._uploadService.uploadPhoto(file as Photo);
-          imageUrl = img?.location || '';
-        }
-      } catch (error) {
-        console.error('Error uploading image:', error);
-      }
+    let imageUrl = ''
+    const dataPhoto = this.routineForm.get('coverImage')?.value;
+    if (dataPhoto) {
+      const img = await this.uploadPhoto(dataPhoto);
+      imageUrl = img?.location || '';
     }
 
     const payload = convertToPayload({
@@ -343,5 +340,22 @@ export class RoutineFormComponent implements OnInit {
           );
         },
       });
+  }
+
+  private async uploadPhoto(image: Photo): Promise<CompleteResultUpload> {
+    try {
+      const dataPhoto = await proceessUploadPhoto(image);
+      const result: CompleteResultUpload = await this._uploadService.uploadFile(
+        dataPhoto.fileData,
+        dataPhoto.fileName,
+        dataPhoto.fileType,
+        BUCKET_TYPE.PUBLIC
+      );
+
+      return result;
+    } catch (error) {
+      console.error('Error in uploadPhoto:', error);
+      throw error;
+    }
   }
 }

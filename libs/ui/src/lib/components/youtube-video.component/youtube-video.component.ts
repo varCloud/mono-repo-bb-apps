@@ -7,6 +7,7 @@ import {
   ElementRef,
   HostListener,
   input,
+  output,
   signal,
   ViewChild,
   type OnInit,
@@ -28,18 +29,9 @@ export class YoutubeVideoComponent implements OnInit {
   videoUrl = input.required<string>();
   destroyVideo = input<boolean>(false);
   playVideo = input<boolean>(false);
+  isPlaying = output<boolean>();
 
   constructor(public sanitizer: DomSanitizer) {
-    effect(() => {
-      const shouldDestroy = this.destroyVideo();
-      console.log('Effect destroyVideo ejecutado, valor:', shouldDestroy);
-      if (shouldDestroy) {
-        console.log('Destruyendo video por señal (ionViewWillLeave)');
-        console.log('videoPlayer existe?', !!this.videoPlayer);
-        this.executeCommandOnIframe(CONSTANTS.COMMANDS_VIDEO_PLAYER.DESTROY);
-      }
-    });
-
     effect(() => {
       const action = this.playVideo()
         ? CONSTANTS.COMMANDS_VIDEO_PLAYER.PLAY
@@ -66,15 +58,13 @@ export class YoutubeVideoComponent implements OnInit {
 
   @HostListener('window:message', ['$event'])
   async onMessage(event: MessageEvent) {
-    const comando = event.data;
+    const command = event.data;
     try {
-      if (Capacitor.isNativePlatform()) {
-        const overlay = Capacitor.getPlatform() === 'ios';
-        if (comando === 'FULLSCREEN_ON') {
-        }
-
-        if (comando === 'FULLSCREEN_OFF') {
-        }
+      if (command.state === CONSTANTS.COMMANDS_VIDEO_PLAYER.PLAYING) {
+        this.isPlaying.emit(true);
+      }
+      if (command.state === CONSTANTS.COMMANDS_VIDEO_PLAYER.PAUSED) {
+        this.isPlaying.emit(false);
       }
     } catch (e) {
       console.log('Error verificando plataforma', e);

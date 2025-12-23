@@ -37,6 +37,7 @@ export enum ENUM_WORKOUT_STATUS {
 export enum MODAL_RESPONSE {
   CONFIRM = 'confirm',
   CANCEL = 'cancel',
+  SUCCESS = 'success',
 }
 
 export enum BUCKET_TYPE {
