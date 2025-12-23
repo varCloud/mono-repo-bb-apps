@@ -12,10 +12,9 @@
     "save-changes": "Guardar cambios",
     "search": "Buscar"
   },
-    "update-user-data": {
+  "update-user-data": {
     "success": "Datos Actualizados"
   },
-
 
   "about-me": {
     "placeholder": "Escribe algo sobre ti",
@@ -393,5 +392,8 @@
     "rate": "Calificar",
     "pause": "Pausar",
     "start": "Comenzar"
+  },
+  "workout-comments": {
+    "no-comments": "Aún no hay comentarios. Sé el primero en comentar."
   }
 }

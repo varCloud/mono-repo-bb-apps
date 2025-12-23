@@ -42,6 +42,7 @@ export * from './lib/components/submit-review/submit-review.component';
 export * from './lib/components/youtube-video.component/youtube-video.component';
 export * from './lib/components/custom-video-player/custom-video-player.component';
 export * from './lib/components/view-pdf.component/view-pdf.component';
+export * from './lib/components/workoutComments.component/workoutComments.component';
 
 export * from './lib/components/payment-frequency-settings/payment-frequency-settings.component';
 export * from './lib/components/reset-password-form/reset-password-form/reset-password-form.component';

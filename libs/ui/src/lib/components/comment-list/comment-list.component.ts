@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { IonIcon } from '@ionic/angular/standalone';
+import { Rating } from '@monorepo-bb-app/shared';
 import { addIcons } from 'ionicons';
 import { star } from 'ionicons/icons';
 
@@ -23,7 +24,7 @@ export interface Comment {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommentListComponent {
-  comments = input<Comment[]>([]);
+  comments = input<Rating[]>([]);
 
   constructor() {
     addIcons({ star });

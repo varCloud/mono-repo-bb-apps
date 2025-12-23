@@ -1,49 +1,71 @@
-import { Component, input, signal, type OnInit } from '@angular/core';
+import { Component, effect, input, signal, type OnInit } from '@angular/core';
 import { CommentListComponent } from '../comment-list/comment-list.component';
 import {
   IonInfiniteScroll,
   IonInfiniteScrollContent,
+  IonIcon,
+  IonText,
 } from '@ionic/angular/standalone';
-import {
-  Paginator,
-  ToastService,
-  WorkoutService,
-} from '@monorepo-bb-app/shared';
+import { Paginator, Rating, ToastService, WorkoutService } from '@monorepo-bb-app/shared';
 import { ListSkeletonComponent } from '../skeleton/list-skeleton/list-skeleton.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { addIcons } from 'ionicons';
+import { chatbubbleEllipsesOutline } from 'ionicons/icons';
 
 @Component({
-  selector: 'lib-workout-comments.component',
+  selector: 'lib-workout-comments',
   imports: [
+    IonText,
+    IonIcon,
     IonInfiniteScrollContent,
     IonInfiniteScroll,
     CommentListComponent,
     ListSkeletonComponent,
+    TranslateModule,
   ],
   templateUrl: './workoutComments.component.html',
   styleUrl: './workoutComments.component.scss',
 })
 export class WorkoutCommentsComponent implements OnInit {
   workoutAssetId = input.required<number>();
-  public paginatorComments = signal<Paginator>({} as Paginator);
-  public isLoadingComments = signal<boolean>(false);
-  comments = signal<any[]>([]);
+  newComment = input<Rating | null>(null);
+
+  paginatorComments = signal<Paginator>({} as Paginator);
+  isLoadingComments = signal<boolean>(false);
+  comments = signal<Rating[]>([]);
 
   constructor(
     private _workoutService: WorkoutService,
     private _toastService: ToastService
-  ) {}
+  ) {
+    addIcons({ chatbubbleEllipsesOutline });
+    effect(() => {
+      const comment = this.newComment();
+      if (comment) {
+        this.comments.update((current) => {
+          const exists = current.some((c) => c.ratingId === comment.ratingId);
+          return exists ? current : [comment, ...current];
+        });
+        console.log(this.comments());
+      }
+    });
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getWorkoutComments();
+  }
 
-  private async getWorkoutComments(url: undefined | string = undefined) {
+  private async getWorkoutComments(url: undefined | string = undefined, reset = false) {
     this.isLoadingComments.set(true);
-    const params = {
-      workoutId: this.workoutAssetId(),
-    };
     try {
-      const workouts = await this._workoutService.getWorkouts(url, params);
-      this.paginatorComments.set(workouts.paginator);
-      this.comments.update((current) => [...current, ...workouts.data]);
+      const response = await this._workoutService.getWorkoutComments(url, this.workoutAssetId());
+      this.paginatorComments.set(response.paginator);
+
+      this.comments.update((current) => {
+        const currentIds = new Set(current.map((c) => c.ratingId));
+        const newComments = response.data.filter((c: any) => !currentIds.has(c.ratingId));
+        return [...current, ...newComments];
+      });
     } catch (error) {
       this._toastService.error('Failed to load comments.', {
         duration: 1000,
@@ -54,12 +76,12 @@ export class WorkoutCommentsComponent implements OnInit {
   }
 
   async onIonInfinite(event: any) {
-    if (this.paginatorComments().links.next) {
-      await this.getWorkoutComments(
-        this.paginatorComments().links.next as string
-      );
+    if (this.paginatorComments()?.links?.next) {
+      await this.getWorkoutComments(this.paginatorComments().links.next as string);
       event.target.complete();
-      event.target.disabled = !this.paginatorComments().links.next;
+      if (!this.paginatorComments().links.next) {
+        event.target.disabled = true;
+      }
     } else {
       event.target.complete();
       event.target.disabled = true;

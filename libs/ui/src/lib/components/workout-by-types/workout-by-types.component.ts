@@ -6,17 +6,9 @@ import {
   signal,
   type OnInit,
 } from '@angular/core';
-import {
-  Paginator,
-  ToastService,
-  Workout,
-  WorkoutService,
-} from '@monorepo-bb-app/shared';
+import { Paginator, ToastService, Workout, WorkoutService } from '@monorepo-bb-app/shared';
 import { ENUM_WORKOUT_TYPES } from 'libs/shared/constants/enums';
-import {
-  IonInfiniteScroll,
-  IonInfiniteScrollContent,
-} from '@ionic/angular/standalone';
+import { IonInfiniteScroll, IonInfiniteScrollContent } from '@ionic/angular/standalone';
 import { CardWorkoutInfoComponent } from '../card-workout-info/card-workout-info.component';
 import { ListSkeletonComponent } from '../skeleton/list-skeleton/list-skeleton.component';
 
@@ -70,11 +62,11 @@ export class WorkoutByTypesComponent implements OnInit {
 
   async onIonInfinite(event: any) {
     if (this.paginatorWorkouts().links.next) {
-      await this.getWorkoutsByCreator(
-        this.paginatorWorkouts().links.next as string
-      );
+      await this.getWorkoutsByCreator(this.paginatorWorkouts().links.next as string);
       event.target.complete();
-      event.target.disabled = !this.paginatorWorkouts().links.next;
+      if (!this.paginatorWorkouts().links.next) {
+        event.target.disabled = true;
+      }
     } else {
       event.target.complete();
       event.target.disabled = true;

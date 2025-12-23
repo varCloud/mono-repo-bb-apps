@@ -1,3 +1,11 @@
 :host {
   display: block;
+
+  .no-comments-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    gap: 10px;
+  }
 }

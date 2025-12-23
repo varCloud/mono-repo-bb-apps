@@ -1,4 +1,5 @@
-{      "update-user-data": {
+{
+  "update-user-data": {
     "success": "Data Updated successfully"
   },
   "about-me": {
@@ -153,8 +154,6 @@
     "step-3-description": "Monitor your clients' training, goals, and objectives.",
     "step-3-title": "Progress"
   },
-
-
 
   "user-create-account": {
     "have-account": "Do you have an account?",
@@ -379,5 +378,8 @@
     "rate": "Rate",
     "pause": "Pause",
     "start": "Start"
+  },
+  "workout-comments": {
+    "no-comments": "No comments yet. Be the first to comment."
   }
 }

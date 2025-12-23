@@ -76,7 +76,10 @@
 
     <ion-item-divider mode="md"></ion-item-divider>
     <div style="margin-bottom: 70px">
-      <lib-comment-list [comments]="comments()"></lib-comment-list>
+      <lib-workout-comments
+        [workoutAssetId]="workoutAsset()?.workoutAssetId"
+        [newComment]="latestComment()"
+      ></lib-workout-comments>
     </div>
   </div>
   @if(!isDocument()){
@@ -87,15 +90,8 @@
     style="width: 100%"
     horizontal="center"
   >
-    <ion-button
-      expand="block"
-      fill="solid"
-      color="tertiary"
-      shape="round"
-      (click)="playVideo()"
-    >
-      {{ isPlaying() ? ('workout-asset.pause' | translate) :
-      ('workout-asset.start' | translate) }}
+    <ion-button expand="block" fill="solid" color="tertiary" shape="round" (click)="playVideo()">
+      {{ isPlaying() ? ('workout-asset.pause' | translate) : ('workout-asset.start' | translate) }}
     </ion-button>
   </ion-fab>
   }

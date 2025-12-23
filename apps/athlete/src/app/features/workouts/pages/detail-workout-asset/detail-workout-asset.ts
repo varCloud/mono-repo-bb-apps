@@ -1,6 +1,6 @@
 import { Component, signal, ViewChild, type OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Asset, TrainingTypeEnum, Workout } from '@monorepo-bb-app/shared';
+import { Asset, Rating, TrainingTypeEnum, Workout } from '@monorepo-bb-app/shared';
 import { addIcons } from 'ionicons';
 import {
   IonGrid,
@@ -34,6 +34,7 @@ import {
   YoutubeVideoComponent,
   CustomVideoPlayerComponent,
   ViewPdfComponent,
+  WorkoutCommentsComponent,
 } from '@monorepo-bb-app/ui';
 import { TranslateModule } from '@ngx-translate/core';
 import { MODAL_RESPONSE } from 'libs/shared/constants/enums';
@@ -59,6 +60,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     YoutubeVideoComponent,
     CustomVideoPlayerComponent,
     ViewPdfComponent,
+    WorkoutCommentsComponent,
   ],
   templateUrl: './detail-workout-asset.html',
   styleUrl: './detail-workout-asset.scss',
@@ -73,17 +75,17 @@ export class DetailWorkoutAsset implements OnInit {
   isRoutine = signal<boolean>(false);
   isDocument = signal<boolean>(false);
   isPlaying = signal<boolean>(false);
-  heigthVideo = '400px';
+
   workout = this._activatedRoute.snapshot.data['workout'] as Workout;
-  workoutAssetId =
-    this._activatedRoute.snapshot.paramMap.get('workoutAssetIdP');
+  workoutAssetId = this._activatedRoute.snapshot.paramMap.get('workoutAssetIdP');
 
   url = signal<string | null>('');
   tituloVideo = signal<string>('');
   descripcion = signal<string>('');
 
   workoutAsset = signal<Asset | null>(null);
-  //TODO: Se quitaran cuando se regresen los comentarios desde el backend
+  latestComment = signal<Rating | null>(null);
+
   comments = signal<Comment[]>([
     {
       id: 1,
@@ -159,15 +161,9 @@ export class DetailWorkoutAsset implements OnInit {
     if (asset && (asset.signedUrl || asset.assetUrl)) {
       this.workoutAsset.set(asset);
 
-      this.isYoutube.set(
-        this.workout.workoutTypeId === TrainingTypeEnum.RECORDED_CLASSES
-      );
-      this.isRoutine.set(
-        this.workout.workoutTypeId === TrainingTypeEnum.ROUTINES
-      );
-      this.isDocument.set(
-        this.workout.workoutTypeId === TrainingTypeEnum.DOCUMENT
-      );
+      this.isYoutube.set(this.workout.workoutTypeId === TrainingTypeEnum.RECORDED_CLASSES);
+      this.isRoutine.set(this.workout.workoutTypeId === TrainingTypeEnum.ROUTINES);
+      this.isDocument.set(this.workout.workoutTypeId === TrainingTypeEnum.DOCUMENT);
 
       if (this.isRoutine()) {
         this.url.set(asset.signedUrl || '');
@@ -175,8 +171,7 @@ export class DetailWorkoutAsset implements OnInit {
 
       if (this.isDocument()) {
         this.url.set(
-          asset.signedUrl ||
-            'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf'
+          asset.signedUrl || 'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf'
         );
       }
       if (this.isYoutube()) {
@@ -202,14 +197,14 @@ export class DetailWorkoutAsset implements OnInit {
       component: SubmitReviewComponent,
       componentProps: {
         userId: this.workout.creatorId,
-        workoutId: this.workout.workoutId,
+        workoutAssetId: this.workoutAssetId,
       },
     });
     modal.present();
 
     const { data, role } = await modal.onWillDismiss();
-    console.log(role);
-    if (role === MODAL_RESPONSE.CONFIRM) {
+    if (role === MODAL_RESPONSE.SUCCESS) {
+      this.latestComment.set(data);
     }
   }
 }
