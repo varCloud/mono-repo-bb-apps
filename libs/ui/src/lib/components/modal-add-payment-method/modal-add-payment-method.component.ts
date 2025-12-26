@@ -1,4 +1,5 @@
-import { Component, Input, type OnInit } from '@angular/core';
+import { arrowBackOutline } from 'ionicons/icons';
+import { Component, input, Input, type OnInit } from '@angular/core';
 import { AddPaymentMethodComponent } from '../stripe/add-payment-method/add-payment-method.component';
 import {
   ModalController,
@@ -11,9 +12,11 @@ import {
   IonHeader,
   IonToolbar,
   IonTitle,
+  IonBackButton
 } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
 import { MODAL_RESPONSE } from 'libs/shared/constants/enums';
+import { addIcons } from 'ionicons';
 
 @Component({
   selector: 'lib-modal-add-payment-method',
@@ -26,13 +29,17 @@ import { MODAL_RESPONSE } from 'libs/shared/constants/enums';
     TranslateModule,
     IonButtons,
     AddPaymentMethodComponent,
+    IonBackButton
   ],
   templateUrl: './modal-add-payment-method.component.html',
   styleUrl: './modal-add-payment-method.component.scss',
 })
 export class ModalAddPaymentMethodComponent implements OnInit {
   @Input() idCustomer = '';
-  constructor(private modalCtrl: ModalController) {}
+  public title = input<string>('go-back');
+  constructor(private modalCtrl: ModalController) {
+     addIcons({ arrowBackOutline });
+  }
   ngOnInit(): void {}
 
   cancel() {
