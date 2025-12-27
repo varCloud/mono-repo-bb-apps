@@ -35,14 +35,14 @@
       class="section-header"
       style="display: flex; justify-content: space-between; align-items: center"
     >
-      <h2 class="title ion-no-margin">Tipos entrenamiento</h2>
+      <h2 class="title ion-no-margin">{{ 'home.types-training' | translate }}</h2>
       <ion-button
         color="secondary"
         class="show-all"
         fill="clear"
         [disabled]="!workoutLevelSelected()"
         (click)="clearWorkoutLevelSelection()"
-        >Ver todos</ion-button
+        >{{ 'home.show-all' | translate }}</ion-button
       >
     </div>
     @if (workoutLevels().length > 0) {
@@ -84,8 +84,8 @@
         alt="No hay entrenamientos"
         class="empty-image"
       />
-      <p class="empty-title">Actualmente no tienes entrenamientos.</p>
-      <p class="empty-subtitle">Da clic en el botón para crear tu primer entrenamiento .</p>
+      <p class="empty-title">{{ 'home.no-workouts' | translate }}</p>
+      <p class="empty-subtitle">{{ 'home.create-first-workout' | translate }}</p>
     </div>
   }
   <ion-infinite-scroll

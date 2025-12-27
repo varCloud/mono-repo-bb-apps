@@ -399,5 +399,11 @@
   },
   "workout-comments": {
     "no-comments": "No comments yet. Be the first to comment."
+  },
+  "home": {
+    "types-training": "Training types",
+    "show-all": "Show all",
+    "no-workouts": "You currently have no workouts.",
+    "create-first-workout": "Click the button to create your first workout."
   }
 }

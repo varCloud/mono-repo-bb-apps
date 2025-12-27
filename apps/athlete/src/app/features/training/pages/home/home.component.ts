@@ -44,6 +44,7 @@ import {
 } from '@monorepo-bb-app/shared';
 import { LoaderUIService, LocalStorageService, SesionService } from '@monorepo-bb-app/core';
 import { MODAL_RESPONSE } from 'libs/shared/constants/enums';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -63,6 +64,7 @@ import { MODAL_RESPONSE } from 'libs/shared/constants/enums';
     CardListComponent,
     CardMaxLikesComponent,
     IonImg,
+    TranslateModule,
   ],
 })
 export class HomeComponent implements OnInit {
