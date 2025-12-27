@@ -8,18 +8,19 @@ import {
   viewChild,
 } from '@angular/core';
 
-import { IonButton, IonSpinner } from '@ionic/angular/standalone';
+import { IonButton, IonSpinner, IonCol, IonGrid, IonRow, IonContent } from '@ionic/angular/standalone';
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { StripeService, ToastService } from '@monorepo-bb-app/shared';
 import { LoaderUIService } from '@monorepo-bb-app/core';
 import { finalize } from 'rxjs';
 
+
 @Component({
   selector: 'app-add-payment-method',
   templateUrl: './add-payment-method.component.html',
   styleUrls: ['./add-payment-method.component.scss'],
-  imports: [IonSpinner, IonButton, TranslateModule, ReactiveFormsModule],
+  imports: [IonSpinner, IonButton, TranslateModule, ReactiveFormsModule, IonContent, IonGrid, IonRow, IonCol],
   providers: [TranslatePipe],
 })
 export class AddPaymentMethodComponent implements OnInit {
