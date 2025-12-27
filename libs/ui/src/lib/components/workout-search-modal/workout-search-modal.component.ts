@@ -5,6 +5,10 @@ import {
   ModalController,
   IonInfiniteScroll,
   IonInfiniteScrollContent,
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonButton,
 } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
 import {
@@ -23,6 +27,10 @@ import { MODAL_RESPONSE } from 'libs/shared/constants/enums';
 @Component({
   selector: 'lib-workout-search-modal',
   imports: [
+    IonButton,
+    IonButtons,
+    IonToolbar,
+    IonHeader,
     IonInfiniteScrollContent,
     IonInfiniteScroll,
     IonSearchbar,
