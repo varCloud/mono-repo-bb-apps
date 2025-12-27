@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <div class="container-search-bar">
+      <ion-searchbar
+        [placeholder]="'search' | translate"
+        [mode]="'ios'"
+        [debounce]="500"
+        show-cancel-button="always"
+        [cancelButtonText]="'cancel' | translate"
+        (ionCancel)="dismiss()"
+        (ionInput)="onSearch($event)"
+      ></ion-searchbar>
+    </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <div>
+    @for (workout of workouts(); track workout.workoutId) {
+      <lib-card-workout-info
+        [workout]="workout"
+        [canClick]="true"
+        (clickEvent)="clickCard(workout)"
+      ></lib-card-workout-info>
+    }
+  </div>
+
+  <ion-infinite-scroll
+    (ionInfinite)="onIonInfinite($event)"
+    [disabled]="isInfiniteScrollDisabled()"
+  >
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

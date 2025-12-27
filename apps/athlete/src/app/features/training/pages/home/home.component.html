@@ -4,7 +4,7 @@
       <ion-img src="./assets/images/logo-con-letras.svg" alt="BodyBooster" class="app-logo" />
     </div>
     <div class="header-actions">
-      <ion-button fill="clear" size="small" class="header-icon-btn">
+      <ion-button fill="clear" size="small" class="header-icon-btn" (click)="openSearch()">
         <ion-icon name="search" slot="icon-only"></ion-icon>
       </ion-button>
       <!-- 
@@ -22,13 +22,48 @@
 <ion-content class="workout-home-content ion-safe-area">
   <!-- Biblioteca de ejercicios -->
   <div class="section">
-    <div class="section-header">
+    <!-- <div class="section-header">
       <h2 class="title">Biblioteca de ejercicios</h2>
-    </div>
+    </div> -->
     @if (workoutMaxLikes()) {
       <lib-card-max-likes [workout]="workoutMaxLikes()!"></lib-card-max-likes>
     }
   </div>
+
+  <div class="section">
+    <div
+      class="section-header"
+      style="display: flex; justify-content: space-between; align-items: center"
+    >
+      <h2 class="title ion-no-margin">{{ 'home.types-training' | translate }}</h2>
+      <ion-button
+        color="secondary"
+        class="show-all"
+        fill="clear"
+        [disabled]="!workoutLevelSelected()"
+        (click)="clearWorkoutLevelSelection()"
+        >{{ 'home.show-all' | translate }}</ion-button
+      >
+    </div>
+    @if (workoutLevels().length > 0) {
+      <ion-grid>
+        <ion-row class="levels-row">
+          @for (level of $any(workoutLevels()); track level.levelId) {
+            <ion-col size="4">
+              <ion-chip
+                class="workout-level-chip"
+                [outline]="true"
+                (click)="selectWorkoutLevel(level)"
+                [class.active]="workoutLevelSelected() === level.levelId"
+                >{{ level.description }}
+              </ion-chip>
+            </ion-col>
+          }
+        </ion-row>
+      </ion-grid>
+    }
+  </div>
+
   <ion-grid class="workout-grid">
     <ion-row gap="5px">
       @for (workout of workouts(); track workout.workoutId) {
@@ -49,8 +84,8 @@
         alt="No hay entrenamientos"
         class="empty-image"
       />
-      <p class="empty-title">Actualmente no tienes entrenamientos.</p>
-      <p class="empty-subtitle">Da clic en el botón para crear tu primer entrenamiento .</p>
+      <p class="empty-title">{{ 'home.no-workouts' | translate }}</p>
+      <p class="empty-subtitle">{{ 'home.create-first-workout' | translate }}</p>
     </div>
   }
   <ion-infinite-scroll

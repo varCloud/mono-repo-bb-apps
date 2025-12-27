@@ -87,7 +87,8 @@ export class HomeComponent implements OnInit {
     private _loader: LoaderUIService,
     private _toastService: ToastService,
     private modalCtrl: ModalController,
-    private _localStorage: LocalStorageService
+    private _localStorage: LocalStorageService,
+    private _sesionService: SesionService
   ) {
     addIcons({
       barbell,
@@ -105,7 +106,7 @@ export class HomeComponent implements OnInit {
   ionViewWillEnter() {
     this._loader.showLoader();
     setTimeout(() => {
-      this.getWorkouts();
+      this.getWorkouts(undefined, true);
       this.getWorkoutMaxLikes();
     }, 1000);
   }
@@ -134,9 +135,9 @@ export class HomeComponent implements OnInit {
   private async getWorkoutMaxLikes() {
     this._loader.showLoader();
     try {
-      const user = await this._localStorage.get(KEY_LOCALSTORAGE.USER);
-      this.idCreator.set(user?.userId || null);
-      const res = await this._workoutService.getWorkoutMaxLikes(user.userId);
+      const userId = await this.getUserId();
+      this.idCreator.set(userId);
+      const res = await this._workoutService.getWorkoutMaxLikes(userId);
       if (res.workoutId > 0) {
         this.workoutMaxLikes.set(res);
       }
@@ -178,13 +179,22 @@ export class HomeComponent implements OnInit {
   }
 
   private async getParams() {
-    const user = await this._localStorage.get(KEY_LOCALSTORAGE.USER);
+    const userId = await this.getUserId();
     let params = {
-      creatorId: user?.userId,
+      creatorId: userId,
     };
     if (this.filter) {
       params = { ...params, ...this.filter.toQueryParams() };
     }
     return params;
+  }
+
+  private async getUserId() {
+    let user = this._sesionService.user$();
+    if (!user) {
+      user = await this._sesionService.getUserFromLocalStorage();
+    }
+
+    return user?.userId || null;
   }
 }

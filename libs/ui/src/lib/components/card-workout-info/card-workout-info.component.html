@@ -1,17 +1,13 @@
-<div
-  class="card-workout-info"
-  (click)="goToDetail()"
-  [ngClass]="{ clickable: canClick() }"
->
+<div class="card-workout-info" (click)="onClick()" [ngClass]="{ clickable: canClick() }">
   <lib-card-with-lateral-image [imageUrl]="workout().workoutUrl">
     <div class="content-card-workout-info">
       <h2 class="title">{{ workout().title }}</h2>
       <p class="description">{{ workout().description }}</p>
       <div class="categories ion-no-padding">
         @for (category of workout().categories.slice(0, 1); track category.id) {
-        <ion-chip [outline]="true" class="chip">
-          <ion-label>{{ category.description }}</ion-label>
-        </ion-chip>
+          <ion-chip [outline]="true" class="chip">
+            <ion-label>{{ category.description }}</ion-label>
+          </ion-chip>
         }
       </div>
       <div class="info-row">

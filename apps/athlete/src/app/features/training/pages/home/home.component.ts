@@ -21,22 +21,22 @@ import {
   IonInfiniteScroll,
   IonInfiniteScrollContent,
   ModalController,
-  IonBadge,
-  IonInput,
-  IonFab,
-  IonFabButton,
   IonImg,
+  IonChip,
 } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import {
   CardListComponent,
   CardMaxLikesComponent,
   FilterComponent,
-  OnbordingComponent,
+  WorkoutSearchModalComponent,
 } from '@monorepo-bb-app/ui';
 import {
+  CatalogsService,
+  CatalogType,
   FilterModel,
   KEY_LOCALSTORAGE,
+  Level,
   Paginator,
   ToastService,
   WorkoutListModel,
@@ -44,13 +44,14 @@ import {
 } from '@monorepo-bb-app/shared';
 import { LoaderUIService, LocalStorageService, SesionService } from '@monorepo-bb-app/core';
 import { MODAL_RESPONSE } from 'libs/shared/constants/enums';
-import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   imports: [
+    IonChip,
     IonInfiniteScrollContent,
     IonInfiniteScroll,
     IonRow,
@@ -63,6 +64,7 @@ import { IonicModule } from '@ionic/angular';
     CardListComponent,
     CardMaxLikesComponent,
     IonImg,
+    TranslateModule,
   ],
 })
 export class HomeComponent implements OnInit {
@@ -71,10 +73,14 @@ export class HomeComponent implements OnInit {
   paginator = signal<Paginator>({} as Paginator);
   idCreator = signal<number | null>(null);
   isInfiniteScrollDisabled = signal<boolean>(false);
+  workoutLevels = signal<[]>([]);
+  workoutLevelSelected = signal<number | null>(null);
+
   filter: FilterModel = new FilterModel({
     showWorkoutTags: true,
     showLevels: true,
   });
+
   constructor(
     private router: Router,
     private _workoutService: WorkoutService,
@@ -82,7 +88,8 @@ export class HomeComponent implements OnInit {
     private _toastService: ToastService,
     private modalCtrl: ModalController,
     private _localStorage: LocalStorageService,
-    private _sesionService: SesionService
+    private _sesionService: SesionService,
+    private _catalogService: CatalogsService
   ) {
     addIcons({
       barbell,
@@ -97,9 +104,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._loader.showLoader();
-    this.getWorkouts(undefined, true);
-    this.getWorkoutMaxLikes();
+    this._getCatalog();
   }
 
   ionViewWillEnter() {
@@ -189,5 +194,36 @@ export class HomeComponent implements OnInit {
   async clickCard(workout: WorkoutListModel) {
     const user = await this._localStorage.get(KEY_LOCALSTORAGE.USER);
     this.router.navigate(['home/workouts', workout.workoutId, workout.creatorId, user.userId]);
+  }
+
+  async openSearch() {
+    const modal = await this.modalCtrl.create({
+      component: WorkoutSearchModalComponent,
+      breakpoints: [0, 0.25, 0.5, 0.75, 1],
+    });
+
+    await modal.present();
+    const result = await modal.onWillDismiss();
+  }
+
+  private _getCatalog() {
+    this._catalogService.getCatalog(CatalogType.DIFFICULTY_LEVELS).subscribe((data: any) => {
+      this.workoutLevels.set(data);
+    });
+  }
+
+  clearWorkoutLevelSelection() {
+    this.filter.levels = [];
+    this.workoutLevelSelected.set(null);
+    this.getWorkouts(undefined, true);
+  }
+  selectWorkoutLevel(level: Level) {
+    this.filter.levels = [];
+    if (this.workoutLevelSelected() === level.levelId) {
+      this.clearWorkoutLevelSelection();
+    }
+    this.workoutLevelSelected.set(level.levelId);
+    this.filter.levels.push(level);
+    this.getWorkouts(undefined, true);
   }
 }
