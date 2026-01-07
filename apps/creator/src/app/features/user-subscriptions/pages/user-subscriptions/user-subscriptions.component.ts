@@ -64,7 +64,6 @@ export class UserSubscriptionsComponent implements OnInit {
     private router: Router,
     private sesionService: SesionService,
 
-
   ) {
     effect(() => {
       this.sesionService.user$().userId
