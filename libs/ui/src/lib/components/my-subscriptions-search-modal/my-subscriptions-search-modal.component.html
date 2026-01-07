@@ -17,11 +17,18 @@
         [imageUrl]="sub.user.profilePictureUrl"
         [name]="sub.user.name"
         [nickName]="sub.user.nickName"
-        [descriptionPlan]="'Pago por 3 meses'"
+        [descriptionPlan]="sub.fullDescription"
         class="card-item"
+      [email]="sub.user.email"
+      [endData] = "sub.endDate"
+      [amount] = "sub.amount"
 
       ></lib-user-card>
   }@empty {
-    sin resultados
-    }
+   <ion-row class="no-results-text center-text"
+      ><ion-col><p style="text-align: center;"> {{'common.no-results' | translate}} </p>
+
+        </ion-col>
+    </ion-row>
+  }
 </div>

@@ -4,12 +4,13 @@ import { Subscription } from '@monorepo-bb-app/shared';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { UserCardComponent } from '../user-card/user-card.component';
+import { TranslateModule }  from '@ngx-translate/core';
 
 @Component({
   selector: 'lib-my-subscription-search-modal-component',
   templateUrl: './my-subscriptions-search-modal.component.html',
   styleUrls: ['./my-subscriptions-search-modal.component.scss'],
-  imports: [CommonModule, UserCardComponent, IonicModule],
+  imports: [CommonModule, UserCardComponent, IonicModule, TranslateModule],
 })
 export class MySubscriptionsSearchModalComponent {
 

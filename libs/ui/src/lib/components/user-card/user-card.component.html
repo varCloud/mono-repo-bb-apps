@@ -3,8 +3,11 @@
   <img [src]="imageUrl()" [alt]="name()" class="avatar" />
 
   <div class="card-content">
-    <span class="name">{{ name() }} ({{(nickName())}})</span>
-    <span class="description">{{ descriptionPlan() }}</span>
+    <span class="name ion-color-primary">{{ name() }} ({{(nickName())}})</span>
+    <span class="subtitle">{{ descriptionPlan() }} ${{amount()}} </span>
+    <span class="subtitle">Fecha próximo pago {{  endData()| date:'dd/MM'}}</span>
+     <span class="subtitle">{{email()}}</span>
+
 
     <span></span>
 

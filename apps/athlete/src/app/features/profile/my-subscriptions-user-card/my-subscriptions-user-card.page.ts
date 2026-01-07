@@ -19,7 +19,8 @@ import { OptionsSubscritporModalComponent } from '@monorepo-bb-app/ui';
 import { CONSTANTS, PaginatorModel, Subscription } from '@monorepo-bb-app/shared';
 import { LoaderUIService, SesionService, UserConversationService, UserSuscriptionsIdService } from '@monorepo-bb-app/core';
 import { JsonPipe } from '@angular/common';
-import { CommonModule } from '@angular/common';
+import { CommonModule  } from '@angular/common';
+import { TranslateModule} from '@ngx-translate/core';
 import { EmptyElementsComponent } from '@monorepo-bb-app/ui';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { MySubscriptionsSearchModalComponent } from '@monorepo-bb-app/ui';
@@ -44,7 +45,8 @@ import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
     EmptyElementsComponent,
     ReactiveFormsModule,
     MySubscriptionsSearchModalComponent,
-    IonRefresher
+    IonRefresher,
+    TranslateModule
   ],
 })
 export class mySubscriptionsUserCardPage implements OnInit {

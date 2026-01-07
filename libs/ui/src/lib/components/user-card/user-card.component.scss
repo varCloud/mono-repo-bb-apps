@@ -41,6 +41,13 @@
   text-overflow: ellipsis;
 }
 
+
+.subtitle{
+  font-size: .7em;
+  color: #888888;
+}
+
+
 .description {
   font-size: 0.8rem;
   color: #666666;
@@ -60,6 +67,9 @@
   margin-left: auto;
   padding-left: 10px;
   flex-shrink: 0;
+  margin-top: 25px;
+  margin-bottom: -10px;
+  font-size: 16px !important;
 
   ion-icon {
     font-size: 24px;

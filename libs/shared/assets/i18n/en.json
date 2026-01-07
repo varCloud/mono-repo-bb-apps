@@ -13,8 +13,22 @@
     "previous": "Previous",
     "skip": "Skip",
     "save-changes": "Save changes",
-    "search": "Search"
+    "search": "Search",
+    "load-more-elements-pagination": "Down Scroll to load more subscriptions",
+    "loading": "Loading...",
+    "no-results": "No results found"
   },
+
+  "my-subscriptions":{
+      "empty-subscriptions": "You currently have no subscriptions. Search for workouts and start your subscription with your favorite trainer.",
+      "title-subscriptions": "My Subscriptions"
+  },
+
+    "my-subscriptors":{
+      "empty-subscriptors": "You currently have no subscriptors",
+      "title-subscriptors": "My Subscriptors"
+  },
+
   "network": {
     "no-connection-title": "No internet connection",
     "no-connection-message": "It seems you have lost your internet connection. Please check your connection and try again.",

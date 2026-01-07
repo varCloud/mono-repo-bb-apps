@@ -1,31 +1,47 @@
 <div class="header-container">
-  <app-header-search (clickSearch)="openDetailModal()"></app-header-search>
+  <app-header-search
+    (click)="openSearchSubscriptionsModal()"
+  ></app-header-search>
   <section class="header-info-container">
-    <span class="title">Mensajes</span>
+    <h2 class="title">{{'my-subscriptors.title-subscriptors' | translate }}
+
+    </h2>
   </section>
 </div>
+<ion-content app-layout-content>
+  <ion-refresher
+    slot="fixed"
+    [mode]="'ios'"
+    (ionRefresh)="loadMoreSubscriptions($event)"
+    position="top"
+  >
+    <ion-refresher-content
+      pullingText= "{{ 'common.load-more-elements-pagination' | translate }}"
+      refreshingText="common.loading' | translate"
+    >
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-list [lines]="'none'">
+    @for (sub of subscriptions(); track sub) {
+    <lib-user-card class = "bottomButtons"
+      [imageUrl]="sub.user.profilePictureUrl"
+      [name]="sub.user.name"
+      [descriptionPlan]="sub.fullDescription"
+      [nickName]="sub.user.nickName"
+      [email]="sub.user.email"
+      [endData] = "sub.endDate"
+      [amount] = "sub.amount"
 
-<ion-content>
-  <app-layout-content [customClass]="'subscriptions-page'">
-    <div content-body class="ion-no-padding">
-      <ion-list>
-        <ion-item
-          *ngFor="let subscription of subscriptions"
-          class="subscription-item"
-          [lines]="'none'"
-        >
-          <ion-avatar slot="start">
-            <img [src]="subscription.avatarUrl" [alt]="subscription.userName" />
-          </ion-avatar>
-          <ion-label>
-            <h2>{{ subscription.userName }}</h2>
-            <p>{{ subscription.subscriptionPeriod }}</p>
-          </ion-label>
-          <ion-button fill="clear" slot="end">
-            <ion-icon name="ellipsis-vertical"></ion-icon>
-          </ion-button>
-        </ion-item>
-      </ion-list>
-    </div>
-  </app-layout-content>
+      class="card-item"
+      (optionsClick)="onShowOptions(sub, $event)"
+    ></lib-user-card>
+    }@empty {
+    <lib-empty-elements-component
+      [imgPath]="imgUrl()"
+      [message]="'my-subscriptors.empty-subscriptors' | translate"
+    >
+    </lib-empty-elements-component>
+    }
+  </ion-list>
 </ion-content>
+
