@@ -3,7 +3,9 @@
     (click)="openSearchSubscriptionsModal()"
   ></app-header-search>
   <section class="header-info-container">
-    <h2 class="title">Mis Suscriptores</h2>
+    <h2 class="title">{{'my-subscriptors.title-subscriptors' | translate }}
+
+    </h2>
   </section>
 </div>
 <ion-content app-layout-content>
@@ -14,8 +16,8 @@
     position="top"
   >
     <ion-refresher-content
-      pullingText="Desliza para cargar más subscriptions"
-      refreshingText="Cargando..."
+      pullingText= "{{ 'common.load-more-elements-pagination' | translate }}"
+      refreshingText="common.loading' | translate"
     >
     </ion-refresher-content>
   </ion-refresher>
@@ -36,7 +38,7 @@
     }@empty {
     <lib-empty-elements-component
       [imgPath]="imgUrl()"
-      [message]="textMessage()"
+      [message]="'my-subscriptors.empty-subscriptors' | translate"
     >
     </lib-empty-elements-component>
     }

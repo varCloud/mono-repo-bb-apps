@@ -30,6 +30,11 @@ export const CONSTANTS = {
     STEP: 0.25,
     DEFAULT: 1,
   },
+INFINITELOADER:{
+    LIMIT: 25,
+    PAGE:1
+},
+
 
   HIDE_CONTROLS_DELAY: 3000,
   PLAYBACK_RATES: [0.5, 0.75, 1, 1.25, 1.5, 2],

@@ -10,7 +10,11 @@
     "previous": "Anterior",
     "skip": "Saltar",
     "save-changes": "Guardar cambios",
-    "search": "Buscar"
+    "search": "Buscar",
+    "load-more-elements-pagination": "Desliza para cargar más subscriptions",
+    "loading": "Cargando...",
+    "no-results": "No se encontraron resultados"
+
   },
   "network": {
     "no-connection-title": "Sin conexión a internet",
@@ -20,6 +24,16 @@
     "update-user-data": {
     "success": "Datos Actualizados"
   },
+
+"my-subscriptions": {
+    "empty-subscriptions": "Actualmente no tienes suscripciones  Busca entrenamientos y comienza tu sucripción con tu coach favorito.",
+    "title-subscriptions": "Mis Suscripciones"
+},
+
+"my-subscriptors": {
+    "empty-subscriptors": "Actualmente no tienes suscrriptores.",
+    "title-subscriptors": "Mis Suscrriptores"
+},
 
 
   "about-me": {

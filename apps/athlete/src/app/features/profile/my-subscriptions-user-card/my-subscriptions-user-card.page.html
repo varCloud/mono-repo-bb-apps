@@ -3,7 +3,7 @@
     (click)="openSearchSubscriptionsModal()"
   ></app-header-search>
   <section class="header-info-container">
-    <h2 class="title">Mis Suscripciones</h2>
+    <h2 class="title">{{'my-subscriptions.title-subscriptions' | translate}}</h2>
   </section>
 </div>
 <ion-content app-layout-content>
@@ -14,8 +14,8 @@
     position="top"
   >
     <ion-refresher-content
-      pullingText="Desliza para cargar más subscriptions"
-      refreshingText="Cargando..."
+      pullingText="{{ 'common.load-more-elements-pagination' | translate }}"
+      refreshingText=" common.loading | translate"
     >
     </ion-refresher-content>
   </ion-refresher>
@@ -27,8 +27,7 @@
       [descriptionPlan]="sub.fullDescription"
       [nickName]="sub.user.nickName"
       class="card-item"
-      (optionsClick)="onShowOptions(sub, $event)
-      "
+      (optionsClick)="onShowOptions(sub, $event)"
       [email]="sub.user.email"
       [endData] = "sub.endDate"
       [amount] = "sub.amount"

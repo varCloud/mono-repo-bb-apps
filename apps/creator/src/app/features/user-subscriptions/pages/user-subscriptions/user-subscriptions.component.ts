@@ -24,6 +24,7 @@ import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize, take } from 'rxjs';
 import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -42,16 +43,16 @@ import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
     EmptyElementsComponent,
     ReactiveFormsModule,
     MySubscriptionsSearchModalComponent,
-    IonRefresher
+    IonRefresher,
+    TranslateModule,
+
   ],
 })
 export class UserSubscriptionsComponent implements OnInit {
   subscriptions = signal<Subscription[]>([]);
 
   public imgUrl = signal<string>('assets/images/empty/emptyelements.png');
-  public textMessage = signal<string>(
-    'Actualmente no tienes suscripciones  Busca entrenamientos y comienza tu sucripción con tu coach favorito.'
-  );
+
   public searchControl = new FormControl('');
   public paginator!: PaginatorModel;
   public readonly DEFAULT_URL_AVATAR = CONSTANTS.DEFAULT_URL_AVATAR;
@@ -61,7 +62,8 @@ export class UserSubscriptionsComponent implements OnInit {
     private _userConversationService: UserConversationService,
     private _loaderUIService: LoaderUIService,
     private router: Router,
-    private sesionService: SesionService
+    private sesionService: SesionService,
+
 
   ) {
     effect(() => {
@@ -70,7 +72,7 @@ export class UserSubscriptionsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getSubscriptionsForUser(`/user/${this.sesionService.user$()?.userId}/suscriptions/${ENUM_TYPE_USER.CREATOR}`, { page: 1, limit: 25 });
+    this.getSubscriptionsForUser(`/user/${this.sesionService.user$()?.userId}/suscriptions/${ENUM_TYPE_USER.CREATOR}`, { page: CONSTANTS.INFINITELOADER.PAGE, limit: CONSTANTS.INFINITELOADER.LIMIT });
   }
 
   getSubscriptionsForUser(uri: string = '', params: any = {}): void {
