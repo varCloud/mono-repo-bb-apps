@@ -18,6 +18,7 @@ import {
   IonCol,
   IonRow,
   IonImg,
+  IonCardSubtitle,
 } from '@ionic/angular/standalone';
 import { book, bookmarkOutline, heart } from 'ionicons/icons';
 import { WorkoutListModel } from '@monorepo-bb-app/shared';
@@ -35,6 +36,7 @@ import { WorkoutListModel } from '@monorepo-bb-app/shared';
     IonCard,
     IonButton,
     IonImg,
+    IonCardSubtitle
   ],
   templateUrl: './card-list.component.html',
   styleUrl: './card-list.component.scss',

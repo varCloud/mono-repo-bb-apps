@@ -40,6 +40,8 @@ export interface Workout {
   categories: CategoryList[];
   tools: CategoryList[];
   assets: Asset[];
+  creatorEmail?: string;
+  creatorNickName?: string;
 }
 
 export interface Asset {
@@ -68,6 +70,8 @@ export interface CategoryList {
 export class WorkoutListModel implements Workout {
   workoutId = 0;
   creatorId = 0;
+  creatorEmail = '';
+  creatorNickName = '';
   title = '';
   description = '';
   durationMinutes = null;
@@ -108,5 +112,7 @@ export class WorkoutListModel implements Workout {
     this.categories = item.categories ?? this.categories;
     this.tools = item.tools ?? this.tools;
     this.assets = item.assets ?? this.assets;
+    this.creatorEmail = item.creator?.email ?? this.creatorEmail;
+    this.creatorNickName = item.creator?.nickName ?? this.creatorNickName;
   }
 }

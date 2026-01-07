@@ -57,7 +57,6 @@ export class PersonalDataPageComponent implements OnInit {
   ) {
     effect(() => {
        const user = this.sesionService.user$();
-       console.log(`efecto en personal data page: ${user.firstName}`);
     });
   }
 
@@ -103,20 +102,18 @@ export class PersonalDataPageComponent implements OnInit {
       genderId: ['', [Validators.required]],
       birthdate: ['', [Validators.required]],
       age: [{ value: '', disabled: true }],
-      weight: ['', [Validators.required, Validators.min(30), Validators.max(200)]],
-      height: ['', [Validators.required, Validators.min(100), Validators.max(250)]],
+      weight: ['', [Validators.required, Validators.min(0)]],
+      height: ['', [Validators.required, Validators.min(0)]],
     });
   }
 
   async onBasicFormSubmit(formValue: any) {
     if (this.basicForm.valid) {
-      console.log('Basic Form Value:', formValue);
     }
   }
 
   async onPhysicalFormSubmit(formValue: any) {
     if (this.physicalForm.valid) {
-      console.log('Physical Form Value:', formValue);
     }
   }
 
@@ -128,11 +125,10 @@ export class PersonalDataPageComponent implements OnInit {
     this.isoCode.set(mask.dialCode);
   }
 
-
   async saveAllChanges() {
 
     this._loaderService.showLoader();
-    if (this.isFormsValid()) {
+    if (this.isFormsValid) {
       try {
         if (this.validateImageProfile()) {
           const uploadResult = await this.uploadPhoto(this.imageProfile!);
@@ -185,7 +181,7 @@ export class PersonalDataPageComponent implements OnInit {
     await this.toastService.error(message);
   }
 
-  isFormsValid(): boolean {
+  get isFormsValid(): boolean {
     return this.basicForm.valid && this.physicalForm.valid;
   }
 

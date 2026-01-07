@@ -13,7 +13,10 @@
   <ion-card-content style="padding: 3px 0px 16px 8px" class="card-subtitle">
     <div style="width: 70%">
       <ion-card-title class="card-title">{{ workout().title }}</ion-card-title>
-      {{ level() }}
+      <ion-card-subtitle>{{ level() }}</ion-card-subtitle>
+      <ion-card-subtitle class="subtitle-email"> {{ workout().creatorNickName }}</ion-card-subtitle>
+      <ion-card-subtitle class="subtitle-email">{{ workout().creatorEmail }}</ion-card-subtitle>
+      
     </div>
     @if (useBookmark()) {
     <ion-button
