@@ -46,6 +46,7 @@ export interface Subscription {
   subscriptionStatusId: number;
   stripeSubscriptionId: string;
   user: SubscriptionUserModel;
+  nextPaymentDate?: string;
 }
 
 export class SubscriptionModel implements Subscription {
@@ -53,6 +54,7 @@ export class SubscriptionModel implements Subscription {
   fullDescription: string;
   startDate: string;
   endDate: string;
+  nextPaymentDate?: string;
   billingCycleId: number;
   amount: string;
   subscriptionStatusId: number;
@@ -69,6 +71,7 @@ export class SubscriptionModel implements Subscription {
     this.subscriptionStatusId = data.subscriptionStatusId;
     this.stripeSubscriptionId = data.stripeSubscriptionId;
     this.user = new SubscriptionUserModel(data.user);
+    this.nextPaymentDate = data.nextPaymentDate;
   }
 }
 export interface ApiResponse {

@@ -1,3 +1,5 @@
+import { ToastService } from './../../../../../../../../libs/shared/services/toast.service';
+import { SuscriptionService } from './../../../../../../../../libs/shared/services/suscription/suscription.service';
 import { Component, signal, OnInit, effect } from '@angular/core';
 import {
   IonHeader,
@@ -63,9 +65,8 @@ export class UserSubscriptionsComponent implements OnInit {
     private _loaderUIService: LoaderUIService,
     private router: Router,
     private sesionService: SesionService,
-
-
   ) {
+    debugger
     effect(() => {
       this.sesionService.user$().userId
     })
@@ -73,6 +74,7 @@ export class UserSubscriptionsComponent implements OnInit {
 
   ngOnInit() {
     this.getSubscriptionsForUser(`/user/${this.sesionService.user$()?.userId}/suscriptions/${ENUM_TYPE_USER.CREATOR}`, { page: CONSTANTS.INFINITELOADER.PAGE, limit: CONSTANTS.INFINITELOADER.LIMIT });
+    debugger;
   }
 
   getSubscriptionsForUser(uri: string = '', params: any = {}): void {
@@ -107,6 +109,7 @@ export class UserSubscriptionsComponent implements OnInit {
 
 
   async onShowOptions(subscription: Subscription, event: Event) {
+        debugger;
     const modal = await this.modalCtrl.create({
       component: OptionsSubscritporModalComponent,
       componentProps: {
@@ -116,15 +119,16 @@ export class UserSubscriptionsComponent implements OnInit {
       initialBreakpoint: 0.4,
       handle: false,
       cssClass: 'bottom-sheet-modal-rounded',
-    });
+    })
+
     await modal.present();
     const { data, role } = await modal.onWillDismiss();
     if (role === 'confirm' && data?.confirmed) {
-      // funcion para cancelar suscripcion
+
     } else if (data?.createConversation) {
       this.createConversation(subscription);
     }
-    //mostrar opciones para  subscription.user.name
+
   }
 
 
@@ -148,6 +152,4 @@ export class UserSubscriptionsComponent implements OnInit {
         }
       });
   }
-
-
 }

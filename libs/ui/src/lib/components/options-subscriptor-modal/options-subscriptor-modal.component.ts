@@ -49,7 +49,7 @@ export class OptionsSubscritporModalComponent {
     this.viewState.set('options');
   }
   confirmCancellation(){
-    this.modalCtrl.dismiss({ confirmed: true }, 'confirm');
+    this.modalCtrl.dismiss({ cancelSubscription: true }, 'confirm');
   }
 
   sendMessage() {

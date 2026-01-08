@@ -17,4 +17,8 @@ export class SuscriptionService {
   }) {
     return this._http.post(`${this.BASE_URL}${API_URLS.SUSCRIPTIONS}`, data);
   }
+
+  public cancelSuscription(suscriptionId: number) {
+    return this._http.delete(`${this.BASE_URL}${API_URLS.SUSCRIPTIONS}/${suscriptionId}`);
+  }
 }

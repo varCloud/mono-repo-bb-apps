@@ -11,6 +11,7 @@ export const checkSubscriptionGuard: CanActivateFn = async (route) => {
 
   const userID = route.paramMap.get('userId') ?? 0;
   const creatorID = route.paramMap.get('creatorId') ?? 0;
+  const URL_TO_SUBSCRIPTION = `/home/suscriptions/profile-creator/`;
 
   try {
     _loader.showLoader();
@@ -19,11 +20,16 @@ export const checkSubscriptionGuard: CanActivateFn = async (route) => {
       .toPromise();
     const thereSuscription =
       resp.paymentSubscriptionStatus.status === SubscriptionStatus.ACTIVE;
+    
+    if(resp.paymentSubscriptionStatus.status === SubscriptionStatus.CANCELED){
+      return router.navigate([URL_TO_SUBSCRIPTION, creatorID]);
+    }
+
     if (thereSuscription) {
       return true;
     }
   } catch (error) {
-    return router.navigate(['/home/suscriptions/profile-creator/', creatorID]);
+    return router.navigate([URL_TO_SUBSCRIPTION, creatorID]);
   } finally {
     _loader.hideLoader();
   }
