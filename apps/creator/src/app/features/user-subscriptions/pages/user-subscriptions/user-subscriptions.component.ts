@@ -66,7 +66,6 @@ export class UserSubscriptionsComponent implements OnInit {
     private router: Router,
     private sesionService: SesionService,
   ) {
-    debugger
     effect(() => {
       this.sesionService.user$().userId
     })
@@ -74,7 +73,6 @@ export class UserSubscriptionsComponent implements OnInit {
 
   ngOnInit() {
     this.getSubscriptionsForUser(`/user/${this.sesionService.user$()?.userId}/suscriptions/${ENUM_TYPE_USER.CREATOR}`, { page: CONSTANTS.INFINITELOADER.PAGE, limit: CONSTANTS.INFINITELOADER.LIMIT });
-    debugger;
   }
 
   getSubscriptionsForUser(uri: string = '', params: any = {}): void {
@@ -109,7 +107,6 @@ export class UserSubscriptionsComponent implements OnInit {
 
 
   async onShowOptions(subscription: Subscription, event: Event) {
-        debugger;
     const modal = await this.modalCtrl.create({
       component: OptionsSubscritporModalComponent,
       componentProps: {

@@ -66,6 +66,9 @@ export class ProfileComponent implements OnInit {
       case 'personalData':
         this.personalData();
         break;
+      case 'paymentMethod':
+        this.router.navigate(['home/profile/payment-methods']);
+        break;
       case 'mySubscriptions':
         this.router.navigate(['home/profile/my-subscriptions']);
         break;

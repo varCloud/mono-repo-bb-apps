@@ -47,6 +47,13 @@ export const profileRoutes: Routes = [
           ),
       },
       {
+        path: 'payment-methods',
+        loadComponent: () =>
+          import('./pages/payment-methods/payment-methods-page.component').then(
+            (m) => m.PaymentMethodsPageComponent
+          ),
+      },
+      {
         path: '**',
         redirectTo: '',
         pathMatch: 'full',

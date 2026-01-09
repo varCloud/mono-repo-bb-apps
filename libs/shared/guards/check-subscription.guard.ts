@@ -8,7 +8,6 @@ export const checkSubscriptionGuard: CanActivateFn = async (route) => {
   const router = inject(Router);
   const _user = inject(UserService);
   const _loader = inject(LoaderUIService);
-
   const userID = route.paramMap.get('userId') ?? 0;
   const creatorID = route.paramMap.get('creatorId') ?? 0;
   const URL_TO_SUBSCRIPTION = `/home/suscriptions/profile-creator/`;
@@ -21,7 +20,7 @@ export const checkSubscriptionGuard: CanActivateFn = async (route) => {
     const thereSuscription =
       resp.paymentSubscriptionStatus.status === SubscriptionStatus.ACTIVE;
     
-    if(resp.paymentSubscriptionStatus.status === SubscriptionStatus.CANCELED){
+    if(resp.paymentSubscriptionStatus.status !== SubscriptionStatus.ACTIVE){
       return router.navigate([URL_TO_SUBSCRIPTION, creatorID]);
     }
 

@@ -160,6 +160,10 @@
   },
   "payment-method-added": "Payment method added",
   "payment-method-added-success": "Payment method added successfully",
+  "payment-methods": {
+    "default-set-success": "Payment method set as default",
+    "deleted-success": "Payment method deleted successfully"
+  },
   "recommended": "Recommended",
   "reset-password": {
     "confirm-password": "Confirm password",

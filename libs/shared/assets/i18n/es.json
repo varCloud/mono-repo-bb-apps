@@ -159,6 +159,10 @@
   },
   "payment-method-added": "Método de pago agregado",
   "payment-method-added-success": "Método de pago agregado exitosamente",
+  "payment-methods": {
+    "default-set-success": "Método de pago establecido como principal",
+    "deleted-success": "Método de pago eliminado exitosamente"
+  },
   "recommended": "Recomendado",
   "reset-password": {
     "confirm-password": "Confirmar contraseña",

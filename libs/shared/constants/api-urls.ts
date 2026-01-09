@@ -12,4 +12,5 @@ export const API_URLS = {
   USER_GOALS: '/user-goals',
   SUSCRIPTIONS: '/subscriptions',
   FAQS: '/faqs',
+  PAYMENTS:'/payments'
 };

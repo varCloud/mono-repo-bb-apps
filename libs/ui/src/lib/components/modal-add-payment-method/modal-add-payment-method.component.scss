@@ -4,4 +4,38 @@
   .wrapper-payment-method {
     margin-top: 20px;
   }
+
+  ion-header {
+    --background: #ffffff;
+    --border-width: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    padding-top: env(safe-area-inset-top);
+  }
+
+  ion-toolbar {
+    ion-buttons {
+      width: 10%;
+    }
+
+    ion-title {
+      width: 90%;
+    }
+  }
+
+  .back-button-toolbar {
+    --icon-margin-end: 5px;
+    --color: #757575;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    text-transform: none !important;
+    --icon-font-size: 20px;
+  }
+
+  .app-logo {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+  }
 }

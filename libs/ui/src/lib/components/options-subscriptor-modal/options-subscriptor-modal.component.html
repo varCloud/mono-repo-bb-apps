@@ -2,36 +2,33 @@
   <div class="drag-handle"></div>
 
   @if (viewState() === 'options') {
-    <div class="options-view">
-      <div class="option-item" (click)="showConfirmView()">
-        <ion-icon name="close-circle-outline" color="danger"></ion-icon>
-        <span>Cancelar suscripción</span>
-      </div>
-        <div class="option-item" (click)="sendMessage()">
-        <ion-icon name="chatbox-ellipses-outline" [color]="'primary'"></ion-icon>
-        <span>Enviar mensaje</span>
-      </div>
+  <div class="options-view">
+    <div class="option-item" (click)="showConfirmView()">
+      <ion-icon name="close-circle-outline" color="danger"></ion-icon>
+      <span>Cancelar suscripción</span>
     </div>
+    <div class="option-item" (click)="sendMessage()">
+      <ion-icon name="chatbox-ellipses-outline" [color]="'primary'"></ion-icon>
+      <span>Enviar mensaje</span>
+    </div>
+  </div>
   }
 
   @if (viewState() === 'confirm') {
-    <div class="confirm-view">
-      <h2>¿Estas seguro que deseas cancelar el plan de suscripción?</h2>
-      <p>Esta acción no puede ser revertida</p>
+  <div class="confirm-view">
+    <h2>¿Estás seguro que deseas cancelar tu suscripción?</h2>
+    <p>⚠️ Al confirmar, tu suscripción se cancelará inmediatamente y dejarás de tener acceso al contenido.</p>
+    <p>💡 <strong>Consejo:</strong> Si cancelas ahora, perderás los días restantes de tu periodo actual. Te sugerimos
+      hacerlo el último día para aprovechar tu suscripción completa.</p>
+    <div class="button-group">
+      <ion-button fill="outline" shape="round" (click)="showOptionsView()">
+        Cancelar
+      </ion-button>
 
-      <div class="button-group">
-        <ion-button fill="outline" shape="round" (click)="showOptionsView()">
-          Cancelar
-        </ion-button>
-
-        <ion-button
-          fill="solid"
-          shape="round"
-          color="primary"
-          (click)="confirmCancellation()">
-          Si, Cancelar plan
-        </ion-button>
-      </div>
+      <ion-button fill="solid" shape="round" color="primary" (click)="confirmCancellation()">
+        Si, Cancelar plan
+      </ion-button>
     </div>
+  </div>
   }
 </div>

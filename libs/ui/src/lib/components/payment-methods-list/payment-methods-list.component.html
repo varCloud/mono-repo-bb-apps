@@ -42,13 +42,27 @@
                 method.exp_year
               }}
             </p>
+            @if( method.isDefault ) {
+            <p class="">
+              <span class=" default-badge">{{ 'principal' }}</span>
+            </p>
+            }
           </ion-label>
 
+          @if (showMenuOptions()) {
+          <ion-icon
+            name="ellipsis-vertical"
+            slot="end"
+            class="menu-icon"
+            (click)="openOptionsModal(method, $event)"
+          ></ion-icon>
+          } @else {
           <ion-radio
             slot="end"
             class="bb-radio"
             [value]="method.id"
           ></ion-radio>
+          }
         </ion-item>
         } @if (paymentMethods().length === 0) {
         <ion-item lines="none" class="empty-state-item">

@@ -128,7 +128,6 @@ export class MySubscriptionsPage  {
     });
     await modal.present();
     const { data, role } = await modal.onWillDismiss();
-    debugger;
     if (role === 'confirm' && data?.cancelSubscription) {
       this.cancelSubscription(subscription.subscriptionId);
     } else if (data?.createConversation) {
