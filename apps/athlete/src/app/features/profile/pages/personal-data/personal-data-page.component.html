@@ -1,10 +1,8 @@
-
 <ion-content>
-  <app-layout-content 
+  <app-layout-content
     customClass="personal-data-page"
     [title]="'profile.personal-data' | translate"
     [useGoBack]="true"
-    
   >
     <div content-body>
       <ion-grid>
@@ -16,7 +14,8 @@
               [form]="basicForm"
               (imageSelected)="onImageSelected($event)"
               (maskSelected)="onMaskSelected($event)"
-              (formSubmit)="onBasicFormSubmit($event)">
+              (formSubmit)="onBasicFormSubmit($event)"
+            >
             </app-athlete-profile-basic-form>
           </ion-col>
         </ion-row>
@@ -24,23 +23,34 @@
         <!-- Sección de Información Física -->
         <ion-row>
           <ion-col size="12">
-            <h2  class="title">{{ 'profile.physical-info' | translate }}</h2>
+            <h2 class="title">{{ 'profile.physical-info' | translate }}</h2>
             <app-athlete-physical-info-form
               [form]="physicalForm"
-              (formSubmit)="onPhysicalFormSubmit($event)">
+              (formSubmit)="onPhysicalFormSubmit($event)"
+            >
             </app-athlete-physical-info-form>
           </ion-col>
         </ion-row>
-
+        <ion-row>
+          <ion-col size="12">
+             <h2 class="title">{{ 'onboarding.select-level.title' | translate }}</h2>
+            <app-radio-list-selector
+              [options]="activityLevelOptions()"
+              [value]="levelForm.get('activityLevel')?.value"
+              (valueChange)="onActivityLevelChange($event)"
+            ></app-radio-list-selector>
+          </ion-col>
+        </ion-row>
         <!-- Botones de Acción -->
         <ion-row>
           <ion-col size="12">
-            <ion-button 
+            <ion-button
               shape="round"
-              expand="block" 
+              expand="block"
               color="tertiary"
               (click)="saveAllChanges()"
-              [disabled]="!isFormsValid">
+              [disabled]="!isFormsValid"
+            >
               {{ 'common.save-changes' | translate }}
             </ion-button>
           </ion-col>

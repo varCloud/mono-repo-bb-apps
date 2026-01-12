@@ -82,8 +82,6 @@ private loadFormData() {
       return;
     }
     const bio = this.bio.get('bio')?.value ?? '';
-    console.log('bio:'+bio);
-    debugger
     this._loaderUIService.showLoader();
     this.isLoading.set(true);
     this._userService
