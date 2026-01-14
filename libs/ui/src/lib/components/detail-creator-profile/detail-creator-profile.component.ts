@@ -1,6 +1,7 @@
 import {
   Component,
   computed,
+  CUSTOM_ELEMENTS_SCHEMA,
   input,
   output,
   signal,
@@ -32,17 +33,20 @@ import {
   IonSegmentButton,
   IonBackButton,
   IonSkeletonText,
+  IonIcon,
 } from '@ionic/angular/standalone';
 import { LayoutContentComponent } from '../layout-content';
-import { ENUM_WORKOUT_TYPES } from '../../../../../shared/constants/enums';
+import { ENUM_WORKOUT_TYPES, ENUM_TYPE_USER } from '../../../../../shared/constants/enums';
 import { addIcons } from 'ionicons';
-import { arrowBackOutline } from 'ionicons/icons';
+import { arrowBackOutline, pencil } from 'ionicons/icons';
 import { WorkoutByTypesComponent } from '../workout-by-types/workout-by-types.component';
 import { CONSTANTS } from '../../../../../shared/constants/constants';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'lib-detail-creator-profile',
   imports: [
+    CommonModule,
     IonBackButton,
     IonSegmentButton,
     IonSegment,
@@ -55,7 +59,9 @@ import { CONSTANTS } from '../../../../../shared/constants/constants';
     IonButton,
     WorkoutByTypesComponent,
     IonSkeletonText,
+    IonIcon,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './detail-creator-profile.component.html',
   styleUrl: './detail-creator-profile.component.scss',
 })
@@ -67,6 +73,7 @@ export class DetailCreatorProfileComponent implements OnInit {
   defaultCoverPicture = CONSTANTS.DEFAULT_FRONT_PAGE_URL;
   public tabActive = signal<number>(ENUM_WORKOUT_TYPES.RUTINE_VIDEO);
   public WORKOUT_TYPES = ENUM_WORKOUT_TYPES;
+  public ENUM_TYPE_USER = ENUM_TYPE_USER;
 
   public creator = signal<User | null>(null);
   public fullName = computed(() => {
@@ -77,6 +84,11 @@ export class DetailCreatorProfileComponent implements OnInit {
   // Computed que retorna el color del creador o el color de perfil del usuario logueado
   public creatorColor = computed(() => 
     this.creator()?.profileColor || this.colorService.profileColor()
+  );
+
+  // Computed que valida si el usuario logueado es el creador (tipo de usuario 2)
+  public isCreatorUser = computed(() => 
+    this._sesionService.user$()?.userTypeId === ENUM_TYPE_USER.CREATOR
   );
 
   public defaultProfilePicture = CONSTANTS.DEFAULT_URL_AVATAR;
@@ -90,12 +102,16 @@ export class DetailCreatorProfileComponent implements OnInit {
     private _sesionService: SesionService,
     public colorService: ProfileColorService
   ) {
-    addIcons({ arrowBackOutline });
+    addIcons({ arrowBackOutline, pencil });
   }
 
   ngOnInit(): void {
     this.getCreatorProfile();
     this.checkSubscription();
+  }
+
+  ionViewWillEnter() {
+    console.log('Entering Detail Creator Profile View');
   }
 
   private getCreatorProfile() {
@@ -139,5 +155,9 @@ export class DetailCreatorProfileComponent implements OnInit {
 
   goToSuscriptionCreator() {
     this.suscriptionEvent.emit(true);
+  }
+
+  onEditCoverImage() {
+    this._router.navigate([`/home/profile/portada`])
   }
 }

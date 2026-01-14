@@ -7,18 +7,36 @@
     class="ion-no-padding bb-goback goback-button"
     [defaultHref]="defaultHref()"
     uppercase="false"
+    [color]="'secondary'"
     text=""
   ></ion-back-button>
-  <img
-    [src]="creator()?.frontPageUrl || defaultCoverPicture"
-    [alt]="'Portada de ' + fullName()"
-    style="
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      object-position: center;
-    "
-  />
+  
+  <div class="cover-image-container">
+    <img
+      [src]="creator()?.frontPageUrl || defaultCoverPicture"
+      [alt]="'Portada de ' + fullName()"
+      style="
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        object-position: center;
+      "
+    />
+    @if (isCreatorUser()) {
+      <div 
+        class="edit-cover-badge" 
+        role="button"
+        tabindex="0"
+        (click)="onEditCoverImage()"
+        (keyup.enter)="onEditCoverImage()"
+        (keyup.space)="onEditCoverImage()"
+        aria-label="Editar imagen de portada"
+      >
+        <ion-icon name="pencil"></ion-icon>
+      </div>
+    }
+  </div>
+  
   <app-layout-content customClass="detail-creator-profile-page ion-padding">
     <ion-grid content-body>
       <div class="header-creator-profile">

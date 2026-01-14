@@ -88,7 +88,7 @@ export class UserSubscriptionsComponent {
         this.subscriptions.set([...this.subscriptions(), ...data.subscription]);
         this.paginator = data.paginator;
       }, (error) => {
-        
+
         console.error('Error fetching subscriptions:', error);
       });
   }
@@ -151,8 +151,6 @@ export class UserSubscriptionsComponent {
       finalize(() => this._loaderUIService.hideLoader())).
       subscribe({
         next: (conversation) => {
-          debugger
-          console.log('Conversación seleccionada:', conversation);
           this.router.navigate([`home/${conversation.data.userConversationId}/user-chat`], { state: { conversation: conversation.data }, });
         },
         error: (error) => {

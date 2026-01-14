@@ -61,7 +61,6 @@ export class ProfileComponent {
 
 
   onMenuItemClick(action: string): void {
-    debugger
     switch (action) {
       case 'personalData':
         this.personalData();
