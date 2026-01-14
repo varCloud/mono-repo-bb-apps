@@ -1,24 +1,18 @@
 <div class="card-wrapper">
-
   <img [src]="imageUrl()" [alt]="name()" class="avatar" />
 
   <div class="card-content">
-    <span class="name ion-color-primary">{{ name() }} ({{(nickName())}})</span>
-    <span class="subtitle">{{ descriptionPlan() }} ${{amount()}} </span>
-    <span class="subtitle">Fecha próximo pago {{  endData()| date:'dd/MM'}}</span>
-     <span class="subtitle">{{email()}}</span>
-
-
-    <span></span>
-
-
+    <span class="name">{{ name() }} <span class="nickname">({{ nickName() }})</span></span>
+    <span class="plan-info">{{ descriptionPlan() }} - ${{ amount() }}</span>
+    <span class="subtitle">{{ email() }}</span>
+    <span class="next-payment">Próximo pago: {{ endData() | date: 'dd/MM/yyyy' }}</span>
   </div>
 
   <div class="actions">
     <ion-icon
-      name="ellipsis-horizontal"
+      name="ellipsis-vertical"
+      class="menu-icon"
       (click)="onMoreOptions($event)">
     </ion-icon>
   </div>
-
 </div>

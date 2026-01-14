@@ -4,6 +4,7 @@ import { ModalController, IonIcon, IonButton } from '@ionic/angular/standalone';
 import { LoaderUIService, UserConversationService } from '@monorepo-bb-app/core';
 import { addIcons } from 'ionicons';
 import { chatbubbleOutline, close, closeCircleOutline, chatboxEllipsesOutline ,send, create } from 'ionicons/icons';
+import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
 import { finalize, take } from 'rxjs';
 
 // Define la interfaz de Suscripción aquí o impórtala si la tienes
@@ -29,13 +30,10 @@ export class OptionsSubscritporModalComponent {
 
   // Recibe la suscripción seleccionada desde la página
   subscription = input.required<Subscription>();
+  public userTypeId = input<number>(ENUM_TYPE_USER.ATHLETE);
   viewState = signal<'options' | 'confirm'>('options');
 
-  constructor(private modalCtrl: ModalController,
-    private _userConversationService:  UserConversationService,
-    private _loaderUIService: LoaderUIService,
-    private router: Router
-  ) {
+  constructor(private modalCtrl: ModalController) {
     addIcons({ closeCircleOutline , send, chatbubbleOutline , chatboxEllipsesOutline });
   }
 
@@ -54,5 +52,9 @@ export class OptionsSubscritporModalComponent {
 
   sendMessage() {
     this.modalCtrl.dismiss({ createConversation:true }, 'confirm');
+  }
+
+  public get enumTypeUser() {
+    return ENUM_TYPE_USER;
   }
 }

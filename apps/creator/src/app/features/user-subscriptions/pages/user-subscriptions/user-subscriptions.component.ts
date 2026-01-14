@@ -25,7 +25,7 @@ import { EmptyElementsComponent } from '@monorepo-bb-app/ui';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize, take } from 'rxjs';
-import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
+import { ENUM_TYPE_USER, SUBSCRIPTION_STATUS } from 'libs/shared/constants/enums';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 
@@ -50,7 +50,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
   ],
 })
-export class UserSubscriptionsComponent implements OnInit {
+export class UserSubscriptionsComponent {
   subscriptions = signal<Subscription[]>([]);
 
   public imgUrl = signal<string>('assets/images/empty/emptyelements.png');
@@ -71,17 +71,26 @@ export class UserSubscriptionsComponent implements OnInit {
     })
   }
 
-  ngOnInit() {
-    this.getSubscriptionsForUser(`/user/${this.sesionService.user$()?.userId}/suscriptions/${ENUM_TYPE_USER.CREATOR}`, { page: CONSTANTS.INFINITELOADER.PAGE, limit: CONSTANTS.INFINITELOADER.LIMIT });
+  ionViewWillEnter() {  
+    this._loaderUIService.showLoader();
+    this.subscriptions.set([]);
+    this.getSubscriptionsForUser(`/user/${this.sesionService.user$()?.userId}/suscriptions/${ENUM_TYPE_USER.CREATOR}`, { page: 1, limit: 25 , subscriptionStatusId: SUBSCRIPTION_STATUS.ACTIVE });
   }
+  
 
   getSubscriptionsForUser(uri: string = '', params: any = {}): void {
     this.UserSuscriptionsIdService.getSubscriptions(uri, params)
-      .pipe()
+      .pipe(
+        finalize(() => this._loaderUIService.hideLoader()),
+        take(1)
+      )
       .subscribe((data) => {
         this.subscriptions.set([...this.subscriptions(), ...data.subscription]);
         this.paginator = data.paginator;
-      })
+      }, (error) => {
+        
+        console.error('Error fetching subscriptions:', error);
+      });
   }
 
   loadMoreSubscriptions(event: any) {
@@ -111,6 +120,7 @@ export class UserSubscriptionsComponent implements OnInit {
       component: OptionsSubscritporModalComponent,
       componentProps: {
         subscription: this.subscriptions,
+        userTypeId: this.sesionService.user$()?.userTypeId
       },
       breakpoints: [0.4, 1],
       initialBreakpoint: 0.4,
@@ -141,6 +151,7 @@ export class UserSubscriptionsComponent implements OnInit {
       finalize(() => this._loaderUIService.hideLoader())).
       subscribe({
         next: (conversation) => {
+          debugger
           console.log('Conversación seleccionada:', conversation);
           this.router.navigate([`home/${conversation.data.userConversationId}/user-chat`], { state: { conversation: conversation.data }, });
         },

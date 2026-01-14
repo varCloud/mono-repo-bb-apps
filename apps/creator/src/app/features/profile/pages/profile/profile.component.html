@@ -33,8 +33,11 @@
             </div>
 
             <div class="container-link-button">
-              <ion-button [size]="'small'" fill="clear" (click)="onMenuItemClick('messages')">
+              <ion-button [size]="'small'" fill="clear" (click)="onMenuItemClick('copyLink')">
                 <ion-icon slot="start" [name]="'copy-outline'"></ion-icon>
+              </ion-button>
+              <ion-button [size]="'small'" fill="clear" (click)="onMenuItemClick('shareLink')">
+                <ion-icon slot="start" [name]="'share-social-outline'"></ion-icon>
               </ion-button>
             </div>
           </div>

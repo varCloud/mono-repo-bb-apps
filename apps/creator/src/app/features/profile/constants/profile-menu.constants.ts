@@ -35,7 +35,18 @@ export const PROFILE_MENU_ITEMS: ProfileMenuItem[] = [
     action: 'terms',
     showArrow: true,
   },
-
+  {
+    text: 'Copiar enlace de perfil',
+    action: 'copyLink',
+    showArrow: false,
+    iconEnd: 'copy-outline',
+  },
+  {
+    text: 'Compartir perfil',
+    action: 'shareLink',
+    showArrow: false,
+    iconEnd: 'share-social-outline',
+  },
   {
     text: 'Eliminar cuenta',
     action: 'deleteAccount',

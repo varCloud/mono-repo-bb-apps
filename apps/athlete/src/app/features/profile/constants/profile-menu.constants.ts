@@ -47,11 +47,6 @@ export const PROFILE_MENU_ITEMS: ProfileMenuItem[] = [
 ];
 
 export const OPTIONS_PROFILE_MENU = [
-  // {
-  //   icon: './assets/icons/profile/hearth.svg',
-  //   name: 'Favoritos',
-  //   action: 'favorites',
-  // },
   {
     icon: './assets/icons/profile/bookmark.svg',
     name: 'Guardados',

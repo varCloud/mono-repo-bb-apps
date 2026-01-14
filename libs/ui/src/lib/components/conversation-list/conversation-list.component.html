@@ -1,13 +1,18 @@
 <ion-list>
-  <ion-item *ngFor="let conversation of conversations" lines="none" class="conversation-item"
-    (click)="onSelectConversation(conversation)">
+  @for(conversation of conversations; track conversation) {
+  <ion-item lines="none" class="conversation-item" (click)="onSelectConversation(conversation)">
     <app-user-avatar [src]="$any(conversation)[userPropConversation].profilePictureUrl" slot="start" alt="user avatar">
     </app-user-avatar>
     <ion-label>
-      <h2>{{ $any(conversation)[userPropConversation].firstName}} ({{ $any(conversation)[userPropConversation].nickName
-        }}) </h2>
-      <p>{{ $any(conversation)[userPropConversation].email || $any(conversation).lastMessage.content }}</p>
+      <h2>{{ $any(conversation)[userPropConversation].firstName}} <span class="nickname">({{
+          $any(conversation)[userPropConversation].nickName }})</span></h2>
+      <span class="last-message">{{ $any(conversation)[userPropConversation].email ||
+        $any(conversation).lastMessage.content }}</span>
+      <span class="last-message-date">{{ $any(conversation).lastMessageDate | date: 'dd/MM/yyyy'}}</span>
     </ion-label>
-    <ion-note slot="end" color="medium">{{ $any(conversation).lastMessageDate | date}}</ion-note>
   </ion-item>
+  }@empty {
+  <lib-empty-elements-component [imgPath]="imgUrl()" [message]="'my-subscriptors.empty-subscriptors' | translate">
+  </lib-empty-elements-component>
+  }
 </ion-list>

@@ -16,6 +16,7 @@ import {
   copyOutline,
   logInOutline,
   trashSharp,
+  shareSocialOutline,
 } from 'ionicons/icons';
 import { Router } from '@angular/router';
 import {
@@ -23,7 +24,7 @@ import {
   LocalStorageService,
   SesionService,
 } from '@monorepo-bb-app/core';
-import { StripeService } from '@monorepo-bb-app/shared';
+import { KEY_LOCALSTORAGE, ShareService, ToastService } from '@monorepo-bb-app/shared';
 
 @Component({
   selector: 'app-profile',
@@ -43,13 +44,15 @@ import { StripeService } from '@monorepo-bb-app/shared';
 })
 export class ProfileComponent implements OnInit {
   menuItems = PROFILE_MENU_ITEMS;
-
-  constructor(
+  public webLinkCreatorProfile = '';
+  
+  constructor (
     private router: Router,
     private loaderUIService: LoaderUIService,
     private localStorageService: LocalStorageService,
     public sesionService: SesionService,
-    private _stripeService: StripeService
+    private toastService: ToastService,
+    private shareService: ShareService,
   ) {
     addIcons({
       trashSharp,
@@ -57,10 +60,17 @@ export class ProfileComponent implements OnInit {
       chatboxEllipsesOutline,
       logInOutline,
       copyOutline,
+      shareSocialOutline,
     });
   }
 
-  ngOnInit() {}
+  async ngOnInit() {
+    const config = await this.localStorageService.get(KEY_LOCALSTORAGE.CONFIG);
+    if(config){
+      this.webLinkCreatorProfile = `${config.creatorSiteProfile}?userId=${this.sesionService.user$().userId}`;
+    }
+    console.log('Creator Site Profile URL:', this.webLinkCreatorProfile);
+  }
 
   openStripeOnboarding() {
     this.router.navigate(['/stripe-onbording']);
@@ -89,6 +99,12 @@ export class ProfileComponent implements OnInit {
         break;
       case 'deleteAccount':
         this.deleteAccount();
+        break;
+      case 'copyLink':
+        this.onCopyLink();
+        break;
+      case 'shareLink':
+        this.onShareLink();
         break;
       case 'logout':
         this.logout();
@@ -126,6 +142,28 @@ export class ProfileComponent implements OnInit {
 
   private deleteAccount(): void {
     // Implementar eliminación de cuenta
+  }
+
+  private async onCopyLink(): Promise<void> {
+    try {
+      await this.shareService.copyToClipboard(this.webLinkCreatorProfile);
+      this.toastService.success('Enlace copiado al portapapeles');
+    } catch {
+      this.toastService.error('Error al copiar el enlace');
+    }
+  }
+
+  private async onShareLink(): Promise<void> {
+    try {
+      await this.shareService.share({
+        title: 'Mi perfil de creador',
+        text: `Mira mi perfil: ${this.sesionService.user$().firstName}`,
+        url: this.webLinkCreatorProfile,
+        dialogTitle: 'Compartir perfil'
+      });
+    } catch {
+      await this.onCopyLink();
+    }
   }
 
   private logout(): void {

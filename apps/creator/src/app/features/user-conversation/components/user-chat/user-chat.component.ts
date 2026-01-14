@@ -36,8 +36,6 @@ export class UserChatComponent  {
     private _sesionService: SesionService,
     private _loaderUIService: LoaderUIService
   ) {
-    this._serUserInfo();
-
     effect(() => {
       const user = this._sesionService.user$();
       this.userSesion = user as User;

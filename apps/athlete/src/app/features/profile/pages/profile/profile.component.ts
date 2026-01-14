@@ -36,7 +36,7 @@ import { LoaderUIService, LocalStorageService, SesionService } from '@monorepo-b
     UserAvatarComponent
   ],
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent {
   menuItems = PROFILE_MENU_ITEMS;
   menuOptions = OPTIONS_PROFILE_MENU;
   constructor(
@@ -59,9 +59,9 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
 
   onMenuItemClick(action: string): void {
+    debugger
     switch (action) {
       case 'personalData':
         this.personalData();
@@ -93,6 +93,12 @@ export class ProfileComponent implements OnInit {
       case 'becomeCreator':
         this.router.navigate(['home/profile/become-creator-detail']);
         break;
+      case 'bookmarks':
+        this.router.navigate(['home/profile/bookmarks']);
+      break;
+      case 'messages':
+        this.router.navigate(['home/user-conversations']);
+      break;
     }
   }
 

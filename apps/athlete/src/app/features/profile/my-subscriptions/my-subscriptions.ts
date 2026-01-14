@@ -26,7 +26,7 @@ import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { MySubscriptionsSearchModalComponent } from '@monorepo-bb-app/ui';
 import { Router } from '@angular/router';
 import { finalize, take } from 'rxjs';
-import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
+import { ENUM_TYPE_USER, SUBSCRIPTION_STATUS } from 'libs/shared/constants/enums';
 
 
 @Component({
@@ -77,7 +77,7 @@ export class MySubscriptionsPage  {
 
   ionViewWillEnter() {  
     this.subscriptions.set([]);
-    this.getSubscriptionsForUser(`/user/${this.sesionService.user$()?.userId}/suscriptions/${ENUM_TYPE_USER.ATHLETE}`, { page: 1, limit: 25 , subscriptionStatusId: 1 });
+    this.getSubscriptionsForUser(`/user/${this.sesionService.user$()?.userId}/suscriptions/${ENUM_TYPE_USER.ATHLETE}`, { page: 1, limit: 25 , subscriptionStatusId: SUBSCRIPTION_STATUS.ACTIVE });
   }
 
   getSubscriptionsForUser(uri: string = '', params: any = {}): void {
@@ -120,6 +120,7 @@ export class MySubscriptionsPage  {
       component: OptionsSubscritporModalComponent,
       componentProps: {
         subscription: this.subscriptions,
+        userTypeId: this.sesionService.user$()?.userTypeId
       },
       breakpoints: [0.4, 1],
       initialBreakpoint: 0.4,
