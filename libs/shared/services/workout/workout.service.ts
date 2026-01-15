@@ -93,4 +93,8 @@ export class WorkoutService {
       );
     return await firstValueFrom($observer);
   }
+
+  public deleteWorkout(workoutId: number) {
+    return this._http.delete(`${this.BASE_URL}${API_URLS.WORKOUT}/${workoutId}`);
+  }
 }

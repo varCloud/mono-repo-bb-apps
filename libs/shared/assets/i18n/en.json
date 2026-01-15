@@ -234,6 +234,8 @@
       "link-video": "Link to video",
       "created-success": "Routine created successfully",
       "updated-success": "Routine updated successfully",
+      "deleted-success": "Workout deleted successfully",
+      "deleted-error": "Error deleting workout",
       "error": "Error saving routine",
       "upload-error": "Error uploading file {{fileName}}"
     }

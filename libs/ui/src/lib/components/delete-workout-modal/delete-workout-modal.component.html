@@ -1,0 +1,37 @@
+<div class="modal-content">
+  
+  <div class="delete-confirm-view">
+    <div class="icon-container">
+      <ion-icon name="trash-outline" color="danger"></ion-icon>
+    </div>
+    
+    <h2>¿Eliminar entrenamiento?</h2>
+    
+    <p class="workout-title">{{ workout().title }}</p>
+    
+    <p class="warning-text">
+      ⚠️ Esta acción no se puede deshacer. El entrenamiento será eliminado permanentemente.
+    </p>
+    
+    <div class="button-group">
+      <ion-button 
+        fill="outline" 
+        shape="round" 
+        (click)="closeModal()"
+        expand="block"
+      >
+        Cancelar
+      </ion-button>
+
+      <ion-button 
+        fill="solid" 
+        shape="round" 
+        color="danger" 
+        (click)="confirmDelete()"
+        expand="block"
+      >
+        Sí, eliminar
+      </ion-button>
+    </div>
+  </div>
+</div>

@@ -47,6 +47,7 @@ import {
   SesionService,
 } from '@monorepo-bb-app/core';
 import { MODAL_RESPONSE } from 'libs/shared/constants/enums';
+import { finalize, take } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -87,7 +88,6 @@ export class HomeComponent implements OnInit {
     private _loader: LoaderUIService,
     private _toastService: ToastService,
     private modalCtrl: ModalController,
-    private _localStorage: LocalStorageService,
     private _sesionService: SesionService
   ) {
     addIcons({
@@ -101,7 +101,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   ionViewWillEnter() {
     this._loader.showLoader();
@@ -176,6 +176,22 @@ export class HomeComponent implements OnInit {
       this.filter = data.filter;
       await this.getWorkouts(undefined, true);
     }
+  }
+
+  public onDeleteWorkout(workout: WorkoutListModel) {
+    this._loader.showLoader();
+    this._workoutService.deleteWorkout(workout.workoutId).pipe(
+      take(1),
+      finalize(() => this._loader.hideLoader())
+    ).subscribe({
+      next: async () => {
+        this._toastService.success('workout.routine.deleted-success');
+        await this.getWorkouts(undefined, true);
+      },
+      error: (error) => {
+        this._toastService.error('workout.routine.deleted-error');
+      },
+    });
   }
 
   private async getParams() {

@@ -236,6 +236,8 @@
       "link-video": "Link del video",
       "created-success": "Rutina creada exitosamente",
       "updated-success": "Rutina actualizada exitosamente",
+      "deleted-success": "Entrenamiento eliminado correctamente",
+      "deleted-error": "Error al eliminar el entrenamiento",
       "error": "Error al guardar la rutina",
       "upload-error": "Error al subir el archivo {{fileName}}",
       "image-cover": "Carga la portada de tu rutina"

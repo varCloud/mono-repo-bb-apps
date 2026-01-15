@@ -1,0 +1,75 @@
+.modal-content {
+  padding: 20px;
+  background: var(--ion-background-color, #ffffff);
+  border-radius: 16px 16px 0 0;
+
+  .drag-handle {
+    width: 40px;
+    height: 4px;
+    background: var(--ion-color-medium, #92949c);
+    border-radius: 2px;
+    margin: 0 auto 20px;
+    opacity: 0.5;
+  }
+
+  .delete-confirm-view {
+    padding: 10px;
+    text-align: center;
+
+    .icon-container {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: rgba(var(--ion-color-danger-rgb), 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+
+      ion-icon {
+        font-size: 48px;
+      }
+    }
+
+    h2 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 0 0 12px;
+      color: var(--ion-color-dark, #222428);
+    }
+
+    .workout-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--ion-color-medium, #92949c);
+      margin: 0 0 20px;
+      padding: 8px 12px;
+      background: var(--ion-color-light, #f8f9fa);
+      border-radius: 8px;
+    }
+
+    .warning-text {
+      font-size: 14px;
+      color: var(--ion-color-medium-shade, #808289);
+      line-height: 1.5;
+      margin: 0 0 24px;
+      padding: 12px;
+      background: rgba(var(--ion-color-danger-rgb), 0.05);
+      border-radius: 8px;
+      border-left: 3px solid var(--ion-color-danger);
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      ion-button {
+        margin: 0;
+        --padding-top: 12px;
+        --padding-bottom: 12px;
+        font-weight: 600;
+      }
+    }
+  }
+}

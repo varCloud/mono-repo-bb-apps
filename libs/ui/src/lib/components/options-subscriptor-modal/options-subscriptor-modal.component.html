@@ -3,12 +3,12 @@
 
   @if (viewState() === 'options') {
   <div class="options-view">
-    @if (userTypeId() == enumTypeUser.ATHLETE) {
+    @if (userTypeId === enumTypeUser.ATHLETE) {
     <div class="option-item" (click)="showConfirmView()">
       <ion-icon name="close-circle-outline" color="danger"></ion-icon>
       <span>Cancelar suscripción</span>
     </div>
-  }
+    }
 
     <div class="option-item" (click)="sendMessage()">
       <ion-icon name="chatbox-ellipses-outline" [color]="'primary'"></ion-icon>

@@ -24,13 +24,14 @@ export interface Subscription {
   templateUrl: './options-subscriptor-modal.component.html',
   styleUrls: ['./options-subscriptor-modal.component.scss'],
   standalone: true,
-  imports: [IonIcon, IonButton], // Importa solo lo que necesitas
+  imports: [IonIcon, IonButton],
 })
 export class OptionsSubscritporModalComponent {
 
-  // Recibe la suscripción seleccionada desde la página
-  subscription = input.required<Subscription>();
-  public userTypeId = input<number>(ENUM_TYPE_USER.ATHLETE);
+  //Los parametros se envian desde elcomponente padre usando componentProps
+  
+  subscription!: Subscription;
+  userTypeId: number = ENUM_TYPE_USER.ATHLETE;
   viewState = signal<'options' | 'confirm'>('options');
 
   constructor(private modalCtrl: ModalController) {

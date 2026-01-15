@@ -9,6 +9,20 @@
       }
     </span>
     <span class="category">Fitness</span>
+    
+    @if (isCreator()) {
+      <div 
+        class="delete-badge" 
+        role="button"
+        tabindex="0"
+        (click)="onDeleteWorkout($event)"
+        (keyup.enter)="onDeleteWorkout($event)"
+        (keyup.space)="onDeleteWorkout($event)"
+        aria-label="Eliminar entrenamiento"
+      >
+        <ion-icon name="trash-outline"></ion-icon>
+      </div>
+    }
   </div>
   <ion-card-content style="padding: 3px 0px 16px 8px" class="card-subtitle">
     <div style="width: 70%">

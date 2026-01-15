@@ -116,6 +116,7 @@ export class MySubscriptionsPage  {
 
 
   async onShowOptions(subscription: Subscription, event: Event) {
+    console.log('Subscription selected:', this.sesionService.user$()?.userTypeId);
     const modal = await this.modalCtrl.create({
       component: OptionsSubscritporModalComponent,
       componentProps: {
