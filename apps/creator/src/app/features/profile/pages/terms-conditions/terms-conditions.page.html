@@ -1,0 +1,1615 @@
+<ion-content>
+  <app-layout-content
+    customClass="terms-conditions-page"
+    [useGoBack]="true"
+    [title]="'Términos y Condiciones'"
+  >
+    <div content-body>
+      <ion-grid class="terms-container">
+        <!-- Header Section -->
+        <ion-row>
+          <ion-col size="12">
+            <div class="terms-header">
+              <h1 class="main-title">Términos y Condiciones de Uso</h1>
+              <p class="subtitle">Coach Body Booster - Plataforma para Creadores de Contenido Fitness</p>
+              <div class="version-info">
+                <ion-chip color="primary">
+                  <ion-icon name="document-text-outline"></ion-icon>
+                  <ion-label>Versión 2.0</ion-label>
+                </ion-chip>
+                <ion-chip color="secondary">
+                  <ion-icon name="calendar-outline"></ion-icon>
+                  <ion-label>15 de Enero, 2026</ion-label>
+                </ion-chip>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <!-- Introduction -->
+        <ion-row>
+          <ion-col size="12">
+            <div class="intro-card">
+              <ion-icon name="information-circle" color="primary"></ion-icon>
+              <p>
+                Al utilizar Coach Body Booster, aceptas estos términos y condiciones. 
+                Por favor, lee cuidadosamente todo el documento antes de continuar usando la plataforma.
+              </p>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <!-- Accordion Sections -->
+        <ion-row>
+          <ion-col size="12">
+            <ion-accordion-group [multiple]="true">
+              
+              <!-- 1. DEFINICIONES -->
+              <ion-accordion value="section-definitions" class="terms-accordion">
+                <ion-item slot="header" color="light">
+                  <ion-label>
+                    <h2 class="section-number">1.</h2>
+                    <h2 class="section-title">Definiciones</h2>
+                  </ion-label>
+                </ion-item>
+                <div slot="content" class="accordion-content">
+                  <p>Para efectos de estos términos, se entenderá por:</p>
+                  
+                  <div class="definition-item">
+                    <strong>"Plataforma" o "Coach Body Booster":</strong>
+                    <p>La aplicación móvil y servicios asociados.</p>
+                  </div>
+                  
+                  <div class="definition-item">
+                    <strong>"Creador" o "Usted":</strong>
+                    <p>Usuario registrado que crea y monetiza contenido de fitness.</p>
+                  </div>
+                  
+                  <div class="definition-item">
+                    <strong>"Suscriptor" o "Atleta":</strong>
+                    <p>Usuario de Body Booster que paga por acceso a su contenido.</p>
+                  </div>
+                  
+                  <div class="definition-item">
+                    <strong>"Contenido":</strong>
+                    <p>Todo material que usted sube (videos, PDFs, enlaces).</p>
+                  </div>
+                  
+                  <div class="definition-item">
+                    <strong>"Comisión de Plataforma":</strong>
+                    <p>20% del monto neto después de las tarifas de Stripe.</p>
+                  </div>
+                  
+                  <div class="definition-item">
+                    <strong>"Cuenta Conectada":</strong>
+                    <p>Cuenta de Stripe Connect vinculada a su perfil.</p>
+                  </div>
+                </div>
+              </ion-accordion>
+
+              <!-- 2. ACEPTACIÓN Y CAPACIDAD LEGAL -->
+              <ion-accordion value="section-2" class="terms-accordion">
+                <ion-item slot="header" color="light">
+                  <ion-label>
+                    <h2 class="section-number">2.</h2>
+                    <h2 class="section-title">Aceptación y Capacidad Legal</h2>
+                  </ion-label>
+                </ion-item>
+                <div slot="content" class="accordion-content">
+                  <h3>2.1 Aceptación Vinculante</h3>
+                  <p>Al completar el proceso de registro y onboarding, usted acepta irrevocablemente estos términos. Si no está de acuerdo, debe detener el proceso inmediatamente y no usar la Plataforma.</p>
+                  
+                  <h3>2.2 Capacidad Legal</h3>
+                  <p>Usted declara y garantiza que:</p>
+                  <ul>
+                    <li>Es mayor de 18 años</li>
+                    <li>Tiene capacidad legal para celebrar contratos vinculantes</li>
+                    <li>No está prohibido por ley para ofrecer servicios de fitness</li>
+                    <li>Toda la información proporcionada es verídica y completa</li>
+                  </ul>
+                  
+                  <h3>2.3 Jurisdicción</h3>
+                  <p>Debe cumplir con todas las leyes aplicables en su jurisdicción para ofrecer servicios de fitness en línea, incluyendo obtención de licencias, permisos y seguros requeridos.</p>
+                </div>
+              </ion-accordion>
+
+              <!-- 3. DESCRIPCIÓN DEL SERVICIO -->
+              <ion-accordion value="section-3" class="terms-accordion">
+                <ion-item slot="header" color="light">
+                  <ion-label>
+                    <h2 class="section-number">3.</h2>
+                    <h2 class="section-title">Descripción del Servicio</h2>
+                  </ion-label>
+                </ion-item>
+                <div slot="content" class="accordion-content">
+                  <h3>3.1 Funcionalidades Principales</h3>
+                  <p>Coach Body Booster le permite:</p>
+                  
+                  <div class="feature-card">
+                    <ion-icon name="videocam" color="primary"></ion-icon>
+                    <div>
+                      <h4>a) Gestión de Contenido</h4>
+                      <p>Crear y publicar tres tipos de rutinas:</p>
+                      <ul>
+                        <li><strong>Clase:</strong> Enlaces a videos externos (YouTube, Vimeo, otras plataformas)</li>
+                        <li><strong>Documento:</strong> Archivos PDF (guías, planes nutricionales, información complementaria)</li>
+                        <li><strong>Rutina:</strong> Videos cortos (máximo 10 minutos) con ejercicios específicos</li>
+                      </ul>
+                      <p>Eliminar su contenido en cualquier momento y editar información y descripciones.</p>
+                    </div>
+                  </div>
+
+                  <div class="feature-card">
+                    <ion-icon name="cash" color="secondary"></ion-icon>
+                    <div>
+                      <h4>b) Gestión de Suscripciones</h4>
+                      <p>Establecer precios para tres planes:</p>
+                      <ul>
+                        <li>Suscripción Mensual</li>
+                        <li>Suscripción Semestral (6 meses)</li>
+                        <li>Suscripción Anual (12 meses)</li>
+                      </ul>
+                      <p>Ajustar precios dentro de rangos establecidos por la Plataforma y visualizar ganancias estimadas después de comisiones.</p>
+                    </div>
+                  </div>
+
+                  <div class="feature-card">
+                    <ion-icon name="chatbubbles" color="tertiary"></ion-icon>
+                    <div>
+                      <h4>c) Comunicación con Suscriptores</h4>
+                      <ul>
+                        <li>Sistema de mensajería unidireccional (no chat en tiempo real)</li>
+                        <li>Envío de actualizaciones y motivación a suscriptores</li>
+                        <li>Visualización de lista de suscriptores activos</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="feature-card">
+                    <ion-icon name="person" color="success"></ion-icon>
+                    <div>
+                      <h4>d) Gestión de Perfil</h4>
+                      <ul>
+                        <li>Editar datos personales</li>
+                        <li>Visualizar y actualizar perfil público</li>
+                        <li>Cerrar sesión de forma segura</li>
+                        <li>Eliminar cuenta permanentemente</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <h3>3.2 Limitaciones del Servicio</h3>
+                  <p>La Plataforma <strong>NO</strong> ofrece:</p>
+                  <ul>
+                    <li>Chat en tiempo real o videollamadas</li>
+                    <li>Comunicación bidireccional directa con suscriptores fuera de la mensajería</li>
+                    <li>Asesoría médica o nutricional certificada (a menos que usted esté calificado)</li>
+                    <li>Garantías de ingresos o número de suscriptores</li>
+                    <li>Procesamiento directo de pagos (gestionado por Stripe)</li>
+                  </ul>
+                </div>
+              </ion-accordion>
+
+              <!-- 4. PROCESO DE REGISTRO Y ONBOARDING -->
+              <ion-accordion value="section-4" class="terms-accordion">
+                <ion-item slot="header" color="light">
+                  <ion-label>
+                    <h2 class="section-number">4.</h2>
+                    <h2 class="section-title">Proceso de Registro y Onboarding</h2>
+                  </ion-label>
+                </ion-item>
+                <div slot="content" class="accordion-content">
+                  <h3>4.1 Onboarding de la Aplicación</h3>
+                  <p>Durante el proceso inicial, debe proporcionar:</p>
+                  <ul>
+                    <li>Información personal completa y verídica</li>
+                    <li>Certificaciones profesionales válidas (si aplica)</li>
+                    <li>Categoría de especialización fitness</li>
+                    <li>Fotografía de perfil apropiada</li>
+                    <li>Biografía profesional</li>
+                  </ul>
+
+                  <h3>4.2 Integración con Stripe Connect</h3>
+                  <div class="highlight-box warning">
+                    <ion-icon name="warning" color="warning"></ion-icon>
+                    <div>
+                      <p><strong>REQUISITO OBLIGATORIO:</strong> Para recibir pagos, debe completar el registro de Cuenta Conectada con Stripe:</p>
+                    </div>
+                  </div>
+
+                  <h4>a) Proceso:</h4>
+                  <ol>
+                    <li>Al finalizar el onboarding, la aplicación genera un enlace único de Stripe</li>
+                    <li>Debe completar el formulario de Stripe Connect proporcionando:
+                      <ul>
+                        <li>Información de identidad (INE, pasaporte, identificación oficial)</li>
+                        <li>Datos bancarios para depósitos</li>
+                        <li>Información fiscal (RFC, Tax ID, etc.)</li>
+                        <li>Documentación adicional que Stripe requiera</li>
+                      </ul>
+                    </li>
+                  </ol>
+
+                  <h4>b) Verificación:</h4>
+                  <ul>
+                    <li>Stripe verifica su identidad de forma independiente</li>
+                    <li>El proceso puede tomar de 24 horas a 7 días hábiles</li>
+                    <li>Stripe puede solicitar documentación adicional a su discreción</li>
+                    <li>Coach Body Booster no controla ni es responsable de decisiones de Stripe</li>
+                  </ul>
+
+                  <h4>c) Cuenta Rechazada:</h4>
+                  <ul>
+                    <li>Si Stripe rechaza su cuenta, no podrá recibir pagos</li>
+                    <li>Coach Body Booster no interviene en decisiones de Stripe</li>
+                    <li>Puede apelar directamente con Stripe siguiendo sus procedimientos</li>
+                    <li>La cuenta de Coach Body Booster permanece activa pero sin funcionalidad de pagos</li>
+                  </ul>
+
+                  <h3>4.3 Información Falsa</h3>
+                  <div class="highlight-box danger">
+                    <ion-icon name="alert-circle" color="danger"></ion-icon>
+                    <div>
+                      <p>Proporcionar información falsa o fraudulenta resultará en:</p>
+                      <ul>
+                        <li>Terminación inmediata de cuenta</li>
+                        <li>Retención de fondos pendientes</li>
+                        <li>Reporte a autoridades competentes</li>
+                        <li>Prohibición permanente de crear nuevas cuentas</li>
+                        <li>Posibles acciones legales</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </ion-accordion>
+
+              <!-- 5. MODELO DE PRECIOS Y COMISIONES -->
+              <ion-accordion value="section-5" class="terms-accordion">
+                <ion-item slot="header" color="light">
+                  <ion-label>
+                    <h2 class="section-number">5.</h2>
+                    <h2 class="section-title">Modelo de Precios y Comisiones</h2>
+                  </ion-label>
+                </ion-item>
+                <div slot="content" class="accordion-content">
+                  <h3>5.1 Establecimiento de Precios</h3>
+                  
+                  <h4>a) Rangos Permitidos:</h4>
+                  <p>La Plataforma establece rangos mínimos y máximos para cada tipo de suscripción. Usted puede establecer su precio dentro de estos rangos. Los rangos específicos se muestran en la aplicación y pueden actualizarse con 60 días de aviso.</p>
+
+                  <h4>b) Ajustes de Precios:</h4>
+                  <ul>
+                    <li>Puede modificar sus precios en cualquier momento</li>
+                    <li>Los cambios aplican solo a nuevas suscripciones</li>
+                    <li>Suscriptores existentes mantienen el precio al que se suscribieron durante su ciclo actual</li>
+                    <li>Debe notificar cambios de precio con 30 días de anticipación a renovaciones</li>
+                  </ul>
+
+                  <h4>c) Transparencia de Ganancias:</h4>
+                  <p>La aplicación muestra en tiempo real:</p>
+                  <ul>
+                    <li>Precio que establece</li>
+                    <li>Comisión de Stripe (variable según tipo de transacción)</li>
+                    <li>Comisión de Coach Body Booster (20% fijo)</li>
+                    <li><strong>Ingreso neto que recibirá por cada suscripción</strong></li>
+                  </ul>
+
+                  <h3>5.2 Estructura de Comisiones</h3>
+                  <div class="highlight-box primary">
+                    <ion-icon name="calculator" color="primary"></ion-icon>
+                    <div>
+                      <h4>IMPORTANTE: LEA CUIDADOSAMENTE</h4>
+                      
+                      <p><strong>a) Comisión de Stripe:</strong></p>
+                      <p>Stripe cobra sus propias tarifas de procesamiento de pagos, que típicamente incluyen:</p>
+                      <ul>
+                        <li>Porcentaje de la transacción + tarifa fija por transacción</li>
+                        <li>Tarifas variables según el país y método de pago</li>
+                        <li>Tarifas de cambio de divisa (si aplica)</li>
+                        <li>Tarifas de transferencia internacional (si aplica)</li>
+                      </ul>
+                      <p class="note">Estas tarifas son establecidas por Stripe y están sujetas a cambios según sus políticas.</p>
+                      
+                      <p><strong>b) Comisión de Coach Body Booster:</strong></p>
+                      <p><strong>20% del monto neto después de las tarifas de Stripe</strong></p>
+                      <p>Esta comisión cubre:</p>
+                      <ul>
+                        <li>Infraestructura y mantenimiento de la Plataforma</li>
+                        <li>Almacenamiento en la nube (AWS S3) para sus videos</li>
+                        <li>Ancho de banda para streaming de contenido</li>
+                        <li>Soporte técnico y al cliente</li>
+                        <li>Actualizaciones y mejoras continuas</li>
+                        <li>Costos de seguridad y protección de datos</li>
+                        <li>Marketing y promoción de la Plataforma</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <h4>c) Ejemplo de Cálculo:</h4>
+                  <div class="calculation-example">
+                    <div class="calc-row">
+                      <span>Precio de Suscripción Mensual:</span>
+                      <span class="amount">$500.00 MXN</span>
+                    </div>
+                    <div class="calc-row deduction">
+                      <span>- Tarifa Stripe (~3.6% + $3):</span>
+                      <span class="amount">-$21.00 MXN</span>
+                    </div>
+                    <div class="calc-row">
+                      <span>= Monto después de Stripe:</span>
+                      <span class="amount">$479.00 MXN</span>
+                    </div>
+                    <div class="calc-row deduction">
+                      <span>- Comisión Coach BB (20%):</span>
+                      <span class="amount">-$95.80 MXN</span>
+                    </div>
+                    <div class="calc-row total">
+                      <span><strong>= TU GANANCIA NETA:</strong></span>
+                      <span class="amount"><strong>$383.20 MXN</strong></span>
+                    </div>
+                  </div>
+                  <p class="note">Este es un ejemplo ilustrativo. Las tarifas exactas se muestran en la aplicación.</p>
+
+                  <h3>5.3 Cambios en la Estructura de Comisiones</h3>
+                  <ul>
+                    <li>La comisión del 20% de Coach Body Booster puede modificarse con <strong>90 días de aviso previo</strong></li>
+                    <li>Los cambios no afectan retroactivamente a períodos ya facturados</li>
+                    <li>Si aumenta más del 5%, tendrá derecho a cancelar su cuenta sin penalización</li>
+                    <li>Las tarifas de Stripe están sujetas a sus propias políticas</li>
+                  </ul>
+
+                  <h3>5.4 Calendario de Pagos</h3>
+                  
+                  <h4>a) Procesamiento:</h4>
+                  <ul>
+                    <li>Los suscriptores pagan según su ciclo (mensual, semestral, anual)</li>
+                    <li>Stripe procesa el pago y retiene su comisión</li>
+                    <li>El saldo neto se transfiere a su Cuenta Conectada según el calendario de Stripe</li>
+                  </ul>
+
+                  <h4>b) Disponibilidad de Fondos:</h4>
+                  <ul>
+                    <li>Stripe determina cuándo los fondos están disponibles</li>
+                    <li>Típicamente: 2-7 días hábiles después del pago del suscriptor</li>
+                    <li>Primeras transacciones pueden tener período de retención más largo (hasta 14 días)</li>
+                    <li>Coach Body Booster no controla ni acelera este proceso</li>
+                  </ul>
+
+                  <h4>c) Depósitos a Tu Cuenta Bancaria:</h4>
+                  <ul>
+                    <li>Los fondos se depositan según la configuración de tu Cuenta de Stripe</li>
+                    <li>Frecuencia típica: semanal, quincenal o mensual (configurable en Stripe)</li>
+                    <li>Stripe puede retener fondos por seguridad o riesgo de contracargos</li>
+                  </ul>
+
+                  <h3>5.5 Impuestos</h3>
+                  <div class="highlight-box danger">
+                    <ion-icon name="receipt" color="danger"></ion-icon>
+                    <div>
+                      <p><strong>USTED ES COMPLETAMENTE RESPONSABLE DE:</strong></p>
+                      <ul>
+                        <li>Declarar todos los ingresos generados</li>
+                        <li>Calcular y pagar impuestos aplicables (IVA, ISR, IEPS, etc.)</li>
+                        <li>Emitir facturas si su legislación lo requiere</li>
+                        <li>Mantener registros contables adecuados</li>
+                        <li>Cumplir con obligaciones fiscales de su país</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <p><strong>Coach Body Booster:</strong></p>
+                  <ul>
+                    <li>No retiene impuestos en su nombre (salvo obligación legal)</li>
+                    <li>Puede proporcionar reportes de ingresos para facilitar declaraciones</li>
+                    <li>No ofrece asesoría fiscal</li>
+                    <li>Recomienda consultar con un contador profesional</li>
+                  </ul>
+                </div>
+              </ion-accordion>
+
+              <!-- 6. CONTENIDO Y PROPIEDAD INTELECTUAL -->
+              <ion-accordion value="section-6" class="terms-accordion">
+                <ion-item slot="header" color="light">
+                  <ion-label>
+                    <h2 class="section-number">6.</h2>
+                    <h2 class="section-title">Contenido y Propiedad Intelectual</h2>
+                  </ion-label>
+                </ion-item>
+                <div slot="content" class="accordion-content">
+                  <h3>6.1 Tipos de Contenido Permitido</h3>
+                  
+                  <div class="content-type-card">
+                    <div class="type-header primary-bg">
+                      <ion-icon name="link"></ion-icon>
+                      <h4>a) CLASE - Enlaces Externos</h4>
+                    </div>
+                    <div class="type-content">
+                      <ul>
+                        <li>Puede incluir enlaces a videos hospedados en plataformas externas</li>
+                        <li>Plataformas permitidas: YouTube, Vimeo, Dailymotion y otras similares</li>
+                      </ul>
+                      <p><strong>RESPONSABILIDAD:</strong> Es su responsabilidad asegurar que:</p>
+                      <ul>
+                        <li>Tiene derechos sobre el video enlazado</li>
+                        <li>El enlace permanece activo y funcional</li>
+                        <li>El contenido cumple con políticas de la plataforma externa</li>
+                        <li>No viola términos de servicio de la plataforma de video</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="content-type-card">
+                    <div class="type-header secondary-bg">
+                      <ion-icon name="document"></ion-icon>
+                      <h4>b) DOCUMENTO - Archivos PDF</h4>
+                    </div>
+                    <div class="type-content">
+                      <p><strong>Especificaciones:</strong></p>
+                      <ul>
+                        <li>Tamaño máximo por archivo: [XX] MB</li>
+                        <li>Formatos aceptados: PDF únicamente</li>
+                      </ul>
+                      <p><strong>Contenido permitido:</strong></p>
+                      <ul>
+                        <li>Guías de ejercicios</li>
+                        <li>Planes de entrenamiento escritos</li>
+                        <li>Información nutricional general (si está calificado)</li>
+                        <li>Recursos educativos complementarios</li>
+                      </ul>
+                      <p><strong>PROHIBIDO:</strong></p>
+                      <ul>
+                        <li>Planes de alimentación médicos sin certificación nutricional</li>
+                        <li>Prescripciones o diagnósticos médicos</li>
+                        <li>Contenido copiado sin autorización</li>
+                        <li>Material protegido por derechos de autor de terceros</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="content-type-card">
+                    <div class="type-header tertiary-bg">
+                      <ion-icon name="play-circle"></ion-icon>
+                      <h4>c) RUTINA - Videos Propios</h4>
+                    </div>
+                    <div class="type-content">
+                      <p><strong>Especificaciones técnicas:</strong></p>
+                      <ul>
+                        <li>Duración máxima: <strong>10 minutos por video</strong></li>
+                        <li>Formatos aceptados: MP4, MOV, AVI</li>
+                        <li>Resolución recomendada: 720p o superior (hasta 1080p)</li>
+                        <li>Tamaño máximo por video: [XX] MB</li>
+                        <li>Almacenamiento: AWS S3 con enlaces firmados temporales</li>
+                      </ul>
+                      <p><strong>Características de seguridad:</strong></p>
+                      <ul>
+                        <li>Los videos <strong>NO son descargables</strong> por suscriptores</li>
+                        <li>Enlaces firmados expiran después de visualización</li>
+                        <li>Protección contra copia y distribución no autorizada</li>
+                        <li>Streaming protegido</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <h3>6.2 Propiedad Intelectual - Tus Derechos</h3>
+                  
+                  <h4>a) Eres Propietario:</h4>
+                  <p>Conservas la propiedad completa de:</p>
+                  <ul>
+                    <li>Videos de rutinas que crees</li>
+                    <li>Documentos PDF que generes</li>
+                    <li>Metodologías y programas de entrenamiento originales</li>
+                    <li>Marcas personales y contenido de tu perfil</li>
+                  </ul>
+
+                  <h4>b) Licencia a Coach Body Booster:</h4>
+                  <p>Al subir contenido, nos otorgas una licencia:</p>
+                  <ul>
+                    <li><strong>No exclusiva:</strong> Puedes usar tu contenido en otros lugares</li>
+                    <li><strong>Mundial:</strong> Para operar en cualquier país</li>
+                    <li><strong>Libre de regalías:</strong> Sin pagos adicionales por hosting</li>
+                    <li><strong>Transferible:</strong> Para usar proveedores de nube (AWS)</li>
+                    <li><strong>Limitada al servicio:</strong> Solo para proporcionar la Plataforma</li>
+                  </ul>
+
+                  <p>Esta licencia nos permite:</p>
+                  <ul>
+                    <li>Almacenar tu contenido en servidores AWS S3</li>
+                    <li>Transmitir videos a tus suscriptores mediante streaming</li>
+                    <li>Crear miniaturas y previsualizaciones</li>
+                    <li>Optimizar archivos para diferentes dispositivos</li>
+                    <li>Realizar copias de respaldo para seguridad</li>
+                    <li>Usar fragmentos en marketing de la Plataforma (con tu consentimiento)</li>
+                  </ul>
+
+                  <h4>c) Revocación:</h4>
+                  <ul>
+                    <li>La licencia termina cuando eliminas el contenido</li>
+                    <li>Mantendremos copias de respaldo por 90 días después de eliminación</li>
+                    <li>Si tienes suscriptores activos, el contenido permanece disponible hasta que finalicen sus períodos pagados</li>
+                  </ul>
+
+                  <h3>6.3 Garantías Sobre Tu Contenido</h3>
+                  <p><strong>USTED GARANTIZA QUE TODO CONTENIDO:</strong></p>
+
+                  <h4>a) Es Legal y Original:</h4>
+                  <ul>
+                    <li>No infringe derechos de autor, marcas o patentes de terceros</li>
+                    <li>No contiene material plagiado o copiado sin autorización</li>
+                    <li>Cumple con todas las leyes aplicables de su jurisdicción</li>
+                    <li>No viola derechos de privacidad o publicidad</li>
+                  </ul>
+
+                  <h4>b) Es Seguro:</h4>
+                  <ul>
+                    <li>No promueve técnicas de ejercicio peligrosas o lesivas</li>
+                    <li>Incluye advertencias apropiadas sobre riesgos</li>
+                    <li>No recomienda prácticas que violen estándares de fitness profesional</li>
+                    <li>Muestra técnicas correctas y seguras</li>
+                  </ul>
+
+                  <h4>c) Es Apropiado:</h4>
+                  <ul>
+                    <li>No contiene desnudez o contenido sexual</li>
+                    <li>No incluye lenguaje ofensivo o discriminatorio</li>
+                    <li>Es apto para audiencias mayores de 18 años</li>
+                    <li>Mantiene estándares profesionales</li>
+                  </ul>
+
+                  <h4>d) Respeta Derechos de Terceros:</h4>
+                  <ul>
+                    <li>Si aparecen otras personas, tiene su consentimiento</li>
+                    <li>Música de fondo tiene licencia apropiada o es libre de derechos</li>
+                    <li>Locaciones filmadas permiten grabación comercial</li>
+                    <li>No muestra marcas comerciales de terceros sin autorización</li>
+                  </ul>
+
+                  <h3>6.4 Contenido Estrictamente Prohibido</h3>
+                  <div class="highlight-box danger">
+                    <ion-icon name="alert-circle" color="danger"></ion-icon>
+                    <div>
+                      <h4>TERMINACIÓN INMEDIATA POR:</h4>
+                      
+                      <p><strong>a) Contenido Peligroso:</strong></p>
+                      <ul>
+                        <li>Técnicas que causen alto riesgo de lesión</li>
+                        <li>Ejercicios extremos sin advertencias adecuadas</li>
+                        <li>Promoción de trastornos alimenticios</li>
+                        <li>Ayunos extremos o dietas peligrosas</li>
+                        <li>Uso de sustancias prohibidas o dopaje</li>
+                      </ul>
+
+                      <p><strong>b) Contenido Ilegal:</strong></p>
+                      <ul>
+                        <li>Material protegido por derechos de autor sin autorización</li>
+                        <li>Contenido que viole leyes locales</li>
+                        <li>Fraude o engaño a suscriptores</li>
+                        <li>Promesas falsas sobre resultados garantizados</li>
+                      </ul>
+
+                      <p><strong>c) Contenido Inapropiado:</strong></p>
+                      <ul>
+                        <li>Material sexual o pornográfico</li>
+                        <li>Violencia o contenido gráfico perturbador</li>
+                        <li>Discriminación por raza, género, religión, orientación sexual</li>
+                        <li>Acoso, bullying o intimidación</li>
+                        <li>Lenguaje de odio</li>
+                      </ul>
+
+                      <p><strong>d) Contenido Médico No Autorizado:</strong></p>
+                      <ul>
+                        <li>Diagnósticos médicos sin licencia médica</li>
+                        <li>Prescripción de medicamentos</li>
+                        <li>Tratamiento de condiciones médicas sin calificación</li>
+                        <li>Consejo nutricional clínico sin certificación de nutriólogo</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <h3>6.5 Moderación de Contenido</h3>
+                  
+                  <h4>a) Revisión:</h4>
+                  <ul>
+                    <li>Coach Body Booster se reserva el derecho (pero no la obligación) de revisar contenido</li>
+                    <li>Podemos usar sistemas automatizados y revisión manual</li>
+                    <li>La revisión no implica aprobación o garantía de calidad</li>
+                  </ul>
+
+                  <h4>b) Eliminación:</h4>
+                  <p>Podemos eliminar contenido sin previo aviso si:</p>
+                  <ul>
+                    <li>Viola estos términos</li>
+                    <li>Recibimos quejas válidas de suscriptores</li>
+                    <li>Consideramos que representa riesgo legal</li>
+                    <li>Viola leyes aplicables</li>
+                    <li>Infringe derechos de terceros</li>
+                  </ul>
+
+                  <h4>c) Apelación:</h4>
+                  <ul>
+                    <li>Si eliminamos contenido, recibirá notificación con razón</li>
+                    <li>Puede apelar la decisión dentro de 15 días</li>
+                    <li>Revisaremos apelaciones de buena fe</li>
+                    <li>Decisiones finales son vinculantes</li>
+                  </ul>
+
+                  <h3>6.6 Eliminación de Contenido</h3>
+                  
+                  <h4>a) Por Tu Parte:</h4>
+                  <ul>
+                    <li>Puede eliminar cualquier contenido en cualquier momento</li>
+                    <li>La eliminación es permanente e irreversible después de 30 días</li>
+                    <li>Contenido eliminado deja de estar disponible para nuevas visualizaciones</li>
+                    <li>Suscriptores activos pueden perder acceso inmediatamente (según tu configuración)</li>
+                  </ul>
+
+                  <h4>b) Efecto en Suscriptores:</h4>
+                  <p>Si eliminas contenido significativo:</p>
+                  <ul>
+                    <li>Los suscriptores mantienen acceso a contenido restante</li>
+                    <li>No están obligados a continuar su suscripción</li>
+                    <li>Pueden solicitar cancelación sin penalización si el contenido se reduce sustancialmente</li>
+                    <li>Debe mantener una biblioteca mínima de contenido (al menos [X] rutinas activas)</li>
+                  </ul>
+
+                  <h4>c) Copias de Respaldo:</h4>
+                  <ul>
+                    <li>Mantenemos copias de respaldo por 90 días después de eliminación</li>
+                    <li>Solo para recuperación en caso de error técnico</li>
+                    <li>No redistribuimos ni usamos contenido eliminado</li>
+                    <li>Después de 90 días, eliminación es permanente</li>
+                  </ul>
+                </div>
+              </ion-accordion>
+
+              <!-- Continue with remaining sections... -->
+              <!-- Due to length, I'll create the remaining sections in a structured way -->
+
+              <!-- 7. RELACIÓN CON SUSCRIPTORES (ATLETAS) -->
+              <ion-accordion value="section-7" class="terms-accordion">
+                <ion-item slot="header" color="light">
+                  <ion-label>
+                    <h2 class="section-number">7.</h2>
+                    <h2 class="section-title">Relación con Suscriptores (Atletas)</h2>
+                  </ion-label>
+                </ion-item>
+                <div slot="content" class="accordion-content">
+                  <h3>7.1 Naturaleza de la Relación</h3>
+                  
+                  <h4>a) Contrato Directo:</h4>
+                  <ul>
+                    <li>Usted proporciona servicios directamente a los suscriptores</li>
+                    <li>Coach Body Booster es solo la plataforma facilitadora</li>
+                    <li>No somos parte de la relación contractual entre usted y el suscriptor</li>
+                    <li>No somos responsables de la calidad de sus servicios</li>
+                  </ul>
+
+                  <h4>b) Contratista Independiente:</h4>
+                  <ul>
+                    <li>Usted es un profesional independiente, no empleado de Coach Body Booster</li>
+                    <li>Determina sus propios métodos y horarios</li>
+                    <li>Es responsable de sus propias obligaciones fiscales y legales</li>
+                    <li>No tiene derecho a beneficios de empleado</li>
+                  </ul>
+
+                  <h3>7.2 Sistema de Mensajería</h3>
+                  
+                  <h4>a) Características:</h4>
+                  <p>Sistema de mensajería <strong>unidireccional</strong> (de Creador a Suscriptores):</p>
+                  <ul>
+                    <li>No es un chat en tiempo real</li>
+                    <li>Los suscriptores <strong>NO pueden responder</strong> directamente</li>
+                    <li>Funciona como sistema de notificaciones o boletines</li>
+                  </ul>
+
+                  <h4>b) Usos Permitidos:</h4>
+                  <div class="allowed-uses">
+                    <ion-icon name="checkmark-circle" color="success"></ion-icon>
+                    <p>Enviar motivación y consejos generales</p>
+                  </div>
+                  <div class="allowed-uses">
+                    <ion-icon name="checkmark-circle" color="success"></ion-icon>
+                    <p>Notificar sobre nuevo contenido</p>
+                  </div>
+                  <div class="allowed-uses">
+                    <ion-icon name="checkmark-circle" color="success"></ion-icon>
+                    <p>Compartir tips de fitness</p>
+                  </div>
+                  <div class="allowed-uses">
+                    <ion-icon name="checkmark-circle" color="success"></ion-icon>
+                    <p>Anunciar cambios en tu calendario o disponibilidad</p>
+                  </div>
+                  <div class="allowed-uses">
+                    <ion-icon name="checkmark-circle" color="success"></ion-icon>
+                    <p>Recordar importancia de la constancia</p>
+                  </div>
+
+                  <h4>c) Usos Prohibidos:</h4>
+                  <div class="prohibited-uses">
+                    <ion-icon name="close-circle" color="danger"></ion-icon>
+                    <p>Spam o mensajes excesivos (máximo [X] mensajes por semana)</p>
+                  </div>
+                  <div class="prohibited-uses">
+                    <ion-icon name="close-circle" color="danger"></ion-icon>
+                    <p>Promoción de productos o servicios externos</p>
+                  </div>
+                  <div class="prohibited-uses">
+                    <ion-icon name="close-circle" color="danger"></ion-icon>
+                    <p>Solicitar pagos fuera de la plataforma</p>
+                  </div>
+                  <div class="prohibited-uses">
+                    <ion-icon name="close-circle" color="danger"></ion-icon>
+                    <p>Compartir información de contacto personal</p>
+                  </div>
+                  <div class="prohibited-uses">
+                    <ion-icon name="close-circle" color="danger"></ion-icon>
+                    <p>Contenido inapropiado u ofensivo</p>
+                  </div>
+                  <div class="prohibited-uses">
+                    <ion-icon name="close-circle" color="danger"></ion-icon>
+                    <p>Mensajes de naturaleza sexual o acosadora</p>
+                  </div>
+                  <div class="prohibited-uses">
+                    <ion-icon name="close-circle" color="danger"></ion-icon>
+                    <p>Promoción de otras plataformas o competidores</p>
+                  </div>
+
+                  <h4>d) Consecuencias de Uso Indebido:</h4>
+                  <ul>
+                    <li><strong>Primera infracción:</strong> Advertencia formal</li>
+                    <li><strong>Segunda infracción:</strong> Suspensión temporal de mensajería (30 días)</li>
+                    <li><strong>Tercera infracción:</strong> Suspensión permanente de cuenta</li>
+                  </ul>
+
+                  <h3>7.3 Visualización de Suscriptores</h3>
+                  
+                  <h4>a) Información Visible:</h4>
+                  <p>Puede ver de sus suscriptores activos:</p>
+                  <ul>
+                    <li>Nombre completo</li>
+                    <li>Foto de perfil (si la tienen)</li>
+                    <li>Fecha de inicio de suscripción</li>
+                    <li>Tipo de plan (mensual, semestral, anual)</li>
+                    <li>Estado de suscripción (activa, cancelada, vencida)</li>
+                  </ul>
+
+                  <h4>b) Información NO Visible:</h4>
+                  <ul>
+                    <li>Métodos de pago</li>
+                    <li>Dirección o datos de contacto personal</li>
+                    <li>Información de salud o médica (salvo que ellos compartan voluntariamente)</li>
+                    <li>Historial de visualización específico</li>
+                  </ul>
+
+                  <h4>c) Privacidad:</h4>
+                  <div class="highlight-box danger">
+                    <ion-icon name="alert-circle" color="danger"></ion-icon>
+                    <div>
+                      <p><strong>PROHIBIDO ESTRICTAMENTE:</strong></p>
+                      <ul>
+                        <li>Contactar suscriptores fuera de la plataforma sin consentimiento</li>
+                        <li>Compartir datos de suscriptores con terceros</li>
+                        <li>Usar información para marketing externo</li>
+                        <li>Vender o transferir listas de suscriptores</li>
+                        <li>Acoso o contacto inapropiado</li>
+                      </ul>
+                      <p><strong>VIOLACIONES RESULTARÁN EN:</strong></p>
+                      <ul>
+                        <li>Terminación inmediata de cuenta</li>
+                        <li>Retención de fondos pendientes</li>
+                        <li>Reporte a autoridades de protección de datos</li>
+                        <li>Acciones legales por violación de privacidad</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <h3>7.4 Obligaciones Profesionales con Suscriptores</h3>
+                  
+                  <h4>a) Calidad del Servicio:</h4>
+                  <ul>
+                    <li>Debe mantener estándares profesionales de fitness</li>
+                    <li>Proporcionar contenido actualizado regularmente</li>
+                    <li>Mantener biblioteca mínima de [X] rutinas activas</li>
+                    <li>Responder a problemas técnicos reportados por Coach Body Booster</li>
+                  </ul>
+
+                  <h4>b) Frecuencia de Contenido:</h4>
+                  <ul>
+                    <li>Debe subir contenido nuevo al menos [X] vez(es) al mes</li>
+                    <li>Períodos de inactividad mayores a [X] días requieren notificación</li>
+                    <li>Inactividad prolongada puede resultar en suspensión de nuevas suscripciones</li>
+                  </ul>
+
+                  <h4>c) Continuidad del Servicio:</h4>
+                  <ul>
+                    <li>Los suscriptores pagan por acceso durante todo el período</li>
+                    <li>No puede eliminar todo su contenido mientras tenga suscriptores activos</li>
+                    <li>Si desea cerrar cuenta, debe cumplir con períodos pagados existentes</li>
+                  </ul>
+
+                  <h3>7.5 Cancelaciones y Reembolsos</h3>
+                  
+                  <h4>a) Cancelación por Suscriptor:</h4>
+                  <ul>
+                    <li>Los suscriptores pueden cancelar en cualquier momento</li>
+                    <li>La cancelación toma efecto al final del período pagado</li>
+                    <li>Continúan teniendo acceso hasta la fecha de vencimiento</li>
+                    <li>No se requiere aprobar o rechazar cancelaciones</li>
+                  </ul>
+
+                  <h4>b) Reembolsos:</h4>
+                  <p><strong>Situaciones que pueden generar reembolsos:</strong></p>
+                  <ul>
+                    <li>Falla técnica que impida acceso al contenido por más de 7 días</li>
+                    <li>Eliminación sustancial de contenido sin aviso</li>
+                    <li>Fraude o engaño en la descripción de servicios</li>
+                    <li>Disputa válida procesada por Stripe</li>
+                  </ul>
+
+                  <p><strong>Efecto en Tus Ingresos:</strong></p>
+                  <ul>
+                    <li>Los reembolsos se deducen de tu saldo disponible</li>
+                    <li>Si no hay saldo suficiente, se deduce de futuros ingresos</li>
+                    <li>Las comisiones de plataforma no son reembolsables</li>
+                    <li>Las tarifas de Stripe siguen aplicando</li>
+                  </ul>
+
+                  <h4>c) Disputas y Contracargos:</h4>
+                  <ul>
+                    <li>Los suscriptores pueden presentar disputas con su banco/tarjeta</li>
+                    <li>Stripe maneja el proceso de disputa</li>
+                    <li>Debe proporcionar evidencia si se solicita</li>
+                    <li>Los contracargos tienen tarifas adicionales (aplicadas por Stripe)</li>
+                  </ul>
+                </div>
+              </ion-accordion>
+
+              <!-- 8. GESTIÓN DE PERFIL Y CUENTA -->
+              <ion-accordion value="section-8" class="terms-accordion">
+                <ion-item slot="header" color="light">
+                  <ion-label>
+                    <h2 class="section-number">8.</h2>
+                    <h2 class="section-title">Gestión de Perfil y Cuenta</h2>
+                  </ion-label>
+                </ion-item>
+                <div slot="content" class="accordion-content">
+                  <h3>8.1 Perfil Público</h3>
+                  <h4>a) Información Visible:</h4>
+                  <p>Su perfil público incluye: Nombre, fotografía, biografía profesional, certificaciones, categorías de entrenamiento, precios de suscripción, calificaciones y reseñas, muestra de contenido.</p>
+                  
+                  <h4>b) Responsabilidad:</h4>
+                  <p>Toda la información debe ser verídica. Las fotografías deben ser apropiadas y profesionales. Las certificaciones mostradas deben ser válidas y verificables.</p>
+
+                  <h3>8.2 Datos Personales</h3>
+                  <p><strong>Puede editar:</strong> Nombre, fotografía, biografía, especialidades, precios (dentro de rangos).</p>
+                  <p><strong>NO puede editar:</strong> Email principal, información de Stripe, historial de transacciones, calificaciones recibidas.</p>
+
+                  <h3>8.3 Cerrar Sesión</h3>
+                  <p>Debe cerrar sesión en dispositivos compartidos. Las sesiones expiran automáticamente después de [X] días de inactividad.</p>
+
+                  <h3>8.4 Eliminar Cuenta</h3>
+                  <div class="highlight-box warning">
+                    <ion-icon name="alert-circle" color="warning"></ion-icon>
+                    <div>
+                      <h4>Consecuencias al Eliminar Cuenta:</h4>
+                      <ul>
+                        <li>✗ Pierdes acceso inmediato a la aplicación</li>
+                        <li>✓ Suscriptores activos mantienen acceso hasta fin de período</li>
+                        <li>✓ Recibes pagos pendientes según Stripe</li>
+                        <li>✗ Nuevo contenido no puede ser subido</li>
+                        <li>✗ Mensajería se desactiva inmediatamente</li>
+                        <li>✗ Después de 90 días, todo se elimina permanentemente</li>
+                        <li>✗ No puedes crear nueva cuenta con mismo email durante 6 meses</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </ion-accordion>
+
+              <!-- 9. CERTIFICACIONES Y ESTÁNDARES PROFESIONALES -->
+              <ion-accordion value="section-9" class="terms-accordion">
+                <ion-item slot="header" color="light">
+                  <ion-label>
+                    <h2 class="section-number">9.</h2>
+                    <h2 class="section-title">Certificaciones y Estándares Profesionales</h2>
+                  </ion-label>
+                </ion-item>
+                <div slot="content" class="accordion-content">
+                  <h3>9.1 Requisitos de Certificación</h3>
+                  <p>Debe poseer al menos una de:</p>
+                  <ul>
+                    <li>Certificación de entrenador personal (ACSM, NASM, ACE, ISSA, NSCA, etc.)</li>
+                    <li>Título universitario en Kinesiología, Educación Física, Ciencias del Ejercicio</li>
+                    <li>Experiencia profesional demostrable (mínimo [X] años)</li>
+                  </ul>
+
+                  <h3>9.2 Código de Ética Profesional</h3>
+                  <p><strong>Debe cumplir con:</strong></p>
+                  <ul>
+                    <li><strong>Integridad:</strong> Ser honesto, no hacer promesas de resultados garantizados</li>
+                    <li><strong>Competencia:</strong> Trabajar solo dentro de su expertise</li>
+                    <li><strong>Límites Profesionales:</strong> Mantener relaciones estrictamente profesionales</li>
+                    <li><strong>Bienestar del Cliente:</strong> Priorizar seguridad sobre todo</li>
+                  </ul>
+
+                  <h3>9.3 Consejo Médico y Nutricional</h3>
+                  <div class="highlight-box danger">
+                    <ion-icon name="alert-circle" color="danger"></ion-icon>
+                    <div>
+                      <h4>RESTRICCIONES CRÍTICAS:</h4>
+                      <p><strong>Sin Licencia Médica PROHIBIDO:</strong></p>
+                      <ul>
+                        <li>Diagnosticar condiciones médicas</li>
+                        <li>Prescribir tratamientos o medicamentos</li>
+                        <li>Tratar lesiones o enfermedades</li>
+                      </ul>
+                      <p><strong>Consejo Nutricional SIN certificación:</strong></p>
+                      <ul>
+                        <li>Solo puede dar consejos generales</li>
+                        <li>NO puede crear planes personalizados</li>
+                        <li>NO puede prescribir suplementos como tratamiento</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </ion-accordion>
+
+              <!-- 10. RESPONSABILIDAD Y LIMITACIONES -->
+              <ion-accordion value="section-10" class="terms-accordion">
+                <ion-item slot="header" color="light">
+                  <ion-label>
+                    <h2 class="section-number">10.</h2>
+                    <h2 class="section-title">Responsabilidad y Limitaciones</h2>
+                  </ion-label>
+                </ion-item>
+                <div slot="content" class="accordion-content">
+                  <h3>10.1 Su Responsabilidad como Creador</h3>
+                  <div class="responsibility-grid">
+                    <div class="resp-card">
+                      <ion-icon name="shield-checkmark" color="primary"></ion-icon>
+                      <h4>Su Contenido</h4>
+                      <p>Exactitud, seguridad de rutinas, lesiones resultantes</p>
+                    </div>
+                    <div class="resp-card">
+                      <ion-icon name="people" color="secondary"></ion-icon>
+                      <h4>Sus Servicios</h4>
+                      <p>Calidad profesional, advertencias adecuadas</p>
+                    </div>
+                    <div class="resp-card">
+                      <ion-icon name="document" color="tertiary"></ion-icon>
+                      <h4>Obligaciones Legales</h4>
+                      <p>Impuestos, licencias, seguros, leyes locales</p>
+                    </div>
+                    <div class="resp-card">
+                      <ion-icon name="ribbon" color="success"></ion-icon>
+                      <h4>Suscriptores</h4>
+                      <p>Evaluación, recomendaciones seguras, seguimiento</p>
+                    </div>
+                  </div>
+
+                  <h3>10.2 Descargos de Responsabilidad Requeridos</h3>
+                  <div class="warning-box">
+                    <p><strong>DEBE INCLUIR en su perfil y contenido:</strong></p>
+                    <p class="disclaimer">"Consulte con un profesional médico antes de comenzar cualquier programa de ejercicios. Los resultados individuales pueden variar. El ejercicio conlleva riesgos de lesión. Usted es responsable de su propia salud y seguridad."</p>
+                  </div>
+
+                  <h3>10.3 Limitaciones de Responsabilidad de Coach Body Booster</h3>
+                  <p><strong>NO somos responsables por:</strong> Exactitud/calidad/seguridad de sus rutinas, lesiones causadas por sus programas, disputas con suscriptores, interrupciones del servicio, decisiones de Stripe, pérdida de datos, problemas con terceros.</p>
+
+                  <h3>10.4 Límite Máximo de Responsabilidad</h3>
+                  <p>La responsabilidad total de Coach Body Booster está limitada al MENOR de: Total de comisiones pagadas en últimos 12 meses O $[MONTO].</p>
+
+                  <h3>10.5 Indemnización</h3>
+                  <p><strong>Usted acepta indemnizar</strong> a Coach Body Booster de: Lesiones causadas por su contenido, violaciones de derechos de autor, información falsa, violaciones de privacidad, honorarios legales, multas y penalizaciones.</p>
+                </div>
+              </ion-accordion>
+
+              <!-- 11. SEGURIDAD Y PROTECCIÓN DE DATOS -->
+              <ion-accordion value="section-11" class="terms-accordion">
+                <ion-item slot="header" color="light">
+                  <ion-label>
+                    <h2 class="section-number">11.</h2>
+                    <h2 class="section-title">Seguridad y Protección de Datos</h2>
+                  </ion-label>
+                </ion-item>
+                <div slot="content" class="accordion-content">
+                  <h3>11.1 Seguridad del Contenido</h3>
+                  <p><strong>Almacenamiento en AWS S3:</strong> Servidores certificados, respaldos diarios, protección contra pérdida.</p>
+                  <p><strong>Enlaces Firmados:</strong> Temporales, expiran después de visualización, previenen compartir público.</p>
+                  <p><strong>Protección Anti-Descarga:</strong> Suscriptores NO pueden descargar videos. Streaming únicamente.</p>
+
+                  <h3>11.2 Protección de Datos Personales</h3>
+                  <p><strong>Recopilamos:</strong> Información de registro, datos de verificación, contenido que sube, datos de uso, información de transacciones.</p>
+                  <p><strong>Usamos para:</strong> Proporcionar servicio, procesar pagos, comunicar actualizaciones, mejorar plataforma, cumplir obligaciones legales.</p>
+                  <p><strong>Compartimos con:</strong> Stripe (pagos), AWS (almacenamiento), Autoridades (cuando lo requiera la ley).</p>
+
+                  <h3>11.3 Sus Derechos (GDPR, CCPA)</h3>
+                  <ul>
+                    <li>Acceder a sus datos personales</li>
+                    <li>Corregir información incorrecta</li>
+                    <li>Solicitar eliminación</li>
+                    <li>Portabilidad de datos</li>
+                  </ul>
+
+                  <h3>11.4 Retención de Datos</h3>
+                  <ul>
+                    <li>Datos de cuenta: Mientras esté activa + 90 días</li>
+                    <li>Datos fiscales: 7 años (obligación legal)</li>
+                    <li>Contenido: Mientras esté activo + 90 días</li>
+                  </ul>
+                </div>
+              </ion-accordion>
+
+              <!-- 12. PROPIEDAD INTELECTUAL DE LA PLATAFORMA -->
+              <ion-accordion value="section-12" class="terms-accordion">
+                <ion-item slot="header" color="light">
+                  <ion-label>
+                    <h2 class="section-number">12.</h2>
+                    <h2 class="section-title">Propiedad Intelectual de la Plataforma</h2>
+                  </ion-label>
+                </ion-item>
+                <div slot="content" class="accordion-content">
+                  <h3>12.1 Marcas y Logos</h3>
+                  <p><strong>Propiedad:</strong> "Coach Body Booster" y "Body Booster" son marcas registradas/en proceso.</p>
+                  <p><strong>Uso Autorizado:</strong> Puede mencionar que es creador en Coach Body Booster en biografía y redes sociales.</p>
+                  <p><strong>PROHIBIDO:</strong> Registrar dominios con "Body Booster", crear logos derivados, sugerir asociación oficial no existente, modificar logos.</p>
+
+                  <h3>12.2 Código y Tecnología</h3>
+                  <p><strong>ESTRICTAMENTE PROHIBIDO:</strong> Ingeniería inversa, extraer código, crear apps competidoras similares, acceder áreas no autorizadas, explotar vulnerabilidades.</p>
+                </div>
+              </ion-accordion>
+
+              <!-- 13. MODIFICACIONES Y ACTUALIZACIONES -->
+              <ion-accordion value="section-13" class="terms-accordion">
+                <ion-item slot="header" color="light">
+                  <ion-label>
+                    <h2 class="section-number">13.</h2>
+                    <h2 class="section-title">Modificaciones y Actualizaciones</h2>
+                  </ion-label>
+                </ion-item>
+                <div slot="content" class="accordion-content">
+                  <h3>13.1 Cambios en el Servicio</h3>
+                  <p>Nos reservamos el derecho de agregar/eliminar funcionalidades, cambiar diseño, actualizar requisitos técnicos. Cambios mayores con 30 días de aviso.</p>
+
+                  <h3>13.2 Cambios en los Términos</h3>
+                  <p>Podemos actualizar estos términos en cualquier momento. Cambios materiales requieren 30 días de aviso. Uso continuado constituye aceptación.</p>
+
+                  <h3>13.3 Cambios en Comisiones</h3>
+                  <p>La comisión del 20% puede modificarse con <strong>90 días de aviso previo</strong>. Si aumento > 5%, puede cerrar cuenta sin penalización.</p>
+                </div>
+              </ion-accordion>
+
+              <!-- 14. SUSPENSIÓN Y TERMINACIÓN -->
+              <ion-accordion value="section-14" class="terms-accordion">
+                <ion-item slot="header" color="light">
+                  <ion-label>
+                    <h2 class="section-number">14.</h2>
+                    <h2 class="section-title">Suspensión y Terminación</h2>
+                  </ion-label>
+                </ion-item>
+                <div slot="content" class="accordion-content">
+                  <h3>14.1 Suspensión Temporal</h3>
+                  <p><strong>Causas:</strong> Investigación de violaciones, actividad sospechosa, disputas excesivas, quejas múltiples, problemas con Stripe.</p>
+                  <p><strong>Duración:</strong> Hasta 30 días durante investigación.</p>
+                  <p><strong>Efectos:</strong> No puede subir contenido ni mensajes. Nuevas suscripciones se pausan. Pagos se retienen hasta resolución.</p>
+
+                  <h3>14.2 Terminación Permanente</h3>
+                  <p><strong>Terminación inmediata sin aviso por:</strong> Violación grave, contenido ilegal/peligroso, fraude, acoso, falsificación de certificaciones.</p>
+
+                  <h3>14.3 Consecuencias de Terminación</h3>
+                  <div class="termination-effects">
+                    <div class="effect-item">
+                      <ion-icon name="lock-closed" color="medium"></ion-icon>
+                      <p>Pierdes acceso inmediato</p>
+                    </div>
+                    <div class="effect-item">
+                      <ion-icon name="people" color="primary"></ion-icon>
+                      <p>Suscriptores completan períodos</p>
+                    </div>
+                    <div class="effect-item">
+                      <ion-icon name="cash" color="success"></ion-icon>
+                      <p>Recibes pagos pendientes (si no es por violación grave)</p>
+                    </div>
+                    <div class="effect-item">
+                      <ion-icon name="trash" color="danger"></ion-icon>
+                      <p>Contenido se elimina en 90 días</p>
+                    </div>
+                  </div>
+
+                  <h3>14.4 Prohibición de Crear Nuevas Cuentas</h3>
+                  <p>Si cuenta fue terminada por violación: Prohibido crear nuevas cuentas (permanente o temporal según gravedad).</p>
+                </div>
+              </ion-accordion>
+
+              <!-- 15. SOPORTE Y RESOLUCIÓN DE PROBLEMAS -->
+              <ion-accordion value="section-15" class="terms-accordion">
+                <ion-item slot="header" color="light">
+                  <ion-label>
+                    <h2 class="section-number">15.</h2>
+                    <h2 class="section-title">Soporte y Resolución de Problemas</h2>
+                  </ion-label>
+                </ion-item>
+                <div slot="content" class="accordion-content">
+                  <h3>15.1 Canales de Soporte</h3>
+                  <p><strong>Opciones:</strong> Email, Centro de Ayuda en app, FAQs</p>
+                  <p><strong>Horario:</strong> Lunes a Viernes, 9 AM - 6 PM</p>
+                  <p><strong>Tiempos de Respuesta:</strong> Consultas generales (24-48h), problemas técnicos (12-24h), problemas de pago (24h), emergencias de seguridad (inmediato).</p>
+
+                  <h3>15.2 Problemas Técnicos</h3>
+                  <p>Puede reportar bugs desde la app. Mantenimiento programado se notifica con anticipación.</p>
+
+                  <h3>15.3 Disputas con Suscriptores</h3>
+                  <p>Coach Body Booster puede ofrecer mediación voluntaria. No estamos obligados a mediar disputas. No garantizamos resultados específicos.</p>
+                </div>
+              </ion-accordion>
+
+              <!-- 16. RESOLUCIÓN DE DISPUTAS Y LEY APLICABLE -->
+              <ion-accordion value="section-16" class="terms-accordion">
+                <ion-item slot="header" color="light">
+                  <ion-label>
+                    <h2 class="section-number">16.</h2>
+                    <h2 class="section-title">Resolución de Disputas y Ley Aplicable</h2>
+                  </ion-label>
+                </ion-item>
+                <div slot="content" class="accordion-content">
+                  <h3>16.1 Ley Aplicable</h3>
+                  <p>Estos términos se rigen por las leyes de [TU PAÍS] / [TU ESTADO].</p>
+
+                  <h3>16.2 Proceso Escalonado</h3>
+                  <ol>
+                    <li><strong>Paso 1 - Negociación Informal (30 días):</strong> Contacto por escrito, resolución de buena fe</li>
+                    <li><strong>Paso 2 - Mediación (30 días):</strong> Mediador neutral, costos compartidos 50/50</li>
+                    <li><strong>Paso 3 - Arbitraje o Litigio:</strong> Arbitraje vinculante individual</li>
+                  </ol>
+
+                  <h3>16.3 Renuncia a Acciones Colectivas</h3>
+                  <p><strong>IMPORTANTE:</strong> Acepta presentar reclamaciones de forma individual. Renuncia a derecho de participar en acciones colectivas.</p>
+
+                  <h3>16.4 Limitación de Tiempo</h3>
+                  <p>Debe presentar cualquier reclamación dentro de <strong>1 año</strong> de que surja la causa de acción. Después de 1 año, la reclamación está permanentemente prohibida.</p>
+                </div>
+              </ion-accordion>
+
+              <!-- 17. DISPOSICIONES GENERALES -->
+              <ion-accordion value="section-17" class="terms-accordion">
+                <ion-item slot="header" color="light">
+                  <ion-label>
+                    <h2 class="section-number">17.</h2>
+                    <h2 class="section-title">Disposiciones Generales</h2>
+                  </ion-label>
+                </ion-item>
+                <div slot="content" class="accordion-content">
+                  <h3>17.1 Relación de las Partes</h3>
+                  <p><strong>Contratista Independiente:</strong> No empleado, no relación laboral, no beneficios de empleado, responsable de impuestos.</p>
+                  <p><strong>No Exclusividad:</strong> Libre de ofrecer servicios en otras plataformas.</p>
+
+                  <h3>17.2 Integridad del Acuerdo</h3>
+                  <p>Estos términos + Política de Privacidad + Términos de Stripe = Acuerdo completo.</p>
+
+                  <h3>17.3 Divisibilidad</h3>
+                  <p>Si alguna disposición es inválida, las demás permanecen en vigor.</p>
+
+                  <h3>17.4 No Renuncia</h3>
+                  <p>El no ejercer un derecho no constituye renuncia.</p>
+
+                  <h3>17.5 Cesión</h3>
+                  <p>Usted NO puede transferir estos términos. Nosotros podemos asignarlos libremente.</p>
+
+                  <h3>17.6 Fuerza Mayor</h3>
+                  <p>No somos responsables por causas fuera de control: desastres naturales, pandemias, fallas de infraestructura de terceros, cambios en leyes.</p>
+
+                  <h3>17.7 Avisos</h3>
+                  <p>Los avisos se envían al email registrado y notificaciones en app. Se consideran recibidos en 24 horas.</p>
+                </div>
+              </ion-accordion>
+
+              <!-- 18. CUMPLIMIENTO TRIBUTARIO Y LEGAL -->
+              <ion-accordion value="section-18" class="terms-accordion">
+                <ion-item slot="header" color="light">
+                  <ion-label>
+                    <h2 class="section-number">18.</h2>
+                    <h2 class="section-title">Cumplimiento Tributario y Legal</h2>
+                  </ion-label>
+                </ion-item>
+                <div slot="content" class="accordion-content">
+                  <h3>18.1 Responsabilidades Fiscales</h3>
+                  <div class="highlight-box danger">
+                    <ion-icon name="receipt" color="danger"></ion-icon>
+                    <div>
+                      <p><strong>USTED ES COMPLETAMENTE RESPONSABLE DE:</strong></p>
+                      <ul>
+                        <li>Declarar todos los ingresos generados</li>
+                        <li>Pagar impuestos aplicables (IVA, ISR, IEPS, etc.)</li>
+                        <li>Emitir facturas si legislación lo requiere</li>
+                        <li>Mantener registros contables [X] años</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <h3>18.2 Información Fiscal</h3>
+                  <p>Según jurisdicción puede necesitar proporcionar: W-9 (EE.UU.), W-8BEN (extranjeros), RFC (México), equivalentes en otros países.</p>
+
+                  <h3>18.3 Licencias y Permisos</h3>
+                  <p>Si su jurisdicción requiere licencia para servicios de fitness: Debe obtenerla y mantenerla vigente. Notificar si se suspende o revoca.</p>
+
+                  <h3>18.4 Seguros (Fuertemente Recomendado)</h3>
+                  <ul>
+                    <li>Seguro de responsabilidad profesional</li>
+                    <li>Cobertura de $[MONTO] mínimo</li>
+                    <li>Que cubra servicios en línea</li>
+                  </ul>
+
+                  <h3>18.5 Leyes Anti-Lavado de Dinero (AML/KYC)</h3>
+                  <p>Stripe realiza verificación KYC. Podemos solicitar documentación adicional. Monitoreamos patrones inusuales. Reportamos actividad sospechosa a autoridades.</p>
+                </div>
+              </ion-accordion>
+
+              <!-- 19. CONSIDERACIONES ESPECIALES -->
+              <ion-accordion value="section-19" class="terms-accordion">
+                <ion-item slot="header" color="light">
+                  <ion-label>
+                    <h2 class="section-number">19.</h2>
+                    <h2 class="section-title">Consideraciones Especiales</h2>
+                  </ion-label>
+                </ion-item>
+                <div slot="content" class="accordion-content">
+                  <h3>19.1 Contenido de Terceros - Enlaces Externos</h3>
+                  <p>Para Tipo "Clase" (YouTube, Vimeo): Usted garantiza tener permiso, el enlace permanecerá funcional. NO somos responsables si YouTube elimina el video, publicidad en plataformas externas, problemas de copyright.</p>
+                  <p><strong>Recomendación:</strong> Use solo videos de su propio canal. Verifique periódicamente que enlaces funcionen.</p>
+
+                  <h3>19.2 Contenido Nutricional</h3>
+                  <div class="warning-box">
+                    <p><strong>SIN Certificación de Nutrición:</strong></p>
+                    <p>Solo puede: Compartir consejos generales, recomendar consultar nutriólogo, hablar de experiencias personales.</p>
+                    <p><strong>NO PUEDE:</strong> Crear planes personalizados, prescribir dietas, tratar condiciones médicas con nutrición, calcular requerimientos calóricos individuales.</p>
+                    <p class="disclaimer">"Información nutricional es solo educativa y no sustituye consejo médico profesional. Consulte con médico o nutriólogo certificado antes de realizar cambios significativos en su alimentación."</p>
+                  </div>
+
+                  <h3>19.3 Programas de Alta Intensidad</h3>
+                  <div class="warning-box">
+                    <p class="disclaimer"><strong>ADVERTENCIA: Programa de Alta Intensidad</strong><br>
+                    - Requiere nivel fitness intermedio/avanzado<br>
+                    - No intente sin evaluación médica previa<br>
+                    - Alto riesgo de lesión si se hace incorrectamente<br>
+                    - Detenga inmediatamente si experimenta dolor, mareos o náuseas<br>
+                    - Consulte con médico antes de comenzar</p>
+                  </div>
+
+                  <h3>19.4 Poblaciones Especiales</h3>
+                  <p><strong>Advertencias para:</strong></p>
+                  <ul>
+                    <li>Mujeres Embarazadas: "Consulte con obstetra"</li>
+                    <li>Adultos Mayores (+65): "Evaluación médica recomendada"</li>
+                    <li>Personas con Lesiones: "Aprobación médica requerida"</li>
+                    <li>Condiciones Cardíacas: "Prohibido sin autorización del cardiólogo"</li>
+                    <li>Diabetes: "Monitoree glucosa antes/después"</li>
+                  </ul>
+
+                  <h3>19.5 Menores de Edad</h3>
+                  <p>La plataforma es para usuarios mayores de 18 años. Suscriptores menores deben tener consentimiento parental. Coach Body Booster verifica edad en registro.</p>
+                </div>
+              </ion-accordion>
+
+              <!-- 20. CONTACTO E INFORMACIÓN LEGAL -->
+              <ion-accordion value="section-20" class="terms-accordion">
+                <ion-item slot="header" color="light">
+                  <ion-label>
+                    <h2 class="section-number">20.</h2>
+                    <h2 class="section-title">Contacto e Información Legal</h2>
+                  </ion-label>
+                </ion-item>
+                <div slot="content" class="accordion-content">
+                  <h3>20.1 Información de la Empresa</h3>
+                  <div class="company-info">
+                    <p><strong>Coach Body Booster</strong></p>
+                    <p>Nombre Legal: [Nombre Legal de la Empresa]</p>
+                    <p>RFC/Tax ID: [Número de Identificación Fiscal]</p>
+                    <p>Dirección Legal: [Dirección Completa]</p>
+                    <p>País de Registro: [País]</p>
+                  </div>
+
+                  <h3>20.2 Contacto para Creadores</h3>
+                  <div class="contact-grid">
+                    <div class="contact-card">
+                      <ion-icon name="help-circle" color="primary"></ion-icon>
+                      <h4>Soporte General</h4>
+                      <p>support-creator&#64;coachbodybooster.com</p>
+                    </div>
+                    <div class="contact-card">
+                      <ion-icon name="code-slash" color="secondary"></ion-icon>
+                      <h4>Soporte Técnico</h4>
+                      <p>tech-support&#64;coachbodybooster.com</p>
+                    </div>
+                    <div class="contact-card">
+                      <ion-icon name="cash" color="tertiary"></ion-icon>
+                      <h4>Pagos/Facturación</h4>
+                      <p>billing&#64;coachbodybooster.com</p>
+                    </div>
+                    <div class="contact-card">
+                      <ion-icon name="shield" color="success"></ion-icon>
+                      <h4>Asuntos Legales</h4>
+                      <p>legal&#64;coachbodybooster.com</p>
+                    </div>
+                    <div class="contact-card">
+                      <ion-icon name="lock-closed" color="medium"></ion-icon>
+                      <h4>Privacidad/Datos</h4>
+                      <p>privacy&#64;coachbodybooster.com</p>
+                    </div>
+                    <div class="contact-card">
+                      <ion-icon name="flag" color="danger"></ion-icon>
+                      <h4>Reportar Violaciones</h4>
+                      <p>report&#64;coachbodybooster.com</p>
+                    </div>
+                  </div>
+
+                  <h3>20.3 Soporte de Stripe</h3>
+                  <p>Para problemas con Cuenta Conectada:</p>
+                  <p><strong>Soporte Stripe:</strong> https://support.stripe.com</p>
+                  <p class="note">Coach Body Booster no puede resolver problemas de Stripe directamente.</p>
+                </div>
+              </ion-accordion>
+
+              <!-- 21. RECONOCIMIENTO Y CONSENTIMIENTO FINAL -->
+              <ion-accordion value="section-21" class="terms-accordion">
+                <ion-item slot="header" color="light">
+                  <ion-label>
+                    <h2 class="section-number">21.</h2>
+                    <h2 class="section-title">Reconocimiento y Consentimiento Final</h2>
+                  </ion-label>
+                </ion-item>
+                <div slot="content" class="accordion-content">
+                  <p>Al completar su registro y crear una cuenta de Coach Body Booster, usted confirma y acepta que:</p>
+                  
+                  <div class="checklist">
+                    <div class="check-item">
+                      <ion-icon name="checkmark-circle" color="success"></ion-icon>
+                      <p>Ha leído completamente estos Términos y Condiciones</p>
+                    </div>
+                    <div class="check-item">
+                      <ion-icon name="checkmark-circle" color="success"></ion-icon>
+                      <p>Comprende estructura de comisiones (20% + tarifas de Stripe)</p>
+                    </div>
+                    <div class="check-item">
+                      <ion-icon name="checkmark-circle" color="success"></ion-icon>
+                      <p>Acepta responsabilidad por su contenido y obligaciones fiscales</p>
+                    </div>
+                    <div class="check-item">
+                      <ion-icon name="checkmark-circle" color="success"></ion-icon>
+                      <p>Acepta estar legalmente vinculado por estos términos</p>
+                    </div>
+                    <div class="check-item">
+                      <ion-icon name="checkmark-circle" color="success"></ion-icon>
+                      <p>Tiene capacidad legal para celebrar este acuerdo</p>
+                    </div>
+                    <div class="check-item">
+                      <ion-icon name="checkmark-circle" color="success"></ion-icon>
+                      <p>Posee certificaciones necesarias para ofrecer servicios de fitness</p>
+                    </div>
+                    <div class="check-item">
+                      <ion-icon name="checkmark-circle" color="success"></ion-icon>
+                      <p>Cumplirá con todas las leyes aplicables en su jurisdicción</p>
+                    </div>
+                    <div class="check-item">
+                      <ion-icon name="checkmark-circle" color="success"></ion-icon>
+                      <p>Mantendrá estándares profesionales y éticos</p>
+                    </div>
+                    <div class="check-item">
+                      <ion-icon name="checkmark-circle" color="success"></ion-icon>
+                      <p>Comprende que es contratista independiente, no empleado</p>
+                    </div>
+                    <div class="check-item">
+                      <ion-icon name="checkmark-circle" color="success"></ion-icon>
+                      <p>Acepta resolver disputas mediante arbitraje (donde sea aplicable)</p>
+                    </div>
+                    <div class="check-item">
+                      <ion-icon name="checkmark-circle" color="success"></ion-icon>
+                      <p>Indemnizará a Coach Body Booster de reclamaciones relacionadas</p>
+                    </div>
+                  </div>
+                </div>
+              </ion-accordion>
+
+              <!-- 22. DEFINICIONES Y GLOSARIO -->
+              <ion-accordion value="section-22" class="terms-accordion">
+                <ion-item slot="header" color="light">
+                  <ion-label>
+                    <h2 class="section-number">22.</h2>
+                    <h2 class="section-title">Definiciones y Glosario</h2>
+                  </ion-label>
+                </ion-item>
+                <div slot="content" class="accordion-content">
+                  <p>Para evitar confusiones, los siguientes términos tienen estos significados específicos:</p>
+                  
+                  <div class="glossary-grid">
+                    <div class="glossary-item">
+                      <strong>Activo:</strong>
+                      <p>Suscripción con pago al día y acceso completo</p>
+                    </div>
+                    <div class="glossary-item">
+                      <strong>Almacenamiento:</strong>
+                      <p>Espacio en AWS S3 para su contenido</p>
+                    </div>
+                    <div class="glossary-item">
+                      <strong>Arbitraje:</strong>
+                      <p>Resolución de disputas fuera de tribunales</p>
+                    </div>
+                    <div class="glossary-item">
+                      <strong>AWS:</strong>
+                      <p>Amazon Web Services, proveedor de almacenamiento</p>
+                    </div>
+                    <div class="glossary-item">
+                      <strong>Clase:</strong>
+                      <p>Tipo de contenido con enlace a video externo</p>
+                    </div>
+                    <div class="glossary-item">
+                      <strong>Comisión:</strong>
+                      <p>Porcentaje o monto retenido por servicios</p>
+                    </div>
+                    <div class="glossary-item">
+                      <strong>Cuenta Conectada:</strong>
+                      <p>Cuenta de Stripe Connect vinculada a perfil</p>
+                    </div>
+                    <div class="glossary-item">
+                      <strong>Disputa:</strong>
+                      <p>Contestación de cargo por titular de tarjeta</p>
+                    </div>
+                    <div class="glossary-item">
+                      <strong>Documento:</strong>
+                      <p>Tipo de contenido con archivo PDF</p>
+                    </div>
+                    <div class="glossary-item">
+                      <strong>Enlaces Firmados:</strong>
+                      <p>URLs temporales seguras para acceso</p>
+                    </div>
+                    <div class="glossary-item">
+                      <strong>GDPR:</strong>
+                      <p>Regulación General de Protección de Datos (UE)</p>
+                    </div>
+                    <div class="glossary-item">
+                      <strong>KYC:</strong>
+                      <p>Know Your Customer, verificación de identidad</p>
+                    </div>
+                    <div class="glossary-item">
+                      <strong>Onboarding:</strong>
+                      <p>Proceso inicial de registro y configuración</p>
+                    </div>
+                    <div class="glossary-item">
+                      <strong>Rutina:</strong>
+                      <p>Tipo de contenido con video corto (max 10 min)</p>
+                    </div>
+                    <div class="glossary-item">
+                      <strong>S3:</strong>
+                      <p>Simple Storage Service de AWS</p>
+                    </div>
+                    <div class="glossary-item">
+                      <strong>Streaming:</strong>
+                      <p>Transmisión de video sin descarga</p>
+                    </div>
+                    <div class="glossary-item">
+                      <strong>Stripe:</strong>
+                      <p>Plataforma de procesamiento de pagos</p>
+                    </div>
+                    <div class="glossary-item">
+                      <strong>Suscriptor:</strong>
+                      <p>Usuario de Body Booster que paga por contenido</p>
+                    </div>
+                  </div>
+                </div>
+              </ion-accordion>
+
+              <!-- ANEXO A: RANGOS DE PRECIOS -->
+              <ion-accordion value="anexo-a" class="terms-accordion">
+                <ion-item slot="header" color="light">
+                  <ion-label>
+                    <h2 class="section-number">A.</h2>
+                    <h2 class="section-title">Anexo A: Rangos de Precios de Suscripción</h2>
+                  </ion-label>
+                </ion-item>
+                <div slot="content" class="accordion-content">
+                  <p class="note">Los rangos actuales se muestran en la aplicación. A continuación valores de referencia:</p>
+                  
+                  <div class="price-table">
+                    <div class="price-row header">
+                      <div class="price-cell">Tipo de Suscripción</div>
+                      <div class="price-cell">Mínimo</div>
+                      <div class="price-cell">Máximo</div>
+                    </div>
+                    <div class="price-row">
+                      <div class="price-cell"><strong>Mensual</strong></div>
+                      <div class="price-cell">$[XXX] [MONEDA]</div>
+                      <div class="price-cell">$[XXX] [MONEDA]</div>
+                    </div>
+                    <div class="price-row">
+                      <div class="price-cell"><strong>Semestral</strong></div>
+                      <div class="price-cell">$[XXX] [MONEDA]</div>
+                      <div class="price-cell">$[XXX] [MONEDA]</div>
+                    </div>
+                    <div class="price-row">
+                      <div class="price-cell"><strong>Anual</strong></div>
+                      <div class="price-cell">$[XXX] [MONEDA]</div>
+                      <div class="price-cell">$[XXX] [MONEDA]</div>
+                    </div>
+                  </div>
+                  
+                  <p class="note">Estos rangos pueden actualizarse con 60 días de aviso previo.</p>
+                </div>
+              </ion-accordion>
+
+              <!-- ANEXO B: ESPECIFICACIONES TÉCNICAS -->
+              <ion-accordion value="anexo-b" class="terms-accordion">
+                <ion-item slot="header" color="light">
+                  <ion-label>
+                    <h2 class="section-number">B.</h2>
+                    <h2 class="section-title">Anexo B: Especificaciones Técnicas</h2>
+                  </ion-label>
+                </ion-item>
+                <div slot="content" class="accordion-content">
+                  <h3>Límites de Contenido</h3>
+                  
+                  <div class="tech-specs-card">
+                    <h4>Videos (Tipo "Rutina"):</h4>
+                    <ul>
+                      <li>Duración máxima: <strong>10 minutos</strong></li>
+                      <li>Tamaño máximo por archivo: [XX] MB</li>
+                      <li>Formatos aceptados: MP4, MOV, AVI</li>
+                      <li>Resolución recomendada: 720p - 1080p</li>
+                      <li>Códec de video: H.264</li>
+                      <li>Códec de audio: AAC</li>
+                    </ul>
+                  </div>
+
+                  <div class="tech-specs-card">
+                    <h4>Documentos PDF:</h4>
+                    <ul>
+                      <li>Tamaño máximo: [XX] MB</li>
+                      <li>Páginas máximas: [XX]</li>
+                      <li>Formato: PDF únicamente</li>
+                    </ul>
+                  </div>
+
+                  <div class="tech-specs-card">
+                    <h4>Almacenamiento Total:</h4>
+                    <ul>
+                      <li>Plan básico: [XX] GB incluidos</li>
+                      <li>Almacenamiento adicional: $[XX]/mes por [XX] GB extra</li>
+                    </ul>
+                  </div>
+
+                  <div class="tech-specs-card">
+                    <h4>Mensajería:</h4>
+                    <ul>
+                      <li>Máximo [X] mensajes por semana a suscriptores</li>
+                      <li>Longitud máxima: [XXX] caracteres</li>
+                    </ul>
+                  </div>
+                </div>
+              </ion-accordion>
+
+            </ion-accordion-group>
+          </ion-col>
+        </ion-row>
+
+        <!-- Note about continuing to read -->
+        <ion-row>
+          <ion-col size="12">
+            <div class="continue-reading-note">
+              <ion-icon name="information-circle" color="primary"></ion-icon>
+              <p><strong>Nota:</strong> Por favor, continúa leyendo todas las secciones expandiendo los acordeones. Este documento contiene información legal importante que afecta tus derechos y obligaciones.</p>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <!-- Footer -->
+        <ion-row>
+          <ion-col size="12">
+            <div class="terms-footer">
+              <p>© 2026 Coach Body Booster. Todos los derechos reservados.</p>
+              <p class="version-text">Versión 2.0 - Actualizado: 15 de Enero, 2026</p>
+              <p class="disclaimer-text">Este documento constituye un acuerdo legal vinculante.</p>
+            </div>
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+    </div>
+  </app-layout-content>
+</ion-content>

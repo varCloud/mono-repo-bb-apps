@@ -133,7 +133,7 @@ export class ProfileComponent implements OnInit {
   }
 
   private showTerms(): void {
-    // Implementar mostrar términos
+    this.router.navigate(['home/profile/terms-conditions']);
   }
 
   private contactSupport(): void {

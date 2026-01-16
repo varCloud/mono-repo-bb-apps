@@ -33,6 +33,13 @@ export const profileRoutes: Routes = [
           ),
       },
       {
+        path: 'terms-conditions',
+        loadComponent: () =>
+          import('./pages/terms-conditions/terms-conditions.page').then(
+            (m) => m.TermsConditionsPage,
+          ),
+      },
+      {
         path: '**',
         redirectTo: '',
         pathMatch: 'full',
