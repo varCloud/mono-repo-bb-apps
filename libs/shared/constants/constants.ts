@@ -8,10 +8,9 @@ export const CONSTANTS = {
     PERCENT_BODY_BOOSTER: 'percent-body-booster',
   },
   DEFAULT_URL_AVATAR: 'https://ionicframework.com/docs/img/demos/avatar.svg',
-  DEFAULT_FRONT_PAGE_URL:
-    'assets/images/suscription/default-front-page-url.png',
+  DEFAULT_FRONT_PAGE_URL: 'assets/images/suscription/default-front-page-url.png',
   DEFAULT_COUNTRY_PREFIX: '+52',
-  URL_VIDEO_PLAYER: 'https://wondrous-marzipan-491d5a.netlify.app',
+  URL_VIDEO_PLAYER: 'https://bluecloud.com.mx/2023/bodybooster/video-player',
   COMMANDS_VIDEO_PLAYER: {
     PLAY: 'PLAY',
     PLAYING: 'PLAYING',
@@ -32,11 +31,10 @@ export const CONSTANTS = {
   },
   INFINITELOADER: {
     LIMIT: 25,
-    PAGE: 1
+    PAGE: 1,
   },
-
 
   HIDE_CONTROLS_DELAY: 3000,
   PLAYBACK_RATES: [0.5, 0.75, 1, 1.25, 1.5, 2],
-  DEFAULT_LOGO_LETRAS_TOOLBAR:'./assets/images/logo-con-letras.svg'
+  DEFAULT_LOGO_LETRAS_TOOLBAR: './assets/images/logo-con-letras.svg',
 };
