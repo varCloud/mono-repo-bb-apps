@@ -36,14 +36,21 @@ export const profileRoutes: Routes = [
         path: 'my-subscriptions',
         loadComponent: () =>
           import(
-            './my-subscriptions-user-card/my-subscriptions-user-card.page'
-          ).then((m) => m.mySubscriptionsUserCardPage),
+            './my-subscriptions/my-subscriptions'
+          ).then((m) => m.MySubscriptionsPage),
       },
       {
         path: 'personal-data',
         loadComponent: () =>
           import('./pages/personal-data/personal-data-page.component').then(
             (m) => m.PersonalDataPageComponent
+          ),
+      },
+      {
+        path: 'payment-methods',
+        loadComponent: () =>
+          import('./pages/payment-methods/payment-methods-page.component').then(
+            (m) => m.PaymentMethodsPageComponent
           ),
       },
       {

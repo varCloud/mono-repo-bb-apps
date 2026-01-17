@@ -1,0 +1,20 @@
+<ion-content class="payment-methods-content">
+  <app-layout-content
+    customClass="payment-methods-page"
+    [useGoBack]="true"
+    defaultHref="/home/profile"
+    [title]="'go-back' | translate"
+  >
+    <ion-grid content-body>
+      @if( _sessionService.user$().userId ){
+      <lib-payment-methods-list
+        (selectedPaymentMethodEvent)="selectPaymentMethod($event)"
+        [userId]="_sessionService.user$().userId"
+        [selectPaymentMethodId]="paymentMethodId()"
+        [showMenuOptions]="true"
+        [stripeAccountId]="_sessionService.user$().stripeAccountId"
+      ></lib-payment-methods-list>
+      }
+    </ion-grid>
+  </app-layout-content>
+</ion-content>

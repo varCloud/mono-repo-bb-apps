@@ -46,8 +46,10 @@
 
 .default-badge {
   font-size: 10px;
-  --background: var(--ion-color-success, #2dd36f);
-  --color: white;
+  background: var(--ion-color-tertiary);
+  color: var(--ion-color-medium);
+  padding: 2px 5px;
+  border-radius: 4px;
 }
 
 .empty-state-item {
@@ -72,4 +74,15 @@
 ion-item.selected::part(native) {
   border: 3px solid var(--ion-color-secondary);
   border-radius: 12px;
+}
+
+.menu-icon {
+  font-size: 24px;
+  color: var(--ion-color-medium);
+  cursor: pointer;
+  padding: 8px;
+  
+  &:hover {
+    color: var(--ion-color-dark);
+  }
 }

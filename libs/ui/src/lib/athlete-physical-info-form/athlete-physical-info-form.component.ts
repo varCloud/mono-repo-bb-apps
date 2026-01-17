@@ -4,8 +4,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ErrorMessageComponent, RadioCardSelectorComponent, SelectOption } from '@monorepo-bb-app/ui';
 import { addIcons } from 'ionicons';
-import { cardOutline, female, femaleOutline, maleOutline } from 'ionicons/icons';
-import { IonInput,IonCol, IonLabel,IonDatetime ,IonDatetimeButton, IonItemDivider,IonItem, IonRow, IonModal} from '@ionic/angular/standalone';
+import { cardOutline, female, femaleOutline, maleOutline, calendarOutline } from 'ionicons/icons';
+import { IonIcon,IonInput,IonCol, IonLabel,IonDatetime ,IonDatetimeButton, IonItemDivider,IonItem, IonRow, IonModal} from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-athlete-physical-info-form',
@@ -14,7 +14,7 @@ import { IonInput,IonCol, IonLabel,IonDatetime ,IonDatetimeButton, IonItemDivide
   standalone: true,
   imports: [
     CommonModule,
-    
+    IonIcon,
     ReactiveFormsModule,
     TranslateModule,
     ErrorMessageComponent,
@@ -31,9 +31,8 @@ import { IonInput,IonCol, IonLabel,IonDatetime ,IonDatetimeButton, IonItemDivide
     IonInput
   ]
 })
-export class AthletePhysicalInfoFormComponent implements OnInit , OnChanges {
+export class AthletePhysicalInfoFormComponent implements OnInit {
   @Input() form!: FormGroup;
-  @Input() initialData: any = {};
   @Output() formSubmit = new EventEmitter<any>();
   @Output() genderChange = new EventEmitter<string>();
   @Output() birthdateChange = new EventEmitter<void>();
@@ -41,21 +40,14 @@ export class AthletePhysicalInfoFormComponent implements OnInit , OnChanges {
   public maxDate = signal<string>('');
   
   constructor( private _translate: TranslateService) {
-     addIcons({ cardOutline, femaleOutline, maleOutline, });
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('Changes detected:', changes);
+     addIcons({ cardOutline, femaleOutline, maleOutline, calendarOutline });
   }
 
   ngOnInit() {
     if (!this.form) {
-      throw new Error('Form control is required for AthletePhysicalInfoFormComponent');
+      return
     }
 
-    if (this.initialData) {
-      this.form.patchValue(this.initialData);
-    }
     this.loadGenderOptions();
     this.initializeMaxDate();
   }

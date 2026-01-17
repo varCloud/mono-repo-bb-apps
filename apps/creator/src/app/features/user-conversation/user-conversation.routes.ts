@@ -9,7 +9,7 @@ export const userConversationRoutes: Routes = [
       ),
   },
   {
-    path: 'user-chat',
+    path: ':id/user-chat',
     loadComponent: () =>
       import('./components/user-chat/user-chat.component').then(
         (m) => m.UserChatComponent,

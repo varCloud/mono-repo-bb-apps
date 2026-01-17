@@ -1,7 +1,7 @@
 import { Component, input, output } from '@angular/core';
 import { IonIcon } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { ellipsisHorizontal } from 'ionicons/icons';
+import { ellipsisVertical } from 'ionicons/icons';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -18,9 +18,12 @@ export class UserCardComponent {
   descriptionPlan = input.required<string>();
   optionsClick = output<Event>();
   nickName = input.required<string>();
+  email = input.required<string>();
+  endData = input.required<string>()
+  amount = input.required<string>();
 
   constructor() {
-    addIcons({ ellipsisHorizontal });
+    addIcons({ ellipsisVertical });
   }
 
   onMoreOptions(event: Event) {

@@ -6,6 +6,8 @@ import { PaginatorModel, UserConversationModel } from '@monorepo-bb-app/shared';
 import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
 import { finalize } from 'rxjs';
 import { UserAvatarComponent } from '../user-avatar/user-avatar.component';
+import { EmptyElementsComponent } from '../empty-elements/empty-elements.component';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 
 
@@ -14,7 +16,7 @@ import { UserAvatarComponent } from '../user-avatar/user-avatar.component';
   templateUrl: './conversation-list.component.html',
   styleUrls: ['./conversation-list.component.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule , UserAvatarComponent],
+  imports: [CommonModule, IonicModule , UserAvatarComponent, EmptyElementsComponent, TranslateModule ],
 })
 export class ConversationListComponent implements OnInit {
   @Output() conversationSelected = new EventEmitter<UserConversationModel>();
@@ -23,7 +25,7 @@ export class ConversationListComponent implements OnInit {
   userTypeId = input.required<number>();
   public conversations: UserConversationModel[] = [];
   public userPropConversation : string = 'creatorUser'
-
+  public imgUrl = input<string>('assets/images/empty/emptyelements.png');
   constructor(
     private readonly _userConversationService:UserConversationService,
     private readonly _loaderService: LoaderUIService

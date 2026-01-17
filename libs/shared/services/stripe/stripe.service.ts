@@ -4,6 +4,7 @@ import { Injectable, signal } from '@angular/core';
 import { loadStripe } from '@stripe/stripe-js';
 import { environment } from '../../environment/environment';
 import { Browser } from '@capacitor/browser';
+import { API_URLS } from 'libs/shared/constants/api-urls';
 
 @Injectable({
   providedIn: 'root',
@@ -64,6 +65,21 @@ export class StripeService {
   public getPaymentMethods(customerId: number) {
     return this._http.get(
       `${this.BASE_URL}/user/${customerId}/payment-methods`
+    );
+  }
+
+  public setDefaultPaymentMethod(customerId: string, paymentMethodId: string) {
+    return this._http.put(
+        `${this.BASE_URL}${API_URLS.PAYMENTS}/customers/${customerId}/default-payment-method`,
+      {
+        paymentMethodId: paymentMethodId,
+      }
+    );
+  }
+
+  public deletePaymentMethod(paymentMethodId: string) {
+    return this._http.delete(
+      `${this.BASE_URL}${API_URLS.PAYMENTS}/payment-methods/${paymentMethodId}`
     );
   }
 }

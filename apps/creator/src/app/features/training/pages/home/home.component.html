@@ -15,9 +15,9 @@
       <ion-button fill="clear" size="small" class="header-icon-btn">
         <ion-icon name="search" slot="icon-only" appProfileColor="color"></ion-icon>
       </ion-button>
-      <ion-button fill="clear" size="small" class="header-icon-btn">
+      <!-- <ion-button fill="clear" size="small" class="header-icon-btn">
         <ion-icon name="notifications" slot="icon-only" appProfileColor="color"></ion-icon>
-      </ion-button>
+      </ion-button> -->
     </div>
   </div>
 </ion-header>
@@ -36,7 +36,11 @@
     <ion-row gap="5px">
       @for (workout of workouts(); track workout.workoutId) {
         <ion-col size="6" size-md="3" size-lg="3">
-          <lib-card-list [workout]="workout"></lib-card-list>
+          <lib-card-list 
+          [workout]="workout"
+          (clickDeleteEvent)="onDeleteWorkout($event)"
+          >
+        </lib-card-list>
         </ion-col>
       }
     </ion-row>

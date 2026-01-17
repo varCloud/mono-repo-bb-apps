@@ -31,6 +31,7 @@ export * from './lib/components/card-list/card-list.component';
 export * from './lib/components/filter/filter.component';
 export * from './lib/components/card-max-likes/card-max-likes.component';
 export * from './lib/components/detail-creator-profile/detail-creator-profile.component';
+export * from './lib/components/delete-workout-modal/delete-workout-modal.component';
 export * from './lib/components/card-workout-info/card-workout-info.component';
 export * from './lib/components/card-with-lateral-image/card-with-lateral-image.component';
 export * from './lib/components/modal-add-payment-method/modal-add-payment-method.component';
@@ -73,6 +74,7 @@ export * from './lib/components/slide-info-card/slide-info-card.component';
 export * from './lib/components/toolbar/toolbar.component';
 export * from './lib/components/user-card/user-card.component';
 export * from './lib/components/options-subscriptor-modal/options-subscriptor-modal.component';
+export * from './lib/components/options-payment-method-modal/options-payment-method-modal.component';
 
 // Formularios reutilizables
 export * from './lib/athlete-profile-basic-form/athlete-profile-basic-form.component';

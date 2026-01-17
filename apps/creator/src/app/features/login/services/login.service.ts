@@ -41,7 +41,6 @@ export class LoginService {
         );
         this._userService.getUser(resp.userId).subscribe();
         const config = await this.getAppSettings();
-        console.log(config);
         this._localStorage.set(KEY_LOCALSTORAGE.CONFIG, {
           ...config,
           currency: config.paymentCurrency,

@@ -4,6 +4,7 @@ export * from './constants/times';
 export * from './models/auth.model';
 export * from './models/user.model';
 export * from './services/toast.service';
+export * from './services/share.service';
 export * from './services/otp/otp.service';
 export * from './services/catalogos/catalogs.service';
 export * from './services/errors-msg/errors-messages.service';

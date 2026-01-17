@@ -13,8 +13,22 @@
     "previous": "Previous",
     "skip": "Skip",
     "save-changes": "Save changes",
-    "search": "Search"
+    "search": "Search",
+    "load-more-elements-pagination": "Down Scroll to load more subscriptions",
+    "loading": "Loading...",
+    "no-results": "No results found"
   },
+
+  "my-subscriptions":{
+      "empty-subscriptions": "You currently have no subscriptions. Search for workouts and start your subscription with your favorite trainer.",
+      "title-subscriptions": "My Subscriptions"
+  },
+
+    "my-subscriptors":{
+      "empty-subscriptors": "You currently have no subscriptors",
+      "title-subscriptors": "My Subscriptors"
+  },
+
   "network": {
     "no-connection-title": "No internet connection",
     "no-connection-message": "It seems you have lost your internet connection. Please check your connection and try again.",
@@ -146,6 +160,10 @@
   },
   "payment-method-added": "Payment method added",
   "payment-method-added-success": "Payment method added successfully",
+  "payment-methods": {
+    "default-set-success": "Payment method set as default",
+    "deleted-success": "Payment method deleted successfully"
+  },
   "recommended": "Recommended",
   "reset-password": {
     "confirm-password": "Confirm password",
@@ -216,6 +234,8 @@
       "link-video": "Link to video",
       "created-success": "Routine created successfully",
       "updated-success": "Routine updated successfully",
+      "deleted-success": "Workout deleted successfully",
+      "deleted-error": "Error deleting workout",
       "error": "Error saving routine",
       "upload-error": "Error uploading file {{fileName}}"
     }
@@ -270,6 +290,7 @@
       "birthdate-label": "Select your birth date",
       "age-label": "Age",
       "age-placeholder": "Your age",
+      "years": "years",
       "weight-title": "What is your weight?",
       "weight-label": "Weight",
       "weight-placeholder": "Enter your weight",

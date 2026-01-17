@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, effect, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { ConversationListComponent, HeaderSearchComponent, LayoutContentComponent
+import { ConversationListComponent, HeaderSearchComponent, LayoutContentComponent, UserConversationModalComponent
 
  } from '@monorepo-bb-app/ui';
 
@@ -10,7 +10,6 @@ import { ConversationListComponent, HeaderSearchComponent, LayoutContentComponen
 import { ModalController, IonicModule } from '@ionic/angular';
 
 import { Router } from '@angular/router';
-import { UserConversationModalComponent } from 'libs/ui/src/lib/components/user-conversation-modal/user-conversation-modal.component';
 import { SesionService } from '@monorepo-bb-app/core';
 import { NgItemLabelDirective } from "@ng-select/ng-select";
 
@@ -31,7 +30,7 @@ import { NgItemLabelDirective } from "@ng-select/ng-select";
     NgItemLabelDirective
 ],
 })
-export class UserConversationComponent implements OnInit, OnDestroy {
+export class UserConversationComponent {
 
   conversations: any[] = []; // Aquí definiremos el tipo correcto más adelante
 
@@ -44,21 +43,11 @@ export class UserConversationComponent implements OnInit, OnDestroy {
     effect(() => {
       this.sesionService.user$()      
     });
-    
-
-  }
-
-  ngOnInit(): void {
-    // Inicialización del componente
-  }
-
-  ngOnDestroy(): void {
-    // Limpieza al destruir el componente
   }
 
   onConversationSelected(conversation: any) {
     console.log('Conversación seleccionada:', conversation);
-    this.router.navigate(['/home/user-chat'] , { state: { conversation }, replaceUrl:true });
+    this.router.navigate([`/home/${conversation.userConversationId}/user-chat`] , { state: { conversation }, replaceUrl:true });
   }
 
   async openDetailModal(data?: any) {

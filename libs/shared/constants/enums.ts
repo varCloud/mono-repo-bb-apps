@@ -44,3 +44,10 @@ export enum BUCKET_TYPE {
   PUBLIC = 'public',
   PRIVATE = 'private',
 }
+
+
+export enum SUBSCRIPTION_STATUS {
+  ACTIVE = 1,
+  CANCELED = 2,
+  EXPIRED = 3,
+}

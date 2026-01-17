@@ -10,7 +10,10 @@
     "previous": "Anterior",
     "skip": "Saltar",
     "save-changes": "Guardar cambios",
-    "search": "Buscar"
+    "search": "Buscar",
+    "load-more-elements-pagination": "Desliza para cargar más subscriptions",
+    "loading": "Cargando...",
+    "no-results": "No se encontraron resultados"
   },
   "network": {
     "no-connection-title": "Sin conexión a internet",
@@ -19,6 +22,14 @@
   },
   "update-user-data": {
     "success": "Datos Actualizados"
+  },
+  "my-subscriptions": {
+    "empty-subscriptions": "Actualmente no tienes suscripciones  Busca entrenamientos y comienza tu sucripción con tu coach favorito.",
+    "title-subscriptions": "Mis Suscripciones"
+  },
+  "my-subscriptors": {
+    "empty-subscriptors": "Actualmente no tienes suscrriptores.",
+    "title-subscriptors": "Mis Suscrriptores"
   },
   "about-me": {
     "placeholder": "Escribe algo sobre ti",
@@ -148,6 +159,10 @@
   },
   "payment-method-added": "Método de pago agregado",
   "payment-method-added-success": "Método de pago agregado exitosamente",
+  "payment-methods": {
+    "default-set-success": "Método de pago establecido como principal",
+    "deleted-success": "Método de pago eliminado exitosamente"
+  },
   "recommended": "Recomendado",
   "reset-password": {
     "confirm-password": "Confirmar contraseña",
@@ -221,6 +236,8 @@
       "link-video": "Link del video",
       "created-success": "Rutina creada exitosamente",
       "updated-success": "Rutina actualizada exitosamente",
+      "deleted-success": "Entrenamiento eliminado correctamente",
+      "deleted-error": "Error al eliminar el entrenamiento",
       "error": "Error al guardar la rutina",
       "upload-error": "Error al subir el archivo {{fileName}}",
       "image-cover": "Carga la portada de tu rutina"
@@ -269,6 +286,7 @@
       "birthdate-label": "Selecciona tu fecha de nacimiento",
       "age-label": "Edad",
       "age-placeholder": "Tu edad",
+      "years": "años",
       "weight-title": "¿Cuál es tu peso?",
       "weight-label": "Peso",
       "weight-placeholder": "Ingrese su peso",

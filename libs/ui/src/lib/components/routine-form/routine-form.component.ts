@@ -300,7 +300,6 @@ export class RoutineFormComponent implements OnInit {
   }
 
   private async saveExerciseData() {
-    debugger
     this._loader.showLoader();
     let imageUrl = ''
     const dataPhoto = this.routineForm.get('coverImage')?.value;
