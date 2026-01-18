@@ -1,0 +1,37 @@
+<ion-content>
+  <div class="modal-header">
+    <h2 class="modal-title">{{ 'delete-confirmation' | translate }}</h2>
+    <ion-item-divider mode="md"></ion-item-divider>
+  </div>
+  <div class="modal-body">
+    <ion-card class="card-list-container">
+      <div class="image-container">
+        <ion-img [src]="workout.workoutUrl" alt="Tabata" class="card-image" />
+        <div></div>
+        <span class="likes-counter">
+          <ion-icon name="heart"></ion-icon>
+          {{ workout.totalLikes }} Seguidores
+        </span>
+        <span class="category">Fitness</span>
+      </div>
+      <ion-card-content style="padding: 3px 0px 16px 8px" class="card-subtitle">
+        <div style="width: 70%">
+          <ion-card-title class="card-title">{{ workout.title }}</ion-card-title>
+          <ion-card-subtitle>{{ level }}</ion-card-subtitle>
+          <ion-card-subtitle class="subtitle-email">
+            {{ workout.creatorNickName }}</ion-card-subtitle
+          >
+          <ion-card-subtitle class="subtitle-email">{{ workout.creatorEmail }}</ion-card-subtitle>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div class="modal-footer">
+    <ion-button shape="round" fill="outline" color="secondary" (click)="closeModal()">{{
+      'cancel' | translate
+    }}</ion-button>
+    <ion-button shape="round" color="tertiary" (click)="deleteFavorite()">{{
+      'yes-delete' | translate
+    }}</ion-button>
+  </div>
+</ion-content>

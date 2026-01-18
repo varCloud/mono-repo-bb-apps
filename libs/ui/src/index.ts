@@ -45,6 +45,7 @@ export * from './lib/components/custom-video-player/custom-video-player.componen
 export * from './lib/components/view-pdf.component/view-pdf.component';
 export * from './lib/components/workout-comments.component/workout-comments.component';
 export * from './lib/components/workout-search-modal/workout-search-modal.component';
+export * from './lib/components/remove-favorite-modal.component/remove-favorite-modal.component';
 
 export * from './lib/components/payment-frequency-settings/payment-frequency-settings.component';
 export * from './lib/components/reset-password-form/reset-password-form/reset-password-form.component';

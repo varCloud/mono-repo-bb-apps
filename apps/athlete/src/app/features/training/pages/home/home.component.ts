@@ -23,6 +23,8 @@ import {
   ModalController,
   IonImg,
   IonChip,
+  IonRefresher,
+  IonRefresherContent,
 } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import {
@@ -51,6 +53,8 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   imports: [
+    IonRefresherContent,
+    IonRefresher,
     IonChip,
     IonInfiniteScrollContent,
     IonInfiniteScroll,
@@ -69,6 +73,7 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class HomeComponent implements OnInit {
   workouts = signal<WorkoutListModel[]>([]);
+  favorites = signal<number[]>([]);
   workoutMaxLikes = signal<WorkoutListModel | null>(null);
   paginator = signal<Paginator>({} as Paginator);
   idCreator = signal<number | null>(null);
@@ -109,8 +114,25 @@ export class HomeComponent implements OnInit {
 
   ionViewWillEnter() {
     this._loader.showLoader();
+    this._getFavorites();
     this.getWorkouts(undefined, true);
     this.getWorkoutMaxLikes();
+  }
+
+  handleRefresh(event: any) {
+    this.getWorkoutMaxLikes();
+    this._getFavorites();
+    this.getWorkouts(undefined, true).then(() => {
+      event.target.complete();
+    });
+  }
+
+  isFavorite(workoutId: number): boolean {
+    return this.favorites().includes(workoutId);
+  }
+
+  goToFavorites() {
+    this.router.navigate(['home/workouts/favorites']);
   }
 
   private async getWorkouts(url?: string, reset = false) {
@@ -221,9 +243,22 @@ export class HomeComponent implements OnInit {
     this.filter.levels = [];
     if (this.workoutLevelSelected() === level.levelId) {
       this.clearWorkoutLevelSelection();
+      return;
     }
     this.workoutLevelSelected.set(level.levelId);
     this.filter.levels.push(level);
     this.getWorkouts(undefined, true);
+  }
+
+  private async _getFavorites() {
+    let user = this._sesionService.user$();
+    if (!user) {
+      user = await this._sesionService.getUserFromLocalStorage();
+    }
+    if (user) {
+      this._workoutService.getOnlyidsFavoritesByUser(user.userId).subscribe((resp: any) => {
+        this.favorites.set(resp.data as number[]);
+      });
+    }
   }
 }

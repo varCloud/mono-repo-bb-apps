@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LayoutContentComponent , ItemListComponent , AvatarProfileComponent, UserAvatarComponent} from '@monorepo-bb-app/ui';
 import {
-  PROFILE_MENU_ITEMS,
-  OPTIONS_PROFILE_MENU
-} from '../../constants/profile-menu.constants';
+  LayoutContentComponent,
+  ItemListComponent,
+  AvatarProfileComponent,
+  UserAvatarComponent,
+} from '@monorepo-bb-app/ui';
+import { PROFILE_MENU_ITEMS, OPTIONS_PROFILE_MENU } from '../../constants/profile-menu.constants';
 import { addIcons } from 'ionicons';
 import {
   chatbox,
@@ -33,7 +35,7 @@ import { LoaderUIService, LocalStorageService, SesionService } from '@monorepo-b
     LayoutContentComponent,
     ItemListComponent,
     AvatarProfileComponent,
-    UserAvatarComponent
+    UserAvatarComponent,
   ],
 })
 export class ProfileComponent {
@@ -43,12 +45,11 @@ export class ProfileComponent {
     private router: Router,
     private loaderUIService: LoaderUIService,
     private localStorageService: LocalStorageService,
-    public sesionService: SesionService,
+    public sesionService: SesionService
   ) {
-
     effect(() => {
-       const user = this.sesionService.user$();
-       console.log(`efecto en profile page: ${user.firstName}`);
+      const user = this.sesionService.user$();
+      console.log(`efecto en profile page: ${user.firstName}`);
     });
     addIcons({
       trashSharp,
@@ -58,7 +59,6 @@ export class ProfileComponent {
       copyOutline,
     });
   }
-
 
   onMenuItemClick(action: string): void {
     switch (action) {
@@ -93,11 +93,11 @@ export class ProfileComponent {
         this.router.navigate(['home/profile/become-creator-detail']);
         break;
       case 'bookmarks':
-        this.router.navigate(['home/profile/bookmarks']);
-      break;
+        this.router.navigate(['home/workouts/favorites']);
+        break;
       case 'messages':
         this.router.navigate(['home/user-conversations']);
-      break;
+        break;
     }
   }
 

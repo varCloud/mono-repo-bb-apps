@@ -2,10 +2,11 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environment/environment';
 import { API_URLS } from '../../constants/api-urls';
-import { firstValueFrom, map } from 'rxjs';
+import { firstValueFrom, map, tap } from 'rxjs';
 import { WorkoutListModel } from '../../models/workout-response-list';
 import { PaginatorModel } from 'libs/shared/models/paginator';
 import { RatingModel } from '../../models/rating.model';
+import { Favorite } from 'libs/shared/models/workout-favorites';
 
 @Injectable({
   providedIn: 'root',
@@ -96,5 +97,41 @@ export class WorkoutService {
 
   public deleteWorkout(workoutId: number) {
     return this._http.delete(`${this.BASE_URL}${API_URLS.WORKOUT}/${workoutId}`);
+  }
+
+  public saveFavorite(userId: number, workoutId: number) {
+    return this._http.post(
+      `${this.BASE_URL}${API_URLS.WORKOUT_FAVORITES}/${workoutId}/user/${userId}/save`,
+      {}
+    );
+  }
+
+  public removeFavorite(userId: number, workoutId: number) {
+    return this._http.delete(
+      `${this.BASE_URL}${API_URLS.WORKOUT_FAVORITES}/${workoutId}/user/${userId}`
+    );
+  }
+
+  public getOnlyidsFavoritesByUser(userId: number) {
+    return this._http.get(`${this.BASE_URL}${API_URLS.WORKOUT_FAVORITES}/user/ids/${userId}`);
+  }
+
+  public getFavoritesByUser(userId: number, params = {}) {
+    return this._http
+      .get(`${this.BASE_URL}${API_URLS.WORKOUT_FAVORITES}/user/${userId}`, {
+        params: new HttpParams({ fromObject: params }),
+      })
+      .pipe(
+        map((res: any) => {
+          const data = res.data.favorites.map((item: any) => ({
+            ...item,
+            workout: new WorkoutListModel(item.workout),
+          })) as Favorite[];
+          return {
+            paginator: new PaginatorModel(res.data),
+            data,
+          };
+        })
+      );
   }
 }

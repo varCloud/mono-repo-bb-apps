@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <div class="container-search-bar">
+      <ion-searchbar
+        [placeholder]="'search' | translate"
+        [mode]="'ios'"
+        [debounce]="500"
+        show-cancel-button="always"
+        [cancelButtonText]="'cancel' | translate"
+      ></ion-searchbar>
+    </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-grid class="workout-grid" style="margin-bottom: 80px">
+    <ion-row gap="5px">
+      @for (favorite of favorites(); track favorite.favoriteId) {
+        <ion-col size="6" size-md="3" size-lg="3">
+          <lib-card-list
+            [workout]="$any(favorite.workout)"
+            [useBookmark]="true"
+            [isFavorite]="true"
+            (clickCardEvent)="clickCard($event)"
+            (clickFavoriteEvent)="clickFavorite($event)"
+          ></lib-card-list>
+        </ion-col>
+      } @empty {
+        <ion-col>
+          <div class="no-data" style="text-align: center; margin-top: 20px">
+            <p>{{ 'workout.messages.no-favorites-workouts' | translate }}</p>
+          </div>
+        </ion-col>
+      }
+    </ion-row>
+  </ion-grid>
+
+  <!-- <ion-infinite-scroll
+    (ionInfinite)="onIonInfinite($event)"
+    [disabled]="isInfiniteScrollDisabled()"
+  >
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll> -->
+</ion-content>

@@ -19,14 +19,14 @@
     "no-results": "No results found"
   },
 
-  "my-subscriptions":{
-      "empty-subscriptions": "You currently have no subscriptions. Search for workouts and start your subscription with your favorite trainer.",
-      "title-subscriptions": "My Subscriptions"
+  "my-subscriptions": {
+    "empty-subscriptions": "You currently have no subscriptions. Search for workouts and start your subscription with your favorite trainer.",
+    "title-subscriptions": "My Subscriptions"
   },
 
-    "my-subscriptors":{
-      "empty-subscriptors": "You currently have no subscriptors",
-      "title-subscriptors": "My Subscriptors"
+  "my-subscriptors": {
+    "empty-subscriptors": "You currently have no subscriptors",
+    "title-subscriptors": "My Subscriptors"
   },
 
   "network": {
@@ -238,6 +238,15 @@
       "deleted-error": "Error deleting workout",
       "error": "Error saving routine",
       "upload-error": "Error uploading file {{fileName}}"
+    },
+    "messages": {
+      "no-workouts": "No workouts available.",
+      "no-favorites-workouts": "No favorite workouts available.",
+      "search-placeholder": "Search workouts...",
+      "favorite-added": "Workout added to favorites",
+      "favorite-removed": "Workout removed from favorites",
+      "favorite-not-removed": "Error removing workout from favorites",
+      "favorite-not-added": "Error adding workout to favorites"
     }
   },
   "your-client-payment": "Your client will pay",
@@ -426,5 +435,6 @@
     "show-all": "Show all",
     "no-workouts": "You currently have no workouts.",
     "create-first-workout": "Click the button to create your first workout."
-  }
+  },
+  "yes-delete": "Yes, delete"
 }

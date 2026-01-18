@@ -241,6 +241,15 @@
       "error": "Error al guardar la rutina",
       "upload-error": "Error al subir el archivo {{fileName}}",
       "image-cover": "Carga la portada de tu rutina"
+    },
+    "messages": {
+      "no-workouts": "No hay entrenamientos disponibles.",
+      "no-favorites-workouts": "No hay entrenamientos favoritos disponibles.",
+      "search-placeholder": "Buscar entrenamientos...",
+      "favorite-added": "Entrenamiento agregado a favoritos",
+      "favorite-removed": "Entrenamiento eliminado de favoritos",
+      "favorite-not-removed": "Error al eliminar el entrenamiento de favoritos",
+      "favorite-not-added": "Error al agregar el entrenamiento a favoritos"
     }
   },
   "your-client-payment": "Tu cliente pagará",
@@ -423,5 +432,7 @@
     "show-all": "Ver todos",
     "no-workouts": "Actualmente no tienes entrenamientos.",
     "create-first-workout": "Da clic en el botón para crear tu primer entrenamiento."
-  }
+  },
+  "yes-delete": "Sí, eliminar",
+  "delete-confirmation": "¿Deseas eliminarlo de tus guardados?"
 }
