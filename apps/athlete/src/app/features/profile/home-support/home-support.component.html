@@ -1,31 +1,30 @@
-<ion-content content-body>
-  <!-- toolbar-->
-  <app-tool-bar
-    leftIcon="arrow-back-outline"
-    title="Regresar"
-    emailIcon="mail"
-    emailLink="{{mailLinkSignal()}}"
-    phoneIcon="call"
-    phoneLink="{{phoneLinkSignal()}}">
-  </app-tool-bar>
-
+<ion-header class="header-support">
+  <ion-toolbar class="toolbar">
+    <app-tool-bar
+      leftIcon="arrow-back-outline"
+      title="Regresar"
+      emailIcon="mail"
+      emailLink="{{ mailLinkSignal() }}"
+      phoneIcon="call"
+      phoneLink="{{ phoneLinkSignal() }}"
+    >
+    </app-tool-bar>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="ion-padding-top">
   <!-- simple search input-->
   <app-simple-search-input
     (click)="openSearchModal()"
     headerTitle="¿Como podemos ayudarte?"
-    placeholder="{{'common.search' | translate}}"
-    [debounce]="700">
+    placeholder="{{ 'common.search' | translate }}"
+    [debounce]="700"
+  >
   </app-simple-search-input>
 
   <!-- card slider-->
-  <app-card-slider
-    [cards]="cardCategories"
-    (cardSelected)="onSliderCardClicked($event)">
+  <app-card-slider [cards]="cardCategories" (cardSelected)="onSliderCardClicked($event)">
   </app-card-slider>
 
   <!-- faq accordion-->
-  <app-faq-accordion
-    [items]="myFaqList()"
-    tittleaccordion="Top questions"
-  ></app-faq-accordion>
+  <app-faq-accordion [items]="myFaqList()" tittleaccordion="Top questions"></app-faq-accordion>
 </ion-content>

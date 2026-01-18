@@ -9,18 +9,13 @@
     --background: #ffffff;
     --border-width: 0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    padding-top: env(safe-area-inset-top);
   }
 
   ion-toolbar {
     ion-buttons {
       width: 10%;
     }
-
-    ion-title {
-      width: 90%;
-    }
+    padding-bottom: 10px;
   }
 
   .back-button-toolbar {
