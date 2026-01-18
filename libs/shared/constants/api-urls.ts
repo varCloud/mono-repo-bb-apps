@@ -9,8 +9,9 @@ export const API_URLS = {
   USER_CONVERSATION: '/user-conversation',
   WORKOUT: '/workout',
   WORKOUT_RATINGS: '/workout-ratings',
+  WORKOUT_FAVORITES: '/workout-favorites',
   USER_GOALS: '/user-goals',
   SUSCRIPTIONS: '/subscriptions',
   FAQS: '/faqs',
-  PAYMENTS:'/payments'
+  PAYMENTS: '/payments',
 };

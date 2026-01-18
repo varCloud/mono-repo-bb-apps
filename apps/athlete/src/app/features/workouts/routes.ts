@@ -14,9 +14,7 @@ export const workoutRoutes: Routes = [
           workout: WorkoutDataResolver,
         },
         loadComponent: () =>
-          import('./pages/detail-workout/detail-workout').then(
-            (m) => m.DetailWorkout
-          ),
+          import('./pages/detail-workout/detail-workout').then((m) => m.DetailWorkout),
       },
       {
         path: 'workoutAsset/:workoutId/:creatorId/:userId/:workoutAssetIdP',
@@ -28,6 +26,11 @@ export const workoutRoutes: Routes = [
           import('./pages/detail-workout-asset/detail-workout-asset').then(
             (m) => m.DetailWorkoutAsset
           ),
+      },
+      {
+        path: 'favorites',
+        loadComponent: () =>
+          import('./pages/favorites/favorites.component').then((m) => m.FavoritesComponent),
       },
       {
         path: '**',
