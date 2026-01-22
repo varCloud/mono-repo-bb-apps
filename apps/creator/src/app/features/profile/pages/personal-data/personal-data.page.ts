@@ -39,12 +39,7 @@ import {
   IonGrid,
   IonButton,
 } from '@ionic/angular/standalone';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { finalize } from 'rxjs';
 @Component({
   selector: 'app-personal-data',
@@ -111,8 +106,7 @@ export class PersonalDataPage implements OnInit {
         countryCodePrefix: CONSTANTS.DEFAULT_COUNTRY_PREFIX,
         phoneNumber: this.user?.phone || '',
         profileColor: this.user?.profileColor || CONSTANTS.USER_DEFAULT_COLOR,
-        profilePictureUrl:
-          this.user?.profilePictureUrl || CONSTANTS.DEFAULT_URL_AVATAR,
+        profilePictureUrl: this.user?.profilePictureUrl || CONSTANTS.DEFAULT_URL_AVATAR,
       });
     }
   }
@@ -129,10 +123,7 @@ export class PersonalDataPage implements OnInit {
       birthdate: [new Date().toISOString(), Validators.required],
       gender: ['', Validators.required],
       countryCodePrefix: [CONSTANTS.DEFAULT_COUNTRY_PREFIX, Validators.required],
-      phoneNumber: [
-        '',
-        [Validators.required, Validators.pattern('^[0-9]*$')],
-      ],
+      phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       profileColor: [CONSTANTS.USER_DEFAULT_COLOR],
       profilePictureUrl: [''],
     });
@@ -168,7 +159,6 @@ export class PersonalDataPage implements OnInit {
   }
 
   async saveAllChanges() {
-
     const userId = this._sesionService.user$()?.userId || 0;
     this._loaderService.showLoader();
 
@@ -187,8 +177,7 @@ export class PersonalDataPage implements OnInit {
           firstName: this.currentUserData.get('firstName')?.value || '',
           lastName: this.currentUserData.get('lastName')?.value || '',
           profileColor:
-            this.currentUserData.get('profileColor')?.value ||
-            CONSTANTS.USER_DEFAULT_COLOR,
+            this.currentUserData.get('profileColor')?.value || CONSTANTS.USER_DEFAULT_COLOR,
           nickName: this.currentUserData.get('nickname')?.value || '',
           birthdate: this.currentUserData.get('birthdate')?.value || '',
           phone: this.currentUserData.get('phoneNumber')?.value ?? '',
@@ -210,22 +199,14 @@ export class PersonalDataPage implements OnInit {
           .pipe(finalize(() => this._loaderService.hideLoader()))
           .subscribe({
             next: () => {
-              this._toast.success(
-                this._translateService.instant(
-                  'update-user-data.success'
-                ),
-                { duration: 500 }
-              );
-              this._localStorageService.set(
-                KEY_LOCALSTORAGE.HAS_NULL_PROFILE_FIELDS,
-                false
-              );
+              this._toast.success(this._translateService.instant('update-user-data.success'), {
+                duration: 500,
+              });
+              this._localStorageService.set(KEY_LOCALSTORAGE.HAS_NULL_PROFILE_FIELDS, false);
             },
             error: (err) => {
               this._toast.error(
-                this._translateService.instant(
-                  'create-account-profile.save-error'
-                ),
+                this._translateService.instant('create-account-profile.save-error'),
                 {
                   duration: 1000,
                 }
