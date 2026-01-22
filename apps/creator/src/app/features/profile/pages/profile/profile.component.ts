@@ -112,8 +112,13 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['home/profile/portada']);
   }
 
-  private navigateToBankInfo(): void {
-    // Implementar navegación a información bancaria
+  private navigateToBankInfo(): void {   
+    this.loaderUIService.showLoader();
+    setTimeout(() => {
+      this.loaderUIService.hideLoader();
+    }, 300);
+    this._stripeService.openStripeOnboarding(this.sesionService.user$().userId);
+  
   }
 
   private showTerms(): void {

@@ -66,7 +66,7 @@ export class PersonalDataPageComponent implements OnInit {
   activityLevelOptions = signal<SelectOption[]>([]);
   imageProfile: Photo | null = null;
   isoCode = signal<string>('+52');
-  levelId = signal<string>('');
+  loadingData = signal<boolean>(false);
   constructor(
     private fb: FormBuilder,
     private _translateService: TranslateService,
@@ -84,21 +84,18 @@ export class PersonalDataPageComponent implements OnInit {
     });
   }
 
-  async initStorageLevel() {
-    await this._storage.create();
-    const value = await this._storage.get('user');
-    return value.levelId;
-  }
+
 
   ngOnInit() {
-    this.levelId.set(String(this.initStorageLevel()));
+    this.loadingData.set(true);
     this.initializeForms();
     this.loadUserData();
     this.getActivityLevel();
   }
 
   onActivityLevelChange(selectedLevel: any): void {
-    this.levelForm.patchValue({ activityLevel: selectedLevel });
+    console.log('Selected activity level:', selectedLevel);
+    this.levelForm.patchValue({ levelId: selectedLevel });
   }
 
   private getActivityLevel() {
@@ -126,7 +123,6 @@ export class PersonalDataPageComponent implements OnInit {
 
   private loadUserData() {
     const currentUser = this.sesionService.user$();
-
     if (currentUser) {
       this.basicForm.patchValue({
         profilePictureUrl: currentUser.profilePictureUrl || '',
@@ -145,9 +141,10 @@ export class PersonalDataPageComponent implements OnInit {
       });
 
       this.levelForm.patchValue({
-        activityLevel: String(currentUser.levelId) || '',
+        levelId: currentUser.levelId || '',
       });
     }
+     this.loadingData.set(false);
   }
 
   private initializeForms() {
@@ -169,22 +166,8 @@ export class PersonalDataPageComponent implements OnInit {
     });
 
     this.levelForm = this.fb.group({
-      activityLevel: ['', Validators.required],
+      levelId: ['', Validators.required],
     });
-  }
-
-  async onBasicFormSubmit(formValue: any) {
-    if (this.basicForm.valid) {
-    }
-  }
-
-  async onPhysicalFormSubmit(formValue: any) {
-    if (this.physicalForm.valid) {
-    }
-  }
-  async onLevelFormSubmit(formValue: any) {
-    if (this.levelForm.valid) {
-    }
   }
 
   async onImageSelected(event: any) {
@@ -207,7 +190,7 @@ export class PersonalDataPageComponent implements OnInit {
         const combinedData = {
           ...this.basicForm.value,
           ...this.physicalForm.value,
-
+          ...this.levelForm.value,
           height: this.physicalForm.value.height.toString(),
           weight: this.physicalForm.value.weight.toString(),
         };
@@ -220,10 +203,6 @@ export class PersonalDataPageComponent implements OnInit {
           };
 
           this.sesionService.setUser(updatedUser);
-          const lvl = {
-            activityLevel: this.levelForm.value,
-          };
-          this._onboardingStateService.setSelectLevelData(lvl);
 
           this._userService
             .updateUser(currentUser.userId, combinedData)

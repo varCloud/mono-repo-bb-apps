@@ -17,7 +17,9 @@ import {
   trashSharp,
 } from 'ionicons/icons';
 import { Router } from '@angular/router';
-import { LoaderUIService, LocalStorageService, SesionService } from '@monorepo-bb-app/core';
+import { LoaderUIService, LocalStorageService, SesionService, UserService } from '@monorepo-bb-app/core';
+import { StripeService } from '@monorepo-bb-app/shared';
+
 
 @Component({
   selector: 'app-profile',
@@ -43,7 +45,9 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private loaderUIService: LoaderUIService,
     private localStorageService: LocalStorageService,
+    private stripeService: StripeService,
     public sesionService: SesionService,
+    
   ) {
 
     effect(() => {
@@ -71,9 +75,6 @@ export class ProfileComponent implements OnInit {
         break;
       case 'themeColor':
         this.changeThemeColor();
-        break;
-      case 'bankInfo':
-        this.navigateToBankInfo();
         break;
       case 'terms':
         this.showTerms();
@@ -103,10 +104,6 @@ export class ProfileComponent implements OnInit {
 
   private changeThemeColor(): void {
     // Implementar cambio de color
-  }
-
-  private navigateToBankInfo(): void {
-    // Implementar navegación a información bancaria
   }
 
   private showTerms(): void {
