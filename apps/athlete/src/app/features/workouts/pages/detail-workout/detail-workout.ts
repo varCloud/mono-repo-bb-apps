@@ -22,7 +22,7 @@ import {
   IonLabel,
   IonItem,
 } from '@ionic/angular/standalone';
-import { LocalStorageService } from '@monorepo-bb-app/core';
+import { ActionsWorkoutService, LocalStorageService } from '@monorepo-bb-app/core';
 import {
   Asset,
   KEY_LOCALSTORAGE,
@@ -64,7 +64,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailWorkout implements OnInit {
-  isFavorite = signal<boolean>(false);
+  isLiked = signal<boolean>(false);
   TYPE_ASSETS = TrainingTypeEnum;
   isIos = Capacitor.getPlatform() === 'ios';
   workout = this.activatedRoute.snapshot.data['workout'] as Workout;
@@ -75,7 +75,8 @@ export class DetailWorkout implements OnInit {
     private activatedRoute: ActivatedRoute,
     private _router: Router,
     private _localstorage: LocalStorageService,
-    private _workoutInformationSelect: WorkoutInformationSelect
+    private _workoutInformationSelect: WorkoutInformationSelect,
+    private _actionsWorkoutService: ActionsWorkoutService
   ) {
     addIcons({
       heart,
@@ -89,8 +90,26 @@ export class DetailWorkout implements OnInit {
   }
   ngOnInit(): void {}
 
-  toggleFavorite($event: Event) {
-    this.isFavorite.set(!this.isFavorite());
+  ionViewWillEnter() {
+    this.checkLike();
+  }
+
+  async checkLike() {
+    const liked = await this._actionsWorkoutService.checkLike(this.workout.workoutId);
+    this.isLiked.set(liked);
+  }
+
+  async toggleLike() {
+    try {
+      const newLikeStatus = !this.isLiked();
+      await this._actionsWorkoutService.changeStatusLikeWorkout(
+        newLikeStatus,
+        this.workout.workoutId
+      );
+      this.isLiked.set(newLikeStatus);
+    } catch (error) {
+      console.error('Error toggling like status:', error);
+    }
   }
 
   async viewDetailRutine(workoutAsset: Asset) {

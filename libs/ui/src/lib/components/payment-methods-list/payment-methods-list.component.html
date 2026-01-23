@@ -17,68 +17,57 @@
         (ngModelChange)="selectedPaymentMethod.set($event)"
       >
         @for (method of paymentMethods(); track method.id) {
-        <ion-item
-          lines="none"
-          (click)="selectPaymentMethod(method)"
-          [ngClass]="{
-            selected: method.id === selectedPaymentMethod()
-          }"
-          class="payment-method-item"
-        >
-          <ion-icon name="card-outline" slot="start" size="large"></ion-icon>
+          <ion-item
+            lines="none"
+            (click)="selectPaymentMethod(method)"
+            [ngClass]="{
+              selected: method.id === selectedPaymentMethod(),
+            }"
+            class="payment-method-item"
+          >
+            <ion-icon name="card-outline" slot="start" size="large"></ion-icon>
 
-          <ion-label>
-            <h2>
-              <strong>{{ method.brand | titlecase }}</strong>
-              @if (method.is_default) {
-              <ion-badge color="success" class="default-badge">
-                {{ 'default' | translate }}
-              </ion-badge>
+            <ion-label>
+              <h2>
+                <strong>{{ method.brand | titlecase }}</strong>
+                @if (method.is_default) {
+                  <ion-badge color="success" class="default-badge">
+                    {{ 'default' | translate }}
+                  </ion-badge>
+                }
+              </h2>
+              <h3>•••• •••• •••• {{ method.last4 }}</h3>
+              <p>{{ 'expires' | translate }} {{ method.exp_month }}/{{ method.exp_year }}</p>
+              @if (method.isDefault) {
+                <p class="">
+                  <span class="default-badge">{{ 'principal' }}</span>
+                </p>
               }
-            </h2>
-            <h3>•••• •••• •••• {{ method.last4 }}</h3>
-            <p>
-              {{ 'expires' | translate }} {{ method.exp_month }}/{{
-                method.exp_year
-              }}
-            </p>
-            @if( method.isDefault ) {
-            <p class="">
-              <span class=" default-badge">{{ 'principal' }}</span>
-            </p>
-            }
-          </ion-label>
+            </ion-label>
 
-          @if (showMenuOptions()) {
-          <ion-icon
-            name="ellipsis-vertical"
-            slot="end"
-            class="menu-icon"
-            (click)="openOptionsModal(method, $event)"
-          ></ion-icon>
-          } @else {
-          <ion-radio
-            slot="end"
-            class="bb-radio"
-            [value]="method.id"
-          ></ion-radio>
-          }
-        </ion-item>
-        } @if (paymentMethods().length === 0) {
-        <ion-item lines="none" class="empty-state-item">
-          <ion-icon
-            name="card-outline"
-            slot="start"
-            size="large"
-            color="medium"
-          ></ion-icon>
-          <ion-label>
-            <h2>{{ 'no-payment-methods' | translate }}</h2>
-            <p>{{ 'add-first-payment-method' | translate }}</p>
-          </ion-label>
-        </ion-item>
+            @if (showMenuOptions()) {
+              <ion-icon
+                name="ellipsis-vertical"
+                slot="end"
+                class="menu-icon"
+                (click)="openOptionsModal(method, $event)"
+              ></ion-icon>
+            } @else {
+              <ion-radio slot="end" class="bb-radio" [value]="method.id"></ion-radio>
+            }
+          </ion-item>
+        }
+        @if (paymentMethods().length === 0) {
+          <ion-item lines="none" class="empty-state-item">
+            <ion-icon name="card-outline" slot="start" size="large" color="medium"></ion-icon>
+            <ion-label>
+              <h2>{{ 'no-payment-methods' | translate }}</h2>
+              <p>{{ 'add-first-payment-method' | translate }}</p>
+            </ion-label>
+          </ion-item>
         }
       </ion-radio-group>
     </ion-col>
   </ion-row>
 </ion-grid>
+<ion-content> </ion-content>

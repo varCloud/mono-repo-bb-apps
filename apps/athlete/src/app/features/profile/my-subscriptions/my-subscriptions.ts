@@ -9,25 +9,35 @@ import {
   IonIcon,
   IonButtons,
   IonRefresherContent,
-  IonRefresher
+  IonRefresher,
 } from '@ionic/angular/standalone';
 // Importamos nuestro nuevo componente
 import { HeaderSearchComponent, UserCardComponent } from '@monorepo-bb-app/ui';
 import { ModalController } from '@ionic/angular/standalone';
 import { OptionsSubscritporModalComponent } from '@monorepo-bb-app/ui';
 
-import { CONSTANTS, PaginatorModel, Subscription, SuscriptionService, ToastService } from '@monorepo-bb-app/shared';
-import { LoaderUIService, SesionService, UserConversationService, UserSuscriptionsIdService } from '@monorepo-bb-app/core';
+import {
+  CONSTANTS,
+  PaginatorModel,
+  Subscription,
+  SuscriptionService,
+  ToastService,
+} from '@monorepo-bb-app/shared';
+import {
+  LoaderUIService,
+  SesionService,
+  UserConversationService,
+  UserSuscriptionsIdService,
+} from '@monorepo-bb-app/core';
 import { JsonPipe } from '@angular/common';
-import { CommonModule  } from '@angular/common';
-import { TranslateModule} from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import { EmptyElementsComponent } from '@monorepo-bb-app/ui';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { MySubscriptionsSearchModalComponent } from '@monorepo-bb-app/ui';
 import { Router } from '@angular/router';
 import { finalize, take } from 'rxjs';
 import { ENUM_TYPE_USER, SUBSCRIPTION_STATUS } from 'libs/shared/constants/enums';
-
 
 @Component({
   selector: 'app-home',
@@ -46,10 +56,12 @@ import { ENUM_TYPE_USER, SUBSCRIPTION_STATUS } from 'libs/shared/constants/enums
     ReactiveFormsModule,
     MySubscriptionsSearchModalComponent,
     IonRefresher,
-    TranslateModule
+    TranslateModule,
+    IonHeader,
+    IonToolbar,
   ],
 })
-export class MySubscriptionsPage  {
+export class MySubscriptionsPage {
   subscriptions = signal<Subscription[]>([]);
 
   public imgUrl = signal<string>('assets/images/empty/emptyelements.png');
@@ -67,17 +79,19 @@ export class MySubscriptionsPage  {
     private router: Router,
     private sesionService: SesionService,
     private _suscriptionService: SuscriptionService,
-    private _toastService: ToastService,
-
+    private _toastService: ToastService
   ) {
     effect(() => {
-      this.sesionService.user$().userId
-    })
+      this.sesionService.user$().userId;
+    });
   }
 
-  ionViewWillEnter() {  
+  ionViewWillEnter() {
     this.subscriptions.set([]);
-    this.getSubscriptionsForUser(`/user/${this.sesionService.user$()?.userId}/suscriptions/${ENUM_TYPE_USER.ATHLETE}`, { page: 1, limit: 25 , subscriptionStatusId: SUBSCRIPTION_STATUS.ACTIVE });
+    this.getSubscriptionsForUser(
+      `/user/${this.sesionService.user$()?.userId}/suscriptions/${ENUM_TYPE_USER.ATHLETE}`,
+      { page: 1, limit: 25, subscriptionStatusId: SUBSCRIPTION_STATUS.ACTIVE }
+    );
   }
 
   getSubscriptionsForUser(uri: string = '', params: any = {}): void {
@@ -90,7 +104,7 @@ export class MySubscriptionsPage  {
       .subscribe((data) => {
         this.subscriptions.set([...this.subscriptions(), ...data.subscription]);
         this.paginator = data.paginator;
-      })
+      });
   }
 
   loadMoreSubscriptions(event: any) {
@@ -114,14 +128,13 @@ export class MySubscriptionsPage  {
     await modalSearch.present();
   }
 
-
   async onShowOptions(subscription: Subscription, event: Event) {
     console.log('Subscription selected:', this.sesionService.user$()?.userTypeId);
     const modal = await this.modalCtrl.create({
       component: OptionsSubscritporModalComponent,
       componentProps: {
         subscription: this.subscriptions,
-        userTypeId: this.sesionService.user$()?.userTypeId
+        userTypeId: this.sesionService.user$()?.userTypeId,
       },
       breakpoints: [0.4, 1],
       initialBreakpoint: 0.4,
@@ -135,46 +148,50 @@ export class MySubscriptionsPage  {
     } else if (data?.createConversation) {
       this.createConversation(subscription);
     }
-
   }
-
 
   createConversation(subscription: Subscription) {
     const payload = {
       creatorUserId: subscription.user.id,
       athleteUserId: this.sesionService.user$()?.userId,
-      sendMessageUserId: this.sesionService.user$()?.userId
+      sendMessageUserId: this.sesionService.user$()?.userId,
     };
     this._loaderUIService.showLoader();
-    this._userConversationService.createConversation(payload).pipe(
-      take(1),
-      finalize(() => this._loaderUIService.hideLoader())).
-      subscribe({
+    this._userConversationService
+      .createConversation(payload)
+      .pipe(
+        take(1),
+        finalize(() => this._loaderUIService.hideLoader())
+      )
+      .subscribe({
         next: (conversation) => {
           console.log('Conversación seleccionada:', conversation);
-          this.router.navigate([`home/${conversation.data.userConversationId}/user-chat`], { state: { conversation: conversation.data }, });
+          this.router.navigate([`home/${conversation.data.userConversationId}/user-chat`], {
+            state: { conversation: conversation.data },
+          });
         },
         error: (error) => {
           console.error('Error al crear la conversación:', error);
-        }
+        },
       });
   }
 
-    cancelSubscription(subscriptionId: number) {
+  cancelSubscription(subscriptionId: number) {
     this._loaderUIService.showLoader();
-    this._suscriptionService.cancelSuscription(subscriptionId).pipe(
-      take(1),
-      finalize(() => this._loaderUIService.hideLoader())).
-      subscribe({
+    this._suscriptionService
+      .cancelSuscription(subscriptionId)
+      .pipe(
+        take(1),
+        finalize(() => this._loaderUIService.hideLoader())
+      )
+      .subscribe({
         next: () => {
           this.ionViewWillEnter();
           this._toastService.success('La suscripción ha sido cancelada exitosamente.');
         },
         error: (error) => {
           console.error('Error al cancelar la suscripción:', error);
-        }
+        },
       });
   }
-
-
 }

@@ -44,7 +44,12 @@ import {
   WorkoutListModel,
   WorkoutService,
 } from '@monorepo-bb-app/shared';
-import { LoaderUIService, LocalStorageService, SesionService } from '@monorepo-bb-app/core';
+import {
+  ActionsWorkoutService,
+  LoaderUIService,
+  LocalStorageService,
+  SesionService,
+} from '@monorepo-bb-app/core';
 import { MODAL_RESPONSE } from 'libs/shared/constants/enums';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -94,7 +99,8 @@ export class HomeComponent implements OnInit {
     private modalCtrl: ModalController,
     private _localStorage: LocalStorageService,
     private _sesionService: SesionService,
-    private _catalogService: CatalogsService
+    private _catalogService: CatalogsService,
+    private _actionsWorkoutService: ActionsWorkoutService
   ) {
     addIcons({
       barbell,
@@ -256,7 +262,7 @@ export class HomeComponent implements OnInit {
       user = await this._sesionService.getUserFromLocalStorage();
     }
     if (user) {
-      this._workoutService.getOnlyidsFavoritesByUser(user.userId).subscribe((resp: any) => {
+      this._actionsWorkoutService.getOnlyidsFavoritesByUser(user.userId).subscribe((resp: any) => {
         this.favorites.set(resp.data as number[]);
       });
     }

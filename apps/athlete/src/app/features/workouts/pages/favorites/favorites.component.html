@@ -7,6 +7,7 @@
         [debounce]="500"
         show-cancel-button="always"
         [cancelButtonText]="'cancel' | translate"
+        (ionInput)="onSearch($event)"
       ></ion-searchbar>
     </div>
   </ion-toolbar>
@@ -34,10 +35,10 @@
     </ion-row>
   </ion-grid>
 
-  <!-- <ion-infinite-scroll
+  <ion-infinite-scroll
     (ionInfinite)="onIonInfinite($event)"
     [disabled]="isInfiniteScrollDisabled()"
   >
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll> -->
+  </ion-infinite-scroll>
 </ion-content>

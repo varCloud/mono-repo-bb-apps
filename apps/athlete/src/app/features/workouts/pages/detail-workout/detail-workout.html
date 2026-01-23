@@ -8,9 +8,9 @@
       uppercase="false"
       text=""
     ></ion-back-button>
-    <ion-button fill="clear" size="small" class="lovely-btn" (click)="toggleFavorite($event)">
+    <ion-button fill="clear" size="small" class="lovely-btn" (click)="toggleLike()">
       <ion-icon
-        [name]="isFavorite() ? 'heart' : 'heart-outline'"
+        [name]="isLiked() ? 'heart' : 'heart-outline'"
         color="secondary"
         class="bookmark-icon"
       ></ion-icon>

@@ -112,13 +112,10 @@ export class WorkoutService {
     );
   }
 
-  public getOnlyidsFavoritesByUser(userId: number) {
-    return this._http.get(`${this.BASE_URL}${API_URLS.WORKOUT_FAVORITES}/user/ids/${userId}`);
-  }
-
-  public getFavoritesByUser(userId: number, params = {}) {
+  public getFavoritesByUser(url: any = undefined, userId: number, params = {}) {
+    const _url = url ? url : `${API_URLS.WORKOUT_FAVORITES}/user/${userId}`;
     return this._http
-      .get(`${this.BASE_URL}${API_URLS.WORKOUT_FAVORITES}/user/${userId}`, {
+      .get(`${this.BASE_URL}${_url}`, {
         params: new HttpParams({ fromObject: params }),
       })
       .pipe(
@@ -131,6 +128,16 @@ export class WorkoutService {
             paginator: new PaginatorModel(res.data),
             data,
           };
+        })
+      );
+  }
+
+  public getRatingByWorkoutAssetandUser(workoutAssetId: number, userId: number) {
+    return this._http
+      .get(`${this.BASE_URL}${API_URLS.WORKOUT_RATINGS}/${workoutAssetId}/${userId}/rating-by-user`)
+      .pipe(
+        map((res: any) => {
+          return res ? new RatingModel(res.data) : null;
         })
       );
   }

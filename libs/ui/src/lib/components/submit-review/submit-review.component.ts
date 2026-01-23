@@ -10,7 +10,7 @@ import { ModalController } from '@ionic/angular/standalone';
 import { MODAL_RESPONSE } from 'libs/shared/constants/enums';
 import { LoaderUIService, UserService } from '@monorepo-bb-app/core';
 import { finalize } from 'rxjs';
-import { RatingModel, ToastService, User, WorkoutService } from '@monorepo-bb-app/shared';
+import { Rating, RatingModel, ToastService, User, WorkoutService } from '@monorepo-bb-app/shared';
 
 @Component({
   selector: 'lib-submit-review',
@@ -23,6 +23,7 @@ export class SubmitReviewComponent implements OnInit {
   reviewForm: FormGroup;
   @Input() userId = null;
   @Input() workoutAssetId = null;
+  @Input() rating: Rating | null = null;
 
   creator = signal<User | null>(null);
   fullName = computed(() => {
@@ -46,13 +47,13 @@ export class SubmitReviewComponent implements OnInit {
     private _workoutService: WorkoutService
   ) {
     addIcons({ star, starOutline });
-    this.reviewForm = this.fb.group({
-      rating: [0, [Validators.required, Validators.min(1)]],
-      comment: ['', [Validators.required]],
-    });
   }
 
   ngOnInit(): void {
+    this.reviewForm = this.fb.group({
+      rating: [this.rating ? this.rating.rating : 0, [Validators.required, Validators.min(1)]],
+      comment: [this.rating ? this.rating.comment : '', [Validators.required]],
+    });
     if (this.userId) {
       this.getCreatorProfile();
     }
@@ -66,13 +67,14 @@ export class SubmitReviewComponent implements OnInit {
     if (this.reviewForm.valid) {
       this.submitReview.emit(this.reviewForm.value);
     }
-
+    this._loader.showLoader();
     this._workoutService
       .workoutRate(
         this.workoutAssetId!,
         +this.reviewForm.value.rating,
         this.reviewForm.value.comment
       )
+      .pipe(finalize(() => this._loader.hideLoader()))
       .subscribe({
         next: (resp) => {
           this._toastService.success('¡Gracias por tu evaluación!', {

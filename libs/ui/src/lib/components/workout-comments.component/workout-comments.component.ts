@@ -44,10 +44,14 @@ export class WorkoutCommentsComponent implements OnInit {
       const comment = this.newComment();
       if (comment) {
         this.comments.update((current) => {
-          const exists = current.some((c) => c.ratingId === comment.ratingId);
-          return exists ? current : [comment, ...current];
+          const aux = [...current];
+          const exists = current.findIndex((c: any) => c.ratingId === comment.ratingId);
+          if (exists > -1) {
+            aux[exists] = comment;
+          }
+
+          return exists > -1 ? aux : [comment, ...current];
         });
-        console.log(this.comments());
       }
     });
   }

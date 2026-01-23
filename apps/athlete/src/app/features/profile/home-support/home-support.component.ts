@@ -1,7 +1,13 @@
 import { Component, input, signal, WritableSignal, inject } from '@angular/core';
 import { FaqCategories, InfoCardData, AppConfig2Model } from '@monorepo-bb-app/shared';
 import { CardSliderComponent, FaqSearchModalComponent } from '@monorepo-bb-app/ui';
-import { IonContent, ModalController } from '@ionic/angular/standalone';
+import {
+  IonContent,
+  ModalController,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+} from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
   informationCircle,
@@ -24,7 +30,7 @@ import {
   ToolBarComponent,
 } from '@monorepo-bb-app/ui';
 import { Faq, RequestFaqs } from '@monorepo-bb-app/shared';
-import { FaqService, FaqCategoriesService,AppConfig2Service } from '@monorepo-bb-app/core';
+import { FaqService, FaqCategoriesService, AppConfig2Service } from '@monorepo-bb-app/core';
 import { take } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -35,6 +41,8 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrls: ['home-support.component.scss'],
   standalone: true,
   imports: [
+    IonTitle,
+    IonToolbar,
     ToolBarComponent,
     FormsModule,
     CommonModule,
@@ -44,7 +52,7 @@ import { TranslateModule } from '@ngx-translate/core';
     AccordionComponent,
     TranslateModule,
     FaqSearchModalComponent,
-
+    IonHeader,
   ],
 })
 export class HomeSupport {
@@ -86,8 +94,7 @@ export class HomeSupport {
     this.getAppConfig();
   }
 
-
-    public getAppConfig() {
+  public getAppConfig() {
     this.appConfig2Service
       .getAppConfig()
       .pipe(take(1))
@@ -119,15 +126,13 @@ export class HomeSupport {
       .subscribe((response: Faq[]) => {
         this.myFaqList.set(response);
       });
-
   }
 
   async openSearchModal() {
     const modal = await this.modalCtrl.create({
       component: FaqSearchModalComponent,
       componentProps: {
-        allFaqs: this.myFaqList
-
+        allFaqs: this.myFaqList,
       },
       breakpoints: [0, 0.25, 0.5, 0.75, 1],
       cssClass: 'search-modal',
@@ -144,5 +149,4 @@ export class HomeSupport {
   onSliderCardClicked(cardId: string) {
     this.getFacts(Number(cardId));
   }
-
 }

@@ -1,6 +1,15 @@
 import { Component, signal, ViewChild, type OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Asset, Rating, TrainingTypeEnum, Workout } from '@monorepo-bb-app/shared';
+import {
+  Asset,
+  KEY_LOCALSTORAGE,
+  Rating,
+  RatingModel,
+  TrainingTypeEnum,
+  Workout,
+  WorkoutListModel,
+  WorkoutService,
+} from '@monorepo-bb-app/shared';
 import { addIcons } from 'ionicons';
 import {
   IonGrid,
@@ -36,6 +45,7 @@ import {
 import { TranslateModule } from '@ngx-translate/core';
 import { MODAL_RESPONSE } from 'libs/shared/constants/enums';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { ActionsWorkoutService, LocalStorageService, SesionService } from '@monorepo-bb-app/core';
 @Component({
   selector: 'app-detail-workout-asset',
   imports: [
@@ -71,7 +81,9 @@ export class DetailWorkoutAsset implements OnInit {
   isRoutine = signal<boolean>(false);
   isDocument = signal<boolean>(false);
   isPlaying = signal<boolean>(false);
-
+  isFavorite = signal<boolean>(false);
+  isLiked = signal<boolean>(false);
+  rating = signal<RatingModel | null>(null);
   workout = this._activatedRoute.snapshot.data['workout'] as Workout;
   workoutAssetId = this._activatedRoute.snapshot.paramMap.get('workoutAssetIdP');
 
@@ -81,10 +93,13 @@ export class DetailWorkoutAsset implements OnInit {
 
   workoutAsset = signal<Asset | null>(null);
   latestComment = signal<Rating | null>(null);
-
   constructor(
     private _activatedRoute: ActivatedRoute,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private _localStorage: LocalStorageService,
+    private _workoutService: WorkoutService,
+    private _sesionService: SesionService,
+    private _actionsWorkoutService: ActionsWorkoutService
   ) {
     addIcons({
       heart,
@@ -126,6 +141,51 @@ export class DetailWorkoutAsset implements OnInit {
     }
   }
 
+  ionViewWillEnter() {
+    this.checkFavorite();
+    this.checkLike();
+    this.checkrating();
+  }
+
+  async checkFavorite() {
+    const favorites = await this._localStorage.get(KEY_LOCALSTORAGE.FAVORITES);
+    const isFavorite = favorites?.includes(this.workout.workoutId);
+    if (isFavorite) {
+      this.isFavorite.set(true);
+      return;
+    }
+
+    const user = this._sesionService.user$();
+    if (!user) return;
+    this._actionsWorkoutService.getOnlyidsFavoritesByUser(user.userId).subscribe({
+      next: (res) => {
+        const updatedFavorites = res.data;
+        this.isFavorite.set(updatedFavorites?.includes(this.workout.workoutId));
+      },
+      error: () => {
+        this.isFavorite.set(false);
+      },
+    });
+  }
+
+  async checkLike() {
+    const liked = await this._actionsWorkoutService.checkLike(this.workout.workoutId);
+    this.isLiked.set(liked);
+  }
+
+  checkrating() {
+    this._workoutService
+      .getRatingByWorkoutAssetandUser(+this.workoutAssetId!, this._sesionService.user$()?.userId!)
+      .subscribe({
+        next: (data) => {
+          this.rating.set(new RatingModel(data));
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+  }
+
   ionViewWillLeave() {
     this.youtubeVideoComponent?.destroy();
     this.customVideoPlayerComponent?.destroy();
@@ -142,6 +202,7 @@ export class DetailWorkoutAsset implements OnInit {
       componentProps: {
         userId: this.workout.creatorId,
         workoutAssetId: this.workoutAssetId,
+        rating: this.rating(),
       },
     });
     modal.present();
@@ -149,6 +210,34 @@ export class DetailWorkoutAsset implements OnInit {
     const { data, role } = await modal.onWillDismiss();
     if (role === MODAL_RESPONSE.SUCCESS) {
       this.latestComment.set(data);
+      this.rating.set(data);
+    }
+  }
+
+  async toggleFavorite() {
+    try {
+      if (this.isFavorite()) {
+        await this._actionsWorkoutService.removeFavoriteModal(this.workout as WorkoutListModel);
+        this.isFavorite.set(false);
+        return;
+      }
+      await this._actionsWorkoutService.saveChangeFavoriteStatus(true, this.workout.workoutId);
+      this.isFavorite.set(true);
+    } catch (error) {
+      console.error('Error toggling favorite status:', error);
+    }
+  }
+
+  async toggleLike() {
+    try {
+      const newLikeStatus = !this.isLiked();
+      await this._actionsWorkoutService.changeStatusLikeWorkout(
+        newLikeStatus,
+        this.workout.workoutId
+      );
+      this.isLiked.set(newLikeStatus);
+    } catch (error) {
+      console.error('Error toggling like status:', error);
     }
   }
 }
