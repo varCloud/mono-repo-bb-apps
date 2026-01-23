@@ -12,7 +12,7 @@ export { TranslationService } from './services/translation.service';
 export { ThemeService } from './services/theme.service';
 export { UploadService } from './services/upload-service.service';
 export { S3Service } from './services/s3/s3.service';
-export { FileAccessPermissionService} from './services/file-access-permission.service'
+export { FileAccessPermissionService } from './services/file-access-permission.service';
 export { DeepLinkService } from './services/deep-link.service';
 export { PushNotificationService } from './services/push-notifications/push-notification.service';
 export { ProfileColorService } from './services/profile-color.service';
@@ -26,3 +26,4 @@ export { UserSuscriptionsIdService } from './services/user-suscriptions-id.servi
 export { AppConfig2Service } from './services/app-config2.service';
 export { ProfileColorDirective } from './directives/profile-color.directive';
 export { NetworkService } from './services/network.service';
+export { ActionsWorkoutService } from './services/actions-workout.service';

@@ -22,14 +22,13 @@ import {
   IonLabel,
   IonItem,
 } from '@ionic/angular/standalone';
-import { LocalStorageService } from '@monorepo-bb-app/core';
+import { ActionsWorkoutService, LocalStorageService } from '@monorepo-bb-app/core';
 import {
   Asset,
   KEY_LOCALSTORAGE,
   TrainingTypeEnum,
   Workout,
   WorkoutInformationSelect,
-  WorkoutService,
 } from '@monorepo-bb-app/shared';
 import { TranslateModule } from '@ngx-translate/core';
 import { addIcons } from 'ionicons';
@@ -77,7 +76,7 @@ export class DetailWorkout implements OnInit {
     private _router: Router,
     private _localstorage: LocalStorageService,
     private _workoutInformationSelect: WorkoutInformationSelect,
-    private _workoutService: WorkoutService
+    private _actionsWorkoutService: ActionsWorkoutService
   ) {
     addIcons({
       heart,
@@ -96,14 +95,17 @@ export class DetailWorkout implements OnInit {
   }
 
   async checkLike() {
-    const liked = await this._workoutService.checkLike(this.workout.workoutId);
+    const liked = await this._actionsWorkoutService.checkLike(this.workout.workoutId);
     this.isLiked.set(liked);
   }
 
   async toggleLike() {
     try {
       const newLikeStatus = !this.isLiked();
-      await this._workoutService.changeStatusLikeWorkout(newLikeStatus, this.workout.workoutId);
+      await this._actionsWorkoutService.changeStatusLikeWorkout(
+        newLikeStatus,
+        this.workout.workoutId
+      );
       this.isLiked.set(newLikeStatus);
     } catch (error) {
       console.error('Error toggling like status:', error);

@@ -1,4 +1,4 @@
-import { Component, type OnInit, computed, input, model, output, inject } from '@angular/core';
+import { Component, type OnInit, computed, input, model, output } from '@angular/core';
 import { addIcons } from 'ionicons';
 import {
   IonCard,
@@ -11,9 +11,9 @@ import {
   ModalController,
 } from '@ionic/angular/standalone';
 import { bookmark, bookmarkOutline, heart, trashOutline } from 'ionicons/icons';
-import { WorkoutListModel, WorkoutService } from '@monorepo-bb-app/shared';
+import { WorkoutListModel } from '@monorepo-bb-app/shared';
 import { ENUM_TYPE_USER } from '../../../../../shared/constants/enums';
-import { SesionService } from '@monorepo-bb-app/core';
+import { ActionsWorkoutService, SesionService } from '@monorepo-bb-app/core';
 import { DeleteWorkoutModalComponent } from '../delete-workout-modal/delete-workout-modal.component';
 import { CommonModule } from '@angular/common';
 
@@ -55,7 +55,7 @@ export class CardListComponent {
   constructor(
     private modalCtrl: ModalController,
     private sesionService: SesionService,
-    private _workoutService: WorkoutService
+    private _actionsWorkoutService: ActionsWorkoutService
   ) {
     addIcons({ heart, bookmarkOutline, trashOutline, bookmark });
   }
@@ -72,11 +72,11 @@ export class CardListComponent {
   async changeFavoriteStatus(isFav: boolean) {
     try {
       if (!isFav) {
-        await this._workoutService.removeFavoriteModal(this.workout() as WorkoutListModel);
+        await this._actionsWorkoutService.removeFavoriteModal(this.workout() as WorkoutListModel);
         this.isFavorite.set(false);
         return;
       }
-      await this._workoutService.saveChangeFavoriteStatus(true, this.workout().workoutId);
+      await this._actionsWorkoutService.saveChangeFavoriteStatus(true, this.workout().workoutId);
       this.isFavorite.set(true);
     } catch (error) {
       console.error('Error toggling favorite status:', error);

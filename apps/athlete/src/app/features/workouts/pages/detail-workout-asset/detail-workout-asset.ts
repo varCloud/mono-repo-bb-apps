@@ -45,7 +45,7 @@ import {
 import { TranslateModule } from '@ngx-translate/core';
 import { MODAL_RESPONSE } from 'libs/shared/constants/enums';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-import { LocalStorageService, SesionService } from '@monorepo-bb-app/core';
+import { ActionsWorkoutService, LocalStorageService, SesionService } from '@monorepo-bb-app/core';
 @Component({
   selector: 'app-detail-workout-asset',
   imports: [
@@ -98,7 +98,8 @@ export class DetailWorkoutAsset implements OnInit {
     private modalCtrl: ModalController,
     private _localStorage: LocalStorageService,
     private _workoutService: WorkoutService,
-    private _sesionService: SesionService
+    private _sesionService: SesionService,
+    private _actionsWorkoutService: ActionsWorkoutService
   ) {
     addIcons({
       heart,
@@ -156,7 +157,7 @@ export class DetailWorkoutAsset implements OnInit {
 
     const user = this._sesionService.user$();
     if (!user) return;
-    this._workoutService.getOnlyidsFavoritesByUser(user.userId).subscribe({
+    this._actionsWorkoutService.getOnlyidsFavoritesByUser(user.userId).subscribe({
       next: (res) => {
         const updatedFavorites = res.data;
         this.isFavorite.set(updatedFavorites?.includes(this.workout.workoutId));
@@ -168,7 +169,7 @@ export class DetailWorkoutAsset implements OnInit {
   }
 
   async checkLike() {
-    const liked = await this._workoutService.checkLike(this.workout.workoutId);
+    const liked = await this._actionsWorkoutService.checkLike(this.workout.workoutId);
     this.isLiked.set(liked);
   }
 
@@ -216,11 +217,11 @@ export class DetailWorkoutAsset implements OnInit {
   async toggleFavorite() {
     try {
       if (this.isFavorite()) {
-        await this._workoutService.removeFavoriteModal(this.workout as WorkoutListModel);
+        await this._actionsWorkoutService.removeFavoriteModal(this.workout as WorkoutListModel);
         this.isFavorite.set(false);
         return;
       }
-      await this._workoutService.saveChangeFavoriteStatus(true, this.workout.workoutId);
+      await this._actionsWorkoutService.saveChangeFavoriteStatus(true, this.workout.workoutId);
       this.isFavorite.set(true);
     } catch (error) {
       console.error('Error toggling favorite status:', error);
@@ -230,7 +231,10 @@ export class DetailWorkoutAsset implements OnInit {
   async toggleLike() {
     try {
       const newLikeStatus = !this.isLiked();
-      await this._workoutService.changeStatusLikeWorkout(newLikeStatus, this.workout.workoutId);
+      await this._actionsWorkoutService.changeStatusLikeWorkout(
+        newLikeStatus,
+        this.workout.workoutId
+      );
       this.isLiked.set(newLikeStatus);
     } catch (error) {
       console.error('Error toggling like status:', error);
