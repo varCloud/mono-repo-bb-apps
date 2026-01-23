@@ -42,9 +42,10 @@ import { finalize } from 'rxjs';
   styleUrl: './favorites.component.scss',
 })
 export class FavoritesComponent implements OnInit {
+  searchValue = signal<string>('');
   paginator = signal<Paginator>({} as Paginator);
   favorites = signal<Favorite[]>([]);
-
+  isInfiniteScrollDisabled = signal<boolean>(false);
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -57,7 +58,7 @@ export class FavoritesComponent implements OnInit {
   ngOnInit(): void {}
 
   ionViewWillEnter() {
-    this.getfavorites();
+    this.getfavorites(undefined, true);
   }
 
   async clickCard(workout: WorkoutListModel) {
@@ -65,16 +66,21 @@ export class FavoritesComponent implements OnInit {
     this.router.navigate(['home/workouts', workout.workoutId, workout.creatorId, user.userId]);
   }
 
-  getfavorites() {
+  getfavorites(url = undefined, refresh = false) {
     this._loader.showLoader();
     const user = this._sesionService.user$();
     return this._workoutService
-      .getFavoritesByUser(user.userId)
+      .getFavoritesByUser(url, user.userId, this.getParameters())
       .pipe(finalize(() => this._loader.hideLoader()))
       .subscribe({
         next: (resp) => {
-          this.favorites.set(resp.data);
+          if (refresh) {
+            this.favorites.set(resp.data);
+          } else {
+            this.favorites.update((favorites) => [...favorites, ...resp.data]);
+          }
           this.paginator.set(resp.paginator);
+          this.isInfiniteScrollDisabled.set(!resp.paginator.links.next);
         },
         error: () => {
           this.favorites.set([]);
@@ -85,5 +91,28 @@ export class FavoritesComponent implements OnInit {
 
   clickFavorite(workout: WorkoutListModel) {
     this.getfavorites();
+  }
+
+  onSearch(event: Event) {
+    const target = event.target as HTMLIonSearchbarElement;
+    const query = target.value?.toLowerCase() || '';
+    this.searchValue.set(query);
+    this.getfavorites(undefined, true);
+  }
+
+  async onIonInfinite(event: any) {
+    if (this.paginator()?.links?.next) {
+      await this.getfavorites(this.paginator().links.next as string);
+    }
+    event.target.complete();
+  }
+
+  private getParameters() {
+    const params: any = {};
+    const search = this.searchValue();
+    if (search && search.length > 0) {
+      params.search = search;
+    }
+    return params;
   }
 }

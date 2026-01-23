@@ -10,6 +10,7 @@ export const API_URLS = {
   WORKOUT: '/workout',
   WORKOUT_RATINGS: '/workout-ratings',
   WORKOUT_FAVORITES: '/workout-favorites',
+  WORKOUT_LIKES: '/workout-likes',
   USER_GOALS: '/user-goals',
   SUSCRIPTIONS: '/subscriptions',
   FAQS: '/faqs',

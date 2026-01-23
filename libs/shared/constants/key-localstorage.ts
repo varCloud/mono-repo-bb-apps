@@ -6,4 +6,6 @@ export const KEY_LOCALSTORAGE = {
   HAS_NULL_PROFILE_FIELDS: 'hasNullProfileFields',
   TOKEN: 'token',
   TOKEN_PUSH: 'push_token',
+  FAVORITES: 'favorites_workouts',
+  LIKES_WORKOUT: 'likes_workouts',
 };

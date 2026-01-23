@@ -11,13 +11,11 @@ import {
   ModalController,
 } from '@ionic/angular/standalone';
 import { bookmark, bookmarkOutline, heart, trashOutline } from 'ionicons/icons';
-import { ToastService, WorkoutListModel, WorkoutService } from '@monorepo-bb-app/shared';
-import { ENUM_TYPE_USER, MODAL_RESPONSE } from '../../../../../shared/constants/enums';
+import { WorkoutListModel, WorkoutService } from '@monorepo-bb-app/shared';
+import { ENUM_TYPE_USER } from '../../../../../shared/constants/enums';
 import { SesionService } from '@monorepo-bb-app/core';
 import { DeleteWorkoutModalComponent } from '../delete-workout-modal/delete-workout-modal.component';
 import { CommonModule } from '@angular/common';
-import { RemoveFavoriteModalComponent } from '../remove-favorite-modal.component/remove-favorite-modal.component';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'lib-card-list',
@@ -57,9 +55,7 @@ export class CardListComponent {
   constructor(
     private modalCtrl: ModalController,
     private sesionService: SesionService,
-    private _workoutService: WorkoutService,
-    private _toastService: ToastService,
-    private _translateService: TranslateService
+    private _workoutService: WorkoutService
   ) {
     addIcons({ heart, bookmarkOutline, trashOutline, bookmark });
   }
@@ -73,59 +69,17 @@ export class CardListComponent {
     this.changeFavoriteStatus(!this.isFavorite());
   }
 
-  private changeFavoriteStatus(isFav: boolean) {
-    if (!isFav) {
-      this.removeFavoriteModal();
-      return;
-    }
-
-    this.saveChangeFavoriteStatus(isFav);
-  }
-
-  private saveChangeFavoriteStatus(isFav: boolean) {
-    const userId = this.sesionService.user$()?.userId ?? 0;
-    const method = isFav ? 'saveFavorite' : 'removeFavorite';
-    this.isFavorite.set(isFav);
-    this._workoutService[method](userId, this.workout().workoutId).subscribe({
-      next: (resp) => {
-        const message = isFav
-          ? 'workout.messages.favorite-added'
-          : 'workout.messages.favorite-removed';
-        if (isFav) {
-          this._toastService.success(this._translateService.instant(message));
-        } else {
-          this._toastService.success(this._translateService.instant(message));
-        }
-        this.clickFavoriteEvent.emit(this.workout());
-      },
-      error: () => {
-        const message = isFav
-          ? 'workout.messages.favorite-not-added'
-          : 'workout.messages.favorite-not-removed';
-        this._toastService.error(this._translateService.instant(message));
-        this.isFavorite.set(!isFav);
-      },
-    });
-  }
-
-  async removeFavoriteModal() {
-    const modal = await this.modalCtrl.create({
-      component: RemoveFavoriteModalComponent,
-      componentProps: {
-        workout: this.workout(),
-      },
-      mode: 'md',
-      cssClass: 'bottom-sheet-modal-rounded',
-      breakpoints: [0, 0.5, 0.75],
-      initialBreakpoint: 0.6,
-    });
-
-    await modal.present();
-
-    const { data, role } = await modal.onWillDismiss();
-
-    if (role === MODAL_RESPONSE.CONFIRM) {
-      this.saveChangeFavoriteStatus(false);
+  async changeFavoriteStatus(isFav: boolean) {
+    try {
+      if (!isFav) {
+        await this._workoutService.removeFavoriteModal(this.workout() as WorkoutListModel);
+        this.isFavorite.set(false);
+        return;
+      }
+      await this._workoutService.saveChangeFavoriteStatus(true, this.workout().workoutId);
+      this.isFavorite.set(true);
+    } catch (error) {
+      console.error('Error toggling favorite status:', error);
     }
   }
 

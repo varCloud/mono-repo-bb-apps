@@ -246,7 +246,11 @@
       "favorite-added": "Workout added to favorites",
       "favorite-removed": "Workout removed from favorites",
       "favorite-not-removed": "Error removing workout from favorites",
-      "favorite-not-added": "Error adding workout to favorites"
+      "favorite-not-added": "Error adding workout to favorites",
+      "like-added": "You like this workout",
+      "like-removed": "You no longer like this workout",
+      "like-not-removed": "Error removing like from workout",
+      "like-not-added": "Error adding like to workout"
     }
   },
   "your-client-payment": "Your client will pay",
