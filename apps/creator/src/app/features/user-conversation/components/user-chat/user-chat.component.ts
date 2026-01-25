@@ -53,6 +53,7 @@ export class UserChatComponent  {
 
   private _serUserInfo() {
     const state = history.state;
+
     if (state?.conversation) {
       this.userConversationModel = (state.conversation as UserConversationModel);
       if (this.userConversationModel) {
@@ -60,7 +61,7 @@ export class UserChatComponent  {
           this.userConversationModel.creatorUser : 
           this.userConversationModel.athleteUser;
       }
-      console.log('Datos recibidos:', this.userConversationModel);
+      console.log('Datos recibidos:', JSON.stringify(this.userConversationModel));
       this.getMessages();
     }
   }

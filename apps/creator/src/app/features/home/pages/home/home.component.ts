@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, effect, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { ProfileColorService } from '@monorepo-bb-app/core';
+import { ProfileColorService, UserService } from '@monorepo-bb-app/core';
 import {
   IonTabs,
   IonTabBar,
@@ -26,7 +26,8 @@ import {
 export class HomeComponent implements OnInit {
   constructor(
     private router: Router,
-    public colorService: ProfileColorService
+    public colorService: ProfileColorService,
+    private _userService: UserService,
   ) {
     addIcons({
       homeOutline,
@@ -34,6 +35,10 @@ export class HomeComponent implements OnInit {
       pricetagOutline,
       personOutline,
     });
+
+    effect(() => {
+        this._userService.updatePushTokenIfSessionActive();
+    })
   }
 
   ngOnInit() {}

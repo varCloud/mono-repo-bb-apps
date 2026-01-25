@@ -24,7 +24,7 @@ import {
   LocalStorageService,
   SesionService,
 } from '@monorepo-bb-app/core';
-import { KEY_LOCALSTORAGE, ShareService, ToastService } from '@monorepo-bb-app/shared';
+import { KEY_LOCALSTORAGE, ShareService, StripeService, ToastService } from '@monorepo-bb-app/shared';
 
 @Component({
   selector: 'app-profile',
@@ -53,6 +53,7 @@ export class ProfileComponent implements OnInit {
     public sesionService: SesionService,
     private toastService: ToastService,
     private shareService: ShareService,
+    private _stripeService: StripeService,
   ) {
     addIcons({
       trashSharp,
