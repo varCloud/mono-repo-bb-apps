@@ -249,7 +249,11 @@
       "favorite-added": "Entrenamiento agregado a favoritos",
       "favorite-removed": "Entrenamiento eliminado de favoritos",
       "favorite-not-removed": "Error al eliminar el entrenamiento de favoritos",
-      "favorite-not-added": "Error al agregar el entrenamiento a favoritos"
+      "favorite-not-added": "Error al agregar el entrenamiento a favoritos",
+      "like-added": "Te gusta este entrenamiento",
+      "like-removed": "Ya no te gusta este entrenamiento",
+      "like-not-removed": "Error al eliminar el me gusta del entrenamiento",
+      "like-not-added": "Error al agregar el me gusta al entrenamiento"
     }
   },
   "your-client-payment": "Tu cliente pagará",

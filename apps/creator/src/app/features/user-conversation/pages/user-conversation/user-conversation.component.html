@@ -3,18 +3,17 @@
   <section class="header-info-container">
     <span class="title">Mensajes</span>
     <span class="subTitle"
-      >¿Quisieras reportar algún usuario?
-      <span class="contact-link">Contáctanos</span></span
+      >¿Quisieras reportar algún usuario? <span class="contact-link">Contáctanos</span></span
     >
   </section>
 </div>
 
-<ion-content >
+<ion-content>
   <app-layout-content
     [customClass]="'conversation-page'"
     [title]="'conversations.title' | translate"
   >
-    <ion-grid content-body class="ion-no-padding"  *ngIf="this.sesionService.user$()">
+    <ion-grid content-body class="ion-no-padding" *ngIf="this.sesionService.user$()">
       <app-conversation-list
         [userId]="this.sesionService.user$()!.userId"
         [userTypeId]="this.sesionService.user$()!.userTypeId"

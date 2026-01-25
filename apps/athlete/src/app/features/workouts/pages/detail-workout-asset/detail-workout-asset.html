@@ -39,17 +39,23 @@
       <ion-grid class="ion-margin-top">
         <ion-row>
           <ion-col>
-            <ion-button fill="clear" class="btn-option">
+            <ion-button fill="clear" class="btn-option" (click)="toggleLike()">
               <div class="container">
-                <ion-icon name="heart-outline" color="secondary"></ion-icon>
+                <ion-icon
+                  [name]="isLiked() ? 'heart' : 'heart-outline'"
+                  color="secondary"
+                ></ion-icon>
                 <ion-text>{{ 'workout-asset.like' | translate }}</ion-text>
               </div>
             </ion-button>
           </ion-col>
           <ion-col>
-            <ion-button fill="clear" class="btn-option">
+            <ion-button fill="clear" class="btn-option" (click)="toggleFavorite()">
               <div class="container">
-                <ion-icon name="bookmark-outline" color="secondary"></ion-icon>
+                <ion-icon
+                  [name]="isFavorite() ? 'bookmark' : 'bookmark-outline'"
+                  color="secondary"
+                ></ion-icon>
                 <ion-text>{{ 'workout-asset.save' | translate }}</ion-text>
               </div>
             </ion-button>
@@ -57,7 +63,7 @@
           <ion-col>
             <ion-button fill="clear" class="btn-option" (click)="openReview()">
               <div class="container">
-                <ion-icon name="star-outline" color="secondary"></ion-icon>
+                <ion-icon [name]="rating() ? 'star' : 'star-outline'" color="secondary"></ion-icon>
                 <ion-text>{{ 'workout-asset.rate' | translate }}</ion-text>
               </div>
             </ion-button>

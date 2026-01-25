@@ -19,6 +19,7 @@ import {
   IonBadge,
   IonRadio,
   ModalController,
+  IonContent,
 } from '@ionic/angular/standalone';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { StripeService } from '../../../../../shared/services/stripe/stripe.service';
@@ -50,6 +51,7 @@ import { ellipsisVertical } from 'ionicons/icons';
     FormsModule,
     NgClass,
     TitleCasePipe,
+    IonContent,
   ],
   templateUrl: './payment-methods-list.component.html',
   styleUrl: './payment-methods-list.component.scss',
@@ -109,9 +111,7 @@ export class PaymentMethodsListComponent implements OnInit {
         next: (resp: any) => {
           this.paymentMethods.set(resp.data);
           if (idPaymentMethod) {
-            const findPaymentMethod = resp.data.find(
-              (pm: any) => pm.id === idPaymentMethod
-            );
+            const findPaymentMethod = resp.data.find((pm: any) => pm.id === idPaymentMethod);
             if (findPaymentMethod) {
               this.selectPaymentMethod(findPaymentMethod);
             }
@@ -156,7 +156,9 @@ export class PaymentMethodsListComponent implements OnInit {
       .subscribe({
         next: () => {
           this.loadPaymentMethods(method.id);
-          this._toastService.success(this._translateService.instant('payment-methods.default-set-success'));
+          this._toastService.success(
+            this._translateService.instant('payment-methods.default-set-success')
+          );
         },
         error: (error: any) => {
           console.error('Error setting default payment method:', error);
@@ -172,7 +174,9 @@ export class PaymentMethodsListComponent implements OnInit {
       .subscribe({
         next: () => {
           this.loadPaymentMethods();
-          this._toastService.success(this._translateService.instant('payment-methods.deleted-success'));
+          this._toastService.success(
+            this._translateService.instant('payment-methods.deleted-success')
+          );
         },
         error: (error: any) => {
           console.error('Error deleting payment method:', error);
