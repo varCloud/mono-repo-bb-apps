@@ -8,6 +8,7 @@ export const CONSTANTS = {
     PERCENT_BODY_BOOSTER: 'percent-body-booster',
   },
   DEFAULT_URL_AVATAR: 'https://ionicframework.com/docs/img/demos/avatar.svg',
+  DEFAULT_ONLY_LOGO: 'assets/images/logo/logo_48x48.jpg',
   DEFAULT_FRONT_PAGE_URL: 'assets/images/suscription/default-front-page-url.png',
   DEFAULT_COUNTRY_PREFIX: '+52',
   URL_VIDEO_PLAYER: 'https://bluecloud.com.mx/2023/bodybooster/video-player',

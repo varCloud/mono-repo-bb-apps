@@ -46,8 +46,8 @@ export class UserConversationComponent {
   }
 
   onConversationSelected(conversation: any) {
-    console.log('Conversación seleccionada:', conversation);
-    this.router.navigate([`/home/${conversation.userConversationId}/user-chat`] , { state: { conversation }, replaceUrl:true });
+    console.log('Conversación seleccionada:', JSON.stringify(conversation));
+    this.router.navigate([`/home/${conversation.userConversationId}/user-chat`] , { state: { conversation , fromPush:false }, replaceUrl:true });
   }
 
   async openDetailModal(data?: any) {

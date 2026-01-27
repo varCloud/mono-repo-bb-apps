@@ -24,7 +24,7 @@ import {
   LocalStorageService,
   SesionService,
 } from '@monorepo-bb-app/core';
-import { KEY_LOCALSTORAGE, ShareService, ToastService } from '@monorepo-bb-app/shared';
+import { KEY_LOCALSTORAGE, ShareService, StripeService, ToastService } from '@monorepo-bb-app/shared';
 
 @Component({
   selector: 'app-profile',
@@ -53,6 +53,7 @@ export class ProfileComponent implements OnInit {
     public sesionService: SesionService,
     private toastService: ToastService,
     private shareService: ShareService,
+    private _stripeService: StripeService,
   ) {
     addIcons({
       trashSharp,
@@ -128,8 +129,13 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['home/profile/portada']);
   }
 
-  private navigateToBankInfo(): void {
-    // Implementar navegación a información bancaria
+  private navigateToBankInfo(): void {   
+    this.loaderUIService.showLoader();
+    setTimeout(() => {
+      this.loaderUIService.hideLoader();
+    }, 300);
+    this._stripeService.openStripeOnboarding(this.sesionService.user$().userId);
+  
   }
 
   private showTerms(): void {

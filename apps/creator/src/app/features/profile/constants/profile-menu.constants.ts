@@ -26,7 +26,7 @@ export const PROFILE_MENU_ITEMS: ProfileMenuItem[] = [
     showArrow: true,
   },
   {
-    text: 'Información bancaria y pagos',
+    text: 'Información bancaria',
     action: 'bankInfo',
     showArrow: true,
   },

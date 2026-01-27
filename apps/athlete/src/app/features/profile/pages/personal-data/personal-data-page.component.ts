@@ -1,4 +1,4 @@
-import { Component, effect, OnInit, signal } from '@angular/core';
+import { Component, effect, OnInit, Signal, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   IonBackButton,
@@ -10,14 +10,31 @@ import {
   IonRow,
 } from '@ionic/angular/standalone';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AthletePhysicalInfoFormComponent, AthleteProfileBasicFormComponent, LayoutContentComponent } from '@monorepo-bb-app/ui';
+import {
+  AthletePhysicalInfoFormComponent,
+  AthleteProfileBasicFormComponent,
+  LayoutContentComponent,
+  RadioListSelectorComponent,
+  SelectOption,
+  ErrorMessageComponent,
+} from '@monorepo-bb-app/ui';
 
 import { LoaderUIService, SesionService, UploadService, UserService } from '@monorepo-bb-app/core';
-import { CompleteResultUpload, Countrycode, guessFileType, proceessUploadPhoto, ToastService } from '@monorepo-bb-app/shared';
+import {
+  CompleteResultUpload,
+  Countrycode,
+  guessFileType,
+  proceessUploadPhoto,
+  ToastService,
+  CatalogsService,
+  CatalogType,
+} from '@monorepo-bb-app/shared';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { endWith, finalize, take } from 'rxjs';
 import { Photo } from '@capacitor/camera';
 import { BUCKET_TYPE } from 'libs/shared/constants/enums';
+import { Storage } from '@ionic/storage-angular';
+import { OnboardingStateService } from '../../../user/services/onboarding-state.service';
 
 @Component({
   selector: 'app-personal-data-page',
@@ -38,38 +55,75 @@ import { BUCKET_TYPE } from 'libs/shared/constants/enums';
     LayoutContentComponent,
     AthleteProfileBasicFormComponent,
     AthletePhysicalInfoFormComponent,
+    RadioListSelectorComponent,
+    ErrorMessageComponent,
   ],
 })
 export class PersonalDataPageComponent implements OnInit {
   basicForm!: FormGroup;
   physicalForm!: FormGroup;
+  levelForm!: FormGroup;
+  activityLevelOptions = signal<SelectOption[]>([]);
   imageProfile: Photo | null = null;
   isoCode = signal<string>('+52');
+  loadingData = signal<boolean>(false);
   constructor(
     private fb: FormBuilder,
     private _translateService: TranslateService,
-    private toastService: ToastService,
+    private _toastService: ToastService,
     private _loaderService: LoaderUIService,
     private sesionService: SesionService,
     private _userService: UserService,
     private _uploadService: UploadService,
-
+    private _catalogsService: CatalogsService,
+    private _storage: Storage,
+    private _onboardingStateService: OnboardingStateService
   ) {
     effect(() => {
-       const user = this.sesionService.user$();
+      const user = this.sesionService.user$();
     });
   }
 
+
+
   ngOnInit() {
+    this.loadingData.set(true);
     this.initializeForms();
     this.loadUserData();
+    this.getActivityLevel();
+  }
+
+  onActivityLevelChange(selectedLevel: any): void {
+    console.log('Selected activity level:', selectedLevel);
+    this.levelForm.patchValue({ levelId: selectedLevel });
+  }
+
+  private getActivityLevel() {
+    this._loaderService.showLoader();
+    this._catalogsService.getCatalog(CatalogType.DIFFICULTY_LEVELS).subscribe({
+      next: (levels: any) => {
+        this._loaderService.hideLoader();
+        this.activityLevelOptions.set(
+          levels.map((level) => ({
+            label: level.description,
+            value: level.levelId,
+          }))
+        );
+      },
+      error: (error) => {
+        console.error('Error loading activity levels', error);
+        this._loaderService.hideLoader();
+        this._toastService.error(
+          this._translateService.instant('onboarding.select-level.load-error'),
+          { duration: 1000 }
+        );
+      },
+    });
   }
 
   private loadUserData() {
     const currentUser = this.sesionService.user$();
-
     if (currentUser) {
-
       this.basicForm.patchValue({
         profilePictureUrl: currentUser.profilePictureUrl || '',
         firstName: currentUser.firstName || '',
@@ -85,7 +139,12 @@ export class PersonalDataPageComponent implements OnInit {
         weight: currentUser.weight || '',
         height: currentUser.height || '',
       });
+
+      this.levelForm.patchValue({
+        levelId: currentUser.levelId || '',
+      });
     }
+     this.loadingData.set(false);
   }
 
   private initializeForms() {
@@ -105,16 +164,10 @@ export class PersonalDataPageComponent implements OnInit {
       weight: ['', [Validators.required, Validators.min(0)]],
       height: ['', [Validators.required, Validators.min(0)]],
     });
-  }
 
-  async onBasicFormSubmit(formValue: any) {
-    if (this.basicForm.valid) {
-    }
-  }
-
-  async onPhysicalFormSubmit(formValue: any) {
-    if (this.physicalForm.valid) {
-    }
+    this.levelForm = this.fb.group({
+      levelId: ['', Validators.required],
+    });
   }
 
   async onImageSelected(event: any) {
@@ -126,7 +179,6 @@ export class PersonalDataPageComponent implements OnInit {
   }
 
   async saveAllChanges() {
-
     this._loaderService.showLoader();
     if (this.isFormsValid) {
       try {
@@ -138,8 +190,9 @@ export class PersonalDataPageComponent implements OnInit {
         const combinedData = {
           ...this.basicForm.value,
           ...this.physicalForm.value,
-           height: this.physicalForm.value.height.toString(),
-           weight: this.physicalForm.value.weight.toString(),
+          ...this.levelForm.value,
+          height: this.physicalForm.value.height.toString(),
+          weight: this.physicalForm.value.weight.toString(),
         };
 
         const currentUser = this.sesionService.user$();
@@ -148,17 +201,19 @@ export class PersonalDataPageComponent implements OnInit {
             ...currentUser,
             ...combinedData,
           };
-          
-          this.sesionService.setUser(updatedUser)
-          this._userService.updateUser(currentUser.userId, combinedData)
-            .pipe(take(1),
+
+          this.sesionService.setUser(updatedUser);
+
+          this._userService
+            .updateUser(currentUser.userId, combinedData)
+            .pipe(
+              take(1),
               finalize(() => this._loaderService.hideLoader())
             )
             .subscribe(() => {
               this.showSuccessMessage('profile.save.success');
               this.loadUserData();
             });
-
         }
       } catch (error) {
         this._loaderService.hideLoader();
@@ -173,16 +228,16 @@ export class PersonalDataPageComponent implements OnInit {
 
   async showSuccessMessage(key: string) {
     const message = await this._translateService.get(key).toPromise();
-    await this.toastService.success(message);
+    await this._toastService.success(message);
   }
 
   async showErrorMessage(key: string) {
     const message = await this._translateService.get(key).toPromise();
-    await this.toastService.error(message);
+    await this._toastService.error(message);
   }
 
   get isFormsValid(): boolean {
-    return this.basicForm.valid && this.physicalForm.valid;
+    return this.basicForm.valid && this.physicalForm.valid && this.levelForm.valid;
   }
 
   private validateImageProfile(): boolean {

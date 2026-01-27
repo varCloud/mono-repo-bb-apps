@@ -114,6 +114,60 @@
         transform: scale(0.98) !important;
         opacity: 0.9 !important;
       }
+
+      ion-icon {
+        font-size: 40px;
+        margin-right: 12px;
+      }
+    }
+
+    .toast-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+
+      .toast-avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0;
+        border: 2px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .toast-icon-default {
+        font-size: 48px;
+        flex-shrink: 0;
+        color: var(--ion-color-primary);
+      }
+
+      .toast-text {
+        flex: 1;
+        overflow: hidden;
+
+        strong {
+          display: block;
+          font-weight: 600;
+          font-size: 0.95rem;
+          color: var(--ion-color-dark);
+          margin-bottom: 4px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        p {
+          margin: 0;
+          font-size: 0.85rem;
+          color: var(--ion-color-medium);
+          line-height: 1.4;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+      }
     }
 
     .toast-header {
@@ -127,6 +181,246 @@
       font-size: 0.85rem !important;
       color: var(--ion-color-medium) !important;
       line-height: 1.4 !important;
+    }
+
+    .toast-icon {
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+    }
+  }
+}
+
+// Notificación personalizada tipo WhatsApp
+.whatsapp-notification-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+  padding: 16px;
+  pointer-events: auto;
+  transform: translateY(-100%);
+  transition: transform 0.3s ease;
+
+  &.show {
+    transform: translateY(0);
+  }
+
+  .whatsapp-notification-container {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+
+  .whatsapp-notification-content {
+    display: flex;
+    align-items: flex-start;
+    padding: 12px 16px;
+    position: relative;
+
+    .whatsapp-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 12px;
+      flex-shrink: 0;
+      border: 2px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .whatsapp-content {
+      flex: 1;
+      min-width: 0;
+
+      .whatsapp-sender {
+        font-weight: 600;
+        font-size: 15px;
+        color: #000;
+        margin-bottom: 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .whatsapp-message {
+        font-size: 14px;
+        color: #666;
+        line-height: 1.3;
+        margin-bottom: 4px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .whatsapp-time {
+        font-size: 12px;
+        color: #999;
+      }
+    }
+
+    .whatsapp-app-icon {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      background: #25d366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
+    }
+  }
+}
+
+// Estilos para notificaciones de chat con AlertController
+.chat-notification-alert {
+  --max-width: 90%;
+  --border-radius: 16px;
+
+  .alert-wrapper {
+    border-radius: 16px !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+    
+    .alert-message {
+      text-align: left !important;
+      margin: 0 !important;
+      padding: 4px 0 !important;
+      
+      img {
+        display: block !important;
+        border: 2px solid rgba(0, 0, 0, 0.08) !important;
+      }
+    }
+    
+    .alert-button-group {
+      border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+      
+      .alert-button {
+        font-weight: 500 !important;
+        min-height: 48px !important;
+        
+        &.primary-button {
+          color: #007AFF !important;
+          font-weight: 600 !important;
+        }
+        
+        &.cancel-button {
+          color: #8E8E93 !important;
+        }
+      }
+    }
+  }
+}
+
+// Estilos para notificaciones estilo WhatsApp (versión simplificada)
+.whatsapp-notification-simple {
+  --background: #ffffff;
+  --color: #000000;
+  --border-radius: 12px;
+  --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+
+  ::ng-deep {
+    .toast-wrapper {
+      background: #ffffff !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+      border-radius: 12px !important;
+      padding: 12px 16px !important;
+      cursor: pointer !important;
+      
+      &:active {
+        transform: scale(0.98) !important;
+      }
+    }
+
+    .toast-message {
+      margin: 0 !important;
+      
+      img {
+        display: block !important;
+      }
+    }
+  }
+}
+
+// Estilos para notificaciones estilo WhatsApp
+.whatsapp-notification {
+  --background: #ffffff;
+  --color: #000000;
+  --border-radius: 12px;
+  --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+
+  ::ng-deep {
+    .toast-wrapper {
+      background: #ffffff !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+      border-radius: 12px !important;
+      padding: 16px !important;
+    }
+
+    .toast-header {
+      font-weight: 600 !important;
+      font-size: 0.95rem !important;
+      color: #000 !important;
+      margin-bottom: 8px !important;
+      display: flex !important;
+      align-items: center !important;
+      
+      .chat-avatar {
+        width: 40px !important;
+        height: 40px !important;
+        border-radius: 50% !important;
+        object-fit: cover !important;
+        margin-right: 12px !important;
+        flex-shrink: 0 !important;
+        border: 2px solid #ccc !important;
+      }
+    }
+
+    .toast-message {
+      font-size: 0.9rem !important;
+      color: #666 !important;
+      line-height: 1.4 !important;
+      margin: 0 !important;
+    }
+  }
+}
+
+// Estilos para las notificaciones con AlertController
+.notification-alert {
+  --max-width: 90%;
+  --border-radius: 12px;
+
+  .alert-wrapper {
+    border-radius: 12px !important;
+    
+    .alert-message {
+      text-align: left !important;
+      
+      img {
+        border: 2px solid rgba(0, 0, 0, 0.05);
+      }
+    }
+    
+    .alert-button-group {
+      .alert-button {
+        font-weight: 500;
+        
+        &.alert-button-role-cancel {
+          color: var(--ion-color-medium);
+        }
+      }
     }
   }
 }
