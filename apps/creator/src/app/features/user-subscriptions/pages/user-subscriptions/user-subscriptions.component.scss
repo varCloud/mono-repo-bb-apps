@@ -4,7 +4,7 @@ ion-list {
   margin: 0px !important;
 }
 
-.bottomButtons .ion-icon{
+.bottomButtons .ion-icon {
   margin-top: 30px;
 }
 
@@ -26,10 +26,10 @@ ion-list {
 }
 
 ion-modal {
-   --border-radius: 6px;
+  --border-radius: 6px;
 }
 
-.header-logo{
+.header-logo {
   max-width: 40% !important;
 }
 
@@ -42,17 +42,15 @@ ion-modal {
     display: flex;
     flex-direction: column;
     justify-content: end;
-    padding-top: 15px;
     margin-bottom: 25px;
     padding-bottom: 15px;
   }
 }
-app-header-search{
+app-header-search {
   padding-bottom: 0px;
-
 }
 
-h2{
+h2 {
   font-size: 1.2em !important;
   font-weight: 600;
 }

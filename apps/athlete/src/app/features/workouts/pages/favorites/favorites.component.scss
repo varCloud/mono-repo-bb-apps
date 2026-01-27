@@ -1,3 +1,10 @@
 :host {
   display: block;
+
+  .bb-goback {
+    --icon-margin-start: 16px;
+    --icon-margin-end: 10px;
+    --color: #757575;
+    --margin-bottom: 10px;
+  }
 }

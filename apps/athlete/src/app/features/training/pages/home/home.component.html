@@ -20,9 +20,6 @@
 </ion-header>
 
 <ion-content class="workout-home-content ion-safe-area">
-  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
   <!-- Biblioteca de ejercicios -->
   <div class="section">
     <!-- <div class="section-header">
@@ -32,6 +29,9 @@
       <lib-card-max-likes [workout]="workoutMaxLikes()!"></lib-card-max-likes>
     }
   </div>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
   <div class="section">
     <div
