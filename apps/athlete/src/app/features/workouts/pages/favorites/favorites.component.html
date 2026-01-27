@@ -1,18 +1,24 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button
+        icon="arrow-back-outline"
+        class="bb-goback"
+        [defaultHref]="'/home'"
+        [text]="'go-back' | translate"
+      ></ion-back-button>
+    </ion-buttons>
     <div class="container-search-bar">
       <ion-searchbar
         [placeholder]="'search' | translate"
         [mode]="'ios'"
         [debounce]="500"
-        show-cancel-button="always"
-        [cancelButtonText]="'cancel' | translate"
         (ionInput)="onSearch($event)"
       ></ion-searchbar>
     </div>
   </ion-toolbar>
 </ion-header>
-<ion-content class="ion-padding">
+<ion-content class="ion-padding" [fullscreen]="true">
   <ion-grid class="workout-grid" style="margin-bottom: 80px">
     <ion-row gap="5px">
       @for (favorite of favorites(); track favorite.favoriteId) {

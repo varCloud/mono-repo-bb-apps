@@ -24,6 +24,8 @@ import {
   IonInput,
   IonFab,
   IonFabButton,
+  IonRefresher,
+  IonRefresherContent,
 } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import {
@@ -54,6 +56,8 @@ import { finalize, take } from 'rxjs';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   imports: [
+    IonRefresherContent,
+    IonRefresher,
     IonFabButton,
     IonFab,
     IonInput,
@@ -101,7 +105,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   ionViewWillEnter() {
     this._loader.showLoader();
@@ -109,6 +113,13 @@ export class HomeComponent implements OnInit {
       this.getWorkouts(undefined, true);
       this.getWorkoutMaxLikes();
     }, 1000);
+  }
+
+  handleRefresh(event: any) {
+    this.getWorkoutMaxLikes();
+    this.getWorkouts(undefined, true).then(() => {
+      event.target.complete();
+    });
   }
 
   private async getWorkouts(url?: string, reset = false) {
@@ -180,18 +191,21 @@ export class HomeComponent implements OnInit {
 
   public onDeleteWorkout(workout: WorkoutListModel) {
     this._loader.showLoader();
-    this._workoutService.deleteWorkout(workout.workoutId).pipe(
-      take(1),
-      finalize(() => this._loader.hideLoader())
-    ).subscribe({
-      next: async () => {
-        this._toastService.success('workout.routine.deleted-success');
-        await this.getWorkouts(undefined, true);
-      },
-      error: (error) => {
-        this._toastService.error('workout.routine.deleted-error');
-      },
-    });
+    this._workoutService
+      .deleteWorkout(workout.workoutId)
+      .pipe(
+        take(1),
+        finalize(() => this._loader.hideLoader())
+      )
+      .subscribe({
+        next: async () => {
+          this._toastService.success('workout.routine.deleted-success');
+          await this.getWorkouts(undefined, true);
+        },
+        error: (error) => {
+          this._toastService.error('workout.routine.deleted-error');
+        },
+      });
   }
 
   private async getParams() {

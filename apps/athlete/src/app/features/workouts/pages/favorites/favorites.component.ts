@@ -10,6 +10,9 @@ import {
   IonGrid,
   IonRow,
   IonCol,
+  IonBackButton,
+  IonButton,
+  IonButtons,
 } from '@ionic/angular/standalone';
 import { LoaderUIService, LocalStorageService, SesionService } from '@monorepo-bb-app/core';
 import {
@@ -22,10 +25,14 @@ import {
 import { CardListComponent } from '@monorepo-bb-app/ui';
 import { TranslateModule } from '@ngx-translate/core';
 import { finalize } from 'rxjs';
+import { addIcons } from 'ionicons';
+import { arrowBackOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-favorites',
   imports: [
+    IonButtons,
+    IonButton,
     IonCol,
     IonRow,
     IonGrid,
@@ -37,6 +44,7 @@ import { finalize } from 'rxjs';
     IonHeader,
     TranslateModule,
     CardListComponent,
+    IonBackButton,
   ],
   templateUrl: './favorites.component.html',
   styleUrl: './favorites.component.scss',
@@ -53,7 +61,9 @@ export class FavoritesComponent implements OnInit {
     private _loader: LoaderUIService,
     private _sesionService: SesionService,
     private _workoutService: WorkoutService
-  ) {}
+  ) {
+    addIcons({ arrowBackOutline });
+  }
 
   ngOnInit(): void {}
 

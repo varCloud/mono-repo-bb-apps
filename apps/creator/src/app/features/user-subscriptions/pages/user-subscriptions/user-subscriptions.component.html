@@ -1,12 +1,12 @@
-<div class="header-container">
-  <app-header-search
-    (click)="openSearchSubscriptionsModal()"
-  ></app-header-search>
-  <section class="header-info-container">
-    <h2 class="title">{{'my-subscriptors.title-subscriptors' | translate }} </h2>
-  </section>
-</div>
-<ion-content app-layout-content>
+<ion-header>
+  <ion-toolbar class="header-container">
+    <app-header-search (click)="openSearchSubscriptionsModal()"></app-header-search>
+    <section class="header-info-container">
+      <h2 class="title">{{ 'my-subscriptions.title-subscriptions' | translate }}</h2>
+    </section>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
   <ion-refresher
     slot="fixed"
     [mode]="'ios'"
@@ -14,32 +14,31 @@
     position="top"
   >
     <ion-refresher-content
-      pullingText= "{{ 'common.load-more-elements-pagination' | translate }}"
+      pullingText="{{ 'common.load-more-elements-pagination' | translate }}"
       refreshingText="common.loading' | translate"
     >
     </ion-refresher-content>
   </ion-refresher>
   <ion-list [lines]="'none'">
     @for (sub of subscriptions(); track sub) {
-    <lib-user-card class = "bottomButtons"
-      [imageUrl]="sub.user.profilePictureUrl"
-      [name]="sub.user.name"
-      [descriptionPlan]="sub.fullDescription"
-      [nickName]="sub.user.nickName"
-      [email]="sub.user.email"
-      [endData]="sub.nextPaymentDate"
-      [amount]="sub.amount"
-
-      class="card-item"
-      (optionsClick)="onShowOptions(sub, $event)"
-    ></lib-user-card>
-    }@empty {
-    <lib-empty-elements-component
-      [imgPath]="imgUrl()"
-      [message]="'my-subscriptors.empty-subscriptors' | translate"
-    >
-    </lib-empty-elements-component>
+      <lib-user-card
+        class="bottomButtons"
+        [imageUrl]="sub.user.profilePictureUrl"
+        [name]="sub.user.name"
+        [descriptionPlan]="sub.fullDescription"
+        [nickName]="sub.user.nickName"
+        [email]="sub.user.email"
+        [endData]="sub.nextPaymentDate"
+        [amount]="sub.amount"
+        class="card-item"
+        (optionsClick)="onShowOptions(sub, $event)"
+      ></lib-user-card>
+    } @empty {
+      <lib-empty-elements-component
+        [imgPath]="imgUrl()"
+        [message]="'my-subscriptors.empty-subscriptors' | translate"
+      >
+      </lib-empty-elements-component>
     }
   </ion-list>
 </ion-content>
-

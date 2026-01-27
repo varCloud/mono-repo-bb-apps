@@ -11,14 +11,23 @@ import {
   IonIcon,
   IonButtons,
   IonRefresherContent,
-  IonRefresher
+  IonRefresher,
 } from '@ionic/angular/standalone';
-import { HeaderSearchComponent, UserCardComponent, MySubscriptionsSearchModalComponent } from '@monorepo-bb-app/ui';
+import {
+  HeaderSearchComponent,
+  UserCardComponent,
+  MySubscriptionsSearchModalComponent,
+} from '@monorepo-bb-app/ui';
 import { ModalController } from '@ionic/angular/standalone';
 import { OptionsSubscritporModalComponent } from '@monorepo-bb-app/ui';
 
 import { CONSTANTS, PaginatorModel, Subscription } from '@monorepo-bb-app/shared';
-import { LoaderUIService, SesionService, UserConversationService, UserSuscriptionsIdService } from '@monorepo-bb-app/core';
+import {
+  LoaderUIService,
+  SesionService,
+  UserConversationService,
+  UserSuscriptionsIdService,
+} from '@monorepo-bb-app/core';
 import { JsonPipe } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { EmptyElementsComponent } from '@monorepo-bb-app/ui';
@@ -27,7 +36,6 @@ import { Router } from '@angular/router';
 import { finalize, take } from 'rxjs';
 import { ENUM_TYPE_USER, SUBSCRIPTION_STATUS } from 'libs/shared/constants/enums';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-
 
 @Component({
   selector: 'app-home',
@@ -47,7 +55,8 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
     MySubscriptionsSearchModalComponent,
     IonRefresher,
     TranslateModule,
-
+    IonHeader,
+    IonToolbar,
   ],
 })
 export class UserSubscriptionsComponent {
@@ -64,19 +73,21 @@ export class UserSubscriptionsComponent {
     private _userConversationService: UserConversationService,
     private _loaderUIService: LoaderUIService,
     private router: Router,
-    private sesionService: SesionService,
+    private sesionService: SesionService
   ) {
     effect(() => {
-      this.sesionService.user$().userId
-    })
+      this.sesionService.user$().userId;
+    });
   }
 
-  ionViewWillEnter() {  
+  ionViewWillEnter() {
     this._loaderUIService.showLoader();
     this.subscriptions.set([]);
-    this.getSubscriptionsForUser(`/user/${this.sesionService.user$()?.userId}/suscriptions/${ENUM_TYPE_USER.CREATOR}`, { page: 1, limit: 25 , subscriptionStatusId: SUBSCRIPTION_STATUS.ACTIVE });
+    this.getSubscriptionsForUser(
+      `/user/${this.sesionService.user$()?.userId}/suscriptions/${ENUM_TYPE_USER.CREATOR}`,
+      { page: 1, limit: 25, subscriptionStatusId: SUBSCRIPTION_STATUS.ACTIVE }
+    );
   }
-  
 
   getSubscriptionsForUser(uri: string = '', params: any = {}): void {
     this.UserSuscriptionsIdService.getSubscriptions(uri, params)
@@ -84,13 +95,15 @@ export class UserSubscriptionsComponent {
         finalize(() => this._loaderUIService.hideLoader()),
         take(1)
       )
-      .subscribe((data) => {
-        this.subscriptions.set([...this.subscriptions(), ...data.subscription]);
-        this.paginator = data.paginator;
-      }, (error) => {
-
-        console.error('Error fetching subscriptions:', error);
-      });
+      .subscribe(
+        (data) => {
+          this.subscriptions.set([...this.subscriptions(), ...data.subscription]);
+          this.paginator = data.paginator;
+        },
+        (error) => {
+          console.error('Error fetching subscriptions:', error);
+        }
+      );
   }
 
   loadMoreSubscriptions(event: any) {
@@ -114,48 +127,49 @@ export class UserSubscriptionsComponent {
     await modalSearch.present();
   }
 
-
   async onShowOptions(subscription: Subscription, event: Event) {
     const modal = await this.modalCtrl.create({
       component: OptionsSubscritporModalComponent,
       componentProps: {
         subscription: this.subscriptions,
-        userTypeId: this.sesionService.user$()?.userTypeId
+        userTypeId: this.sesionService.user$()?.userTypeId,
       },
       breakpoints: [0.4, 1],
       initialBreakpoint: 0.4,
       handle: false,
       cssClass: 'bottom-sheet-modal-rounded',
-    })
+    });
 
     await modal.present();
     const { data, role } = await modal.onWillDismiss();
     if (role === 'confirm' && data?.confirmed) {
-
     } else if (data?.createConversation) {
       this.createConversation(subscription);
     }
-
   }
-
 
   createConversation(subscription: Subscription) {
     const payload = {
       creatorUserId: subscription.user.id,
       athleteUserId: this.sesionService.user$()?.userId,
-      sendMessageUserId: this.sesionService.user$()?.userId
+      sendMessageUserId: this.sesionService.user$()?.userId,
     };
     this._loaderUIService.showLoader();
-    this._userConversationService.createConversation(payload).pipe(
-      take(1),
-      finalize(() => this._loaderUIService.hideLoader())).
-      subscribe({
+    this._userConversationService
+      .createConversation(payload)
+      .pipe(
+        take(1),
+        finalize(() => this._loaderUIService.hideLoader())
+      )
+      .subscribe({
         next: (conversation) => {
-          this.router.navigate([`home/${conversation.data.userConversationId}/user-chat`], { state: { conversation: conversation.data }, });
+          this.router.navigate([`home/${conversation.data.userConversationId}/user-chat`], {
+            state: { conversation: conversation.data },
+          });
         },
         error: (error) => {
           console.error('Error al crear la conversación:', error);
-        }
+        },
       });
   }
 }
