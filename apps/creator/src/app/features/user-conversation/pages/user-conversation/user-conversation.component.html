@@ -1,13 +1,14 @@
-<div class="header-container">
-  <app-header-search (clickSearch)="openDetailModal()"></app-header-search>
-  <section class="header-info-container">
-    <span class="title">Mensajes</span>
-    <span class="subTitle"
-      >¿Quisieras reportar algún usuario? <span class="contact-link">Contáctanos</span></span
-    >
-  </section>
-</div>
-
+<ion-header>
+  <ion-toolbar class="header-container">
+    <app-header-search (clickSearch)="openDetailModal()"></app-header-search>
+    <section class="header-info-container">
+      <span class="title">Mensajes</span>
+      <span class="subTitle"
+        >¿Quisieras reportar algún usuario? <span class="contact-link">Contáctanos</span></span
+      >
+    </section>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
   <app-layout-content
     [customClass]="'conversation-page'"

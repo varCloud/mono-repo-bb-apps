@@ -1,4 +1,5 @@
 .chat-container {
+  padding-top: env(safe-area-inset-top);
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -40,7 +41,7 @@
       color: #666;
 
       &::before {
-        content: "";
+        content: '';
         position: absolute;
         left: 0;
         top: 50%;
