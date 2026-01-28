@@ -182,7 +182,8 @@ export class DeepLinkService {
     
     if (status === 'success') {
       console.log('✅ Stripe success! Navigating to personal-data page');
-      await this.router.navigate(['home/profile/personal-data']);
+      await this.router.navigate(['home'], { queryParams: { stripe: 'success' } , replaceUrl: true});
+      await this.router.navigate(['home/profile'], { queryParams: { stripe: 'success' } , replaceUrl: true});
     } else {
       console.warn('❌ Stripe onboarding failed with status:', status);
       this.navigateToFallback();

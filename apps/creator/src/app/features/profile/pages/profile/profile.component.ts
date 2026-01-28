@@ -1,3 +1,4 @@
+import { LoggerService } from 'libs/core/services/logger.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
@@ -18,13 +19,15 @@ import {
   trashSharp,
   shareSocialOutline,
 } from 'ionicons/icons';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   LoaderUIService,
   LocalStorageService,
   SesionService,
+  UserService,
 } from '@monorepo-bb-app/core';
-import { KEY_LOCALSTORAGE, ShareService, StripeService, ToastService } from '@monorepo-bb-app/shared';
+import { KEY_LOCALSTORAGE, ShareService, StripeService, ToastService, User } from '@monorepo-bb-app/shared';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -45,7 +48,7 @@ import { KEY_LOCALSTORAGE, ShareService, StripeService, ToastService } from '@mo
 export class ProfileComponent implements OnInit {
   menuItems = PROFILE_MENU_ITEMS;
   public webLinkCreatorProfile = '';
-  
+  public showMessageStripeIncomplete = true;
   constructor (
     private router: Router,
     private loaderUIService: LoaderUIService,
@@ -54,6 +57,8 @@ export class ProfileComponent implements OnInit {
     private toastService: ToastService,
     private shareService: ShareService,
     private _stripeService: StripeService,
+    private route: ActivatedRoute,
+    private _userService:UserService
   ) {
     addIcons({
       trashSharp,
@@ -63,6 +68,16 @@ export class ProfileComponent implements OnInit {
       copyOutline,
       shareSocialOutline,
     });
+    this.route.queryParams.subscribe(params => {
+      if (params['stripe'] === 'success') {
+        this.showMessageStripeIncomplete = false;
+        this.toastService.success('¡Configuración de Stripe completada con éxito!');
+        if(this.sesionService.user$().userId){
+          this._userService.getUser(this.sesionService.user$().userId).pipe(take(1));
+        }
+      }
+    });
+
   }
 
   async ngOnInit() {
@@ -175,7 +190,7 @@ export class ProfileComponent implements OnInit {
   private logout(): void {
     this.loaderUIService.showLoader();
     setTimeout(async () => {
-      this.localStorageService.clear([KEY_LOCALSTORAGE.TOKEN_PUSH]);
+      await this.localStorageService.clear([KEY_LOCALSTORAGE.TOKEN_PUSH]);
       await this.router.navigate(['login']);
       this.loaderUIService.hideLoader();
     }, 300);

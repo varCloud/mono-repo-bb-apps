@@ -119,6 +119,7 @@ export class PaymentFrequencySettingsComponent implements OnInit {
       .pipe(finalize(() => this.isLoading.set(false)))
       .subscribe({
         next: (data: any) => {
+          debugger
           const payments = data.filter((item: any) => item.isTrialSubscription != 1).map(
             (item: any) => new PaymentFrecuencyModel(item),
           );
@@ -219,6 +220,9 @@ export class PaymentFrequencySettingsComponent implements OnInit {
     const freeFrequency = data.find(
       (item:any) => item.isTrialSubscription === 1,
     );
+    
+    if(!freeFrequency) return;
+
     this.PaymentFrecuencyFree.emit(new PaymentFrecuencyModel(freeFrequency)!);
   }
 }

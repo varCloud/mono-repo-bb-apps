@@ -44,7 +44,7 @@
         </ion-col>
       </ion-row>
 
-      @if(this.sesionService.user$()?.stripeAccountId == null || this.sesionService.user$()?.stripeStatus != 'active'){
+      @if(showMessageStripeIncomplete && (this.sesionService.user$()?.stripeAccountId == null || this.sesionService.user$()?.stripeStatus != 'active')){
       <ion-row class="menu-items">
         <ion-col>
           <ion-item color="danger" button (click)="openStripeOnboarding()" class="finish-stripe">

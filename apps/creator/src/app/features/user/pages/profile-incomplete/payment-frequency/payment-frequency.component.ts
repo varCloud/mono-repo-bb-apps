@@ -76,12 +76,16 @@ export class PaymentFrequencyComponent implements OnInit {
   }
 
   onNextButtonClick() {
+    debugger
     if (this.paymentFrecuency.length < 1) {
       return;
     }
     this.isNextButtonDisabled.set(true);
     this._loaderUIService.showLoader();
-    this.paymentFrecuency.push(this.paymentFrecuencyFree!);
+    
+    if(this.paymentFrecuencyFree){
+      this.paymentFrecuency.push(this.paymentFrecuencyFree!);
+    }
     const payload: PaymentFrecuencyRequest[] = this.paymentFrecuency.map(
       (item) => ({
         cycleId: item.cycleId,
