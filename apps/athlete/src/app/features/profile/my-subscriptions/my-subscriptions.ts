@@ -136,8 +136,8 @@ export class MySubscriptionsPage {
         subscription: this.subscriptions,
         userTypeId: this.sesionService.user$()?.userTypeId,
       },
-      breakpoints: [0.4, 1],
-      initialBreakpoint: 0.4,
+      breakpoints: [0.5, 1],
+      initialBreakpoint: 0.5,
       handle: false,
       cssClass: 'bottom-sheet-modal-rounded',
     });

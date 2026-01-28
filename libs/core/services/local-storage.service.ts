@@ -30,9 +30,18 @@ export class LocalStorageService {
     return this._storage!.remove(key);
   }
 
-  public async clear() {
+  public async clear(excludeKeys?: string[]) {
     await this.checkInitialized();
-    this._storage?.clear();
+    if (excludeKeys && excludeKeys.length > 0) {
+      const keys = await this._storage?.keys();
+      for (const key of keys) {
+        if (!excludeKeys.includes(key)) {
+          await this._storage?.remove(key);
+        }
+      }
+    } else {
+      this._storage?.clear();
+    }
   }
 
   async checkInitialized() {

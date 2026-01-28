@@ -141,8 +141,8 @@ export class UserSubscriptionsComponent {
 
   createConversation(subscription: Subscription) {
     const payload = {
-      creatorUserId: subscription.user.id,
-      athleteUserId: this.sesionService.user$()?.userId,
+      creatorUserId: this.sesionService.user$()?.userId,
+      athleteUserId: subscription.user.id,
       sendMessageUserId: this.sesionService.user$()?.userId
     };
     this._loaderUIService.showLoader();

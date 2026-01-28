@@ -159,7 +159,7 @@ export class UserChatComponent  implements AfterViewChecked {
 
     this._loaderUIService.showLoader();
     this._userConectionService
-      .getMessagesByConversartion(uri, this.conversationId, params)
+      .getMessagesByConversartion(uri, this.userConversationModel.userConversationId, params)
       .pipe(take(1), finalize(() => this._loaderUIService.hideLoader()))
       .subscribe(
         (data) => {

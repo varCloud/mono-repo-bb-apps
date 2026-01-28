@@ -175,7 +175,7 @@ export class ProfileComponent implements OnInit {
   private logout(): void {
     this.loaderUIService.showLoader();
     setTimeout(async () => {
-      this.localStorageService.clear();
+      this.localStorageService.clear([KEY_LOCALSTORAGE.TOKEN_PUSH]);
       await this.router.navigate(['login']);
       this.loaderUIService.hideLoader();
     }, 300);

@@ -44,7 +44,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {}
 
   onRedirectTabButton(url: string) {
-    console.log('Redirecting to:', url);
     this.router.navigateByUrl('/home/profile');
   }
 }

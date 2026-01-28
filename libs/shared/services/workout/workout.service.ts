@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environment/environment';
 import { API_URLS } from '../../constants/api-urls';
-import { firstValueFrom, map, tap } from 'rxjs';
+import { firstValueFrom, map, of, tap } from 'rxjs';
 import { WorkoutListModel } from '../../models/workout-response-list';
 import { PaginatorModel } from 'libs/shared/models/paginator';
 import { RatingModel } from '../../models/rating.model';
@@ -37,6 +37,7 @@ export class WorkoutService {
   }
 
   public async getWorkoutMaxLikes(idCreator: number) {
+
     const $observer = this._http
       .get(`${this.BASE_URL}${API_URLS.WORKOUT}/${idCreator}/max-likes`)
       .pipe(
@@ -48,6 +49,7 @@ export class WorkoutService {
   }
 
   public async getWorkoutById(id: number) {
+    
     const $observer = this._http.get(`${this.BASE_URL}${API_URLS.WORKOUT}/${id}`).pipe(
       map((res: any) => {
         return res.data;

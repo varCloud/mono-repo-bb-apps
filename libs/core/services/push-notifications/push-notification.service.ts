@@ -11,11 +11,11 @@ import { LocalNotifications } from '@capacitor/local-notifications';
 import { isPlatform, ToastController, AlertController } from '@ionic/angular';
 import { LoggerService } from '../../services/logger.service';
 import { LocalStorageService } from '../local-storage.service';
-import { KEY_LOCALSTORAGE } from 'libs/shared/constants/key-localstorage';
 import { SesionService } from '../sesion.service';
 import { UserService } from '../user.service';
 import { take } from 'rxjs';
 import { Router } from '@angular/router';
+import { KEY_LOCALSTORAGE } from '../../../shared/constants/key-localstorage';
 
 
 @Injectable({

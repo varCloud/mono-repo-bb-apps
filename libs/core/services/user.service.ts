@@ -90,36 +90,29 @@ export class UserService {
     if (!user) {
       user = await this._sesionService.getUserFromLocalStorage();
     }
+    this.logger.info('Checking session to update push token', { user , tokenPush: await this._localStorage.get(KEY_LOCALSTORAGE.TOKEN_PUSH) });
+    
     if (user && user.userId) {
-      const payload = {
-        pushNotificationToken:
-          (await this._localStorage.get(KEY_LOCALSTORAGE.TOKEN_PUSH)) || '',
-      };
+      const payload = { pushNotificationToken: (await this._localStorage.get(KEY_LOCALSTORAGE.TOKEN_PUSH)) || ''};
+      
+      this.logger.info('payload', payload);
 
       if (payload.pushNotificationToken == '') {
-        this.logger.info(
-          'No hay token push guardado en local storage, no se actualiza el token push'
-        );
+        this.logger.info('No hay token push guardado en local storage, no se actualiza el token push');
         return;
       }
 
       if (payload.pushNotificationToken == user?.pushNotificationToken) {
-        this.logger.info(
-          'El token push guardado es igual al token actual del usuario, no se actualiza el token push'
-        );
+        this.logger.info('El token push guardado es igual al token actual del usuario, no se actualiza el token push');
         return;
       }
 
-      this.logger.info('Actualizando token push para usuario', {
-        userId: user.userId,
-        pushNotificationToken: payload.pushNotificationToken,
-      });
+      this.logger.info('Actualizando token push para usuario', {userId: user.userId,pushNotificationToken: payload.pushNotificationToken});
       this.updateUser(user.userId, payload)
         .pipe(take(1))
         .subscribe({
           next: () => {
-            this.logger.info(
-              'Token push actualizado correctamente para usuario',
+            this.logger.info('Token push actualizado correctamente para usuario',
               {
                 userId: user.userId,
                 pushNotificationToken: payload.pushNotificationToken,

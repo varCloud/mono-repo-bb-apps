@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, effect, Input, OnInit } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, effect, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -22,15 +22,16 @@ import { UserAvatarComponent } from '@monorepo-bb-app/ui';
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule, UserAvatarComponent],
 })
-export class UserChatComponent  {
-
+export class UserChatComponent implements AfterViewChecked {
+  @ViewChild('messageContainer') private messageContainer!: ElementRef;
   @Input() messages: Message[] = [];
   public userInfo: UserSummary | null = null;
   public userSesion!: User;
   public paginator!: PaginatorModel;
   public userConversationModel!: UserConversationModel;
   public newMessage: string = '';
-  
+  private goToBottom: boolean = true;
+
   constructor(
     private _userConectionService: UserConversationService,
     private _sesionService: SesionService,
@@ -49,6 +50,7 @@ export class UserChatComponent  {
 
   ionViewWillLeave() {
     this.messages = [];
+    this.goToBottom = true;
   }
 
   private _serUserInfo() {
@@ -57,8 +59,8 @@ export class UserChatComponent  {
     if (state?.conversation) {
       this.userConversationModel = (state.conversation as UserConversationModel);
       if (this.userConversationModel) {
-          this.userInfo = this.userSesion?.userTypeId === ENUM_TYPE_USER.ATHLETE ? 
-          this.userConversationModel.creatorUser : 
+        this.userInfo = this.userSesion?.userTypeId === ENUM_TYPE_USER.ATHLETE ?
+          this.userConversationModel.creatorUser :
           this.userConversationModel.athleteUser;
       }
       console.log('Datos recibidos:', JSON.stringify(this.userConversationModel));
@@ -124,7 +126,8 @@ export class UserChatComponent  {
       this.newMessage = '';
       const creatorUserId = this.userConversationModel.creatorUser.userId;
       const athleteUserId = this.userConversationModel.athleteUser.userId;
-      this._userConectionService.message(newMsg.createPayload(creatorUserId,athleteUserId)).subscribe(
+      this.goToBottom=true;
+      this._userConectionService.message(newMsg.createPayload(creatorUserId, athleteUserId)).subscribe(
         (response) => {
           console.log('Message sent successfully', response);
         },
@@ -137,6 +140,7 @@ export class UserChatComponent  {
 
   async loadMoreMessages(event: any) {
     if (this.paginator && this.paginator.links.next) {
+      this.goToBottom = false;
       await this.getMessages(this.paginator.links.next);
     }
     event.target.complete();
@@ -158,6 +162,22 @@ export class UserChatComponent  {
           console.error('Error retrieving messages', error);
         },
       );
+  }
+
+  ngAfterViewChecked() {
+    if (this.goToBottom) {
+      this.scrollToBottom();
+    }
+  }
+
+  public scrollToBottom(): void {
+    try {
+
+      this.messageContainer.nativeElement.scrollTop = this.messageContainer.nativeElement.scrollHeight + 15;
+
+    } catch (err) {
+      console.error('Error scrolling to bottom:', err);
+    }
   }
 
   get ENUM_STATUS_MESSAGE() {
