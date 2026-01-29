@@ -1,0 +1,128 @@
+<ion-header>
+    <ion-toolbar class="header-container">
+        <app-header-search (click)="openFilterModal()"></app-header-search>
+        <section class="header-info-container">
+            <span class="title">{{ 'creator-payments.title' | translate }}</span>
+        </section>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <app-layout-content [title]="'creator-payments.title' | translate">
+        <div content-body>
+            <!-- Earnings Summary -->
+            <div class="earnings-summary">
+                <ion-card class="summary-card">
+                    <ion-card-header>
+                        <ion-card-title class="summary-title">
+                            <ion-icon name="trending-up-outline"></ion-icon>
+                            {{ 'creator-payments.earnings-summary' | translate }}
+                        </ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <div class="earnings-grid">
+                            <div class="earning-item">
+                                <div class="earning-amount total">{{ totalEarnings() | currency:'MXN':'symbol':'1.2-2'
+                                    }}</div>
+                                <div class="earning-label">{{ 'creator-payments.total-earnings' | translate }}</div>
+                            </div>
+                            <div class="earning-item">
+                                <div class="earning-amount monthly">{{ thisMonthEarnings() |
+                                    currency:'MXN':'symbol':'1.2-2' }}</div>
+                                <div class="earning-label">{{ 'creator-payments.this-month' | translate }}</div>
+                            </div>
+                        </div>
+                    </ion-card-content>
+                </ion-card>
+            </div>
+
+            <ion-refresher slot="fixed" [mode]="'ios'" (ionRefresh)="loadMorePayments($event)" position="top">
+                <ion-refresher-content [pullingText]="'common.load-more-elements-pagination' | translate"
+                    [refreshingText]="'common.loading' | translate">
+                </ion-refresher-content>
+            </ion-refresher>
+
+            <ion-list [lines]="'none'">
+                @for (payment of payments(); track payment.transactionId) {
+                <lib-payment-card [payment]="payment" [userType]="'creator'" [showOptions]="true"
+                    (optionsClick)="onPaymentOptions($event)" (downloadInvoice)="onDownloadInvoice($event)"
+                    (downloadReceipt)="onDownloadReceipt($event)" class="payment-item"></lib-payment-card>
+                } @empty {
+                <lib-empty-elements-component [imgPath]="imgUrl()" [message]="textMessage()">
+                </lib-empty-elements-component>
+                }
+            </ion-list>
+        </div>
+    </app-layout-content>
+</ion-content>
+
+<!-- Filter Modal -->
+<ion-modal [isOpen]="isFilterModalOpen()" (didDismiss)="closeFilterModal()">
+    <ng-template>
+        <ion-header>
+            <ion-toolbar>
+                <ion-title>{{ 'creator-payments.filters' | translate }}</ion-title>
+                <ion-buttons slot="end">
+                    <ion-button fill="clear" (click)="closeFilterModal()">
+                        <ion-icon name="close-outline" slot="icon-only"></ion-icon>
+                    </ion-button>
+                </ion-buttons>
+            </ion-toolbar>
+        </ion-header>
+
+        <ion-content class="filter-content">
+            <div class="search-container">
+                <ion-searchbar [formControl]="searchControl"
+                    [placeholder]="'creator-payments.search-placeholder' | translate" [debounce]="300"></ion-searchbar>
+            </div>
+
+            <div class="filter-section">
+                <ion-item>
+                    <ion-label>{{ 'creator-payments.start-date' | translate }}</ion-label>
+                    <ion-datetime [formControl]="startDateControl" display-format="DD/MM/YYYY"
+                        picker-format="DD/MM/YYYY" slot="end"></ion-datetime>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label>{{ 'creator-payments.end-date' | translate }}</ion-label>
+                    <ion-datetime [formControl]="endDateControl" display-format="DD/MM/YYYY" picker-format="DD/MM/YYYY"
+                        slot="end"></ion-datetime>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label>{{ 'creator-payments.sort-by' | translate }}</ion-label>
+                    <ion-segment [formControl]="sortByControl" slot="end">
+                        <ion-segment-button value="transactionDate">
+                            <ion-label>{{ 'creator-payments.date' | translate }}</ion-label>
+                        </ion-segment-button>
+                        <ion-segment-button value="amount">
+                            <ion-label>{{ 'creator-payments.amount' | translate }}</ion-label>
+                        </ion-segment-button>
+                    </ion-segment>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label>{{ 'creator-payments.order' | translate }}</ion-label>
+                    <ion-segment [formControl]="sortOrderControl" slot="end">
+                        <ion-segment-button value="DESC">
+                            <ion-label>{{ 'creator-payments.newest' | translate }}</ion-label>
+                        </ion-segment-button>
+                        <ion-segment-button value="ASC">
+                            <ion-label>{{ 'creator-payments.oldest' | translate }}</ion-label>
+                        </ion-segment-button>
+                    </ion-segment>
+                </ion-item>
+            </div>
+
+            <div class="filter-actions">
+                <ion-button expand="block" fill="clear" color="medium" (click)="clearFilters()">
+                    {{ 'creator-payments.clear-filters' | translate }}
+                </ion-button>
+
+                <ion-button expand="block" (click)="applyFilters()">
+                    {{ 'creator-payments.apply-filters' | translate }}
+                </ion-button>
+            </div>
+        </ion-content>
+    </ng-template>
+</ion-modal>

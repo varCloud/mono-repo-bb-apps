@@ -31,6 +31,11 @@ export const PROFILE_MENU_ITEMS: ProfileMenuItem[] = [
     showArrow: true,
   },
   {
+    text: 'Historial de ganancias',
+    action: 'payments',
+    showArrow: true,
+  },
+  {
     text: 'Términos de servicio',
     action: 'terms',
     showArrow: true,

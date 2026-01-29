@@ -54,6 +54,13 @@ export const profileRoutes: Routes = [
           ),
       },
       {
+        path: 'payments',
+        loadComponent: () =>
+          import('./pages/athlete-payments/athlete-payments.page').then(
+            (m) => m.AthletePaymentsPage
+          ),
+      },
+      {
         path: '**',
         redirectTo: '',
         pathMatch: 'full',
