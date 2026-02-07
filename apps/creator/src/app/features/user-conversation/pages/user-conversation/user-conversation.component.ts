@@ -33,7 +33,7 @@ import { NgItemLabelDirective } from "@ng-select/ng-select";
 export class UserConversationComponent {
 
   conversations: any[] = []; // Aquí definiremos el tipo correcto más adelante
-
+  reload: boolean = true;
   constructor(
     private modalCtrl: ModalController,
     private router: Router,
@@ -43,6 +43,14 @@ export class UserConversationComponent {
     effect(() => {
       this.sesionService.user$()      
     });
+  }
+
+    ionViewWillEnter() {
+      this.reload = true;
+  }
+
+  ionViewWillLeave() {
+    this.reload = false;
   }
 
   onConversationSelected(conversation: any) {

@@ -40,12 +40,9 @@ export class UserConversationComponent{
     private router: Router,
     public sesionService: SesionService
   ) {
-
     effect(() => {
       this.sesionService.user$()
     });
-
-
   }
 
   ionViewWillEnter() {
@@ -55,7 +52,6 @@ export class UserConversationComponent{
   ionViewWillLeave() {
     this.reload = false;
   }
-
 
   onConversationSelected(conversation: any) {
     this.router.navigate([`/home/${conversation.userConversationId}/user-chat`] , { state: { conversation } });
@@ -77,7 +73,6 @@ export class UserConversationComponent{
 
     const result = await modal.onDidDismiss();
     if (result.data) {
-      // Manejar los datos retornados del modal si es necesario
       console.log('Modal Data:', result.data);
     }
   }

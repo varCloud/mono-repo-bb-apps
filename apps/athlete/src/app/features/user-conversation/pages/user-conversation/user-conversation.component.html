@@ -11,7 +11,8 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-grid content-body class="ion-no-padding" *ngIf="this.sesionService.user$() && reload">
+  @if( this.sesionService.user$() && reload) {
+  <ion-grid content-body class="ion-no-padding">
     <app-conversation-list
       [userId]="this.sesionService.user$()!.userId"
       [userTypeId]="this.sesionService.user$()!.userTypeId"
@@ -19,4 +20,5 @@
     >
     </app-conversation-list>
   </ion-grid>
+}
 </ion-content>

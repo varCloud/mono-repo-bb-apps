@@ -86,9 +86,9 @@ export class CategoriesSelectComponent implements OnInit {
           return cat;
         });
       });
-      this._toastService.error(
+      this._toastService.info(
         this._translate.transform('error.max-categories-selected', {
-          limit: this.limitSelected,
+          limit: this.limitSelected(),
         }),
         { duration: 3000 },
       );

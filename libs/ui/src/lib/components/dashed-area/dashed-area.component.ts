@@ -12,7 +12,7 @@ type iconType = 'cloud-upload-outline' | 'add-circle-outline';
   imports: [IonIcon, IonButton],
 })
 export class DashedAreaComponent implements OnInit {
-  label = input('Carga el video de tu ejercicio');
+  label = input('');
   icon = input<iconType>('cloud-upload-outline');
   disabled = input<boolean>(false);
   clickEvent = output<void>();

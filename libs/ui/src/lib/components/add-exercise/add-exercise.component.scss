@@ -147,3 +147,14 @@
     }
   }
 }
+
+.message-format{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -8px;
+  span{
+    font-size: 9px;
+    color: #666;
+  }
+}

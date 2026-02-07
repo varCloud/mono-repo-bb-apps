@@ -20,18 +20,20 @@
     </ion-col>
 
     <ion-col size="12">
-      <ion-input
+      <ion-textarea 
         formControlName="description"
         class="bb-input"
-        [label]="'workout.routine.cover-description' | translate"
+        [label]="'workout.routine.cover-description' | translate "
         label-placement="floating"
         fill="outline"
-        [maxlength]="100"
+        [maxlength]="255"
+        [counter]="true" 
         mode="md"
+        [autoGrow]="true"
         [placeholder]="
           'workout.routine.cover-description-placeholder' | translate
         "
-      ></ion-input>
+      ></ion-textarea>
       <app-error-message
         [control]="$any(routineForm.get('description'))"
       ></app-error-message>

@@ -55,11 +55,19 @@
           }
           <!--  -->
           @if (!hideCoverUpload()) {
-          <app-dashed-area (clickEvent)="abrirExplorer()"></app-dashed-area>
+          <app-dashed-area 
+            [label]="
+              isDocument
+                ? 'Sube un documento PDF'
+                : 'Carga el video de tu ejercicio'
+            "
+          (clickEvent)="abrirExplorer()"></app-dashed-area>
           }
 
           <!-- Uppy Dashboard para subida de video -->
-
+           <div class="message-format">
+             <span>carga un arhivo .mp4 o .mov</span>
+           </div>
           <div
             class="video-upload"
             [style.display]="hideCoverUpload() ? 'block' : 'none'"

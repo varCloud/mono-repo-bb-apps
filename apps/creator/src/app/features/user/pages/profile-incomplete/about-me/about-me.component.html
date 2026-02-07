@@ -26,6 +26,8 @@
                 fill="outline"
                 placeholder="{{ 'about-me.placeholder' | translate }}"
                 rows="10"
+                maxlength="500"
+                [counter]="true"
                 [formControl]="bio"
               ></ion-textarea>
             </ion-col>

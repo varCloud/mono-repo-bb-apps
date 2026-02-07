@@ -14,6 +14,7 @@ import {
   IonInput,
   IonButton,
   IonProgressBar,
+  IonTextarea,
 } from '@ionic/angular/standalone';
 import {
   LoaderUIService,
@@ -58,6 +59,7 @@ import { TrainingTypeEnum } from '../../../../../shared/constants/types-routines
 import Uppy from '@uppy/core';
 import { BUCKET_TYPE } from 'libs/shared/constants/enums';
 
+
 @Component({
   selector: 'lib-routine-form',
   imports: [
@@ -73,6 +75,7 @@ import { BUCKET_TYPE } from 'libs/shared/constants/enums';
     DashedAreaComponent,
     ReactiveFormsModule,
     AddRecordedClassComponent,
+    IonTextarea
   ],
   templateUrl: './routine-form.component.html',
   styleUrl: './routine-form.component.scss',

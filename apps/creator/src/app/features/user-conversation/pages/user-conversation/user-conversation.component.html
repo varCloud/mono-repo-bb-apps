@@ -14,7 +14,8 @@
     [customClass]="'conversation-page'"
     [title]="'conversations.title' | translate"
   >
-    <ion-grid content-body class="ion-no-padding" *ngIf="this.sesionService.user$()">
+  @if(this.sesionService.user$() && reload) {
+    <ion-grid content-body class="ion-no-padding">
       <app-conversation-list
         [userId]="this.sesionService.user$()!.userId"
         [userTypeId]="this.sesionService.user$()!.userTypeId"
@@ -22,5 +23,6 @@
       >
       </app-conversation-list>
     </ion-grid>
+  }
   </app-layout-content>
 </ion-content>
