@@ -76,7 +76,6 @@ export class PaymentFrequencyComponent implements OnInit {
   }
 
   onNextButtonClick() {
-    debugger
     if (this.paymentFrecuency.length < 1) {
       return;
     }

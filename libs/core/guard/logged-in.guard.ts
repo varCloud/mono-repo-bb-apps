@@ -6,7 +6,6 @@ import { KEY_LOCALSTORAGE } from '../../shared/';
 export const loggedInGuard: CanActivateFn = async (route, state) => {
   const storageService = inject(LocalStorageService);
   const router = inject(Router);
-  debugger
   const token = await storageService.get(KEY_LOCALSTORAGE.TOKEN);
   if (token) {
     router.navigate(['/home']);

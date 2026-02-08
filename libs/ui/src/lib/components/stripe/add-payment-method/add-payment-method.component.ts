@@ -51,13 +51,34 @@ export class AddPaymentMethodComponent implements OnInit {
       theme: 'flat',
       variables: { colorPrimaryText: '#f79145' },
     };
-    const options = {
+
+    const paymentElementOptions = {
       layout: {
-        type: 'accordion',
+        type: 'tabs',
         defaultCollapsed: false,
-        radios: true,
+        radios: false,
         spacedAccordionItems: false,
       },
+    };
+    const options = {
+      fields: {
+        billingDetails: {
+          name: 'never',
+          email: 'never',
+          phone: 'never',
+          address: {
+            line1: 'never',
+            line2: 'never',
+            city: 'never',
+            state: 'never',
+            postalCode: 'never',
+            country: 'never'
+          }
+        }
+      },
+      terms: {
+        card: 'never'
+      }
     };
     this._loader.showLoader();
     this.isLoading.set(true);
@@ -76,8 +97,9 @@ export class AddPaymentMethodComponent implements OnInit {
             clientSecret: client_secret,
             locale: 'es',
             appearance,
+            ...options
           });
-          this.card = this.elements.create('payment', options);
+          this.card = this.elements.create('payment', paymentElementOptions);
           this.card.mount(this.paymentMethodElement()?.nativeElement);
         },
         (error) => {

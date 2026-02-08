@@ -17,6 +17,7 @@ import {
   IonLabel,
   IonText,
   IonBackButton,
+  IonIcon 
 } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
 import {
@@ -27,6 +28,8 @@ import {
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { caretBack , chevronBackOutline } from 'ionicons/icons';
+import { addIcons } from 'ionicons';
 
 @Component({
   selector: 'app-detail-suscription-creator',
@@ -40,6 +43,7 @@ import { RouterLink } from '@angular/router';
     IonItem,
     IonButton,
     IonGrid,
+    IonIcon,
     IonContent,
     TranslateModule,
     LayoutContentComponent,
@@ -62,7 +66,9 @@ export class DetailSuscriptionCreatorComponent implements OnInit {
     if (!creator) return '';
     return `${creator.firstName} ${creator.lastName}`;
   });
-  constructor(private _processSuscriptionService: ProcessSuscriptionService) {}
+  constructor(private _processSuscriptionService: ProcessSuscriptionService) {
+     addIcons({ caretBack, chevronBackOutline });
+  }
   ngOnInit(): void {
     this.creator.set(this._processSuscriptionService.getCreator());
     this.creator.update((creator) => {

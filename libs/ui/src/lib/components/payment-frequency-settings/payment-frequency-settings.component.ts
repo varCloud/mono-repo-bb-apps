@@ -119,7 +119,6 @@ export class PaymentFrequencySettingsComponent implements OnInit {
       .pipe(finalize(() => this.isLoading.set(false)))
       .subscribe({
         next: (data: any) => {
-          debugger
           const payments = data.filter((item: any) => item.isTrialSubscription != 1).map(
             (item: any) => new PaymentFrecuencyModel(item),
           );

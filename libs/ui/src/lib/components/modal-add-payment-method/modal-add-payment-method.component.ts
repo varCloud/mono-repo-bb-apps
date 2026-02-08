@@ -1,4 +1,4 @@
-import { arrowBackOutline } from 'ionicons/icons';
+import { arrowBackOutline , chevronBackOutline } from 'ionicons/icons';
 import { Component, input, Input, type OnInit } from '@angular/core';
 import { AddPaymentMethodComponent } from '../stripe/add-payment-method/add-payment-method.component';
 import {
@@ -42,7 +42,7 @@ export class ModalAddPaymentMethodComponent implements OnInit {
   public title = input<string>('');
   public logo = input<string>(CONSTANTS.DEFAULT_LOGO_LETRAS_TOOLBAR);
   constructor(private modalCtrl: ModalController) {
-     addIcons({ arrowBackOutline });
+     addIcons({ arrowBackOutline, chevronBackOutline });
   }
   ngOnInit(): void {}
 

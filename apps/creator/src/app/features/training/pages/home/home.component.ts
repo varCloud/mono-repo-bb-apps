@@ -153,9 +153,7 @@ export class HomeComponent implements OnInit {
         this.workoutMaxLikes.set(res);
       }
     } catch (error) {
-      this._toastService.error('Error al cargar los entrenamientos 222', {
-        duration: 3000,
-      });
+        console.log(`getWorkoutMaxLikes`, error);
     } finally {
       this._loader.hideLoader();
     }

@@ -3,14 +3,13 @@
   [fullscreen]="true"
 >
   <ion-back-button
-    icon="arrow-back-outline"
+    [icon]="'chevron-back-outline'"
     class="ion-no-padding bb-goback"
-    [defaultHref]="
-      '/home/suscriptions/suscription-creator/' + creator()?.userId
-    "
+    [defaultHref]="'/home/suscriptions/suscription-creator/' + creator()?.userId"
     uppercase="false"
     text=""
     style="position: absolute; top: 16px; left: 16px; z-index: 10"
+    [color]="'secondary'"
   ></ion-back-button>
   <div class="container-header-subscription">
     <img src="assets/images/logo/logo.svg" alt="" class="img-logo" />
@@ -25,7 +24,6 @@
       la aplicación.</ion-text
     >
   </div>
-
   @if( creator() ) {
   <app-layout-content customClass="suscription-creator-page ion-padding">
     <ion-grid content-body class="ion-margin-top">
