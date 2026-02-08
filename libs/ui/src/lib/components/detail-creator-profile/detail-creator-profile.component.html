@@ -1,30 +1,23 @@
-<ion-content
-  class="detail-creator-profile-content ion-no-padding"
-  [fullscreen]="true"
->
+<ion-content class="detail-creator-profile-content ion-no-padding" [fullscreen]="true">
   <ion-back-button
     icon="arrow-back-outline"
     class="ion-no-padding bb-goback goback-button"
+    [ngClass]="{ 'top-safe-area': isIos }"
     [defaultHref]="defaultHref()"
     uppercase="false"
     [color]="'secondary'"
     text=""
   ></ion-back-button>
-  
+
   <div class="cover-image-container">
     <img
       [src]="creator()?.frontPageUrl || defaultCoverPicture"
       [alt]="'Portada de ' + fullName()"
-      style="
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        object-position: center;
-      "
+      style="width: 100%; height: 200px; object-fit: cover; object-position: center"
     />
     @if (isCreatorUser()) {
-      <div 
-        class="edit-cover-badge" 
+      <div
+        class="edit-cover-badge"
         role="button"
         tabindex="0"
         (click)="onEditCoverImage()"
@@ -36,14 +29,11 @@
       </div>
     }
   </div>
-  
-  <app-layout-content customClass="detail-creator-profile-page ion-padding">
+
+  <app-layout-content customClass="detail-creator-profile-page ion-padding" [useSafeArea]="false">
     <ion-grid content-body>
       <div class="header-creator-profile">
-        <ion-avatar
-          class="avatar-creator-profile"
-          [style.border-color]="creatorColor()"
-        >
+        <ion-avatar class="avatar-creator-profile" [style.border-color]="creatorColor()">
           <img
             [alt]="'Avatar de ' + fullName()"
             [src]="creator()?.profilePictureUrl || defaultProfilePicture"
@@ -54,36 +44,32 @@
           <div class="info-creator-profile-header">
             <h2 class="name">{{ fullName() }}</h2>
             @if (!hasSubscriptionActive()) {
-            <ion-button
-              size="small"
-              color="tertiary"
-              shape="round"
-              class="btn-suscription"
-              [style.border-color]="creatorColor()"
-              (click)="goToSuscriptionCreator()"
-            >
-              Suscribirse
-            </ion-button>
+              <ion-button
+                size="small"
+                color="tertiary"
+                shape="round"
+                class="btn-suscription"
+                [style.border-color]="creatorColor()"
+                (click)="goToSuscriptionCreator()"
+              >
+                Suscribirse
+              </ion-button>
             }
           </div>
           @if (creator()?.bio) {
-          <p class="bio">{{ creator()?.bio }}</p>
+            <p class="bio">{{ creator()?.bio }}</p>
           } @else {
-          <ion-skeleton-text animated></ion-skeleton-text>
-          <ion-skeleton-text animated></ion-skeleton-text>
-          <ion-skeleton-text animated></ion-skeleton-text>
+            <ion-skeleton-text animated></ion-skeleton-text>
+            <ion-skeleton-text animated></ion-skeleton-text>
+            <ion-skeleton-text animated></ion-skeleton-text>
           }
         </div>
 
         <div class="categories-creator-profile">
           @for (category of creator()?.categories; track category.categoryId) {
-          <ion-chip
-            [outline]="true"
-            class="chip"
-            [style.border-color]="creatorColor()"
-          >
-            <ion-label>{{ category.name }}</ion-label>
-          </ion-chip>
+            <ion-chip [outline]="true" class="chip" [style.border-color]="creatorColor()">
+              <ion-label>{{ category.name }}</ion-label>
+            </ion-chip>
           }
         </div>
       </div>
@@ -94,37 +80,28 @@
           [value]="tabActive()"
           [style.--indicator-color]="creatorColor()"
         >
-          <ion-segment-button
-            [value]="WORKOUT_TYPES.RUTINE_VIDEO"
-            content-id="first"
-          >
+          <ion-segment-button [value]="WORKOUT_TYPES.RUTINE_VIDEO" content-id="first">
             <ion-label class="no-transform title">Entrenamientos</ion-label>
           </ion-segment-button>
-          <ion-segment-button
-            [value]="WORKOUT_TYPES.DOCUMENT"
-            content-id="second"
-          >
+          <ion-segment-button [value]="WORKOUT_TYPES.DOCUMENT" content-id="second">
             <ion-label class="no-transform title">Documentos</ion-label>
           </ion-segment-button>
         </ion-segment>
         <div class="segment-content-wrapper" style="height: 350px">
           @if (tabActive() === WORKOUT_TYPES.RUTINE_VIDEO) {
-          <ion-content class="segment-scroll-content ion-no-padding">
-            <lib-workout-by-types
-              [idCreator]="idCreator()"
-              [workoutTypes]="[
-                WORKOUT_TYPES.RUTINE_VIDEO,
-                WORKOUT_TYPES.CLASS_VIDEO
-              ]"
-            ></lib-workout-by-types>
-          </ion-content>
+            <ion-content class="segment-scroll-content ion-no-padding">
+              <lib-workout-by-types
+                [idCreator]="idCreator()"
+                [workoutTypes]="[WORKOUT_TYPES.RUTINE_VIDEO, WORKOUT_TYPES.CLASS_VIDEO]"
+              ></lib-workout-by-types>
+            </ion-content>
           } @else if (tabActive() === WORKOUT_TYPES.DOCUMENT) {
-          <ion-content class="segment-scroll-content ion-no-padding">
-            <lib-workout-by-types
-              [idCreator]="idCreator()"
-              [workoutTypes]="[WORKOUT_TYPES.DOCUMENT]"
-            ></lib-workout-by-types>
-          </ion-content>
+            <ion-content class="segment-scroll-content ion-no-padding">
+              <lib-workout-by-types
+                [idCreator]="idCreator()"
+                [workoutTypes]="[WORKOUT_TYPES.DOCUMENT]"
+              ></lib-workout-by-types>
+            </ion-content>
           }
         </div>
       </div>

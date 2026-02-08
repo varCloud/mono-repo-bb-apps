@@ -42,6 +42,7 @@ import { arrowBackOutline, pencil } from 'ionicons/icons';
 import { WorkoutByTypesComponent } from '../workout-by-types/workout-by-types.component';
 import { CONSTANTS } from '../../../../../shared/constants/constants';
 import { CommonModule } from '@angular/common';
+import { Capacitor } from '@capacitor/core';
 
 @Component({
   selector: 'lib-detail-creator-profile',
@@ -74,7 +75,7 @@ export class DetailCreatorProfileComponent implements OnInit {
   public tabActive = signal<number>(ENUM_WORKOUT_TYPES.RUTINE_VIDEO);
   public WORKOUT_TYPES = ENUM_WORKOUT_TYPES;
   public ENUM_TYPE_USER = ENUM_TYPE_USER;
-
+  public isIos = Capacitor.getPlatform() === 'ios';
   public creator = signal<User | null>(null);
   public fullName = computed(() => {
     const creator = this.creator();
@@ -82,13 +83,13 @@ export class DetailCreatorProfileComponent implements OnInit {
   });
 
   // Computed que retorna el color del creador o el color de perfil del usuario logueado
-  public creatorColor = computed(() => 
-    this.creator()?.profileColor || this.colorService.profileColor()
+  public creatorColor = computed(
+    () => this.creator()?.profileColor || this.colorService.profileColor()
   );
 
   // Computed que valida si el usuario logueado es el creador (tipo de usuario 2)
-  public isCreatorUser = computed(() => 
-    this._sesionService.user$()?.userTypeId === ENUM_TYPE_USER.CREATOR
+  public isCreatorUser = computed(
+    () => this._sesionService.user$()?.userTypeId === ENUM_TYPE_USER.CREATOR
   );
 
   public defaultProfilePicture = CONSTANTS.DEFAULT_URL_AVATAR;
@@ -134,19 +135,16 @@ export class DetailCreatorProfileComponent implements OnInit {
 
   private checkSubscription() {
     const userId = this._sesionService.user$()?.userId || 0;
-    const suscription = this._user
-      .getSubscriptionInformation(userId, this.idCreator())
-      .subscribe({
-        next: (resp) => {
-          const status =
-            resp.paymentSubscriptionStatus.status === SubscriptionStatus.ACTIVE;
-          console.log(status);
-          this.hasSubscriptionActive.set(status);
-        },
-        error: (err) => {
-          this.hasSubscriptionActive.set(false);
-        },
-      });
+    const suscription = this._user.getSubscriptionInformation(userId, this.idCreator()).subscribe({
+      next: (resp) => {
+        const status = resp.paymentSubscriptionStatus.status === SubscriptionStatus.ACTIVE;
+        console.log(status);
+        this.hasSubscriptionActive.set(status);
+      },
+      error: (err) => {
+        this.hasSubscriptionActive.set(false);
+      },
+    });
     return suscription !== null;
   }
   public changeTab(event: any) {
@@ -158,6 +156,6 @@ export class DetailCreatorProfileComponent implements OnInit {
   }
 
   onEditCoverImage() {
-    this._router.navigate([`/home/profile/portada`])
+    this._router.navigate([`/home/profile/portada`]);
   }
 }

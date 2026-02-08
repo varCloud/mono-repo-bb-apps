@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  signal,
-  type OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, signal, type OnInit } from '@angular/core';
 import { ProcessSuscriptionService, User } from '@monorepo-bb-app/shared';
 import {
   IonContent,
@@ -17,7 +11,7 @@ import {
   IonLabel,
   IonText,
   IonBackButton,
-  IonIcon 
+  IonIcon,
 } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
 import {
@@ -27,9 +21,10 @@ import {
 } from '@monorepo-bb-app/ui';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
-import { caretBack , chevronBackOutline } from 'ionicons/icons';
+import { Router, RouterLink } from '@angular/router';
+import { caretBack, chevronBackOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
+import { Capacitor } from '@capacitor/core';
 
 @Component({
   selector: 'app-detail-suscription-creator',
@@ -58,18 +53,25 @@ import { addIcons } from 'ionicons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailSuscriptionCreatorComponent implements OnInit {
-  
   creator = signal<User | null>(null);
   selectedPaymentFrequencyId = signal<number | null>(null);
+  isIos = Capacitor.getPlatform() === 'ios';
   fullName = computed(() => {
     const creator = this.creator();
     if (!creator) return '';
     return `${creator.firstName} ${creator.lastName}`;
   });
-  constructor(private _processSuscriptionService: ProcessSuscriptionService) {
-     addIcons({ caretBack, chevronBackOutline });
+  constructor(
+    private _processSuscriptionService: ProcessSuscriptionService,
+    private _router: Router
+  ) {
+    addIcons({ caretBack, chevronBackOutline });
   }
   ngOnInit(): void {
+    if (!this._processSuscriptionService.getCreator()) {
+      this._router.navigate(['/home']);
+      return;
+    }
     this.creator.set(this._processSuscriptionService.getCreator());
     this.creator.update((creator) => {
       creator?.billingCycles.sort((a, b) => a.interval - b.interval);
@@ -81,5 +83,9 @@ export class DetailSuscriptionCreatorComponent implements OnInit {
   selectPaymentFrequency(payment: any) {
     this.selectedPaymentFrequencyId.set(payment.billingCycleId);
     this._processSuscriptionService.setSelectedBillingCycle(payment);
+  }
+
+  goToPaymentMethods() {
+    this._router.navigate(['/home/suscriptions/payment-methods']);
   }
 }

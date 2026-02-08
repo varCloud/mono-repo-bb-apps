@@ -18,6 +18,7 @@ export class LayoutContentComponent implements OnInit {
   public defaultHref = input<string>('/home');
   public title = input<string>('go-back');
   public goBackClicked = output<void>();
+  public useSafeArea = input<boolean>(true);
 
   constructor() {
     addIcons({ arrowBackOutline });
