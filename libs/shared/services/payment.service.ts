@@ -1,3 +1,4 @@
+import { PaymentTotalsModel } from './../models/paymen-totals.model';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, map, catchError, of } from 'rxjs';
@@ -5,14 +6,15 @@ import {
   PaymentTransactionModel, 
   PaymentResponse, 
   PaymentFilters,
-  PaginatorModel
+  PaginatorModel,
+  environment
 } from '@monorepo-bb-app/shared';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PaymentService {
-  private readonly BASE_URL = 'https://bb-api-y0vm.onrender.com/api/v1/user-payments';
+  private readonly BASE_URL = `${environment.API_URL}/user-payments`;
 
   constructor(private httpClient: HttpClient) {}
 
@@ -53,6 +55,14 @@ export class PaymentService {
       catchError(this.handleError)
     );
   }
+
+    public getCreatorTotalEarnings(creatorId: number): Observable<PaymentTotalsModel> {
+    const url = `${this.BASE_URL}/creator/${creatorId}/total-earnings`;    
+    return this.httpClient.get<any>(url).pipe(
+      map((response) => new PaymentTotalsModel(response.data)),
+    )
+  }
+
 
   private buildParams(filters: PaymentFilters): HttpParams {
     let params = new HttpParams();

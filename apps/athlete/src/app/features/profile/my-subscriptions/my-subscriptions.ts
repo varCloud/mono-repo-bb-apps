@@ -10,10 +10,10 @@ import {
   IonButtons,
   IonRefresherContent,
   IonRefresher,
+  ModalController,
 } from '@ionic/angular/standalone';
 // Importamos nuestro nuevo componente
 import { HeaderSearchComponent, UserCardComponent } from '@monorepo-bb-app/ui';
-import { ModalController } from '@ionic/angular/standalone';
 import { OptionsSubscritporModalComponent } from '@monorepo-bb-app/ui';
 
 import {
@@ -38,6 +38,7 @@ import { MySubscriptionsSearchModalComponent } from '@monorepo-bb-app/ui';
 import { Router } from '@angular/router';
 import { finalize, take } from 'rxjs';
 import { ENUM_TYPE_USER, SUBSCRIPTION_STATUS } from 'libs/shared/constants/enums';
+
 
 @Component({
   selector: 'app-home',
@@ -117,15 +118,8 @@ export class MySubscriptionsPage {
   async openSearchSubscriptionsModal() {
     const modalSearch = await this.modalCtrl.create({
       component: MySubscriptionsSearchModalComponent,
-      componentProps: {
-        allSubscriptions: this.subscriptions,
-      },
-      breakpoints: [0.4, 1],
-      initialBreakpoint: 1,
-      handle: false,
-      cssClass: 'search-modal',
     });
-    await modalSearch.present();
+    modalSearch.present();
   }
 
   async onShowOptions(subscription: Subscription, event: Event) {

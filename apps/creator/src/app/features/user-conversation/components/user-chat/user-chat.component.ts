@@ -9,7 +9,7 @@ import { Message, MessageModel, ENUM_MESSAGE_STATUS, UserConversationModel, User
 import { finalize, take } from 'rxjs';
 import { LoaderUIService, SesionService, UserConversationService } from '@monorepo-bb-app/core';
 import { User } from '@monorepo-bb-app/shared';
-import { send, sendSharp } from 'ionicons/icons';
+import { arrowBackOutline, chevronBackOutline, send, sendSharp } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { PaginatorModel } from '@monorepo-bb-app/shared';
 import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
@@ -41,8 +41,10 @@ export class UserChatComponent implements AfterViewChecked {
       const user = this._sesionService.user$();
       this.userSesion = user as User;
     });
-    addIcons({ sendSharp });
+    addIcons({ sendSharp , arrowBackOutline , chevronBackOutline });
   }
+
+  
 
   ionViewWillEnter() {
     this._serUserInfo();

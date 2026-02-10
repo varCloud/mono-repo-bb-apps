@@ -12,15 +12,15 @@ import {
   IonButtons,
   IonRefresherContent,
   IonRefresher,
+  ModalController,
 } from '@ionic/angular/standalone';
 import {
   HeaderSearchComponent,
   UserCardComponent,
   MySubscriptionsSearchModalComponent,
 } from '@monorepo-bb-app/ui';
-import { ModalController } from '@ionic/angular/standalone';
-import { OptionsSubscritporModalComponent } from '@monorepo-bb-app/ui';
 
+import { OptionsSubscritporModalComponent } from '@monorepo-bb-app/ui';
 import { CONSTANTS, PaginatorModel, Subscription } from '@monorepo-bb-app/shared';
 import {
   LoaderUIService,
@@ -119,10 +119,6 @@ export class UserSubscriptionsComponent {
       componentProps: {
         allSubscriptions: this.subscriptions,
       },
-      breakpoints: [0.4, 1],
-      initialBreakpoint: 1,
-      handle: false,
-      cssClass: 'search-modal',
     });
     await modalSearch.present();
   }

@@ -1,84 +1,181 @@
 :host {
-  .header-container {
-    background-color: white;
-    margin-top: 20px;
-    padding-left: 24px;
-    padding-right: 24px;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-  }
-
-  app-header-search {
-    margin-bottom: 15px;
-  }
-
-  .header-info-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    text-align: center;
-    margin-bottom: 15px;
-    margin-top: 15px;
-    gap: 4px;
-
-    .title {
-      font-size: 20px;
-      font-weight: 600;
-      color: var(--ion-color-dark);
-    }
+  .title {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+    margin-top: 0px;
   }
 }
 
 .earnings-summary {
-  padding: 16px;
-
-  .summary-card {
-    --background: linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-primary-shade) 100%);
-    --color: white;
-    border-radius: 16px;
-    box-shadow: 0 4px 16px rgba(var(--ion-color-primary-rgb), 0.3);
-
+  padding: 16px 8px;
+  
+  .summary-header {
+    margin-bottom: 24px;
+    
     .summary-title {
       display: flex;
       align-items: center;
-      font-size: 18px;
-      font-weight: 600;
-      color: white;
-
-      ion-icon {
-        margin-right: 8px;
-        font-size: 24px;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--ion-color-dark);
+      margin: 0;
+      letter-spacing: -0.02em;
+      
+      .title-icon {
+        margin-right: 12px;
+        font-size: 28px;
+        color: var(--ion-color-primary);
+        filter: drop-shadow(0 2px 4px rgba(var(--ion-color-primary-rgb), 0.2));
       }
     }
-
-    .earnings-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-top: 16px;
-
-      .earning-item {
-        text-align: center;
-
-        .earning-amount {
-          font-size: 24px;
-          font-weight: 700;
-          margin-bottom: 4px;
-
-          &.total {
-            color: #FFD700; // Gold color
-          }
-
-          &.monthly {
-            color: #98FB98; // Light green color
+  }
+  
+  .earnings-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    
+    .earning-card {
+      position: relative;
+      border-radius: 24px;
+      padding: 24px;
+      min-height: 160px;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: inherit;
+        opacity: 0.9;
+        z-index: 1;
+      }
+      
+      &:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        
+        .icon-container {
+          transform: scale(1.1) rotate(5deg);
+        }
+      }
+      
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 2;
+        
+        .icon-container {
+          width: 60px;
+          height: 60px;
+          border-radius: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s ease;
+          backdrop-filter: blur(10px);
+          
+          ion-icon {
+            font-size: 32px;
+            color: white;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
           }
         }
-
+        
+        .trend-indicator {
+          width: 36px;
+          height: 36px;
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(255, 255, 255, 0.2);
+          backdrop-filter: blur(10px);
+          
+          &.positive ion-icon {
+            color: #10DC60;
+            font-size: 20px;
+          }
+        }
+      }
+      
+      .card-content {
+        position: relative;
+        z-index: 2;
+        
+        .earning-amount {
+          font-size: 32px;
+          font-weight: 800;
+          color: white;
+          margin-bottom: 8px;
+          text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+          letter-spacing: -0.02em;
+        }
+        
         .earning-label {
+          font-size: 14px;
+          color: rgba(255, 255, 255, 0.9);
+          font-weight: 500;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+        
+        .earning-date {
           font-size: 12px;
-          opacity: 0.9;
+          color: rgba(255, 255, 255, 0.8);
+          font-weight: 400;
+          margin-top: 4px;
+          letter-spacing: 0.3px;
+        }
+      }
+      
+      .card-background-pattern {
+        position: absolute;
+        top: -50%;
+        right: -20%;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        opacity: 0.1;
+        z-index: 0;
+      }
+      
+      &.total-earnings {
+        background: linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-primary-shade) 100%);
+        box-shadow: 0 8px 32px rgba(var(--ion-color-primary-rgb), 0.4);
+        
+        .icon-container.total-icon {
+          background: linear-gradient(45deg, var(--ion-color-secondary) 0%, var(--ion-color-warning) 100%);
+        }
+        
+        .card-background-pattern {
+          background: radial-gradient(circle, rgba(var(--ion-color-secondary-rgb), 0.3) 0%, transparent 70%);
+        }
+      }
+      
+      &.daily-earnings {
+        background: linear-gradient(135deg, var(--ion-color-tertiary) 0%, var(--ion-color-tertiary-shade) 100%);
+        box-shadow: 0 8px 32px rgba(var(--ion-color-tertiary-rgb), 0.4);
+        
+        .icon-container.daily-icon {
+          background: linear-gradient(45deg, var(--ion-color-secondary) 0%, var(--ion-color-secondary-shade) 100%);
+        }
+        
+        .card-background-pattern {
+          background: radial-gradient(circle, rgba(var(--ion-color-secondary-rgb), 0.3) 0%, transparent 70%);
         }
       }
     }
@@ -144,14 +241,81 @@ ion-list {
 // Responsive design
 @media (max-width: 768px) {
   .earnings-summary {
-    padding: 12px;
-
-    .summary-card .earnings-grid {
-      grid-template-columns: 1fr;
+    padding: 16px 4px;
+    
+    .earnings-cards {
+      grid-template-columns: 1fr 1fr;
       gap: 16px;
+      max-width: none;
+      
+      .earning-card {
+        padding: 20px;
+        min-height: 140px;
+        
+        &:hover {
+          transform: translateY(-4px) scale(1.01);
+        }
+        
+        .card-header {
+          margin-bottom: 16px;
+          
+          .icon-container {
+            width: 50px;
+            height: 50px;
+            border-radius: 16px;
+            
+            ion-icon {
+              font-size: 28px;
+            }
+          }
+          
+          .trend-indicator {
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            
+            ion-icon {
+              font-size: 18px;
+            }
+          }
+        }
+        
+        .card-content {
+          .earning-amount {
+            font-size: 28px;
+          }
+          
+          .earning-label {
+            font-size: 13px;
+          }
+          
+          .earning-date {
+            font-size: 11px;
+          }
+        }
+      }
+    }
+  }
+}
 
-      .earning-item .earning-amount {
-        font-size: 20px;
+@media (max-width: 480px) {
+  .earnings-summary {
+    .summary-header .summary-title {
+      font-size: 20px;
+      
+      .title-icon {
+        font-size: 24px;
+        margin-right: 8px;
+      }
+    }
+    
+    .earnings-cards .earning-card {
+      padding: 16px;
+      min-height: 120px;
+      border-radius: 20px;
+      
+      .card-content .earning-amount {
+        font-size: 24px;
       }
     }
   }
@@ -159,8 +323,33 @@ ion-list {
 
 // Dark mode support
 @media (prefers-color-scheme: dark) {
-  .earnings-summary .summary-card {
-    --background: linear-gradient(135deg, var(--ion-color-primary-shade) 0%, var(--ion-color-primary-tint) 100%);
+  .earnings-summary {
+    .summary-header .summary-title {
+      color: var(--ion-color-light);
+    }
+    
+    .earnings-cards .earning-card {
+      &.total-earnings {
+        background: linear-gradient(135deg, var(--ion-color-primary-shade) 0%, var(--ion-color-dark) 100%);
+        box-shadow: 0 8px 32px rgba(var(--ion-color-primary-rgb), 0.5);
+      }
+      
+      &.daily-earnings {
+        background: linear-gradient(135deg, var(--ion-color-tertiary-shade) 0%, var(--ion-color-dark) 100%);
+        box-shadow: 0 8px 32px rgba(var(--ion-color-tertiary-rgb), 0.5);
+      }
+      
+      .card-header {
+        .icon-container {
+          background: rgba(255, 255, 255, 0.15);
+          backdrop-filter: blur(15px);
+        }
+        
+        .trend-indicator {
+          background: rgba(255, 255, 255, 0.1);
+        }
+      }
+    }
   }
 
   .filter-content {
