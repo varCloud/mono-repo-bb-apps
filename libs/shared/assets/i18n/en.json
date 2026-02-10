@@ -440,5 +440,39 @@
     "no-workouts": "You currently have no workouts.",
     "create-first-workout": "Click the button to create your first workout."
   },
-  "yes-delete": "Yes, delete"
+  "yes-delete": "Yes, delete",
+  "athlete-payments": {
+    "title": "My Payments",
+    "search-placeholder": "Search by creator...",
+    "filters": "Filters",
+    "start-date": "Start date",
+    "end-date": "End date",
+    "sort-by": "Sort by",
+    "date": "Date",
+    "amount": "Amount",
+    "order": "Order",
+    "newest": "Newest",
+    "oldest": "Oldest",
+    "clear-filters": "Clear filters",
+    "apply-filters": "Apply filters"
+  },
+  "creator-payments": {
+    "title": "My Earnings",
+    "earnings-summary": "Earnings Summary",
+    "total-earnings": "Total earnings",
+    "this-month": "This month",
+    "today": "Today",
+    "search-placeholder": "Search by athlete...",
+    "filters": "Filters",
+    "start-date": "Start date",
+    "end-date": "End date",
+    "sort-by": "Sort by",
+    "date": "Date",
+    "amount": "Amount",
+    "order": "Order",
+    "newest": "Newest",
+    "oldest": "Oldest",
+    "clear-filters": "Clear filters",
+    "apply-filters": "Apply filters"
+  }
 }

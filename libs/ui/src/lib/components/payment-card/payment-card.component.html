@@ -1,0 +1,37 @@
+<div class="card-wrapper">
+  <img 
+    [src]="displayUser().profilePictureUrl" 
+    [alt]="displayUser().fullName"
+    class="avatar"
+    (error)="$event.target.src = 'assets/images/default-avatar.png'"
+  >
+
+  <div class="card-content">
+    <span class="name">{{ displayUser().fullName }} <span class="nickname">({{ displayUser().nickName }})</span></span>
+    <span class="plan-info">{{ payment().formattedAmount }} - {{ payment().billingTypeLabel }}</span>
+    <span class="subtitle">{{ displayUser().email }}</span>
+    <span class="next-payment">
+      <ion-badge [color]="statusColor()" class="status-badge"
+      >
+        <ion-icon [name]="statusIcon()" class="status-icon"></ion-icon>
+        {{ payment().transactionStatusCode }}
+      </ion-badge>
+      • {{ payment().formattedDate }}
+    </span>
+  </div>
+
+  <div class="actions">
+    
+    <ion-icon
+      name="receipt-outline"
+      class="download-icon"
+      (click)="onDownloadInvoice($event)">
+    </ion-icon>
+    <ion-icon
+      *ngIf="false"
+      name="ellipsis-vertical"
+      class="menu-icon"
+      (click)="onOptionsClick($event)">
+    </ion-icon>
+  </div>
+</div>

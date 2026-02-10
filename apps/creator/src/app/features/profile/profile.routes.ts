@@ -40,6 +40,13 @@ export const profileRoutes: Routes = [
           ),
       },
       {
+        path: 'payments',
+        loadComponent: () =>
+          import('./pages/creator-payments/creator-payments.page').then(
+            (m) => m.CreatorPaymentsPage
+          ),
+      },
+      {
         path: '**',
         redirectTo: '',
         pathMatch: 'full',

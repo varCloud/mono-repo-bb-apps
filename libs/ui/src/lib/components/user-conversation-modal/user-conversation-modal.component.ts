@@ -1,10 +1,11 @@
+import { addIcons } from 'ionicons';
 import { Component, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { ConversationListComponent } from '../conversation-list/conversation-list.component';
 import { TranslateModule } from '@ngx-translate/core';
-
+import { arrowBackOutline, chevronBackOutline, send, sendSharp } from 'ionicons/icons';
 @Component({
   selector: 'app-user-conversation-modal',
   templateUrl: './user-conversation-modal.component.html',
@@ -21,7 +22,9 @@ import { TranslateModule } from '@ngx-translate/core';
 export class UserConversationModalComponent implements OnInit {
   @Input() data: any; // Aquí recibiremos los datos enviados
 
-  constructor(private modalCtrl: ModalController) {}
+  constructor(private modalCtrl: ModalController) {
+     addIcons({ sendSharp , arrowBackOutline , chevronBackOutline });
+  }
 
   ngOnInit() {
     console.log('Datos recibidos en el modal:', this.data);

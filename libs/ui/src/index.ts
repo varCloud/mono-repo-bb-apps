@@ -74,6 +74,7 @@ export * from './lib/components/info-card/info-card.component';
 export * from './lib/components/slide-info-card/slide-info-card.component';
 export * from './lib/components/toolbar/toolbar.component';
 export * from './lib/components/user-card/user-card.component';
+export * from './lib/components/payment-card/payment-card.component';
 export * from './lib/components/options-subscriptor-modal/options-subscriptor-modal.component';
 export * from './lib/components/options-payment-method-modal/options-payment-method-modal.component';
 
