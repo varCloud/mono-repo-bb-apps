@@ -1,6 +1,14 @@
 :host {
   display: block;
 
+  .top-safe-area {
+    top: var(--ion-safe-area-top);
+  }
+
+  .bb-goback {
+    --icon-font-size: 25px;
+  }
+
   .suscription-creator-content {
     ::ng-deep {
       .suscription-creator-page {
@@ -16,7 +24,6 @@
       background-size: cover;
       background-position: center;
       height: 337px;
-
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -27,6 +34,10 @@
         height: 68px;
         width: 60px;
         margin-bottom: 16px;
+
+        &.top-ios {
+          margin-top: var(--ion-safe-area-top);
+        }
       }
 
       .subscription-title {

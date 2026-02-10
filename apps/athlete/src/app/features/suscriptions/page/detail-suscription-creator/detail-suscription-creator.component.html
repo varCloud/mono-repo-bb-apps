@@ -1,18 +1,21 @@
-<ion-content
-  class="suscription-creator-content ion-no-padding"
-  [fullscreen]="true"
->
+<ion-content class="suscription-creator-content ion-no-padding" [fullscreen]="true">
   <ion-back-button
-    [icon]="'chevron-back-outline'"
+    [icon]="'arrow-back-outline'"
     class="ion-no-padding bb-goback"
+    [ngClass]="{ 'top-safe-area': isIos }"
     [defaultHref]="'/home/suscriptions/suscription-creator/' + creator()?.userId"
     uppercase="false"
     text=""
-    style="position: absolute; top: 16px; left: 16px; z-index: 10"
+    style="position: absolute; left: 16px; z-index: 10"
     [color]="'secondary'"
   ></ion-back-button>
   <div class="container-header-subscription">
-    <img src="assets/images/logo/logo.svg" alt="" class="img-logo" />
+    <img
+      src="assets/images/logo/logo.svg"
+      alt=""
+      class="img-logo"
+      [ngClass]="{ 'top-ios': isIos }"
+    />
     <ion-text class="subscription-title"
       >Suscripción<br /><ion-text class="creator-name" color="secondary">{{
         fullName()
@@ -20,68 +23,64 @@
     >
 
     <ion-text class="description" color="white"
-      >Obtén acceso a la selección de entrenamientos y clases que se ofrecen en
-      la aplicación.</ion-text
+      >Obtén acceso a la selección de entrenamientos y clases que se ofrecen en la
+      aplicación.</ion-text
     >
   </div>
-  @if( creator() ) {
-  <app-layout-content customClass="suscription-creator-page ion-padding">
-    <ion-grid content-body class="ion-margin-top">
-      <ion-radio-group
-        [ngModel]="selectedPaymentFrequencyId()"
-        (ngModelChange)="selectedPaymentFrequencyId.set($event)"
-      >
-        @for (payment of creator().billingCycles; track payment.billingCycleId)
-        {
-        <ion-item
-          lines="none"
-          (click)="selectPaymentFrequency(payment)"
-          [ngClass]="{
-                selected: payment.billingCycleId   === selectedPaymentFrequencyId(),
-              }"
+  @if (creator()) {
+    <app-layout-content customClass="suscription-creator-page ion-padding">
+      <ion-grid content-body class="ion-margin-top">
+        <ion-radio-group
+          [ngModel]="selectedPaymentFrequencyId()"
+          (ngModelChange)="selectedPaymentFrequencyId.set($event)"
         >
-          <ion-radio
-            class="bb-radio"
-            slot="start"
-            [value]="payment.billingCycleId"
-          ></ion-radio>
-          <ion-label>
-            <ion-text>{{ payment.interval }}</ion-text>
-            @if (!payment.isTrialSubscription) {
-            <ion-text>
-              {{ payment.interval === 1 ? 'mes' : 'meses' }}
-            </ion-text>
-            } @if (payment.isTrialSubscription) {
-            <ion-text>
-              {{ 'días (Prueba gratis)' }}
-            </ion-text>
-            }
+          @for (payment of creator().billingCycles; track payment.billingCycleId) {
+            <ion-item
+              lines="none"
+              (click)="selectPaymentFrequency(payment)"
+              [ngClass]="{
+                selected: payment.billingCycleId === selectedPaymentFrequencyId(),
+              }"
+            >
+              <ion-radio class="bb-radio" slot="start" [value]="payment.billingCycleId"></ion-radio>
+              <ion-label>
+                <ion-text>{{ payment.interval }}</ion-text>
+                @if (!payment.isTrialSubscription) {
+                  <ion-text>
+                    {{ payment.interval === 1 ? 'mes' : 'meses' }}
+                  </ion-text>
+                }
+                @if (payment.isTrialSubscription) {
+                  <ion-text>
+                    {{ 'días (Prueba gratis)' }}
+                  </ion-text>
+                }
 
-            <br />
-            <ion-note class="recommended-label">
-              {{ payment.description }}
-            </ion-note>
-          </ion-label>
-          <ion-text slot="end" class="payment-amount">
-            <app-currency [amount]="payment.amount"></app-currency>
-          </ion-text>
-        </ion-item>
-        }
-      </ion-radio-group>
-    </ion-grid>
-    <div content-footer class="ion-text-center">
-      <ion-button
-        color="tertiary"
-        class="bb-input"
-        expand="block"
-        shape="round"
-        routerLink="/home/suscriptions/payment-methods"
-      >
-        {{ 'Suscribirse' | translate }}
-      </ion-button>
-    </div>
-  </app-layout-content>
-  }@else {
-  <app-list-skeleton [itemRepeat]="3"></app-list-skeleton>
+                <br />
+                <ion-note class="recommended-label">
+                  {{ payment.description }}
+                </ion-note>
+              </ion-label>
+              <ion-text slot="end" class="payment-amount">
+                <app-currency [amount]="payment.amount"></app-currency>
+              </ion-text>
+            </ion-item>
+          }
+        </ion-radio-group>
+      </ion-grid>
+      <div content-footer class="ion-text-center">
+        <ion-button
+          color="tertiary"
+          class="bb-input"
+          expand="block"
+          shape="round"
+          (click)="goToPaymentMethods()"
+        >
+          {{ 'Suscribirse' | translate }}
+        </ion-button>
+      </div>
+    </app-layout-content>
+  } @else {
+    <app-list-skeleton [itemRepeat]="3"></app-list-skeleton>
   }
 </ion-content>

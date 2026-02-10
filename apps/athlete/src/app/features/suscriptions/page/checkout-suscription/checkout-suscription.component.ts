@@ -110,7 +110,12 @@ export class CheckoutSuscriptionComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (!this._processSuscriptionService.getCreator()) {
+      this._router.navigate(['/home']);
+      return;
+    }
+  }
 
   public selectPaymentMethod() {
     this._router.navigate(['/home/suscriptions/payment-methods']);

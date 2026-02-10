@@ -1,26 +1,33 @@
-import {
-  Component,
-  ElementRef,
-  input,
-  OnInit,
-  output,
-  signal,
-  viewChild,
-} from '@angular/core';
+import { Component, ElementRef, input, OnInit, output, signal, viewChild } from '@angular/core';
 
-import { IonButton, IonSpinner, IonCol, IonGrid, IonRow, IonContent } from '@ionic/angular/standalone';
+import {
+  IonButton,
+  IonSpinner,
+  IonCol,
+  IonGrid,
+  IonRow,
+  IonContent,
+} from '@ionic/angular/standalone';
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { StripeService, ToastService } from '@monorepo-bb-app/shared';
 import { LoaderUIService } from '@monorepo-bb-app/core';
 import { finalize } from 'rxjs';
 
-
 @Component({
   selector: 'app-add-payment-method',
   templateUrl: './add-payment-method.component.html',
   styleUrls: ['./add-payment-method.component.scss'],
-  imports: [IonSpinner, IonButton, TranslateModule, ReactiveFormsModule, IonContent, IonGrid, IonRow, IonCol],
+  imports: [
+    IonSpinner,
+    IonButton,
+    TranslateModule,
+    ReactiveFormsModule,
+    IonContent,
+    IonGrid,
+    IonRow,
+    IonCol,
+  ],
   providers: [TranslatePipe],
 })
 export class AddPaymentMethodComponent implements OnInit {
@@ -59,6 +66,9 @@ export class AddPaymentMethodComponent implements OnInit {
         radios: false,
         spacedAccordionItems: false,
       },
+      wallets: {
+        link: 'never',
+      },
     };
     const options = {
       fields: {
@@ -72,13 +82,13 @@ export class AddPaymentMethodComponent implements OnInit {
             city: 'never',
             state: 'never',
             postalCode: 'never',
-            country: 'never'
-          }
-        }
+            country: 'never',
+          },
+        },
       },
       terms: {
-        card: 'never'
-      }
+        card: 'never',
+      },
     };
     this._loader.showLoader();
     this.isLoading.set(true);
@@ -97,7 +107,7 @@ export class AddPaymentMethodComponent implements OnInit {
             clientSecret: client_secret,
             locale: 'es',
             appearance,
-            ...options
+            ...options,
           });
           this.card = this.elements.create('payment', paymentElementOptions);
           this.card.mount(this.paymentMethodElement()?.nativeElement);
@@ -116,19 +126,17 @@ export class AddPaymentMethodComponent implements OnInit {
 
   async addPaymentMethod() {
     this._loader.showLoader();
-    const { setupIntent, error } =
-      await this._stripeService.stripe.confirmSetup({
-        elements: this.elements,
-        confirmParams: {},
-        redirect: 'if_required',
-      });
+    const { setupIntent, error } = await this._stripeService.stripe.confirmSetup({
+      elements: this.elements,
+      confirmParams: {},
+      redirect: 'if_required',
+    });
     this._loader.hideLoader();
     if (error) return;
     this.clearFields();
     this.succesAddPayment.emit({ data: setupIntent });
-    this._toastService.success(
-      this._translate.transform('payment-method-added'),
-      { duration: 2000 }
-    );
+    this._toastService.success(this._translate.transform('payment-method-added'), {
+      duration: 2000,
+    });
   }
 }

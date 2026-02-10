@@ -1,4 +1,7 @@
-<div class="layout-content ion-safe-area" [ngClass]="[customClass()]">
+<div
+  class="layout-content {{ useSafeArea() ? 'safe-area-padding' : '' }} "
+  [ngClass]="[customClass()]"
+>
   <div>
     @if (useGoBack()) {
       <div class="go-back">
