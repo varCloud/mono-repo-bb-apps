@@ -17,7 +17,8 @@ import {
   IonItem,
   IonDatetime,
   IonModal,
-  IonButtons
+  IonButtons,
+  IonCol, IonGrid, IonRow
 } from '@ionic/angular/standalone';
 import { 
   PaymentCardComponent,
@@ -75,7 +76,8 @@ import {
     HeaderSearchComponent,
     LayoutContentComponent,
     TranslateModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+      IonCol, IonGrid, IonRow
   ],
 })
 export class AthletePaymentsPage implements OnInit {
@@ -131,7 +133,7 @@ export class AthletePaymentsPage implements OnInit {
     }
 
     const filters: PaymentFilters = {
-      page: isLoadMore ? (this.paginator?.currentPage || 0) + 1 : 1,
+      page: isLoadMore ? (this.paginator?.meta.currentPage || 0) + 1 : 1,
       limit: 25,
       search: this.searchControl.value || undefined,
       startDate: this.startDateControl.value || undefined,
@@ -169,7 +171,7 @@ export class AthletePaymentsPage implements OnInit {
   }
 
   loadMorePayments(event: any) {
-    if (this.paginator && this.paginator.currentPage < this.paginator.totalPages) {
+    if (this.paginator && this.paginator.meta.currentPage < this.paginator.meta.totalPages) {
       this.loadPayments(true);
     }
     event.target.complete();
