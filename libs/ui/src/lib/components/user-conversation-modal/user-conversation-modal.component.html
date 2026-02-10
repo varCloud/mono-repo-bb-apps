@@ -1,17 +1,30 @@
 <ion-header>
   <ion-toolbar>
-    <div class="container-search-bar">
-      <ion-searchbar
-        [placeholder]="'search' | translate"
-        [mode]="'ios'"
-        [debounce]="300"
-        show-cancel-button="always"
-        [cancelButtonText]="'cancel' | translate"
-        (ionCancel)="dismiss()"
-        (ionInput)="onSearch($event)"
-      ></ion-searchbar>
-    </div>
+    <ion-buttons slot="start">
+      <ion-back-button
+        icon="chevron-back-outline"
+        class="ion-no-padding bb-goback"
+        uppercase="false"
+        defaultHref=""
+        (click)="dismiss()"
+        [text]="''"
+      >
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title >
+      {{'conversations.search-title' | translate}}
+    </ion-title>
   </ion-toolbar>
+  
+  <div class="search-modal-container">
+    <ion-searchbar
+      [placeholder]="'conversations.find-conversation' | translate"
+      [mode]="'ios'"
+      [debounce]="300"      
+      (ionInput)="onSearch($event)"
+      class="elegant-searchbar"
+    ></ion-searchbar>
+  </div>
 </ion-header>
 <ion-content class="ion-padding" [fullscreen]="true">
   <app-conversation-list

@@ -472,5 +472,14 @@
     "oldest": "Más antiguos",
     "clear-filters": "Limpiar filtros",
     "apply-filters": "Aplicar filtros"
+  },
+
+  
+  "conversations": {
+    "search-title": "Buscar conversaciones",
+    "search-description": "Encuentra rápidamente tus conversaciones anteriores", 
+    "find-conversation": "Buscar por nombre, email o mensaje...",
+    "no-conversations": "No tienes conversaciones aún"
   }
+
 }
