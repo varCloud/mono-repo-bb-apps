@@ -486,6 +486,14 @@
     "find-subscription": "Buscar por nombre, email ...",
     "no-subscriptions": "No tienes suscripciones aún",
     "no-subscriptions-for-search": "No se encontraron suscripciones para tu búsqueda"
+  },
+
+    "favorites": {
+    "search-title": "Buscar favoritos",
+    "search-description": "Encuentra rápidamente tus favoritos anteriores", 
+    "find-favorite": "Buscar por nombre, email ...",
+    "no-favorites": "No tienes favoritos aún",
+    "no-favorites-for-search": "No se encontraron favoritos para tu búsqueda"
   }
 
 }

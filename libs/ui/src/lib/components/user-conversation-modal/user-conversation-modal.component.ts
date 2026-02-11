@@ -30,8 +30,6 @@ export class UserConversationModalComponent implements OnInit {
   @Input() data: any; // Aquí recibiremos los datos enviados
   public search: string = '';
   constructor(private modalCtrl: ModalController
-    ,private readonly _loaderService: LoaderUIService
-    ,private readonly _userConversationService: UserConversationService
   ) {
      addIcons({ sendSharp , arrowBackOutline , chevronBackOutline });
   }

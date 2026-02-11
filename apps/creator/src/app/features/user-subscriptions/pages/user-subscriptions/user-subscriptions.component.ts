@@ -117,6 +117,7 @@ export class UserSubscriptionsComponent {
       component: MySubscriptionsSearchModalComponent,
       componentProps: {
         allSubscriptions: this.subscriptions,
+        
       },
     });
     await modalSearch.present();

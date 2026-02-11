@@ -22,7 +22,7 @@ import {
   WorkoutListModel,
   WorkoutService,
 } from '@monorepo-bb-app/shared';
-import { CardListComponent } from '@monorepo-bb-app/ui';
+import { CardListComponent, EmptyElementsComponent, ModalHeaderSearchbarComponent } from '@monorepo-bb-app/ui';
 import { TranslateModule } from '@ngx-translate/core';
 import { finalize } from 'rxjs';
 import { addIcons } from 'ionicons';
@@ -45,6 +45,8 @@ import { arrowBackOutline } from 'ionicons/icons';
     TranslateModule,
     CardListComponent,
     IonBackButton,
+    ModalHeaderSearchbarComponent,
+    EmptyElementsComponent
   ],
   templateUrl: './favorites.component.html',
   styleUrl: './favorites.component.scss',
@@ -54,18 +56,19 @@ export class FavoritesComponent implements OnInit {
   paginator = signal<Paginator>({} as Paginator);
   favorites = signal<Favorite[]>([]);
   isInfiniteScrollDisabled = signal<boolean>(false);
+  public messsageList = 'favorites.no-favorites';
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private _localStorage: LocalStorageService,
-    private _loader: LoaderUIService,
+    public _loader: LoaderUIService,
     private _sesionService: SesionService,
     private _workoutService: WorkoutService
   ) {
     addIcons({ arrowBackOutline });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   ionViewWillEnter() {
     this.getfavorites(undefined, true);
@@ -79,6 +82,7 @@ export class FavoritesComponent implements OnInit {
   getfavorites(url = undefined, refresh = false) {
     this._loader.showLoader();
     const user = this._sesionService.user$();
+    this.messsageList = 'favorites.no-favorites';
     return this._workoutService
       .getFavoritesByUser(url, user.userId, this.getParameters())
       .pipe(finalize(() => this._loader.hideLoader()))
@@ -86,6 +90,9 @@ export class FavoritesComponent implements OnInit {
         next: (resp) => {
           if (refresh) {
             this.favorites.set(resp.data);
+            if (resp.data.length === 0) {
+              this.messsageList = 'favorites.no-favorites-for-search';
+            }
           } else {
             this.favorites.update((favorites) => [...favorites, ...resp.data]);
           }
@@ -101,6 +108,10 @@ export class FavoritesComponent implements OnInit {
 
   clickFavorite(workout: WorkoutListModel) {
     this.getfavorites();
+  }
+
+  onDismiss(){
+    this.router.navigate(['home/training']);
   }
 
   onSearch(event: Event) {

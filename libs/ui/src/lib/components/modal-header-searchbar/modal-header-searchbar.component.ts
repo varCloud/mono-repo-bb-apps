@@ -42,7 +42,6 @@ export class ModalHeaderSearchbarComponent {
     this.search.emit(event);
   }
 
-  // Métodos públicos para actualizar signals desde el componente padre
   setTitle(title: string): void {
     this.title.set(title);
   }
