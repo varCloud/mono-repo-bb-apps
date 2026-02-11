@@ -1,12 +1,6 @@
-import {
-  Component,
-  CUSTOM_ELEMENTS_SCHEMA,
-  ElementRef,
-  OnInit,
-  viewChild,
-} from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, OnInit, viewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonContent } from '@ionic/angular/standalone';
+import { IonContent, NavController } from '@ionic/angular/standalone';
 import { StepsOnboardingComponent } from '@monorepo-bb-app/ui';
 import { ONBOARDING_STEPS } from './constants/steps';
 
@@ -15,15 +9,12 @@ import { ONBOARDING_STEPS } from './constants/steps';
   templateUrl: './steps-onboarding.component.html',
   styleUrls: ['./steps-onboarding.component.scss'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [
-    IonContent,
-    StepsOnboardingComponent
-  ],
+  imports: [IonContent, StepsOnboardingComponent],
 })
 export class StepsOnboardingPage implements OnInit {
   swiperRef = viewChild<ElementRef>('swiperRef');
   readonly onboardingSteps = ONBOARDING_STEPS;
-  constructor(private router: Router) {}
+  constructor(private router: NavController) {}
 
   ngOnInit() {}
 
@@ -35,6 +26,6 @@ export class StepsOnboardingPage implements OnInit {
   }
 
   goToLogin() {
-    this.router.navigate(['/login'], { replaceUrl: true });
+    this.router.navigateRoot(['/login'], { replaceUrl: true });
   }
 }

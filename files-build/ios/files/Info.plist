@@ -67,5 +67,16 @@
 	<false />
 	<key>UIStatusBarHidden</key>
 	<false />
+		<key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLName</key>
+            <string>io.bb.body.booster.creator</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>coach-body-booster-app</string>
+            </array>
+        </dict>
+    </array>
 </dict>
 </plist>

@@ -1,23 +1,14 @@
 import { Component, type OnInit } from '@angular/core';
 import { SesionService } from '@monorepo-bb-app/core';
-import {
-  LayoutContentComponent,
-  OnbordingComponent,
-} from '@monorepo-bb-app/ui';
+import { LayoutContentComponent, OnbordingComponent } from '@monorepo-bb-app/ui';
 import {
   IonHeader,
   IonToolbar,
-  IonButtons,
-  IonBackButton,
   IonTitle,
   IonContent,
   IonGrid,
-  IonCol,
-  IonRow,
-  IonInput,
-  IonButton,
+  NavController,
 } from '@ionic/angular/standalone';
-import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 
 @Component({
@@ -26,8 +17,6 @@ import { AlertController } from '@ionic/angular';
     IonGrid,
     IonContent,
     IonTitle,
-    IonBackButton,
-    IonButtons,
     IonToolbar,
     IonHeader,
     OnbordingComponent,
@@ -39,19 +28,19 @@ import { AlertController } from '@ionic/angular';
 export class StripeOnbordingComponent implements OnInit {
   constructor(
     public sesion: SesionService,
-    private _router: Router,
+    private _router: NavController,
     private alertController: AlertController
   ) {}
   ngOnInit(): void {}
 
   skipOnbording() {
-    this._router.navigate(['/home']);
+    this._router.navigateRoot(['/home'], { replaceUrl: true });
   }
 
   isSuccesOnbording(sucess: boolean) {
     if (sucess) {
       this.alertMessage(true);
-      this._router.navigate(['/home']);
+      this._router.navigateRoot(['/home'], { replaceUrl: true });
     } else {
       this.alertMessage(false);
     }
