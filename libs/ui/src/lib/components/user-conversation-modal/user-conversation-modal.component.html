@@ -1,31 +1,9 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button
-        icon="chevron-back-outline"
-        class="ion-no-padding bb-goback"
-        uppercase="false"
-        defaultHref=""
-        (click)="dismiss()"
-        [text]="''"
-      >
-      </ion-back-button>
-    </ion-buttons>
-    <ion-title >
-      {{'conversations.search-title' | translate}}
-    </ion-title>
-  </ion-toolbar>
-  
-  <div class="search-modal-container">
-    <ion-searchbar
-      [placeholder]="'conversations.find-conversation' | translate"
-      [mode]="'ios'"
-      [debounce]="300"      
-      (ionInput)="onSearch($event)"
-      class="elegant-searchbar"
-    ></ion-searchbar>
-  </div>
-</ion-header>
+<app-modal-header-searchbar
+  [titleText]="'conversations.search-title' | translate"
+  [placeholderText]="'conversations.find-conversation' | translate"
+  (dismiss)="dismiss()"
+  (search)="onSearch($event)"
+></app-modal-header-searchbar>
 <ion-content class="ion-padding" [fullscreen]="true">
   <app-conversation-list
     [userId]="data.userId"

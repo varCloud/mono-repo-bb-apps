@@ -1,12 +1,5 @@
 import { Component, computed, input, signal, Input } from '@angular/core';
-
-
-// Importaciones de Ionic
-
-
-// Importa los íconos
-
-
+import { CONSTANTS } from '@monorepo-bb-app/shared';
 
 @Component({
   selector: 'lib-empty-elements-component',
@@ -18,8 +11,7 @@ import { Component, computed, input, signal, Input } from '@angular/core';
 })
 export class EmptyElementsComponent {
 
-  // 1. Recibe la lista completa de FAQs desde la página
-  public imgPath = input.required<string>();
+  public imgPath = input<string>(CONSTANTS.EMPTY_ELEMENTS_IMAGE);
   public message = input.required<string>();
 
 

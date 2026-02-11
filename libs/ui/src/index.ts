@@ -35,6 +35,7 @@ export * from './lib/components/delete-workout-modal/delete-workout-modal.compon
 export * from './lib/components/card-workout-info/card-workout-info.component';
 export * from './lib/components/card-with-lateral-image/card-with-lateral-image.component';
 export * from './lib/components/modal-add-payment-method/modal-add-payment-method.component';
+export * from './lib/components/modal-header-searchbar/modal-header-searchbar.component';
 export * from './lib/components/workout-by-types/workout-by-types.component';
 export * from './lib/components/payment-methods-list/payment-methods-list.component';
 export * from './lib/components/workout-information-time-likes-coments/workout-information-time-likes-coments.component';

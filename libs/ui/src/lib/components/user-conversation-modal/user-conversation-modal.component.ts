@@ -11,6 +11,7 @@ import { LoaderUIService } from 'libs/core/services/loader-ui.service';
 import { finalize } from 'rxjs';
 import { UserConversationModel } from 'libs/shared/models/user-conversation';
 import { PaginatorModel } from 'libs/shared/models/paginator';
+import { ModalHeaderSearchbarComponent } from '../modal-header-searchbar/modal-header-searchbar.component';
 @Component({
   selector: 'app-user-conversation-modal',
   templateUrl: './user-conversation-modal.component.html',
@@ -22,6 +23,7 @@ import { PaginatorModel } from 'libs/shared/models/paginator';
     FormsModule,
     ConversationListComponent,
     TranslateModule,
+    ModalHeaderSearchbarComponent
   ],
 })
 export class UserConversationModalComponent implements OnInit {

@@ -473,14 +473,19 @@
     "clear-filters": "Limpiar filtros",
     "apply-filters": "Aplicar filtros"
   },
-
-  
   "conversations": {
     "search-title": "Buscar conversaciones",
     "search-description": "Encuentra rápidamente tus conversaciones anteriores", 
-    "find-conversation": "Buscar por nombre, email o mensaje...",
+    "find-conversation": "Buscar por nombre, email ...",
     "no-conversations": "No tienes conversaciones aún",
     "no-conversations-for-search": "No se encontraron conversaciones para tu búsqueda"
+  },
+  "subscriptions": {
+    "search-title": "Buscar suscripciones",
+    "search-description": "Encuentra rápidamente tus suscripciones anteriores", 
+    "find-subscription": "Buscar por nombre, email ...",
+    "no-subscriptions": "No tienes suscripciones aún",
+    "no-subscriptions-for-search": "No se encontraron suscripciones para tu búsqueda"
   }
 
 }

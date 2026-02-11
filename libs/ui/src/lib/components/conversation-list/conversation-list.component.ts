@@ -3,7 +3,7 @@ import { Component, EventEmitter, input, Input, OnInit, Output } from '@angular/
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import {  LoaderUIService, UserConversationService } from '@monorepo-bb-app/core';
-import { PaginatorModel, UserConversationModel } from '@monorepo-bb-app/shared';
+import { CONSTANTS, PaginatorModel, UserConversationModel } from '@monorepo-bb-app/shared';
 import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
 import { finalize } from 'rxjs';
 import { UserAvatarComponent } from '../user-avatar/user-avatar.component';
@@ -32,7 +32,7 @@ export class ConversationListComponent implements OnInit {
   userTypeId = input.required<number>();
   public conversations: UserConversationModel[] = [];
   public userPropConversation : string = 'creatorUser'
-  public imgUrl = input<string>('assets/images/empty/emptyelements.png');
+  public imgUrl = input<string>(CONSTANTS.EMPTY_ELEMENTS_IMAGE);
   public messsageList  = 'conversations.no-conversations'
   constructor(
     private readonly _userConversationService:UserConversationService,

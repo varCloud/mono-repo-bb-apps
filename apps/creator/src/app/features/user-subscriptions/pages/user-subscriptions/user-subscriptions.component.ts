@@ -91,8 +91,7 @@ export class UserSubscriptionsComponent {
 
   getSubscriptionsForUser(uri: string = '', params: any = {}): void {
     this.UserSuscriptionsIdService.getSubscriptions(uri, params)
-      .pipe(
-        finalize(() => this._loaderUIService.hideLoader()),
+      .pipe(finalize(() => this._loaderUIService.hideLoader()),
         take(1)
       )
       .subscribe(

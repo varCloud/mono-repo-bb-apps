@@ -7,12 +7,11 @@
     <span class="subtitle">{{ email() }}</span>
     <span class="next-payment">Próximo pago: {{ endData() | date: 'dd/MM/yyyy' }}</span>
   </div>
-
+  @if(showOptions()){
   <div class="actions">
-    <ion-icon
-      name="ellipsis-vertical"
-      class="menu-icon"
-      (click)="onMoreOptions($event)">
+    <ion-icon name="ellipsis-vertical" class="menu-icon" (click)="onMoreOptions($event)">
     </ion-icon>
   </div>
+
+  }
 </div>
