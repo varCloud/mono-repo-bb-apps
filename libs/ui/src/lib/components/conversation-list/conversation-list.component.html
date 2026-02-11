@@ -12,7 +12,7 @@
     </ion-label>
   </ion-item>
   }@empty {
-  <lib-empty-elements-component [imgPath]="imgUrl()" [message]="'conversations.no-conversations' | translate">
+  <lib-empty-elements-component [imgPath]="imgUrl()" [message]=" this.messsageList| translate">
   </lib-empty-elements-component>
   }
 </ion-list>

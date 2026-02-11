@@ -2,13 +2,9 @@ import { PaymentTotalsModel } from './../models/paymen-totals.model';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, map, catchError, of } from 'rxjs';
-import { 
-  PaymentTransactionModel, 
-  PaymentResponse, 
-  PaymentFilters,
-  PaginatorModel,
-  environment
-} from '@monorepo-bb-app/shared';
+import { PaymentTransactionModel, PaymentResponse, PaymentFilters } from '../models/payment-transaction';
+import { PaginatorModel } from '../models/paginator';
+import { environment } from '../environment/environment';
 
 @Injectable({
   providedIn: 'root',

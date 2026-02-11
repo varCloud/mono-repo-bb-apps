@@ -32,7 +32,7 @@ import { NgItemLabelDirective } from "@ng-select/ng-select";
 })
 export class UserConversationComponent {
 
-  conversations: any[] = []; // Aquí definiremos el tipo correcto más adelante
+  conversations: any[] = []; 
   reload: boolean = true;
   constructor(
     private modalCtrl: ModalController,
@@ -54,7 +54,6 @@ export class UserConversationComponent {
   }
 
   onConversationSelected(conversation: any) {
-    console.log('Conversación seleccionada:', JSON.stringify(conversation));
     this.router.navigate([`/home/${conversation.userConversationId}/user-chat`] , { state: { conversation , fromPush:false }, replaceUrl:true });
   }
 
@@ -64,17 +63,17 @@ export class UserConversationComponent {
       componentProps: {
         data: {
           conversations: this.conversations,
+          userId: this.sesionService.user$()?.userId,
+          userTypeId: this.sesionService.user$()?.userTypeId,
         },
       },
-      breakpoints: [0, 0.25, 0.5, 0.75, 1],
     });
 
     await modal.present();
 
     const result = await modal.onDidDismiss();
     if (result.data) {
-      // Manejar los datos retornados del modal si es necesario
-      console.log('Modal Data:', result.data);
+      this.onConversationSelected(result.data.conversation);
     }
   }
 }

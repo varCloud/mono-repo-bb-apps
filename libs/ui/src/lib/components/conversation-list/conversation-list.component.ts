@@ -1,3 +1,4 @@
+import { search } from 'ionicons/icons';
 import { Component, EventEmitter, input, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
@@ -20,12 +21,19 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 })
 export class ConversationListComponent implements OnInit {
   @Output() conversationSelected = new EventEmitter<UserConversationModel>();
+  @Output() conversationsList = new EventEmitter<UserConversationModel[]>();
+
+  @Input() set searchTerm(search:string) {
+      const params = { search: search?.trim()}
+      this.getConversations(this._buildParams(params));
+  };
 
   userId = input.required<number>();
   userTypeId = input.required<number>();
   public conversations: UserConversationModel[] = [];
   public userPropConversation : string = 'creatorUser'
   public imgUrl = input<string>('assets/images/empty/emptyelements.png');
+  public messsageList  = 'conversations.no-conversations'
   constructor(
     private readonly _userConversationService:UserConversationService,
     private readonly _loaderService: LoaderUIService
@@ -44,19 +52,30 @@ export class ConversationListComponent implements OnInit {
   }
 
 
-  private getConversations(){
+  private getConversations(queryParams:any = {}){
     this._loaderService.showLoader();
-    this._userConversationService.getConversations('',this.userId(), this.userTypeId())
+    this._userConversationService.getConversations('',this.userId(), this.userTypeId(), queryParams)
     .pipe(finalize(() => this._loaderService.hideLoader()))
     .subscribe({
       next: (response: { conversations: UserConversationModel[]; paginator: PaginatorModel }) => {
+            this.messsageList = 'conversations.no-conversations';
             this.conversations = response.conversations;
-            console.log('Conversations fetched:', this.conversations);
+            this.conversationsList.emit(this.conversations);
+            if(queryParams.search && queryParams.search.trim() !== '' && this.conversations.length === 0){
+                this.messsageList = 'conversations.no-conversations-for-search';
+            }
       },
       error: (error) => {
-        console.error('Error fetching conversations:', error);
       }
     });
+  }
+
+  private _buildParams(params:any){
+     const queryParams: any = {};
+     if(params.search){
+       queryParams.search = params.search || null;
+     }     
+     return queryParams;
   }
 
 
