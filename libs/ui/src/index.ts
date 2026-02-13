@@ -35,6 +35,7 @@ export * from './lib/components/delete-workout-modal/delete-workout-modal.compon
 export * from './lib/components/card-workout-info/card-workout-info.component';
 export * from './lib/components/card-with-lateral-image/card-with-lateral-image.component';
 export * from './lib/components/modal-add-payment-method/modal-add-payment-method.component';
+export * from './lib/components/modal-header-searchbar/modal-header-searchbar.component';
 export * from './lib/components/workout-by-types/workout-by-types.component';
 export * from './lib/components/payment-methods-list/payment-methods-list.component';
 export * from './lib/components/workout-information-time-likes-coments/workout-information-time-likes-coments.component';
@@ -74,6 +75,7 @@ export * from './lib/components/info-card/info-card.component';
 export * from './lib/components/slide-info-card/slide-info-card.component';
 export * from './lib/components/toolbar/toolbar.component';
 export * from './lib/components/user-card/user-card.component';
+export * from './lib/components/payment-card/payment-card.component';
 export * from './lib/components/options-subscriptor-modal/options-subscriptor-modal.component';
 export * from './lib/components/options-payment-method-modal/options-payment-method-modal.component';
 

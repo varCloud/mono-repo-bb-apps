@@ -63,10 +63,10 @@ export class UserConversationComponent{
       componentProps: {
         data: {
           conversations: this.conversations,
+            userId:this.sesionService.user$()?.userId,
+            userTypeId: this.sesionService.user$()?.userTypeId
         },
       },
-      breakpoints: [0, 0.25, 0.5, 0.75, 1],
-      cssClass: 'bottom-sheet-modal'
     });
 
     await modal.present();

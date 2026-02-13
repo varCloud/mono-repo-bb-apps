@@ -21,6 +21,7 @@ export class UserCardComponent {
   email = input.required<string>();
   endData = input.required<string>()
   amount = input.required<string>();
+  showOptions = input<boolean>(true);
 
   constructor() {
     addIcons({ ellipsisVertical });

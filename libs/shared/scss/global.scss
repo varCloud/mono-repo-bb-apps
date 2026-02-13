@@ -292,30 +292,30 @@
   .alert-wrapper {
     border-radius: 16px !important;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
-    
+
     .alert-message {
       text-align: left !important;
       margin: 0 !important;
       padding: 4px 0 !important;
-      
+
       img {
         display: block !important;
         border: 2px solid rgba(0, 0, 0, 0.08) !important;
       }
     }
-    
+
     .alert-button-group {
       border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
-      
+
       .alert-button {
         font-weight: 500 !important;
         min-height: 48px !important;
-        
+
         &.primary-button {
           color: #007AFF !important;
           font-weight: 600 !important;
         }
-        
+
         &.cancel-button {
           color: #8E8E93 !important;
         }
@@ -338,7 +338,7 @@
       border-radius: 12px !important;
       padding: 12px 16px !important;
       cursor: pointer !important;
-      
+
       &:active {
         transform: scale(0.98) !important;
       }
@@ -346,7 +346,7 @@
 
     .toast-message {
       margin: 0 !important;
-      
+
       img {
         display: block !important;
       }
@@ -376,7 +376,7 @@
       margin-bottom: 8px !important;
       display: flex !important;
       align-items: center !important;
-      
+
       .chat-avatar {
         width: 40px !important;
         height: 40px !important;
@@ -404,19 +404,19 @@
 
   .alert-wrapper {
     border-radius: 12px !important;
-    
+
     .alert-message {
       text-align: left !important;
-      
+
       img {
         border: 2px solid rgba(0, 0, 0, 0.05);
       }
     }
-    
+
     .alert-button-group {
       .alert-button {
         font-weight: 500;
-        
+
         &.alert-button-role-cancel {
           color: var(--ion-color-medium);
         }
@@ -449,4 +449,52 @@ ion-back-button {
   line-height: 24px;
   text-transform: none !important;
   --icon-font-size: 20px;
+}
+
+.header-container {
+  background-color: white;
+  margin-top: 20px;
+  padding-left: 24px;
+  padding-right: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+
+  app-header-search {
+    margin-bottom: 15px;
+  }
+
+}
+
+
+
+.header-info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  gap: 4px;
+
+  .title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--ion-color-dark);
+  }
+
+  .subTitle {
+    font-size: 14px;
+    color: var(--ion-color-dark);
+    margin-top: 4px;
+  }
+
+  .contact-link {
+    font-size: 14px;
+    color: var(--ion-color-primary);
+    margin-top: 2px;
+    font-weight: 500;
+    cursor: pointer;
+  }
 }

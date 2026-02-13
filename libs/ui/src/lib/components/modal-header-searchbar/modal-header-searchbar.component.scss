@@ -1,0 +1,49 @@
+
+// Contenedor principal del modal de búsqueda
+.search-modal-container {
+  padding: 16px;
+  padding-top: 5px;
+  background: var(--ion-background-color, #ffffff);
+  border-bottom: 1px solid var(--ion-color-light-shade, #e1e5e9);
+}
+
+
+.elegant-searchbar {
+  --background: var(--ion-background-color, #ffffff);
+  --border-radius: 16px;
+  --box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+  --color: var(--ion-color-dark);
+  --placeholder-color: var(--ion-color-medium-shade);
+  --icon-color: var(--ion-color-primary);
+  --clear-button-color: var(--ion-color-medium);
+  --cancel-button-color: var(--ion-color-primary);
+  padding: 0;
+  margin: 0;
+  border: 2px solid transparent;
+  
+  &.searchbar-has-focus {
+    --box-shadow: 0 6px 20px rgba(var(--ion-color-primary-rgb), 0.25);
+    border: 2px solid var(--ion-color-primary-tint);
+    transform: translateY(-1px);
+    transition: all 0.3s ease;
+  }
+  
+  .searchbar-input {
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 14px 16px;
+  }
+  
+  .searchbar-search-icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.container-search-bar {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}

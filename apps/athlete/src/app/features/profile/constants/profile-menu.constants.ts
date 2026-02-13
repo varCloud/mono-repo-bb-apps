@@ -21,6 +21,11 @@ export const PROFILE_MENU_ITEMS: ProfileMenuItem[] = [
     showArrow: true,
   },
   {
+    text: 'Historial de pagos',
+    action: 'payments',
+    showArrow: true,
+  },
+  {
     text: 'Contactar a soporte',
     action: 'support',
     showArrow: true,

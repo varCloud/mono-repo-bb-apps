@@ -1,56 +1,39 @@
-ion-list {
-  background: transparent;
-  padding: 0px 0px;
-  margin: 0px !important;
-}
-
-.bottomButtons .ion-icon {
-  margin-top: 30px;
-}
-
-.card-item {
-  display: block;
-  margin-bottom: 12px;
-}
-
-.bottom-sheet-modal {
-  --height: auto;
-  .ion-backdrop {
-    opacity: 0.5;
-  }
-
-  .ion-page {
-    position: relative;
-    contain: content;
-  }
-}
-
-ion-modal {
-  --border-radius: 6px;
-}
-
-.header-logo {
-  max-width: 40% !important;
-}
-
 :host {
-  .header-container {
-    background-color: white;
-    min-height: 100px;
-    padding-left: 24px;
-    padding-right: 24px;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    margin-bottom: 25px;
-    padding-bottom: 15px;
-  }
-}
-app-header-search {
-  padding-bottom: 0px;
-}
 
-h2 {
-  font-size: 1.2em !important;
-  font-weight: 600;
+  ion-list {
+    background: transparent;
+    padding: 0px 0px;
+    margin: 0px !important;
+  }
+
+  .bottomButtons .ion-icon {
+    margin-top: 30px;
+  }
+
+  .card-item {
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .bottom-sheet-modal {
+    --height: auto;
+
+    .ion-backdrop {
+      opacity: 0.5;
+    }
+
+    .ion-page {
+      position: relative;
+      contain: content;
+    }
+  }
+
+  ion-modal {
+    --border-radius: 6px;
+  }
+
+  .header-logo {
+    max-width: 40% !important;
+  }
+
 }

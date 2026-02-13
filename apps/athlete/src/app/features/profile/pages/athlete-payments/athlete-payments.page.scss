@@ -1,0 +1,87 @@
+
+:host {
+  .title {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+    margin-top: 0px;
+  }
+}
+
+ion-list {
+  background: transparent;
+  padding: 0;
+}
+
+.payment-item {
+  --background: transparent;
+}
+
+// Filter modal styles
+.filter-content {
+  .search-container {
+    padding: 16px;
+    background: white;
+    border-bottom: 1px solid var(--ion-color-light);
+
+    ion-searchbar {
+      --background: var(--ion-color-light);
+      --border-radius: 12px;
+    }
+  }
+
+  .filter-section {
+    padding: 16px;
+
+    ion-item {
+      --padding-start: 0;
+      --inner-padding-end: 0;
+      margin-bottom: 16px;
+
+      ion-label {
+        font-weight: 500;
+      }
+
+      ion-segment {
+        width: auto;
+        min-width: 150px;
+      }
+
+      ion-datetime {
+        max-width: 120px;
+      }
+    }
+  }
+
+  .filter-actions {
+    margin-top: 32px;
+    padding: 16px;
+    border-top: 1px solid var(--ion-color-light);
+
+    ion-button {
+      margin-bottom: 8px;
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .header-container {
+    padding: 12px;
+  }
+}
+
+// Dark mode support
+@media (prefers-color-scheme: dark) {
+  .filter-content {
+    .search-container {
+      background: var(--ion-color-step-50);
+      border-bottom-color: var(--ion-color-step-100);
+    }
+
+    .filter-actions {
+      border-top-color: var(--ion-color-step-100);
+    }
+  }
+}

@@ -139,6 +139,9 @@ export class ProfileComponent implements OnInit {
       case 'bankInfo':
         this.navigateToBankInfo();
         break;
+      case 'payments':
+        this.router.navigate(['home/profile/payments']);
+        break;
       case 'terms':
         this.showTerms();
         break;

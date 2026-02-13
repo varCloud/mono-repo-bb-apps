@@ -38,4 +38,5 @@ export const CONSTANTS = {
   HIDE_CONTROLS_DELAY: 3000,
   PLAYBACK_RATES: [0.5, 0.75, 1, 1.25, 1.5, 2],
   DEFAULT_LOGO_LETRAS_TOOLBAR: './assets/images/logo-con-letras.svg',
+  EMPTY_ELEMENTS_IMAGE: 'assets/images/empty/emptyelements.png'
 };

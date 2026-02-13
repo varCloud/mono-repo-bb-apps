@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        icon="chevron-back-outline"
+        class="ion-no-padding bb-goback"
+        uppercase="false"
+        defaultHref=""
+        (click)="onDismiss()"
+        [text]="''"
+      >
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      {{ title() }}
+    </ion-title>
+  </ion-toolbar>
+  
+  <div class="search-modal-container">
+    <ion-searchbar
+      [placeholder]="placeholder()"
+      [mode]="'ios'"
+      [debounce]="300"      
+      (ionInput)="onSearch($event)"
+      class="elegant-searchbar"
+    ></ion-searchbar>
+  </div>
+</ion-header>

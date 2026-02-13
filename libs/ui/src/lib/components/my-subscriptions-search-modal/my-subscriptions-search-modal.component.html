@@ -1,34 +1,27 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-searchbar
-      [placeholder]="'Buscar'"
-      [mode]="'ios'"
-      [debounce]="300"
-      show-cancel-button="always"
-      [cancelButtonText]="'cancel'"
-      (ionCancel)="dismiss()"
-      (ionInput)="onSearchChange($event)"
-    ></ion-searchbar>
-  </ion-toolbar>
-</ion-header>
-<div class="scroll" style="overflow: scroll">
-  @for (sub of filteredSubscriptions(); track sub) {
- <lib-user-card
-        [imageUrl]="sub.user.profilePictureUrl"
-        [name]="sub.user.name"
-        [nickName]="sub.user.nickName"
-        [descriptionPlan]="sub.fullDescription"
-        class="card-item"
-      [email]="sub.user.email"
-      [endData] = "sub.endDate"
-      [amount] = "sub.amount"
+<app-modal-header-searchbar
+  [titleText]="'subscriptions.search-title' | translate"
+  [placeholderText]="'subscriptions.find-subscription' | translate"
+  (dismiss)="dismiss()"
+  (search)="onSearch($event)"
+></app-modal-header-searchbar>
 
+<ion-content class="ion-padding">
+  <div class="scroll" >
+    @for (sub of subscriptions(); track sub) {
+    <lib-user-card 
+      [imageUrl]="sub.user.profilePictureUrl" 
+      [name]="sub.user.name" [nickName]="sub.user.nickName"
+      [descriptionPlan]="sub.fullDescription" class="card-item" 
+      [email]="sub.user.email" 
+      [endData]="sub.nextPaymentDate"
+      [amount]="sub.amount"
+      [showOptions]="false"
       ></lib-user-card>
-  }@empty {
-   <ion-row class="no-results-text center-text"
-      ><ion-col><p style="text-align: center;"> {{'common.no-results' | translate}} </p>
-
-        </ion-col>
-    </ion-row>
-  }
-</div>
+    }@empty {
+      @if(!this._loaderUIService.getLoading()){
+       <lib-empty-elements-component [message]="this.messsageList| translate">
+      </lib-empty-elements-component> 
+      }
+    }
+  </div>
+</ion-content>

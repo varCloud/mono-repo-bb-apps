@@ -71,6 +71,9 @@ export class ProfileComponent {
       case 'paymentMethod':
         this.router.navigate(['home/profile/payment-methods']);
         break;
+      case 'payments':
+        this.router.navigate(['home/profile/payments']);
+        break;
       case 'mySubscriptions':
         this.router.navigate(['home/profile/my-subscriptions']);
         break;
