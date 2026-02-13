@@ -7,7 +7,7 @@ import {
   Input,
   input,
 } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import {
   IonContent,
   IonButton,
@@ -16,8 +16,8 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonCard,
+  NavController,
 } from '@ionic/angular/standalone';
-import { SwiperContainer } from 'swiper/element';
 import { CardOnboardingComponent } from '../card-onboarding/card-onboarding.component';
 import { CommonModule } from '@angular/common';
 
@@ -36,7 +36,7 @@ import { CommonModule } from '@angular/common';
     IonContent,
     RouterLink,
     CardOnboardingComponent,
-    CommonModule
+    CommonModule,
   ],
 })
 export class StepsOnboardingComponent implements OnInit {
@@ -64,7 +64,7 @@ export class StepsOnboardingComponent implements OnInit {
     },
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: NavController) {}
 
   ngOnInit() {}
 
@@ -76,6 +76,6 @@ export class StepsOnboardingComponent implements OnInit {
   }
 
   goToLogin() {
-    this.router.navigate(['/login'], { replaceUrl: true });
+    this.router.navigateRoot(['/login'], { replaceUrl: true });
   }
 }

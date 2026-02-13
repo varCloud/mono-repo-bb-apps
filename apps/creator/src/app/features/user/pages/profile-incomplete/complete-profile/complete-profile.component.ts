@@ -1,12 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  effect,
-  ElementRef,
-  OnInit,
-  signal,
-  ViewChild,
-} from '@angular/core';
+import { Component, effect, ElementRef, OnInit, signal, ViewChild } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
@@ -23,6 +16,7 @@ import {
   IonDatetime,
   IonSelect,
   IonSelectOption,
+  NavController,
 } from '@ionic/angular/standalone';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import {
@@ -99,7 +93,7 @@ export class CompleteProfileComponent implements OnInit {
 
   constructor(
     private _fb: FormBuilder,
-    private _router: Router,
+    private _router: NavController,
     private _localStorage: LocalStorageService,
     private _userService: UserService,
     private _toast: ToastService,
@@ -127,11 +121,7 @@ export class CompleteProfileComponent implements OnInit {
 
   getMaxDate(): string {
     const today = new Date();
-    const maxDate = new Date(
-      today.getFullYear() - 18,
-      today.getMonth(),
-      today.getDate()
-    );
+    const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
     return maxDate.toISOString();
   }
 
@@ -164,37 +154,29 @@ export class CompleteProfileComponent implements OnInit {
     const payload = {
       firstName: this.form.value.firstName || '',
       lastName: this.form.value.lastName || '',
-      profileColor:
-        this.form.value.profileColor || CONSTANTS.USER_DEFAULT_COLOR,
+      profileColor: this.form.value.profileColor || CONSTANTS.USER_DEFAULT_COLOR,
       nickName: this.form.value.nickName || '',
       birthdate: this.form.value.birthdate || '',
       phone: this.form.value.phone ?? '',
       isoCode: this.isoCode(),
       genderId: this.form.value.genderId || 3,
       profilePictureUrl: imageUrl,
-      pushNotificationToken:
-        (await this._localStorage.get(KEY_LOCALSTORAGE.TOKEN_PUSH)) || '',
+      pushNotificationToken: (await this._localStorage.get(KEY_LOCALSTORAGE.TOKEN_PUSH)) || '',
     };
-    this._userService
-      .updateUser(userId, payload)
-      .subscribe({
-        next: () => {
-          this._toast.success(
-            this._translate.instant('create-account-profile.save-success'),
-            { duration: 500 }
-          );
-          this._localStorage.set( KEY_LOCALSTORAGE.HAS_NULL_PROFILE_FIELDS,false);
-          this.getUserData();
-        },
-        error: (err) => {
-          this._toast.error(
-            this._translate.instant('create-account-profile.save-error'),
-            {
-              duration: 1000,
-            }
-          );
-        },
-      });
+    this._userService.updateUser(userId, payload).subscribe({
+      next: () => {
+        this._toast.success(this._translate.instant('create-account-profile.save-success'), {
+          duration: 500,
+        });
+        this._localStorage.set(KEY_LOCALSTORAGE.HAS_NULL_PROFILE_FIELDS, false);
+        this.getUserData();
+      },
+      error: (err) => {
+        this._toast.error(this._translate.instant('create-account-profile.save-error'), {
+          duration: 1000,
+        });
+      },
+    });
   }
 
   onMaskSelected(mask: Countrycode) {
@@ -213,14 +195,20 @@ export class CompleteProfileComponent implements OnInit {
     return result;
   }
 
-    public getUserData() {
-    this._userService.getUser(this._sesionService.user$().userId).pipe(
-      take(1),
-      finalize(() => this._loader.hideLoader()),
-    ).subscribe((response) => {
-      this._router.navigate(['/stripe-onbording'], { replaceUrl: true });
-    }, (error) => {
-      this._loader.hideLoader();
-    });
+  public getUserData() {
+    this._userService
+      .getUser(this._sesionService.user$().userId)
+      .pipe(
+        take(1),
+        finalize(() => this._loader.hideLoader())
+      )
+      .subscribe(
+        (response) => {
+          this._router.navigateRoot(['/stripe-onbording'], { replaceUrl: true });
+        },
+        (error) => {
+          this._loader.hideLoader();
+        }
+      );
   }
 }

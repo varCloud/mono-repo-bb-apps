@@ -1,7 +1,7 @@
 import { LoggerService } from 'libs/core/services/logger.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, NavController } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -26,8 +26,16 @@ import {
   SesionService,
   UserService,
 } from '@monorepo-bb-app/core';
-import { KEY_LOCALSTORAGE, ShareService, StripeService, ToastService, User } from '@monorepo-bb-app/shared';
-import { take } from 'rxjs';
+import {
+  KEY_LOCALSTORAGE,
+  ShareService,
+  StripePropertiesAccount,
+  StripeService,
+  StripeStatus,
+  ToastService,
+  User,
+} from '@monorepo-bb-app/shared';
+import { finalize, take } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -49,7 +57,7 @@ export class ProfileComponent implements OnInit {
   menuItems = PROFILE_MENU_ITEMS;
   public webLinkCreatorProfile = '';
   public showMessageStripeIncomplete = true;
-  constructor (
+  constructor(
     private router: Router,
     private loaderUIService: LoaderUIService,
     private localStorageService: LocalStorageService,
@@ -58,7 +66,8 @@ export class ProfileComponent implements OnInit {
     private shareService: ShareService,
     private _stripeService: StripeService,
     private route: ActivatedRoute,
-    private _userService:UserService
+    private _userService: UserService,
+    private _navCtrl: NavController
   ) {
     addIcons({
       trashSharp,
@@ -68,21 +77,45 @@ export class ProfileComponent implements OnInit {
       copyOutline,
       shareSocialOutline,
     });
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe(async (params) => {
       if (params['stripe'] === 'success') {
-        this.showMessageStripeIncomplete = false;
-        this.toastService.success('¡Configuración de Stripe completada con éxito!');
-        if(this.sesionService.user$().userId){
-          this._userService.getUser(this.sesionService.user$().userId).pipe(take(1));
-        }
+        const user = await this.localStorageService.get(KEY_LOCALSTORAGE.USER);
+        this.loaderUIService.showLoader();
+        this._userService
+          .statusAccountPaymentStripe(user.userId)
+          .pipe(finalize(() => this.loaderUIService.hideLoader()))
+          .subscribe({
+            next: async (account: StripePropertiesAccount) => {
+              if (account.isFullyActive) {
+                this.showMessageStripeIncomplete = false;
+                this.localStorageService.set(KEY_LOCALSTORAGE.USER, {
+                  ...user,
+                  stripeStatus: StripeStatus.ACTIVE,
+                });
+              } else {
+                this.errorSatusStripe();
+              }
+            },
+            error: () => {
+              this.errorSatusStripe();
+            },
+          });
       }
     });
+  }
 
+  private async errorSatusStripe() {
+    const user = await this.localStorageService.get(KEY_LOCALSTORAGE.USER);
+    this.showMessageStripeIncomplete = true;
+    this.localStorageService.set(KEY_LOCALSTORAGE.USER, {
+      ...user,
+      stripeStatus: StripeStatus.RESTRICTED,
+    });
   }
 
   async ngOnInit() {
     const config = await this.localStorageService.get(KEY_LOCALSTORAGE.CONFIG);
-    if(config){
+    if (config) {
       this.webLinkCreatorProfile = `${config.creatorSiteProfile}?userId=${this.sesionService.user$().userId}`;
     }
     console.log('Creator Site Profile URL:', this.webLinkCreatorProfile);
@@ -93,7 +126,6 @@ export class ProfileComponent implements OnInit {
   }
 
   onMenuItemClick(action: string): void {
-
     switch (action) {
       case 'viewAsClient':
         this.viewAsClient();
@@ -147,13 +179,12 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['home/profile/portada']);
   }
 
-  private navigateToBankInfo(): void {   
+  private navigateToBankInfo(): void {
     this.loaderUIService.showLoader();
     setTimeout(() => {
       this.loaderUIService.hideLoader();
     }, 300);
     this._stripeService.openStripeOnboarding(this.sesionService.user$().userId);
-  
   }
 
   private showTerms(): void {
@@ -161,7 +192,7 @@ export class ProfileComponent implements OnInit {
   }
 
   private contactSupport(): void {
-     this.router.navigate(['home/profile/support-creator']);
+    this.router.navigate(['home/profile/support-creator']);
   }
 
   private deleteAccount(): void {
@@ -183,7 +214,7 @@ export class ProfileComponent implements OnInit {
         title: 'Mi perfil de creador',
         text: `Mira mi perfil: ${this.sesionService.user$().firstName}`,
         url: this.webLinkCreatorProfile,
-        dialogTitle: 'Compartir perfil'
+        dialogTitle: 'Compartir perfil',
       });
     } catch {
       await this.onCopyLink();
@@ -194,7 +225,8 @@ export class ProfileComponent implements OnInit {
     this.loaderUIService.showLoader();
     setTimeout(async () => {
       await this.localStorageService.clear([KEY_LOCALSTORAGE.TOKEN_PUSH]);
-      await this.router.navigate(['login']);
+      await this.localStorageService.clear();
+      await this._navCtrl.navigateRoot(['login'], { replaceUrl: true });
       this.loaderUIService.hideLoader();
     }, 300);
   }

@@ -7,16 +7,17 @@ import { Browser } from '@capacitor/browser';
 /**
  * Servicio para manejar todos los deep links de la aplicación
  * Implementa el patrón Strategy para diferentes tipos de enlaces
- * los deep links son los que  te ayudan a abrir tu aplicacion movil desde un sitio web 
+ * los deep links son los que  te ayudan a abrir tu aplicacion movil desde un sitio web
  * ademas de este servicio tambien es necesario agregar algunas validaciones al manifest de android y al info.plist de ios
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DeepLinkService {
-  private readonly APP_SCHEME = 'coach_body_booster_app';
+  private readonly APP_SCHEME = 'coach-body-booster-app';
+  //private readonly APP_SCHEME_IOS = 'coach-body-booster-app';
   private readonly APP_ID = 'io.bb.body.booster.creator';
-  
+
   constructor(
     private router: Router,
     private zone: NgZone
@@ -44,7 +45,7 @@ export class DeepLinkService {
    */
   private handleIncomingDeepLink(event: URLOpenListenerEvent): void {
     console.log('🎯 Deep link event received:', event);
-    
+
     this.zone.run(async () => {
       try {
         await this.closeBrowserIfOpen();
@@ -73,7 +74,7 @@ export class DeepLinkService {
    */
   private async processDeepLink(url: string): Promise<void> {
     console.log('🔗 Processing deep link:', url);
-    
+
     if (!this.isValidDeepLink(url)) {
       console.warn('❌ Invalid deep link scheme:', url);
       this.navigateToFallback();
@@ -96,7 +97,7 @@ export class DeepLinkService {
    */
   private parseDeepLink(url: string): DeepLinkData {
     console.log('🔍 Parsing deep link:', url);
-    
+
     const urlWithoutScheme = url.replace(`${this.APP_SCHEME}://`, '');
     const [hostAndPath, queryString] = urlWithoutScheme.split('?');
     const [host, ...pathParts] = hostAndPath.split('/');
@@ -109,14 +110,17 @@ export class DeepLinkService {
       host: host || '',
       path: path || undefined,
       params,
-      rawUrl: url
+      rawUrl: url,
     };
 
-    console.log('📋 Parsed deep link data:', JSON.stringify({
-      host: deepLinkData.host,
-      path: deepLinkData.path,
-      params: Array.from(deepLinkData.params.entries())
-    }));
+    console.log(
+      '📋 Parsed deep link data:',
+      JSON.stringify({
+        host: deepLinkData.host,
+        path: deepLinkData.path,
+        params: Array.from(deepLinkData.params.entries()),
+      })
+    );
 
     return deepLinkData;
   }
@@ -126,18 +130,15 @@ export class DeepLinkService {
    */
   private parseQueryParams(queryString?: string): Map<string, string> {
     const params = new Map<string, string>();
-    
+
     if (!queryString) {
       return params;
     }
 
-    queryString.split('&').forEach(param => {
+    queryString.split('&').forEach((param) => {
       const [key, value] = param.split('=');
       if (key && value !== undefined) {
-        params.set(
-          decodeURIComponent(key),
-          decodeURIComponent(value || '')
-        );
+        params.set(decodeURIComponent(key), decodeURIComponent(value || ''));
       }
     });
 
@@ -152,20 +153,20 @@ export class DeepLinkService {
       case DeepLinkHost.STRIPE_RETURN:
         await this.handleStripeReturn(data);
         break;
-        
+
       case DeepLinkHost.OPEN:
       case '':
         await this.handleGeneralOpen(data);
         break;
-        
+
       case DeepLinkHost.ONBOARDING:
         await this.handleOnboarding(data);
         break;
-        
+
       case DeepLinkHost.PROFILE:
         await this.handleProfile(data);
         break;
-        
+
       default:
         console.warn('❓ Unknown deep link host:', data.host);
         this.navigateToFallback();
@@ -179,11 +180,17 @@ export class DeepLinkService {
   private async handleStripeReturn(data: DeepLinkData): Promise<void> {
     const status = data.params.get('status');
     console.log('💳 Handling Stripe return with status:', status);
-    
+
     if (status === 'success') {
       console.log('✅ Stripe success! Navigating to personal-data page');
-      await this.router.navigate(['home'], { queryParams: { stripe: 'success' } , replaceUrl: true});
-      await this.router.navigate(['home/profile'], { queryParams: { stripe: 'success' } , replaceUrl: true});
+      await this.router.navigate(['home'], {
+        queryParams: { stripe: 'success' },
+        replaceUrl: true,
+      });
+      await this.router.navigate(['home/profile'], {
+        queryParams: { stripe: 'success' },
+        replaceUrl: true,
+      });
     } else {
       console.warn('❌ Stripe onboarding failed with status:', status);
       this.navigateToFallback();
@@ -197,9 +204,9 @@ export class DeepLinkService {
     const page = data.params.get('page');
     const action = data.params.get('action');
     const source = data.params.get('source');
-    
+
     console.log('🔄 General deep link:', { page, action, source });
-    
+
     if (action === DeepLinkAction.ONBOARDING_COMPLETE) {
       console.log('🎉 Onboarding completed, navigating to home');
       await this.router.navigate(['/home']);
@@ -218,7 +225,7 @@ export class DeepLinkService {
   private async handleOnboarding(data: DeepLinkData): Promise<void> {
     const step = data.params.get('step');
     console.log('🚀 Handling onboarding deep link, step:', step);
-    
+
     if (step) {
       await this.router.navigate(['/onboarding', step]);
     } else {
@@ -232,7 +239,7 @@ export class DeepLinkService {
   private async handleProfile(data: DeepLinkData): Promise<void> {
     const section = data.params.get('section') || data.path;
     console.log('👤 Handling profile deep link, section:', section);
-    
+
     if (section) {
       await this.router.navigate(['/home/profile', section]);
     } else {
