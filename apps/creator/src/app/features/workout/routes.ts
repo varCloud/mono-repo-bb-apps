@@ -1,3 +1,5 @@
+import { WorkoutAssetDataResolver } from './../../../../../../libs/shared/services/resolvers/detail-workout-asset.resolvert';
+import { WorkoutDataResolver } from './../../../../../../libs/shared/services/resolvers/detail-workout-resolver';
 import { Routes } from '@angular/router';
 
 export const workoutRoutes: Routes = [
@@ -8,6 +10,24 @@ export const workoutRoutes: Routes = [
         (m) => m.WorkoutComponent,
       ),
   },
+  {
+    path: 'workouts/:workoutId/:creatorId/:userId',
+    resolve: {
+      workout: WorkoutDataResolver,
+    },
+    loadComponent: () =>
+      import('./pages/detail-workout/detail-workout').then((m) => m.DetailWorkout),
+  },
+  {
+        path: 'workouts/workoutAsset/:workoutId/:creatorId/:userId/:workoutAssetIdP',
+        resolve: {
+          workout: WorkoutAssetDataResolver,
+        },
+        loadComponent: () =>
+          import('./pages/detail-workout-asset/detail-workout-asset').then(
+            (m) => m.DetailWorkoutAsset
+          ),
+      },
   {
     path: 'workouts/create-recorded-class',
     loadComponent: () =>

@@ -475,25 +475,30 @@
   },
   "conversations": {
     "search-title": "Buscar conversaciones",
-    "search-description": "Encuentra rápidamente tus conversaciones anteriores", 
+    "search-description": "Encuentra rápidamente tus conversaciones anteriores",
     "find-conversation": "Buscar por nombre, email ...",
     "no-conversations": "No tienes conversaciones aún",
     "no-conversations-for-search": "No se encontraron conversaciones para tu búsqueda"
   },
   "subscriptions": {
     "search-title": "Buscar suscripciones",
-    "search-description": "Encuentra rápidamente tus suscripciones anteriores", 
+    "search-description": "Encuentra rápidamente tus suscripciones anteriores",
     "find-subscription": "Buscar por nombre, email ...",
     "no-subscriptions": "No tienes suscripciones aún",
     "no-subscriptions-for-search": "No se encontraron suscripciones para tu búsqueda"
   },
-
-    "favorites": {
+  "favorites": {
     "search-title": "Buscar favoritos",
-    "search-description": "Encuentra rápidamente tus favoritos anteriores", 
+    "search-description": "Encuentra rápidamente tus favoritos anteriores",
     "find-favorite": "Buscar por nombre, email ...",
     "no-favorites": "No tienes favoritos aún",
     "no-favorites-for-search": "No se encontraron favoritos para tu búsqueda"
+  },
+  "workouts-search": {
+    "search-title": "Buscar entrenamientos",
+    "search-description": "Encuentra rápidamente tus entrenamientos anteriores",
+    "find-workout": "Buscar por nombre, descripción ...",
+    "no-workouts": "No tienes entrenamientos aún",
+    "no-workouts-for-search": "No se encontraron entrenamientos para tu búsqueda"
   }
-
 }

@@ -9,7 +9,6 @@ export const authGuard: CanActivateFn = async (route, state) => {
   const isProfileIncomplete = route.data?.['isProfileIncomplete'] || false;
   const token = await storageService.get(KEY_LOCALSTORAGE.TOKEN);
   const hasNullProfileFields = await storageService.get(KEY_LOCALSTORAGE.HAS_NULL_PROFILE_FIELDS);
-
   if (!token) {
     router.navigateRoot(['/login'], { replaceUrl: true });
     return false;

@@ -49,8 +49,6 @@ export class PaymentCardComponent {
   displayUser = computed(() => {
     const payment = this.payment();
     const userType = this.userType();
-    
-    // Para atleta, mostrar creador; para creador, mostrar atleta
     return userType === 'athlete' ? payment.creator : payment.athlete;
   });
 

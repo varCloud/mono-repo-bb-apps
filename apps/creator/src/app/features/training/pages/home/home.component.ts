@@ -1,3 +1,4 @@
+import { CreatorSearchWorkoutModalComponent } from './../../../../../../../../libs/ui/src/lib/components/creator-search-workout-modal/creator-search-workout-modal';
 import { Component, OnInit, signal } from '@angular/core';
 import { addIcons } from 'ionicons';
 import {
@@ -163,6 +164,12 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['home/workouts']);
   }
 
+  async clickCard(workout: WorkoutListModel) {
+    const userId = await this.getUserId();
+    this.router.navigate(['home/workouts', workout.workoutId, workout.creatorId, userId]);
+    this.modalCtrl.dismiss();
+  }
+
   async onIonInfinite(event: any) {
     if (this.paginator()?.links?.next) {
       await this.getWorkouts(this.paginator().links.next as string);
@@ -172,7 +179,7 @@ export class HomeComponent implements OnInit {
 
   public async openFilter() {
     const modal = await this.modalCtrl.create({
-      component: FilterComponent,
+      component: CreatorSearchWorkoutModalComponent,
       componentProps: {
         filter: this.filter,
       },

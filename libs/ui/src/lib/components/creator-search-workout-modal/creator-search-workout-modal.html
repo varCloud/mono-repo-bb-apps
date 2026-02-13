@@ -1,0 +1,21 @@
+<app-modal-header-searchbar
+  [titleText]="'workouts-search.search-title' | translate"
+  [placeholderText]="'workouts-search.find-workout' | translate"
+  (dismiss)="dismiss()"
+  (search)="onSearch($event)"
+></app-modal-header-searchbar>
+<ion-content class="ion-padding" [fullscreen]="true">
+    <ion-grid class="workout-grid">
+    <ion-row gap="5px">
+      @for (workout of workouts(); track workout.workoutId) {
+        <ion-col size="6" size-md="3" size-lg="3">
+          <lib-card-list
+            [workout]="workout"
+            [useBookmark]="false"
+            (clickCardEvent)="clickCard($event)"
+          ></lib-card-list>
+        </ion-col>
+      }
+    </ion-row>
+  </ion-grid>
+</ion-content>
