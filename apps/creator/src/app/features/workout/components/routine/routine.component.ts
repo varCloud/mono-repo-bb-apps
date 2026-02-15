@@ -1,11 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import {
-  IonHeader,
-  IonContent,
-  IonBackButton,
-} from '@ionic/angular/standalone';
+import { IonHeader, IonContent, IonBackButton, IonToolbar } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
 import { RoutineFormComponent } from '@monorepo-bb-app/ui';
 import { TrainingTypeEnum } from '@monorepo-bb-app/shared';
@@ -16,6 +12,7 @@ import { TrainingTypeEnum } from '@monorepo-bb-app/shared';
   styleUrls: ['./routine.component.scss'],
   standalone: true,
   imports: [
+    IonToolbar,
     CommonModule,
     ReactiveFormsModule,
     TranslateModule,
@@ -23,6 +20,7 @@ import { TrainingTypeEnum } from '@monorepo-bb-app/shared';
     IonContent,
     IonBackButton,
     RoutineFormComponent,
+    IonToolbar,
   ],
 })
 export class RoutineComponent implements OnInit {
