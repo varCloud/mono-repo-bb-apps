@@ -4,15 +4,14 @@
       <img src="./assets/images/logo-con-letras.svg" alt="BodyBooster" class="app-logo" />
     </div>
     <div class="header-actions">
+      @if (false) {
       <ion-button fill="clear" size="small" class="header-icon-btn" (click)="openFilter()">
-        <ion-icon
-          [name]="filter.countFilters > 0 ? 'filter-circle' : 'filter-circle-outline'"
-          slot="icon-only"
-          [color]="filter.countFilters > 0 ? 'secondary' : null"
-          appProfileColor="color"
-        ></ion-icon>
+        <ion-icon [name]="filter.countFilters > 0 ? 'filter-circle' : 'filter-circle-outline'" slot="icon-only"
+          [color]="filter.countFilters > 0 ? 'secondary' : null" appProfileColor="color"></ion-icon>
+
       </ion-button>
-      <ion-button fill="clear" size="small" class="header-icon-btn">
+      }
+      <ion-button fill="clear" size="small" class="header-icon-btn" (click)="openFilter()">
         <ion-icon name="search" slot="icon-only" appProfileColor="color"></ion-icon>
       </ion-button>
       <!-- <ion-button fill="clear" size="small" class="header-icon-btn">
@@ -32,47 +31,37 @@
       <h2 class="title">Biblioteca de ejercicios</h2>
     </div>
     @if (workoutMaxLikes()) {
-      <lib-card-max-likes [workout]="workoutMaxLikes()!"></lib-card-max-likes>
+    <lib-card-max-likes [workout]="workoutMaxLikes()!"></lib-card-max-likes>
     }
   </div>
   <ion-grid class="workout-grid">
     <ion-row gap="5px">
       @for (workout of workouts(); track workout.workoutId) {
-        <ion-col size="6" size-md="3" size-lg="3">
-          <lib-card-list [workout]="workout" (clickDeleteEvent)="onDeleteWorkout($event)">
-          </lib-card-list>
-        </ion-col>
+      <ion-col size="6" size-md="3" size-lg="3">
+        <lib-card-list [workout]="workout" 
+        (clickDeleteEvent)="onDeleteWorkout($event)"
+        (clickCardEvent)="clickCard($event)"
+        >
+        </lib-card-list>
+      </ion-col>
       }
     </ion-row>
   </ion-grid>
   @if (workouts().length === 0 && !workoutMaxLikes()) {
-    <div class="empty-section">
-      <img
-        src="/assets/images/empty/ejercices.png"
-        alt="No hay entrenamientos"
-        class="empty-image"
-      />
-      <p class="empty-title">Actualmente no tienes entrenamientos.</p>
-      <p class="empty-subtitle">Da clic en el botón para crear tu primer entrenamiento .</p>
-    </div>
+  <div class="empty-section">
+    <img src="/assets/images/empty/ejercices.png" alt="No hay entrenamientos" class="empty-image" />
+    <p class="empty-title">Actualmente no tienes entrenamientos.</p>
+    <p class="empty-subtitle">Da clic en el botón para crear tu primer entrenamiento .</p>
+  </div>
   }
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="center">
-    <ion-button
-      expand="block"
-      fill="solid"
-      class="new-workout-btn"
-      color="tertiary"
-      (click)="onNewWorkoutClick()"
-    >
+    <ion-button expand="block" fill="solid" class="new-workout-btn" color="tertiary" (click)="onNewWorkoutClick()">
       <ion-icon src="assets/icons/equipment.svg" slot="start"></ion-icon>
       Nuevo entrenamiento
     </ion-button>
   </ion-fab>
-  <ion-infinite-scroll
-    (ionInfinite)="onIonInfinite($event)"
-    [disabled]="isInfiniteScrollDisabled()"
-  >
+  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)" [disabled]="isInfiniteScrollDisabled()">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>

@@ -111,7 +111,11 @@ export class PaymentTransactionModel implements PaymentTransaction {
     this.creator = new PaymentUserModel(data.creator);
   }
 
-  get formattedAmount(): string {
+  get formattedAmountCreator(): string {
+    return `${this.creatorPayout} ${this.currency}`;
+  }
+
+  get formattedAmountAthlete(): string {
     return `${this.amount} ${this.currency}`;
   }
 

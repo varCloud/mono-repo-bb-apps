@@ -8,7 +8,11 @@
 
   <div class="card-content">
     <span class="name">{{ displayUser().fullName }} <span class="nickname">({{ displayUser().nickName }})</span></span>
-    <span class="plan-info">{{ payment().formattedAmount }} - {{ payment().billingTypeLabel }}</span>
+    @if(userType() === 'creator') {
+      <span class="plan-info">{{ payment().formattedAmountCreator }} - {{ payment().billingTypeLabel }}</span>
+    }@else {
+      <span class="plan-info">{{ payment().formattedAmountAthlete }} - {{ payment().billingTypeLabel }}</span>
+    }
     <span class="subtitle">{{ displayUser().email }}</span>
     <span class="next-payment">
       <ion-badge [color]="statusColor()" class="status-badge"
