@@ -4,7 +4,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>es</string>
 	<key>CFBundleDisplayName</key>
 	<string>Body Booster</string>
 	<key>CFBundleExecutable</key>
@@ -29,6 +29,8 @@
 			</array>
 		</dict>
 	</array>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Necesitamos acceso al micrófono para grabar videos con audio.</string>
 	<key>NSCameraUsageDescription</key>
 	<string
     >Necesitamos acceso a tu cámara para que puedas tomar fotos y grabar videos directamente en la app.</string>
