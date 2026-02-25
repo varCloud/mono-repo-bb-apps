@@ -16,7 +16,7 @@ const config: CapacitorConfig = {
     allowMixedContent: true,
     buildOptions: {
       keystorePath:
-        'F:/Documents/BlueCloud/Proyectos/BB/key-android-creator/keystore.jks',
+        'E:/Documents/BlueCloud/Proyectos/BB/key-android-creator/keystore.jks',
       keystorePassword: 'bb2025',
       keystoreAlias: 'body-booster',
       keystoreAliasPassword: 'bb2025',

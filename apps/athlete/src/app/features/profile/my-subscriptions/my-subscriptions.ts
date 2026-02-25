@@ -129,6 +129,8 @@ export class MySubscriptionsPage {
       componentProps: {
         subscription: this.subscriptions,
         userTypeId: this.sesionService.user$()?.userTypeId,
+        creatorSelected: subscription.user.id,
+
       },
       breakpoints: [0.5, 1],
       initialBreakpoint: 0.5,

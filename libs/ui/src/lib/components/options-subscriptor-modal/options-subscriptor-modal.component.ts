@@ -3,7 +3,7 @@ import { Router, RouterEvent } from '@angular/router';
 import { ModalController, IonIcon, IonButton } from '@ionic/angular/standalone';
 import { LoaderUIService, UserConversationService } from '@monorepo-bb-app/core';
 import { addIcons } from 'ionicons';
-import { chatbubbleOutline, close, closeCircleOutline, chatboxEllipsesOutline ,send, create } from 'ionicons/icons';
+import { chatbubbleOutline, close, closeCircleOutline, chatboxEllipsesOutline ,send, create, personCircleOutline } from 'ionicons/icons';
 import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
 import { finalize, take } from 'rxjs';
 
@@ -30,23 +30,31 @@ export class OptionsSubscritporModalComponent {
 
   //Los parametros se envian desde elcomponente padre usando componentProps
   
-  subscription!: Subscription;
   userTypeId: number = ENUM_TYPE_USER.ATHLETE;
   viewState = signal<'options' | 'confirm'>('options');
-
-  constructor(private modalCtrl: ModalController) {
-    addIcons({ closeCircleOutline , send, chatbubbleOutline , chatboxEllipsesOutline });
+  creatorSelected: number = 0;
+  constructor(private modalCtrl: ModalController, private router: Router) {
+    addIcons({ personCircleOutline, closeCircleOutline , send, chatbubbleOutline , chatboxEllipsesOutline });
   }
 
   closeModal() {
     this.modalCtrl.dismiss(null, 'cancel');
   }
+
   showConfirmView() {
     this.viewState.set('confirm');
   }
+
+  showProfile() {
+    this.modalCtrl.dismiss({ viewProfile: true }, 'confirm');
+    this.router.navigate([`/home/suscriptions/profile-creator/${this.creatorSelected}`]);
+
+  }
+
   showOptionsView() {
     this.viewState.set('options');
   }
+
   confirmCancellation(){
     this.modalCtrl.dismiss({ cancelSubscription: true }, 'confirm');
   }
