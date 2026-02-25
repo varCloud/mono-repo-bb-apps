@@ -126,9 +126,23 @@ ion-back-button {
       .textarea-bottom {
         .counter {
           font-size: 10px;
-          color: var(--ion-color-step-300, var(--ion-background-color-step-300, #b3b3b3)) !important;
+          color: var(--ion-color-step-300, var(--ion-background-color-step-300, #e4e1e1)) !important;
         }
       }
     }
+  }
+}
+
+
+.form-guide-text{
+  padding: 10px;
+  text-align: center;
+  font-size: 12px;
+  margin-bottom: 10px;
+  span{
+    padding: 5px;
+    background: #d1d1d1;
+    border-radius: 10px;
+    color: #333;
   }
 }

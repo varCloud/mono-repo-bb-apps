@@ -15,6 +15,7 @@ import {
   IonButton,
   IonProgressBar,
   IonTextarea,
+  IonText
 } from '@ionic/angular/standalone';
 import {
   LoaderUIService,
@@ -75,7 +76,8 @@ import { BUCKET_TYPE } from 'libs/shared/constants/enums';
     DashedAreaComponent,
     ReactiveFormsModule,
     AddRecordedClassComponent,
-    IonTextarea
+    IonTextarea,
+    IonText
   ],
   templateUrl: './routine-form.component.html',
   styleUrl: './routine-form.component.scss',
