@@ -92,6 +92,9 @@ export class ProfileComponent implements OnInit {
                   ...user,
                   stripeStatus: StripeStatus.ACTIVE,
                 });
+                this.toastService.success('¡Configuración de Stripe completada con éxito!', {
+                  duration: 2000,
+                });
               } else {
                 this.errorSatusStripe();
               }
