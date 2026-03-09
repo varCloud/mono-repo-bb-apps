@@ -11,7 +11,10 @@ import {
   IonButton,
   IonIcon,
   IonSearchbar,
-  ModalController // Importa ModalController
+  ModalController,
+  IonItem,
+  IonInput,
+  IonModal
 } from '@ionic/angular/standalone';
 
 // Importa los íconos
@@ -21,6 +24,9 @@ import { closeOutline } from 'ionicons/icons';
 // Importa nuestro acordeón y la interfaz
 import {Faq } from '@monorepo-bb-app/shared';
 import { AccordionComponent } from '../accordion/accordion.component';
+import { TranslateModule } from '@ngx-translate/core';
+
+
 
 
 @Component({
@@ -28,34 +34,35 @@ import { AccordionComponent } from '../accordion/accordion.component';
   templateUrl: './faq-search-modal.component.html',
   styleUrls: ['./faq-search-modal.component.scss'],
   standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  //changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CommonModule,
-    // Componentes Ionic
+    IonSearchbar,
     IonHeader,
     IonToolbar,
-    IonTitle,
     IonContent,
+    AccordionComponent,
+    TranslateModule,
     IonButtons,
     IonButton,
     IonIcon,
-    IonSearchbar,
-    // Nuestro componente de acordeón
-    AccordionComponent,
+    IonItem,
+    IonTitle,
+    IonInput,
+    IonModal
   ]
 })
 export class FaqSearchModalComponent {
 
-  // 1. Recibe la lista completa de FAQs desde la página
+  constructor(
+    private modalCtrl: ModalController
+  ) {
+    addIcons({ closeOutline });
+  }
+ 
   allFaqs = input.required<Faq[]>();
-
-  // 2. Inyecta el ModalController para poder cerrarlo
-  private modalCtrl = inject(ModalController);
-
-  // 3. Signal para el término de búsqueda
+  
   searchTerm = signal('');
-
-  // 4. Signal computado para la lista filtrada
   filteredFaqs = computed(() => {
     const term = this.searchTerm().toLowerCase();
     const faqs = this.allFaqs();
@@ -72,11 +79,8 @@ export class FaqSearchModalComponent {
     );
   });
 
-  constructor() {
-    addIcons({ closeOutline });
-  }
 
-  // 5. Función para cerrar el modal
+  // // 5. Función para cerrar el modal
   dismiss() {
     this.modalCtrl.dismiss();
   }
@@ -85,4 +89,8 @@ export class FaqSearchModalComponent {
   onSearchChange(event: any) {
     this.searchTerm.set(event.detail.value || '');
   }
+
+  cancel(){}
+
+  confirm(){}
 }

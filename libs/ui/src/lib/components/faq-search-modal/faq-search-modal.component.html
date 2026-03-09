@@ -1,16 +1,10 @@
-<ion-content>
 <ion-header>
   <ion-toolbar>
-    <ion-searchbar
-     [placeholder]="'Buscar'"
-      [mode]="'ios'"
-      [debounce]="300"
-      show-cancel-button="always"
-      [cancelButtonText]="'cancel'"
-      (ionCancel)="dismiss()"
-      (ionInput)="onSearchChange($event)"
-    ></ion-searchbar>
+    <ion-searchbar [placeholder]="'Buscar'" [mode]="'ios'" [debounce]="300" show-cancel-button="always"
+      [cancelButtonText]="'cancel'" (ionCancel)="dismiss()" (ionInput)="onSearchChange($event)"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
+<ion-content class="ion-padding" >
   <app-faq-accordion [items]="filteredFaqs()" [showHeader]="false" />
 </ion-content>
+

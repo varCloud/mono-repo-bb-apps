@@ -59,10 +59,10 @@ export class HomeSupport {
   public leftIcon = input<string>('arrow-back-outline');
   public backLink = input<string>('https://google.com');
   public title = input<string>('Help');
-  public emailLink = input<string>('gusmg90@gmail.com');
+  public emailLink = input<string>('');
   public emailIcon = input<string>('mail-outline');
   public phoneIcon = input<string>('call-outline');
-  public phoneLink = input<string>('+524432426259');
+  public phoneLink = input<string>('');
   public mySearchText?: string = '';
   cardCategories: InfoCardData[] = [];
   appConfig2: AppConfig2Model[] = [];
@@ -129,23 +129,29 @@ export class HomeSupport {
   }
 
   async openSearchModal() {
-    const modal = await this.modalCtrl.create({
-      component: FaqSearchModalComponent,
-      componentProps: {
-        allFaqs: this.myFaqList,
-      },
-      breakpoints: [0, 0.25, 0.5, 0.75, 1],
-      cssClass: 'search-modal',
-    });
+    try {
+      
+      const modal = await this.modalCtrl.create({
+        component: FaqSearchModalComponent,
+        componentProps: {
+          allFaqs: this.myFaqList,
+        },
+        
+        cssClass: 'search-modal',
+      });
 
-    await modal.present();
+      await modal.present();
 
-    const result = await modal.onDidDismiss();
-    if (result.data) {
-      console.log('Modal Data:', result.data);
+      const result = await modal.onDidDismiss();
+      if (result.data) {
+        console.log('Modal Data:', result.data);
+      }
+
+    } catch (error) {
+      console.error('Error opening modal:', error);
     }
   }
-  //info slider
+
   onSliderCardClicked(cardId: string) {
     this.getFacts(Number(cardId));
   }
