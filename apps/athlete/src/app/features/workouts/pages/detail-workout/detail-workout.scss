@@ -4,6 +4,9 @@
       --margin-bottom: 0;
       --icon-margin-start: 16px;
     }
+    .workout-description {
+      white-space: pre-line;
+    }
     .header {
       display: flex;
       justify-content: space-between;
@@ -131,4 +134,8 @@
       }
     }
   }
+}
+
+ion-conten{
+      --offset-bottom: 0px;
 }

@@ -82,6 +82,7 @@
     "title": "Crear cuenta"
   },
   "description": "Descripción",
+  "document": "Documento",
   "error": {
     "default": "Ha ocurrido un error inesperado",
     "email-required": "El correo electrónico es obligatorio",

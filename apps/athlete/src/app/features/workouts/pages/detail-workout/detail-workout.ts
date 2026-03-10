@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Capacitor } from '@capacitor/core';
+
 import {
   IonButton,
   IonGrid,
@@ -21,11 +22,13 @@ import {
   IonChip,
   IonLabel,
   IonItem,
+  IonFooter
 } from '@ionic/angular/standalone';
 import { ActionsWorkoutService, LocalStorageService } from '@monorepo-bb-app/core';
 import {
   Asset,
   KEY_LOCALSTORAGE,
+  SentenceCasePipe,
   TrainingTypeEnum,
   Workout,
   WorkoutInformationSelect,
@@ -58,6 +61,8 @@ import {
     IonButton,
     TranslateModule,
     NgClass,
+    IonFooter,
+    SentenceCasePipe
   ],
   templateUrl: './detail-workout.html',
   styleUrl: './detail-workout.scss',

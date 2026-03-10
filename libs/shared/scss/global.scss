@@ -34,7 +34,6 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 @import '@ionic/angular/css/palettes/dark.class.css';
-@import 'theme/bb-colors.scss';
 @import 'theme/override/ion-content.scss';
 @import 'theme/override/ion-input.scss';
 @import 'theme/override/ion-button.scss';
@@ -44,6 +43,7 @@
 @import 'theme/override/ion-checkbox.scss';
 @import 'theme/override/ion-card.scss';
 @import 'theme/override/ion-textarea.scss';
+@import 'theme/override/padding.scss';
 @import '@uppy/dashboard/dist/style.min.css';
 @import '@uppy/core/dist/style.css';
 @import 'theme/override/ion-radio.scss';

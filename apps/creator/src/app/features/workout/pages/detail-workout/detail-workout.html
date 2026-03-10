@@ -18,15 +18,15 @@
         <span class="workout-likes">
           <ion-icon name="heart"></ion-icon>
 
-          {{ workout.totalLikes }} {{ 'likes' | translate }} | {{ level }}</span>
+          {{ workout.totalLikes }} {{ 'likes' | translate }} </span>
         <ion-chip class="chip">
-          <ion-label>{{ tag }}</ion-label>
+          <ion-label>{{ level }}</ion-label>
         </ion-chip>
       </div>
     </div>
   </div>
-  <ion-grid class="ion-padding">
-    <ion-row>
+  <ion-grid class="ion-padding  padding-b-70">
+    <!-- <ion-row>
       <ion-col class="ion-no-padding">
         <div class="categories-creator-profile">
           @for (category of $any(workout?.categories); track category.categoryId) {
@@ -36,32 +36,38 @@
           }
         </div>
       </ion-col>
-    </ion-row>
-    <ion-row class="">
+    </ion-row> -->
+    <ion-row>
+      <ion-col class="ion-no-padding" size="12">
+        <ion-text class="workout-title">{{ 'description' | translate }}: </ion-text>
+      </ion-col>
       <ion-col class="ion-no-padding">
-        <ion-text>Titulo: {{ workout.title | sentenceCase }}</ion-text><br />
-        <ion-text>Descripcion: {{ workout.description | sentenceCase }}</ion-text>
+        <p class="workout-description">{{ workout.description }}</p>
       </ion-col>
     </ion-row>
-    @for (asset of workout.assets; let i = $index; track asset.workoutAssetId) {
-    <ion-item lines="none" class="workouts-items" (click)="viewDetailRutine(asset)" detail="false" [button]="true">
-      <div class="container-video" slot="start">
-        <ion-icon [name]="workout.workoutTypeId === TYPE_ASSETS.DOCUMENT ? 'document' : 'play'"></ion-icon>
-      </div>
-      <div class="info-workout-item">
-        <div class="body">
-          <ion-text color="secondary" class="exercise-number">{{ 'exercise' | translate }} {{ i + 1 }}</ion-text>
-          <ion-text class="exercise-description">{{ asset.name }}</ion-text>
-        </div>
-        <div class="footer">
-          <ion-text>
-            <ion-icon name="timer-sharp"></ion-icon> {{ asset.duration || 0 }} m</ion-text>|
-          <ion-text> <ion-icon name="heart"></ion-icon> {{ asset.likes || 0 }}</ion-text>
-          <ion-text>
-            <ion-icon name="chatbox-sharp"></ion-icon> {{ asset.messages || 0 }}</ion-text>
-        </div>
-      </div>
-    </ion-item>
-    }
+    <ion-row>
+      @for (asset of workout.assets; let i = $index; track asset.workoutAssetId) {
+      <ion-col class="" size="12">
+        <ion-item lines="none" class="workouts-items" (click)="viewDetailRutine(asset)" detail="false" [button]="true">
+          <div class="container-video" slot="start">
+            <ion-icon [name]="workout.workoutTypeId === TYPE_ASSETS.DOCUMENT ? 'document' : 'play'"></ion-icon>
+          </div>
+          <div class="info-workout-item">
+            <div class="body">
+              <ion-text color="secondary" class="exercise-number">{{ (workout.workoutTypeId === TYPE_ASSETS.DOCUMENT ? 'document' : 'exercise') | translate }} {{ i + 1 }}</ion-text>
+              <ion-text class="exercise-description">{{ asset.name | sentenceCase  }}</ion-text>
+            </div>
+            <div class="footer">
+              <ion-text>
+                <ion-icon name="timer-sharp"></ion-icon> {{ asset.duration || 0 }} m</ion-text>|
+              <ion-text> <ion-icon name="heart"></ion-icon> {{ asset.likes || 0 }}</ion-text>
+              <ion-text>
+                <ion-icon name="chatbox-sharp"></ion-icon> {{ asset.messages || 0 }}</ion-text>
+            </div>
+          </div>
+        </ion-item>
+      </ion-col>
+      }
+    </ion-row>
   </ion-grid>
 </ion-content>

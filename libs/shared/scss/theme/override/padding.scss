@@ -1,0 +1,5 @@
+@for $i from 12 through 100 {
+  .padding-b-#{$i} {
+    padding-bottom: #{$i}px;
+  }
+}
