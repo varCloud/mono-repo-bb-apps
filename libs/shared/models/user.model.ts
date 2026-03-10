@@ -1,3 +1,5 @@
+import { ENUM_TYPE_USER } from "../constants/enums";
+
 export interface User {
   userId: number;
   userTypeId: number;
@@ -112,5 +114,9 @@ export class UserModel implements User {
     this.birthdate = data.birthdate || '';
     this.age = data.age || '';
     this.frontPageUrl = data.frontPageUrl || '';
+  }
+
+   get isCreator() {
+    return this.userTypeId === ENUM_TYPE_USER.CREATOR;
   }
 }

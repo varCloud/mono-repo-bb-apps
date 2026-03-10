@@ -28,8 +28,11 @@
         <ion-col>
           <div class="container-link">
             <div class="container-link-info">
-              <span class="title">Mi enlace</span>
-              <span class="subtitle">Bodybooster.com/{{this.sesionService.user$()?.nickName}}</span>
+              <div class="link-click" (click)="onMenuItemClick('openLink')">
+                <span class="title">Mi enlace</span>
+                <span class="subtitle">Bodybooster.com/{{this.sesionService.user$()?.nickName}}</span>
+              </div>
+              
             </div>
 
             <div class="container-link-button">

@@ -5,7 +5,7 @@ import { LoaderUIService, UserConversationService } from '@monorepo-bb-app/core'
 import { addIcons } from 'ionicons';
 import { chatbubbleOutline, close, closeCircleOutline, chatboxEllipsesOutline ,send, create, personCircleOutline } from 'ionicons/icons';
 import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
-import { finalize, take } from 'rxjs';
+
 
 // Define la interfaz de Suscripción aquí o impórtala si la tienes
 // en un archivo separado.

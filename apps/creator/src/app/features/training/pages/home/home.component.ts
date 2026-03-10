@@ -27,6 +27,7 @@ import {
   IonFabButton,
   IonRefresher,
   IonRefresherContent,
+  IonChip,
 } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import {
@@ -75,6 +76,7 @@ import { finalize, take } from 'rxjs';
     CardListComponent,
     CardMaxLikesComponent,
     ProfileColorDirective,
+    IonChip
   ],
 })
 export class HomeComponent implements OnInit {
@@ -87,6 +89,7 @@ export class HomeComponent implements OnInit {
     showWorkoutTags: true,
     showLevels: true,
   });
+  loadWorkouts = signal<boolean>(false);
   constructor(
     private router: Router,
     private _workoutService: WorkoutService,
@@ -106,7 +109,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   ionViewWillEnter() {
     this._loader.showLoader();
@@ -124,6 +127,7 @@ export class HomeComponent implements OnInit {
   }
 
   private async getWorkouts(url?: string, reset = false) {
+    this.loadWorkouts.set(true);
     this._loader.showLoader();
     try {
       const params = await this.getParams();
@@ -135,12 +139,15 @@ export class HomeComponent implements OnInit {
       }
       this.paginator.set(res.paginator);
       this.isInfiniteScrollDisabled.set(!res.paginator?.links?.next);
+      this.loadWorkouts.set(false);
     } catch (error) {
+      this.loadWorkouts.set(false);
       this._toastService.error('Error al cargar los entrenamientos', {
         duration: 3000,
       });
     } finally {
       this._loader.hideLoader();
+      this.loadWorkouts.set(false);
     }
   }
 
@@ -154,7 +161,7 @@ export class HomeComponent implements OnInit {
         this.workoutMaxLikes.set(res);
       }
     } catch (error) {
-        console.log(`getWorkoutMaxLikes`, error);
+      console.log(`getWorkoutMaxLikes`, error);
     } finally {
       this._loader.hideLoader();
     }

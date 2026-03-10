@@ -121,7 +121,6 @@ export class ProfileComponent implements OnInit {
     if (config) {
       this.webLinkCreatorProfile = `${config.creatorSiteProfile}?userId=${this.sesionService.user$().userId}`;
     }
-    console.log('Creator Site Profile URL:', this.webLinkCreatorProfile);
   }
 
   openStripeOnboarding() {
@@ -163,9 +162,15 @@ export class ProfileComponent implements OnInit {
       case 'logout':
         this.logout();
         break;
+      case 'openLink':
+        this.openLink();
+        break;
     }
   }
 
+  public openLink(): void{
+    window.open(this.webLinkCreatorProfile, '_blank');
+  }
   public messages(): void {
     this.router.navigate(['home/user-conversations']);
   }

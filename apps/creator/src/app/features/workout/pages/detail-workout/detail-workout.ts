@@ -22,11 +22,14 @@ import {
   IonLabel,
   IonItem,
 } from '@ionic/angular/standalone';
-import { ActionsWorkoutService, LocalStorageService } from '@monorepo-bb-app/core';
+import { ActionsWorkoutService, LocalStorageService, SesionService } from '@monorepo-bb-app/core';
 import {
   Asset,
   KEY_LOCALSTORAGE,
+  SentenceCasePipe,
   TrainingTypeEnum,
+  User,
+  UserModel,
   Workout,
   WorkoutInformationSelect,
 } from '@monorepo-bb-app/shared';
@@ -58,6 +61,7 @@ import {
     IonButton,
     TranslateModule,
     NgClass,
+    SentenceCasePipe
   ],
   templateUrl: './detail-workout.html',
   styleUrl: './detail-workout.scss',
@@ -70,13 +74,14 @@ export class DetailWorkout implements OnInit {
   workout = this.activatedRoute.snapshot.data['workout'] as Workout;
   level = (this.workout.difficultyLevels[0] as any)?.level?.description || '';
   tag = (this.workout.tags[0] as any)?.tag.name || '';
-
+  public user : UserModel;
   constructor(
     private activatedRoute: ActivatedRoute,
     private _router: Router,
     private _localstorage: LocalStorageService,
     private _workoutInformationSelect: WorkoutInformationSelect,
-    private _actionsWorkoutService: ActionsWorkoutService
+    private _actionsWorkoutService: ActionsWorkoutService,
+    private _sesionService: SesionService
   ) {
     addIcons({
       heart,
@@ -87,6 +92,8 @@ export class DetailWorkout implements OnInit {
       play,
       document,
     });
+
+    this.user = new UserModel(this._sesionService.user$());
   }
   ngOnInit(): void {}
 

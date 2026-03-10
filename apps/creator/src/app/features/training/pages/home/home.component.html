@@ -28,7 +28,7 @@
   <!-- Biblioteca de ejercicios -->
   <div class="section">
     <div class="section-header">
-      <h2 class="title">Biblioteca de ejercicios</h2>
+      <h2 class="title">Mis Entrenamientos <ion-chip [outline]="true" [color]="'secondary'">{{ this.paginator()?.meta?.totalItems }}</ion-chip></h2>
     </div>
     @if (workoutMaxLikes()) {
     <lib-card-max-likes [workout]="workoutMaxLikes()!"></lib-card-max-likes>

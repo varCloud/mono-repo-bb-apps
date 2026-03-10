@@ -5,6 +5,7 @@ import {
   KEY_LOCALSTORAGE,
   Rating,
   RatingModel,
+  SentenceCasePipe,
   TrainingTypeEnum,
   Workout,
   WorkoutListModel,
@@ -69,7 +70,8 @@ import { ActionsWorkoutService, LocalStorageService, SesionService } from '@mono
     CustomVideoPlayerComponent,
     ViewPdfComponent,
     WorkoutCommentsComponent,
-    IonButtons
+    IonButtons,
+    SentenceCasePipe
   ],
   templateUrl: './detail-workout-asset.html',
   styleUrl: './detail-workout-asset.scss',
