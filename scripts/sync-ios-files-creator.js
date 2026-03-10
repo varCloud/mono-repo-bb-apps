@@ -2,15 +2,15 @@ const fs = require('fs');
 const path = require('path');
 
 const filesToCopy = {
-  '../files-build/ios/files/AppDelegate.swift': '../apps/creator/ios/App/App/AppDelegate.swift',
-  '../files-build/ios/files/Info.plist': '../apps/creator/ios/App/App/Info.plist',
-  '../files-build/ios/files/Podfile': '../apps/creator/ios/App/Podfile',
+  '../files-build/ios/files/creator/AppDelegate.swift':
+    '../apps/creator/ios/App/App/AppDelegate.swift',
+  '../files-build/ios/files/creator/Info.plist': '../apps/creator/ios/App/App/Info.plist',
+  '../files-build/ios/files/creator/Podfile': '../apps/creator/ios/App/Podfile',
 };
 
 Object.entries(filesToCopy).forEach(([source, dest]) => {
   const sourcePath = path.join(__dirname, source);
   const destPath = path.join(__dirname, dest);
-
   if (!fs.existsSync(sourcePath)) {
     console.warn(`⚠️ Archivo no encontrado: ${sourcePath}`);
     return;

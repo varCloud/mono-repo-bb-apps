@@ -2,11 +2,10 @@ const fs = require('fs');
 const path = require('path');
 
 const filesToCopy = {
-  '../files-build/ios/files/AppDelegate.swift':
+  '../files-build/ios/files/athlete/AppDelegate.swift':
     '../apps/athlete/ios/App/App/AppDelegate.swift',
-  '../files-build/ios/files/Info.plist':
-    '../apps/athlete/ios/App/App/Info.plist',
-  '../files-build/ios/files/Podfile': '../apps/athlete/ios/App/Podfile',
+  '../files-build/ios/files/athlete/Info.plist': '../apps/athlete/ios/App/App/Info.plist',
+  '../files-build/ios/files/athlete/Podfile': '../apps/athlete/ios/App/Podfile',
 };
 
 Object.entries(filesToCopy).forEach(([source, dest]) => {
