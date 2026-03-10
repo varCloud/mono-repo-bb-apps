@@ -1,57 +1,68 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button color="medium" (click)="cancel()">{{
-        'cancel' | translate
-      }}</ion-button>
-    </ion-buttons>
-    <ion-title>Filtro</ion-title>
-    <ion-buttons slot="end">
-      <ion-button
-        (click)="resetFilters()"
-        [disabled]="filter.countFilters === 0"
-        >{{ 'filter.clearAll' | translate }}</ion-button
-      >
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content class="filter-content">
-  <app-layout-content>
-    <ion-grid content-body>
-      @if(filter.showWorkoutTags){
-      <div class="section">
-        <h2>{{ 'workout.routine.target' | translate }}</h2>
-        <lib-catalog-select
-          [control]="$any(filterForm.get('workoutTags'))"
-          [typeCatalog]="CATALOG_TYPE.TAGS"
-          blindValue="tagId"
-          placeholder="workout.routine.target-placeholder"
-        ></lib-catalog-select>
-      </div>
-      } @if(filter.showLevels){
-      <div class="section">
-        <h2>{{ 'workout.routine.difficulty' | translate }}</h2>
-        <lib-catalog-select
-          [control]="$any(filterForm.get('levels'))"
-          [typeCatalog]="CATALOG_TYPE.DIFFICULTY_LEVELS"
-          blindValue="levelId"
-          blindLabel="description"
-          placeholder="workout.routine.difficulty-placeholder"
-        ></lib-catalog-select>
-      </div>
-      }
-    </ion-grid>
-    <div content-footer class="ion-text-center">
-      <ion-button
-        color="tertiary"
-        class="bb-input"
-        expand="block"
-        shape="round"
-        (click)="confirm()"
-      >
-        {{ 'filter.apply' | translate }}
-      </ion-button>
+  <ion-grid class="ion-no-padding">
+    <ion-row class="filter-header" align-items-center>
+      <ion-col size="6">
+        <ion-button fill="clear" color="medium" (click)="cancel()">
+          {{ 'cancel' | translate }}
+        </ion-button>
+      </ion-col>
+      <ion-col size="6" class="ion-text-end">
+        <ion-button fill="clear" color="danger" (click)="resetFilters()" [disabled]="filter.activeFiltersCount === 0">
+          Limpiar Filtros
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+    <ion-grid class="">
+    <ion-row class="filter-header" align-items-center>
+      <ion-col size="12" class="ion-text-center">        
+          <ion-text class="filter-title" [color]="'primary'"> {{ 'workout.routine.filters' | translate }} </ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="filter-body">
+    @if (filter.showWorkoutTags) {
+    <div class="section">
+      <h2>{{ 'workout.routine.target' | translate }}</h2>
+      <lib-catalog-select [control]="$any(filterForm.get('workoutTags'))" [typeCatalog]="CATALOG_TYPE.TAGS"
+        blindValue="tagId" placeholder="workout.routine.target-placeholder"></lib-catalog-select>
     </div>
-  </app-layout-content>
+    }
+    @if (filter.showLevels) {
+    <div class="section">
+      <h2>{{ 'workout.routine.difficulty' | translate }}</h2>
+      <lib-catalog-select [control]="$any(filterForm.get('levels'))" [typeCatalog]="CATALOG_TYPE.DIFFICULTY_LEVELS"
+        blindValue="levelId" blindLabel="description"
+        placeholder="workout.routine.difficulty-placeholder"></lib-catalog-select>
+    </div>
+    }
+    @if (filter.showCategories) {
+    <div class="section">
+      <h2>{{ 'workout.routine.category' | translate }}</h2>
+      <lib-catalog-select [control]="$any(filterForm.get('categories'))" [typeCatalog]="CATALOG_TYPE.CATEGORIES"
+        blindValue="categoryId" blindLabel="name"
+        placeholder="workout.routine.category-placeholder"></lib-catalog-select>
+    </div>
+    }
+  </div>
+  <ion-toolbar>
+    <ion-button color="tertiary" expand="block" shape="round" class="apply-btn" (click)="confirm()">
+      Aplicar filtros
+    </ion-button>
+  </ion-toolbar>
 </ion-content>
+<!-- 
+<ion-footer class="filter-footer ion-no-border">
+  <ion-toolbar>
+    <ion-button color="tertiary" expand="block" shape="round" class="apply-btn" (click)="confirm()">
+      Aplicar filtros
+      @if (filter.activeFiltersCount > 0) {
+      <ion-badge slot="end" color="light" class="apply-badge">
+        {{ filter.activeFiltersCount }}
+      </ion-badge>
+      }
+    </ion-button>
+  </ion-toolbar>
+</ion-footer> -->

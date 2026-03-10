@@ -4,13 +4,18 @@
       <img src="./assets/images/logo-con-letras.svg" alt="BodyBooster" class="app-logo" />
     </div>
     <div class="header-actions">
-      @if (false) {
-      <ion-button fill="clear" size="small" class="header-icon-btn" (click)="openFilter()">
-        <ion-icon [name]="filter.countFilters > 0 ? 'filter-circle' : 'filter-circle-outline'" slot="icon-only"
-          [color]="filter.countFilters > 0 ? 'secondary' : null" appProfileColor="color"></ion-icon>
-
+      <ion-button fill="clear" size="small" class="header-icon-btn filter-btn" (click)="openFilterModal()">
+        <div class="filter-icon-wrapper">
+          <ion-icon
+            [name]="filter.activeFiltersCount > 0 ? 'filter-circle' : 'filter-circle-outline'"
+            [color]="filter.activeFiltersCount > 0 ? 'secondary' : undefined"
+            appProfileColor="color">
+          </ion-icon>
+          @if (filter.activeFiltersCount > 0) {
+            <ion-badge color="secondary" class="filter-badge">{{ filter.activeFiltersCount }}</ion-badge>
+          }
+        </div>
       </ion-button>
-      }
       <ion-button fill="clear" size="small" class="header-icon-btn" (click)="openFilter()">
         <ion-icon name="search" slot="icon-only" appProfileColor="color"></ion-icon>
       </ion-button>

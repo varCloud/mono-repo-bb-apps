@@ -8,8 +8,10 @@
       <span class="level-badge">{{ workout().totalRatings }}</span>
       }
     </span>
-    <span class="category">Fitness</span>
-    
+    <span class="category" [ngClass]="['category-' + (this.workout().difficultyLevels.length || 0)]">
+      {{ level() || "Recomendadacion" }}
+    </span>
+
     @if (isCreator()) {
       <div 
         class="delete-badge" 
@@ -27,10 +29,8 @@
   <ion-card-content style="padding: 3px 0px 16px 8px" class="card-subtitle">
     <div style="width: 70%">
       <ion-card-title class="card-title">{{ workout().title }}</ion-card-title>
-      <ion-card-subtitle>{{ level() }}</ion-card-subtitle>
-      <ion-card-subtitle class="subtitle-email"> {{ workout().creatorNickName }}</ion-card-subtitle>
-      <ion-card-subtitle class="subtitle-email">{{ workout().creatorEmail }}</ion-card-subtitle>
-      
+      <ion-card-subtitle  class="subtitle-email">{{ tags() }}</ion-card-subtitle>
+      <ion-card-subtitle class="subtitle-email">Coach: {{ workout().creatorNickName }}</ion-card-subtitle>
     </div>
     @if (useBookmark()) {
     <ion-button

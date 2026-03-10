@@ -240,7 +240,8 @@
       "deleted-error": "Error al eliminar el entrenamiento",
       "error": "Error al guardar la rutina",
       "upload-error": "Error al subir el archivo {{fileName}}",
-      "image-cover": "Carga la portada de tu rutina"
+      "image-cover": "Carga la portada de tu rutina",
+      "filters":"Filtros para tus entrenamientos"
     },
     "messages": {
       "no-workouts": "No hay entrenamientos disponibles.",

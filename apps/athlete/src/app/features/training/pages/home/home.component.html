@@ -4,6 +4,17 @@
       <ion-img src="./assets/images/logo-con-letras.svg" alt="BodyBooster" class="app-logo" />
     </div>
     <div class="header-actions">
+      <ion-button fill="clear" size="small" class="header-icon-btn filter-btn" (click)="openFilter()">
+        <div class="filter-icon-wrapper">
+          <ion-icon
+            [name]="filter.activeFiltersCount > 0 ? 'filter-circle' : 'filter-circle-outline'"
+            [color]="filter.activeFiltersCount > 0 ? 'secondary' : undefined">
+          </ion-icon>
+          @if (filter.activeFiltersCount > 0) {
+            <ion-badge color="secondary" class="filter-badge">{{ filter.activeFiltersCount }}</ion-badge>
+          }
+        </div>
+      </ion-button>
       <ion-button fill="clear" size="small" class="header-icon-btn" (click)="openSearch()">
         <ion-icon name="search" slot="icon-only"></ion-icon>
       </ion-button>

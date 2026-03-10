@@ -76,7 +76,7 @@ import { finalize, take } from 'rxjs';
     CardListComponent,
     CardMaxLikesComponent,
     ProfileColorDirective,
-    IonChip
+    IonChip,
   ],
 })
 export class HomeComponent implements OnInit {
@@ -88,6 +88,7 @@ export class HomeComponent implements OnInit {
   filter: FilterModel = new FilterModel({
     showWorkoutTags: true,
     showLevels: true,
+    showCategories: true,
   });
   loadWorkouts = signal<boolean>(false);
   constructor(
@@ -192,6 +193,26 @@ export class HomeComponent implements OnInit {
       },
     });
     modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role === MODAL_RESPONSE.CONFIRM) {
+      this.filter = data.filter;
+      await this.getWorkouts(undefined, true);
+    }
+  }
+
+  public async openFilterModal() {
+    const modal = await this.modalCtrl.create({
+      component: FilterComponent,
+      componentProps: {
+        filter: this.filter,
+      },
+      breakpoints: [0, 0.75, 1],
+      initialBreakpoint: 0.75,
+      cssClass: 'bottom-sheet-modal-rounded',
+    });
+    await modal.present();
 
     const { data, role } = await modal.onWillDismiss();
 

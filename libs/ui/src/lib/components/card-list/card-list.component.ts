@@ -37,9 +37,12 @@ export class CardListComponent {
   showLevel = input<boolean>(false);
   level = computed(() => {
     return this.workout()
-      .difficultyLevels.map((level: any) => level.description ?? '---')
-      .sort()
-      .join(', ');
+      .difficultyLevels.map((level: any) => level.description ?? '---').sort().join(', ');
+  });
+
+  tags = computed(() => {
+    return this.workout()
+      .tags.map((t: any) => t.description ?? '---').sort().join(', ');
   });
 
   isFavorite = model<boolean>(false);

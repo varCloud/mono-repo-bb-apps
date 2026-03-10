@@ -22,6 +22,7 @@ import {
   IonInfiniteScrollContent,
   ModalController,
   IonImg,
+  IonBadge,
   IonChip,
   IonRefresher,
   IonRefresherContent,
@@ -70,6 +71,7 @@ import { TranslateModule } from '@ngx-translate/core';
     IonIcon,
     IonContent,
     IonHeader,
+    IonBadge,
     CardListComponent,
     CardMaxLikesComponent,
     IonImg,
@@ -89,6 +91,7 @@ export class HomeComponent implements OnInit {
   filter: FilterModel = new FilterModel({
     showWorkoutTags: true,
     showLevels: true,
+    showCategories: true,
   });
 
   constructor(
@@ -198,8 +201,10 @@ export class HomeComponent implements OnInit {
       componentProps: {
         filter: this.filter,
       },
+      breakpoints: [0, 0.75, 1],
+      initialBreakpoint: 0.75,
     });
-    modal.present();
+    await modal.present();
 
     const { data, role } = await modal.onWillDismiss();
 
