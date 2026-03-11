@@ -22,7 +22,7 @@ import {
   IonChip,
   IonLabel,
   IonItem,
-  IonFooter
+  IonFooter,
 } from '@ionic/angular/standalone';
 import { ActionsWorkoutService, LocalStorageService } from '@monorepo-bb-app/core';
 import {
@@ -62,7 +62,7 @@ import {
     TranslateModule,
     NgClass,
     IonFooter,
-    SentenceCasePipe
+    SentenceCasePipe,
   ],
   templateUrl: './detail-workout.html',
   styleUrl: './detail-workout.scss',
@@ -97,6 +97,7 @@ export class DetailWorkout implements OnInit {
 
   ionViewWillEnter() {
     this.checkLike();
+    this.workout.assets = this.workout.assets.sort((a, b) => a?.order - b?.order);
   }
 
   async checkLike() {

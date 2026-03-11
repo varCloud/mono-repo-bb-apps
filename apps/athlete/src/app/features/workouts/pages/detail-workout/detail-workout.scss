@@ -1,5 +1,8 @@
 :host {
   .detail-workout-content {
+    .margin-b-80 {
+      margin-bottom: 80px;
+    }
     .bb-goback {
       --margin-bottom: 0;
       --icon-margin-start: 16px;
@@ -136,6 +139,6 @@
   }
 }
 
-ion-conten{
-      --offset-bottom: 0px;
+ion-conten {
+  --offset-bottom: 0px;
 }
