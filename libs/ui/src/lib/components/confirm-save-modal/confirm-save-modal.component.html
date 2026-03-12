@@ -1,0 +1,37 @@
+<div class="modal-content">
+  <div class="drag-handle"></div>
+
+  <div class="confirm-view">
+    <div class="icon-container">
+      <ion-icon name="checkmark-circle-outline" color="primary"></ion-icon>
+    </div>
+
+    <h2>¿Estás seguro que deseas guardar {{contentLabel}}? </h2>
+
+    <p class="info-text">
+      Revisa que toda la información sea correcta antes de continuar, una vez guardado no podrás editarlo. Si deseas hacer cambios después de guardar, tendrás que eliminar {{contentLabel}} y crear uno nuevo. 
+    </p>
+
+    <div class="button-group">
+      <ion-button
+        fill="outline"
+        shape="round"
+        (click)="closeModal()"
+        expand="block"
+        
+      >
+        Cancelar
+      </ion-button>
+
+      <ion-button
+        fill="solid"
+        shape="round"
+        color="tertiary"
+        (click)="confirmSave()"
+        expand="block"
+      >
+        Sí, guardar
+      </ion-button>
+    </div>
+  </div>
+</div>

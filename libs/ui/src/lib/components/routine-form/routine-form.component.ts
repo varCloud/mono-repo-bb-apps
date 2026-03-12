@@ -15,7 +15,8 @@ import {
   IonButton,
   IonProgressBar,
   IonTextarea,
-  IonText
+  IonText,
+  ModalController,
 } from '@ionic/angular/standalone';
 import {
   LoaderUIService,
@@ -56,6 +57,7 @@ import { CatalogSelectComponent } from '../catalog-select/catalog-select.compone
 import { AddExerciseComponent } from '../add-exercise/add-exercise.component';
 import { AddRecordedClassComponent } from '../add-recorded-class/add-recorded-class.component';
 import { DashedAreaComponent } from '../dashed-area/dashed-area.component';
+import { ConfirmSaveModalComponent } from '../confirm-save-modal/confirm-save-modal.component';
 import { TrainingTypeEnum } from '../../../../../shared/constants/types-routines';
 import Uppy from '@uppy/core';
 import { BUCKET_TYPE } from 'libs/shared/constants/enums';
@@ -130,19 +132,21 @@ export class RoutineFormComponent implements OnInit {
     private _uploadService: UploadService,
     private _workoutService: WorkoutService,
     private _toastService: ToastService,
-    private _translate: TranslateService
+    private _translate: TranslateService,
+    private _modalCtrl: ModalController
   ) {
     addIcons({ addCircleOutline, trashOutline, createOutline, addOutline });
   }
 
   ngOnInit() {
+    
     if (
       this.typeRoutine() === TrainingTypeEnum.ROUTINES ||
       this.typeRoutine() === TrainingTypeEnum.DOCUMENT
     ) {
       this.toggleAddExercise();
     }
-
+    
     this.setValidators();
   }
 
@@ -219,11 +223,14 @@ export class RoutineFormComponent implements OnInit {
     this.router.navigate(['/workout/create']);
   }
 
-  saveRoutine() {
+  async saveRoutine() {
     if (this.routineForm.invalid) {
       this.routineForm.markAllAsTouched();
       return;
     }
+
+    const confirmed = await this.openConfirmSaveModal();
+    if (!confirmed) return;
 
     if (this.typeRoutine() === TrainingTypeEnum.RECORDED_CLASSES) {
       this.saveExerciseData();
@@ -302,6 +309,22 @@ export class RoutineFormComponent implements OnInit {
     return exercises.controls.every(
       (exercise) => exercise.get('uploadStatus')?.value !== StatusUpload.PENDING
     );
+  }
+
+  private async openConfirmSaveModal(): Promise<boolean> {
+    const modal = await this._modalCtrl.create({
+      component: ConfirmSaveModalComponent,
+      componentProps: { typeRoutine: this.typeRoutine },
+      cssClass: 'bottom-sheet-modal-rounded',
+      breakpoints: [0, 0.4, 0.75],
+      initialBreakpoint: 0.4,
+      handle: false,
+      mode: 'md',
+    });
+
+    await modal.present();
+    const { data, role } = await modal.onWillDismiss();
+    return role === 'confirm' && data?.confirmed === true;
   }
 
   private async saveExerciseData() {

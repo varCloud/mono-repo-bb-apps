@@ -136,8 +136,6 @@ export class HomeSupport {
         componentProps: {
           allFaqs: this.myFaqList,
         },
-        
-        cssClass: 'search-modal',
       });
 
       await modal.present();
