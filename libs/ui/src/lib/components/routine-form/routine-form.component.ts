@@ -18,11 +18,7 @@ import {
   IonText,
   ModalController,
 } from '@ionic/angular/standalone';
-import {
-  LoaderUIService,
-  SesionService,
-  UploadService,
-} from '@monorepo-bb-app/core';
+import { LoaderUIService, SesionService, UploadService } from '@monorepo-bb-app/core';
 import {
   Tag,
   LocationType,
@@ -44,12 +40,7 @@ import { finalize } from 'rxjs';
 
 import ObjectID from 'bson-objectid';
 import { addIcons } from 'ionicons';
-import {
-  addCircleOutline,
-  addOutline,
-  createOutline,
-  trashOutline,
-} from 'ionicons/icons';
+import { addCircleOutline, addOutline, createOutline, trashOutline } from 'ionicons/icons';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
 import { AvatarPickerComponent } from '../avatar-picker/avatar-picker.component';
@@ -61,7 +52,6 @@ import { ConfirmSaveModalComponent } from '../confirm-save-modal/confirm-save-mo
 import { TrainingTypeEnum } from '../../../../../shared/constants/types-routines';
 import Uppy from '@uppy/core';
 import { BUCKET_TYPE } from 'libs/shared/constants/enums';
-
 
 @Component({
   selector: 'lib-routine-form',
@@ -79,7 +69,7 @@ import { BUCKET_TYPE } from 'libs/shared/constants/enums';
     ReactiveFormsModule,
     AddRecordedClassComponent,
     IonTextarea,
-    IonText
+    IonText,
   ],
   templateUrl: './routine-form.component.html',
   styleUrl: './routine-form.component.scss',
@@ -105,8 +95,7 @@ export class RoutineFormComponent implements OnInit {
 
   titleSectionByType = {
     [TrainingTypeEnum.ROUTINES]: 'workout.routine.exercises-title',
-    [TrainingTypeEnum.RECORDED_CLASSES]:
-      'workout.routine.exercises-video-title',
+    [TrainingTypeEnum.RECORDED_CLASSES]: 'workout.routine.exercises-video-title',
     [TrainingTypeEnum.DOCUMENT]: 'workout.routine.exercises-doc-title',
   };
 
@@ -167,9 +156,7 @@ export class RoutineFormComponent implements OnInit {
 
     if (this.typeRoutine() === TrainingTypeEnum.RECORDED_CLASSES) {
       this.routineForm.get('titleVideo')?.setValidators([Validators.required]);
-      this.routineForm
-        .get('urlVideo')
-        ?.setValidators([Validators.required, urlValidator]);
+      this.routineForm.get('urlVideo')?.setValidators([Validators.required, urlValidator]);
     }
   }
 
@@ -181,6 +168,7 @@ export class RoutineFormComponent implements OnInit {
     this.nextExerciseId += 1;
     const emptyExercise = this.formBuilder.group<ExerciseFormControls>({
       id: new FormControl<number>(this.nextExerciseId, { nonNullable: true }),
+      order: new FormControl<number>(this.nextExerciseId, { nonNullable: true }),
       name: new FormControl('', {
         validators: [Validators.required],
         nonNullable: true,
@@ -271,9 +259,7 @@ export class RoutineFormComponent implements OnInit {
 
     const updatedExercises = this.routineForm.get('exercises')?.value ?? [];
 
-    const allUploaded = updatedExercises.every(
-      (ex: any) => ex.url && ex.url.length > 0
-    );
+    const allUploaded = updatedExercises.every((ex: any) => ex.url && ex.url.length > 0);
     if (!allUploaded) {
       return;
     }
@@ -329,7 +315,7 @@ export class RoutineFormComponent implements OnInit {
 
   private async saveExerciseData() {
     this._loader.showLoader();
-    let imageUrl = ''
+    let imageUrl = '';
     const dataPhoto = this.routineForm.get('coverImage')?.value;
     if (dataPhoto) {
       const img = await this.uploadPhoto(dataPhoto);
@@ -350,21 +336,15 @@ export class RoutineFormComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.router.navigate(['/home/training']);
-          this._toastService.success(
-            this._translate.instant('workout.routine.created-success'),
-            {
-              duration: 3000,
-            }
-          );
+          this._toastService.success(this._translate.instant('workout.routine.created-success'), {
+            duration: 3000,
+          });
         },
         error: (err) => {
           this.retryOnlyForm.set(true);
-          this._toastService.error(
-            this._translate.instant('workout.routine.error'),
-            {
-              duration: 2000,
-            }
-          );
+          this._toastService.error(this._translate.instant('workout.routine.error'), {
+            duration: 2000,
+          });
         },
       });
   }

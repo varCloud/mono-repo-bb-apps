@@ -61,7 +61,7 @@ import {
     IonButton,
     TranslateModule,
     NgClass,
-    SentenceCasePipe
+    SentenceCasePipe,
   ],
   templateUrl: './detail-workout.html',
   styleUrl: './detail-workout.scss',
@@ -74,7 +74,7 @@ export class DetailWorkout implements OnInit {
   workout = this.activatedRoute.snapshot.data['workout'] as Workout;
   level = (this.workout.difficultyLevels[0] as any)?.level?.description || '';
   tag = (this.workout.tags[0] as any)?.tag.name || '';
-  public user : UserModel;
+  public user: UserModel;
   constructor(
     private activatedRoute: ActivatedRoute,
     private _router: Router,
@@ -99,6 +99,7 @@ export class DetailWorkout implements OnInit {
 
   ionViewWillEnter() {
     this.checkLike();
+    this.workout.assets.sort((a, b) => a?.order - b?.order);
   }
 
   async checkLike() {

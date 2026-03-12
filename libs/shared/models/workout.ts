@@ -26,7 +26,8 @@ export const convertToPayload = (data: any) => {
       name: exercise.name,
       description: exercise.description,
       s3Key: exercise.s3Key,
-      duration: data.duration,
+      duration: exercise.duration,
+      // order: exercise.order,
     })),
     idempotencyKey: data.idempotencyKey,
   };
@@ -50,6 +51,7 @@ export const payloadToRecordedClassForm = (data: any) => {
         assetUrl: data.urlVideo,
         name: data.titleVideo,
         description: '',
+        // order: 1,
       },
     ],
     idempotencyKey: data.idempotencyKey,
@@ -69,8 +71,9 @@ export const payloadToDocumentForm = (data: any) => {
       assetUrl: exercise.url || '',
       name: exercise.name,
       description: exercise.description,
-      duration: data.duration,
+      duration: exercise.duration,
       s3Key: exercise.s3Key,
+      // order: exercise.order,
     })),
     idempotencyKey: data.idempotencyKey,
   };

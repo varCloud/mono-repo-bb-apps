@@ -11,6 +11,7 @@ export interface Exercise {
 
 export interface ExerciseFormControls {
   id: FormControl<number>;
+  order: FormControl<number>;
   name: FormControl<string>;
   description?: FormControl<string>;
   file: FormControl<UppyFile | null>;

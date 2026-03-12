@@ -1,19 +1,15 @@
 <ion-header>
-  <div class="container-header">
+  <ion-toolbar class="container-header">
     <ion-back-button
-      [text]='""'
+      [text]="''"
       mode="ios"
       defaultHref="/home/workouts"
       class="bb-icon"
     ></ion-back-button>
     <span class="header-title">{{ 'Clases grabadas' | translate }}</span>
-  </div>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content class="create-account-content">
-  <app-layout-content customClass="create-account-page">
-    <ion-grid content-body>
-      <lib-routine-form [typeRoutine]="type"></lib-routine-form>
-    </ion-grid>
-  </app-layout-content>
+<ion-content class="create-account-content" [fullscreen]="true">
+  <lib-routine-form [typeRoutine]="type"></lib-routine-form>
 </ion-content>

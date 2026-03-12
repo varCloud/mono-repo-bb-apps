@@ -60,6 +60,7 @@ export interface Asset {
   duration: number;
   messages: number;
   likes: number;
+  order?: number;
 }
 
 export interface CategoryList {

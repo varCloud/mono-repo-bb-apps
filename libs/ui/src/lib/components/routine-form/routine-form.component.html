@@ -14,29 +14,23 @@
         mode="md"
         [placeholder]="'workout.routine.cover-title-placeholder' | translate"
       ></ion-input>
-      <app-error-message
-        [control]="$any(routineForm.get('title'))"
-      ></app-error-message>
+      <app-error-message [control]="$any(routineForm.get('title'))"></app-error-message>
     </ion-col>
 
     <ion-col size="12">
-      <ion-textarea 
+      <ion-textarea
         formControlName="description"
         class="bb-input"
-        [label]="'workout.routine.cover-description' | translate "
+        [label]="'workout.routine.cover-description' | translate"
         label-placement="floating"
         fill="outline"
         [maxlength]="255"
-        [counter]="true" 
+        [counter]="true"
         mode="md"
         [autoGrow]="true"
-        [placeholder]="
-          'workout.routine.cover-description-placeholder' | translate
-        "
+        [placeholder]="'workout.routine.cover-description-placeholder' | translate"
       ></ion-textarea>
-      <app-error-message
-        [control]="$any(routineForm.get('description'))"
-      ></app-error-message>
+      <app-error-message [control]="$any(routineForm.get('description'))"></app-error-message>
     </ion-col>
     <app-avatar-picker
       [useOnlyDashedElement]="true"
@@ -45,113 +39,110 @@
     ></app-avatar-picker>
   </div>
 
-  @if( typeRoutine() === TRAINING_TYPES.ROUTINES || typeRoutine() ===
-  TRAINING_TYPES.RECORDED_CLASSES) {
-  <div class="section">
-    <h2>{{ 'workout.routine.target' | translate }}</h2>
-    <lib-catalog-select
-      [control]="$any(routineForm.get('target'))"
-      [typeCatalog]="CATALOG_TYPE.TAGS"
-      blindValue="tagId"
-      placeholder="workout.routine.target-placeholder"
-    ></lib-catalog-select>
-  </div>
+  @if (
+    typeRoutine() === TRAINING_TYPES.ROUTINES || typeRoutine() === TRAINING_TYPES.RECORDED_CLASSES
+  ) {
+    <div class="section">
+      <h2>{{ 'workout.routine.target' | translate }}</h2>
+      <lib-catalog-select
+        [control]="$any(routineForm.get('target'))"
+        [typeCatalog]="CATALOG_TYPE.TAGS"
+        blindValue="tagId"
+        placeholder="workout.routine.target-placeholder"
+      ></lib-catalog-select>
+    </div>
 
-  <div class="section">
-    <h2>{{ 'workout.routine.location' | translate }}</h2>
-    <lib-catalog-select
-      [control]="$any(routineForm.get('location'))"
-      [typeCatalog]="CATALOG_TYPE.LOCATION_TYPES"
-      blindValue="locationTypeId"
-      blindLabel="description"
-      placeholder="workout.routine.location-placeholder"
-    ></lib-catalog-select>
-  </div>
-  <div class="section">
-    <h2>{{ 'workout.routine.difficulty' | translate }}</h2>
-    <lib-catalog-select
-      [control]="$any(routineForm.get('difficulty'))"
-      [typeCatalog]="CATALOG_TYPE.DIFFICULTY_LEVELS"
-      blindValue="levelId"
-      blindLabel="description"
-      placeholder="workout.routine.difficulty-placeholder"
-    ></lib-catalog-select>
-  </div>
+    <div class="section">
+      <h2>{{ 'workout.routine.location' | translate }}</h2>
+      <lib-catalog-select
+        [control]="$any(routineForm.get('location'))"
+        [typeCatalog]="CATALOG_TYPE.LOCATION_TYPES"
+        blindValue="locationTypeId"
+        blindLabel="description"
+        placeholder="workout.routine.location-placeholder"
+      ></lib-catalog-select>
+    </div>
+    <div class="section">
+      <h2>{{ 'workout.routine.difficulty' | translate }}</h2>
+      <lib-catalog-select
+        [control]="$any(routineForm.get('difficulty'))"
+        [typeCatalog]="CATALOG_TYPE.DIFFICULTY_LEVELS"
+        blindValue="levelId"
+        blindLabel="description"
+        placeholder="workout.routine.difficulty-placeholder"
+      ></lib-catalog-select>
+    </div>
 
-  <div class="section">
-    <h2>{{ 'workout.routine.category' | translate }}</h2>
-    <lib-catalog-select
-      [control]="$any(routineForm.get('category'))"
-      [typeCatalog]="CATALOG_TYPE.CATEGORIES"
-      blindValue="categoryId"
-      blindLabel="description"
-      placeholder="workout.routine.category-placeholder"
-    ></lib-catalog-select>
-  </div>
-  <div class="section">
-    <h2>{{ 'workout.routine.equipment' | translate }}</h2>
-    <lib-catalog-select
-      [control]="$any(routineForm.get('equipment'))"
-      [typeCatalog]="CATALOG_TYPE.TOOLS"
-      blindValue="toolId"
-      blindLabel="description"
-      placeholder="workout.routine.equipment-placeholder"
-    ></lib-catalog-select>
-  </div>
+    <div class="section">
+      <h2>{{ 'workout.routine.category' | translate }}</h2>
+      <lib-catalog-select
+        [control]="$any(routineForm.get('category'))"
+        [typeCatalog]="CATALOG_TYPE.CATEGORIES"
+        blindValue="categoryId"
+        blindLabel="description"
+        placeholder="workout.routine.category-placeholder"
+      ></lib-catalog-select>
+    </div>
+    <div class="section">
+      <h2>{{ 'workout.routine.equipment' | translate }}</h2>
+      <lib-catalog-select
+        [control]="$any(routineForm.get('equipment'))"
+        [typeCatalog]="CATALOG_TYPE.TOOLS"
+        blindValue="toolId"
+        blindLabel="description"
+        placeholder="workout.routine.equipment-placeholder"
+      ></lib-catalog-select>
+    </div>
   }
 
   <!-- Sección Ejercicios -->
-  @if(typeRoutine() === TRAINING_TYPES.ROUTINES || typeRoutine() ===
-  TRAINING_TYPES.DOCUMENT){
-  <div class="section">
-    <h2>
-      {{
-        titleSectionByType[typeRoutine()] || titleSectionByType[1] | translate
-      }}
-    </h2>
+  @if (typeRoutine() === TRAINING_TYPES.ROUTINES || typeRoutine() === TRAINING_TYPES.DOCUMENT) {
+    <div class="section">
+      <h2>
+        {{ titleSectionByType[typeRoutine()] || titleSectionByType[1] | translate }}
+      </h2>
 
-    <!-- Lista de ejercicios y formularios -->
-    <div class="exercises-list">
-      @for (exercise of exercises.controls; track $index; let i = $index) {
-      <div class="exercise-item">
-        <!-- Formulario para añadir ejercicio -->
-        @if (_sesionService.user$()) {
-        <app-add-exercise
-          [exerciseNumber]="exercise.get('id')!.value"
-          [exerciseForm]="$any(exercise)"
-          [ejecutar]="ejecutarFILE()"
-          [objectId]="objectId"
-          (uploadErrorEvent)="onExerciseUploadError()"
-          (uploadSuccessEvent)="successUpload()"
-          (deleteEvent)="removeExercise($event, i)"
-          [isDocument]="typeRoutine() === TRAINING_TYPES.DOCUMENT"
-          [showDescription]="typeRoutine() !== TRAINING_TYPES.DOCUMENT"
-          [showIconDelete]="exercises.length > 1"
-        ></app-add-exercise>
+      <!-- Lista de ejercicios y formularios -->
+      <div class="exercises-list">
+        @for (exercise of exercises.controls; track $index; let i = $index) {
+          <div class="exercise-item">
+            <!-- Formulario para añadir ejercicio -->
+            @if (_sesionService.user$()) {
+              <app-add-exercise
+                [exerciseNumber]="exercise.get('id')!.value"
+                [exerciseForm]="$any(exercise)"
+                [ejecutar]="ejecutarFILE()"
+                [objectId]="objectId"
+                (uploadErrorEvent)="onExerciseUploadError()"
+                (uploadSuccessEvent)="successUpload()"
+                (deleteEvent)="removeExercise($event, i)"
+                [isDocument]="typeRoutine() === TRAINING_TYPES.DOCUMENT"
+                [showDescription]="typeRoutine() !== TRAINING_TYPES.DOCUMENT"
+                [showIconDelete]="exercises.length > 1"
+              ></app-add-exercise>
+            }
+          </div>
         }
       </div>
+
+      <!-- Botón para agregar ejercicio -->
+      @if (typeRoutine() === TRAINING_TYPES.ROUTINES) {
+        <app-dashed-area
+          (clickEvent)="toggleAddExercise()"
+          icon="add-circle-outline"
+          [label]="'workout.routine.add-exercise' | translate"
+          [disabled]="!areValidExercises"
+        ></app-dashed-area>
       }
     </div>
-
-    <!-- Botón para agregar ejercicio -->
-    @if(typeRoutine() === TRAINING_TYPES.ROUTINES){
-    <app-dashed-area
-      (clickEvent)="toggleAddExercise()"
-      icon="add-circle-outline"
-      [label]="'workout.routine.add-exercise' | translate"
-      [disabled]="!areValidExercises"
-    ></app-dashed-area>
-    }
-  </div>
-
   }
   <!-- Sección para añadir documento -->
 
   @if (typeRoutine() === TRAINING_TYPES.RECORDED_CLASSES) {
-  <lib-add-recorded-class
-    [titleControl]="$any(routineForm.get('titleVideo'))"
-    [urlControl]="$any(routineForm.get('urlVideo'))"
-  ></lib-add-recorded-class>
+    <lib-add-recorded-class
+      [titleControl]="$any(routineForm.get('titleVideo'))"
+      [urlControl]="$any(routineForm.get('urlVideo'))"
+    ></lib-add-recorded-class>
   }
 
   <!-- Botón para crear entrenamiento -->
@@ -165,9 +156,9 @@
     [disabled]="routineForm.invalid"
   >
     @if (retryUpload()) {
-    {{ 'Reintentar ' | translate }}
+      {{ 'Reintentar ' | translate }}
     } @else {
-    {{ 'workout.routine.create-routine' | translate }}
+      {{ 'workout.routine.create-routine' | translate }}
     }
   </ion-button>
 
