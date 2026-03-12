@@ -73,7 +73,7 @@
       </ion-grid>
       <div class="description-text">
         <ion-text>Titulo: <span class="text-description">{{ workoutAsset()?.name | sentenceCase }}</span> </ion-text>
-        <ion-text>Descripción: <span class="text-description">{{ workoutAsset()?.description | sentenceCase }}</span> </ion-text>
+        <ion-text>Descripción: <span class="text-description with-enter-line">{{ workoutAsset()?.description | sentenceCase }}</span> </ion-text>
         <lib-workout-information-time-likes-coments
           [workoutAsset]="workoutAsset()"
         ></lib-workout-information-time-likes-coments>

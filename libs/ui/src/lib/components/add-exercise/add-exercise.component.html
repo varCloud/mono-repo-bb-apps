@@ -28,8 +28,10 @@
             <ion-input
               formControlName="name"
               class="bb-input"
-              placeholder="Nombre"
+              placeholder="Escribe el nombre del ejercicio"
+              [label]="'Nombre'"
               fill="outline"
+               label-placement="floating"
               mode="md"
             ></ion-input>
             <app-error-message
@@ -43,10 +45,14 @@
             <ion-textarea
               formControlName="description"
               class="bb-input"
-              placeholder="Descripción"
+              [label]="'Descripcion'"
+              placeholder="Escribe una breve descripción del ejercicio"
               fill="outline"
-              rows="3"
+              [maxlength]="255"
+              [counter]="true"
               mode="md"
+              [autoGrow]="true"
+              label-placement="floating"
             ></ion-textarea>
             <app-error-message
               [control]="exerciseForm().get('description')!"

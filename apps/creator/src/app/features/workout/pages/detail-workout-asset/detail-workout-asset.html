@@ -56,7 +56,7 @@
       }
       <div class="description-text">
         <ion-text> Titulo:  <span class="text-description">{{ workoutAsset()?.name | sentenceCase }}</span> </ion-text>
-        <ion-text> Descripcion: <span class="text-description">{{ workoutAsset()?.description || `Sin descripcion proporcionada por creador` | sentenceCase }}</span> </ion-text>
+        <ion-text> Descripcion: <span class="text-description with-enter-line">{{ workoutAsset()?.description || `Sin descripcion proporcionada por creador` | sentenceCase }}</span> </ion-text>
         <lib-workout-information-time-likes-coments
           [workoutAsset]="workoutAsset()"></lib-workout-information-time-likes-coments>
       </div>
