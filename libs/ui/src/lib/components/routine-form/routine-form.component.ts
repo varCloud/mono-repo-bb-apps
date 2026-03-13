@@ -303,7 +303,7 @@ export class RoutineFormComponent implements OnInit {
       componentProps: { typeRoutine: this.typeRoutine },
       cssClass: 'bottom-sheet-modal-rounded',
       breakpoints: [0, 0.4, 0.75],
-      initialBreakpoint: 0.4,
+      initialBreakpoint: 0.6,
       handle: false,
       mode: 'md',
     });
