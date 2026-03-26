@@ -129,7 +129,10 @@
     "errors": {
       "email-required": "El correo electrónico es obligatorio",
       "invalid-credentials": "Correo electrónico y/o contraseña incorrectos",
-      "password-required": "La contraseña es obligatoria"
+      "password-required": "La contraseña es obligatoria",
+      "suspended-account": "Tu cuenta esta suspendido o inactivo, por favor comunicate con el administrador",
+      "deleted-account": "Tu cuenta ha sido eliminada, por favor comunicate con el administrador"
+      
     },
     "forgot-password": "Olvidé mi contraseña",
     "login": "Iniciar sesión",

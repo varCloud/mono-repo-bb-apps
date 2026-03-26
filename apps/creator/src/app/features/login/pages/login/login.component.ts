@@ -70,10 +70,10 @@ export class LoginComponent implements OnInit {
         this._loader.hideLoader();
         this._router.navigate(['/home']);
       },
-      error: () => {
+      error: (err) => {
         this._loader.hideLoader();
         this._toastService.error(
-          this._translate.instant('login.errors.invalid-credentials'),
+          this._translate.instant( err.error.message || 'login.errors.invalid-credentials'),
           { duration: 3000 }
         );
       },
