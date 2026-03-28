@@ -8,4 +8,5 @@ export const environment = {
     'pk_test_51RYEfqPJwPYM8uTUSzJynUl2wpW3QZu5MshEneuaIwPnkPKz0L1tD6jISeB1ICgGS5zW7UGbVZ8ssJKXSuVM2IYK00SBjAS5mS',
   MAX_SIZE_FILE_AWS_S3: 10 * 1024 * 1024 * 1024,
   appVersion: '1.0.0-dev',
+  URL_TERMS_AND_CONDITIONS: 'https://bb-landing-tau.vercel.app/',
 };

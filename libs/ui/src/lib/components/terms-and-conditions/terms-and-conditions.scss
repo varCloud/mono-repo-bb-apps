@@ -1,0 +1,32 @@
+.terms-and-conditions {
+  padding-inline: 2px;
+
+  .bb-checkbox {
+    --size: 18px;
+    --checkmark-width: 2px;
+    align-items: flex-start;
+    font-size: 12px;
+    line-height: 1.35;
+    color: var(--ion-color-medium-shade);
+    width: 100%;
+  }
+
+  .terms-text {
+    white-space: normal;
+  }
+
+  .bb-checkbox::part(label) {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    line-height: 1.35;
+  }
+
+  .terms-link {
+    color: var(--ion-color-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+}

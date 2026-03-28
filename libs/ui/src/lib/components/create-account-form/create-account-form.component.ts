@@ -1,10 +1,5 @@
 import { Component, input, output } from '@angular/core';
-import {
-  FormBuilder,
-  ReactiveFormsModule,
-  Validators,
-  FormGroup,
-} from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators, FormGroup } from '@angular/forms';
 import {
   IonButton,
   IonInput,
@@ -16,6 +11,7 @@ import {
 import { TranslateModule } from '@ngx-translate/core';
 import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
 import { UserCreateAccountPayload } from '@monorepo-bb-app/shared';
+import { TermsAndConditions } from '../terms-and-conditions/terms-and-conditions';
 
 @Component({
   selector: 'app-create-account-form',
@@ -31,21 +27,23 @@ import { UserCreateAccountPayload } from '@monorepo-bb-app/shared';
     IonInputPasswordToggle,
     ReactiveFormsModule,
     TranslateModule,
+    TermsAndConditions,
   ],
 })
 export class CreateAccountFormComponent {
   // Inputs siguiendo estándares de la app
   userType = input<ENUM_TYPE_USER>();
-  
+
   // Outputs siguiendo estándares de la app
   createAccountSubmit = output<UserCreateAccountPayload>();
-  
+
   createAccountForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {
     this.createAccountForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       passwordHash: ['', [Validators.required, Validators.minLength(6)]],
+      terms: [false, [Validators.requiredTrue]],
     });
   }
 

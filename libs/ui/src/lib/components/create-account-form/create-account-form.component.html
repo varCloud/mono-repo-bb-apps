@@ -29,13 +29,15 @@
           [errorText]="'error.password-required' | translate"
           mode="md"
         >
-          @if (createAccountForm.get("passwordHash")?.value) {
-            <ion-input-password-toggle
-              slot="end"
-              [color]="'secondary'"
-            ></ion-input-password-toggle>
+          @if (createAccountForm.get('passwordHash')?.value) {
+            <ion-input-password-toggle slot="end" [color]="'secondary'"></ion-input-password-toggle>
           }
         </ion-input>
+      </ion-col>
+      <ion-col size="12">
+        <lib-terms-and-conditions
+          [termsControl]="$any(createAccountForm.get('terms'))"
+        ></lib-terms-and-conditions>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -46,8 +48,9 @@
           expand="block"
           shape="round"
           type="submit"
+          [disabled]="createAccountForm.invalid"
         >
-          {{ "user-create-account.create-account" | translate }}
+          {{ 'user-create-account.create-account' | translate }}
         </ion-button>
       </ion-col>
     </ion-row>
