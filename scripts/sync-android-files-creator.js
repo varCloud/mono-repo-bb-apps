@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const filesToCopy = {
-  '../files-build/android/files/creator/MainActivity.java':'../apps/creator/android/app/src/main/java/io/bb/body/booster/creator/MainActivity.java',
+  '../files-build/android/files/creator/MainActivity.java':'../apps/creator/android/app/src/main/java/io/bc/body/booster/creator/MainActivity.java',
   '../files-build/android/files/creator/google-services.json': '../apps/creator/android/app/google-services.json',
 };
 

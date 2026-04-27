@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.bb.body.booster.athlete',
+  appId: 'io.bc.body.booster.athlete',
   appName: 'Body Booster',
   webDir: '../../dist/apps/athlete/browser',
   server: {

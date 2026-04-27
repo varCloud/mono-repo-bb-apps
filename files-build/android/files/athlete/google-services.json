@@ -1,26 +1,79 @@
 {
   "project_info": {
-    "project_number": "471200663734",
-    "project_id": "body-booster-f008b",
-    "storage_bucket": "body-booster-f008b.firebasestorage.app"
+    "project_number": "728116258989",
+    "project_id": "body-booster-1a99d",
+    "storage_bucket": "body-booster-1a99d.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:471200663734:android:fe9b8804055f5830ed7e17",
+        "mobilesdk_app_id": "1:728116258989:android:4fcc83017a505fe9173e24",
         "android_client_info": {
-          "package_name": "io.bb.body.booster.athlete"
+          "package_name": "io.bc.body.booster.athlete"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "728116258989-piuoo1j73310oer0di5ee0hrfago0b34.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyBTn7aS0CDTB23Jbo-ALAFkiYRPYxgyJXk"
+          "current_key": "AIzaSyDf4uMZXSw9267Yi83N8Nu5QMMgQ9FauQk"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "728116258989-p0r0ui0tg472scga7gb1o4nsfg7ejut1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "728116258989-oe719k2gf7ec5h0tob0v285bkertf0gt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.bb.pp.cloud"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:728116258989:android:5b390547c37578a3173e24",
+        "android_client_info": {
+          "package_name": "io.bc.body.booster.creator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "728116258989-piuoo1j73310oer0di5ee0hrfago0b34.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDf4uMZXSw9267Yi83N8Nu5QMMgQ9FauQk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "728116258989-p0r0ui0tg472scga7gb1o4nsfg7ejut1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "728116258989-oe719k2gf7ec5h0tob0v285bkertf0gt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.bb.pp.cloud"
+              }
+            }
+          ]
         }
       }
     }

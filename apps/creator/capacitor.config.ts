@@ -1,7 +1,7 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.bb.body.booster.creator',
+  appId: 'io.bc.body.booster.creator',
   appName: 'Coach Body Booster',
   webDir: '../../dist/apps/creator/browser',
   plugins: {

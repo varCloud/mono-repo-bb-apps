@@ -1,4 +1,4 @@
-package io.bb.body.booster.creator;
+package io.bc.body.booster.creator;
 
 import android.content.Intent;
 import android.util.Log;

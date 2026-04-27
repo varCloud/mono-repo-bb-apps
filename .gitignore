@@ -104,6 +104,8 @@ apps/athlete/ios/*
 apps/creator/ios/*
 apps/creator/android/*
 apps/creator/android.bak/*
+apps/creator/_android/*
+apps/athlete/_android/*
 .vscode/settings.json
 .vscode/settings.json
 .vscode/settings.json

@@ -1,4 +1,4 @@
-package io.bb.body.booster.athlete;
+package io.bc.body.booster.athlete;
 
 import android.content.Intent;
 import android.util.Log;
