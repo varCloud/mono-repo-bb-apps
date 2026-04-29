@@ -1,13 +1,13 @@
 import { Component, effect, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { IonicModule, ModalController } from '@ionic/angular';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   LayoutContentComponent,
   ItemListComponent,
   AvatarProfileComponent,
-  UserAvatarComponent,
+  DeleteAccountModalComponent,
 } from '@monorepo-bb-app/ui';
 import { PROFILE_MENU_ITEMS, OPTIONS_PROFILE_MENU } from '../../constants/profile-menu.constants';
 import { addIcons } from 'ionicons';
@@ -20,7 +20,7 @@ import {
 } from 'ionicons/icons';
 import { Router } from '@angular/router';
 import { LoaderUIService, LocalStorageService, SesionService, UserService } from '@monorepo-bb-app/core';
-import { StripeService } from '@monorepo-bb-app/shared';
+import { StripeService, ToastService } from '@monorepo-bb-app/shared';
 
 
 @Component({
@@ -37,7 +37,6 @@ import { StripeService } from '@monorepo-bb-app/shared';
     LayoutContentComponent,
     ItemListComponent,
     AvatarProfileComponent,
-    UserAvatarComponent,
   ],
 })
 export class ProfileComponent {
@@ -49,7 +48,10 @@ export class ProfileComponent {
     private localStorageService: LocalStorageService,
     public sesionService: SesionService,
     private stripeService: StripeService,
-    
+    private userService: UserService,
+    private toastService: ToastService,
+    private modalCtrl: ModalController,
+    private translate: TranslateService,
   ) {
     effect(() => {
       const user = this.sesionService.user$();
@@ -125,7 +127,53 @@ export class ProfileComponent {
   }
 
   private deleteAccount(): void {
-    // Implementar eliminación de cuenta
+    this.openDeleteAccountModal();
+  }
+
+  private async openDeleteAccountModal(): Promise<void> {
+    const modal = await this.modalCtrl.create({
+      component: DeleteAccountModalComponent,
+      breakpoints: [0.5, 1],
+      initialBreakpoint: 0.5,
+      handle: false,
+      cssClass: 'bottom-sheet-modal-rounded',
+    });
+
+    await modal.present();
+
+    const { data, role } = await modal.onDidDismiss();
+
+    if (role === 'confirm' && data?.confirmDelete) {
+      await this.performDeleteAccount();
+    }
+  }
+
+  private async performDeleteAccount(): Promise<void> {
+    const userId = this.sesionService.user$()?.userId;
+    
+    if (!userId) {
+      await this.toastService.error(this.translate.instant('delete-account.user-error'));
+      return;
+    }
+
+    this.loaderUIService.showLoader();
+
+    try {
+      await this.userService.deleteAccount(userId).toPromise();
+      
+      this.loaderUIService.hideLoader();
+      await this.toastService.success(this.translate.instant('delete-account.success-message'));
+      
+      // Limpiar datos locales y redirigir al login
+      setTimeout(async () => {
+        this.localStorageService.clear();
+        await this.router.navigate(['login']);
+      }, 500);
+    } catch (error) {
+      this.loaderUIService.hideLoader();
+      console.error('Error al eliminar la cuenta:', error);
+      await this.toastService.error(this.translate.instant('delete-account.error-message'));
+    }
   }
 
   private logout(): void {

@@ -505,5 +505,16 @@
     "find-workout": "Buscar por nombre, descripción ...",
     "no-workouts": "No tienes entrenamientos aún",
     "no-workouts-for-search": "No se encontraron entrenamientos para tu búsqueda"
+  },
+  "delete-account": {
+    "title": "¿Estás seguro que deseas eliminar tu cuenta?",
+    "warning": "⚠️ Advertencia: Esta acción es irreversible. Al confirmar, tu cuenta se eliminará permanentemente junto con todos tus datos.",
+    "important": "💡 Importante: Una vez eliminada, no podremos recuperar tu información ni tus suscripciones activas.",
+    "email-notice": "📧 El correo asociado a esta cuenta no podrá ser utilizado nuevamente. Deberás registrarte con una dirección de correo diferente.",
+    "confirm-button": "Sí, Eliminar mi cuenta",
+    "cancel-button": "Cancelar",
+    "success-message": "Cuenta eliminada exitosamente",
+    "error-message": "Error al eliminar la cuenta. Intenta nuevamente.",
+    "user-error": "No se pudo obtener la información del usuario"
   }
 }

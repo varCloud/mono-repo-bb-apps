@@ -474,5 +474,16 @@
     "oldest": "Oldest",
     "clear-filters": "Clear filters",
     "apply-filters": "Apply filters"
+  },
+  "delete-account": {
+    "title": "Are you sure you want to delete your account?",
+    "warning": "⚠️ Warning: This action is irreversible. Once confirmed, your account will be permanently deleted along with all your data.",
+    "important": "💡 Important: Once deleted, we will not be able to recover your information or active subscriptions.",
+    "email-notice": "📧 The email associated with this account cannot be reused. You will need to register with a different email address.",
+    "confirm-button": "Yes, Delete my account",
+    "cancel-button": "Cancel",
+    "success-message": "Account deleted successfully",
+    "error-message": "Error deleting account. Please try again.",
+    "user-error": "Could not get user information"
   }
 }

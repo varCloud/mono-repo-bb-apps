@@ -1,13 +1,14 @@
 import { LoggerService } from 'libs/core/services/logger.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule, NavController } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { IonicModule, NavController, ModalController } from '@ionic/angular';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   LayoutContentComponent,
   ItemListComponent,
   AvatarProfileComponent,
+  DeleteAccountModalComponent,
 } from '@monorepo-bb-app/ui';
 import { PROFILE_MENU_ITEMS } from '../../constants/profile-menu.constants';
 import { addIcons } from 'ionicons';
@@ -67,7 +68,9 @@ export class ProfileComponent implements OnInit {
     private _stripeService: StripeService,
     private route: ActivatedRoute,
     private _userService: UserService,
-    private _navCtrl: NavController
+    private _navCtrl: NavController,
+    private modalCtrl: ModalController,
+    private translate: TranslateService,
   ) {
     addIcons({
       trashSharp,
@@ -204,7 +207,53 @@ export class ProfileComponent implements OnInit {
   }
 
   private deleteAccount(): void {
-    // Implementar eliminación de cuenta
+    this.openDeleteAccountModal();
+  }
+
+  private async openDeleteAccountModal(): Promise<void> {
+    const modal = await this.modalCtrl.create({
+      component: DeleteAccountModalComponent,
+      breakpoints: [0.5, 1],
+      initialBreakpoint: 0.5,
+      handle: false,
+      cssClass: 'bottom-sheet-modal-rounded',
+    });
+
+    await modal.present();
+
+    const { data, role } = await modal.onDidDismiss();
+
+    if (role === 'confirm' && data?.confirmDelete) {
+      await this.performDeleteAccount();
+    }
+  }
+
+  private async performDeleteAccount(): Promise<void> {
+    const userId = this.sesionService.user$()?.userId;
+    
+    if (!userId) {
+      await this.toastService.error(this.translate.instant('delete-account.user-error'));
+      return;
+    }
+
+    this.loaderUIService.showLoader();
+
+    try {
+      await this._userService.deleteAccount(userId).toPromise();
+      
+      this.loaderUIService.hideLoader();
+      await this.toastService.success(this.translate.instant('delete-account.success-message'));
+      
+      // Limpiar datos locales y redirigir al login
+      setTimeout(async () => {
+        await this.localStorageService.clear();
+        await this._navCtrl.navigateRoot(['login'], { replaceUrl: true });
+      }, 500);
+    } catch (error) {
+      this.loaderUIService.hideLoader();
+      console.error('Error al eliminar la cuenta:', error);
+      await this.toastService.error(this.translate.instant('delete-account.error-message'));
+    }
   }
 
   private async onCopyLink(): Promise<void> {

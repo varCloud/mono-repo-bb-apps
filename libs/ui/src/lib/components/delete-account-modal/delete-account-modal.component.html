@@ -1,0 +1,22 @@
+<div class="modal-content">
+  <div class="drag-handle"></div>
+
+  <div class="confirm-view">
+    <div class="icon-container">
+      <ion-icon name="trash" color="danger"></ion-icon>
+    </div>
+    <h2>{{ 'delete-account.title' | translate }}</h2>
+    <p>{{ 'delete-account.warning' | translate }}</p>
+    <p>{{ 'delete-account.important' | translate }}</p>
+    <p>{{ 'delete-account.email-notice' | translate }}</p>
+    <div class="button-group">
+      <ion-button fill="outline" shape="round" (click)="closeModal()">
+        {{ 'delete-account.cancel-button' | translate }}
+      </ion-button>
+
+      <ion-button fill="solid" shape="round" color="danger" (click)="confirmDeleteAccount()">
+        {{ 'delete-account.confirm-button' | translate }}
+      </ion-button>
+    </div>
+  </div>
+</div>

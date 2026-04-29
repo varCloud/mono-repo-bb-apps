@@ -1,0 +1,72 @@
+/* Estilo para el contenedor principal del modal */
+.modal-content {
+  padding: 20px 20px 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  /* Añade padding inferior para el "safe area" en iOS */
+  padding-bottom: calc(30px + var(--ion-safe-area-bottom));
+}
+
+/* El "asa" gris de arrastre */
+.drag-handle {
+  width: 40px;
+  height: 4px;
+  background-color: #ccc;
+  border-radius: 2px;
+  margin-bottom: 20px;
+}
+
+/* --- Vista de Confirmación --- */
+.confirm-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+
+  .icon-container {
+    margin-bottom: 20px;
+    ion-icon {
+      font-size: 3.5rem;
+    }
+  }
+
+  h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 15px 0;
+    color: var(--ion-text-color);
+  }
+
+  p {
+    font-size: 0.95rem;
+    color: var(--ion-text-color-step-600);
+    margin: 10px 0;
+    line-height: 1.5;
+
+    &:first-of-type {
+      color: var(--ion-color-danger);
+      font-weight: 500;
+    }
+  }
+
+  .button-group {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin-top: 30px;
+    justify-content: center;
+
+    ion-button {
+      flex: 1;
+      max-width: 200px;
+      --border-radius: 20px;
+      --padding-top: 12px;
+      --padding-bottom: 12px;
+      font-weight: 600;
+    }
+  }
+}

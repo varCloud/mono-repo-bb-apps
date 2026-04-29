@@ -141,4 +141,8 @@ export class UserService {
       )
       .pipe(map((resp: any) => resp.data));
   }
+
+  public deleteAccount(userId: number): Observable<any> {
+    return this._http.delete(`${this._baseUrl}${API_URLS.USER}/${userId}`);
+  }
 }
