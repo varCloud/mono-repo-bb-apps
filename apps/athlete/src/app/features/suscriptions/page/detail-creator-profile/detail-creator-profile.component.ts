@@ -1,13 +1,17 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
+  inject,
   signal,
   type OnInit,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular/standalone';
 import { Browser } from '@capacitor/browser';
 import { DetailCreatorProfileComponent } from '@monorepo-bb-app/ui';
+import { AthleteDeepLinkService } from '@monorepo-bb-app/core';
 import { LeaveAppModalComponent } from './leave-app-modal/leave-app-modal.component';
 import { environment } from '@monorepo-bb-app/shared';
 
@@ -22,6 +26,10 @@ const PLANS_BASE_URL = environment.URL_ATHLETE_WEB + '/login';
 })
 export class DetailCreatorProfilePageComponent implements OnInit {
   public idCreator = signal<number | null>(null);
+  public workoutId = signal<number | null>(null);
+  public athleteId = signal<number | null>(null);
+  private readonly _destroyRef = inject(DestroyRef);
+  private readonly _deepLinkService = inject(AthleteDeepLinkService);
 
   constructor(
     private _routerActivate: ActivatedRoute,
@@ -29,13 +37,19 @@ export class DetailCreatorProfilePageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    debugger
     const id = this._routerActivate.snapshot.paramMap.get('id');
+    const workoutId = this._routerActivate.snapshot.queryParamMap.get('workoutId');
+    const athleteId = this._routerActivate.snapshot.queryParamMap.get('userID');
+    this.workoutId.set(workoutId ? +workoutId : null);
+    this.athleteId.set(athleteId ? +athleteId : null);
     this.idCreator.set(id ? +id : null);
+
   }
 
   async goToSuscriptionCreator() {
     const creatorId = this.idCreator();
-    const url = `${PLANS_BASE_URL}?creatorId=${creatorId}`;
+    const url = `${PLANS_BASE_URL}?creatorId=${creatorId}&athleteId=${this.athleteId()}&workoutId=${this.workoutId()}`;
 
     const modal = await this._modalCtrl.create({
       component: LeaveAppModalComponent,

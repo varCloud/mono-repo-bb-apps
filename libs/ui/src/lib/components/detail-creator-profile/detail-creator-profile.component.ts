@@ -43,6 +43,7 @@ import { WorkoutByTypesComponent } from '../workout-by-types/workout-by-types.co
 import { CONSTANTS } from '../../../../../shared/constants/constants';
 import { CommonModule } from '@angular/common';
 import { Capacitor } from '@capacitor/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'lib-detail-creator-profile',
@@ -61,6 +62,7 @@ import { Capacitor } from '@capacitor/core';
     WorkoutByTypesComponent,
     IonSkeletonText,
     IonIcon,
+    TranslateModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './detail-creator-profile.component.html',
@@ -107,6 +109,7 @@ export class DetailCreatorProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('Initializing Detail Creator Profile Component');
     this.getCreatorProfile();
     this.checkSubscription();
   }

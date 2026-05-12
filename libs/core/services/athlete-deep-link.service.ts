@@ -3,6 +3,7 @@ import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { App as CapacitorApp, URLOpenListenerEvent } from '@capacitor/app';
 import { Browser } from '@capacitor/browser';
+import { Subject } from 'rxjs';
 
 /**
  * Servicio de deep links exclusivo para la app del atleta.
@@ -130,12 +131,15 @@ export class AthleteDeepLinkService {
   private async handlePaymentSuccess(data: DeepLinkData): Promise<void> {
     const status = data.params.get('status');
     const creatorId = data.params.get('creatorId');
+    const workoutId = data.params.get('workoutId');
+    const athleteId = data.params.get('athleteId');
 
     console.log('💳 [Athlete] Payment deep link — status:', status, '| creatorId:', creatorId);
 
+     this.router.navigate([]);
     if (status === 'success' && creatorId) {
       await this.router.navigate(
-        ['/home/suscriptions/profile-creator', creatorId],
+        ['/home/workouts/',workoutId, creatorId, athleteId],
         { replaceUrl: true }
       );
     } else {
