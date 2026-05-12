@@ -14,6 +14,7 @@ export { UploadService } from './services/upload-service.service';
 export { S3Service } from './services/s3/s3.service';
 export { FileAccessPermissionService } from './services/file-access-permission.service';
 export { DeepLinkService } from './services/deep-link.service';
+export { AthleteDeepLinkService } from './services/athlete-deep-link.service';
 export { PushNotificationService } from './services/push-notifications/push-notification.service';
 export { ProfileColorService } from './services/profile-color.service';
 export { httpInterceptor } from './interceptors/http.interceptor';

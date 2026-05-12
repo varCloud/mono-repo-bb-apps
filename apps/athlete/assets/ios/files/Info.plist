@@ -26,6 +26,14 @@
 				<string>com.googleusercontent.apps.728116258989-oe719k2gf7ec5h0tob0v285bkertf0gt</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>io.bc.body.booster.athlete</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>athlete-body-booster-app</string>
+			</array>
+		</dict>
 	</array>
 	<key>NSCameraUsageDescription</key>
 	<string>Necesitamos acceso a tu cámara para que puedas tomar fotos y grabar videos directamente en la app.</string>

@@ -516,5 +516,10 @@
     "success-message": "Cuenta eliminada exitosamente",
     "error-message": "Error al eliminar la cuenta. Intenta nuevamente.",
     "user-error": "No se pudo obtener la información del usuario"
+  },
+  "subscribe": "Ver planes",
+  "leave-app": {
+    "title": "Estás a punto de salir de la app e ir a una página web externa. Ya no realizarás transacciones con Apple.",
+    "body": "Las cuentas o compras hechas fuera de esta app serán administradas por el desarrollador \"BodyBooster\". Tu cuenta de App Store, la forma de pago guardada y las funciones relacionadas con aquella, tales como la administración de suscripciones y los pedidos de reembolso, no estarán disponibles. Apple no será responsable por la privacidad o la seguridad de las transacciones efectuadas con este desarrollador."
   }
 }

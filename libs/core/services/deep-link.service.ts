@@ -16,7 +16,7 @@ import { Browser } from '@capacitor/browser';
 export class DeepLinkService {
   private readonly APP_SCHEME = 'coach-body-booster-app';
   //private readonly APP_SCHEME_IOS = 'coach-body-booster-app';
-  private readonly APP_ID = 'io.bb.body.booster.creator';
+  private readonly APP_ID = 'io.bc.body.booster.creator';
 
   constructor(
     private router: Router,

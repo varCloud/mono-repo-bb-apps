@@ -4,8 +4,14 @@ import {
   signal,
   type OnInit,
 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { ModalController } from '@ionic/angular/standalone';
+import { Browser } from '@capacitor/browser';
 import { DetailCreatorProfileComponent } from '@monorepo-bb-app/ui';
+import { LeaveAppModalComponent } from './leave-app-modal/leave-app-modal.component';
+import { environment } from '@monorepo-bb-app/shared';
+
+const PLANS_BASE_URL = environment.URL_ATHLETE_WEB + '/login'; 
 
 @Component({
   selector: 'app-detail-creator-profile',
@@ -19,7 +25,7 @@ export class DetailCreatorProfilePageComponent implements OnInit {
 
   constructor(
     private _routerActivate: ActivatedRoute,
-    private _router: Router
+    private _modalCtrl: ModalController,
   ) {}
 
   ngOnInit(): void {
@@ -27,10 +33,25 @@ export class DetailCreatorProfilePageComponent implements OnInit {
     this.idCreator.set(id ? +id : null);
   }
 
-  goToSuscriptionCreator() {
-    this._router.navigate([
-      '/home/suscriptions/suscription-creator',
-      this.idCreator(),
-    ]);
+  async goToSuscriptionCreator() {
+    const creatorId = this.idCreator();
+    const url = `${PLANS_BASE_URL}?creatorId=${creatorId}`;
+
+    const modal = await this._modalCtrl.create({
+      component: LeaveAppModalComponent,
+      componentProps: { url },
+      breakpoints: [0, 0.75, 1],
+      initialBreakpoint: 0.75,
+      handle: false,
+      cssClass: 'bottom-sheet-modal-rounded',
+    });
+
+    await modal.present();
+
+    const { data, role } = await modal.onDidDismiss();
+
+    if (role === 'confirm' && data?.confirmed) {
+      await Browser.open({ url: data.url });
+    }
   }
 }

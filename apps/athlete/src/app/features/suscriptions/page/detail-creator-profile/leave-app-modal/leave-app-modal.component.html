@@ -1,0 +1,33 @@
+<div class="leave-app-modal">
+  <div class="drag-handle"></div>
+
+  <h2 class="leave-app-modal__title">
+    {{ 'leave-app.title' | translate }}
+  </h2>
+
+  <p class="leave-app-modal__body">
+    {{ 'leave-app.body' | translate }}
+  </p>
+
+  <div class="leave-app-modal__actions">
+    <ion-button
+      expand="block"
+      shape="round"
+      fill="outline"
+      class="leave-app-modal__btn"
+      (click)="continue()"
+    >
+      {{ 'common.continue' | translate }}
+    </ion-button>
+
+    <ion-button
+      expand="block"
+      shape="round"
+      fill="outline"
+      class="leave-app-modal__btn"
+      (click)="cancel()"
+    >
+      {{ 'common.cancel' | translate }}
+    </ion-button>
+  </div>
+</div>

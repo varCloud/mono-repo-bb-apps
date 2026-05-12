@@ -3,6 +3,7 @@ import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { RouterModule } from '@angular/router';
 import { ScreenOrientation } from '@capacitor/screen-orientation';
 import {
+  AthleteDeepLinkService,
   LoaderUIService,
   NetworkService,
   PushNotificationService,
@@ -30,11 +31,13 @@ export class App implements OnInit {
     private pushNotificationService: PushNotificationService,
     private _themeService: ThemeService,
     private _translationService: TranslationService,
-    private _networkService: NetworkService
+    private _networkService: NetworkService,
+    private _deepLinkService: AthleteDeepLinkService,
   ) {
     this._themeService.initializeTheme();
     this._translationService.setDefaultConfig();
     this.pushNotificationService.initPushNotifications();
+    this._deepLinkService.initialize();
     effect(() => {
       const blockUIState = this.globalBlockUIService.getLoading();
       this.showNoConnection = this._networkService.showNoConnectionModal;

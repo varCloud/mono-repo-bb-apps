@@ -10,6 +10,8 @@ export const environment = {
   MAX_SIZE_FILE_AWS_S3: 10 * 1024 * 1024 * 1024,
   appVersion: '1.0.0-dev',
   URL_TERMS_AND_CONDITIONS: 'https://bb-landing-tau.vercel.app/',
+  URL_ATHLETE_WEB: 'https://athlete.bodybooster.com.mx',
+  //URL_ATHLETE_WEB: 'http://192.168.1.5:4500',
 };
 
 

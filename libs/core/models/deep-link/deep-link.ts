@@ -16,7 +16,8 @@ export enum DeepLinkHost {
   STRIPE_RETURN = 'stripe-return',
   OPEN = 'open',
   ONBOARDING = 'onboarding',
-  PROFILE = 'profile'
+  PROFILE = 'profile',
+  PAYMENT_SUCCESS = 'payment-success',
 }
 
 /**

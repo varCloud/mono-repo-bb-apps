@@ -73,7 +73,7 @@
     <array>
         <dict>
             <key>CFBundleURLName</key>
-            <string>io.bb.body.booster.creator</string>
+            <string>io.bc.body.booster.creator</string>
             <key>CFBundleURLSchemes</key>
             <array>
                 <string>coach-body-booster-app</string>
