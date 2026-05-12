@@ -33,10 +33,10 @@
 	<string>Necesitamos acceso al micrófono para grabar videos con audio.</string>
 	<key>NSCameraUsageDescription</key>
 	<string
-    >Necesitamos acceso a tu cámara para que puedas tomar fotos y grabar videos directamente en la app.</string>
+    >Necesitamos acceso a tu cámara para que puedas tomar fotos y grabar videos directamente en la app y luego subirlos a la plataforma como contenido para tus atletas. Ejemplo: graba un video explicativo de un ejercicio y publícalo para que tus atletas lo vean.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string
-    >Necesitamos acceder a tu fototeca para que puedas seleccionar y usar tus fotos y videos dentro de la app.</string>
+    >Necesitamos acceso a tu biblioteca de fotos para que puedas seleccionar imágenes, videos o PDFs existentes y subirlos a la plataforma como material de entrenamiento para tus atletas. Ejemplo: elige un PDF con una rutina de ejercicios desde tu galería y compártelo con tus suscriptores.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string
     >Permítenos guardar fotos y videos en tu fototeca para que no pierdas tus creaciones.</string>

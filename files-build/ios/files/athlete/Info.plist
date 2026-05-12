@@ -41,10 +41,10 @@
 	<string>Necesitamos acceso al micrófono para grabar videos con audio.</string>
 	<key>NSCameraUsageDescription</key>
 	<string
-    >Necesitamos acceso a tu cámara para que puedas tomar fotos y grabar videos directamente en la app.</string>
+    >Necesitamos acceso a tu cámara para que puedas tomarte una foto y usarla como tu foto de perfil dentro de la app. La foto se guarda solo en tu dispositivo y no se comparte con otros usuarios. Ejemplo: tómate un selfie desde la app y asígnatelo como tu avatar.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string
-    >Necesitamos acceder a tu fototeca para que puedas seleccionar y usar tus fotos y videos dentro de la app.</string>
+    >Necesitamos acceso a tu biblioteca de fotos para que puedas seleccionar una imagen existente y usarla como tu foto de perfil. La imagen no se sube a nuestros servidores ni se comparte. Ejemplo: elige una foto de tu galería para que aparezca junto a tu nombre en la app.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string
     >Permítenos guardar fotos y videos en tu fototeca para que no pierdas tus creaciones.</string>
