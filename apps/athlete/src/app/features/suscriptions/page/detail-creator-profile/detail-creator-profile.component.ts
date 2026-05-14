@@ -37,7 +37,6 @@ export class DetailCreatorProfilePageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    debugger
     const id = this._routerActivate.snapshot.paramMap.get('id');
     const workoutId = this._routerActivate.snapshot.queryParamMap.get('workoutId');
     const athleteId = this._routerActivate.snapshot.queryParamMap.get('userID');
