@@ -42,15 +42,34 @@
               "maximumError": "15kb"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing": "all",
+          "optimization": {
+            "scripts": true,
+            "styles": {
+              "minify": true,
+              "inlineCritical": true
+            },
+            "fonts": true
+          },
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "aot": true,
+          "fileReplacements": [
+            {
+              "replace": "libs/shared/environment/environment.ts",
+              "with": "libs/shared/environment/environment.prod.ts"
+            }
+          ]
         },
         "development": {
           "optimization": false,
           "extractLicenses": false,
-          "sourceMap": true
+          "sourceMap": true,
+          "outputHashing": "none"
         }
       },
-      "defaultConfiguration": "production"
+      "defaultConfiguration": "development"
     },
     "serve": {
       "continuous": true,

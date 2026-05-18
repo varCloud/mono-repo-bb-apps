@@ -56,7 +56,13 @@
           "sourceMap": false,
           "namedChunks": false,
           "extractLicenses": true,
-          "aot": true
+          "aot": true,
+          "fileReplacements": [
+            {
+              "replace": "libs/shared/environment/environment.ts",
+              "with": "libs/shared/environment/environment.prod.ts"
+            }
+          ]
         },
         "development": {
           "optimization": false,
