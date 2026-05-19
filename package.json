@@ -17,6 +17,8 @@
     "creator:sync": "cd apps/creator && nx build creator  && npx cap sync && npx cap open android && npm run sync-files-creator:creator",
     "creator:sync:prod": "cd apps/creator && nx build creator --configuration=production && npx cap sync && npx cap open android && npm run sync-files-creator:creator",
     "athlete:sync:prod": "cd apps/athlete && nx build athlete --configuration=production && npx cap sync && npx cap open android && npm run sync-files-creator:athlete",
+    "creator:sync:prod:ios": "cd apps/creator && nx build creator --configuration=production && npx cap sync && npx cap open ios && npm run sync-files-creator:ios",
+    "athlete:sync:prod:ios": "cd apps/athlete && nx build athlete --configuration=production && npx cap sync && npx cap open ios && npm run sync-files-athlete:ios",
     "dev:athlete:celular": "cd apps/athlete && npx cap sync && npx cap open android && npx cap run android -l --host=192.168.1.5 --port=3000",
     "dev:creator:celular": "cd apps/creator && npx cap sync && npx cap open android && npx cap run android -l --host=192.168.1.5 --port=3002",
     "cap:athlete:sync": "cd apps/athlete && npx cap sync",
