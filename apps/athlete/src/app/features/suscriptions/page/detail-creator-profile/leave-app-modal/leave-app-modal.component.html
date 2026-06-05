@@ -2,11 +2,19 @@
   <div class="drag-handle"></div>
 
   <h2 class="leave-app-modal__title">
-    {{ 'leave-app.title' | translate }}
+    @if (isAndroid) {
+      {{ 'leave-app-android.title' | translate }}
+    } @else {
+      {{ 'leave-app.title' | translate }}
+    }
   </h2>
 
   <p class="leave-app-modal__body">
-    {{ 'leave-app.body' | translate }}
+    @if (isAndroid) {
+      {{ 'leave-app-android.body' | translate }}
+    } @else {
+      {{ 'leave-app.body' | translate }}
+    }
   </p>
 
   <div class="leave-app-modal__actions">

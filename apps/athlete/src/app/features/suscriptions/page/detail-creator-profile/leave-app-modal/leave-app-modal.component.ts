@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ModalController, IonButton } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
+import { Capacitor } from '@capacitor/core';
 
 @Component({
   selector: 'app-leave-app-modal',
@@ -11,6 +12,7 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class LeaveAppModalComponent {
   @Input() url!: string;
+  isAndroid = Capacitor.getPlatform() === 'android';
 
   constructor(private modalCtrl: ModalController) {}
 

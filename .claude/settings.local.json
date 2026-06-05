@@ -6,7 +6,9 @@
       "Bash(Get-ChildItem -Path \"e:\\\\Documents\\\\BlueCloud\\\\Proyectos\\\\BB\\\\mono-repo-bb-apps\" -Directory)",
       "Bash(Select-Object Name)",
       "Skill(update-config)",
-      "Skill(update-config:*)"
+      "Skill(update-config:*)",
+      "Bash(Get-ChildItem -Path \"E:\\\\Documents\\\\BlueCloud\\\\Proyectos\\\\BB\\\\mono-repo-bb-apps\" -Directory)",
+      "Bash(ls -la \"E:\\\\\\\\Documents\\\\\\\\BlueCloud\\\\\\\\Proyectos\\\\\\\\BB\\\\\\\\mono-repo-bb-apps\\\\\\\\libs\\\\\\\\utils\")"
     ]
   }
 }

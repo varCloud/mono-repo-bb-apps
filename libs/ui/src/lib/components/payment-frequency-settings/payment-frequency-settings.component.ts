@@ -19,6 +19,8 @@ import {
   IonText,
   IonLabel,
   IonItem,
+  IonList,
+  IonListHeader,
   IonRadio,
   IonRadioGroup,
   IonNote,
@@ -26,7 +28,10 @@ import {
   RangeCustomEvent,
   IonInput,
   IonContent,
+  IonIcon,
 } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { chevronDownOutline } from 'ionicons/icons';
 import { debounceTime, finalize } from 'rxjs';
 import {
   FormControl,
@@ -53,11 +58,14 @@ import { PaymentFrecuency, PaymentFrecuencyModel } from '@monorepo-bb-app/shared
     IonNote,
     IonRadioGroup,
     IonItem,
+    IonList,
+    IonListHeader,
     IonLabel,
     IonCol,
     IonGrid,
     IonRow,
     IonText,
+    IonIcon,
     ListSkeletonComponent,
     IonRadio,
     FormsModule,
@@ -79,6 +87,8 @@ export class PaymentFrequencySettingsComponent implements OnInit {
   currencyControl = new FormControl<number | null>(null);
   currency = signal<string | null>('');
   config = signal<Config | null>(null);
+  showBreakdown = signal<boolean>(true);
+
   selectedPaymentFrequency = computed(() => {
     if (this.selectedPaymentFrequencyId() === null) {
       return new PaymentFrecuencyModel({});
@@ -88,21 +98,32 @@ export class PaymentFrequencySettingsComponent implements OnInit {
     )!;
   });
 
-  calculatePayment = computed(() => {
-    this.paymentFrecuency();
+  commissionBreakdown = computed(() => {
     const frequency = this.selectedPaymentFrequency();
     const cfg = this.config();
 
-    if (!frequency?.amount || !cfg) return 0;
+    if (!frequency?.amount || !cfg) {
+      return { amount: 0, appCommission: 0, stripePercentage: 0, stripeFixedFee: 0, net: 0, percentApp: 0, percentStripe: 0 };
+    }
 
     const amount = frequency.amount;
     const appCommission = (amount * cfg.percentBodyBooster) / 100;
     const stripePercentage = (amount * cfg.percentTransactionStripe) / 100;
     const stripeFixedFee = cfg.amountTransactionStripe;
-    const result = amount - appCommission - stripePercentage - stripeFixedFee;
+    const net = Math.max(0, amount - appCommission - stripePercentage - stripeFixedFee);
 
-    return Math.max(0, result);
+    return {
+      amount,
+      appCommission,
+      stripePercentage,
+      stripeFixedFee,
+      net,
+      percentApp: cfg.percentBodyBooster,
+      percentStripe: cfg.percentTransactionStripe,
+    };
   });
+
+  calculatePayment = computed(() => this.commissionBreakdown().net);
 
   constructor(
     private _paymentFrequencyService: CatalogsService,
@@ -110,7 +131,13 @@ export class PaymentFrequencySettingsComponent implements OnInit {
     private _translate: TranslatePipe,
     private _localStorage: LocalStorageService,
     private _errorsMessagesService: ErrorsMessagesService,
-  ) {}
+  ) {
+    addIcons({ chevronDownOutline });
+  }
+
+  toggleBreakdown() {
+    this.showBreakdown.update((v) => !v);
+  }
 
   ngOnInit() {
     this.isLoading.set(true);

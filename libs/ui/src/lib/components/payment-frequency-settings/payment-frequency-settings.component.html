@@ -43,7 +43,7 @@
     </ion-row>
 
     <ion-row>
-      <ion-col size="12" class="bold">
+      <ion-col size="12" class="bold" [hidden]="true">
         <ion-range
           [min]="selectedPaymentFrequency()?.amountMin"
           [max]="selectedPaymentFrequency()?.amountMax"
@@ -68,7 +68,7 @@
           </div>
         </ion-range>
       </ion-col>
-      <ion-col size="6" offset="3">
+      <ion-col size="6" offset="3" [hidden]="true">
         <ion-input
           fill="outline"
           placeholder="00.00"
@@ -89,14 +89,73 @@
           }"
         ></app-error-message>
       </ion-col>
-      <ion-col size="12" class="ion-margin-top">
-        <ion-item class="text-card-calculate-payment">
-          <ion-label> Total a ganar después de comisiones </ion-label>
-
+      <ion-col size="12" class="ion-margin-top" id="totalAmount">
+        <ion-item
+          class="text-card-calculate-payment"
+          button
+          detail="false"
+          (click)="toggleBreakdown()"
+        >
+          <ion-label>{{ 'payment-frequency.total-after-fees' | translate }}</ion-label>
           <ion-text slot="end" class="payment-amount" color="primary">
             <app-currency [amount]="calculatePayment()"></app-currency>
           </ion-text>
+          <ion-icon
+            slot="end"
+            name="chevron-down-outline"
+            class="breakdown-chevron"
+            [class.expanded]="showBreakdown()"
+          ></ion-icon>
         </ion-item>
+
+        @if (showBreakdown()) {
+          <ion-list class="fee-breakdown" lines="full">
+            <ion-list-header>
+              <ion-label>{{ 'payment-frequency.fee-breakdown' | translate }}</ion-label>
+            </ion-list-header>
+
+            <ion-item>
+              <ion-label>{{ 'payment-frequency.amount-charged' | translate }}</ion-label>
+              <ion-text slot="end">
+                <app-currency [amount]="commissionBreakdown().amount"></app-currency>
+              </ion-text>
+            </ion-item>
+
+            <ion-item>
+              <ion-label color="medium">
+                {{ 'payment-frequency.platform-commission' | translate }}
+                ({{ commissionBreakdown().percentApp }}%)
+              </ion-label>
+              <ion-note slot="end" color="medium">
+                - <app-currency [amount]="commissionBreakdown().appCommission"></app-currency>
+              </ion-note>
+            </ion-item>
+
+            <ion-item>
+              <ion-label color="medium">
+                {{ 'payment-frequency.stripe-percentage-fee' | translate }}
+                ({{ commissionBreakdown().percentStripe }}%)
+              </ion-label>
+              <ion-note slot="end" color="medium">
+                - <app-currency [amount]="commissionBreakdown().stripePercentage"></app-currency>
+              </ion-note>
+            </ion-item>
+
+            <ion-item>
+              <ion-label color="medium">{{ 'payment-frequency.stripe-fixed-fee' | translate }}</ion-label>
+              <ion-note slot="end" color="medium">
+                - <app-currency [amount]="commissionBreakdown().stripeFixedFee"></app-currency>
+              </ion-note>
+            </ion-item>
+
+            <ion-item lines="none" class="total-row">
+              <ion-label color="primary">{{ 'payment-frequency.you-receive' | translate }}</ion-label>
+              <ion-text slot="end" color="primary">
+                <app-currency [amount]="commissionBreakdown().net"></app-currency>
+              </ion-text>
+            </ion-item>
+          </ion-list>
+        }
       </ion-col>
     </ion-row>
   </ion-grid>

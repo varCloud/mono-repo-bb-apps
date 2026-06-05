@@ -159,7 +159,14 @@
   "payment-frequency": {
     "save-error": "Error al guardar la frecuencia de pago",
     "save-success": "Frecuencia de pago guardada exitosamente",
-    "title": "Elige el costo de tus entrenamientos"
+    "title": "Elige el costo de tus entrenamientos",
+    "total-after-fees": "Total a ganar después de comisiones",
+    "fee-breakdown": "Desglose de comisiones",
+    "amount-charged": "Monto cobrado",
+    "platform-commission": "Comisión de la plataforma",
+    "stripe-percentage-fee": "Tarifa de transacción Stripe",
+    "stripe-fixed-fee": "Tarifa fija de Stripe",
+    "you-receive": "Recibes"
   },
   "payment-method-added": "Método de pago agregado",
   "payment-method-added-success": "Método de pago agregado exitosamente",
@@ -521,5 +528,9 @@
   "leave-app": {
     "title": "Estás a punto de salir de la app e ir a una página web externa. Ya no realizarás transacciones con Apple.",
     "body": "Las cuentas o compras hechas fuera de esta app serán administradas por el desarrollador \"BodyBooster\". Tu cuenta de App Store, la forma de pago guardada y las funciones relacionadas con aquella, tales como la administración de suscripciones y los pedidos de reembolso, no estarán disponibles. Apple no será responsable por la privacidad o la seguridad de las transacciones efectuadas con este desarrollador."
+  },
+  "leave-app-android": {
+    "title": "Estás a punto de salir de la app e ir a una página web externa. Ya no realizarás transacciones con Google Play.",
+    "body": "Las cuentas o compras hechas fuera de esta app serán administradas por el desarrollador \"BodyBooster\". Tu cuenta de Play Store, la forma de pago guardada y las funciones relacionadas con aquella, tales como la administración de suscripciones y los pedidos de reembolso, no estarán disponibles. Google no será responsable por la privacidad o la seguridad de las transacciones efectuadas con este desarrollador."
   }
 }
