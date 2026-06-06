@@ -35,6 +35,7 @@ import {
   WorkoutSearchModalComponent,
 } from '@monorepo-bb-app/ui';
 import {
+  API_URLS,
   CatalogsService,
   CatalogType,
   FilterModel,
@@ -47,6 +48,7 @@ import {
 } from '@monorepo-bb-app/shared';
 import {
   ActionsWorkoutService,
+  AppSettingsService,
   LoaderUIService,
   LocalStorageService,
   SesionService,
@@ -103,7 +105,8 @@ export class HomeComponent implements OnInit {
     private _localStorage: LocalStorageService,
     private _sesionService: SesionService,
     private _catalogService: CatalogsService,
-    private _actionsWorkoutService: ActionsWorkoutService
+    private _actionsWorkoutService: ActionsWorkoutService,
+    private _appSettingsService: AppSettingsService
   ) {
     addIcons({
       barbell,
@@ -144,11 +147,19 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['home/workouts/favorites']);
   }
 
+  private _resolveWorkoutUrl(): string {
+    const settings = this._appSettingsService.settings$();
+    return settings?.onlyWorkoutSuscription === '1'
+      ? API_URLS.WORKOUT_SUBSCRIBED
+      : API_URLS.WORKOUT;
+  }
+
   private async getWorkouts(url?: string, reset = false) {
     this._loader.showLoader();
     try {
       const params = await this.getParams();
-      const res = await this._workoutService.getWorkouts(url, params);
+      const effectiveUrl = url ?? this._resolveWorkoutUrl();
+      const res = await this._workoutService.getWorkouts(effectiveUrl, params);
       if (reset) {
         this.workouts.set(res.data);
       } else {

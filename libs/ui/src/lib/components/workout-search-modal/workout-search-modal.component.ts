@@ -12,13 +12,14 @@ import {
 } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
 import {
+  API_URLS,
   KEY_LOCALSTORAGE,
   Paginator,
   ToastService,
   Workout,
   WorkoutService,
 } from '@monorepo-bb-app/shared';
-import { LoaderUIService, LocalStorageService } from '@monorepo-bb-app/core';
+import { AppSettingsService, LoaderUIService, LocalStorageService } from '@monorepo-bb-app/core';
 import { CardListComponent } from '../card-list/card-list.component';
 import { CardWorkoutInfoComponent } from '../card-workout-info/card-workout-info.component';
 import { Router } from '@angular/router';
@@ -57,7 +58,8 @@ export class WorkoutSearchModalComponent {
     private _workoutService: WorkoutService,
     private _toastService: ToastService,
     private _localStorage: LocalStorageService,
-    private router: Router
+    private router: Router,
+    private _appSettingsService: AppSettingsService
   ) {
     effect(() => {
       const value = this.searchValue();
@@ -79,10 +81,18 @@ export class WorkoutSearchModalComponent {
     this.searchValue.set(query);
   }
 
+  private _resolveWorkoutUrl(): string {
+    const settings = this._appSettingsService.settings$();
+    return settings?.onlyWorkoutSuscription === '1'
+      ? API_URLS.WORKOUT_SUBSCRIBED
+      : API_URLS.WORKOUT;
+  }
+
   private async getWorkouts(url?: string, params = {}, reset = false) {
     this._loader.showLoader();
     try {
-      const res = await this._workoutService.getWorkouts(url, params);
+      const effectiveUrl = url ?? this._resolveWorkoutUrl();
+      const res = await this._workoutService.getWorkouts(effectiveUrl, params);
       if (reset) {
         this.workouts.set(res.data);
       } else {

@@ -1,16 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoginCredentials, UserResponse } from '@monorepo-bb-app/shared';
 import {
   API_URLS,
-  Currency,
+  AppSettingsModel,
   environment,
   KEY_LOCALSTORAGE,
+  LoginCredentials,
+  UserResponse,
 } from '@monorepo-bb-app/shared';
 
 import { Router } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { firstValueFrom, map, Observable, tap } from 'rxjs';
 import {
+  AppSettingsService,
   LocalStorageService,
   SesionService,
   UserService,
@@ -27,7 +29,8 @@ export class LoginService {
     private _router: Router,
     private _localStorage: LocalStorageService,
     private _sesionService: SesionService,
-    private _userService: UserService
+    private _userService: UserService,
+    private _appSettingsService: AppSettingsService
   ) {}
 
   public login(user: LoginCredentials): Observable<UserResponse> {
@@ -39,13 +42,17 @@ export class LoginService {
           resp.hasNullProfileFields
         );
         this._userService.getUser(resp.userId).subscribe();
-        this._localStorage.set(KEY_LOCALSTORAGE.CONFIG, {
-          currency: Currency.MXN,
-          amountTransactionStripe: 3,
-          percentTransactionStripe: 3.6,
-          percentBodyBooster: 20,
-        });
+        const config = await this.getAppSettings();
+        this._appSettingsService.setSettings(config);
       })
+    );
+  }
+
+  public async getAppSettings(): Promise<AppSettingsModel> {
+    return firstValueFrom(
+      this._http
+        .get(`${environment.API_URL}/app-settings`)
+        .pipe(map((resp: any) => new AppSettingsModel(resp.data)))
     );
   }
 }

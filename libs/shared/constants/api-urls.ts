@@ -8,6 +8,7 @@ export const API_URLS = {
   CATALOGS: '/catalogs',
   USER_CONVERSATION: '/user-conversation',
   WORKOUT: '/workout',
+  WORKOUT_SUBSCRIBED: '/workout/subscribed',
   WORKOUT_RATINGS: '/workout-ratings',
   WORKOUT_FAVORITES: '/workout-favorites',
   WORKOUT_LIKES: '/workout-likes',

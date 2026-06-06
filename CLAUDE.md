@@ -24,3 +24,5 @@ Angular v20 + Ionic v8.6 + Capacitor v7 + Nx 21. Dos apps: `athlete`, `creator`.
 @.claude/rules/multimedia.md
 @.claude/rules/capacitor.md
 @.claude/rules/file-structure.md
+@.claude/rules/app-scope.md
+@.claude/rules/app-settings-service.md

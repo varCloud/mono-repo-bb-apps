@@ -28,3 +28,4 @@ export { AppConfig2Service } from './services/app-config2.service';
 export { ProfileColorDirective } from './directives/profile-color.directive';
 export { NetworkService } from './services/network.service';
 export { ActionsWorkoutService } from './services/actions-workout.service';
+export { AppSettingsService } from './services/app-settings.service';
