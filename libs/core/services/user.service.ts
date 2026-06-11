@@ -87,6 +87,7 @@ export class UserService {
 
   public async updatePushTokenIfSessionActive(): Promise<void> {
     let user = this._sesionService.user$?.();
+    this.logger.info('Checking session to update push token', { user });
     if (!user) {
       user = await this._sesionService.getUserFromLocalStorage();
     }
@@ -95,7 +96,7 @@ export class UserService {
     if (user && user.userId) {
       const payload = { pushNotificationToken: (await this._localStorage.get(KEY_LOCALSTORAGE.TOKEN_PUSH)) || ''};
       
-      this.logger.info('payload', payload);
+      this.logger.info('push token payload', payload);
 
       if (payload.pushNotificationToken == '') {
         this.logger.info('No hay token push guardado en local storage, no se actualiza el token push');

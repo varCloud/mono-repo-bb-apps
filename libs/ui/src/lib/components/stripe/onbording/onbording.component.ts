@@ -12,6 +12,7 @@ import {
   IonCard,
   IonCardContent,
   IonText,
+  ModalController,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
@@ -28,6 +29,7 @@ import {
   UserService,
 } from '@monorepo-bb-app/core';
 import { finalize } from 'rxjs';
+import { StripeIdentificationWarningModalComponent } from '../stripe-identification-warning-modal/stripe-identification-warning-modal.component';
 
 @Component({
   selector: 'lib-onbording',
@@ -47,7 +49,8 @@ export class OnbordingComponent implements OnDestroy {
     private _stripeService: StripeService,
     private _loader: LoaderUIService,
     private _userService: UserService,
-    private _localStorage: LocalStorageService
+    private _localStorage: LocalStorageService,
+    private _modalCtrl: ModalController
   ) {
     addIcons({
       cardOutline,
@@ -73,7 +76,64 @@ export class OnbordingComponent implements OnDestroy {
   }
 
   startStripeOnboarding() {
-    this.openStripeOnboarding();
+    this._loader.showLoader();
+    this._userService
+      .statusAccountPaymentStripe(this.userId())
+      .pipe(finalize(() => this._loader.hideLoader()))
+      .subscribe({
+        next: (account: StripePropertiesAccount) => {
+          if (account.isFullyActive) {
+            this.updateCreatorStripeStatus();
+          } else {
+            this.showIdentificationWarningModal();
+          }
+        },
+        error: () => {
+          this.showIdentificationWarningModal();
+        },
+      });
+  }
+
+  private updateCreatorStripeStatus() {
+    this._loader.showLoader();
+    this._userService
+      .updateUser(this.userId(), { stripeStatus: StripeStatus.ACTIVE })
+      .pipe(finalize(() => this._loader.hideLoader()))
+      .subscribe({
+        next: async () => {
+          await this.setStripeStatusActiveInLocalStorage();
+          this.isSuccesOnbording.emit(true);
+        },
+        error: () => {
+          this.isSuccesOnbording.emit(false);
+        },
+      });
+  }
+
+  private async setStripeStatusActiveInLocalStorage(): Promise<void> {
+    const user = await this._localStorage.get(KEY_LOCALSTORAGE.USER);
+    await this._localStorage.set(KEY_LOCALSTORAGE.USER, {
+      ...user,
+      stripeStatus: StripeStatus.ACTIVE,
+    });
+  }
+
+  private async showIdentificationWarningModal(): Promise<void> {
+    const modal = await this._modalCtrl.create({
+      component: StripeIdentificationWarningModalComponent,
+      breakpoints: [0.8, 1],
+      initialBreakpoint: 0.8,
+      handle: false,
+      cssClass: 'bottom-sheet-modal-rounded',
+    });
+
+    await modal.present();
+
+    const { data, role } = await modal.onDidDismiss();
+
+    if (role === 'confirm' && data?.continue) {
+      this.openStripeOnboarding();
+    }
   }
 
   async openStripeOnboarding() {
@@ -107,11 +167,7 @@ export class OnbordingComponent implements OnDestroy {
           console.log(account);
           if (account.isFullyActive) {
             this.isSuccesOnbording.emit(true);
-            const user = await this._localStorage.get(KEY_LOCALSTORAGE.USER);
-            this._localStorage.set(KEY_LOCALSTORAGE.USER, {
-              ...user,
-              stripeStatus: StripeStatus.ACTIVE,
-            });
+            await this.setStripeStatusActiveInLocalStorage();
           } else {
             this.isSuccesOnbording.emit(false);
           }

@@ -1,0 +1,32 @@
+<div class="modal-content">
+  <div class="drag-handle"></div>
+
+  <div class="result-view">
+    <div class="icon-container">
+      @if (isSuccess) {
+        <ion-icon name="checkmark-circle-outline" color="success"></ion-icon>
+      } @else {
+        <ion-icon name="alert-circle-outline" color="danger"></ion-icon>
+      }
+    </div>
+
+    @if (isSuccess) {
+      <h2>{{ 'stripe-onboarding-result.success-title' | translate }}</h2>
+      <p class="main-text">{{ 'stripe-onboarding-result.success-message' | translate }}</p>
+    } @else {
+      <h2>{{ 'stripe-onboarding-result.error-title' | translate }}</h2>
+      <p class="main-text">{{ 'stripe-onboarding-result.error-message' | translate }}</p>
+    }
+
+    <div class="button-group">
+      <ion-button
+        fill="solid"
+        shape="round"
+        [color]="isSuccess ? 'success' : 'danger'"
+        (click)="closeModal()"
+      >
+        {{ 'stripe-onboarding-result.accept-button' | translate }}
+      </ion-button>
+    </div>
+  </div>
+</div>

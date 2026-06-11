@@ -532,5 +532,24 @@
   "leave-app-android": {
     "title": "Estás a punto de salir de la app e ir a una página web externa. Ya no realizarás transacciones con Google Play.",
     "body": "Las cuentas o compras hechas fuera de esta app serán administradas por el desarrollador \"BodyBooster\". Tu cuenta de Play Store, la forma de pago guardada y las funciones relacionadas con aquella, tales como la administración de suscripciones y los pedidos de reembolso, no estarán disponibles. Google no será responsable por la privacidad o la seguridad de las transacciones efectuadas con este desarrollador."
+  },
+  "stripe-identification": {
+    "title": "Identificación requerida",
+    "message": "Antes de continuar con Stripe, asegúrate de tener a la mano tu identificación oficial y la cuenta CLABE de tu banco. Las necesitarás para completar el registro.",
+    "required-documents": "Documentos aceptados:",
+    "document-ine": "INE (Credencial para Votar)",
+    "document-passport": "Pasaporte",
+    "bank-requirement-title": "Datos bancarios:",
+    "bank-clabe": "Cuenta CLABE de tu banco (18 dígitos)",
+    "additional-info": "Stripe verificará tu identidad de forma independiente. El proceso puede tomar de 24 horas a 7 días hábiles.",
+    "continue-button": "Continuar",
+    "cancel-button": "Cancelar"
+  },
+  "stripe-onboarding-result": {
+    "success-title": "¡Felicidades! Has completado tu registro en Stripe",
+    "success-message": "Tu cuenta ha sido verificada exitosamente. Ya estás listo para recibir tus pagos.",
+    "error-title": "¡Vaya! Hubo un problema con Stripe.",
+    "error-message": "No te preocupes, esto puede suceder a veces. Si el problema persiste, cierra tu sesión e inicia nuevamente.",
+    "accept-button": "Aceptar"
   }
 }

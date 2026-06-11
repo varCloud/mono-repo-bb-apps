@@ -126,6 +126,44 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  async ionViewWillEnter() {
+    await this.validateStripeStatusIfRestricted();
+  }
+
+  private async validateStripeStatusIfRestricted(): Promise<void> {
+    const user =
+      this.sesionService.user$() ??
+      (await this.sesionService.getUserFromLocalStorage());
+
+    if (!user || user.stripeStatus !== StripeStatus.RESTRICTED) return;
+
+    this._userService
+      .statusAccountPaymentStripe(user.userId)
+      .pipe(take(1))
+      .subscribe({
+        next: (account: StripePropertiesAccount) => {
+          if (account.isFullyActive) {
+            this.updateCreatorStripeStatusToActive(user);
+          }
+        },
+      });
+  }
+
+  private updateCreatorStripeStatusToActive(user: User): void {
+    this._userService
+      .updateUser(user.userId, { stripeStatus: StripeStatus.ACTIVE })
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.showMessageStripeIncomplete = false;
+          this.sesionService.setUser({
+            ...user,
+            stripeStatus: StripeStatus.ACTIVE,
+          });
+        },
+      });
+  }
+
   openStripeOnboarding() {
     this.router.navigate(['/stripe-onbording']);
   }

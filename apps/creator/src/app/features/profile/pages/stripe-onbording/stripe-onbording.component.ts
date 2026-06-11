@@ -1,6 +1,10 @@
 import { Component, type OnInit } from '@angular/core';
 import { SesionService } from '@monorepo-bb-app/core';
-import { LayoutContentComponent, OnbordingComponent } from '@monorepo-bb-app/ui';
+import {
+  LayoutContentComponent,
+  OnbordingComponent,
+  StripeOnboardingResultModalComponent,
+} from '@monorepo-bb-app/ui';
 import {
   IonHeader,
   IonToolbar,
@@ -8,8 +12,8 @@ import {
   IonContent,
   IonGrid,
   NavController,
+  ModalController,
 } from '@ionic/angular/standalone';
-import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-stripe-onbording',
@@ -29,7 +33,7 @@ export class StripeOnbordingComponent implements OnInit {
   constructor(
     public sesion: SesionService,
     private _router: NavController,
-    private alertController: AlertController
+    private _modalCtrl: ModalController
   ) {}
   ngOnInit(): void {}
 
@@ -38,27 +42,24 @@ export class StripeOnbordingComponent implements OnInit {
   }
 
   isSuccesOnbording(sucess: boolean) {
-    if (sucess) {
-      this.alertMessage(true);
-      this._router.navigateRoot(['/home'], { replaceUrl: true });
-    } else {
-      this.alertMessage(false);
-    }
+    this.showResultModal(sucess);
   }
 
-  async alertMessage(isSuccess: boolean) {
-    const headerMsg = isSuccess
-      ? 'Felicidades has completado tu registro en Stripe!'
-      : 'Hubo un problema con tu registro en Stripe.';
-    const messageMsg = isSuccess
-      ? 'Tu cuenta ha sido verificada exitosamente.'
-      : 'Por favor, pero no te preocupes intenta completar el proceso nuevamente.';
-    const alert = await this.alertController.create({
-      header: headerMsg,
-      message: messageMsg,
-      buttons: ['Aceptar'],
+  private async showResultModal(isSuccess: boolean): Promise<void> {
+    const modal = await this._modalCtrl.create({
+      component: StripeOnboardingResultModalComponent,
+      componentProps: { isSuccess },
+      breakpoints: [0.5, 1],
+      initialBreakpoint: 0.5,
+      handle: false,
+      cssClass: 'bottom-sheet-modal-rounded',
     });
 
-    await alert.present();
+    await modal.present();
+    await modal.onDidDismiss();
+
+    if (isSuccess) {
+      this._router.navigateRoot(['/home'], { replaceUrl: true });
+    }
   }
 }

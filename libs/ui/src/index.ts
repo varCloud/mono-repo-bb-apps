@@ -54,6 +54,8 @@ export * from './lib/components/reset-password-form/reset-password-form/reset-pa
 
 export * from './lib/components/stripe/add-payment-method/add-payment-method.component';
 export * from './lib/components/stripe/onbording/onbording.component';
+export * from './lib/components/stripe/stripe-identification-warning-modal/stripe-identification-warning-modal.component';
+export * from './lib/components/stripe/stripe-onboarding-result-modal/stripe-onboarding-result-modal.component';
 export * from './lib/components/training-type-selection/training-type-selection.component';
 export * from './lib/components/upload-file/upload-file.component';
 export * from './lib/const/training-types.constants';

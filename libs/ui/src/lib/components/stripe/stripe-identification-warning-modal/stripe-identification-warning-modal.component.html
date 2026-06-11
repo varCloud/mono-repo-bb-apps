@@ -1,0 +1,39 @@
+<div class="modal-content">
+  <div class="drag-handle"></div>
+
+  <div class="warning-view">
+    <div class="icon-container">
+      <ion-icon name="id-card-outline" color="warning"></ion-icon>
+    </div>
+    <h2>{{ 'stripe-identification.title' | translate }}</h2>
+    <p class="main-text">{{ 'stripe-identification.message' | translate }}</p>
+    
+    <div class="requirements-container">
+      <p class="requirements-title">{{ 'stripe-identification.required-documents' | translate }}</p>
+      <ul class="requirements-list">
+        <li>{{ 'stripe-identification.document-ine' | translate }}</li>
+        <li>{{ 'stripe-identification.document-passport' | translate }}</li>
+      </ul>
+
+      <p class="requirements-title">{{ 'stripe-identification.bank-requirement-title' | translate }}</p>
+      <ul class="requirements-list">
+        <li>{{ 'stripe-identification.bank-clabe' | translate }}</li>
+      </ul>
+    </div>
+
+    <p class="additional-info">{{ 'stripe-identification.additional-info' | translate }}</p>
+
+    <div class="button-group">
+      <ion-button fill="outline" shape="round" (click)="closeModal()">
+        {{ 'stripe-identification.cancel-button' | translate }}
+      </ion-button>
+
+      <ion-button fill="solid" shape="round" color="warning" (click)="confirmContinue()">
+        {{ 'stripe-identification.continue-button' | translate }}
+      </ion-button>
+    </div>
+  </div>
+</div>
+
+
+
