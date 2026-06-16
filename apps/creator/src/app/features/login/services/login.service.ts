@@ -10,8 +10,9 @@ import {
 } from '@monorepo-bb-app/shared';
 
 import { Router } from '@angular/router';
-import { firstValueFrom, map, Observable, tap } from 'rxjs';
+import { firstValueFrom, map, Observable, concatMap } from 'rxjs';
 import {
+  AppSettingsService,
   LocalStorageService,
   SesionService,
   UserService,
@@ -28,12 +29,13 @@ export class LoginService {
     private _router: Router,
     private _localStorage: LocalStorageService,
     private _sesionService: SesionService,
-    private _userService: UserService
+    private _userService: UserService,
+    private _appSettingsService: AppSettingsService
   ) {}
 
   public login(user: LoginCredentials): Observable<UserResponse> {
     return this._http.post<UserResponse>(`${this._baseUrl}/login`, user).pipe(
-      tap(async (resp) => {
+      concatMap(async (resp) => {
         await this._localStorage.set(KEY_LOCALSTORAGE.TOKEN, resp.token);
         await this._localStorage.set(
           KEY_LOCALSTORAGE.HAS_NULL_PROFILE_FIELDS,
@@ -41,18 +43,17 @@ export class LoginService {
         );
         this._userService.getUser(resp.userId).subscribe();
         const config = await this.getAppSettings();
-        this._localStorage.set(KEY_LOCALSTORAGE.CONFIG, {
-          ...config,
-          currency: config.paymentCurrency,
-        });
+        await this._appSettingsService.setSettings(config);
+        return resp;
       })
     );
   }
 
-  public async getAppSettings() {
-    const settings = this._http
-      .get(`${environment.API_URL}/app-settings`)
-      .pipe(map((resp: any) => new AppSettingsModel(resp.data)));
-    return await firstValueFrom(settings);
+  public async getAppSettings(): Promise<AppSettingsModel> {
+    return firstValueFrom(
+      this._http
+        .get(`${environment.API_URL}/app-settings`)
+        .pipe(map((resp: any) => new AppSettingsModel(resp.data)))
+    );
   }
 }

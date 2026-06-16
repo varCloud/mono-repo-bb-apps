@@ -10,7 +10,7 @@ import {
 } from '@monorepo-bb-app/shared';
 
 import { Router } from '@angular/router';
-import { firstValueFrom, map, Observable, tap } from 'rxjs';
+import { firstValueFrom, map, Observable, concatMap } from 'rxjs';
 import {
   AppSettingsService,
   LocalStorageService,
@@ -35,7 +35,7 @@ export class LoginService {
 
   public login(user: LoginCredentials): Observable<UserResponse> {
     return this._http.post<UserResponse>(`${this._baseUrl}/login`, user).pipe(
-      tap(async (resp) => {
+      concatMap(async (resp) => {
         await this._localStorage.set(KEY_LOCALSTORAGE.TOKEN, resp.token);
         await this._localStorage.set(
           KEY_LOCALSTORAGE.HAS_NULL_PROFILE_FIELDS,
@@ -43,7 +43,8 @@ export class LoginService {
         );
         this._userService.getUser(resp.userId).subscribe();
         const config = await this.getAppSettings();
-        this._appSettingsService.setSettings(config);
+        await this._appSettingsService.setSettings(config);
+        return resp;
       })
     );
   }

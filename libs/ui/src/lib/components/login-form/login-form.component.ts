@@ -14,7 +14,7 @@ import {
   IonInputPasswordToggle,
 } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
-import { LoginCredentials } from '@monorepo-bb-app/shared';
+import { environment, LoginCredentials } from '@monorepo-bb-app/shared';
 import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
 
 @Component({
@@ -45,6 +45,12 @@ export class LoginFormComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
+
+    if(!environment.production) {
+      this.loginForm.get('email')?.setValue('var901106@gmail.com');
+      this.loginForm.get('password')?.setValue('Victor90');
+      
+    }
   }
 
   onSubmit() {

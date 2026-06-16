@@ -21,11 +21,15 @@ export class AppSettingsService {
     }
   }
 
-  setSettings(settings: AppSettingsModel) {
+  async setSettings(settings: AppSettingsModel) {
     this._settings.set(settings);
-    this._localStorage.set(KEY_LOCALSTORAGE.CONFIG, {
+    await this._localStorage.set(KEY_LOCALSTORAGE.CONFIG, {
       ...settings,
       currency: settings.paymentCurrency,
     });
+  }
+
+  clearSettings() {
+    this._settings.set(null);
   }
 }

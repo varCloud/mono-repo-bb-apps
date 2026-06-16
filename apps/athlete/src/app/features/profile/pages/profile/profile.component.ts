@@ -19,7 +19,7 @@ import {
   trashSharp,
 } from 'ionicons/icons';
 import { Router } from '@angular/router';
-import { LoaderUIService, LocalStorageService, SesionService, UserService } from '@monorepo-bb-app/core';
+import { AppSettingsService, LoaderUIService, LocalStorageService, SesionService, UserService } from '@monorepo-bb-app/core';
 import { StripeService, ToastService } from '@monorepo-bb-app/shared';
 
 
@@ -52,6 +52,7 @@ export class ProfileComponent {
     private toastService: ToastService,
     private modalCtrl: ModalController,
     private translate: TranslateService,
+    private appSettingsService: AppSettingsService,
   ) {
     effect(() => {
       const user = this.sesionService.user$();
@@ -178,6 +179,7 @@ export class ProfileComponent {
 
   private logout(): void {
     this.loaderUIService.showLoader();
+    this.appSettingsService.clearSettings();
     setTimeout(async () => {
       this.localStorageService.clear();
       await this.router.navigate(['login']);

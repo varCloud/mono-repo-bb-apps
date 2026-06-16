@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, effect } from '@angular/core';
 import { addIcons } from 'ionicons';
 import {
   barbell,
@@ -129,6 +129,7 @@ export class HomeComponent implements OnInit {
     this._getFavorites();
     this.getWorkouts(undefined, true);
     this.getWorkoutMaxLikes();
+
   }
 
   handleRefresh(event: any) {
@@ -149,6 +150,7 @@ export class HomeComponent implements OnInit {
 
   private _resolveWorkoutUrl(): string {
     const settings = this._appSettingsService.settings$();
+    console.log(`settings`, settings);
     return settings?.onlyWorkoutSuscription === '1'
       ? API_URLS.WORKOUT_SUBSCRIBED
       : API_URLS.WORKOUT;

@@ -18,7 +18,7 @@ export class LocalStorageService {
 
   public async set(key: string, value: any) {
     await this.checkInitialized();
-    this._storage.set(key, value);
+    await this._storage.set(key, value);
   }
 
   public async get(key: string) {

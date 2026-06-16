@@ -22,6 +22,7 @@ import {
 } from 'ionicons/icons';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
+  AppSettingsService,
   LoaderUIService,
   LocalStorageService,
   SesionService,
@@ -71,6 +72,7 @@ export class ProfileComponent implements OnInit {
     private _navCtrl: NavController,
     private modalCtrl: ModalController,
     private translate: TranslateService,
+    private appSettingsService: AppSettingsService,
   ) {
     addIcons({
       trashSharp,
@@ -318,6 +320,7 @@ export class ProfileComponent implements OnInit {
 
   private logout(): void {
     this.loaderUIService.showLoader();
+    this.appSettingsService.clearSettings();
     setTimeout(async () => {
       await this.localStorageService.clear([KEY_LOCALSTORAGE.TOKEN_PUSH]);
       await this.localStorageService.clear();
