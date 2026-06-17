@@ -13,6 +13,7 @@ export interface AppSettings {
   percentBodyBooster: string;
   creatorSiteProfile: string;
   onlyWorkoutSuscription: string;
+  paymentInApp: string;
 }
 
 const VALUES_FOR_KEYS = {
@@ -30,6 +31,7 @@ const VALUES_FOR_KEYS = {
   'percent-body-booster': 'percentBodyBooster',
   'creator-site-profile': 'creatorSiteProfile',
   'only-workout-suscription': 'onlyWorkoutSuscription',
+  'payment-in-app': 'paymentInApp',
 };
 
 export class AppSettingsModel implements AppSettings {
@@ -47,6 +49,7 @@ export class AppSettingsModel implements AppSettings {
   percentBodyBooster = '';
   creatorSiteProfile = '';
   onlyWorkoutSuscription = '';
+  paymentInApp = '';
   constructor(item: any) {
     item.forEach((setting: any) => {
       const key = VALUES_FOR_KEYS[setting.key as keyof typeof VALUES_FOR_KEYS];

@@ -7,11 +7,11 @@ import {
   type OnInit,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular/standalone';
 import { Browser } from '@capacitor/browser';
 import { DetailCreatorProfileComponent } from '@monorepo-bb-app/ui';
-import { AthleteDeepLinkService } from '@monorepo-bb-app/core';
+import { AppSettingsService, AthleteDeepLinkService } from '@monorepo-bb-app/core';
 import { LeaveAppModalComponent } from './leave-app-modal/leave-app-modal.component';
 import { environment } from '@monorepo-bb-app/shared';
 
@@ -30,10 +30,12 @@ export class DetailCreatorProfilePageComponent implements OnInit {
   public athleteId = signal<number | null>(null);
   private readonly _destroyRef = inject(DestroyRef);
   private readonly _deepLinkService = inject(AthleteDeepLinkService);
+  private readonly _appSettingsService = inject(AppSettingsService);
 
   constructor(
     private _routerActivate: ActivatedRoute,
     private _modalCtrl: ModalController,
+    private _router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -48,6 +50,18 @@ export class DetailCreatorProfilePageComponent implements OnInit {
 
   async goToSuscriptionCreator() {
     const creatorId = this.idCreator();
+
+    // payment-in-app activo: suscripción dentro de la app. En caso contrario,
+    // se manda al usuario a la web para ver los planes (modal leave-app).
+    const paymentInApp = this._appSettingsService.settings$()?.paymentInApp === '1';
+    if (paymentInApp) {
+      await this._router.navigate([
+        '/home/suscriptions/suscription-creator',
+        creatorId,
+      ]);
+      return;
+    }
+
     const url = `${PLANS_BASE_URL}?creatorId=${creatorId}&athleteId=${this.athleteId()}&workoutId=${this.workoutId()}`;
 
     const modal = await this._modalCtrl.create({

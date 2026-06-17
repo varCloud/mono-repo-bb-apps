@@ -14,7 +14,8 @@ export class LeaveAppModalComponent {
   @Input() url!: string;
   isAndroid = Capacitor.getPlatform() === 'android';
 
-  constructor(private modalCtrl: ModalController) {}
+  constructor(private modalCtrl: ModalController) {
+  }
 
   continue() {
     this.modalCtrl.dismiss({ confirmed: true, url: this.url }, 'confirm');

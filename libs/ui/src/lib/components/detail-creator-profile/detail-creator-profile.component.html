@@ -52,7 +52,7 @@
                 [style.border-color]="creatorColor()"
                 (click)="goToSuscriptionCreator()"
               >
-                {{'subscribe' | translate}}
+                {{ (paymentInApp() ? 'subscribe' : 'view-plans') | translate }}
               </ion-button>
             }
           </div>

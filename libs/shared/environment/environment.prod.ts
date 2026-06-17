@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  ENV: 'PRODUCTION',
   IOS_GOOGLE_CLIENT_ID: '728116258989-oe719k2gf7ec5h0tob0v285bkertf0gt.apps.googleusercontent.com',
   WEB_GOOGLE_CLIENT_ID: '728116258989-p0r0ui0tg472scga7gb1o4nsfg7ejut1.apps.googleusercontent.com',
   API_URL: 'https://api.bodybooster.com.mx/api/v1',

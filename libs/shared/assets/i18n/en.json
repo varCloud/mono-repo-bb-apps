@@ -493,7 +493,8 @@
     "error-message": "Error deleting account. Please try again.",
     "user-error": "Could not get user information"
   },
-  "subscribe": "View Plans",
+  "subscribe": "Subscribe",
+  "view-plans": "View Plans",
   "leave-app": {
     "title": "You are about to leave the app and go to an external website. You will no longer be making transactions with Apple.",
     "body": "Accounts or purchases made outside this app will be managed by the developer \"BodyBooster\". Your App Store account, saved payment method, and related features such as subscription management and refund requests will not be available. Apple will not be responsible for the privacy or security of transactions made with this developer."

@@ -47,8 +47,8 @@ export class LoginFormComponent {
     });
 
     if(!environment.production) {
-      this.loginForm.get('email')?.setValue('var901106@gmail.com');
-      this.loginForm.get('password')?.setValue('Victor90');
+      // this.loginForm.get('email')?.setValue('var901106@gmail.com');
+      // this.loginForm.get('password')?.setValue('Victor90');
       
     }
   }

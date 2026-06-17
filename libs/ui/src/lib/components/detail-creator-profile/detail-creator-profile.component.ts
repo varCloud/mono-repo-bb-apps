@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import {
+  AppSettingsService,
   LoaderUIService,
   ProfileColorService,
   SesionService,
@@ -94,6 +95,12 @@ export class DetailCreatorProfileComponent implements OnInit {
     () => this._sesionService.user$()?.userTypeId === ENUM_TYPE_USER.CREATOR
   );
 
+  // Bandera payment-in-app de app-settings: '1' habilita el pago dentro de la app
+  // ('Suscribirse'); cualquier otro valor muestra 'Ver planes' (manda a la web).
+  public paymentInApp = computed(
+    () => this._appSettingsService.settings$()?.paymentInApp === '1'
+  );
+
   public defaultProfilePicture = CONSTANTS.DEFAULT_URL_AVATAR;
 
   constructor(
@@ -103,6 +110,7 @@ export class DetailCreatorProfileComponent implements OnInit {
     private _loader: LoaderUIService,
     private _processSuscriptionService: ProcessSuscriptionService,
     private _sesionService: SesionService,
+    private _appSettingsService: AppSettingsService,
     public colorService: ProfileColorService
   ) {
     addIcons({ arrowBackOutline, pencil });
