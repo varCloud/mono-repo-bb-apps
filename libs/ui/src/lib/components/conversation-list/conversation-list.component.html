@@ -1,6 +1,6 @@
 <ion-list>
-  @for(conversation of conversations; track conversation) {
-  <ion-item lines="none" class="conversation-item" (click)="onSelectConversation(conversation)">
+  @for(conversation of conversations; track conversation.userConversationId) {
+  <ion-item lines="none" class="conversation-item" [class.has-unread]="conversation.hasUnread" (click)="onSelectConversation(conversation)">
     <app-user-avatar [src]="$any(conversation)[userPropConversation].profilePictureUrl" slot="start" alt="user avatar">
     </app-user-avatar>
     <ion-label>
@@ -10,6 +10,9 @@
         $any(conversation).lastMessage.content }}</span>
       <span class="last-message-date">{{ $any(conversation).lastMessageDate | date: 'dd/MM/yyyy'}}</span>
     </ion-label>
+    @if (conversation.hasUnread) {
+    <ion-badge color="danger" slot="end">{{ conversation.unreadCount }}</ion-badge>
+    }
   </ion-item>
   }@empty {
   <lib-empty-elements-component [imgPath]="imgUrl()" [message]=" this.messsageList| translate">

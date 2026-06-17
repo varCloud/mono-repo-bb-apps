@@ -13,6 +13,7 @@ import { LoggerService } from '../../services/logger.service';
 import { LocalStorageService } from '../local-storage.service';
 import { SesionService } from '../sesion.service';
 import { UserService } from '../user.service';
+import { UserConversationService } from '../user-conversation/user-conversation.services';
 import { take } from 'rxjs';
 import { Router } from '@angular/router';
 import { KEY_LOCALSTORAGE } from '../../../shared/constants/key-localstorage';
@@ -32,6 +33,7 @@ export class PushNotificationService {
     private _localStorage: LocalStorageService,
     private _sesionService: SesionService,
     private _userService: UserService,
+    private _userConversationService: UserConversationService,
     private _zone: NgZone,
     private _router: Router
   ) {}
@@ -117,6 +119,7 @@ export class PushNotificationService {
     this.logger.info('Manejando tap en notificación', notification);
     const conversation =  JSON.parse(notification.data.conversation)
     console.log('Conversation data on tap:', JSON.stringify(conversation))
+    this._userConversationService.refreshUnreadSummary();
     this.redirectToConversation(conversation);
   }
 
@@ -161,7 +164,8 @@ export class PushNotificationService {
     switch (Number(notification.data?.notificationType)) {
       case ENUM_TYPE_PUSH_NOTIFICATION.CHAT_MESSAGE:
               imageUrl = notification.data?.profilePictureReceivesUrl || CONSTANTS.DEFAULT_URL_AVATAR;
-              this.showNotification(notification, imageUrl);        
+              this._userConversationService.refreshUnreadSummary();
+              this.showNotification(notification, imageUrl);
       break;
       case ENUM_TYPE_PUSH_NOTIFICATION.INFORMATION:
               this.showNotification(notification, imageUrl);        

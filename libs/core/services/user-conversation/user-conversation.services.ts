@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { environment, API_URLS , MessageModel , Message,Paginator ,PaginatorModel, UserConversationModel } from '@monorepo-bb-app/shared';
+import { environment, API_URLS , MessageModel , Message,Paginator ,PaginatorModel, UserConversationModel, UnreadSummary, MarkReadResult } from '@monorepo-bb-app/shared';
 import { catchError, map, Observable, of } from 'rxjs';
 
 
@@ -9,6 +9,13 @@ import { catchError, map, Observable, of } from 'rxjs';
 })
 export class UserConversationService {
   private readonly BASE_URL = environment.API_URL;
+
+  private readonly _unreadSummary = signal<UnreadSummary>({
+    totalUnreadMessages: 0,
+    conversationsWithUnread: 0,
+    hasUnread: false,
+  });
+  public readonly unreadSummary$ = this._unreadSummary.asReadonly();
 
   constructor(private _http: HttpClient) {}
 
@@ -73,5 +80,31 @@ export class UserConversationService {
       `${this.BASE_URL}${API_URLS.USER_CONVERSATION}/conversation`,
       payload,
     );
+  }
+
+  public getUnreadSummary(): Observable<UnreadSummary> {
+    return this._http
+      .get<{ data: UnreadSummary }>(
+        `${this.BASE_URL}${API_URLS.USER_CONVERSATION}/unread-summary`,
+      )
+      .pipe(map((response) => response.data));
+  }
+
+  public markConversationAsRead(
+    conversationId: number,
+  ): Observable<MarkReadResult> {
+    return this._http
+      .patch<{ data: MarkReadResult }>(
+        `${this.BASE_URL}${API_URLS.USER_CONVERSATION}/conversation/${conversationId}/read`,
+        {},
+      )
+      .pipe(map((response) => response.data));
+  }
+
+  /** Refresca el resumen global de no leídos (badge del tab). */
+  public refreshUnreadSummary(): void {
+    this.getUnreadSummary()
+      .pipe(catchError(() => of(this._unreadSummary())))
+      .subscribe((summary) => this._unreadSummary.set(summary));
   }
 }

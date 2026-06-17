@@ -22,6 +22,18 @@
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
       }
 
+      &.has-unread {
+        ion-label h2,
+        ion-label .last-message {
+          font-weight: 700;
+          color: var(--ion-color-dark, #222428);
+        }
+
+        ion-badge {
+          align-self: center;
+        }
+      }
+
       app-user-avatar {
         width: 56px;
         height: 56px;

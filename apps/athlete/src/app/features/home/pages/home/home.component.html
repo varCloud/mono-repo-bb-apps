@@ -8,6 +8,9 @@
       </ion-tab-button>
       <ion-tab-button tab="user-conversations" [routerLink]="'user-conversations'">
         <ion-icon name="chatbox-ellipses-outline" color="secondary"></ion-icon>
+        @if (userConversationService.unreadSummary$().hasUnread) {
+        <ion-badge color="danger">{{ userConversationService.unreadSummary$().conversationsWithUnread }}</ion-badge>
+        }
         <ion-text color="dark">Mensajes</ion-text>
       </ion-tab-button>
       <ion-tab-button tab="profile/my-subscriptions" [routerLink]="'profile/my-subscriptions'">

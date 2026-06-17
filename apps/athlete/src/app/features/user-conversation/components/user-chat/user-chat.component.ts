@@ -1,4 +1,4 @@
-import { Component, effect, Input, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
+import { Component, effect, Input, OnInit, ViewChild, ElementRef, AfterViewChecked, OnDestroy } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 
 import { Message, MessageModel, ENUM_MESSAGE_STATUS, UserConversationModel, UserSummary } from '@monorepo-bb-app/shared';
-import { finalize, take } from 'rxjs';
+import { finalize, Subscription, take } from 'rxjs';
 import { LoaderUIService, SesionService, UserConversationService } from '@monorepo-bb-app/core';
 import { User } from '@monorepo-bb-app/shared';
 import { send, sendSharp } from 'ionicons/icons';
@@ -23,7 +23,7 @@ import { LoggerService } from 'libs/core/services/logger.service';
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule, UserAvatarComponent],
 })
-export class UserChatComponent  implements AfterViewChecked {
+export class UserChatComponent  implements AfterViewChecked, OnDestroy {
   @ViewChild('messageContainer') private messageContainer!: ElementRef;
   @Input() messages: Message[] = [];
   public userInfo: UserSummary | null = null;
@@ -33,6 +33,8 @@ export class UserChatComponent  implements AfterViewChecked {
   public newMessage: string = '';
   public conversationId: number;
   private goToBottom: boolean = true;
+  private currentConversationId: number | null = null;
+  private _paramsSub?: Subscription;
   constructor(
     private _userConectionService: UserConversationService,
     private _sesionService: SesionService,
@@ -40,20 +42,25 @@ export class UserChatComponent  implements AfterViewChecked {
     private route: ActivatedRoute,
     private logger: LoggerService,
   ) {
-    this._serUserInfo();
     effect(() => {
       const user = this._sesionService.user$();
       this.userSesion = user as User;
     });
     addIcons({ sendSharp });
-    this.route.paramMap.subscribe(params => {
+    // Recargar cuando la conversación cambia con la página ya montada
+    // (caso: tap de push hacia otra conversación). La primera carga la
+    // resuelve ionViewWillEnter, cuando la sesión ya está disponible.
+    this._paramsSub = this.route.paramMap.subscribe(params => {
       this.conversationId = Number(params.get('id') ?? 0);
       this.logger.info('ID del conversationId:', this.conversationId);
+      if (this.currentConversationId !== null && this.conversationId !== this.currentConversationId) {
+        this.loadConversationFromState();
+      }
     });
   }
 
   ionViewWillEnter() {
-    this._serUserInfo();
+    this.loadConversationFromState();
   }
 
   ionViewWillLeave() {
@@ -61,7 +68,11 @@ export class UserChatComponent  implements AfterViewChecked {
     this.goToBottom = true;
   }
 
-  private _serUserInfo() {
+  ngOnDestroy() {
+    this._paramsSub?.unsubscribe();
+  }
+
+  private loadConversationFromState() {
     const state = history.state;
     if (state?.conversation) {
       this.userConversationModel = (state.conversation as UserConversationModel);
@@ -69,10 +80,27 @@ export class UserChatComponent  implements AfterViewChecked {
         this.userInfo = this.userSesion?.userTypeId === ENUM_TYPE_USER.ATHLETE ?
           this.userConversationModel.creatorUser :
           this.userConversationModel.athleteUser;
+        this.currentConversationId = this.userConversationModel.userConversationId;
       }
       console.log('Datos recibidos:', this.userConversationModel);
       this.getMessages();
+      this.markAsRead();
     }
+  }
+
+  private markAsRead() {
+    const id = this.userConversationModel?.userConversationId;
+    if (!id) {
+      return;
+    }
+    this._userConectionService.markConversationAsRead(id).pipe(take(1)).subscribe({
+      next: () => {
+        this.userConversationModel.unreadCount = 0;
+        this.userConversationModel.hasUnread = false;
+        this._userConectionService.refreshUnreadSummary();
+      },
+      error: (error) => this.logger.error('Error marking conversation as read', error),
+    });
   }
 
   shouldShowDateDivider(
@@ -153,7 +181,7 @@ export class UserChatComponent  implements AfterViewChecked {
   }
 
   public async getMessages(uri: string = '', params: any = {}): Promise<void> {
-    if( !this.conversationId && this.conversationId === 0) {
+    if (!this.userConversationModel?.userConversationId) {
       return;
     }
 
@@ -165,7 +193,9 @@ export class UserChatComponent  implements AfterViewChecked {
         (data) => {
           const { messages, paginator } = data;
           console.log('Messages retrieved successfully', messages);
-          this.messages = [...this.messages, ...messages];
+          // En carga inicial (uri vacío) reemplazar para evitar duplicados;
+          // solo concatenar al paginar.
+          this.messages = uri ? [...this.messages, ...messages] : messages;
           this.paginator = paginator;
         },
         (error) => {

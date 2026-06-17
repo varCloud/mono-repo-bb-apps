@@ -61,6 +61,7 @@ export class ConversationListComponent implements OnInit {
             this.messsageList = 'conversations.no-conversations';
             this.conversations = response.conversations;
             this.conversationsList.emit(this.conversations);
+            this._userConversationService.refreshUnreadSummary();
             if(queryParams.search && queryParams.search.trim() !== '' && this.conversations.length === 0){
                 this.messsageList = 'conversations.no-conversations-for-search';
             }

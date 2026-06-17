@@ -9,6 +9,7 @@ export const environment = {
   appVersion: '1.0.0-dev',
   URL_TERMS_AND_CONDITIONS: 'https://bb-landing-tau.vercel.app/',
   URL_ATHLETE_WEB: 'https://athlete.bodybooster.com.mx',
+  DEFAULT_UNREAD_POLL_MS: 120000,
 };
 
 
