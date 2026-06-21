@@ -104,7 +104,44 @@ export class UserConversationService {
   /** Refresca el resumen global de no leídos (badge del tab). */
   public refreshUnreadSummary(): void {
     this.getUnreadSummary()
-      .pipe(catchError(() => of(this._unreadSummary())))
+      .pipe(
+        catchError((error) => {
+          console.error('Error obteniendo unread-summary', error);
+          return of(this._unreadSummary());
+        }),
+      )
       .subscribe((summary) => this._unreadSummary.set(summary));
+  }
+
+  /**
+   * Deriva el resumen de no leídos a partir de la lista de conversaciones ya
+   * cargada (que sí trae unreadCount/hasUnread). Sirve de fuente confiable para
+   * el badge del tab aunque el endpoint /unread-summary no esté disponible.
+   */
+  public setUnreadSummaryFromConversations(conversations: UserConversationModel[]): void {
+    const withUnread = conversations.filter((c) => c.hasUnread);
+    this._unreadSummary.set({
+      totalUnreadMessages: withUnread.reduce((acc, c) => acc + (c.unreadCount ?? 0), 0),
+      conversationsWithUnread: withUnread.length,
+      hasUnread: withUnread.length > 0,
+    });
+  }
+
+  /**
+   * Actualización optimista al abrir/leer una conversación: descuenta del
+   * resumen los mensajes que tenía pendientes para que el badge se limpie de
+   * inmediato, sin esperar al refresh del backend.
+   */
+  public registerConversationRead(removedUnread: number): void {
+    if (!removedUnread || removedUnread <= 0) {
+      return;
+    }
+    const current = this._unreadSummary();
+    const conversationsWithUnread = Math.max(0, current.conversationsWithUnread - 1);
+    this._unreadSummary.set({
+      totalUnreadMessages: Math.max(0, current.totalUnreadMessages - removedUnread),
+      conversationsWithUnread,
+      hasUnread: conversationsWithUnread > 0,
+    });
   }
 }

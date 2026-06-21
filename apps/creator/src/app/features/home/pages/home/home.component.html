@@ -7,10 +7,10 @@
       </ion-tab-button>
       <ion-tab-button tab="user-conversations" [routerLink]="'user-conversations'">
         <ion-icon name="chatbox-ellipses-outline" [style.color]="colorService.profileColor()"></ion-icon>
-        @if (userConversationService.unreadSummary$().hasUnread) {
-        <ion-badge color="danger">{{ userConversationService.unreadSummary$().conversationsWithUnread }}</ion-badge>
-        }
         <ion-text color="dark">Mensajes</ion-text>
+        @if (userConversationService.unreadSummary$().hasUnread) {
+        <ion-badge color="primary">{{ userConversationService.unreadSummary$().conversationsWithUnread }}</ion-badge>
+        }
       </ion-tab-button>
       <ion-tab-button tab="user-subscriptions" [routerLink]="'user-subscriptions'">
         <ion-icon name="pricetag-outline" [style.color]="colorService.profileColor()"></ion-icon>

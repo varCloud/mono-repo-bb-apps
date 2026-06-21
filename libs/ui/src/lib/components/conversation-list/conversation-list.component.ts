@@ -61,8 +61,14 @@ export class ConversationListComponent implements OnInit {
             this.messsageList = 'conversations.no-conversations';
             this.conversations = response.conversations;
             this.conversationsList.emit(this.conversations);
-            this._userConversationService.refreshUnreadSummary();
-            if(queryParams.search && queryParams.search.trim() !== '' && this.conversations.length === 0){
+            const isSearching = !!(queryParams.search && queryParams.search.trim() !== '');
+            if (!isSearching) {
+                // Deriva el badge del tab desde la lista completa (fuente confiable);
+                // el endpoint /unread-summary solo afina si responde correctamente.
+                this._userConversationService.setUnreadSummaryFromConversations(this.conversations);
+                this._userConversationService.refreshUnreadSummary();
+            }
+            if(isSearching && this.conversations.length === 0){
                 this.messsageList = 'conversations.no-conversations-for-search';
             }
       },

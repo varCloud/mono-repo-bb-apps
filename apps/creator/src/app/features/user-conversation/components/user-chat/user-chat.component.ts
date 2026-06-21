@@ -92,12 +92,13 @@ export class UserChatComponent implements AfterViewChecked, OnDestroy {
     if (!id) {
       return;
     }
+    // Limpieza optimista: actualizar badge del tab y la conversación al instante.
+    const removed = this.userConversationModel.unreadCount ?? 0;
+    this.userConversationModel.unreadCount = 0;
+    this.userConversationModel.hasUnread = false;
+    this._userConectionService.registerConversationRead(removed);
     this._userConectionService.markConversationAsRead(id).pipe(take(1)).subscribe({
-      next: () => {
-        this.userConversationModel.unreadCount = 0;
-        this.userConversationModel.hasUnread = false;
-        this._userConectionService.refreshUnreadSummary();
-      },
+      next: () => this._userConectionService.refreshUnreadSummary(),
       error: (error) => console.error('Error marking conversation as read', error),
     });
   }

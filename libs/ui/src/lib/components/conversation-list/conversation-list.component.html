@@ -11,7 +11,7 @@
       <span class="last-message-date">{{ $any(conversation).lastMessageDate | date: 'dd/MM/yyyy'}}</span>
     </ion-label>
     @if (conversation.hasUnread) {
-    <ion-badge color="danger" slot="end">{{ conversation.unreadCount }}</ion-badge>
+    <ion-badge color="primary" slot="end">{{ conversation.unreadCount }}</ion-badge>
     }
   </ion-item>
   }@empty {
