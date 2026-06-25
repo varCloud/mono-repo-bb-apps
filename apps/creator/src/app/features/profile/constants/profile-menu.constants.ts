@@ -36,6 +36,12 @@ export const PROFILE_MENU_ITEMS: ProfileMenuItem[] = [
     showArrow: true,
   },
   {
+    text: 'Evaluar app',
+    action: 'rateApp',
+    showArrow: true,
+    iconEnd: 'star-outline',
+  },
+  {
     text: 'Términos de servicio',
     action: 'terms',
     showArrow: true,

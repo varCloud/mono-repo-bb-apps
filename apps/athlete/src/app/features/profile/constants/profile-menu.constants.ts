@@ -26,6 +26,12 @@ export const PROFILE_MENU_ITEMS: ProfileMenuItem[] = [
     showArrow: true,
   },
   {
+    text: 'Evaluar app',
+    action: 'rateApp',
+    showArrow: true,
+    iconEnd: 'star-outline',
+  },
+  {
     text: 'Contactar a soporte',
     action: 'support',
     showArrow: true,

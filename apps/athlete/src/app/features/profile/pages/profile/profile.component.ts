@@ -8,6 +8,7 @@ import {
   ItemListComponent,
   AvatarProfileComponent,
   DeleteAccountModalComponent,
+  AppRatingModalComponent,
 } from '@monorepo-bb-app/ui';
 import { PROFILE_MENU_ITEMS, OPTIONS_PROFILE_MENU } from '../../constants/profile-menu.constants';
 import { addIcons } from 'ionicons';
@@ -17,10 +18,11 @@ import {
   copyOutline,
   logInOutline,
   trashSharp,
+  starOutline,
 } from 'ionicons/icons';
 import { Router } from '@angular/router';
 import { AppSettingsService, LoaderUIService, LocalStorageService, SesionService, UserService } from '@monorepo-bb-app/core';
-import { StripeService, ToastService } from '@monorepo-bb-app/shared';
+import { AppRatingService, StripeService, ToastService } from '@monorepo-bb-app/shared';
 
 
 @Component({
@@ -53,6 +55,7 @@ export class ProfileComponent {
     private modalCtrl: ModalController,
     private translate: TranslateService,
     private appSettingsService: AppSettingsService,
+    private _appRatingService: AppRatingService,
   ) {
     effect(() => {
       const user = this.sesionService.user$();
@@ -63,6 +66,7 @@ export class ProfileComponent {
       chatboxEllipsesOutline,
       logInOutline,
       copyOutline,
+      starOutline,
     });
   }
 
@@ -104,7 +108,32 @@ export class ProfileComponent {
       case 'messages':
         this.router.navigate(['home/user-conversations']);
         break;
+      case 'rateApp':
+        this.openRateApp();
+        break;
     }
+  }
+
+  private async openRateApp(): Promise<void> {
+    this.loaderUIService.showLoader();
+    this._appRatingService.getMyRating(1).subscribe({
+      next: async (existingRating) => {
+        this.loaderUIService.hideLoader();
+        const modal = await this.modalCtrl.create({
+          component: AppRatingModalComponent,
+          componentProps: { appTypeId: 1, existingRating },
+        });
+        await modal.present();
+      },
+      error: async () => {
+        this.loaderUIService.hideLoader();
+        const modal = await this.modalCtrl.create({
+          component: AppRatingModalComponent,
+          componentProps: { appTypeId: 1, existingRating: null },
+        });
+        await modal.present();
+      },
+    });
   }
 
   private personalData(): void {
