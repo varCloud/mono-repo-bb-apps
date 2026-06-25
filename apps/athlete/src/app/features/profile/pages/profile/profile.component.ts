@@ -122,6 +122,9 @@ export class ProfileComponent {
         const modal = await this.modalCtrl.create({
           component: AppRatingModalComponent,
           componentProps: { appTypeId: 1, existingRating },
+          breakpoints: [0, 0.7, 1],
+          initialBreakpoint: 0.7,
+          cssClass: 'bottom-sheet-modal-rounded',
         });
         await modal.present();
       },
@@ -130,6 +133,9 @@ export class ProfileComponent {
         const modal = await this.modalCtrl.create({
           component: AppRatingModalComponent,
           componentProps: { appTypeId: 1, existingRating: null },
+          breakpoints: [0, 0.7, 1],
+          initialBreakpoint: 0.7,
+          cssClass: 'bottom-sheet-modal-rounded',
         });
         await modal.present();
       },

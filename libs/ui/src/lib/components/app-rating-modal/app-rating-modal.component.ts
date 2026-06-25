@@ -77,8 +77,4 @@ export class AppRatingModalComponent implements OnInit {
         },
       });
   }
-
-  cancel(): void {
-    this.modalCtrl.dismiss(null, MODAL_RESPONSE.CANCEL);
-  }
 }

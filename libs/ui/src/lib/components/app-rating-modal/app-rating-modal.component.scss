@@ -1,13 +1,20 @@
+:host {
+  display: block;
+}
+
 .review-container {
+  position: relative;
+  width: 100%;
+  min-height: 50vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  background-color: #fff;
-  height: 100%;
+  padding: 26px 24px calc(20px + var(--ion-safe-area-bottom)) 24px;
+  background: var(--ion-background-color, #fff);
 }
 
 .header {
-  margin-top: 20px;
+  margin-top: 10px;
   margin-bottom: 30px;
   display: flex;
   flex-direction: column;

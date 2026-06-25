@@ -228,6 +228,9 @@ export class ProfileComponent implements OnInit {
         const modal = await this.modalCtrl.create({
           component: AppRatingModalComponent,
           componentProps: { appTypeId: 2, existingRating },
+          breakpoints: [0, 0.7, 1],
+          initialBreakpoint: 0.7,
+          cssClass: 'bottom-sheet-modal-rounded',
         });
         await modal.present();
       },
@@ -236,6 +239,9 @@ export class ProfileComponent implements OnInit {
         const modal = await this.modalCtrl.create({
           component: AppRatingModalComponent,
           componentProps: { appTypeId: 2, existingRating: null },
+          breakpoints: [0, 0.7, 1],
+          initialBreakpoint: 0.7,
+          cssClass: 'bottom-sheet-modal-rounded',
         });
         await modal.present();
       },
