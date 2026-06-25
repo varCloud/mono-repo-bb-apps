@@ -9,6 +9,7 @@ import {
   ItemListComponent,
   AvatarProfileComponent,
   DeleteAccountModalComponent,
+  AppRatingModalComponent,
 } from '@monorepo-bb-app/ui';
 import { PROFILE_MENU_ITEMS } from '../../constants/profile-menu.constants';
 import { addIcons } from 'ionicons';
@@ -19,6 +20,7 @@ import {
   logInOutline,
   trashSharp,
   shareSocialOutline,
+  starOutline,
 } from 'ionicons/icons';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -36,6 +38,8 @@ import {
   StripeStatus,
   ToastService,
   User,
+  AppRatingService,
+  AppRatingModel,
 } from '@monorepo-bb-app/shared';
 import { finalize, take } from 'rxjs';
 
@@ -73,6 +77,7 @@ export class ProfileComponent implements OnInit {
     private modalCtrl: ModalController,
     private translate: TranslateService,
     private appSettingsService: AppSettingsService,
+    private _appRatingService: AppRatingService,
   ) {
     addIcons({
       trashSharp,
@@ -81,6 +86,7 @@ export class ProfileComponent implements OnInit {
       logInOutline,
       copyOutline,
       shareSocialOutline,
+      starOutline,
     });
     this.route.queryParams.subscribe(async (params) => {
       if (params['stripe'] === 'success') {
@@ -208,7 +214,32 @@ export class ProfileComponent implements OnInit {
       case 'openLink':
         this.openLink();
         break;
+      case 'rateApp':
+        this.openRateApp();
+        break;
     }
+  }
+
+  private async openRateApp(): Promise<void> {
+    this.loaderUIService.showLoader();
+    this._appRatingService.getMyRating(2).subscribe({
+      next: async (existingRating) => {
+        this.loaderUIService.hideLoader();
+        const modal = await this.modalCtrl.create({
+          component: AppRatingModalComponent,
+          componentProps: { appTypeId: 2, existingRating },
+        });
+        await modal.present();
+      },
+      error: async () => {
+        this.loaderUIService.hideLoader();
+        const modal = await this.modalCtrl.create({
+          component: AppRatingModalComponent,
+          componentProps: { appTypeId: 2, existingRating: null },
+        });
+        await modal.present();
+      },
+    });
   }
 
   public openLink(): void{

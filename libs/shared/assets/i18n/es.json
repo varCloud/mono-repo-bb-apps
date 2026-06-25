@@ -552,5 +552,14 @@
     "error-title": "¡Vaya! Hubo un problema con Stripe.",
     "error-message": "No te preocupes, esto puede suceder a veces. Si el problema persiste, cierra tu sesión e inicia nuevamente.",
     "accept-button": "Aceptar"
+  },
+  "app-rating": {
+    "title": "Evalúa la app",
+    "subtitle": "¿Cómo ha sido tu experiencia? Déjanos una reseña.",
+    "comment-label": "Comentario",
+    "comment-placeholder": "Cuéntanos tu experiencia (opcional)",
+    "submit": "Enviar evaluación",
+    "success": "¡Gracias por tu evaluación!",
+    "error": "Hubo un error al enviar tu evaluación. Por favor, intenta de nuevo."
   }
 }

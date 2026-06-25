@@ -16,4 +16,5 @@ export const API_URLS = {
   SUSCRIPTIONS: '/subscriptions',
   FAQS: '/faqs',
   PAYMENTS: '/payments',
+  APP_RATINGS: '/app-ratings',
 };
