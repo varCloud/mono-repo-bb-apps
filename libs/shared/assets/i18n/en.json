@@ -521,5 +521,14 @@
     "error-title": "Oops! There was a problem with Stripe.",
     "error-message": "Don't worry, this can happen sometimes. If the problem persists, log out and sign in again.",
     "accept-button": "Accept"
+  },
+  "app-rating": {
+    "title": "Rate the app",
+    "subtitle": "How has your experience been? Leave us a review.",
+    "comment-label": "Comment",
+    "comment-placeholder": "Tell us about your experience (optional)",
+    "submit": "Submit rating",
+    "success": "Thank you for your rating!",
+    "error": "There was an error submitting your rating. Please try again."
   }
 }

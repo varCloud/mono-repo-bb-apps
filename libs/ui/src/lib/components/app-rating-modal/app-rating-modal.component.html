@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button color="medium" (click)="cancel()">{{ 'common.cancel' | translate }}</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="review-container">
+  <div class="header">
+    <h2 class="title">{{ 'app-rating.title' | translate }}</h2>
+    <p class="subtitle">{{ 'app-rating.subtitle' | translate }}</p>
+  </div>
+
+  <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+    <div class="rating-section">
+      @for (star of stars; track $index) {
+        <ion-icon
+          [name]="reviewForm.get('rating')?.value >= star ? 'star' : 'star-outline'"
+          class="star-icon"
+          (click)="setRating(star)"
+        ></ion-icon>
+      }
+    </div>
+
+    <div class="input-section">
+      <ion-text class="input-label">{{ 'app-rating.comment-label' | translate }}</ion-text>
+      <div class="textarea-wrapper">
+        <ion-textarea
+          formControlName="comment"
+          rows="6"
+          mode="md"
+          class="custom-textarea"
+          [placeholder]="'app-rating.comment-placeholder' | translate"
+          maxlength="500"
+        ></ion-textarea>
+      </div>
+    </div>
+
+    <div class="button-section">
+      <ion-button
+        type="submit"
+        expand="block"
+        shape="round"
+        class="submit-btn"
+        [disabled]="reviewForm.invalid || !hasChanges()"
+      >
+        {{ 'app-rating.submit' | translate }}
+      </ion-button>
+    </div>
+  </form>
+</ion-content>
