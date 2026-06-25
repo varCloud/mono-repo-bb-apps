@@ -1,0 +1,143 @@
+:host {
+  display: block;
+}
+
+.app-update {
+  position: relative;
+  width: 100%;
+  /* El sheet sólo muestra ~50% de pantalla: el contenido fluye desde arriba. */
+  min-height: 50vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 26px 24px calc(20px + var(--ion-safe-area-bottom)) 24px;
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(var(--ion-color-primary-rgb, 72, 123, 226), 0.18) 0%,
+      transparent 60%
+    ),
+    var(--ion-background-color, #fff);
+}
+
+/* ----------------- Contenido ----------------- */
+.app-update__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.app-update__badge {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  background: linear-gradient(
+    135deg,
+    var(--ion-color-primary, #487be2),
+    var(--ion-color-secondary, #f79145)
+  );
+  box-shadow: 0 12px 28px rgba(var(--ion-color-primary-rgb, 72, 123, 226), 0.4);
+  animation: badge-pop 0.6s cubic-bezier(0.22, 1.2, 0.36, 1) both,
+    badge-float 3s ease-in-out 0.6s infinite;
+
+  ion-icon {
+    font-size: 2.8rem;
+    color: #fff;
+  }
+}
+
+.app-update__title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 4px 0 8px;
+  color: var(--ion-text-color, #121212);
+}
+
+.app-update__message {
+  font-size: 0.95rem;
+  line-height: 1.45;
+  font-weight: 500;
+  margin: 0 0 22px;
+  max-width: 320px;
+  color: var(--ion-text-color-step-600, #5a5a5a);
+}
+
+.app-update__button {
+  width: 100%;
+  max-width: 280px;
+  --border-radius: 24px;
+  --padding-top: 14px;
+  --padding-bottom: 14px;
+  --background: linear-gradient(
+    135deg,
+    var(--ion-color-primary, #487be2),
+    var(--ion-color-secondary, #f79145)
+  );
+  --box-shadow: 0 8px 20px rgba(var(--ion-color-primary-rgb, 72, 123, 226), 0.35);
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+/* ----------------- Confeti ----------------- */
+.confetti {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.confetti__piece {
+  position: absolute;
+  top: -16px;
+  border-radius: 2px;
+  opacity: 0;
+  animation-name: confetti-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* ----------------- Animaciones ----------------- */
+@keyframes badge-pop {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes badge-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(120vh) rotate(720deg);
+    opacity: 0;
+  }
+}

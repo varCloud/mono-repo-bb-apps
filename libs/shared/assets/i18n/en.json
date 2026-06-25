@@ -503,6 +503,11 @@
     "title": "You are about to leave the app and go to an external website. You will no longer be making transactions with Google Play.",
     "body": "Accounts or purchases made outside this app will be managed by the developer \"BodyBooster\". Your Play Store account, saved payment method, and related features such as subscription management and refund requests will not be available. Google will not be responsible for the privacy or security of transactions made with this developer."
   },
+  "app-update": {
+    "title": "Update available",
+    "message": "A new version of the app is available in the store. Please update to keep enjoying all the features.",
+    "update-button": "Update"
+  },
   "stripe-identification": {
     "title": "Identification Required",
     "message": "Before continuing with Stripe, make sure you have your official identification and your bank CLABE account on hand. You will need them to complete the registration.",

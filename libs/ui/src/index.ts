@@ -92,4 +92,5 @@ export * from './lib/components/my-subscriptions-search-modal/my-subscriptions-s
 export * from './lib/components/form-personal-data-creator/form-personal-data-creator.component';
 export * from './lib/components/about-me/about-me.component';
 export * from './lib/components/no-connection-modal/no-connection-modal.component';
+export * from './lib/components/app-update-modal/app-update-modal.component';
 export * from './lib/components/terms-and-conditions/terms-and-conditions';

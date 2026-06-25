@@ -15,6 +15,14 @@ export interface AppSettings {
   onlyWorkoutSuscription: string;
   paymentInApp: string;
   unreadPollMs: string;
+  athletePlayStoreVersion: string;
+  athleteAppStoreVersion: string;
+  coachPlayStoreVersion: string;
+  coachAppStoreVersion: string;
+  athleteLinkPlayStore: string;
+  athleteLinkAppStore: string;
+  coachLinkPlayStore: string;
+  coachLinkAppStore: string;
 }
 
 const VALUES_FOR_KEYS = {
@@ -34,6 +42,14 @@ const VALUES_FOR_KEYS = {
   'only-workout-suscription': 'onlyWorkoutSuscription',
   'payment-in-app': 'paymentInApp',
   'unread_poll_ms': 'unreadPollMs',
+  'athlete-play-store-version': 'athletePlayStoreVersion',
+  'athlete-app-store-version': 'athleteAppStoreVersion',
+  'coach-play-store-version': 'coachPlayStoreVersion',
+  'coach-app-store-version': 'coachAppStoreVersion',
+  'athlete-link-play-store': 'athleteLinkPlayStore',
+  'athlete-link-app-store': 'athleteLinkAppStore',
+  'coach-link-play-store': 'coachLinkPlayStore',
+  'coach-link-app-store': 'coachLinkAppStore',
 };
 
 export class AppSettingsModel implements AppSettings {
@@ -53,6 +69,14 @@ export class AppSettingsModel implements AppSettings {
   onlyWorkoutSuscription = '';
   paymentInApp = '';
   unreadPollMs = '';
+  athletePlayStoreVersion = '';
+  athleteAppStoreVersion = '';
+  coachPlayStoreVersion = '';
+  coachAppStoreVersion = '';
+  athleteLinkPlayStore = '';
+  athleteLinkAppStore = '';
+  coachLinkPlayStore = '';
+  coachLinkAppStore = '';
   constructor(item: any) {
     item.forEach((setting: any) => {
       const key = VALUES_FOR_KEYS[setting.key as keyof typeof VALUES_FOR_KEYS];

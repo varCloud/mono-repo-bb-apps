@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import {
   IonButton,
   IonRow,
@@ -28,6 +28,8 @@ import { Router, RouterLink } from '@angular/router';
 import { LoaderUIService } from '@monorepo-bb-app/core';
 import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
 import { Browser } from '@capacitor/browser';
+import { App } from '@capacitor/app';
+import { Capacitor } from '@capacitor/core';
 
 @Component({
   selector: 'app-login',
@@ -58,8 +60,14 @@ export class LoginComponent implements OnInit {
   ) {}
   public userType = ENUM_TYPE_USER.CREATOR;
   public env = { ...environment };
-  ngOnInit() {
+  /** Versión instalada, tomada del build nativo (fallback al environment en web). */
+  public appVersion = signal(environment.appVersion);
+  async ngOnInit() {
     // Browser.open({ url: 'https://bluecloud.com.mx/2023/bodybooster/fin-onboarding.html' });
+    if (Capacitor.isNativePlatform()) {
+      const { version } = await App.getInfo();
+      this.appVersion.set(version);
+    }
   }
 
   public async onLogin(credentials: LoginCredentials) {

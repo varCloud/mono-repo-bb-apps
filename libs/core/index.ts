@@ -29,3 +29,5 @@ export { ProfileColorDirective } from './directives/profile-color.directive';
 export { NetworkService } from './services/network.service';
 export { ActionsWorkoutService } from './services/actions-workout.service';
 export { AppSettingsService } from './services/app-settings.service';
+export { AppVersionService } from './services/app-version.service';
+export type { AppUserType } from './services/app-version.service';

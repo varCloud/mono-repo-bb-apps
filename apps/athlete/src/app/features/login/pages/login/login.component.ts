@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import {
   IonButton,
   IonRow,
@@ -9,6 +9,8 @@ import {
 } from '@ionic/angular/standalone';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { HeaderComponent, LayoutContentComponent, LoginFormComponent } from '@monorepo-bb-app/ui';
+import { App } from '@capacitor/app';
+import { Capacitor } from '@capacitor/core';
 
 import { LoginService } from '../../services/login.service';
 import {
@@ -43,6 +45,8 @@ import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
 export class LoginComponent implements OnInit {
   public userType =  ENUM_TYPE_USER.ATHLETE;
   public env ={...environment}
+  /** Versión instalada, tomada del build nativo (fallback al environment en web). */
+  public appVersion = signal(environment.appVersion);
   constructor(
     private _loginService: LoginService,
     private _toastService: ToastService,
@@ -51,7 +55,12 @@ export class LoginComponent implements OnInit {
     private _loader: LoaderUIService
   ) {}
 
-  ngOnInit() {}
+  async ngOnInit() {
+    if (Capacitor.isNativePlatform()) {
+      const { version } = await App.getInfo();
+      this.appVersion.set(version);
+    }
+  }
 
   public async onLogin(credentials: LoginCredentials) {
     this._loader.showLoader();
