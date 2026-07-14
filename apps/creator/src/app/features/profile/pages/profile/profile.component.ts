@@ -187,6 +187,9 @@ export class ProfileComponent implements OnInit {
       case 'portada':
         this.navigateToPortada();
         break;
+      case 'categories':
+        this.navigateToCategories();
+        break;
       case 'bankInfo':
         this.navigateToBankInfo();
         break;
@@ -265,6 +268,10 @@ export class ProfileComponent implements OnInit {
 
   private navigateToPortada(): void {
     this.router.navigate(['home/profile/portada']);
+  }
+
+  private navigateToCategories(): void {
+    this.router.navigate(['home/profile/categories']);
   }
 
   private navigateToBankInfo(): void {

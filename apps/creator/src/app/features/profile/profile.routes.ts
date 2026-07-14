@@ -47,6 +47,13 @@ export const profileRoutes: Routes = [
           ),
       },
       {
+        path: 'categories',
+        loadComponent: () =>
+          import('./pages/categories/categories.page').then(
+            (m) => m.CategoriesPage
+          ),
+      },
+      {
         path: '**',
         redirectTo: '',
         pathMatch: 'full',

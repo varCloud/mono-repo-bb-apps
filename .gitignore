@@ -111,3 +111,4 @@ apps/athlete/_android/*
 .vscode/settings.json
 .claude/settings.local.json
 .claude/settings.local.json
+.claude/settings.local.json

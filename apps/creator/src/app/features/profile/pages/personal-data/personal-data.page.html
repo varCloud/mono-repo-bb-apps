@@ -23,6 +23,16 @@
             <lib-about-me [formAboutMe]="formAboutMe"></lib-about-me>
           </ion-col>
         </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <app-item-list
+              [text]="'profile.edit-categories' | translate"
+              [showArrow]="true"
+              (itemClick)="goToCategories()"
+            >
+            </app-item-list>
+          </ion-col>
+        </ion-row>
       </ion-grid>
     </div>
     <div content-footer class="ion-padding">

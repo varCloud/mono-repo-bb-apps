@@ -1,4 +1,4 @@
-import { AboutMeComponent } from '@monorepo-bb-app/ui';
+import { AboutMeComponent, ItemListComponent } from '@monorepo-bb-app/ui';
 import {
   PersonalData,
   CompleteResultUpload,
@@ -40,6 +40,7 @@ import {
   IonButton,
 } from '@ionic/angular/standalone';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 @Component({
   selector: 'app-personal-data',
@@ -63,6 +64,7 @@ import { finalize } from 'rxjs';
     TranslateModule,
     IonFooter,
     FormPersonalDataCreatorComponent,
+    ItemListComponent,
   ],
   templateUrl: './personal-data.page.html',
   styleUrls: ['./personal-data.page.scss'],
@@ -83,8 +85,13 @@ export class PersonalDataPage implements OnInit {
     private _uploadService: UploadService,
     private _userService: UserService,
     private _localStorageService: LocalStorageService,
-    private _toast: ToastService
+    private _toast: ToastService,
+    private _router: Router
   ) {}
+
+  goToCategories(): void {
+    this._router.navigate(['home/profile/categories']);
+  }
 
   ngOnInit() {
     this.createForm();

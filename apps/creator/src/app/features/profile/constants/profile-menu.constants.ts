@@ -16,6 +16,11 @@ export const PROFILE_MENU_ITEMS: ProfileMenuItem[] = [
     showArrow: true,
   },
   {
+    text: 'categories.title',
+    action: 'categories',
+    showArrow: true,
+  },
+  {
     text: 'Visualizar perfil como atleta',
     action: 'viewAsClient',
     showArrow: true,
