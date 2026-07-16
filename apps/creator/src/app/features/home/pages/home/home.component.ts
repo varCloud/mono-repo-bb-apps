@@ -65,7 +65,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   /** Muestra un modal bloqueante si hay una versión más reciente en la tienda. */
   private async checkAppUpdate() {
     const storeUrl = await this._appVersionService.getRequiredUpdate('creator');
-    return
     if (!storeUrl) {
       return;
     }
