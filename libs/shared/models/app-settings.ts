@@ -23,6 +23,7 @@ export interface AppSettings {
   athleteLinkAppStore: string;
   coachLinkPlayStore: string;
   coachLinkAppStore: string;
+  subscriptionBypassEmails: string;
 }
 
 const VALUES_FOR_KEYS = {
@@ -50,6 +51,7 @@ const VALUES_FOR_KEYS = {
   'athlete-link-app-store': 'athleteLinkAppStore',
   'coach-link-play-store': 'coachLinkPlayStore',
   'coach-link-app-store': 'coachLinkAppStore',
+  'subscription-bypass-emails': 'subscriptionBypassEmails',
 };
 
 export class AppSettingsModel implements AppSettings {
@@ -77,6 +79,7 @@ export class AppSettingsModel implements AppSettings {
   athleteLinkAppStore = '';
   coachLinkPlayStore = '';
   coachLinkAppStore = '';
+  subscriptionBypassEmails = '';
   constructor(item: any) {
     item.forEach((setting: any) => {
       const key = VALUES_FOR_KEYS[setting.key as keyof typeof VALUES_FOR_KEYS];
