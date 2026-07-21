@@ -2,9 +2,7 @@
   <app-layout-content customClass="login-page">
     <ion-grid content-header>
       <ion-row>
-        <ion-col
-          ><app-header [text]="'login.welcome-user' | translate"></app-header
-        ></ion-col>
+        <ion-col><app-header [text]="'login.welcome-user' | translate"></app-header></ion-col>
       </ion-row>
     </ion-grid>
     <ion-grid content-body>
@@ -16,22 +14,20 @@
     </ion-grid>
     <div content-footer class="ion-text-center">
       <ion-button fill="clear" [routerLink]="['/create-account']">
-        <ion-text class="question">{{
-          'login.no-account' | translate
-        }}</ion-text>
+        <ion-text class="question">{{ 'login.no-account' | translate }}</ion-text>
         &nbsp;
-        <ion-text color="secondary" class="link">{{
-          'login.register' | translate
-        }}</ion-text>
+        <ion-text color="secondary" class="link">{{ 'login.register' | translate }}</ion-text>
       </ion-button>
       <ion-row class="version-text">
         <ion-col>
-          <ion-text color="medium" class="version-label">{{
-            'Version: ' | translate}} {{ appVersion() }}</ion-text>
+          <ion-text color="medium" class="version-label"
+            >{{ 'Version: ' | translate }} {{ appVersion() }}</ion-text
+          >
         </ion-col>
-        <ion-col>
-          <ion-text color="medium" class="version-label">{{
-            'Environment: ' | translate}} {{env.ENV}}</ion-text>
+        <ion-col hidden>
+          <ion-text color="medium" class="version-label"
+            >{{ 'Environment: ' | translate }} {{ env.ENV }}</ion-text
+          >
         </ion-col>
       </ion-row>
     </div>

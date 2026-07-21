@@ -1,24 +1,12 @@
 import { Component, OnInit, signal } from '@angular/core';
-import {
-  IonButton,
-  IonRow,
-  IonCol,
-  IonGrid,
-  IonText,
-  IonContent,
-} from '@ionic/angular/standalone';
+import { IonButton, IonRow, IonCol, IonGrid, IonText, IonContent } from '@ionic/angular/standalone';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { HeaderComponent, LayoutContentComponent, LoginFormComponent } from '@monorepo-bb-app/ui';
 import { App } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
 
 import { LoginService } from '../../services/login.service';
-import {
-  LoginCredentials,
-  UserResponse,
-  ToastService,
-  environment,
-} from '@monorepo-bb-app/shared';
+import { LoginCredentials, UserResponse, ToastService, environment } from '@monorepo-bb-app/shared';
 import { Router, RouterLink } from '@angular/router';
 import { LoaderUIService } from '@monorepo-bb-app/core';
 import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
@@ -43,8 +31,8 @@ import { ENUM_TYPE_USER } from 'libs/shared/constants/enums';
   ],
 })
 export class LoginComponent implements OnInit {
-  public userType =  ENUM_TYPE_USER.ATHLETE;
-  public env ={...environment}
+  public userType = ENUM_TYPE_USER.ATHLETE;
+  public env = { ...environment };
   /** Versión instalada, tomada del build nativo (fallback al environment en web). */
   public appVersion = signal(environment.appVersion);
   constructor(
@@ -73,7 +61,7 @@ export class LoginComponent implements OnInit {
       error: (err) => {
         this._loader.hideLoader();
         this._toastService.error(
-          this._translate.instant( err.error.message || 'login.errors.invalid-credentials'),
+          this._translate.instant(err.error.message || 'login.errors.invalid-credentials'),
           { duration: 3000 }
         );
       },
